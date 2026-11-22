@@ -331,12 +331,20 @@ async function translateBatch(llm, texts, to) {
 }
 
 /** Rerank dense bge-m3 : le question + les candidats, cosine. */
+let DENSE_ERROR = null;
+
+/** Rerank dense bge-m3 : le question + les 8 meilleurs candidats, cosine. */
 async function denseRerank(embeddings, question, candidates) {
+  DENSE_ERROR = null;
   if (!embeddings || typeof embeddings.embedBatch !== 'function' || candidates.length < 2) return null;
+  const pool = candidates.slice(0, 8);
   try {
-    const texts = [question, ...candidates.map((c) => c.sentence)];
+    const texts = [question, ...pool.map((c) => c.sentence)];
     const vectors = await embeddings.embedBatch(texts);
-    if (!Array.isArray(vectors) || vectors.length !== texts.length) return null;
+    if (!Array.isArray(vectors) || vectors.length !== texts.length) {
+      DENSE_ERROR = `shape ${Array.isArray(vectors) ? vectors.length : 'n/a'} ≠ ${texts.length}`;
+      return null;
+    }
     const q = vectors[0];
     const dot = (a, b) => {
       let s = 0;
@@ -344,10 +352,11 @@ async function denseRerank(embeddings, question, candidates) {
       for (let i = 0; i < n; i += 1) s += a[i] * b[i];
       return s;
     };
-    return candidates
+    return pool
       .map((c, i) => ({ ...c, dense: dot(q, vectors[i + 1]) }))
       .sort((a, b) => b.dense - a.dense);
-  } catch {
+  } catch (e) {
+    DENSE_ERROR = String(e.message || e);
     return null;
   }
 }
@@ -536,11 +545,11 @@ export default async function salonSpeakRoutes(app) {
         ok: true,
         text: fb.text,
         prise: fb.prise,
-        citations: passage ? [{ work: passage.work, text: passage.quote }] : [],
+        citations: passage ? [{ work: passage.work, text: passage.sentence }] : [],
         engine: 'fallback',
         provider: result ? result.provider || null : null,
         degraded: isMock ? 'mock' : (errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
-        retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense) },
+        retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
       };
     }
 
@@ -563,7 +572,7 @@ export default async function salonSpeakRoutes(app) {
       provider: result.provider || null,
       degraded: result.degraded || null,
       to: toward === 'author' ? toName : 'hôte',
-      retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense) },
+      retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
     };
   });
 }
