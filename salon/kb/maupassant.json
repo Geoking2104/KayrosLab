@@ -1,0 +1,2967 @@
+{
+  "authorId": "maupassant",
+  "kbVersion": "maupassant@bootstrap-2026-11-22",
+  "builtAt": "2026-11-22T11:09:33.565Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Boule de Suif",
+      "sentences": 49
+    },
+    {
+      "title": "Le Horla",
+      "sentences": 48
+    },
+    {
+      "title": "Pierre et Jean",
+      "sentences": 48
+    },
+    {
+      "title": "L'inutile beauté",
+      "sentences": 49
+    },
+    {
+      "title": "Claire de Lune",
+      "sentences": 40
+    }
+  ],
+  "passages": [
+    {
+      "id": "maupassant.p0001",
+      "w": "Boule de Suif",
+      "s": "L'appétit grandissait, troublait les esprits; et aucune gargote, aucun marchand de vin ne se montraient, l'approche des Prussiens et le passage des troupes françaises affamées ayant effrayé toutes les industries.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0002",
+      "w": "Boule de Suif",
+      "s": "Enfin, à trois heures, comme on se trouvait au milieu d'une plaine interminable, sans un seul village en vue, Boule de Suif se baissant vivement, retira de sous la banquette un large panier couvert d'une serviette blanche.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0003",
+      "w": "Boule de Suif",
+      "s": "Elle dit: «Mais oui, certainement, monsieur,» avec un sourire aimable, et tendit la terrine.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0004",
+      "w": "Boule de Suif",
+      "s": "Il parla à son tour d'un ton doctrinaire, avec l'emphase apprise dans les proclamations qu'on collait chaque jour aux murs, et il finit par un morceau d'éloquence où il étrillait magistralement cette «crapule de Badinguet».",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0005",
+      "w": "Boule de Suif",
+      "s": "Bien que la diligence fût immobile, personne ne descendait, comme si l'on se fût attendu à être massacré à la sortie.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0006",
+      "w": "Boule de Suif",
+      "s": "Son père lui avait transmis le nom de Follenvie.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0007",
+      "w": "Boule de Suif",
+      "s": "Cependant Loiseau, qui avait observé les choses, fit mettre au lit son épouse, puis colla tantôt son oreille et tantôt son oeil au trou de la serrure, pour tâcher de découvrir ce qu'il appelait: «les mystères du corridor».",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0008",
+      "w": "Boule de Suif",
+      "s": "Comme on avait décidé qu'on partirait à huit heures le lendemain, tout le monde se trouva dans la cuisine; mais la voiture, dont la bâche avait un toit de neige, se dressait solitaire au milieu de la cour, sans chevaux et sans conducteur.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0009",
+      "w": "Boule de Suif",
+      "s": "Les trois hommes rentrèrent fort inquiets.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0010",
+      "w": "Boule de Suif",
+      "s": "On ne comprenait rien à ce caprice d'Allemand; et les idées les plus singulières troublaient les têtes.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0011",
+      "w": "Boule de Suif",
+      "s": "On alla, par désoeuvrement, tourner autour de la voiture.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0012",
+      "w": "Boule de Suif",
+      "s": "L'Allemand, qui connaissait la nature humaine, l'avait mis à la porte.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0013",
+      "w": "Boule de Suif",
+      "s": "Les femmes se serrèrent, le ton de la voix fut baissé, et la discussion devint générale, chacun donnant son avis.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0014",
+      "w": "Boule de Suif",
+      "s": "On cita des exemples anciens: Judith et Holopherne, puis, sans aucune raison, Lucrèce avec Sextus, Cléopâtre faisant passer par sa couche tous les généraux ennemis, et les réduisant à des servilités d'esclave.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0015",
+      "w": "Boule de Suif",
+      "s": "Alors il tendit l'oreille en faisant «Chut!» des deux mains, leva les yeux vers le plafond, écouta de nouveau, et reprit, de sa voix naturelle: «Rassurez-vous, tout va bien.» On hésitait à comprendre, mais bientôt un sourire passa.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0016",
+      "w": "Boule de Suif",
+      "s": "L'industriel se comprimait le ventre à deux mains.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0017",
+      "w": "Boule de Suif",
+      "s": "Personne ne la regardait, ne songeait à elle.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0018",
+      "w": "Boule de Suif",
+      "s": "Je venais comme agent de la Compagnie, pour témoigner ensuite contradictoirement, si besoin était, dans le procès.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0019",
+      "w": "Boule de Suif",
+      "s": "Je m'étais assis sur un baril vide et brisé, et j'écrivais à la lueur d'une large fente par où je pouvais apercevoir l'étendue illimitée de la grève.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0020",
+      "w": "Boule de Suif",
+      "s": "J'appris qu'ils passaient l'hiver à Biarritz et qu'ils étaient venus tout exprès à l'île de Ré pour contempler ce trois-mâts enlisé.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0021",
+      "w": "Boule de Suif",
+      "s": "Les deux petites Anglaises s'étaient blotties contre leur père, qui regardait, d'un oeil consterné, la mer démesurée autour de nous.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0022",
+      "w": "Boule de Suif",
+      "s": "Ça me ferait une cause de divorce et j'en serais débarrassé.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0023",
+      "w": "Boule de Suif",
+      "s": "Aussitôt que nous rencontrons une Russe, une Italienne, une Suédoise, une Espagnole ou une Anglaise un peu jolie, nous en tombons amoureux instantanément.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0024",
+      "w": "Boule de Suif",
+      "s": "J'ai ouvert ma poupée pour regarder dedans ...",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0025",
+      "w": "Boule de Suif",
+      "s": "Il était de petite taille, d'un blond de lin, avec des yeux gris, fixes et clairs.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0026",
+      "w": "Boule de Suif",
+      "s": "J'étais sans défense, ils furent sans pitié.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0027",
+      "w": "Boule de Suif",
+      "s": "Mon tour est venu d'en faire autant pour eux.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0028",
+      "w": "Boule de Suif",
+      "s": "Alors il me sembla tout à coup que je venais d'être fait orphelin, d'être abandonné, poussé au ruisseau.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0029",
+      "w": "Boule de Suif",
+      "s": "Est-ce que je sais, moi, ce que j'ai fait à ce moment-là?",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0030",
+      "w": "Boule de Suif",
+      "s": "Non, il ne changeait pas ses effets, le pauvre garçon!",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0031",
+      "w": "Boule de Suif",
+      "s": "Quand le baron fut revenu, sa carte bleue à la main, elle écrivit au crayon: «Mon cher ami, je suis très souffrante; j'ai une névralgie atroce qui me tient au lit.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0032",
+      "w": "Boule de Suif",
+      "s": "Elle répondit: --Aôh, vos êtes fort gracious.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0033",
+      "w": "Boule de Suif",
+      "s": "Elle ne se fâchait pas; elle ne faisait point de scènes; elle ne criait jamais; elle n'avait jamais l'air irrité ou blessé, ou même froissé.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0034",
+      "w": "Boule de Suif",
+      "s": "Il imagina de faire attendre Victorine dans le couloir de sa maison, sur les marches du vestibule, dans l'obscurité.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0035",
+      "w": "Boule de Suif",
+      "s": "Ses dispositions étaient prises, tout arrangé, tout réglé; elle se chargeait de tout, voilà!",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0036",
+      "w": "Boule de Suif",
+      "s": "Dès que la jeune fille eut ouvert son logis elle se rangea pour laisser passer le monde qui défilait devant elle en roulant de grands yeux et en tournant la tête de tous les côtés pour voir ce luxe mystérieux.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0037",
+      "w": "Boule de Suif",
+      "s": "Anna prit un air content et se renversa sur sa chaise pour écouter.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0038",
+      "w": "Boule de Suif",
+      "s": "J'ferions p't'être ben d'y envoyer Adélaïde.» La femme posa sur la table la marmite toute noire, enleva le couvercle, et, pendant que montait au plafond une vapeur de soupe pleine d'une odeur de choux, elle réfléchit.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0039",
+      "w": "Boule de Suif",
+      "s": "Maître Omont considéra la fille, puis, brusquement: --Quel âge qu'elle a, c'te grande bique-là?",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0040",
+      "w": "Boule de Suif",
+      "s": "En apportant le café, elle ne déposa qu'une tasse devant lui, alors, repris de colère, il grogna: --Eh bien, et pour té?",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0041",
+      "w": "Boule de Suif",
+      "s": "Et soudain une grosse bûche, une souche hérissée de racines enflammées, croula.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0042",
+      "w": "Boule de Suif",
+      "s": "Peu à peu je me laissai séduire par le charme doux de cette vie commune; et je dînais souvent chez eux; et souvent, rentré chez moi la nuit, je songeais à faire comme lui, à prendre une femme, trouvant bien triste à présent ma maison vide.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0043",
+      "w": "Boule de Suif",
+      "s": "Alors chacun apporta un fait, des pressentiments fantastiques, des communications d'âmes à travers de longs espaces, des influences secrètes d'un être sur un autre.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0044",
+      "w": "Boule de Suif",
+      "s": "Un des fumeurs déclara: --C'est assez juste, ce que vous dites là, mais voyons votre seconde histoire?",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0045",
+      "w": "Boule de Suif",
+      "s": "Je balbutiai quelques banalités qu'elle ne semblait point écouter.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0046",
+      "w": "Boule de Suif",
+      "s": "Il y avait là dedans une odeur de poêle rougi, de vieux papiers, l'odeur des papiers de procédure avancés--rien ne pue comme ça--et une odeur de clercs--bottes, redingotes, cheveux et peau, peau d'hiver peu lavée, le tout chauffée à dix-huit degrés.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0047",
+      "w": "Boule de Suif",
+      "s": "Nous autres, notaires, nous ne devrions jamais lire des romans; et j'en ai lu, monsieur.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0048",
+      "w": "Boule de Suif",
+      "s": "Je rentrai effaré, l'esprit en détresse, comprenant et ne comprenant pas, n'osant point deviner.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0049",
+      "w": "Boule de Suif",
+      "s": "Varajou considérait son beau-frère en songeant: «Quel crétin!» Padoie devait avoir près de cinquante ans; il était grand, maigre, osseux, lent, velu, avec des sourcils en arcade qui faisaient sur ses yeux deux voûtes de poils.",
+      "src": {
+        "work": "Boule de Suif"
+      }
+    },
+    {
+      "id": "maupassant.p0050",
+      "w": "Le Horla",
+      "s": "Elle poussa une sorte de cri de souffrance.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0051",
+      "w": "Le Horla",
+      "s": "Je rentrerai chez moi la semaine prochaine.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0052",
+      "w": "Le Horla",
+      "s": "Un trouble inconnu se serait produit dans mon cerveau, un de ces troubles qu'essayent de noter et de préciser aujourd'hui les physiologistes; et ce trouble aurait déterminé dans mon esprit, dans l'ordre et la logique de mes idées, une crevasse profonde.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0053",
+      "w": "Le Horla",
+      "s": "Mais aucun d'eux ne ressemble à celui qui me hante.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0054",
+      "w": "Le Horla",
+      "s": "Mais mon siège, avant que je l'eusse atteint, se renversa comme si on eût fui devant moi...",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0055",
+      "w": "Le Horla",
+      "s": "Quoi d'étonnant, alors, à ce qu'il ne sache point apercevoir un corps nouveau que la lumière traverse.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0056",
+      "w": "Le Horla",
+      "s": "Et j'allai me cacher au fond de mon jardin, dans un massif de lauriers.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0057",
+      "w": "Le Horla",
+      "s": "A trois heures sonnantes on me réveilla.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0058",
+      "w": "Le Horla",
+      "s": "Il approchait, en effet, insouciant du danger, affolé par son amour de bête, pour l'autre bête que j'avais tuée.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0059",
+      "w": "Le Horla",
+      "s": "Mme Renard l'interrompit: «Cause toujours; rira bien qui rira l'dernier.» Il se tourna vers elle avec candeur: --Eh bien, j'peux t'charger puisque t'es pas en cause, toi...",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0060",
+      "w": "Le Horla",
+      "s": "V'là qu'tu fuis, maintenant, que tu rends la place!",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0061",
+      "w": "Le Horla",
+      "s": "Il lève les bras, il lève la jambe et il tombe sur le dos, en pleine rivière, juste dans l'trou.» «Je l'aurais repêché pour sûr, m'sieu l'président, si j'avais eu le temps tout de suite.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0062",
+      "w": "Le Horla",
+      "s": "Oui, il en avait une, mais il prenait mille précautions pour aller chez elle.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0063",
+      "w": "Le Horla",
+      "s": "Une heure plus tard mon mari rentrait, Rose ne leva même pas les yeux sur lui, mais il leva les yeux sur elle, lui.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0064",
+      "w": "Le Horla",
+      "s": "J'ai été chercher papa et maman d'abord, et puis mon oncle d'Orvelin, le président, et puis M.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0065",
+      "w": "Le Horla",
+      "s": "Elle en avait sur le nez, sous le nez, autour du nez, sur le menton, sur les joues; et ses sourcils d'une épaisseur et d'une longueur extravagantes, tout gris, touffus, hérissés, avaient tout à fait l'air d'une paire de moustaches placées là par erreur.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0066",
+      "w": "Le Horla",
+      "s": "Cachez-vous donc!» «On entendait la clef qui tournait de nouveau dans la serrure.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0067",
+      "w": "Le Horla",
+      "s": "Moi, je l'appelle don Quichotte parce qu'il s'est battu pendant douze ans contre le moulin à vent de la République sans bien savoir si c'était au nom des Bourbons ou bien au nom des Orléans.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0068",
+      "w": "Le Horla",
+      "s": "Mais pour un homme politique dans votre position, c'est autre chose.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0069",
+      "w": "Le Horla",
+      "s": "Sa barbe blanche tombait sur sa poitrine, et ses cheveux, tout blancs aussi, la rejoignaient sur les joues.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0070",
+      "w": "Le Horla",
+      "s": "Mon oncle fut tellement stupéfait de cette apparition qu'il demeura d'abord immobile; puis il ouvrit la bouche comme s'il voulait avaler le prêtre; puis il cria d'une voix forte, profonde, furieuse: --Que venez-vous faire ici?",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0071",
+      "w": "Le Horla",
+      "s": "Je saisis par les bras les deux hommes et je les jetai dehors si brusquement qu'ils s'embrassèrent avec violence deux fois de suite, au passage des deux portes qui conduisaient à l'escalier.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0072",
+      "w": "Le Horla",
+      "s": "Mais je m'aperçus tout de suite que c'était une vilaine fille.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0073",
+      "w": "Le Horla",
+      "s": "Maintenant ils passaient tous sur mon trottoir et plus un seul sur le sien.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0074",
+      "w": "Le Horla",
+      "s": "Par la fenêtre et la porte ouvertes, le soleil de juillet entrait à flots, jetait sa flamme chaude sur le sol de terre brune, onduleux et battu par les sabots de quatre générations de rustres.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0075",
+      "w": "Le Horla",
+      "s": "Et la garde comprit que cela pouvait durer deux jours, quatre jours, huit jours ainsi; et une épouvante étreignit son coeur d'avare, tandis qu'une colère furieuse la soulevait contre ce finaud qui l'avait jouée et contre cette femme qui ne mourait pas.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0076",
+      "w": "Le Horla",
+      "s": "J'étais alors maréchal des logis de hussards, et depuis quinze jours rôdant en éclaireur en face d'une avant-garde allemande.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0077",
+      "w": "Le Horla",
+      "s": "Il me montra une chaise, et puis me dit: --Qu'y a-t-il pour votre service?",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0078",
+      "w": "Le Horla",
+      "s": "Le gros Ponderel enleva la mère Jean-Jean, qui gémissait pour avoir sa béquille; et le petit Joseph Herbon dirigea l'idiote, la Putois, vers la salle à manger, pleine d'odeur de viandes.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0079",
+      "w": "Le Horla",
+      "s": "Et pendant que les trois cavaliers s'éloignaient au galop dans la nuit, je me mis en selle avec mes deux autres hussards, devant le perron de la villa, tandis que le curé, la Soeur et les trois bonnes femmes montraient aux fenêtres leurs têtes effarées.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0080",
+      "w": "Le Horla",
+      "s": "Le maire reprit: --Niez-vous ce qu'affirme l'agent de l'autorité municipale?",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0081",
+      "w": "Le Horla",
+      "s": "Un samedi, il m'annonça, en riant, qu'il amènerait un camarade le lendemain.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0082",
+      "w": "Le Horla",
+      "s": "Je me sentais tellement confuse de les voir partir ainsi que ça me donna du courage; et je me suis mise à parler.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0083",
+      "w": "Le Horla",
+      "s": "Puis je murmurai stupéfait: «Cristi, tu n'as pas maigri.» Il répondit en riant: «Que veux-tu?",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0084",
+      "w": "Le Horla",
+      "s": "Puis elle cria dans l'oreille du vieillard trépidant: «C'est un ami de Simon, papa.» L'ancêtre fit un effort pour me dire bonjour et il vagit: «Oua, oua, oua» en agitant sa main.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0085",
+      "w": "Le Horla",
+      "s": "Un seul désir lui restait, une seule joie; pourquoi ne pas lui donner entièrement cette joie dernière, la lui donner jusqu'à ce qu'il en mourût.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0086",
+      "w": "Le Horla",
+      "s": "L'amour qu'il nous faut est fait de gâteries, de gentillesses, de galanteries.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0087",
+      "w": "Le Horla",
+      "s": "Je lui ai dit que j'allais me trouver mal et qu'il fallait me porter sur l'herbe.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0088",
+      "w": "Le Horla",
+      "s": "Ils contournèrent d'abord le petit lac, gelé maintenant au fond du grand trou de rochers qui s'étend devant l'auberge, puis ils suivirent le vallon clair comme un drap et dominé de tous côtés par des sommets de neige.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0089",
+      "w": "Le Horla",
+      "s": "Quand ce fut le tour d'Ulrich Kunsi, il murmura dans l'oreille de Louise: «N'oubliez point ceux d'en-haut.» Elle répondit «non» si bas, qu'il devina sans l'entendre.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0090",
+      "w": "Le Horla",
+      "s": "C'était alors fête dans l'auberge de Schwarenbach et grand festin de chair fraîche.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0091",
+      "w": "Le Horla",
+      "s": "Il lui sembla que le silence, le froid, la solitude, la mort hivernale de ces monts entraient en lui, allaient arrêter et geler son sang, raidir ses membres, faire de lui un être immobile et glacé.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0092",
+      "w": "Le Horla",
+      "s": "Il attendait, l'oreille éveillée aux bruits lointains, frissonnant quand le vent léger frôlait le toit et les murs.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0093",
+      "w": "Le Horla",
+      "s": "Il avait agonisé pendant deux jours et trois nuits, et il venait de mourir tout à l'heure en pensant à son compagnon.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0094",
+      "w": "Le Horla",
+      "s": "Il ne mangea guère le lendemain, se bornant à boire de l'alcool.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0095",
+      "w": "Le Horla",
+      "s": "Et des jours et des nuits se passèrent sans qu'ils cessassent de hurler l'un et l'autre.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0096",
+      "w": "Le Horla",
+      "s": "Mais la saison était passée, et il devrait, comme la veille, ronger une betterave crue, arrachée dans un sillon.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0097",
+      "w": "Le Horla",
+      "s": "Au bout d'un quart d'heure, en effet, deux gendarmes apparurent sur la route.",
+      "src": {
+        "work": "Le Horla"
+      }
+    },
+    {
+      "id": "maupassant.p0098",
+      "w": "Pierre et Jean",
+      "s": "Mme Roland, assoupie à l'arrière du bateau, à côté de Mme Rosémilly invitée à cette partie de pêche, se réveilla, et tournant la tête vers son mari: --Eh bien!...",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0099",
+      "w": "Pierre et Jean",
+      "s": "C'était un ancien bijoutier parisien qu'un amour immodéré de la navigation et de la pêche avait arraché au comptoir dès qu'il eut assez d'aisance pour vivre modestement de ses rentes.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0100",
+      "w": "Pierre et Jean",
+      "s": "Elle semblait deviner que l'opinion de Jean fortifierait la sienne propre, tandis que l'opinion de Pierre devait fatalement être différente.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0101",
+      "w": "Pierre et Jean",
+      "s": "Le patron, enfin, ordonna: «Stop!» Les deux rames se levèrent ensemble, et Jean, sur l'ordre de son père, tira seul quelques instants.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0102",
+      "w": "Pierre et Jean",
+      "s": "Les deux femmes ne l'écoutaient point, engourdies par le bien-être, émues par la vue de cet Océan couvert de navires qui couraient comme des bêtes autour de leur tanière; et elles se taisaient, un peu écrasées par ce vaste horizon d'air et d'eau, rendues silencieuses par ce coucher de soleil apaisant et magnifique.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0103",
+      "w": "Pierre et Jean",
+      "s": "Mme Roland, douée d'une excellente mémoire pour les parentés, se mit aussitôt à rechercher toutes les alliances du côté de son mari et du sien, à remonter les filiations, à suivre les branches des cousinages.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0104",
+      "w": "Pierre et Jean",
+      "s": "Mme Roland, tout à coup, parut sortir d'un rêve, se rappeler une chose lointaine, presque oubliée, qu'elle avait entendue autrefois, dont elle n'était pas sûre d'ailleurs, et elle balbutia: --Ne disiez-vous point que notre pauvre Maréchal avait laissé sa fortune à mon petit Jean?",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0105",
+      "w": "Pierre et Jean",
+      "s": "Il avait déjeuné chez nous quand ta mère s'est trouvée souffrante.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0106",
+      "w": "Pierre et Jean",
+      "s": "J'en suis sûr maintenant, car la première idée qui m'est venue est celle de son mariage avec Mme Rosémilly.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0107",
+      "w": "Pierre et Jean",
+      "s": "Ce serait rudement chic de pouvoir s'offrir une promenade par là-bas; mais voilà, il faudrait de l'argent, beaucoup....",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0108",
+      "w": "Pierre et Jean",
+      "s": "Depuis trois semaines il aurait pu, il aurait dû prendre cette résolution née brusquement en lui, sans aucun doute, à la suite de l'héritage de son frère.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0109",
+      "w": "Pierre et Jean",
+      "s": "Jean demeurait silencieux comme s'il ne s'agissait point de lui.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0110",
+      "w": "Pierre et Jean",
+      "s": "Il jeta vingt sous sur la table et sortit.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0111",
+      "w": "Pierre et Jean",
+      "s": "Je ne vais jamais jusqu'à la tempête par exemple, jamais, jamais, car je crains les avaries.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0112",
+      "w": "Pierre et Jean",
+      "s": "Une envie de partir le harcelait, une envie de n'être plus au milieu de ces gens, de ne plus les entendre causer, plaisanter et rire.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0113",
+      "w": "Pierre et Jean",
+      "s": "Elle leva son verre, et, d'une voix gentille, un peu nuancée de tristesse: --Moi, dit-elle, je bois à la mémoire bénie de M.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0114",
+      "w": "Pierre et Jean",
+      "s": "Or cette idée ne lui était pas venue, puisqu'elle avait bu, avec une simplicité parfaite, à la mémoire bénie de feu Maréchal.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0115",
+      "w": "Pierre et Jean",
+      "s": "Roland chercha de nouveau, mais ne se souvenant plus de rien, il fit appel à la mémoire de sa femme: --En quelle année, voyons, Louise, tu ne dois pas avoir oublié, toi qui as un si bon souvenir?",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0116",
+      "w": "Pierre et Jean",
+      "s": "Et Pierre croyait l'entendre penser, devinait, comprenait, lisait dans ses yeux détournés, dans le ton hésitant de sa voix, les phrases, qui lui venaient aux lèvres et qu'il ne disait pas, qu'il ne dirait point, lui si prudent, si timide, si cauteleux.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0117",
+      "w": "Pierre et Jean",
+      "s": "Maréchal.» Et dans le noir de ses paupières baissées, il le vit tout à coup tel qu'il l'avait connu.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0118",
+      "w": "Pierre et Jean",
+      "s": "Alors, à travers la brume, proches ou lointains, des cris pareils s'élevèrent de nouveau dans la nuit.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0119",
+      "w": "Pierre et Jean",
+      "s": "Mais oui, puisque cet homme n'avait pas eu d'autre amie;--mais oui, puisqu'il était resté fidèle à la femme éloignée et vieillie,--mais oui, puisqu'il avait laissé toute sa fortune à son fils, à leur fils!...",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0120",
+      "w": "Pierre et Jean",
+      "s": "Il avait si froid qu'il entra dans un café de matelots pour boire un grog; et quand l'eau-de-vie poivrée et chaude lui eut brûlé le palais et la gorge, il sentit en lui renaître un espoir.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0121",
+      "w": "Pierre et Jean",
+      "s": "C'était un mensonge qui faisait cet amour paternel et cet amour filial, un mensonge impossible à dévoiler et que personne ne connaîtrait jamais que lui, le vrai fils.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0122",
+      "w": "Pierre et Jean",
+      "s": "En le voyant, peut-être, il ne douterait plus.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0123",
+      "w": "Pierre et Jean",
+      "s": "Elle était assise dans son lit tandis qu'à son côté, Roland, un foulard sur la tête et tourné vers le mur, s'obstinait à dormir.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0124",
+      "w": "Pierre et Jean",
+      "s": "Elles s'étaient faites belles pour les hommes, pour tous les hommes, excepté pour l'époux qu'elles n'avaient plus besoin de conquérir.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0125",
+      "w": "Pierre et Jean",
+      "s": "Si mes compatriotes sont bêtes ou malhonnêtes, ai-je besoin de suivre leur exemple?",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0126",
+      "w": "Pierre et Jean",
+      "s": "Elles avaient, certes, des signes communs: la même barbe et le même front, mais rien d'assez précis pour permettre de déclarer: «Voilà le père, et voilà le fils.» C'était plutôt un air de famille, une parenté de physionomies qu'anime le même sang.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0127",
+      "w": "Pierre et Jean",
+      "s": "Elle commençait, ce soir-là, une tapisserie destinée à la chambre de Jean.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0128",
+      "w": "Pierre et Jean",
+      "s": "Le père péchait, Jean s'installait aidé de sa mère, Pierre, très sombre, ne paraissait plus qu'aux heures des repas.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0129",
+      "w": "Pierre et Jean",
+      "s": "Elle en eut d'autres en effet, presque chaque jour, et que Pierre semblait provoquer d'une parole, comme s'il avait eu le secret de son mal étrange et inconnu.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0130",
+      "w": "Pierre et Jean",
+      "s": "A côté des trèfles d'un vert sombre, et des betteraves d'un vert cru, les blés jaunes éclairaient la campagne d'une lueur dorée et blonde.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0131",
+      "w": "Pierre et Jean",
+      "s": "Jean, depuis son héritage, se demandait tous les jours s'il l'épouserait ou non.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0132",
+      "w": "Pierre et Jean",
+      "s": "Elle s'y décida pourtant, et pinçant entre deux doigts le bout effilé de leur barbe, elle les mit, l'une après l'autre, dans sa hotte, avec un peu de varech qui les conserverait vivantes.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0133",
+      "w": "Pierre et Jean",
+      "s": "Pierre aussi les regardait, et un rire sec sortit brusquement de ses lèvres.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0134",
+      "w": "Pierre et Jean",
+      "s": "Il serait excellent pour plaider, ce salon.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0135",
+      "w": "Pierre et Jean",
+      "s": "Et quand cette fortune m'est arrivée, tu es devenu enragé, et tu m'as détesté, et tu l'as montré de toutes les manières, et tu as fait souffrir tout le monde, et tu n'es pas une heure sans cracher la bile qui t'étouffe.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0136",
+      "w": "Pierre et Jean",
+      "s": "Et nous sommes arrivés ici; et jamais je ne l'ai plus revu, jamais il n'est venu ...",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0137",
+      "w": "Pierre et Jean",
+      "s": "Elle essaya de se lever; mais la secousse avait été trop forte; elle ne pouvait encore se tenir sur ses jambes.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0138",
+      "w": "Pierre et Jean",
+      "s": "Mais une idée soudaine l'assaillit:--Cette fortune qu'il avait reçue, un honnête homme la garderait-il?",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0139",
+      "w": "Pierre et Jean",
+      "s": "Et puis j'avais un petit service à lui demander.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0140",
+      "w": "Pierre et Jean",
+      "s": "Son père, aussitôt, fut convaincu: --Ça, c'est vrai.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0141",
+      "w": "Pierre et Jean",
+      "s": "Elle regarde la côte déjà lointaine d'un oeil mouillé de larmes et de regrets.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0142",
+      "w": "Pierre et Jean",
+      "s": "Madame, j'ai fait, de mon côté, dans ce rocher de Saint-Jouin, une pêche que je veux aussi rapporter chez moi.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0143",
+      "w": "Pierre et Jean",
+      "s": "Et sans cesse il sentirait remuer ce navire sous ses pieds.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0144",
+      "w": "Pierre et Jean",
+      "s": "Je n'ai point trouvé à me caser ici et je pars comme médecin sur un paquebot transatlantique.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0145",
+      "w": "Pierre et Jean",
+      "s": "Quand elle l'apporta, il reprit: --Je viens te faire mes adieux.",
+      "src": {
+        "work": "Pierre et Jean"
+      }
+    },
+    {
+      "id": "maupassant.p0146",
+      "w": "L'inutile beauté",
+      "s": "Ce qu'il y a de propre, de joli, d'élégant, d'idéal sur la terre, ce n'est pas Dieu qui l'y a mis, c'est l'homme, c'est le cerveau humain.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0147",
+      "w": "L'inutile beauté",
+      "s": "Il crée parce que c'est sa fonction de Dieu; mais il est ignorant de ce qu'il fait, stupidement prolifique, inconscient des combinaisons de toutes sortes produites par ses germes éparpillés.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0148",
+      "w": "L'inutile beauté",
+      "s": "Ils sont chez eux, logés et nourris, ils n'ont qu'à brouter ou à chasser et à s'entre-manger selon leurs instincts, car Dieu n'a jamais prévu la douceur et les moeurs pacifiques; il n'a prévu que la mort des êtres acharnés à se détruire et à se dévorer.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0149",
+      "w": "L'inutile beauté",
+      "s": "Je n'avais qu'un moyen de vous chasser de mon lit.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0150",
+      "w": "L'inutile beauté",
+      "s": "Non, c'est aujourd'hui que vous mentez, je ne sais pourquoi, par pitié pour moi, peut-être?",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0151",
+      "w": "L'inutile beauté",
+      "s": "L'abbé était seul dedans, et il ramait comme un vrai marin, avec une énergie rare malgré ses cinquante-huit ans.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0152",
+      "w": "L'inutile beauté",
+      "s": "Elle eut peur, se sentant perdue, et comme elle roulait sous son poing, comme elle voyait son pied prêt à frapper par terre le flanc gonflé où vivait déjà un embryon d'homme, elle lui cria, les mains tendues pour arrêter les coups: --Ne me tue point.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0153",
+      "w": "L'inutile beauté",
+      "s": "La religion qui lui était apparue autrefois comme un refuge contre la vie inconnue, lui apparaissait maintenant comme un refuge contre la vie trompeuse et torturante.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0154",
+      "w": "L'inutile beauté",
+      "s": "Elle était coiffée du petit bonnet des arlésiennes, cône pointu de soie ou de velours noir sur qui fleurit un champignon blanc.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0155",
+      "w": "L'inutile beauté",
+      "s": "Alors le vieillard, levant ses bras en un geste biblique et désespéré, gémit: --Ça n'est pas vrai.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0156",
+      "w": "L'inutile beauté",
+      "s": "L'Arlésienne, inquiète et déjà grondeuse, attendait devant la porte.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0157",
+      "w": "L'inutile beauté",
+      "s": "Il y a longtemps que je n'ai mangé comme ça.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0158",
+      "w": "L'inutile beauté",
+      "s": "Il demanda: --Qu'est-ce qu'elle disait de moi, votre mère?",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0159",
+      "w": "L'inutile beauté",
+      "s": "Mais il vivait chez maman plus souvent que chez lui, car il ne pouvait plus se passer d'elle.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0160",
+      "w": "L'inutile beauté",
+      "s": "Il but encore, et la face toujours hilare, continua: --Maman mourut deux jours ...",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0161",
+      "w": "L'inutile beauté",
+      "s": "Bien qu'abruti par le vin, Philippe-Auguste comprit la menace; et le criminel qui était en lui surgit tout à coup.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0162",
+      "w": "L'inutile beauté",
+      "s": "Marguerite, aux aguets, accourut; mais dès qu'elle eut ouvert la porte, elle recula épouvantée devant l'ombre impénétrable.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0163",
+      "w": "L'inutile beauté",
+      "s": "Depuis que la lueur unique de sa fenêtre éclairée s'était éteinte comme un oeil fermé, elle demeurait noyée dans l'ombre, perdue dans les ténèbres, introuvable pour quiconque n'était pas enfant du pays.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0164",
+      "w": "L'inutile beauté",
+      "s": "Une femme, c'est indispensable dans un canot.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0165",
+      "w": "L'inutile beauté",
+      "s": "Elle découvrait des raisons tellement invraisemblables que nous cessions de nager pour en rire.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0166",
+      "w": "L'inutile beauté",
+      "s": "Cela lui donnait pour nous un rôle difficile, un peu ridicule, un rôle d'amant trompé, presque de mari.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0167",
+      "w": "L'inutile beauté",
+      "s": "Alors, sauvée tout d'un coup, délivrée du poids horrible d'inquiétude qui torturait depuis un mois cette gentille et détraquée pauvresse de l'amour, Mouche s'écria: --Oh!",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0168",
+      "w": "L'inutile beauté",
+      "s": "Trop faible, elle ne toucha que du bout du pied le bord de la pierre, glissa, heurta de tout son ventre l'angle aigu, poussa un grand cri et disparut dans l'eau.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0169",
+      "w": "L'inutile beauté",
+      "s": "LE NOYÉ I Tout le monde, dans Fécamp, connaissait l'histoire de la mère Patin.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0170",
+      "w": "L'inutile beauté",
+      "s": "Les hommes accouraient et tous regardaient s'allumer dans la nuit, sur la mer, les écumes au sommet des vagues.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0171",
+      "w": "L'inutile beauté",
+      "s": "Tremblante, roulée en boule, le dos tendu à la rossée qu'elle attendait déjà, elle murmurait, la figure cachée dans la couche: --Dieu Seigneur, le v'là!",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0172",
+      "w": "L'inutile beauté",
+      "s": "Assise sur une botte de paille, elle se mit à pleurer; mais, pendant qu'elle sanglotait, traversée d'une terreur poignante et surnaturelle, elle entendit, dans sa chambre, au-dessous d'elle, Patin qui racontait des choses.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0173",
+      "w": "L'inutile beauté",
+      "s": "Elle reprit: --Tu aurais aussi bien fait de l'éviter.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0174",
+      "w": "L'inutile beauté",
+      "s": "Qui peut affirmer une chose pareille tant qu'il n'y a pas flagrant délit.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0175",
+      "w": "L'inutile beauté",
+      "s": "Il affirma de nouveau: --Je te jure bien que non.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0176",
+      "w": "L'inutile beauté",
+      "s": "Et ils attendirent, tombés sur deux fauteuils, émus à présent de la même envie de s'en aller au plus vite, avant que n'apparût sur le seuil la grande personne redoutée.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0177",
+      "w": "L'inutile beauté",
+      "s": "Il fallut couper tout cela avec de forts ciseaux; et quand le médecin eut fait, dans ce surprenant assemblage, une entaille allant de l'épaule à la tempe, il entr'ouvrit cette carapace et y trouva une vieille figure d'homme usée, pâle, maigre et ridée.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0178",
+      "w": "L'inutile beauté",
+      "s": "Il n'a pas dîné pour être souple, et puis il a bu deux vertes, pour se donner de l'agitation.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0179",
+      "w": "L'inutile beauté",
+      "s": "Elle prit la brosse, puis revint vers le lit et relevant toute la chevelure emmêlée du pochard, elle lui donna, en quelques instants, une figure de modèle de peintre, à grandes boucles tombant sur le cou.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0180",
+      "w": "L'inutile beauté",
+      "s": "Il était d'ailleurs aussi facile de lui donner la réplique que de l'écouter.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0181",
+      "w": "L'inutile beauté",
+      "s": "Rien d'éclatant dans la pièce; partout de belles choses modestes, des meubles simples et rares, des rideaux d'Orient qui ne semblaient pas venir du Louvre, mais de l'intérieur d'un harem, et, en face de moi, un portrait de femme.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0182",
+      "w": "L'inutile beauté",
+      "s": "Tous les portraits savent qu'ils sont contemplés, et ils répondent avec les yeux, avec des yeux qui voient, qui pensent, qui nous suivent, sans nous quitter, depuis notre entrée jusqu'à notre sortie de l'appartement qu'ils habitent.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0183",
+      "w": "L'inutile beauté",
+      "s": "J'en retrouvais la sensation particulière au fond de ma mémoire, mais rien de plus, sensation comparable au fumet que sème pour le nez d'un chien le pied d'un gibier sur le sol.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0184",
+      "w": "L'inutile beauté",
+      "s": "Maître Le Harivau le fit étendre sur une table, et un cavalier courut à Rouville pour chercher le médecin, qui arriva une heure après.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0185",
+      "w": "L'inutile beauté",
+      "s": "Il ne venait pas à la ville plus d'une fois ou deux par an, et il lui était resté, d'une de ces visites en particulier, un souvenir confus et enivrant d'orgie.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0186",
+      "w": "L'inutile beauté",
+      "s": "Monsieur, d'abord, voulut ramasser l'homme, mais, dès qu'il l'eût mis debout, le paysan perdit de nouveau l'équilibre, puis se mit à vociférer qu'il avait la jambe cassée, l'autre, la bonne, la bonne!",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0187",
+      "w": "L'inutile beauté",
+      "s": "Mais il la jeta dans le lac, et prenant ses rames gagna la berge, sans s'inquiéter si on la sauvait.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0188",
+      "w": "L'inutile beauté",
+      "s": "L'âme bleue seule porte en elle du rêve, elle a pris son azur aux flots et à l'espace.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0189",
+      "w": "L'inutile beauté",
+      "s": "Pourquoi les fleurs, seules, sentent-elles si bon, les grandes fleurs éclatantes ou es, dont les tons, les nuances font frémir mon coeur et troublent mes yeux.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0190",
+      "w": "L'inutile beauté",
+      "s": "Les quelques fragments que je viens de vous soumettre vous suffiront, je crois, pour apprécier ce cas de maladie mentale, moins rare qu'on ne croit dans notre époque de démence hystérique et de décadence corrompue.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0191",
+      "w": "L'inutile beauté",
+      "s": "La cause en est peut-être fort simple: je me fatigue très vite de tout ce qui ne se passe pas en moi.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0192",
+      "w": "L'inutile beauté",
+      "s": "Tous les noctambules ont dû faire cette remarque.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0193",
+      "w": "L'inutile beauté",
+      "s": "Mais je ne pus dormir, et j'attendis le jour en écoutant bondir mon coeur.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0194",
+      "w": "L'inutile beauté",
+      "s": "Pendant six mois, j'errai de Gênes à Venise, de Venise à Florence, de Florence à Rome, de Rome à Naples.",
+      "src": {
+        "work": "L'inutile beauté"
+      }
+    },
+    {
+      "id": "maupassant.p0195",
+      "w": "Claire de Lune",
+      "s": "Nous allons occuper ensemble la mairie et sommer M.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0196",
+      "w": "Claire de Lune",
+      "s": "Ils étaient armés de leurs vieux fusils rouilles, ces vieux fusils pendus depuis trente ans sur les cheminées des cuisines, et ils ressemblaient assez à un détachement de gardes champêtres.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0197",
+      "w": "Claire de Lune",
+      "s": "Et comme le populaire s'était tu, il reprit fièrement: --Voici la communication que je reçois du gouvernement.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0198",
+      "w": "Claire de Lune",
+      "s": "Massarel vint au-devant de lui, prit la chaise, la posa par terre, plaça dessus le buste blanc, puis se reculant de quelques pas, l'interpella d'une voix sonore: «Tyran, tyran, te voici tombé, tombé dans la boue, tombé dans la fange.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0199",
+      "w": "Claire de Lune",
+      "s": "Massarel tira un second coup, qui fit un second trou, puis un troisième, puis, sans s'arrêter, il lâcha les trois derniers.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0200",
+      "w": "Claire de Lune",
+      "s": "Ils n'aimaient que cela, ne comprenaient pas autre chose, ne parlaient que de cela, ne vivaient que pour cela.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0201",
+      "w": "Claire de Lune",
+      "s": "Ils prirent tous leurs forts limiers habitués à poursuivre les bêtes redoutables, et ils se mirent en chasse, le coeur soulevé de fureur.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0202",
+      "w": "Claire de Lune",
+      "s": "Alors il s'assit auprès du corps, posa sur ses genoux la tête défigurée et rouge et il attendit en contemplant cette face immobile de l'aîné.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0203",
+      "w": "Claire de Lune",
+      "s": "Et, soudain, l'animal et le cavalier sortirent de la forêt et se ruèrent dans un vallon, comme la lune rouge apparaissait au-dessus des monts.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0204",
+      "w": "Claire de Lune",
+      "s": "Les parents hésitèrent longtemps, retenus par la mauvaise réputation du jeune homme.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0205",
+      "w": "Claire de Lune",
+      "s": "Lui la regardait obstinément, souriant d'un sourire fixe.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0206",
+      "w": "Claire de Lune",
+      "s": "Me permettez-vous de m'absenter vingt minutes?",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0207",
+      "w": "Claire de Lune",
+      "s": "Il le posa doucement sur le lit, entre eux, et le petit être cessa de pleurer.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0208",
+      "w": "Claire de Lune",
+      "s": "A minuit, on coucha la mariée toute secouée de sanglots.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0209",
+      "w": "Claire de Lune",
+      "s": "Mais allez donc faire entendre raison à des gens affolés.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0210",
+      "w": "Claire de Lune",
+      "s": "Et la femme du forgeron dormit quarante heures de suite, puis se réveilla sans aucun souvenir de la possession ni de la délivrance.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0211",
+      "w": "Claire de Lune",
+      "s": "Elle n'allait pas à l'église, n'aimait pas les prêtres, ne croyait guère à Dieu, appelant toutes les choses religieuses de la «marchandise à pleureurs».",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0212",
+      "w": "Claire de Lune",
+      "s": "Tu l'aimes bien ta maman, dis, mon enfant?",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0213",
+      "w": "Claire de Lune",
+      "s": "Le petit Joseph et le chien faisaient un bruit terrible: l'un poussant des cris de joie, l'autre aboyant éperdument.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0214",
+      "w": "Claire de Lune",
+      "s": "Les Savignol marièrent leur fille Berthe à dix-huit ans.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0215",
+      "w": "Claire de Lune",
+      "s": "Elle les désignait en faisant précéder leur nom de l'article «les»--les Martinet et les Michelint.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0216",
+      "w": "Claire de Lune",
+      "s": "La jeune veuve poussa un léger cri d'étonnement et de joie, et s'élança, les deux mains ouvertes.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0217",
+      "w": "Claire de Lune",
+      "s": "Elle le reconnut aussitôt, c'était celui qu'on venait de remettre à Georges.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0218",
+      "w": "Claire de Lune",
+      "s": "Berthe répondit: --Vous aimeriez mieux que ce fût moi.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0219",
+      "w": "Claire de Lune",
+      "s": "Elle s'arrêta devant la grille du cimetière.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0220",
+      "w": "Claire de Lune",
+      "s": "Le diable, candide et sans défiance, répondit: --Ça me va.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0221",
+      "w": "Claire de Lune",
+      "s": "Mais le saint avait pris goût à la culture; il retourna retrouver le diable: --Je t'assure que je n'y ai point pensé du tout; ça s'est trouvé comme ça; il n'y a point de ma faute.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0222",
+      "w": "Claire de Lune",
+      "s": "Le diable but et mangea comme un coffre, tant et si bien qu'il se trouva gêné.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0223",
+      "w": "Claire de Lune",
+      "s": "Je repris ma raison dans mon lit, avec ma mère à mon chevet.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0224",
+      "w": "Claire de Lune",
+      "s": "Le cocher était ce François, gars de campagne, un peu lourdaud, bon coeur, niais, facile à duper.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0225",
+      "w": "Claire de Lune",
+      "s": "Aussitôt elle remua la queue, se sentant accueillie, adoptée, et, au lieu de rester dans les mollets de son nouveau maître, elle se mit à courir devant lui.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0226",
+      "w": "Claire de Lune",
+      "s": "Elle trouvait des chiens jusque sous son fourneau, dans le buffet, dans la soupente au charbon, et ils volaient tout ce qu'ils rencontraient.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0227",
+      "w": "Claire de Lune",
+      "s": "Mais brusquement il se décida, et de toute sa force il la lança le plus loin possible.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0228",
+      "w": "Claire de Lune",
+      "s": "Elle gouverna sa maison avec une économie si adroite qu'ils semblaient vivre dans le luxe.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0229",
+      "w": "Claire de Lune",
+      "s": "Leur vue même, chaque jour, lui gâtait un peu le souvenir de sa bien-aimée.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0230",
+      "w": "Claire de Lune",
+      "s": "Il s'efforçait de raisonner, de comprendre.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0231",
+      "w": "Claire de Lune",
+      "s": "Pour la première fois de sa vie il ne s'ennuya pas au théâtre, et il passa sa nuit avec des filles.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0232",
+      "w": "Claire de Lune",
+      "s": "Il est permis de n'être pas brave devant les dangers imaginaires, quand on a quatre-vingt-deux ans.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0233",
+      "w": "Claire de Lune",
+      "s": "C'était un ami de jeunesse que j'avais beaucoup aimé.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    },
+    {
+      "id": "maupassant.p0234",
+      "w": "Claire de Lune",
+      "s": "Je le quittai vers une heure pour accomplir ma mission.",
+      "src": {
+        "work": "Claire de Lune"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "maupassant.f.v0001",
+      "kind": "verbatim",
+      "text": "L'appétit grandissait, troublait les esprits; et aucune gargote, aucun marchand de vin ne se montraient, l'approche des Prussiens et le passage des troupes françaises affamées ayant effrayé toutes les industries.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "maupassant.f.v0002",
+      "kind": "verbatim",
+      "text": "Enfin, à trois heures, comme on se trouvait au milieu d'une plaine interminable, sans un seul village en vue, Boule de Suif se baissant vivement, retira de sous la banquette un large panier couvert d'une serviette blanche.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "maupassant.f.v0003",
+      "kind": "verbatim",
+      "text": "Il parla à son tour d'un ton doctrinaire, avec l'emphase apprise dans les proclamations qu'on collait chaque jour aux murs, et il finit par un morceau d'éloquence où il étrillait magistralement cette «crapule de Badinguet».",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "maupassant.f.v0004",
+      "kind": "verbatim",
+      "text": "Comme on avait décidé qu'on partirait à huit heures le lendemain, tout le monde se trouva dans la cuisine; mais la voiture, dont la bâche avait un toit de neige, se dressait solitaire au milieu de la cour, sans chevaux et sans conducteur.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "maupassant.f.v0005",
+      "kind": "verbatim",
+      "text": "On cita des exemples anciens: Judith et Holopherne, puis, sans aucune raison, Lucrèce avec Sextus, Cléopâtre faisant passer par sa couche tous les généraux ennemis, et les réduisant à des servilités d'esclave.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "maupassant.f.v0006",
+      "kind": "verbatim",
+      "text": "Je m'étais assis sur un baril vide et brisé, et j'écrivais à la lueur d'une large fente par où je pouvais apercevoir l'étendue illimitée de la grève.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "maupassant.f.v0007",
+      "kind": "verbatim",
+      "text": "J'appris qu'ils passaient l'hiver à Biarritz et qu'ils étaient venus tout exprès à l'île de Ré pour contempler ce trois-mâts enlisé.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "maupassant.f.v0008",
+      "kind": "verbatim",
+      "text": "Les deux petites Anglaises s'étaient blotties contre leur père, qui regardait, d'un oeil consterné, la mer démesurée autour de nous.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "maupassant.f.v0009",
+      "kind": "verbatim",
+      "text": "Aussitôt que nous rencontrons une Russe, une Italienne, une Suédoise, une Espagnole ou une Anglaise un peu jolie, nous en tombons amoureux instantanément.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "maupassant.f.v0010",
+      "kind": "verbatim",
+      "text": "Quand le baron fut revenu, sa carte bleue à la main, elle écrivit au crayon: «Mon cher ami, je suis très souffrante; j'ai une névralgie atroce qui me tient au lit.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "maupassant.f.v0011",
+      "kind": "verbatim",
+      "text": "Elle ne se fâchait pas; elle ne faisait point de scènes; elle ne criait jamais; elle n'avait jamais l'air irrité ou blessé, ou même froissé.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "maupassant.f.v0012",
+      "kind": "verbatim",
+      "text": "Dès que la jeune fille eut ouvert son logis elle se rangea pour laisser passer le monde qui défilait devant elle en roulant de grands yeux et en tournant la tête de tous les côtés pour voir ce luxe mystérieux.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "maupassant.f.v0013",
+      "kind": "verbatim",
+      "text": "J'ferions p't'être ben d'y envoyer Adélaïde.» La femme posa sur la table la marmite toute noire, enleva le couvercle, et, pendant que montait au plafond une vapeur de soupe pleine d'une odeur de choux, elle réfléchit.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "maupassant.f.v0014",
+      "kind": "verbatim",
+      "text": "En apportant le café, elle ne déposa qu'une tasse devant lui, alors, repris de colère, il grogna: --Eh bien, et pour té?",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "maupassant.f.v0015",
+      "kind": "verbatim",
+      "text": "Peu à peu je me laissai séduire par le charme doux de cette vie commune; et je dînais souvent chez eux; et souvent, rentré chez moi la nuit, je songeais à faire comme lui, à prendre une femme, trouvant bien triste à présent ma maison vide.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "maupassant.f.v0016",
+      "kind": "verbatim",
+      "text": "Il y avait là dedans une odeur de poêle rougi, de vieux papiers, l'odeur des papiers de procédure avancés--rien ne pue comme ça--et une odeur de clercs--bottes, redingotes, cheveux et peau, peau d'hiver peu lavée, le tout chauffée à dix-huit degrés.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "maupassant.f.v0017",
+      "kind": "verbatim",
+      "text": "Varajou considérait son beau-frère en songeant: «Quel crétin!» Padoie devait avoir près de cinquante ans; il était grand, maigre, osseux, lent, velu, avec des sourcils en arcade qui faisaient sur ses yeux deux voûtes de poils.",
+      "work": "Boule de Suif",
+      "lang": "fr",
+      "src": {
+        "work": "Boule de Suif"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "maupassant.f.v0018",
+      "kind": "verbatim",
+      "text": "Un trouble inconnu se serait produit dans mon cerveau, un de ces troubles qu'essayent de noter et de préciser aujourd'hui les physiologistes; et ce trouble aurait déterminé dans mon esprit, dans l'ordre et la logique de mes idées, une crevasse profonde.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "maupassant.f.v0019",
+      "kind": "verbatim",
+      "text": "Mme Renard l'interrompit: «Cause toujours; rira bien qui rira l'dernier.» Il se tourna vers elle avec candeur: --Eh bien, j'peux t'charger puisque t'es pas en cause, toi...",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "maupassant.f.v0020",
+      "kind": "verbatim",
+      "text": "Il lève les bras, il lève la jambe et il tombe sur le dos, en pleine rivière, juste dans l'trou.» «Je l'aurais repêché pour sûr, m'sieu l'président, si j'avais eu le temps tout de suite.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "maupassant.f.v0021",
+      "kind": "verbatim",
+      "text": "Elle en avait sur le nez, sous le nez, autour du nez, sur le menton, sur les joues; et ses sourcils d'une épaisseur et d'une longueur extravagantes, tout gris, touffus, hérissés, avaient tout à fait l'air d'une paire de moustaches placées là par erreur.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "maupassant.f.v0022",
+      "kind": "verbatim",
+      "text": "Moi, je l'appelle don Quichotte parce qu'il s'est battu pendant douze ans contre le moulin à vent de la République sans bien savoir si c'était au nom des Bourbons ou bien au nom des Orléans.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "maupassant.f.v0023",
+      "kind": "verbatim",
+      "text": "Mon oncle fut tellement stupéfait de cette apparition qu'il demeura d'abord immobile; puis il ouvrit la bouche comme s'il voulait avaler le prêtre; puis il cria d'une voix forte, profonde, furieuse: --Que venez-vous faire ici?",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "maupassant.f.v0024",
+      "kind": "verbatim",
+      "text": "Je saisis par les bras les deux hommes et je les jetai dehors si brusquement qu'ils s'embrassèrent avec violence deux fois de suite, au passage des deux portes qui conduisaient à l'escalier.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "maupassant.f.v0025",
+      "kind": "verbatim",
+      "text": "Par la fenêtre et la porte ouvertes, le soleil de juillet entrait à flots, jetait sa flamme chaude sur le sol de terre brune, onduleux et battu par les sabots de quatre générations de rustres.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "maupassant.f.v0026",
+      "kind": "verbatim",
+      "text": "J'étais alors maréchal des logis de hussards, et depuis quinze jours rôdant en éclaireur en face d'une avant-garde allemande.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "maupassant.f.v0027",
+      "kind": "verbatim",
+      "text": "Le gros Ponderel enleva la mère Jean-Jean, qui gémissait pour avoir sa béquille; et le petit Joseph Herbon dirigea l'idiote, la Putois, vers la salle à manger, pleine d'odeur de viandes.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "maupassant.f.v0028",
+      "kind": "verbatim",
+      "text": "Puis elle cria dans l'oreille du vieillard trépidant: «C'est un ami de Simon, papa.» L'ancêtre fit un effort pour me dire bonjour et il vagit: «Oua, oua, oua» en agitant sa main.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "maupassant.f.v0029",
+      "kind": "verbatim",
+      "text": "Un seul désir lui restait, une seule joie; pourquoi ne pas lui donner entièrement cette joie dernière, la lui donner jusqu'à ce qu'il en mourût.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "maupassant.f.v0030",
+      "kind": "verbatim",
+      "text": "Ils contournèrent d'abord le petit lac, gelé maintenant au fond du grand trou de rochers qui s'étend devant l'auberge, puis ils suivirent le vallon clair comme un drap et dominé de tous côtés par des sommets de neige.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "maupassant.f.v0031",
+      "kind": "verbatim",
+      "text": "Quand ce fut le tour d'Ulrich Kunsi, il murmura dans l'oreille de Louise: «N'oubliez point ceux d'en-haut.» Elle répondit «non» si bas, qu'il devina sans l'entendre.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "maupassant.f.v0032",
+      "kind": "verbatim",
+      "text": "Il lui sembla que le silence, le froid, la solitude, la mort hivernale de ces monts entraient en lui, allaient arrêter et geler son sang, raidir ses membres, faire de lui un être immobile et glacé.",
+      "work": "Le Horla",
+      "lang": "fr",
+      "src": {
+        "work": "Le Horla"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "maupassant.f.v0033",
+      "kind": "verbatim",
+      "text": "Mme Roland, assoupie à l'arrière du bateau, à côté de Mme Rosémilly invitée à cette partie de pêche, se réveilla, et tournant la tête vers son mari: --Eh bien!...",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "maupassant.f.v0034",
+      "kind": "verbatim",
+      "text": "C'était un ancien bijoutier parisien qu'un amour immodéré de la navigation et de la pêche avait arraché au comptoir dès qu'il eut assez d'aisance pour vivre modestement de ses rentes.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "maupassant.f.v0035",
+      "kind": "verbatim",
+      "text": "Elle semblait deviner que l'opinion de Jean fortifierait la sienne propre, tandis que l'opinion de Pierre devait fatalement être différente.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "maupassant.f.v0036",
+      "kind": "verbatim",
+      "text": "Le patron, enfin, ordonna: «Stop!» Les deux rames se levèrent ensemble, et Jean, sur l'ordre de son père, tira seul quelques instants.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "maupassant.f.v0037",
+      "kind": "verbatim",
+      "text": "Les deux femmes ne l'écoutaient point, engourdies par le bien-être, émues par la vue de cet Océan couvert de navires qui couraient comme des bêtes autour de leur tanière; et elles se taisaient, un peu écrasées par ce vaste horizon d'air et d'eau, rendues silencieuses par ce coucher de soleil apaisant et magnifique.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 316
+      }
+    },
+    {
+      "id": "maupassant.f.v0038",
+      "kind": "verbatim",
+      "text": "Mme Roland, douée d'une excellente mémoire pour les parentés, se mit aussitôt à rechercher toutes les alliances du côté de son mari et du sien, à remonter les filiations, à suivre les branches des cousinages.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 208
+      }
+    },
+    {
+      "id": "maupassant.f.v0039",
+      "kind": "verbatim",
+      "text": "Mme Roland, tout à coup, parut sortir d'un rêve, se rappeler une chose lointaine, presque oubliée, qu'elle avait entendue autrefois, dont elle n'était pas sûre d'ailleurs, et elle balbutia: --Ne disiez-vous point que notre pauvre Maréchal avait laissé sa fortune à mon petit Jean?",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 280
+      }
+    },
+    {
+      "id": "maupassant.f.v0040",
+      "kind": "verbatim",
+      "text": "Ce serait rudement chic de pouvoir s'offrir une promenade par là-bas; mais voilà, il faudrait de l'argent, beaucoup....",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "maupassant.f.v0041",
+      "kind": "verbatim",
+      "text": "Depuis trois semaines il aurait pu, il aurait dû prendre cette résolution née brusquement en lui, sans aucun doute, à la suite de l'héritage de son frère.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "maupassant.f.v0042",
+      "kind": "verbatim",
+      "text": "Une envie de partir le harcelait, une envie de n'être plus au milieu de ces gens, de ne plus les entendre causer, plaisanter et rire.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "maupassant.f.v0043",
+      "kind": "verbatim",
+      "text": "Elle leva son verre, et, d'une voix gentille, un peu nuancée de tristesse: --Moi, dit-elle, je bois à la mémoire bénie de M.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "maupassant.f.v0044",
+      "kind": "verbatim",
+      "text": "Roland chercha de nouveau, mais ne se souvenant plus de rien, il fit appel à la mémoire de sa femme: --En quelle année, voyons, Louise, tu ne dois pas avoir oublié, toi qui as un si bon souvenir?",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "maupassant.f.v0045",
+      "kind": "verbatim",
+      "text": "Il avait si froid qu'il entra dans un café de matelots pour boire un grog; et quand l'eau-de-vie poivrée et chaude lui eut brûlé le palais et la gorge, il sentit en lui renaître un espoir.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "maupassant.f.v0046",
+      "kind": "verbatim",
+      "text": "C'était un mensonge qui faisait cet amour paternel et cet amour filial, un mensonge impossible à dévoiler et que personne ne connaîtrait jamais que lui, le vrai fils.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "maupassant.f.v0047",
+      "kind": "verbatim",
+      "text": "Elle était assise dans son lit tandis qu'à son côté, Roland, un foulard sur la tête et tourné vers le mur, s'obstinait à dormir.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "maupassant.f.v0048",
+      "kind": "verbatim",
+      "text": "Elles s'étaient faites belles pour les hommes, pour tous les hommes, excepté pour l'époux qu'elles n'avaient plus besoin de conquérir.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "maupassant.f.v0049",
+      "kind": "verbatim",
+      "text": "Elles avaient, certes, des signes communs: la même barbe et le même front, mais rien d'assez précis pour permettre de déclarer: «Voilà le père, et voilà le fils.» C'était plutôt un air de famille, une parenté de physionomies qu'anime le même sang.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "maupassant.f.v0050",
+      "kind": "verbatim",
+      "text": "Elle en eut d'autres en effet, presque chaque jour, et que Pierre semblait provoquer d'une parole, comme s'il avait eu le secret de son mal étrange et inconnu.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "maupassant.f.v0051",
+      "kind": "verbatim",
+      "text": "A côté des trèfles d'un vert sombre, et des betteraves d'un vert cru, les blés jaunes éclairaient la campagne d'une lueur dorée et blonde.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "maupassant.f.v0052",
+      "kind": "verbatim",
+      "text": "Elle s'y décida pourtant, et pinçant entre deux doigts le bout effilé de leur barbe, elle les mit, l'une après l'autre, dans sa hotte, avec un peu de varech qui les conserverait vivantes.",
+      "work": "Pierre et Jean",
+      "lang": "fr",
+      "src": {
+        "work": "Pierre et Jean"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "maupassant.f.v0053",
+      "kind": "verbatim",
+      "text": "Ce qu'il y a de propre, de joli, d'élégant, d'idéal sur la terre, ce n'est pas Dieu qui l'y a mis, c'est l'homme, c'est le cerveau humain.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "maupassant.f.v0054",
+      "kind": "verbatim",
+      "text": "Il crée parce que c'est sa fonction de Dieu; mais il est ignorant de ce qu'il fait, stupidement prolifique, inconscient des combinaisons de toutes sortes produites par ses germes éparpillés.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "maupassant.f.v0055",
+      "kind": "verbatim",
+      "text": "Ils sont chez eux, logés et nourris, ils n'ont qu'à brouter ou à chasser et à s'entre-manger selon leurs instincts, car Dieu n'a jamais prévu la douceur et les moeurs pacifiques; il n'a prévu que la mort des êtres acharnés à se détruire et à se dévorer.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "maupassant.f.v0056",
+      "kind": "verbatim",
+      "text": "Elle eut peur, se sentant perdue, et comme elle roulait sous son poing, comme elle voyait son pied prêt à frapper par terre le flanc gonflé où vivait déjà un embryon d'homme, elle lui cria, les mains tendues pour arrêter les coups: --Ne me tue point.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "maupassant.f.v0057",
+      "kind": "verbatim",
+      "text": "La religion qui lui était apparue autrefois comme un refuge contre la vie inconnue, lui apparaissait maintenant comme un refuge contre la vie trompeuse et torturante.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "maupassant.f.v0058",
+      "kind": "verbatim",
+      "text": "Elle était coiffée du petit bonnet des arlésiennes, cône pointu de soie ou de velours noir sur qui fleurit un champignon blanc.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "maupassant.f.v0059",
+      "kind": "verbatim",
+      "text": "Marguerite, aux aguets, accourut; mais dès qu'elle eut ouvert la porte, elle recula épouvantée devant l'ombre impénétrable.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "maupassant.f.v0060",
+      "kind": "verbatim",
+      "text": "Depuis que la lueur unique de sa fenêtre éclairée s'était éteinte comme un oeil fermé, elle demeurait noyée dans l'ombre, perdue dans les ténèbres, introuvable pour quiconque n'était pas enfant du pays.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "maupassant.f.v0061",
+      "kind": "verbatim",
+      "text": "Trop faible, elle ne toucha que du bout du pied le bord de la pierre, glissa, heurta de tout son ventre l'angle aigu, poussa un grand cri et disparut dans l'eau.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "maupassant.f.v0062",
+      "kind": "verbatim",
+      "text": "Tremblante, roulée en boule, le dos tendu à la rossée qu'elle attendait déjà, elle murmurait, la figure cachée dans la couche: --Dieu Seigneur, le v'là!",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "maupassant.f.v0063",
+      "kind": "verbatim",
+      "text": "Assise sur une botte de paille, elle se mit à pleurer; mais, pendant qu'elle sanglotait, traversée d'une terreur poignante et surnaturelle, elle entendit, dans sa chambre, au-dessous d'elle, Patin qui racontait des choses.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "maupassant.f.v0064",
+      "kind": "verbatim",
+      "text": "Il fallut couper tout cela avec de forts ciseaux; et quand le médecin eut fait, dans ce surprenant assemblage, une entaille allant de l'épaule à la tempe, il entr'ouvrit cette carapace et y trouva une vieille figure d'homme usée, pâle, maigre et ridée.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "maupassant.f.v0065",
+      "kind": "verbatim",
+      "text": "Elle prit la brosse, puis revint vers le lit et relevant toute la chevelure emmêlée du pochard, elle lui donna, en quelques instants, une figure de modèle de peintre, à grandes boucles tombant sur le cou.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "maupassant.f.v0066",
+      "kind": "verbatim",
+      "text": "Rien d'éclatant dans la pièce; partout de belles choses modestes, des meubles simples et rares, des rideaux d'Orient qui ne semblaient pas venir du Louvre, mais de l'intérieur d'un harem, et, en face de moi, un portrait de femme.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "maupassant.f.v0067",
+      "kind": "verbatim",
+      "text": "Tous les portraits savent qu'ils sont contemplés, et ils répondent avec les yeux, avec des yeux qui voient, qui pensent, qui nous suivent, sans nous quitter, depuis notre entrée jusqu'à notre sortie de l'appartement qu'ils habitent.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "maupassant.f.v0068",
+      "kind": "verbatim",
+      "text": "J'en retrouvais la sensation particulière au fond de ma mémoire, mais rien de plus, sensation comparable au fumet que sème pour le nez d'un chien le pied d'un gibier sur le sol.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "maupassant.f.v0069",
+      "kind": "verbatim",
+      "text": "Maître Le Harivau le fit étendre sur une table, et un cavalier courut à Rouville pour chercher le médecin, qui arriva une heure après.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "maupassant.f.v0070",
+      "kind": "verbatim",
+      "text": "Il ne venait pas à la ville plus d'une fois ou deux par an, et il lui était resté, d'une de ces visites en particulier, un souvenir confus et enivrant d'orgie.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "maupassant.f.v0071",
+      "kind": "verbatim",
+      "text": "Monsieur, d'abord, voulut ramasser l'homme, mais, dès qu'il l'eût mis debout, le paysan perdit de nouveau l'équilibre, puis se mit à vociférer qu'il avait la jambe cassée, l'autre, la bonne, la bonne!",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "maupassant.f.v0072",
+      "kind": "verbatim",
+      "text": "Pourquoi les fleurs, seules, sentent-elles si bon, les grandes fleurs éclatantes ou es, dont les tons, les nuances font frémir mon coeur et troublent mes yeux.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "maupassant.f.v0073",
+      "kind": "verbatim",
+      "text": "Les quelques fragments que je viens de vous soumettre vous suffiront, je crois, pour apprécier ce cas de maladie mentale, moins rare qu'on ne croit dans notre époque de démence hystérique et de décadence corrompue.",
+      "work": "L'inutile beauté",
+      "lang": "fr",
+      "src": {
+        "work": "L'inutile beauté"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "maupassant.f.v0074",
+      "kind": "verbatim",
+      "text": "Ils étaient armés de leurs vieux fusils rouilles, ces vieux fusils pendus depuis trente ans sur les cheminées des cuisines, et ils ressemblaient assez à un détachement de gardes champêtres.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "maupassant.f.v0075",
+      "kind": "verbatim",
+      "text": "Massarel vint au-devant de lui, prit la chaise, la posa par terre, plaça dessus le buste blanc, puis se reculant de quelques pas, l'interpella d'une voix sonore: «Tyran, tyran, te voici tombé, tombé dans la boue, tombé dans la fange.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "maupassant.f.v0076",
+      "kind": "verbatim",
+      "text": "Massarel tira un second coup, qui fit un second trou, puis un troisième, puis, sans s'arrêter, il lâcha les trois derniers.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "maupassant.f.v0077",
+      "kind": "verbatim",
+      "text": "Ils prirent tous leurs forts limiers habitués à poursuivre les bêtes redoutables, et ils se mirent en chasse, le coeur soulevé de fureur.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "maupassant.f.v0078",
+      "kind": "verbatim",
+      "text": "Elle n'allait pas à l'église, n'aimait pas les prêtres, ne croyait guère à Dieu, appelant toutes les choses religieuses de la «marchandise à pleureurs».",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "maupassant.f.v0079",
+      "kind": "verbatim",
+      "text": "Aussitôt elle remua la queue, se sentant accueillie, adoptée, et, au lieu de rester dans les mollets de son nouveau maître, elle se mit à courir devant lui.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "maupassant.f.v0080",
+      "kind": "verbatim",
+      "text": "Elle trouvait des chiens jusque sous son fourneau, dans le buffet, dans la soupente au charbon, et ils volaient tout ce qu'ils rencontraient.",
+      "work": "Claire de Lune",
+      "lang": "fr",
+      "src": {
+        "work": "Claire de Lune"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "maupassant.f.p01",
+      "kind": "pattern",
+      "label": "restriction",
+      "shape": "\\bne\\b[^.]{0,80}\\b(que|point|jamais|rien)\\b",
+      "attested": 17,
+      "worksSpan": 5,
+      "examples": [
+        "On ne comprenait rien à ce caprice d'Allemand; et les idées les plus singulières troublaient les têtes.",
+        "Elle ne se fâchait pas; elle ne faisait point de scènes; elle ne criait jamais; elle n'avait jamais l'air irrité ou blessé, ou même froissé."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 234,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:f49c88dde31432a4833096b0f179cfa4783615fbe2575ac762e44eb10bd2e37e"
+}

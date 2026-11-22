@@ -22,9 +22,11 @@ test('le vhost www sert le site statique et laisse passer ACME', async () => {
   assert.match(vhost, /location \/\.well-known\/acme-challenge\//);
   assert.match(vhost, /include snippets\/kayroslab-www-locations\.conf/);
   assert.match(locations, /root \/var\/www\/kayroslab/);
-  // Salon supprimé : les anciennes URL /salon renvoient vers l'accueil.
-  assert.match(locations, /location \^~ \/salon \{\s*return 301 \/;/);
-  assert.doesNotMatch(locations, /\/salon\/index\.html/);
+  // Salon restauré : page statique et packs mémoire servis par le VPS.
+  assert.match(locations, /location \^~ \/salon\/ \{/);
+  assert.match(locations, /\/salon\/index\.html/);
+  assert.doesNotMatch(locations, /location \^~ \/salon \{\s*return 301 \/;/);
+  assert.match(locations, /location \^~ \/salon\/kb\//);
   assert.match(locations, /location \/console\/ \{/);
   assert.match(locations, /try_files \$uri \$uri\/ \/console\/index\.html/);
   assert.match(locations, /default_type application\/wasm/);
@@ -35,7 +37,7 @@ test('le vhost www sert le site statique et laisse passer ACME', async () => {
   assert.match(vps, /index\.fr\.html/);
 });
 
-test('assemble-www copie accueil, console et légal (sans Salon)', async () => {
+test('assemble-www copie accueil, console, légal et Salon', async () => {
   const dest = await mkdtemp(join(tmpdir(), 'kayros-www-'));
   try {
     const result = spawnSync(
@@ -56,7 +58,11 @@ test('assemble-www copie accueil, console et légal (sans Salon)', async () => {
     // Le Salon n'est plus lié depuis l'accueil (la page /salon/ reste déployée, non liée).
     assert.doesNotMatch(home, /href="\/salon\/|href="#salon"|id="salon"/);
     assert.match(home, /\/legal\/#mentions/);
-    await assert.rejects(readFile(join(dest, 'salon/index.html'), 'utf8'), 'plus de page /salon/ assemblée');
+    const salon = await readFile(join(dest, 'salon/index.html'), 'utf8');
+    assert.match(salon, /Le Salon/);
+    assert.match(salon, /app\.js/);
+    const salonManifest = JSON.parse(await readFile(join(dest, 'salon/kb-manifest.json'), 'utf8'));
+    assert.ok(salonManifest.totals.authors >= 60, 'packs Salon copiés');
     assert.match(consoleIndex, /<div id="root">/);
     assert.match(legal, /SASU KayrosLab/);
     assert.doesNotMatch(legal, /salon/i, 'plus aucune mention du Salon dans /legal/');

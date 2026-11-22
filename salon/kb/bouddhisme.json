@@ -1,0 +1,2823 @@
+{
+  "authorId": "bouddhisme",
+  "kbVersion": "bouddhisme@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.527Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "The Dhammapada",
+      "sentences": 78
+    },
+    {
+      "title": "Jataka Tales",
+      "sentences": 66
+    },
+    {
+      "title": "Buddhist Psalms",
+      "sentences": 73
+    }
+  ],
+  "passages": [
+    {
+      "id": "bouddhisme.p0001",
+      "w": "The Dhammapada",
+      "s": "Those who bridle their mind which travels far, moves about alone, is without a body, and hides in the chamber (of the heart), will be free from the bonds of Mara (the tempter).",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0002",
+      "w": "The Dhammapada",
+      "s": "Not a mother, not a father will do so much, nor any other relative; a well-directed mind will do us greater service.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0003",
+      "w": "The Dhammapada",
+      "s": "He who knows that this body is like froth, and has learnt that it is as unsubstantial as a mirage, will break the flower-pointed arrow of Mara, and never see the king of death.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0004",
+      "w": "The Dhammapada",
+      "s": "Like a beautiful flower, full of colour, but without scent, are the fine but fruitless words of him who does not act accordingly.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0005",
+      "w": "The Dhammapada",
+      "s": "Mean is the scent that comes from Tagara and sandal-wood;--the perfume of those who possess virtue rises up to the gods as the highest.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0006",
+      "w": "The Dhammapada",
+      "s": "These sons belong to me, and this wealth belongs to me,\" with such thoughts a fool is tormented.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0007",
+      "w": "The Dhammapada",
+      "s": "Fools of little understanding have themselves for their greatest enemies, for they do evil deeds which must bear bitter fruits.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0008",
+      "w": "The Dhammapada",
+      "s": "An evil deed, like newly-drawn milk, does not turn (suddenly); smouldering, like fire covered by ashes, it follows the fool.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0009",
+      "w": "The Dhammapada",
+      "s": "Well-makers lead the water (wherever they like); fletchers bend the arrow; carpenters bend a log of wood; wise people fashion themselves.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0010",
+      "w": "The Dhammapada",
+      "s": "Few are there among men who arrive at the other shore (become Arhats); the other people here run up and down the shore.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0011",
+      "w": "The Dhammapada",
+      "s": "Those whose mind is well grounded in the (seven) elements of knowledge, who without clinging to anything, rejoice in freedom from attachment, whose appetites have been conquered, and who are full of light, are free (even) in this world.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0012",
+      "w": "The Dhammapada",
+      "s": "The gods even envy him whose senses, like horses well broken in by the driver, have been subdued, who is free from pride, and free from appetites.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0013",
+      "w": "The Dhammapada",
+      "s": "Forests are delightful; where the world finds no delight, there the passionless will find delight, for they look not for pleasures.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0014",
+      "w": "The Dhammapada",
+      "s": "One's own self conquered is better than all other people; not even a god, a Gandharva, not Mara with Brahman could change into defeat the victory of a man who has vanquished himself, and always lives under restraint.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0015",
+      "w": "The Dhammapada",
+      "s": "But he who lives a hundred years, vicious and unrestrained, a life of one day is better if a man is virtuous and reflecting.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0016",
+      "w": "The Dhammapada",
+      "s": "And he who lives a hundred years, not seeing the highest law, a life of one day is better if a man sees the highest law.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0017",
+      "w": "The Dhammapada",
+      "s": "Even a good man sees evil days, as long as his good deed has not ripened; but when his good deed has ripened, then does the good man see happy days.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0018",
+      "w": "The Dhammapada",
+      "s": "He who has no wound on his hand, may touch poison with his hand; poison does not affect one who has no wound; nor is there evil for one who does not commit evil.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0019",
+      "w": "The Dhammapada",
+      "s": "All men tremble at punishment, all men love life; remember that thou art like unto them, and do not kill, nor cause slaughter.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0020",
+      "w": "The Dhammapada",
+      "s": "If, like a shattered metal plate (gong), thou utter not, then thou hast reached Nirvana; contention is not known to thee.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0021",
+      "w": "The Dhammapada",
+      "s": "Or lightning-fire will burn his houses; and when his body is destroyed, the fool will go to hell.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0022",
+      "w": "The Dhammapada",
+      "s": "How is there laughter, how is there joy, as this world is always burning?",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0023",
+      "w": "The Dhammapada",
+      "s": "After a stronghold has been made of the bones, it is covered with flesh and blood, and there dwell in it old age and death, pride and deceit.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0024",
+      "w": "The Dhammapada",
+      "s": "All thy rafters are broken, thy ridge-pole is sundered; the mind, approaching the Eternal (visankhara, nirvana), has attained to the extinction of all desires.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0025",
+      "w": "The Dhammapada",
+      "s": "Self is the lord of self, who else could be the lord?",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0026",
+      "w": "The Dhammapada",
+      "s": "The foolish man who scorns the rule of the venerable (Arahat), of the elect (Ariya), of the virtuous, and follows false doctrine, he bears fruit to his own destruction, like the fruits of the Katthaka reed.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0027",
+      "w": "The Dhammapada",
+      "s": "Look upon the world as a bubble, look upon it as a mirage: the king of death does not see him who thus looks down upon the world.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0028",
+      "w": "The Dhammapada",
+      "s": "The swans go on the path of the sun, they go through the ether by means of their miraculous power; the wise are led out of this world, when they have conquered Mara and his train.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0029",
+      "w": "The Dhammapada",
+      "s": "He whose conquest is not conquered again, into whose conquest no one in this world enters, by what track can you lead him, the Awakened, the Omniscient, the trackless?",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0030",
+      "w": "The Dhammapada",
+      "s": "Not to blame, not to strike, to live restrained under the law, to be moderate in eating, to sleep and sit alone, and to dwell on the highest thoughts,--this is the teaching of the Awakened.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0031",
+      "w": "The Dhammapada",
+      "s": "He who takes refuge with Buddha, the Law, and the Church; he who, with clear understanding, sees the four holy truths:-- 191.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0032",
+      "w": "The Dhammapada",
+      "s": "He who pays homage to those who deserve homage, whether the awakened (Buddha) or their disciples, those who have overcome the host (of evils), and crossed the flood of sorrow, he who pays homage to such as have found deliverance and know no fear, his merit can never be measured by anybody.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0033",
+      "w": "The Dhammapada",
+      "s": "We shall be like the bright gods, feeding on happiness!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0034",
+      "w": "The Dhammapada",
+      "s": "Health is the greatest of gifts, contentedness the best riches; trust is the best of relationships, Nirvana the highest happiness.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0035",
+      "w": "The Dhammapada",
+      "s": "He who gives himself to vanity, and does not give himself to meditation, forgetting the real aim (of life) and grasping at pleasure, will in time envy him who has exerted himself in meditation.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0036",
+      "w": "The Dhammapada",
+      "s": "From pleasure comes grief, from pleasure comes fear; he who is free from pleasure knows neither grief nor fear.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0037",
+      "w": "The Dhammapada",
+      "s": "He who possesses virtue and intelligence, who is just, speaks the truth, and does what is his own business, him the world will hold dear.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0038",
+      "w": "The Dhammapada",
+      "s": "No sufferings befall the man who is not attached to name and form, and who calls nothing his own.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0039",
+      "w": "The Dhammapada",
+      "s": "Those who are ever watchful, who study day and night, and who strive after Nirvana, their passions will come to an end.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0040",
+      "w": "The Dhammapada",
+      "s": "Beware of bodily anger, and control thy body!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0041",
+      "w": "The Dhammapada",
+      "s": "Leave the sins of the mind, and practise virtue with thy mind!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0042",
+      "w": "The Dhammapada",
+      "s": "Thy life has come to an end, thou art come near to death (Yama), there is no resting-place for thee on the road, and thou hast no provision for thy journey.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0043",
+      "w": "The Dhammapada",
+      "s": "But there is a taint worse than all taints,--ignorance is the greatest taint.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0044",
+      "w": "The Dhammapada",
+      "s": "O man, know this, that the unrestrained are in a bad state; take care that greediness and vice do not bring thee to grief for a long time!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0045",
+      "w": "The Dhammapada",
+      "s": "If a man looks after the faults of others, and is always inclined to be offended, his own passions will grow, and he is far from the destruction of passions.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0046",
+      "w": "The Dhammapada",
+      "s": "A man is not learned because he talks much; he who is patient, free from hatred and fear, he is called learned.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0047",
+      "w": "The Dhammapada",
+      "s": "He in whom all this is destroyed, and taken out with the very root, he, when freed from hatred and wise, is called respectable.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0048",
+      "w": "The Dhammapada",
+      "s": "A man is not a Muni because he observes silence (mona, i.e.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0049",
+      "w": "The Dhammapada",
+      "s": "This is the way, there is no other that leads to the purifying of intelligence.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0050",
+      "w": "The Dhammapada",
+      "s": "The Tathagatas (Buddhas) are only preachers.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0051",
+      "w": "The Dhammapada",
+      "s": "Through zeal knowledge is gotten, through lack of zeal knowledge is lost; let a man who knows this double path of gain and loss thus place himself that knowledge may grow.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0052",
+      "w": "The Dhammapada",
+      "s": "Cut out the love of self, like an autumn lotus, with thy hand!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0053",
+      "w": "The Dhammapada",
+      "s": "If by leaving a small pleasure one sees a great pleasure, let a wise man leave the small pleasure, and look to the great.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0054",
+      "w": "The Dhammapada",
+      "s": "The disciples of Gotama (Buddha) are always well awake, and their thoughts day and night are always set on Buddha.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0055",
+      "w": "The Dhammapada",
+      "s": "Whatever place a faithful, virtuous, celebrated, and wealthy man chooses, there he is respected.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0056",
+      "w": "The Dhammapada",
+      "s": "After death both are equal, they are men with evil deeds in the next world.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0057",
+      "w": "The Dhammapada",
+      "s": "As a grass-blade, if badly grasped, cuts the arm, badly-practised asceticism leads to hell.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0058",
+      "w": "The Dhammapada",
+      "s": "Like a well-guarded frontier fort, with defences within and without, so let a man guard himself.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0059",
+      "w": "The Dhammapada",
+      "s": "They who know what is forbidden as forbidden, and what is not forbidden as not forbidden, such men, embracing the true doctrine, enter the good path.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0060",
+      "w": "The Dhammapada",
+      "s": "The elephant called Dhanapalaka, his temples running with sap, and difficult to hold, does not eat a morsel when bound; the elephant longs for the elephant grove.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0061",
+      "w": "The Dhammapada",
+      "s": "If a man find a prudent companion who walks with him, is wise, and lives soberly, he may walk with him, overcoming all dangers, happy, but considerate.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0062",
+      "w": "The Dhammapada",
+      "s": "Pleasant is virtue lasting to old age, pleasant is a faith firmly rooted; pleasant is attainment of intelligence, pleasant is avoiding of sins.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0063",
+      "w": "The Dhammapada",
+      "s": "As a tree, even though it has been cut down, is firm so long as its root is safe, and grows again, thus, unless the feeders of thirst are destroyed, the pain (of life) will return again and again.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0064",
+      "w": "The Dhammapada",
+      "s": "Men, driven on by thirst, run about like a snared hare; let therefore the mendicant drive out thirst, by striving after passionlessness for himself.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0065",
+      "w": "The Dhammapada",
+      "s": "Give up what is before, give up what is behind, give up what is in the middle, when thou goest to the other shore of existence; if thy mind is altogether free, thou wilt not again enter into birth and decay.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0066",
+      "w": "The Dhammapada",
+      "s": "The gift of the law exceeds all gifts; the sweetness of the law exceeds all sweetness; the delight in the law exceeds all delights; the extinction of thirst overcomes all pain.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0067",
+      "w": "The Dhammapada",
+      "s": "The fields are damaged by weeds, mankind is damaged by lust: therefore a gift bestowed on those who are free from lust brings great reward.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0068",
+      "w": "The Dhammapada",
+      "s": "He who controls his hand, he who controls his feet, he who controls his speech, he who is well controlled, he who delights inwardly, who is collected, who is solitary and content, him they call Bhikshu.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0069",
+      "w": "The Dhammapada",
+      "s": "The Bhikshu who acts with kindness, who is calm in the doctrine of Buddha, will reach the quiet place (Nirvana), cessation of natural desires, and happiness.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0070",
+      "w": "The Dhammapada",
+      "s": "Do not direct thy thought to what gives pleasure that thou mayest not for thy heedlessness have to swallow the iron ball (in hell), and that thou mayest not cry out when burning, `This is pain.' 372.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0071",
+      "w": "The Dhammapada",
+      "s": "Let him live in charity, let him be perfect in his duties; then in the fulness of delight he will make an end of suffering.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0072",
+      "w": "The Dhammapada",
+      "s": "The Bhikshu, full of delight, who is calm in the doctrine of Buddha will reach the quiet place (Nirvana), cessation of natural desires, and happiness.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0073",
+      "w": "The Dhammapada",
+      "s": "If the Brahmana has reached the other shore in both laws (in restraint and contemplation), all bonds vanish from him who has obtained knowledge.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0074",
+      "w": "The Dhammapada",
+      "s": "No one should attack a Brahmana, but no Brahmana (if attacked) should let himself fly at his aggressor!",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0075",
+      "w": "The Dhammapada",
+      "s": "A man does not become a Brahmana by his platted hair, by his family, or by birth; in whom there is truth and righteousness, he is blessed, he is a Brahmana.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0076",
+      "w": "The Dhammapada",
+      "s": "He is indeed arrogant, and he is wealthy: but the poor, who is free from all attachments, him I call indeed a Brahmana.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0077",
+      "w": "The Dhammapada",
+      "s": "Him I call indeed a Brahmana who does not cling to pleasures, like water on a lotus leaf, like a mustard seed on the point of a needle.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0078",
+      "w": "The Dhammapada",
+      "s": "Him I call indeed a Brahmana who is tolerant with the intolerant, mild with fault-finders, and free from passion among the passionate.",
+      "src": {
+        "work": "The Dhammapada"
+      }
+    },
+    {
+      "id": "bouddhisme.p0079",
+      "w": "Jataka Tales",
+      "s": "Those monks--knowing not what had been spoken at length, and what concisely, What was the obvious, and what was the higher meaning-- Attached new meaning to new words, as if spoken by the Buddha, And destroyed much of the spirit by holding to the shadow of the letter.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0080",
+      "w": "Jataka Tales",
+      "s": "In Siam there is even a rival collection of Birth Stories, which is called PAṆṆĀSA-JĀTAKAŊ (’The Fifty Jātakas’), and of which an account has been given us by M.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0081",
+      "w": "Jataka Tales",
+      "s": "The former of these two ideas underlies both the central Buddhist doctrine of Karma and the theory of the Buddhas, views certainly common among all the early Buddhists, and therefore probably held by Gotama himself.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0082",
+      "w": "Jataka Tales",
+      "s": "The trumpeting of elephants, the neighing of horses, (the sound of) drums, trumpets, and chariots, And viands and drinks were cried, with the invitation, “Eat and drink.” It goes on to say, 14.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0083",
+      "w": "Jataka Tales",
+      "s": "At his conception, at his birth, at his Buddhahood, at his preaching, I saw not the four signs, plunged in the blissful trance of meditation.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0084",
+      "w": "Jataka Tales",
+      "s": "Having received the rice pottage on the banks of the Neranjarā, the Conqueror Shall come by a fair road prepared for him to the foot of the Bodhi-tree.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0085",
+      "w": "Jataka Tales",
+      "s": "Those creatures that dwell in holes and caves depart each from his lair, This day these lairs are forsaken,--verily thou shalt be Buddha.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0086",
+      "w": "Jataka Tales",
+      "s": "This fourth do thou strenuously undertake, And reach the perfection of wisdom, if thou wilt attain Buddhahood.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0087",
+      "w": "Jataka Tales",
+      "s": "Seeking then I beheld the tenth Perfection of Equanimity Practised and followed by former Buddhas.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0088",
+      "w": "Jataka Tales",
+      "s": "If I am asked, “What, do not other Buddhas also possess this power?” I reply, Certainly they do, for they might at will fill with their lustre ten thousand worlds or more.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0089",
+      "w": "Jataka Tales",
+      "s": "After Revata came the Leader named Sobhita, Subdued and mild, unequalled and unrivalled.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0090",
+      "w": "Jataka Tales",
+      "s": "His body was eighty cubits high, the effulgence from his body always reached a hundred leagues, and his age was a hundred thousand years.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0091",
+      "w": "Jataka Tales",
+      "s": "Though they dwell in heaven, they are not born into the Unconscious state, Nor are they destined to rebirth among the angels in the Pure Abodes.[168] 258.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0092",
+      "w": "Jataka Tales",
+      "s": "The Great Being therefore saw that the time of his advent had arrived.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0093",
+      "w": "Jataka Tales",
+      "s": "Everywhere the earth was covered with lotuses of every colour.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0094",
+      "w": "Jataka Tales",
+      "s": "Tell me the reason of it.” The angels replied, “Sir, to Suddhodana the king is born a son, who seated under the Bo-tree will become a Buddha, and will found a Kingdom of Righteousness.[180] To us it will be given to see his infinite grace and to hear his word.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0095",
+      "w": "Jataka Tales",
+      "s": "The king, leaving his house with a great retinue, took his son and went to the spot.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0096",
+      "w": "Jataka Tales",
+      "s": "And when he was arrayed in all his splendour,--the musicians the while exhibiting each one his peculiar skill, the Brāhmans honouring him with words of joy and victory, and the men of lower castes with festive cries and shouts of praise;--he ascended his superbly decorated car.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0097",
+      "w": "Jataka Tales",
+      "s": "And the whole sky was full of Paricchātaka flowers from Indra’s heaven, as with the pouring rain when thick clouds gather.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0098",
+      "w": "Jataka Tales",
+      "s": "It is in the hope of attaining to complete enlightenment that I have left all.” And when the king gained not his consent, though he asked it in many ways, he said, “Assuredly thou wilt become a Buddha!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0099",
+      "w": "Jataka Tales",
+      "s": "Not seeing his pot, the Bodisat stretched out his right hand, and took the water.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0100",
+      "w": "Jataka Tales",
+      "s": "Mahā Brahma, putting the white canopy of state on to the summit of the rocks at the end of the earth, went to the world of Brahma.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0101",
+      "w": "Jataka Tales",
+      "s": "I am his witness!” Then the Tempter addressed the Great Being, and said, “Siddhattha!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0102",
+      "w": "Jataka Tales",
+      "s": "Now, some teachers say that when the Blessed One saw them approaching in the form of elderly women, he commanded, saying, “Let these women remain just as they are, with broken teeth and bald heads.” This should not be believed, for the Master issues not such commands.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0103",
+      "w": "Jataka Tales",
+      "s": "And He received also the other fifty-four, his companions, into the order, with the formula, “Follow me!” and caused them to attain to Arahatship.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0104",
+      "w": "Jataka Tales",
+      "s": "And he went, and in the same manner attained Arahatship with his followers, and remained silent.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0105",
+      "w": "Jataka Tales",
+      "s": "At the rumour that the young chief Siddhattha was begging from door to door, the windows in the two-storied and three-storied houses were thrown open, and the multitude was transfixed at the sight.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0106",
+      "w": "Jataka Tales",
+      "s": "At that time the householder Anātha Piṇḍika, bringing merchandise in five hundred carts, went to the house of a trader in Rājagaha, his intimate friend, and there heard that a Blessed Buddha had arisen.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0107",
+      "w": "Jataka Tales",
+      "s": "And from that time they were in the habit of going with Anātha Piṇḍika to the Wihāra, taking garlands and perfumes with them, and of hearing the Truth, and of giving gifts, and of keeping the Precepts, and of making confession.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0108",
+      "w": "Jataka Tales",
+      "s": "And journeying on till sunset, they unyoked the waggons, and ranged them in a circle, and tied the oxen to the wheels.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0109",
+      "w": "Jataka Tales",
+      "s": "Returning to the Teacher, I will live in the sight of the glorious person of the Buddha, and within hearing of the sweet sound of the Law.” And he returned to Jetavana.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0110",
+      "w": "Jataka Tales",
+      "s": "And they all drank of the water, and bathed in it.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0111",
+      "w": "Jataka Tales",
+      "s": "And as the other gazed and gazed at the departing Bodisat, he was torn with violent grief; his heart grew hot, and blood flowed from his mouth until his heart broke--like tank-mud in the heat of the sun!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0112",
+      "w": "Jataka Tales",
+      "s": "I am Little Roadling!” The man returned, and said, “Why, Sir, they all say they are called Little Roadling!” “Then go and take by the hand the first who says ‘I am Little Roadling,’ and the rest will disappear.” And he did so.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0113",
+      "w": "Jataka Tales",
+      "s": "So the monks said to him, “Brother Udāyin!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0114",
+      "w": "Jataka Tales",
+      "s": "And even after he was ordained he used to call his slaves and have what he liked cooked, and ate it.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0115",
+      "w": "Jataka Tales",
+      "s": "All!” “Well; all save those who know what beings are divine.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0116",
+      "w": "Jataka Tales",
+      "s": "When he had there passed the four rainy months, he took leave of the king.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0117",
+      "w": "Jataka Tales",
+      "s": "The mother was the mother of Rāhula, but the father was I myself.” END OF THE STORY ABOUT ‘BEAUTY.’ No.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0118",
+      "w": "Jataka Tales",
+      "s": "His mother, the nun, too, obtained spiritual insight, and reached Nirvāna.[284] And Kassapa the Prince became as distinguished in the religion of the Buddhas as the full moon in the midst of the vault of heaven.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0119",
+      "w": "Jataka Tales",
+      "s": "But when its mother saw that, she said, “My son, henceforth go not in his company; you may keep to the Banyan Deer’s herd!” And thus exhorting him, she uttered the verse-- Follow the Banyan Deer: Dwell not with the Monkey Deer.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0120",
+      "w": "Jataka Tales",
+      "s": "And without letting him see the people who had come from the lord’s house, but surrounding herself with servants of her own, she from the very first provided the Elder when he came there with food and drink.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0121",
+      "w": "Jataka Tales",
+      "s": "He has well learnt the devices of the deer.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0122",
+      "w": "Jataka Tales",
+      "s": "And the Bodisat, preaching to the people, and establishing them in the Precepts, passed away according to his deeds.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0123",
+      "w": "Jataka Tales",
+      "s": "The Bodisat said to himself, “Why, these fruits are coming this way, and falling before me.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0124",
+      "w": "Jataka Tales",
+      "s": "But the Bodisat lived to a good old age and passed away according to his deeds.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0125",
+      "w": "Jataka Tales",
+      "s": "We will take him to the Tathāgata.” And he led him to the Master.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0126",
+      "w": "Jataka Tales",
+      "s": "Then he said, “Not now only, O mendicants, have these been close allies; they were so also in a former birth.” And he told a tale.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0127",
+      "w": "Jataka Tales",
+      "s": "Thus, by means of the Bodisat, great was the wealth he acquired.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0128",
+      "w": "Jataka Tales",
+      "s": "Why do you put yourself to all this pain?” And she bathed him in warm water, and rubbed him all over with oil, and gave him to drink, and fed him up with good food.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0129",
+      "w": "Jataka Tales",
+      "s": "Henceforward live a life of righteousness!” And thus confirming her in the Five Commandments, he took her back, and then dismissed her.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0130",
+      "w": "Jataka Tales",
+      "s": "Now one day the Bodisat said to the quails, “This fowler is bringing our kith and kin to destruction!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0131",
+      "w": "Jataka Tales",
+      "s": "Some of the monks being unconverted were terrified with the fear of death; and called out-- “Let’s make a counter-fire, so that the conflagration shall not spread beyond the space burnt out by that.” And taking out their fire-sticks they began to get a light.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0132",
+      "w": "Jataka Tales",
+      "s": "The Bodisat thought, on seeing this,-- “If these two branches go on rubbing like that they will send out sparks of fire, and the fire will fall down and seize on the withered leaves; and the tree itself will soon after be consumed.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0133",
+      "w": "Jataka Tales",
+      "s": "You had better leave these cloths here and take that away with you.” And he would take it out and show it to them.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0134",
+      "w": "Jataka Tales",
+      "s": "Your dear little uncle, your very sweet nephew, you call me!",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0135",
+      "w": "Jataka Tales",
+      "s": "It’s I; the Fairy who dwells in the turret over the fourth gate.” “What are you come for?” “You are not looking after the Merchant’s affairs.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0136",
+      "w": "Jataka Tales",
+      "s": "It is impossible for me to speak on your behalf to the Merchant.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0137",
+      "w": "Jataka Tales",
+      "s": "And after creating it, he himself remained in the sky.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0138",
+      "w": "Jataka Tales",
+      "s": "137 Babrius, the Greek fabulist, xxxiii Bāhiya Jātaka No.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0139",
+      "w": "Jataka Tales",
+      "s": "32 Nāgas, mystic snakes, 85, 88, 94; king of, sings the Bodisat’s praise, 97 Nakkhatta Jātaka No.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0140",
+      "w": "Jataka Tales",
+      "s": "86, 290, 330, 362 Simpson, W., xliii Sinbad the Sailor, xli Sindh horses, 76, 78 Sindhava Jātaka Nos.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0141",
+      "w": "Jataka Tales",
+      "s": "BY MARTIN HAUG, PH.D., Late of the Universities of Tübingen, Göttingen, and Bonn; Superintendent of Sanskrit Studies, and Professor of Sanskrit in the Poona College; Honorary Member of the Bombay Branch Royal Asiatic Society, &c.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0142",
+      "w": "Jataka Tales",
+      "s": "The main portion of this work consists of mythology, but religion is bound up with mythology, and in many points the two are quite inseparable.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0143",
+      "w": "Jataka Tales",
+      "s": "SECTION XIV.--Pre-eminence of the Vernaculars; or, the Anglicists Answered: Being Letters on the Education of the People of India.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0144",
+      "w": "Jataka Tales",
+      "s": "Dennys, in his ‘Folklore of China,’ gives the Chinese Buddhist version of it.",
+      "src": {
+        "work": "Jataka Tales"
+      }
+    },
+    {
+      "id": "bouddhisme.p0145",
+      "w": "Buddhist Psalms",
+      "s": "Trouble was stirred up by the orthodox Buddhist Church with evil reports which reached the ears of the Emperor, and Shinran was sent into banishment in the lonely and primitive province of Echigo—a terrible alternative for a man of noble birth and refined culture.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0146",
+      "w": "Buddhist Psalms",
+      "s": "Therefore he certainly received at that time the true meaning of the Divine Promise of universal salvation, and attained unto the imperishable faith by which alone the ignorant can enter into Nirvana without condition or price.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0147",
+      "w": "Buddhist Psalms",
+      "s": "He was sixty-two years of age when he returned from exile to City-Royal, and though he made it his centre, it was his home no more.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0148",
+      "w": "Buddhist Psalms",
+      "s": "EDITORIAL NOTE The object of the Editors of this series is a very definite one.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0149",
+      "w": "Buddhist Psalms",
+      "s": "For the light of His Wisdom is infinite.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0150",
+      "w": "Buddhist Psalms",
+      "s": "Take refuge in the ultimate Strength, for His pure radiance is above all things.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0151",
+      "w": "Buddhist Psalms",
+      "s": "He who is within the Light, being washed from the soil of Karma, shall attain unto the final deliverance.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0152",
+      "w": "Buddhist Psalms",
+      "s": "All the Buddhas glorify the glory of the Infinite One who is Buddha through His promise of Light immeasurable.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0153",
+      "w": "Buddhist Psalms",
+      "s": "Therefore let him who would be born into the Land of Purity seek refuge in the Great Congregation.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0154",
+      "w": "Buddhist Psalms",
+      "s": "Seek refuge in the World-Honoured, for His Divine Power is Almighty and beyond man’s measure, being made perfect in inconceivable Holiness.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0155",
+      "w": "Buddhist Psalms",
+      "s": "Of His Land of Peace the half cannot be told.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0156",
+      "w": "Buddhist Psalms",
+      "s": "To Him do gather the myriad Bodhisattvas, unnumbered as the Sands of Ganges in worship from the Eastern world.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0157",
+      "w": "Buddhist Psalms",
+      "s": "For by His Divine Promise was this glorious land, great beyond human measurement, made to be.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0158",
+      "w": "Buddhist Psalms",
+      "s": "For the jewel groves and gem trees of Paradise give forth a sweet and most excellent melody in pure and ordered unison.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0159",
+      "w": "Buddhist Psalms",
+      "s": "By His Sacred teaching He leadeth all having life into the way of light.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0160",
+      "w": "Buddhist Psalms",
+      "s": "The Venerable Ananda, rising from his seat, and looking upwards to the World-Honoured Gautama Buddha, his eyes being opened, marvelled greatly, seeing the glory of his Lord so transfigured.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0161",
+      "w": "Buddhist Psalms",
+      "s": "Purity, Rejoicing, Wisdom, these three are the Supernal Essence of the light of the Infinite One that enlighteneth all things, communicating good to all the worlds of the Ten Regions.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0162",
+      "w": "Buddhist Psalms",
+      "s": "Instructing All that have life in the Ten Regions how that they may through sincerity, merit, and hope be born into the Temporal Paradise, He promiseth that no man shall lose salvation, for He hath opened the Gate of Truth.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0163",
+      "w": "Buddhist Psalms",
+      "s": "In all the myriads of Kalpas such a way comes seldom.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0164",
+      "w": "Buddhist Psalms",
+      "s": "Seek refuge in the Sole Vehicle of merciful promise.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0165",
+      "w": "Buddhist Psalms",
+      "s": "For the fame of our race unworthy art thou to dwell in the Palace.” And earnestly did they counsel him to change his evil purpose.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0166",
+      "w": "Buddhist Psalms",
+      "s": "The Eternal Father is called the Buddha of Infinite Light, because very mightily He holdeth in safety all beings dwelling in the Ten Regions of the world who, by His merciful enlightenment, recite His Holy Name.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0167",
+      "w": "Buddhist Psalms",
+      "s": "That Lord most compassionate, the Buddha of immeasurable Light, He who had attained unto the Supreme Wisdom even before the myriads of Kalpas were, pitying them that know not, made himself manifest in the Palace of Kapila as the Lord Sakya-muni.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0168",
+      "w": "Buddhist Psalms",
+      "s": "Dengyo-Daishi, he who taught the Tendai-shu in the mount of Hiye, hath compassionately instructed us that we should recite Namuamida-butsu, that Holiest Name, as a sure shield against the seven sorts of calamities.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0169",
+      "w": "Buddhist Psalms",
+      "s": "To him who reciteth the Holy Name, the King of Death, together with his ministers in the five worlds, shall do reverence, guarding him throughout the days and nights.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0170",
+      "w": "Buddhist Psalms",
+      "s": "Within the Light of Buddha of Infinite Light are unnumbered Buddhas, and of these, each and every one shall shield him who hath within him the true Faith.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0171",
+      "w": "Buddhist Psalms",
+      "s": "Unto me hath that Buddha revealed the Path of the meditation of the Supreme—that meditation wherein He instructeth us that all the Buddhas of all the Ten Regions compassionate as even as a father pitieth his child.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0172",
+      "w": "Buddhist Psalms",
+      "s": "Nagarjuna, the great teacher, setting forth in many excellent writings the praise of the Kingdom of Purity, hath instructed us to recite the Holy Name.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0173",
+      "w": "Buddhist Psalms",
+      "s": "This great priest hath in one utterance set forth that the Lord is Ruler indeed of the sacred teaching, and that herein are the holy Bodhisattvas His ministers.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0174",
+      "w": "Buddhist Psalms",
+      "s": "Only to Him who is above all things is known the glory of the Land of Peace.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0175",
+      "w": "Buddhist Psalms",
+      "s": "Whoso taketh refuge in the Buddha of Infinite Light, that light that shineth unto all the worlds of the Ten Regions, shall be called, according to the teaching of that master of excelling works, a man whose heart is great, and to him shall the True Light be shown.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0176",
+      "w": "Buddhist Psalms",
+      "s": "Having thus cast from him the writings that he had so many years diligently studied, he preached unto all men the doctrine of the Divine Promise, and, so teaching, he led men that are fast bound in the fetters of illusion, in at the Gate of the Great Peace.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0177",
+      "w": "Buddhist Psalms",
+      "s": "And this King of the Gi Dynasty reverently offered unto him the holy title of Shinran (Ran of Divinity) and the honourable name of “Rock of the Venerable Ran”—that his dwelling-place should be called by it.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0178",
+      "w": "Buddhist Psalms",
+      "s": "And when we shall have attained unto that height which is desire for the ingathering of all beings into Paradise, shall we return again into this world that we may be Saviours of Men.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0179",
+      "w": "Buddhist Psalms",
+      "s": "Sin is made one with virtue in its essence, even as ice is one with water.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0180",
+      "w": "Buddhist Psalms",
+      "s": "The Great Priest hath well taught us that in order to cleanse our deeds, words, and thoughts of deceitfulness, our Father hath performed the three of His pure and universal.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0181",
+      "w": "Buddhist Psalms",
+      "s": "And second: This faith is not Single Minded, for it hath not resolution.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0182",
+      "w": "Buddhist Psalms",
+      "s": "And attaining not unto the faith of determination, the faith is not sanctified in him.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0183",
+      "w": "Buddhist Psalms",
+      "s": "And for the sake of mankind in this sinful place, he called unto all the Buddhas of the Ten Regions to be his testimony unto his commentary on the Sutra.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0184",
+      "w": "Buddhist Psalms",
+      "s": "To mingle the right action with the action that is not akin to it is called the confused practice.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0185",
+      "w": "Buddhist Psalms",
+      "s": "The teachings that are not the teachings of the Land of Purity are to be condemned as confused deeds.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0186",
+      "w": "Buddhist Psalms",
+      "s": "And because they are needless, therefore the wise who have received the Great and Lesser Vehicles must trust unto the promise of the Almighty One.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0187",
+      "w": "Buddhist Psalms",
+      "s": "He shall be let and hindered that is not at one with the Divine Promise, and therefore he whose faith is not full of Peace is a man who holdeth not the Divine Thought.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0188",
+      "w": "Buddhist Psalms",
+      "s": "He shall sink into three evil worlds for age-long myriads of Kalpas.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0189",
+      "w": "Buddhist Psalms",
+      "s": "From the teaching of our Lord hath Genshin, the Great Teacher, tenderly opened unto us the gate of the Doctrine of the Holy Name, and hath so taught mankind in this evil world that is far removed from the Golden Day of our Lord.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0190",
+      "w": "Buddhist Psalms",
+      "s": "And very solemnly he warneth us that more are they that are born into the Temporal Paradise.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0191",
+      "w": "Buddhist Psalms",
+      "s": "For from the strength of the wisdom of light, Hōnen, the Great Teacher, came into the world and hath taught the chosen doctrine of the Divine Promise, and he hath built Jodo-Shinshu upon the rock.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0192",
+      "w": "Buddhist Psalms",
+      "s": "Even while Hōnen Shōnin yet walked in this world, there issued from his body rays of a golden shining, and this, so it is said, hath Kanezane Fujiwara beheld with his own eyes.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0193",
+      "w": "Buddhist Psalms",
+      "s": "Of all rare things it is the rarest that we should ourselves meet with the True Teacher, yet verily the chain of doubt in the Divine Mercy is the true cause of unending birth and death.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0194",
+      "w": "Buddhist Psalms",
+      "s": "And thus had he done not only then, but many times in ages gone by.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0195",
+      "w": "Buddhist Psalms",
+      "s": "It is necessary that men should believe the divine promise of Him who is Infinite.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0196",
+      "w": "Buddhist Psalms",
+      "s": "Men are impotent to follow after their practice or to attain unto them.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0197",
+      "w": "Buddhist Psalms",
+      "s": "Hatred great and unbreakable as the high mountains is in the stead of love.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0198",
+      "w": "Buddhist Psalms",
+      "s": "Of heretics in the faith are there ninety sorts that defile the world and only the teaching of the Enlightened One cleanseth it.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0199",
+      "w": "Buddhist Psalms",
+      "s": "The strong heart that is able to attain unto wisdom by self-help is beyond human knowledge and speech.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0200",
+      "w": "Buddhist Psalms",
+      "s": "The noble mind that shall attain unto wisdom in the doctrine of the Pure Land is the mind that fain would become Buddha, and it is named: “The mind that shall save men who suffer.” 254.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0201",
+      "w": "Buddhist Psalms",
+      "s": "Fifty-six thousand and seventy years shall pass before the Bodhisattva that is Maitreya shall attain unto the Perfected Wisdom.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0202",
+      "w": "Buddhist Psalms",
+      "s": "He who reciteth the Holy Name, having attained unto the true faith, shall unceasingly adore the Eternal Father, that he may make a return unto Him for His Grace.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0203",
+      "w": "Buddhist Psalms",
+      "s": "Without the wisdom of the faith, how is it possible that we should attain unto the Nirvana?",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0204",
+      "w": "Buddhist Psalms",
+      "s": "Yea, the recitation of His Holy Name is given of the Blessed One.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0205",
+      "w": "Buddhist Psalms",
+      "s": "Well may we understand from the teaching of the myriad Buddhas in the Ten Regions—they that protect mankind—that the strong mind that seeketh enlightenment by self-effort is vain and impotent.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0206",
+      "w": "Buddhist Psalms",
+      "s": "It is the sole way unto the Promised Land that man should believe the wisdom that is beyond human knowledge, of the Enlightened One.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0207",
+      "w": "Buddhist Psalms",
+      "s": "Through the great mercy of the gift of departing shall we attain unto the compassion of the gift of returning.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0208",
+      "w": "Buddhist Psalms",
+      "s": "In India, in China, and the land of Japan, may the many teachers of the doctrine of the Land of Purity, with compassion and tender acceptance, persuade mankind to strive unto the true faith that they may be joined unto those that return no more unto birth and death.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0209",
+      "w": "Buddhist Psalms",
+      "s": "Whoso shall accept the doctrine of rewards and doubteth the wisdom of Him that hath Light that surpasseth all knowledge of man, shall be made captive in Doubting Castle, and the three jewels of the faith shall no more be his.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0210",
+      "w": "Buddhist Psalms",
+      "s": "It is the Law that he who soweth shall reap what he soweth, therefore the man that is full of righteous deeds for the sake of self-merit shall enter into the prison of the sevenfold gems, for he doubteth the marvellous wisdom of Him that hath the Light.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0211",
+      "w": "Buddhist Psalms",
+      "s": "To him who is born into the Palace, glorious with the seven jewels, for five hundred years there shall befall many sorts of sorrows from his own evil doing.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0212",
+      "w": "Buddhist Psalms",
+      "s": "Whoso doubteth the wisdom that is beyond man’s understanding, and hath believed the doctrine of reward, shall of a certainty be born within Doubting Castle, and this is called conception within the womb of ignorance.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0213",
+      "w": "Buddhist Psalms",
+      "s": "Bodhisattva—the Buddha that shall be—having been united unto those men who return no more to birth and death.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0214",
+      "w": "Buddhist Psalms",
+      "s": "Shotoku, he who is mercy’s self, the Compassionate, he who is like unto a father, and the Bodhisattva of Mercy, the divine tenderness, his succour is merciful as the pity of a mother.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0215",
+      "w": "Buddhist Psalms",
+      "s": "We to whom he showed forth his compassion must be swift to praise him, having continually sought refuge in him, and with a single mind.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0216",
+      "w": "Buddhist Psalms",
+      "s": "Therefore is my soul like unto the poison of serpents, Even my righteous deeds, being mingled with this poison, must be named the deeds of deceitfulness.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    },
+    {
+      "id": "bouddhisme.p0217",
+      "w": "Buddhist Psalms",
+      "s": "It is a token of this evil age that in this world the priests, together with the people, In secret serve strange gods, While bearing the appearance of the devout sons of Buddha.",
+      "src": {
+        "work": "Buddhist Psalms"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "bouddhisme.f.v0001",
+      "kind": "verbatim",
+      "text": "Those who bridle their mind which travels far, moves about alone, is without a body, and hides in the chamber (of the heart), will be free from the bonds of Mara (the tempter).",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0002",
+      "kind": "verbatim",
+      "text": "He who knows that this body is like froth, and has learnt that it is as unsubstantial as a mirage, will break the flower-pointed arrow of Mara, and never see the king of death.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0003",
+      "kind": "verbatim",
+      "text": "Those whose mind is well grounded in the (seven) elements of knowledge, who without clinging to anything, rejoice in freedom from attachment, whose appetites have been conquered, and who are full of light, are free (even) in this world.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0004",
+      "kind": "verbatim",
+      "text": "The gods even envy him whose senses, like horses well broken in by the driver, have been subdued, who is free from pride, and free from appetites.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0005",
+      "kind": "verbatim",
+      "text": "One's own self conquered is better than all other people; not even a god, a Gandharva, not Mara with Brahman could change into defeat the victory of a man who has vanquished himself, and always lives under restraint.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0006",
+      "kind": "verbatim",
+      "text": "Even a good man sees evil days, as long as his good deed has not ripened; but when his good deed has ripened, then does the good man see happy days.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0007",
+      "kind": "verbatim",
+      "text": "He who has no wound on his hand, may touch poison with his hand; poison does not affect one who has no wound; nor is there evil for one who does not commit evil.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0008",
+      "kind": "verbatim",
+      "text": "After a stronghold has been made of the bones, it is covered with flesh and blood, and there dwell in it old age and death, pride and deceit.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0009",
+      "kind": "verbatim",
+      "text": "All thy rafters are broken, thy ridge-pole is sundered; the mind, approaching the Eternal (visankhara, nirvana), has attained to the extinction of all desires.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0010",
+      "kind": "verbatim",
+      "text": "The foolish man who scorns the rule of the venerable (Arahat), of the elect (Ariya), of the virtuous, and follows false doctrine, he bears fruit to his own destruction, like the fruits of the Katthaka reed.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0011",
+      "kind": "verbatim",
+      "text": "The swans go on the path of the sun, they go through the ether by means of their miraculous power; the wise are led out of this world, when they have conquered Mara and his train.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0012",
+      "kind": "verbatim",
+      "text": "He whose conquest is not conquered again, into whose conquest no one in this world enters, by what track can you lead him, the Awakened, the Omniscient, the trackless?",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0013",
+      "kind": "verbatim",
+      "text": "Not to blame, not to strike, to live restrained under the law, to be moderate in eating, to sleep and sit alone, and to dwell on the highest thoughts,--this is the teaching of the Awakened.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0014",
+      "kind": "verbatim",
+      "text": "He who pays homage to those who deserve homage, whether the awakened (Buddha) or their disciples, those who have overcome the host (of evils), and crossed the flood of sorrow, he who pays homage to such as have found deliverance and know no fear, his merit can never be measured by anybody.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0015",
+      "kind": "verbatim",
+      "text": "He who gives himself to vanity, and does not give himself to meditation, forgetting the real aim (of life) and grasping at pleasure, will in time envy him who has exerted himself in meditation.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Thy life has come to an end, thou art come near to death (Yama), there is no resting-place for thee on the road, and thou hast no provision for thy journey.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0017",
+      "kind": "verbatim",
+      "text": "If a man looks after the faults of others, and is always inclined to be offended, his own passions will grow, and he is far from the destruction of passions.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0018",
+      "kind": "verbatim",
+      "text": "Through zeal knowledge is gotten, through lack of zeal knowledge is lost; let a man who knows this double path of gain and loss thus place himself that knowledge may grow.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0019",
+      "kind": "verbatim",
+      "text": "They who know what is forbidden as forbidden, and what is not forbidden as not forbidden, such men, embracing the true doctrine, enter the good path.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0020",
+      "kind": "verbatim",
+      "text": "The elephant called Dhanapalaka, his temples running with sap, and difficult to hold, does not eat a morsel when bound; the elephant longs for the elephant grove.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0021",
+      "kind": "verbatim",
+      "text": "If a man find a prudent companion who walks with him, is wise, and lives soberly, he may walk with him, overcoming all dangers, happy, but considerate.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0022",
+      "kind": "verbatim",
+      "text": "Pleasant is virtue lasting to old age, pleasant is a faith firmly rooted; pleasant is attainment of intelligence, pleasant is avoiding of sins.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0023",
+      "kind": "verbatim",
+      "text": "As a tree, even though it has been cut down, is firm so long as its root is safe, and grows again, thus, unless the feeders of thirst are destroyed, the pain (of life) will return again and again.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0024",
+      "kind": "verbatim",
+      "text": "Men, driven on by thirst, run about like a snared hare; let therefore the mendicant drive out thirst, by striving after passionlessness for himself.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0025",
+      "kind": "verbatim",
+      "text": "Give up what is before, give up what is behind, give up what is in the middle, when thou goest to the other shore of existence; if thy mind is altogether free, thou wilt not again enter into birth and decay.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0026",
+      "kind": "verbatim",
+      "text": "The gift of the law exceeds all gifts; the sweetness of the law exceeds all sweetness; the delight in the law exceeds all delights; the extinction of thirst overcomes all pain.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0027",
+      "kind": "verbatim",
+      "text": "He who controls his hand, he who controls his feet, he who controls his speech, he who is well controlled, he who delights inwardly, who is collected, who is solitary and content, him they call Bhikshu.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0028",
+      "kind": "verbatim",
+      "text": "The Bhikshu who acts with kindness, who is calm in the doctrine of Buddha, will reach the quiet place (Nirvana), cessation of natural desires, and happiness.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0029",
+      "kind": "verbatim",
+      "text": "Do not direct thy thought to what gives pleasure that thou mayest not for thy heedlessness have to swallow the iron ball (in hell), and that thou mayest not cry out when burning, `This is pain.' 372.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0030",
+      "kind": "verbatim",
+      "text": "The Bhikshu, full of delight, who is calm in the doctrine of Buddha will reach the quiet place (Nirvana), cessation of natural desires, and happiness.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0031",
+      "kind": "verbatim",
+      "text": "If the Brahmana has reached the other shore in both laws (in restraint and contemplation), all bonds vanish from him who has obtained knowledge.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0032",
+      "kind": "verbatim",
+      "text": "A man does not become a Brahmana by his platted hair, by his family, or by birth; in whom there is truth and righteousness, he is blessed, he is a Brahmana.",
+      "work": "The Dhammapada",
+      "lang": "en",
+      "src": {
+        "work": "The Dhammapada"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0033",
+      "kind": "verbatim",
+      "text": "Those monks--knowing not what had been spoken at length, and what concisely, What was the obvious, and what was the higher meaning-- Attached new meaning to new words, as if spoken by the Buddha, And destroyed much of the spirit by holding to the shadow of the letter.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0034",
+      "kind": "verbatim",
+      "text": "In Siam there is even a rival collection of Birth Stories, which is called PAṆṆĀSA-JĀTAKAŊ (’The Fifty Jātakas’), and of which an account has been given us by M.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0035",
+      "kind": "verbatim",
+      "text": "The former of these two ideas underlies both the central Buddhist doctrine of Karma and the theory of the Buddhas, views certainly common among all the early Buddhists, and therefore probably held by Gotama himself.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0036",
+      "kind": "verbatim",
+      "text": "The trumpeting of elephants, the neighing of horses, (the sound of) drums, trumpets, and chariots, And viands and drinks were cried, with the invitation, “Eat and drink.” It goes on to say, 14.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0037",
+      "kind": "verbatim",
+      "text": "Having received the rice pottage on the banks of the Neranjarā, the Conqueror Shall come by a fair road prepared for him to the foot of the Bodhi-tree.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0038",
+      "kind": "verbatim",
+      "text": "If I am asked, “What, do not other Buddhas also possess this power?” I reply, Certainly they do, for they might at will fill with their lustre ten thousand worlds or more.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0039",
+      "kind": "verbatim",
+      "text": "Tell me the reason of it.” The angels replied, “Sir, to Suddhodana the king is born a son, who seated under the Bo-tree will become a Buddha, and will found a Kingdom of Righteousness.[180] To us it will be given to see his infinite grace and to hear his word.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0040",
+      "kind": "verbatim",
+      "text": "It is in the hope of attaining to complete enlightenment that I have left all.” And when the king gained not his consent, though he asked it in many ways, he said, “Assuredly thou wilt become a Buddha!",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0041",
+      "kind": "verbatim",
+      "text": "Now, some teachers say that when the Blessed One saw them approaching in the form of elderly women, he commanded, saying, “Let these women remain just as they are, with broken teeth and bald heads.” This should not be believed, for the Master issues not such commands.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0042",
+      "kind": "verbatim",
+      "text": "At the rumour that the young chief Siddhattha was begging from door to door, the windows in the two-storied and three-storied houses were thrown open, and the multitude was transfixed at the sight.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0043",
+      "kind": "verbatim",
+      "text": "At that time the householder Anātha Piṇḍika, bringing merchandise in five hundred carts, went to the house of a trader in Rājagaha, his intimate friend, and there heard that a Blessed Buddha had arisen.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0044",
+      "kind": "verbatim",
+      "text": "Returning to the Teacher, I will live in the sight of the glorious person of the Buddha, and within hearing of the sweet sound of the Law.” And he returned to Jetavana.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0045",
+      "kind": "verbatim",
+      "text": "I am Little Roadling!” The man returned, and said, “Why, Sir, they all say they are called Little Roadling!” “Then go and take by the hand the first who says ‘I am Little Roadling,’ and the rest will disappear.” And he did so.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0046",
+      "kind": "verbatim",
+      "text": "His mother, the nun, too, obtained spiritual insight, and reached Nirvāna.[284] And Kassapa the Prince became as distinguished in the religion of the Buddhas as the full moon in the midst of the vault of heaven.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0047",
+      "kind": "verbatim",
+      "text": "Why do you put yourself to all this pain?” And she bathed him in warm water, and rubbed him all over with oil, and gave him to drink, and fed him up with good food.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0048",
+      "kind": "verbatim",
+      "text": "Some of the monks being unconverted were terrified with the fear of death; and called out-- “Let’s make a counter-fire, so that the conflagration shall not spread beyond the space burnt out by that.” And taking out their fire-sticks they began to get a light.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0049",
+      "kind": "verbatim",
+      "text": "The Bodisat thought, on seeing this,-- “If these two branches go on rubbing like that they will send out sparks of fire, and the fire will fall down and seize on the withered leaves; and the tree itself will soon after be consumed.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0050",
+      "kind": "verbatim",
+      "text": "BY MARTIN HAUG, PH.D., Late of the Universities of Tübingen, Göttingen, and Bonn; Superintendent of Sanskrit Studies, and Professor of Sanskrit in the Poona College; Honorary Member of the Bombay Branch Royal Asiatic Society, &c.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0051",
+      "kind": "verbatim",
+      "text": "The main portion of this work consists of mythology, but religion is bound up with mythology, and in many points the two are quite inseparable.",
+      "work": "Jataka Tales",
+      "lang": "en",
+      "src": {
+        "work": "Jataka Tales"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0052",
+      "kind": "verbatim",
+      "text": "Trouble was stirred up by the orthodox Buddhist Church with evil reports which reached the ears of the Emperor, and Shinran was sent into banishment in the lonely and primitive province of Echigo—a terrible alternative for a man of noble birth and refined culture.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0053",
+      "kind": "verbatim",
+      "text": "The Venerable Ananda, rising from his seat, and looking upwards to the World-Honoured Gautama Buddha, his eyes being opened, marvelled greatly, seeing the glory of his Lord so transfigured.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0054",
+      "kind": "verbatim",
+      "text": "Purity, Rejoicing, Wisdom, these three are the Supernal Essence of the light of the Infinite One that enlighteneth all things, communicating good to all the worlds of the Ten Regions.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0055",
+      "kind": "verbatim",
+      "text": "Instructing All that have life in the Ten Regions how that they may through sincerity, merit, and hope be born into the Temporal Paradise, He promiseth that no man shall lose salvation, for He hath opened the Gate of Truth.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0056",
+      "kind": "verbatim",
+      "text": "The Eternal Father is called the Buddha of Infinite Light, because very mightily He holdeth in safety all beings dwelling in the Ten Regions of the world who, by His merciful enlightenment, recite His Holy Name.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0057",
+      "kind": "verbatim",
+      "text": "That Lord most compassionate, the Buddha of immeasurable Light, He who had attained unto the Supreme Wisdom even before the myriads of Kalpas were, pitying them that know not, made himself manifest in the Palace of Kapila as the Lord Sakya-muni.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0058",
+      "kind": "verbatim",
+      "text": "Dengyo-Daishi, he who taught the Tendai-shu in the mount of Hiye, hath compassionately instructed us that we should recite Namuamida-butsu, that Holiest Name, as a sure shield against the seven sorts of calamities.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0059",
+      "kind": "verbatim",
+      "text": "To him who reciteth the Holy Name, the King of Death, together with his ministers in the five worlds, shall do reverence, guarding him throughout the days and nights.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0060",
+      "kind": "verbatim",
+      "text": "Within the Light of Buddha of Infinite Light are unnumbered Buddhas, and of these, each and every one shall shield him who hath within him the true Faith.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0061",
+      "kind": "verbatim",
+      "text": "Unto me hath that Buddha revealed the Path of the meditation of the Supreme—that meditation wherein He instructeth us that all the Buddhas of all the Ten Regions compassionate as even as a father pitieth his child.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0062",
+      "kind": "verbatim",
+      "text": "Nagarjuna, the great teacher, setting forth in many excellent writings the praise of the Kingdom of Purity, hath instructed us to recite the Holy Name.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0063",
+      "kind": "verbatim",
+      "text": "This great priest hath in one utterance set forth that the Lord is Ruler indeed of the sacred teaching, and that herein are the holy Bodhisattvas His ministers.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0064",
+      "kind": "verbatim",
+      "text": "Whoso taketh refuge in the Buddha of Infinite Light, that light that shineth unto all the worlds of the Ten Regions, shall be called, according to the teaching of that master of excelling works, a man whose heart is great, and to him shall the True Light be shown.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0065",
+      "kind": "verbatim",
+      "text": "Having thus cast from him the writings that he had so many years diligently studied, he preached unto all men the doctrine of the Divine Promise, and, so teaching, he led men that are fast bound in the fetters of illusion, in at the Gate of the Great Peace.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0066",
+      "kind": "verbatim",
+      "text": "The Great Priest hath well taught us that in order to cleanse our deeds, words, and thoughts of deceitfulness, our Father hath performed the three of His pure and universal.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0067",
+      "kind": "verbatim",
+      "text": "He shall be let and hindered that is not at one with the Divine Promise, and therefore he whose faith is not full of Peace is a man who holdeth not the Divine Thought.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0068",
+      "kind": "verbatim",
+      "text": "From the teaching of our Lord hath Genshin, the Great Teacher, tenderly opened unto us the gate of the Doctrine of the Holy Name, and hath so taught mankind in this evil world that is far removed from the Golden Day of our Lord.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0069",
+      "kind": "verbatim",
+      "text": "Even while Hōnen Shōnin yet walked in this world, there issued from his body rays of a golden shining, and this, so it is said, hath Kanezane Fujiwara beheld with his own eyes.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0070",
+      "kind": "verbatim",
+      "text": "Of all rare things it is the rarest that we should ourselves meet with the True Teacher, yet verily the chain of doubt in the Divine Mercy is the true cause of unending birth and death.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0071",
+      "kind": "verbatim",
+      "text": "The noble mind that shall attain unto wisdom in the doctrine of the Pure Land is the mind that fain would become Buddha, and it is named: “The mind that shall save men who suffer.” 254.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0072",
+      "kind": "verbatim",
+      "text": "He who reciteth the Holy Name, having attained unto the true faith, shall unceasingly adore the Eternal Father, that he may make a return unto Him for His Grace.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0073",
+      "kind": "verbatim",
+      "text": "Well may we understand from the teaching of the myriad Buddhas in the Ten Regions—they that protect mankind—that the strong mind that seeketh enlightenment by self-effort is vain and impotent.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0074",
+      "kind": "verbatim",
+      "text": "In India, in China, and the land of Japan, may the many teachers of the doctrine of the Land of Purity, with compassion and tender acceptance, persuade mankind to strive unto the true faith that they may be joined unto those that return no more unto birth and death.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0075",
+      "kind": "verbatim",
+      "text": "Whoso shall accept the doctrine of rewards and doubteth the wisdom of Him that hath Light that surpasseth all knowledge of man, shall be made captive in Doubting Castle, and the three jewels of the faith shall no more be his.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0076",
+      "kind": "verbatim",
+      "text": "It is the Law that he who soweth shall reap what he soweth, therefore the man that is full of righteous deeds for the sake of self-merit shall enter into the prison of the sevenfold gems, for he doubteth the marvellous wisdom of Him that hath the Light.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0077",
+      "kind": "verbatim",
+      "text": "To him who is born into the Palace, glorious with the seven jewels, for five hundred years there shall befall many sorts of sorrows from his own evil doing.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0078",
+      "kind": "verbatim",
+      "text": "Whoso doubteth the wisdom that is beyond man’s understanding, and hath believed the doctrine of reward, shall of a certainty be born within Doubting Castle, and this is called conception within the womb of ignorance.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0079",
+      "kind": "verbatim",
+      "text": "Shotoku, he who is mercy’s self, the Compassionate, he who is like unto a father, and the Bodhisattva of Mercy, the divine tenderness, his succour is merciful as the pity of a mother.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "bouddhisme.f.v0080",
+      "kind": "verbatim",
+      "text": "It is a token of this evil age that in this world the priests, together with the people, In secret serve strange gods, While bearing the appearance of the devout sons of Buddha.",
+      "work": "Buddhist Psalms",
+      "lang": "en",
+      "src": {
+        "work": "Buddhist Psalms"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "bouddhisme.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 6,
+      "worksSpan": 2,
+      "examples": [
+        "If, like a shattered metal plate (gong), thou utter not, then thou hast reached Nirvana; contention is not known to thee.",
+        "If a man looks after the faults of others, and is always inclined to be offended, his own passions will grow, and he is far from the destruction of passions."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 217,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:3ed4fd67e1b3af8d843377144ca0d88375482ec5db63fd6a987c6e1b82cfd7d5"
+}

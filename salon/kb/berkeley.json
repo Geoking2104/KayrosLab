@@ -1,0 +1,3319 @@
+{
+  "authorId": "berkeley",
+  "kbVersion": "berkeley@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.429Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "A Treatise Concerning the Principles of Human Knowledge",
+      "sentences": 56
+    },
+    {
+      "title": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "sentences": 53
+    },
+    {
+      "title": "An Essay Towards a New Theory of Vision",
+      "sentences": 57
+    },
+    {
+      "title": "The Querist",
+      "sentences": 60
+    },
+    {
+      "title": "The Lady of Big Shanty",
+      "sentences": 52
+    }
+  ],
+  "passages": [
+    {
+      "id": "berkeley.p0001",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Also Stewart's Philosophy of the Mind, part i, chapt.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0002",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But yet one has reason to suspect such ideas are marks of our imperfection.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0003",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "And surely the great and multiplied labour of framing abstract notions will be found a hard task for that tender age.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0004",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I come now to consider the SOURCE OF THIS PREVAILING NOTION, and that seems to me to be LANGUAGE.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0005",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "It is one thing for to keep a name constantly to the same definition, and another to make it stand everywhere for the same idea; the one is necessary, the other useless and impracticable.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0006",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Or is not the being threatened with danger sufficient to excite a dread, though we think not of any particular evil likely to befal us, nor yet frame to ourselves an idea of danger in abstract?",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0007",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "This seems to me the principal cause why those men who have so emphatically recommended to others the laying aside all use of words in their meditations, and contemplating their bare ideas, have yet failed to perform it themselves.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0008",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "The farther we go, we shall only lose ourselves the more irrecoverably, and be the deeper entangled in difficulties and mistakes.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0009",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Thus, for example a certain colour, taste, smell, figure and consistence having been observed to go together, are accounted one distinct thing, signified by the name APPLE.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0010",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Light and colours, heat and cold, extension and figures--in a word the things we see and feel--what are they but so many sensations, notions, ideas, or impressions on the sense?",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0011",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "SECOND ARGUMENT.[Note.]--From what has been said it follows there is NOT ANY OTHER SUBSTANCE THAN SPIRIT, or that which perceives.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0012",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "The ideas we have of these they acknowledge not to be the resemblances of anything existing without the mind, or unperceived, but they will have our ideas of the primary qualities to be patterns or images of things which exist without the mind, in an unthinking substance which they call MATTER.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0013",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Number is so visibly relative, and dependent on men's understanding, that it is strange to think how any one should give it an absolute existence without the mind.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0014",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I answer, though you have no positive, yet, if you have any meaning at all, you must at least have a relative idea of Matter; though you know not what it is, yet you must be supposed to know what relation it bears to accidents, and what is meant by its supporting them.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0015",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "If therefore it were possible for bodies to exist without the mind, yet to hold they do so, must needs be a very precarious opinion; since it is to suppose, without any reason at all, that God has created innumerable beings THAT ARE ENTIRELY USELESS, AND SERVE TO NO MANNER OF PURPOSE.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0016",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I am afraid I have given cause to think I am needlessly prolix in handling this subject.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0017",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I answer, you may so, there is no difficulty in it; but what is all this, I beseech you, more than framing in your mind certain ideas which you call BOOKS and TREES, and the same time omitting to frame the idea of any one that may perceive them?",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0018",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "It must therefore be a substance; but it has been shown that there is no corporeal or material substance: it remains therefore that the CAUSE OF IDEAS is an incorporeal active substance or Spirit.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0019",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "It is no more than willing, and straightway this or that idea arises in my fancy; and by the same power it is obliterated and makes way for another.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0020",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "And yet THIS consistent UNIFORM WORKING, which so evidently displays the goodness and wisdom of that Governing Spirit whose Will constitutes the laws of nature, is so far from leading our thoughts to Him, that it rather SENDS THEM A WANDERING AFTER SECOND CAUSES.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0021",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "In the sense here given of REALITY it is evident that every vegetable, star, mineral, and in general each part of the mundane system, is as much a REAL BEING by our principles as by any other.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0022",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "THE TERM IDEA PREFERABLE TO THING.--If it be demanded why I make use of the word IDEA, and do not rather in compliance with custom call them THINGS.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0023",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Though throughout the same the contrary be supposed true of tangible objects--not that to suppose that vulgar error was necessary for establishing the notion therein laid down, but because it was beside my purpose to examine and refute it in a discourse concerning VISION.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0024",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "In ANSWER to all which, I refer the reader to what has been said in sect.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0025",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Hence, it follows there is an infinite number of parts in each particle of Matter which are not perceived by sense.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0026",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "In short, whatever advances have been made, either by ancient or modern philosophers, in the study of nature do all proceed on the supposition that corporeal substance or Matter doth really exist.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0027",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "A little reflexion on what is here said will make it manifest that the common use of language would receive no manner of alteration or disturbance from the admission of our tenets.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0028",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "And if so, what cause can be assigned of so widespread and predominant an error?",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0029",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Herein consists the knowledge of nature, which may preserve its use and certainty very consistently with what has been said.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0030",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "In short, it will be asked, how, upon our principles, any tolerable account can be given, or any final cause assigned of an innumerable multitude of bodies and machines, framed with the most exquisite art, which in the common philosophy have very apposite uses assigned them, and serve to explain abundance of phenomena?",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0031",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "To set this matter in a yet clearer light, I shall observe that what has been objected in sect.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0032",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "The words \"to be present,\" when thus applied, must needs be taken in some abstract and strange meaning, and which I am not able to comprehend.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0033",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But, this notion of Matter seems too extravagant to deserve a confutation.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0034",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "First, therefore, it was thought that colour, figure, motion, and the rest of the sensible qualities or accidents, did really exist without the mind; and for this reason it seemed needful to suppose some unthinking substratum or substance wherein they did exist, since they could not be conceived to exist by themselves.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0035",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "For, after all, this is what appears to me to be the result of that definition, the parts whereof when I consider with attention, either collectively or separate from each other, I do not find that there is any kind of effect or impression made on my mind different from what is excited by the term nothing.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0036",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Whether corporeal substance can think,\" \"whether Matter be infinitely divisible,\" and \"how it operates on spirit\"--these and like inquiries have given infinite amusement to philosophers in all ages; but depending on the existence of Matter, they have no longer any place on our principles.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0037",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But, all this doubtfulness, which so bewilders and confounds the mind and makes philosophy ridiculous in the eyes of the world, vanishes if we annex a meaning to our words, and not amuse ourselves with the terms \"absolute,\" \"external,\" \"exist,\" and such-like, signifying we know not what.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0038",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Again, the things perceived by sense may be termed external, with regard to their origin--in that they are not generated from within by the mind itself, but imprinted by a Spirit distinct from that which perceives them.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0039",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "How great a friend material substance has been to Atheists in all ages were needless to relate.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0040",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But to frame an abstract idea of happiness, prescinded from all particular pleasure, or of goodness from everything that is good, this is what few can pretend to.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0041",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "This they exaggerate, and love to enlarge on.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0042",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "ATTRACTION SIGNIFIES THE EFFECT, NOT THE MANNER OR CAUSE.--The great mechanical principle now in vogue is attraction.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0043",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "THREE ANALOGIES.--Those men who frame general rules from the phenomena and afterwards derive the phenomena from those rules, seem to consider signs rather than causes.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0044",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "And, because the parts of absolute space do not fall under our senses, instead of them we are obliged to use their sensible measures, and so define both place and motion with respect to bodies which we regard as immovable.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0045",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Hence, if there was one only body in being it could not possibly be moved.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0046",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "For, to denominate a body moved it is requisite, first, that it change its distance or situation with regard to some other body; and secondly, that the force occasioning that change be applied to it.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0047",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Arithmetic has been thought to have for its object abstract ideas of Number; of which to understand the properties and mutual habitudes, is supposed no mean part of speculative knowledge.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0048",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Nothing can be plainer to me than that the extensions I have in view are no other than my own ideas; and it is no less plain that I cannot resolve any one of my ideas into an infinite number of other ideas, that is, that they are not infinitely divisible.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0049",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "After this manner, the properties of the lines signified are (by a very usual figure) transferred to the sign, and thence, through mistake, though to appertain to it considered in its own nature.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0050",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But, whoever considers the weakness of this pretence will think it was contrived on purpose to humour the laziness of the mind which had rather acquiesce in an indolent scepticism than be at the pains to go through with a severe examination of those principles it has ever embraced for true.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0051",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "And this if I mistake not has been demonstrated in section 27; to which I shall here add that a spirit has been shown to be the only substance or support wherein unthinking beings or ideas can exist; but that this substance which supports or perceives ideas should itself be an idea or like an idea is evidently absurd.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0052",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "But, perhaps you will say that though an idea cannot resemble a spirit in its thinking, acting, or subsisting by itself, yet it may in some other respects; and it is not necessary that an idea or image be in all respects like the original.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0053",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I answer, all the unthinking objects of the mind agree in that they are entirely passive, and their existence consists only in being perceived; whereas a soul or spirit is an active being, whose existence consists, not in being perceived, but in perceiving ideas and thinking.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0054",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "It will not be amiss to add, that the doctrine of abstract ideas has had no small share in rendering those sciences intricate and obscure which are particularly conversant about spiritual things.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0055",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "I perceive several motions, changes, and combinations of ideas, that inform me there are certain particular agents, like myself, which accompany them and concur in their production.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0056",
+      "w": "A Treatise Concerning the Principles of Human Knowledge",
+      "s": "Could we but see Him, say they, as we see a man, we should believe that He is, and believing obey His commands.",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      }
+    },
+    {
+      "id": "berkeley.p0057",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And how could this be, if the taste was something really inherent in the food?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0058",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I tell you, as perceived by us, it is a particular sensation in the mind.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0059",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I own, indeed, the inferences you draw me into sound something oddly; but common language, you know, is framed by, and for the use of the vulgar: we must not therefore wonder if expressions adapted to exact philosophic notions seem uncouth and out of the way.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0060",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And what will you conclude from all this?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0061",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "From all which, should it not seem to follow that all colours are equally apparent, and that none of those which we perceive are really inherent in any outward object?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0062",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "How then do you affirm that colours are in the light; since by LIGHT you understand a corporeal substance external to the mind?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0063",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But, as we approach to or recede from an object, the visible extension varies, being at one distance ten or a hundred times greater than another.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0064",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Is not the motion of a body swift in a reciprocal proportion to the time it takes up in describing any given space?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0065",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "It is therefore superfluous to inquire particularly concerning each of them.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0066",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "You are at liberty to recover any slips you might have made, or offer whatever you have omitted which makes for your first opinion.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0067",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Nor can I imagine how this follows from what you said just now, to wit, that the red and yellow were on the tulip you SAW, since you do not pretend to SEE that unthinking substance.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0068",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "In short, do but consider the point, and then confess ingenuously, whether light and colours, tastes, sounds, &c.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0069",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I tell you, extension is only a mode, and Matter is something that supports modes.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0070",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I am not for imposing any sense on your words: you are at liberty to explain them as you please.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0071",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Without question, that which is conceived is in the mind.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0072",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "You ought not therefore to conclude that sensible objects are without the mind, from their appearance, or manner wherein they are perceived.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0073",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Doth it not therefore follow that distance is not properly and immediately perceived by sight?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0074",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "It is nevertheless evident that, in truth and strictness, nothing can be HEARD BUT SOUND; and the coach is not then properly perceived by sense, but suggested from experience.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0075",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And, after all, this very point which you are now resolved to maintain, without any reason, is in effect what you have more than once during this discourse seen good reason to give up.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0076",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "In a word, can anything be like a sensation or idea, but another sensation or idea?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0077",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "It comes, therefore, to the same thing; and you have been all this while accounting for ideas by certain motions or impressions of the brain; that is, by some alterations in an idea, whether sensible or imaginable it matters not.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0078",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "How sincere a pleasure is it to behold the natural beauties of the earth!",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0079",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Whence I conclude, not that they have no real existence, but that, seeing they depend not on my thought, and have all existence distinct from being perceived by me, THERE MUST BE SOME OTHER MIND WHEREIN THEY EXIST.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0080",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "The things, I say, immediately perceived are ideas or sensations, call them which you will.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0081",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I would by no means be thought to deny that God, or an infinite Spirit, is the Supreme Cause of all things.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0082",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I do not believe that it hath any figure or motion at all, being already convinced, that no sensible qualities can exist in an unperceiving substance.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0083",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Is it not common to all instruments, that they are applied to the doing those things only which cannot be performed by the mere act of our wills?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0084",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Continue, good Hylas, to act the same ingenuous part, and tell me sincerely whether you can frame a distinct idea of Entity in general, prescinded from and exclusive of all thinking and corporeal beings, all particular things whatsoever.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0085",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But granting Matter to be possible, yet, upon that account merely, it can have no more claim to existence than a golden mountain, or a centaur.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0086",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But I am not so thoroughly satisfied that you have proved the impossibility of Matter, in the last most obscure abstracted and indefinite sense.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0087",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Has it confirmed you in the same mind you were in at parting?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0088",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "That is the very top and perfection of human knowledge.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0089",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And so you are plunged into the deepest and most deplorable scepticism that ever man was.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0090",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "That a thing should be really perceived by my senses, and at the same time not really exist, is to me a plain contradiction; since I cannot prescind or abstract, even in thought, the existence of a sensible thing from its being perceived.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0091",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "You will forgive me if I repeat the same things in answer to the same objections.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0092",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But, do you in earnest think the real existence of sensible things consists in their being actually perceived?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0093",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Besides, that which to you, I know not for what reason, seems so extravagant is no more than the Holy Scriptures assert in a hundred places.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0094",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And that the objects immediately perceived are ideas, is on all hands agreed.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0095",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Pray, Philonous, were you not formerly as positive that Matter existed, as you are now that it does not?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0096",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But you have asserted that whatever ideas we perceive from without are in the mind which affects us.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0097",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "But, all this while you have not considered that the quantity of Matter has been demonstrated to be proportioned to the gravity of bodies.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0098",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "And the appearances perceived by sense, are they not ideas?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0099",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "I am not for changing things into ideas, but rather ideas into things; since those immediate objects of perception, which, according to you, are only appearances of things, I take to be the real things themselves.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0100",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "It will not thence follow they are not to be trusted; or that they are inconsistent either with themselves or anything else: except it be with your preconceived notion of (I know not what) one single, unchanged, unperceivable, real Nature, marked by each name.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0101",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Lastly, Whether, the premises considered, it be not the wisest way to follow nature, trust your senses, and, laying aside all anxious thought about unknown natures or substances, admit with the vulgar those for real things which are perceived by the senses?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0102",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "You cannot say objects are in your mind, as books in your study: or that things are imprinted on it, as the figure of a seal upon wax.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0103",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "Bring your principles to agree with this, and I shall perhaps agree with you.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0104",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "In answer to that, I say, first, created beings might begin to exist in the mind of other created intelligences, beside men.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0105",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "What shall we make then of the creation?",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0106",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "If then you would infer anything against me, your difficulty must not be drawn from the inadequateness of our conceptions of the Divine nature, which is unavoidable on any scheme; but from the denial of Matter, of which there is not one word, directly or indirectly, in what you have now objected.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0107",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "You must first reconcile this with your notions, if you expect I should be reconciled to them.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0108",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "When I say the being of a God, I do not mean an obscure general Cause of things, whereof we have no conception, but God, in the strict and proper sense of the word.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0109",
+      "w": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "s": "For, herein consists that constancy and truth of things which secures all the concerns of life, and distinguishes that which is real from the IRREGULAR VISIONS of the fancy.",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      }
+    },
+    {
+      "id": "berkeley.p0110",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Everyone is himself the best judge of what he perceives, and what not.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0111",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And FIRST, it is certain by experience that when we look at a near OBJECT with both eyes, according as it approaches or recedes from us, we alter the disposition of our eyes, by lessening or widening the interval between the PUPILS.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0112",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "But that this is not true I am convinced by my own experience, since I am not conscious that I make any such use of the perception I have by the turn of my eyes.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0113",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "We are not to think that brutes and children, or even grown reasonable men, whenever they perceive an OBJECT to approach, or depart from them, do it by virtue of GEOMETRY and DEMONSTRATION.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0114",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Thirdly, an OBJECT being placed at the distance above specified, and brought nearer to the eye, we may nevertheless prevent, at least for some time, the appearances growing more confused, by straining the eye.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0115",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And methinks, I had better say nothing at all, than repeat that which has been so often said by others.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0116",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "For the eye being placed close to the point B, the OBJECT A appears nearly in its own natural place, if the point B is taken in the glass, or at the same distance, if in the speculum.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0117",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "But as for me, neither this nor any other difficulty shall have so great an influence on me as to make me renounce that which I know to be manifestly agreeable to reason: especially when, as it here falls out, the difficulty is founded in the peculiar nature of a certain odd and particular case.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0118",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "21 the OBJECT should seem to approach the eye gradually as it recedes from the point B, that is, at O it should (in consequence of the principle I have laid down in the aforesaid section) seem nearer than it did at B, and at P nearer than at O, and at Q nearer than at P; and so on, till it quite vanishes at Z.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0119",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And this, by the bye, may show us the difference between confused and faint vision.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0120",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Whether that confusion be occasioned by converging or by diverging rays, it matters not.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0121",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And these (especially for that they fall under mathematical computation) are alone regarded in determining the apparent places of objects, as though they were the sole and immediate cause of the judgments the mind makes of distance.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0122",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Whatever, therefore, is built on this supposition (VID.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0123",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It is indeed otherwise upon the common supposition that men judge of distance by the angle of the optic axes, just as one in the dark, or a blind-man by the angle comprehended by two sticks, one whereof he held in each hand.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0124",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Is not the extension we see coloured, and is it possible for us, so much as in thought, to separate and abstract colour from extension?",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0125",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "By the variation of the noise I perceive the different distances of the coach, and know that it approaches before I look out.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0126",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It is thought a great absurdity to imagine that one and the same thing should have any more than one extension, and one figure.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0127",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And the difficulty seems not a little increased, because the combination of visible ideas hath constantly the same name as the combination of tangible ideas wherewith it is connected: which doth of necessity arise from the use and end of language.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0128",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And by this principle (we are told) the mind estimates the magnitude of an object, comparing the angle under which it is seen with its distance, and thence inferring the magnitude thereof.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0129",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "But though the tangible and visible magnitude in truth belong to two distinct objects: I shall nevertheless (especially since those objects are called by the same name, and are observed to coexist), to avoid tediousness and singularity of speech, sometimes speak of them as belonging to one and the same thing.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0130",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It is also evident that confusion or faintness have no more a necessary connexion with little or great magnitude than they have with little or great distance.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0131",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "We regard the objects that environ us in proportion as they are adapted to benefit or injure our own bodies, and thereby produce in our minds the sensation of pleasure or pain.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0132",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Farther, an inch and a foot, from different distances, shall both exhibit the same visible magnitude, and yet at the same time you shall say that one seems several times greater than the other.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0133",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "From which prejudice everyone, perhaps, will not find it easy to emancipate himself, by any [but] the clearest convictions of reason.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0134",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "FIRST, it is plain that which in this case suggests the idea of greater magnitude must be something which is itself perceived; for that which is unperceived cannot suggest to our perception any other thing.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0135",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "To which I answer, it is not faintness anyhow applied that suggests greater magnitude, there being no necessary but only an experimental connexion between those two things.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0136",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "The magnitude of the visible moon, or that which is the proper and immediate object of vision, is not greater when the moon is in the horizon than when it is in the meridian.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0137",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "So that when a thing is said to appear great or small, or whatever estimate be made of the magnitude of any thing, this is meant not of the visible but of the tangible object.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0138",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Since the writing of which there hath been published in the TRANSACTIONS [Numb.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0139",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "All which visible objects are only in the mind, nor do they suggest ought external, whether distance or magnitude, otherwise than by habitual connexion as words do things.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0140",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "For suppose it otherwise, and that the MINIMUM VISIBILE of a mite, for instance, be less than the MINIMUM VISIBILE of a man: the latter therefore may by detraction of some part be made equal to the former: it doth therefore consist of parts, which is inconsistent with the notion of a MINIMUM VISIBILE or point.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0141",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "In neither of those two ways do microscopes contribute to the improvement of sight; for when we look through a microscope we neither see more visible points, nor are the collateral points more distinct than when we look with the naked eye at objects placed in a due distance.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0142",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Having finished what I intended to say concerning the distance and magnitude of objects, I come now to treat of the manner wherein the mind perceives by sight their situation.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0143",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It is certain this man will judge that to be the upper part of the object which he touches with the stick held in the undermost hand, and that to be the lower part of the object which he touches with the stick in his uppermost hand.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0144",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "In order to disentangle our minds from whatever prejudices we may entertain with relation to the subject in hand, nothing seems more apposite than the taking into our thoughts the case of one born blind, and afterwards, when grown up, made to see.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0145",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "All those things that are intangible and of a spiritual nature, his thoughts and desires, his passions, and in general all the modifications of the soul, to these he would never apply the terms UPPER and LOWER, except only in a metaphorical sense.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0146",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "To set this matter in a clearer light I shall make use of an example.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0147",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "That which I feel is hard or soft, hot or cold, rough or smooth.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0148",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Hence it is certain that neither the visible magnitude of head or foot would bring along with them into the mind, at first opening of the eyes, the respective tangible magnitudes of those parts.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0149",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "I should not, therefore, at first opening my eyes conclude that because I see two I shall feel two.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0150",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "From what hath been premised it is plain the objects of sight and touch make, if I may so say, two sets of ideas which are widely different from each other.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0151",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "The not observing what has been delivered in the two last sections seems to have occasioned no small part of the difficulty that occurs in the business of erect appearances.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0152",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "What is there strange or unaccountable in this?",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0153",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "And besides these the eye B itself, and the objects which environ it, together with another earth, are projected in a larger size on A.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0154",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Farther, there lies a mistake in our imagining that the pictures of external objects are painted on the bottom of the eye.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0155",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Rightly to conceive this point we must carefully distinguish between the ideas of sight and touch, between the visible and tangible eye; for certainly on the tangible eye nothing either is or seems to be painted.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0156",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Let us therefore see how this celebrated author describes the general or abstract idea of a triangle.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0157",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "That a man who laid so great a stress on clear and determinate ideas should nevertheless talk at this rate seems very surprising.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0158",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It must, I say, have so much at least in common with the ideas I have before known and named as to make me give it the same name with them.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0159",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Locke in his ESSAY: which I shall set down as it there lies, together with Mr.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0160",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It hath been evident that a man blind from his birth would not, at first sight, denominate anything he saw by the names he had been used to appropriate to ideas of touch, VID.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0161",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Visible figure and extension having been demonstrated to be of a nature entirely different and heterogeneous from tangible figure and extension, it remains that we inquire concerning.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0162",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "It is therefore necessary that the visible figure which shall be most proper to mark it contain four distinct equal parts corresponding to the four sides of the tangible square, as likewise four other distinct and equal parts whereby to denote the four equal angles of the tangible square.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0163",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "I leave this with the reader to pursue, and apply it in his own thoughts.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0164",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Suppose one who had always continued blind be told by his guide that after he has advanced so many steps he shall come to the brink of a precipice, or be stopped by a wall; must not this to him seem very admirable and surprizing?",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0165",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "Now, it is natural to inquire which of these is the object of geometry.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0166",
+      "w": "An Essay Towards a New Theory of Vision",
+      "s": "All which makes it evident that visible extension and figures are not the object of geometry.",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      }
+    },
+    {
+      "id": "berkeley.p0167",
+      "w": "The Querist",
+      "s": "Whether the prohibition of our woollen trade ought not naturally to put us on other methods which give no jealousy?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0168",
+      "w": "The Querist",
+      "s": "Whether it be not the true interest of both nations to become one people?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0169",
+      "w": "The Querist",
+      "s": "And whether flax and tillage do not naturally multiply hands, and divide land into small holdings, and well-improved?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0170",
+      "w": "The Querist",
+      "s": "Whether we have not, or may not have, all the necessary materials for building at home?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0171",
+      "w": "The Querist",
+      "s": "Whether in such a state the inhabitants may not contrive to pass the twenty-four hours with tolerable ease and cheerfulness?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0172",
+      "w": "The Querist",
+      "s": "Whether, if there was a wall of brass a thousand cubits high round this kingdom, our natives might not nevertheless live cleanly and comfortably, till the land, and reap the fruits of it?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0173",
+      "w": "The Querist",
+      "s": "Whether the same may be said of any in Ireland who have even?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0174",
+      "w": "The Querist",
+      "s": "Whether it be not even madness to encourage trade with a nation that takes nothing of our manufacture?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0175",
+      "w": "The Querist",
+      "s": "Whether it would not be wise so to order our trade as to export manufactures rather than provisions, and of those such as employ most hands?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0176",
+      "w": "The Querist",
+      "s": "And whether at this day it hath any better chance for being considerable?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0177",
+      "w": "The Querist",
+      "s": "Whether any nation ever was in greater want of such an expedient than Ireland?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0178",
+      "w": "The Querist",
+      "s": "And whether it be wise to neglect providing against an event which experience hath shewn us not to be impossible?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0179",
+      "w": "The Querist",
+      "s": "Whether plenty of small cash be not absolutely necessary for keeping up a circulation among the people; that is, whether copper be not more necessary than gold?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0180",
+      "w": "The Querist",
+      "s": "Whether all the bills should be issued at once, or rather by degrees, that so men may be gradually accustomed and reconciled to the bank?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0181",
+      "w": "The Querist",
+      "s": "Whether the exceeding this measure might not produce divers bad effects, one whereof would be the loss of our silver?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0182",
+      "w": "The Querist",
+      "s": "Whether paper-money or notes may not be issued from the national bank, on the security of hemp, of linen, or other manufactures whereby the poor might be supported in their industry?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0183",
+      "w": "The Querist",
+      "s": "Whether he who is bred to a part be fitted to judge of the whole?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0184",
+      "w": "The Querist",
+      "s": "Whether they do not even indulge themselves in foreign vanities?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0185",
+      "w": "The Querist",
+      "s": "Whether Popish children bred in charity schools, when bound out in apprenticeship to Protestant masters, do generally continue Protestants?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0186",
+      "w": "The Querist",
+      "s": "And yet, if there was not, whether this would be a good argument against the use of reason in pubic affairs?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0187",
+      "w": "The Querist",
+      "s": "Whether a few mishaps to particular persons may not throw this nation into the utmost confusion?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0188",
+      "w": "The Querist",
+      "s": "Whether without them what little business and industry there is would not stagnate?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0189",
+      "w": "The Querist",
+      "s": "Whether the great exactness and integrity with which this bank is managed be not the chief support of that republic?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0190",
+      "w": "The Querist",
+      "s": "Whether, at the beginning of the last century, those who had lent money to the public during the war with Spain were not satisfied by the sole expedient of placing their names in a compte en banc, with liberty to transfer their claims?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0191",
+      "w": "The Querist",
+      "s": "Whether it was not made a capital crime to forge the notes of this bank?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0192",
+      "w": "The Querist",
+      "s": "Whether the treasurer alone did not sign all the bills, receive all the stock paid into the bank, and keep account of all the in-goings and out-goings?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0193",
+      "w": "The Querist",
+      "s": "Whether the chests and books of the Banque were not subjected to the joint inspection of a Counsellor of State, and the Prevot des Marchands, assisted by two Echevins, a judge, and a consul, who had power to visit when they would and without warning?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0194",
+      "w": "The Querist",
+      "s": "But whether the ends of money itself be not bounded?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0195",
+      "w": "The Querist",
+      "s": "Whether it was not madness in France to mint bills and actions, merely to humour the people and rob them of their cash?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0196",
+      "w": "The Querist",
+      "s": "Whether divers registers of the bank notes should not be kept in different hands?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0197",
+      "w": "The Querist",
+      "s": "Whether, if we do not reap the benefits that may be made of our country and government, want of will in the lower people, or want of wit in the upper, be most in fault?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0198",
+      "w": "The Querist",
+      "s": "Whether the public be more interested to protect the property acquired by mere birth than that which is the Mediate fruit of learning and vertue?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0199",
+      "w": "The Querist",
+      "s": "Whether all men have not faculties of mind or body which may be employed for the public benefit?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0200",
+      "w": "The Querist",
+      "s": "Whether much may not be expected from a biennial consultation of so many wise men about the public good?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0201",
+      "w": "The Querist",
+      "s": "Why the workhouse in Dublin, with so good an endowment, should yet be of so little use?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0202",
+      "w": "The Querist",
+      "s": "Whether he who is chained in a jail or dungeon hath not, for the time, lost his liberty?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0203",
+      "w": "The Querist",
+      "s": "And whether any of those things can be said of claret?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0204",
+      "w": "The Querist",
+      "s": "Whether when a motion was made once upon a time to establish a private bank in this kingdom by public authority, divers gentlemen did not shew themselves forward to embark in that design?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0205",
+      "w": "The Querist",
+      "s": "Whether there be not two ways of growing rich, sparing and getting?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0206",
+      "w": "The Querist",
+      "s": "But, whether a private interest be not generally supported and pursued with more zeal than a public?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0207",
+      "w": "The Querist",
+      "s": "Whether the establishing of a national bank, if we suppose a concurrence of the government, be not very practicable?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0208",
+      "w": "The Querist",
+      "s": "If it be not ridiculous to question whether the pubic can find cash to circulate bills of a limited value when private bankers are supposed to find enough to circulate them to an unlimited value?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0209",
+      "w": "The Querist",
+      "s": "Whether it be not ridiculous to conceive that a project for cloathing and feeding our natives should give any umbrage to England?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0210",
+      "w": "The Querist",
+      "s": "If it be objected that a national bank must lower interest, and therefore hurt the monied man, whether the same objection would not hold as strong against multiplying our gold and silver?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0211",
+      "w": "The Querist",
+      "s": "Whether the managers and officers of a national bank ought to be considered otherwise than as the cashiers and clerks of private banks?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0212",
+      "w": "The Querist",
+      "s": "Whether our circumstances do not call aloud for some present remedy?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0213",
+      "w": "The Querist",
+      "s": "Whether England, which hath a free trade, whatever she remits for foreign luxury with one hand, doth not with the other receive much more from abroad?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0214",
+      "w": "The Querist",
+      "s": "Whether the sole proprietor of such bank should not be the public, and the sole director the legislature?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0215",
+      "w": "The Querist",
+      "s": "Whether to oil the wheels of commerce be not a common benefit?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0216",
+      "w": "The Querist",
+      "s": "Whether the pubic ends may or may not be better answered by such augmentation, than by a reduction of our coin?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0217",
+      "w": "The Querist",
+      "s": "Whether in regard of the far greater changes and fluctuations of prices from the difference of seasons and other accidents, that small rise should seem considerable?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0218",
+      "w": "The Querist",
+      "s": "Whether those tickets which singly transfer small shares of power, and, being multiplied, large shares, are not fitter for common use than those which singly transfer large shares?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0219",
+      "w": "The Querist",
+      "s": "Whether the greater waste by wearing of small coins would not be abundantly overbalanced by their usefulness?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0220",
+      "w": "The Querist",
+      "s": "And whether there be any knowing of this but by comparison?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0221",
+      "w": "The Querist",
+      "s": "Whether there be not French towns subsisted merely by making pins?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0222",
+      "w": "The Querist",
+      "s": "Whether it were not to be wished that our people shewed their descent from Spain, rather by their honour and honesty than their pride, and if so, whether they might not easily insinuate themselves into a larger share of the Spanish trade?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0223",
+      "w": "The Querist",
+      "s": "Whether it may not be worth while to inform ourselves of the different sorts of linen which are in request among different people?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0224",
+      "w": "The Querist",
+      "s": "Whether Lyons, by the advantage of her midland situation and the rivers Rhone and Saone, be not a great magazine or mart for inward commerce?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0225",
+      "w": "The Querist",
+      "s": "Whether foreign imports that tend to promote industry should not be encouraged, and such as have a tendency to promote luxury should not be discouraged?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0226",
+      "w": "The Querist",
+      "s": "Whether they be not even the bane and undoing of an idle people?",
+      "src": {
+        "work": "The Querist"
+      }
+    },
+    {
+      "id": "berkeley.p0227",
+      "w": "The Lady of Big Shanty",
+      "s": "He stopped, pushed back the door and entered her dainty room.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0228",
+      "w": "The Lady of Big Shanty",
+      "s": "While originally hailing from Ireland, and while retaining some of the characteristics of his race--his good humor being one of them--Blakeman yet possessed that smoothness and deference so often found in an English servant.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0229",
+      "w": "The Lady of Big Shanty",
+      "s": "She made no reply; her flushed cheeks again sunk in her jewelled hands.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0230",
+      "w": "The Lady of Big Shanty",
+      "s": "Is she fond of the woods?\" \"Why--she adores them.\" She had regained her composure now.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0231",
+      "w": "The Lady of Big Shanty",
+      "s": "Blakeman followed the doctor to the door.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0232",
+      "w": "The Lady of Big Shanty",
+      "s": "You fellows must have been drowned out last night; the log over the South Branch is gone in the freshet; we had to get round the best way we could.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0233",
+      "w": "The Lady of Big Shanty",
+      "s": "Doc' Rand see her last September when he come by with them new colts o' his'n.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0234",
+      "w": "The Lady of Big Shanty",
+      "s": "If you was to hear me shoot,\" said the old man, as he took his leave, \"come back up to whar I be.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0235",
+      "w": "The Lady of Big Shanty",
+      "s": "Should the deer charge this way it was just as well to let the man know where he sat, or he might stop a stray bullet.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0236",
+      "w": "The Lady of Big Shanty",
+      "s": "Holt--isn't he coming too?\" \"I'm afraid not; he said to me before lunch that he and the dog were going to stay on for a spell.\" \"What--not alone!",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0237",
+      "w": "The Lady of Big Shanty",
+      "s": "Yes, I'm back and I've had a good time, dear.\" In spite of her disarming welcome he could not dispel a lingering distrust of her sincerity.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0238",
+      "w": "The Lady of Big Shanty",
+      "s": "Then, again, those who were natural appealed to her.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0239",
+      "w": "The Lady of Big Shanty",
+      "s": "The \"Mr.\" had been long since dropped from lack of usage.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0240",
+      "w": "The Lady of Big Shanty",
+      "s": "But if he don't he's got to git along without me.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0241",
+      "w": "The Lady of Big Shanty",
+      "s": "He appeared in localities mysteriously and left them as suddenly.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0242",
+      "w": "The Lady of Big Shanty",
+      "s": "Presently he said, still gazing straight before him: \"I've been wondering, boys, if Mr.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0243",
+      "w": "The Lady of Big Shanty",
+      "s": "I gather from your last letter--I thought I had it with me,\" he said, searching hurriedly among the packet of correspondence, \"but I have evidently left it--I gather,\" he resumed, \"from your last letter that he did not make a very favourable impression.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0244",
+      "w": "The Lady of Big Shanty",
+      "s": "It contained a new one-hundred-dollar bill.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0245",
+      "w": "The Lady of Big Shanty",
+      "s": "Aboard the car were Alice and Margaret, Blakeman and Annette.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0246",
+      "w": "The Lady of Big Shanty",
+      "s": "How is the headache, Alice--better?\" \"A little,\" she returned indifferently.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0247",
+      "w": "The Lady of Big Shanty",
+      "s": "Alice extended three fingers of her own despite her repulsion.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0248",
+      "w": "The Lady of Big Shanty",
+      "s": "Could she have looked on Sperry at that moment she would have found him playing billiards at his club, his whole mind occupied in making a difficult carom shot.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0249",
+      "w": "The Lady of Big Shanty",
+      "s": "He felt like a man who had just received good news.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0250",
+      "w": "The Lady of Big Shanty",
+      "s": "Holcomb,\" said Alice, nodding pleasantly.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0251",
+      "w": "The Lady of Big Shanty",
+      "s": "She knew he had sent for him purely to oblige her and to help her over the chasm which divided Big Shanty from Newport, but what other reasons her husband had for inviting him to share his hospitality at the camp, she was not so familiar with.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0252",
+      "w": "The Lady of Big Shanty",
+      "s": "Yes, a compound fracture; but he'll be all right, my man, in a few weeks.\" Sperry opened a thin leather case, which he took from his bag, extracted a phial, and shook two whitish gray pills into the trapper's palm.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0253",
+      "w": "The Lady of Big Shanty",
+      "s": "What a pretty hat!\" exclaimed Sperry, as they crossed the compound to the trail leading down to the brook.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0254",
+      "w": "The Lady of Big Shanty",
+      "s": "I think now you can dismiss all anxiety from your mind.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0255",
+      "w": "The Lady of Big Shanty",
+      "s": "You have set his arm and are thoroughly in touch with the case.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0256",
+      "w": "The Lady of Big Shanty",
+      "s": "Don't wait up for me; I may not be in until late--my overcoat, Blakeman\"--and the two passed out into the night.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0257",
+      "w": "The Lady of Big Shanty",
+      "s": "It may be the means of keeping two people happy who deserve to be, if nothing else.\" \"That's about what I was going to say,\" confessed Holcomb simply, drawn by the butler's frankness.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0258",
+      "w": "The Lady of Big Shanty",
+      "s": "I'm telling you this,\" Blakeman went on, not waiting for him to reply, \"because I believe you can help.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0259",
+      "w": "The Lady of Big Shanty",
+      "s": "She wondered whether Thayor was paying her back for the many she had given without consulting him.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0260",
+      "w": "The Lady of Big Shanty",
+      "s": "Moreover, this good fellow was overjoyed at the change in his host; he felt that Thayor's splendid health was largely due to his advice.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0261",
+      "w": "The Lady of Big Shanty",
+      "s": "He took her into his arms and carried her--she cuddled her head against his throat.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0262",
+      "w": "The Lady of Big Shanty",
+      "s": "He threw his half-smoked cigar into the blackness beyond the veranda rail and leaned close to her white throat, framed in the soft filmy lace of her gown.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0263",
+      "w": "The Lady of Big Shanty",
+      "s": "Not content with laming and poisoning dumb beasts to buy others at a fat commission, he had provided condemned meat for the men under him at the lower shanty, had secretly damaged thousands of dollars' worth of expensive plumbing, and had sown hatred among the men against the man whose generosity had befriended him.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0264",
+      "w": "The Lady of Big Shanty",
+      "s": "The men's grumbling had been of some weeks' duration; their opinions wavering, swaying and settling under Bergstein's hypnotic popularity as easily as a weather-vane in April.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0265",
+      "w": "The Lady of Big Shanty",
+      "s": "We hain't had a dollar's worth of them things, and you know it,\" Dollard exclaimed surlily, looking up suddenly, as he read.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0266",
+      "w": "The Lady of Big Shanty",
+      "s": "Holcomb began to stagger on the bottom step, reeling like a drunkard; again he proceeded, stumbling on through the passageway leading to Blakeman's pantry.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0267",
+      "w": "The Lady of Big Shanty",
+      "s": "Here was a situation far graver than the burning of Big Shanty.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0268",
+      "w": "The Lady of Big Shanty",
+      "s": "He sat perched on the top of a giant hemlock chattering over his good luck.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0269",
+      "w": "The Lady of Big Shanty",
+      "s": "An iron reservoir lay on its side where it had fallen; twisted girders loomed above the cauldron of desultory flame, marking the rectangle of the main camp.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0270",
+      "w": "The Lady of Big Shanty",
+      "s": "Twice she had patted him; she wanted him near her now in her weariness, but he left her the next moment to join Margaret.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0271",
+      "w": "The Lady of Big Shanty",
+      "s": "A little more--only a little more courage, dear,\" he said kindly; \"Holt tells me we are near Bear Pond.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0272",
+      "w": "The Lady of Big Shanty",
+      "s": "The grip of the primaeval had laid hold of her heart!",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0273",
+      "w": "The Lady of Big Shanty",
+      "s": "She did not hear him until he stood over her and, bending, laid his hand on the upturned collar of the overcoat that lay damp against the fair hair.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0274",
+      "w": "The Lady of Big Shanty",
+      "s": "This, in itself, was a revelation--she who had dared to complain of everything that thwarted her comfort or her plans.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0275",
+      "w": "The Lady of Big Shanty",
+      "s": "When a boy of sixteen he had, like his father, appeared in the valley, hailing, like so many others in that remote region, from nowhere in particular.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0276",
+      "w": "The Lady of Big Shanty",
+      "s": "When he see me he come up to me uglier'n sin.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0277",
+      "w": "The Lady of Big Shanty",
+      "s": "Thayor?\" Thayor turned his head and faced the hide-out.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    },
+    {
+      "id": "berkeley.p0278",
+      "w": "The Lady of Big Shanty",
+      "s": "As for your son, I'll take care that no one sees him.\" As the day wore on and no tidings came from either Thayor or the hide-out, Holcomb's and the Clown's uneasiness became more and more apparent.",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "berkeley.f.v0001",
+      "kind": "verbatim",
+      "text": "It is one thing for to keep a name constantly to the same definition, and another to make it stand everywhere for the same idea; the one is necessary, the other useless and impracticable.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "berkeley.f.v0002",
+      "kind": "verbatim",
+      "text": "This seems to me the principal cause why those men who have so emphatically recommended to others the laying aside all use of words in their meditations, and contemplating their bare ideas, have yet failed to perform it themselves.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "berkeley.f.v0003",
+      "kind": "verbatim",
+      "text": "Light and colours, heat and cold, extension and figures--in a word the things we see and feel--what are they but so many sensations, notions, ideas, or impressions on the sense?",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "berkeley.f.v0004",
+      "kind": "verbatim",
+      "text": "The ideas we have of these they acknowledge not to be the resemblances of anything existing without the mind, or unperceived, but they will have our ideas of the primary qualities to be patterns or images of things which exist without the mind, in an unthinking substance which they call MATTER.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "berkeley.f.v0005",
+      "kind": "verbatim",
+      "text": "Number is so visibly relative, and dependent on men's understanding, that it is strange to think how any one should give it an absolute existence without the mind.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "berkeley.f.v0006",
+      "kind": "verbatim",
+      "text": "I answer, though you have no positive, yet, if you have any meaning at all, you must at least have a relative idea of Matter; though you know not what it is, yet you must be supposed to know what relation it bears to accidents, and what is meant by its supporting them.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "berkeley.f.v0007",
+      "kind": "verbatim",
+      "text": "If therefore it were possible for bodies to exist without the mind, yet to hold they do so, must needs be a very precarious opinion; since it is to suppose, without any reason at all, that God has created innumerable beings THAT ARE ENTIRELY USELESS, AND SERVE TO NO MANNER OF PURPOSE.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "berkeley.f.v0008",
+      "kind": "verbatim",
+      "text": "I answer, you may so, there is no difficulty in it; but what is all this, I beseech you, more than framing in your mind certain ideas which you call BOOKS and TREES, and the same time omitting to frame the idea of any one that may perceive them?",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "berkeley.f.v0009",
+      "kind": "verbatim",
+      "text": "It must therefore be a substance; but it has been shown that there is no corporeal or material substance: it remains therefore that the CAUSE OF IDEAS is an incorporeal active substance or Spirit.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "berkeley.f.v0010",
+      "kind": "verbatim",
+      "text": "In the sense here given of REALITY it is evident that every vegetable, star, mineral, and in general each part of the mundane system, is as much a REAL BEING by our principles as by any other.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "berkeley.f.v0011",
+      "kind": "verbatim",
+      "text": "Though throughout the same the contrary be supposed true of tangible objects--not that to suppose that vulgar error was necessary for establishing the notion therein laid down, but because it was beside my purpose to examine and refute it in a discourse concerning VISION.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "berkeley.f.v0012",
+      "kind": "verbatim",
+      "text": "In short, whatever advances have been made, either by ancient or modern philosophers, in the study of nature do all proceed on the supposition that corporeal substance or Matter doth really exist.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "berkeley.f.v0013",
+      "kind": "verbatim",
+      "text": "A little reflexion on what is here said will make it manifest that the common use of language would receive no manner of alteration or disturbance from the admission of our tenets.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "berkeley.f.v0014",
+      "kind": "verbatim",
+      "text": "Whether corporeal substance can think,\" \"whether Matter be infinitely divisible,\" and \"how it operates on spirit\"--these and like inquiries have given infinite amusement to philosophers in all ages; but depending on the existence of Matter, they have no longer any place on our principles.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "berkeley.f.v0015",
+      "kind": "verbatim",
+      "text": "Again, the things perceived by sense may be termed external, with regard to their origin--in that they are not generated from within by the mind itself, but imprinted by a Spirit distinct from that which perceives them.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "berkeley.f.v0016",
+      "kind": "verbatim",
+      "text": "THREE ANALOGIES.--Those men who frame general rules from the phenomena and afterwards derive the phenomena from those rules, seem to consider signs rather than causes.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "berkeley.f.v0017",
+      "kind": "verbatim",
+      "text": "Arithmetic has been thought to have for its object abstract ideas of Number; of which to understand the properties and mutual habitudes, is supposed no mean part of speculative knowledge.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "berkeley.f.v0018",
+      "kind": "verbatim",
+      "text": "Nothing can be plainer to me than that the extensions I have in view are no other than my own ideas; and it is no less plain that I cannot resolve any one of my ideas into an infinite number of other ideas, that is, that they are not infinitely divisible.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "berkeley.f.v0019",
+      "kind": "verbatim",
+      "text": "After this manner, the properties of the lines signified are (by a very usual figure) transferred to the sign, and thence, through mistake, though to appertain to it considered in its own nature.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "berkeley.f.v0020",
+      "kind": "verbatim",
+      "text": "I answer, all the unthinking objects of the mind agree in that they are entirely passive, and their existence consists only in being perceived; whereas a soul or spirit is an active being, whose existence consists, not in being perceived, but in perceiving ideas and thinking.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 276
+      }
+    },
+    {
+      "id": "berkeley.f.v0021",
+      "kind": "verbatim",
+      "text": "It will not be amiss to add, that the doctrine of abstract ideas has had no small share in rendering those sciences intricate and obscure which are particularly conversant about spiritual things.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "berkeley.f.v0022",
+      "kind": "verbatim",
+      "text": "I perceive several motions, changes, and combinations of ideas, that inform me there are certain particular agents, like myself, which accompany them and concur in their production.",
+      "work": "A Treatise Concerning the Principles of Human Knowledge",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise Concerning the Principles of Human Knowledge"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "berkeley.f.v0023",
+      "kind": "verbatim",
+      "text": "I own, indeed, the inferences you draw me into sound something oddly; but common language, you know, is framed by, and for the use of the vulgar: we must not therefore wonder if expressions adapted to exact philosophic notions seem uncouth and out of the way.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "berkeley.f.v0024",
+      "kind": "verbatim",
+      "text": "From all which, should it not seem to follow that all colours are equally apparent, and that none of those which we perceive are really inherent in any outward object?",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "berkeley.f.v0025",
+      "kind": "verbatim",
+      "text": "Nor can I imagine how this follows from what you said just now, to wit, that the red and yellow were on the tulip you SAW, since you do not pretend to SEE that unthinking substance.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "berkeley.f.v0026",
+      "kind": "verbatim",
+      "text": "It is nevertheless evident that, in truth and strictness, nothing can be HEARD BUT SOUND; and the coach is not then properly perceived by sense, but suggested from experience.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "berkeley.f.v0027",
+      "kind": "verbatim",
+      "text": "It comes, therefore, to the same thing; and you have been all this while accounting for ideas by certain motions or impressions of the brain; that is, by some alterations in an idea, whether sensible or imaginable it matters not.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "berkeley.f.v0028",
+      "kind": "verbatim",
+      "text": "Whence I conclude, not that they have no real existence, but that, seeing they depend not on my thought, and have all existence distinct from being perceived by me, THERE MUST BE SOME OTHER MIND WHEREIN THEY EXIST.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "berkeley.f.v0029",
+      "kind": "verbatim",
+      "text": "Continue, good Hylas, to act the same ingenuous part, and tell me sincerely whether you can frame a distinct idea of Entity in general, prescinded from and exclusive of all thinking and corporeal beings, all particular things whatsoever.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "berkeley.f.v0030",
+      "kind": "verbatim",
+      "text": "That a thing should be really perceived by my senses, and at the same time not really exist, is to me a plain contradiction; since I cannot prescind or abstract, even in thought, the existence of a sensible thing from its being perceived.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "berkeley.f.v0031",
+      "kind": "verbatim",
+      "text": "I am not for changing things into ideas, but rather ideas into things; since those immediate objects of perception, which, according to you, are only appearances of things, I take to be the real things themselves.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "berkeley.f.v0032",
+      "kind": "verbatim",
+      "text": "It will not thence follow they are not to be trusted; or that they are inconsistent either with themselves or anything else: except it be with your preconceived notion of (I know not what) one single, unchanged, unperceivable, real Nature, marked by each name.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "berkeley.f.v0033",
+      "kind": "verbatim",
+      "text": "Lastly, Whether, the premises considered, it be not the wisest way to follow nature, trust your senses, and, laying aside all anxious thought about unknown natures or substances, admit with the vulgar those for real things which are perceived by the senses?",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "berkeley.f.v0034",
+      "kind": "verbatim",
+      "text": "If then you would infer anything against me, your difficulty must not be drawn from the inadequateness of our conceptions of the Divine nature, which is unavoidable on any scheme; but from the denial of Matter, of which there is not one word, directly or indirectly, in what you have now objected.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "berkeley.f.v0035",
+      "kind": "verbatim",
+      "text": "When I say the being of a God, I do not mean an obscure general Cause of things, whereof we have no conception, but God, in the strict and proper sense of the word.",
+      "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists",
+      "lang": "en",
+      "src": {
+        "work": "Three Dialogues Between Hylas and Philonous in Opposition to Sceptics and Atheists"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "berkeley.f.v0036",
+      "kind": "verbatim",
+      "text": "We are not to think that brutes and children, or even grown reasonable men, whenever they perceive an OBJECT to approach, or depart from them, do it by virtue of GEOMETRY and DEMONSTRATION.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "berkeley.f.v0037",
+      "kind": "verbatim",
+      "text": "Thirdly, an OBJECT being placed at the distance above specified, and brought nearer to the eye, we may nevertheless prevent, at least for some time, the appearances growing more confused, by straining the eye.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "berkeley.f.v0038",
+      "kind": "verbatim",
+      "text": "It is indeed otherwise upon the common supposition that men judge of distance by the angle of the optic axes, just as one in the dark, or a blind-man by the angle comprehended by two sticks, one whereof he held in each hand.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "berkeley.f.v0039",
+      "kind": "verbatim",
+      "text": "It is also evident that confusion or faintness have no more a necessary connexion with little or great magnitude than they have with little or great distance.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "berkeley.f.v0040",
+      "kind": "verbatim",
+      "text": "We regard the objects that environ us in proportion as they are adapted to benefit or injure our own bodies, and thereby produce in our minds the sensation of pleasure or pain.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "berkeley.f.v0041",
+      "kind": "verbatim",
+      "text": "Farther, an inch and a foot, from different distances, shall both exhibit the same visible magnitude, and yet at the same time you shall say that one seems several times greater than the other.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "berkeley.f.v0042",
+      "kind": "verbatim",
+      "text": "FIRST, it is plain that which in this case suggests the idea of greater magnitude must be something which is itself perceived; for that which is unperceived cannot suggest to our perception any other thing.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "berkeley.f.v0043",
+      "kind": "verbatim",
+      "text": "To which I answer, it is not faintness anyhow applied that suggests greater magnitude, there being no necessary but only an experimental connexion between those two things.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "berkeley.f.v0044",
+      "kind": "verbatim",
+      "text": "The magnitude of the visible moon, or that which is the proper and immediate object of vision, is not greater when the moon is in the horizon than when it is in the meridian.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "berkeley.f.v0045",
+      "kind": "verbatim",
+      "text": "All which visible objects are only in the mind, nor do they suggest ought external, whether distance or magnitude, otherwise than by habitual connexion as words do things.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "berkeley.f.v0046",
+      "kind": "verbatim",
+      "text": "In neither of those two ways do microscopes contribute to the improvement of sight; for when we look through a microscope we neither see more visible points, nor are the collateral points more distinct than when we look with the naked eye at objects placed in a due distance.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "berkeley.f.v0047",
+      "kind": "verbatim",
+      "text": "Having finished what I intended to say concerning the distance and magnitude of objects, I come now to treat of the manner wherein the mind perceives by sight their situation.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "berkeley.f.v0048",
+      "kind": "verbatim",
+      "text": "It is certain this man will judge that to be the upper part of the object which he touches with the stick held in the undermost hand, and that to be the lower part of the object which he touches with the stick in his uppermost hand.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "berkeley.f.v0049",
+      "kind": "verbatim",
+      "text": "In order to disentangle our minds from whatever prejudices we may entertain with relation to the subject in hand, nothing seems more apposite than the taking into our thoughts the case of one born blind, and afterwards, when grown up, made to see.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "berkeley.f.v0050",
+      "kind": "verbatim",
+      "text": "All those things that are intangible and of a spiritual nature, his thoughts and desires, his passions, and in general all the modifications of the soul, to these he would never apply the terms UPPER and LOWER, except only in a metaphorical sense.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "berkeley.f.v0051",
+      "kind": "verbatim",
+      "text": "Hence it is certain that neither the visible magnitude of head or foot would bring along with them into the mind, at first opening of the eyes, the respective tangible magnitudes of those parts.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "berkeley.f.v0052",
+      "kind": "verbatim",
+      "text": "From what hath been premised it is plain the objects of sight and touch make, if I may so say, two sets of ideas which are widely different from each other.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "berkeley.f.v0053",
+      "kind": "verbatim",
+      "text": "The not observing what has been delivered in the two last sections seems to have occasioned no small part of the difficulty that occurs in the business of erect appearances.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "berkeley.f.v0054",
+      "kind": "verbatim",
+      "text": "Rightly to conceive this point we must carefully distinguish between the ideas of sight and touch, between the visible and tangible eye; for certainly on the tangible eye nothing either is or seems to be painted.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "berkeley.f.v0055",
+      "kind": "verbatim",
+      "text": "It hath been evident that a man blind from his birth would not, at first sight, denominate anything he saw by the names he had been used to appropriate to ideas of touch, VID.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "berkeley.f.v0056",
+      "kind": "verbatim",
+      "text": "Visible figure and extension having been demonstrated to be of a nature entirely different and heterogeneous from tangible figure and extension, it remains that we inquire concerning.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "berkeley.f.v0057",
+      "kind": "verbatim",
+      "text": "It is therefore necessary that the visible figure which shall be most proper to mark it contain four distinct equal parts corresponding to the four sides of the tangible square, as likewise four other distinct and equal parts whereby to denote the four equal angles of the tangible square.",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "berkeley.f.v0058",
+      "kind": "verbatim",
+      "text": "Suppose one who had always continued blind be told by his guide that after he has advanced so many steps he shall come to the brink of a precipice, or be stopped by a wall; must not this to him seem very admirable and surprizing?",
+      "work": "An Essay Towards a New Theory of Vision",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Towards a New Theory of Vision"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "berkeley.f.v0059",
+      "kind": "verbatim",
+      "text": "Whether, if there was a wall of brass a thousand cubits high round this kingdom, our natives might not nevertheless live cleanly and comfortably, till the land, and reap the fruits of it?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "berkeley.f.v0060",
+      "kind": "verbatim",
+      "text": "Whether plenty of small cash be not absolutely necessary for keeping up a circulation among the people; that is, whether copper be not more necessary than gold?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "berkeley.f.v0061",
+      "kind": "verbatim",
+      "text": "Whether paper-money or notes may not be issued from the national bank, on the security of hemp, of linen, or other manufactures whereby the poor might be supported in their industry?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "berkeley.f.v0062",
+      "kind": "verbatim",
+      "text": "Whether, at the beginning of the last century, those who had lent money to the public during the war with Spain were not satisfied by the sole expedient of placing their names in a compte en banc, with liberty to transfer their claims?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 235
+      }
+    },
+    {
+      "id": "berkeley.f.v0063",
+      "kind": "verbatim",
+      "text": "Whether the chests and books of the Banque were not subjected to the joint inspection of a Counsellor of State, and the Prevot des Marchands, assisted by two Echevins, a judge, and a consul, who had power to visit when they would and without warning?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "berkeley.f.v0064",
+      "kind": "verbatim",
+      "text": "Whether, if we do not reap the benefits that may be made of our country and government, want of will in the lower people, or want of wit in the upper, be most in fault?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "berkeley.f.v0065",
+      "kind": "verbatim",
+      "text": "Whether when a motion was made once upon a time to establish a private bank in this kingdom by public authority, divers gentlemen did not shew themselves forward to embark in that design?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "berkeley.f.v0066",
+      "kind": "verbatim",
+      "text": "If it be not ridiculous to question whether the pubic can find cash to circulate bills of a limited value when private bankers are supposed to find enough to circulate them to an unlimited value?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "berkeley.f.v0067",
+      "kind": "verbatim",
+      "text": "If it be objected that a national bank must lower interest, and therefore hurt the monied man, whether the same objection would not hold as strong against multiplying our gold and silver?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "berkeley.f.v0068",
+      "kind": "verbatim",
+      "text": "Whether in regard of the far greater changes and fluctuations of prices from the difference of seasons and other accidents, that small rise should seem considerable?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "berkeley.f.v0069",
+      "kind": "verbatim",
+      "text": "Whether those tickets which singly transfer small shares of power, and, being multiplied, large shares, are not fitter for common use than those which singly transfer large shares?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "berkeley.f.v0070",
+      "kind": "verbatim",
+      "text": "Whether it were not to be wished that our people shewed their descent from Spain, rather by their honour and honesty than their pride, and if so, whether they might not easily insinuate themselves into a larger share of the Spanish trade?",
+      "work": "The Querist",
+      "lang": "en",
+      "src": {
+        "work": "The Querist"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "berkeley.f.v0071",
+      "kind": "verbatim",
+      "text": "While originally hailing from Ireland, and while retaining some of the characteristics of his race--his good humor being one of them--Blakeman yet possessed that smoothness and deference so often found in an English servant.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "berkeley.f.v0072",
+      "kind": "verbatim",
+      "text": "I gather from your last letter--I thought I had it with me,\" he said, searching hurriedly among the packet of correspondence, \"but I have evidently left it--I gather,\" he resumed, \"from your last letter that he did not make a very favourable impression.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "berkeley.f.v0073",
+      "kind": "verbatim",
+      "text": "Could she have looked on Sperry at that moment she would have found him playing billiards at his club, his whole mind occupied in making a difficult carom shot.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "berkeley.f.v0074",
+      "kind": "verbatim",
+      "text": "She knew he had sent for him purely to oblige her and to help her over the chasm which divided Big Shanty from Newport, but what other reasons her husband had for inviting him to share his hospitality at the camp, she was not so familiar with.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "berkeley.f.v0075",
+      "kind": "verbatim",
+      "text": "Yes, a compound fracture; but he'll be all right, my man, in a few weeks.\" Sperry opened a thin leather case, which he took from his bag, extracted a phial, and shook two whitish gray pills into the trapper's palm.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "berkeley.f.v0076",
+      "kind": "verbatim",
+      "text": "It may be the means of keeping two people happy who deserve to be, if nothing else.\" \"That's about what I was going to say,\" confessed Holcomb simply, drawn by the butler's frankness.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "berkeley.f.v0077",
+      "kind": "verbatim",
+      "text": "The men's grumbling had been of some weeks' duration; their opinions wavering, swaying and settling under Bergstein's hypnotic popularity as easily as a weather-vane in April.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "berkeley.f.v0078",
+      "kind": "verbatim",
+      "text": "Holcomb began to stagger on the bottom step, reeling like a drunkard; again he proceeded, stumbling on through the passageway leading to Blakeman's pantry.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "berkeley.f.v0079",
+      "kind": "verbatim",
+      "text": "An iron reservoir lay on its side where it had fallen; twisted girders loomed above the cauldron of desultory flame, marking the rectangle of the main camp.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "berkeley.f.v0080",
+      "kind": "verbatim",
+      "text": "As for your son, I'll take care that no one sees him.\" As the day wore on and no tidings came from either Thayor or the hide-out, Holcomb's and the Clown's uneasiness became more and more apparent.",
+      "work": "The Lady of Big Shanty",
+      "lang": "en",
+      "src": {
+        "work": "The Lady of Big Shanty"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "berkeley.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 5,
+      "worksSpan": 4,
+      "examples": [
+        "If therefore it were possible for bodies to exist without the mind, yet to hold they do so, must needs be a very precarious opinion; since it is to suppose, without any reason at all, that God has created innumerable beings THAT ARE ENTIRELY USELESS, AND SERVE TO NO MANNER OF PURPOSE.",
+        "If then you would infer anything against me, your difficulty must not be drawn from the inadequateness of our conceptions of the Divine nature, which is unavoidable on any scheme; but from the denial of Matter, of which there is not one word, directly or indirectly, in what you have now objected."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 278,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:1caac45ed88cce3eaae885966772c4b87c768e20b2d43b91423d17c7b8933868"
+}

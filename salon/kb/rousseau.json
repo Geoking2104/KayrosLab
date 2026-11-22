@@ -1,0 +1,3513 @@
+{
+  "authorId": "rousseau",
+  "kbVersion": "rousseau@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.207Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Discourse on Inequality",
+      "sentences": 73
+    },
+    {
+      "title": "The Social Contract",
+      "sentences": 73
+    },
+    {
+      "title": "The Confessions",
+      "sentences": 69
+    },
+    {
+      "title": "Julie, or the New Heloise",
+      "sentences": 71
+    }
+  ],
+  "passages": [
+    {
+      "id": "rousseau.p0001",
+      "w": "Discourse on Inequality",
+      "s": "Hobbes very plainly saw the flaws in all the modern definitions of natural right: but the consequences, which he draws from his own definition, show that it is, in the sense he understands it, equally exceptionable.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0002",
+      "w": "Discourse on Inequality",
+      "s": "From these first preferences there proceeded on one side vanity and contempt, on the other envy and shame; and the fermentation raised by these new leavens at length produced combinations fatal to happiness and innocence.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0003",
+      "w": "The Social Contract",
+      "s": "The General Will, then, is the application of human freedom to political institutions.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0004",
+      "w": "The Social Contract",
+      "s": "The monarchy of Cyrus was conquered by thirty thousand men, led by a prince poorer than the meanest of Persian Satraps: in like manner the Scythians, the poorest of all nations, were able to resist the most powerful monarchs of the universe.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0005",
+      "w": "Discourse on Inequality",
+      "s": "It is in a word, in this natural sentiment, rather than in fine-spun arguments, that we must look for the cause of that reluctance which every man would experience to do evil, even independently of the maxims of education.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0006",
+      "w": "The Confessions",
+      "s": "I am everywhere intimidated, restrained by some obstacle, and with money in my pocket return as I went, for want of resolution to purchase what I long for.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0007",
+      "w": "The Confessions",
+      "s": "Minutoli, who, when on guard, always shut the gate he had charge of an hour before the usual time.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0008",
+      "w": "The Confessions",
+      "s": "Depending little, therefore, on external appearances, I had recourse to other expedients: I wrote a most elaborate letter, where, mingling all the flowers of rhetoric which I had borrowed from books with the phrases of an apprentice, I endeavored to strike the attention, and insure the good will of Madam de Warens.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0009",
+      "w": "The Confessions",
+      "s": "I was recommended to their care; they were likewise made my purse-bearers, which had been augmented by Madam de Warens, who, not contented with these kindnesses, added secretly a pecuniary reinforcement, attended with the most ample instructions, and we departed on the Wednesday before Easter.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0010",
+      "w": "The Confessions",
+      "s": "Born in a family of unexceptionable morals, every lesson I received was replete with maxims of prudence and virtue.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0011",
+      "w": "The Confessions",
+      "s": "The two Africans had been baptised with great ceremony, they were habited in white from head to foot to signify the purity of their regenerated souls.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0012",
+      "w": "The Confessions",
+      "s": "This second Egistus was sure to grumble whenever he saw me go into his mistress’ apartment, treating me with a degree of disdain which she took care to repay him with interest; seeming pleased to caress me in his presence, on purpose to torment him.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0013",
+      "w": "The Confessions",
+      "s": "Basile was a tall handsome man, of good address: he entered with a consequential look and an air of taking his family unawares, though none but friends were present.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0014",
+      "w": "The Confessions",
+      "s": "Had I been left to myself, I should infallibly have declared the truth.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0015",
+      "w": "The Confessions",
+      "s": "Fortunately, it did not produce that effect; my memory retained the lessons of M.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0016",
+      "w": "The Confessions",
+      "s": "I labored with assiduity, and the abbe bestowed his attention with a degree of kindness, the remembrance of which, even at this time, both interests and softens me.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0017",
+      "w": "The Confessions",
+      "s": "I had written her an account of my reception at the Count de Gauvon’s; she knew my expectancies, and, in congratulating me on my good fortune, had added some wise lessons on the return I ought to make for the kindness with which they treated me.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0018",
+      "w": "The Confessions",
+      "s": "I think those names convey an exact idea of our behavior, the simplicity of our manners, and above all, the similarity of our dispositions.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0019",
+      "w": "The Confessions",
+      "s": "Evremond, though long since almost forgotten in France: but this did not prevent her having a taste for literature, or expressing her thoughts with elegance.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0020",
+      "w": "The Confessions",
+      "s": "I love society as much as any man, was I not certain to exhibit myself in it, not only disadvantageously, but totally different from what I really am.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0021",
+      "w": "The Confessions",
+      "s": "One evening, in the month of February, when it was very cold, being all sat round the fire, we heard some one knock at the street door.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0022",
+      "w": "The Confessions",
+      "s": "Claude Anet, the gardiner, and myself, carried the case to the first village, then hired an ass, and the same night reached Seyssel.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0023",
+      "w": "The Confessions",
+      "s": "Thus poor Le Maitre lost the fruit of his talents, the labor of his youth, and principal dependence for the support of old age.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0024",
+      "w": "The Confessions",
+      "s": "I turn round, hear myself called by name, and approaching, find two young people of my acquaintance, Mademoiselle de G---- and Mademoiselle Galley, who, not being very excellent horsewomen, could not make their horses cross the rivulet.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0025",
+      "w": "The Confessions",
+      "s": "The ladies had spoken of him slightingly, and appeared discontented at finding me in such bad hands; this hurt him in my esteem; besides, whatever diverted my ideas from them was at this time disagreeable.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0026",
+      "w": "The Confessions",
+      "s": "Though our situations in life were very little connected with each other, as I received some useful lessons from him, I thought gratitude demanded that I should dedicate a few sentences to his memory.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0027",
+      "w": "The Confessions",
+      "s": "Her father, who was not in the best circumstances, did not show me much attention, and I was obliged to lodge at an alehouse.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0028",
+      "w": "The Confessions",
+      "s": "I gave four or five strokes with my paper, attending with “take care!” they begin--No, never since French operas existed was there such a confused discord!",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0029",
+      "w": "The Confessions",
+      "s": "By continuing to teach music, I insensibly gained some knowledge of it.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0030",
+      "w": "The Confessions",
+      "s": "They gave me several letters, a hundred livres to defray the expenses of my journey, accompanied with some good advice, and thus equipped I departed.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0031",
+      "w": "The Confessions",
+      "s": "I showed this scribble to Madam de Merveilleux, who, instead of discouraging me, as she ought to have done, laughed heartily at my sarcasms, as well as her son, who, I believe, did not like M.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0032",
+      "w": "The Confessions",
+      "s": "May a blessing light on the good Batistin and his good cantata, which procured me a better breakfast than I had expected, and a still better dinner which I did not expect at all!",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0033",
+      "w": "The Confessions",
+      "s": "Near Chambery I enjoyed an equal pleasing spectacle, though of a different kind; the road passing near the foot of the most charming cascade I ever saw.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0034",
+      "w": "The Confessions",
+      "s": "Though our occupation did not demand a very profound skill in arithmetic, it sometimes required enough to puzzle me.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0035",
+      "w": "The Confessions",
+      "s": "He was tall and well made; full faced, with very fine eyes, and black hair, which formed natural curls on each side of his forehead.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0036",
+      "w": "The Confessions",
+      "s": "After a month or two of negligent attendance, this was an expedient she devised to make me more assiduous, for I could not easily persuade myself to be so.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0037",
+      "w": "The Confessions",
+      "s": "Though as young as herself, he was so grave and thoughtful, that he looked on us as two children who required indulgence, and we regarded him as a respectable man, whose esteem we had to preserve.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0038",
+      "w": "The Confessions",
+      "s": "On his decease, I was obliged to occupy his place, for which I had as little inclination as abilities, and therefore filled it ill.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0039",
+      "w": "The Confessions",
+      "s": "I answered, it required considerable labor, and could not be done on the spot.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0040",
+      "w": "The Confessions",
+      "s": "After a thousand proofs of the inefficacy of my remonstrances, what remained but to turn away my eyes from the ruin I could not prevent; and fly myself from the door I could not guard!",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0041",
+      "w": "The Confessions",
+      "s": "Nothing more was necessary; behold me fascinated with chess!",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0042",
+      "w": "The Confessions",
+      "s": "Meantime, the air of the country did not restore my health; I was languishing and became more so; I could not endure milk, and was obliged to discontinue the use of it.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0043",
+      "w": "The Confessions",
+      "s": "It is certain, however, that nothing gave me absolute ease, but having no longer any acute pain, I became accustomed to languishment and wakefulness; to thinking instead of acting; in short, I looked on the gradual and slow decay of my body as inevitably progressive and only to be terminated by death.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0044",
+      "w": "The Confessions",
+      "s": "Algebra followed, and Father Lama was still my guide: when I made some progress, I perused Father Reynaud’s Science of Calculation, and then his Analysis Demonstrated; but I never went far enough thoroughly to understand the application of algebra to geometry.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0045",
+      "w": "The Confessions",
+      "s": "I should like to know whether there ever passed such childish notions in the hearts of other men as sometimes do in mine.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0046",
+      "w": "The Confessions",
+      "s": "She spoke much and earnestly on the care of my health, conjured me to consult skilful physicians, and be attentive and exact in following their prescriptions whatever they might happen to be.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0047",
+      "w": "The Confessions",
+      "s": "To sow dissension, dishonor, scandal, and hell itself, in her family?",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0048",
+      "w": "The Confessions",
+      "s": "I saw all the future felicity I had promised myself vanish in a moment; all the charming ideas I had indulged so affectionately, disappear entirely; and I, who even from childhood had not been able to consider my existence for a moment as separate from hers, for the first time saw myself utterly alone.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0049",
+      "w": "The Confessions",
+      "s": "Malby’s was sufficient to undeceive me in that particular.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0050",
+      "w": "The Confessions",
+      "s": "By examining the formation of the signs, I was convinced they were frequently very ill devised.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0051",
+      "w": "The Confessions",
+      "s": "The Abbe de Malby gave me letters to Paris; among others, one to M.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0052",
+      "w": "The Confessions",
+      "s": "Madam de Beuzenval said to me: “You are at a great distance from the quarter of the town in which you reside; stay and dine here.” I did not want asking a second time.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0053",
+      "w": "The Confessions",
+      "s": "She permitted me to visit her, and I abused the permission.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0054",
+      "w": "The Confessions",
+      "s": "This was not the first time I had undertaken so difficult a task.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0055",
+      "w": "The Confessions",
+      "s": "Between my repasts, when I did not either read or write or work at the furnishing of my apartment, I went to walk in the burying-ground of the Protestants, which served me as a courtyard.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0056",
+      "w": "The Confessions",
+      "s": "As he read nothing of what I laid before him, except the despatches for the court, and signed those to other ambassadors without reading them, this left me more at liberty to give what turn I thought proper to the latter, and in these therefore I made the articles of information cross each other.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0057",
+      "w": "The Confessions",
+      "s": "I had formed an intimate connection with him after the example of our ambassadors.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0058",
+      "w": "The Confessions",
+      "s": "He wished to mortify me, and please his favorite; but had no desire to dismiss me his service.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0059",
+      "w": "The Confessions",
+      "s": "I had brought with me from Paris the prejudice of that city against Italian music; but I had also received from nature a sensibility and niceness of distinction which prejudice cannot withstand.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0060",
+      "w": "The Confessions",
+      "s": "Yes: I have something to say upon it, and I will proceed to the confession with the same ingenuousness with which I have made my former ones.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0061",
+      "w": "The Confessions",
+      "s": "In the evening we conducted her to her apartments.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0062",
+      "w": "The Confessions",
+      "s": "I know not whether or not her ardor would have been more satisfied with this visit, her pride at least would have been flattered by it, and I already rejoiced at the idea of my convincing her, in every respect, that I knew how to repair the wrongs I had done.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0063",
+      "w": "The Confessions",
+      "s": "Notwithstanding this, the public talk at Venice, and the unanswerable proof I exhibited, I could not obtain even the shadow of justice.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0064",
+      "w": "The Confessions",
+      "s": "The first time I saw this girl at table, I was struck with her modesty; and still more so with her lively yet charming look, which, with respect to the impression it made upon me, was never equalled.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0065",
+      "w": "The Confessions",
+      "s": "In the first place, I would not touch the words without the consent of the author, to whom I wrote upon the subject a very polite and respectful letter, such a one as was proper; and received from him the following answer: “SIR: In you two talents, which hitherto have always been separated, are united.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0066",
+      "w": "The Confessions",
+      "s": "They wished to have me in common as a kind of secretary, and this was the reason of the invitations of Thieriot.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0067",
+      "w": "The Confessions",
+      "s": "For the present, we will confine ourselves to this first period; its cruel and unforeseen consequences will but too frequently oblige me to refer to it.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0068",
+      "w": "The Confessions",
+      "s": "But I was the only person in readiness at the time prescribed.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0069",
+      "w": "The Confessions",
+      "s": "The state of my finances not permitting me to pay for hackney coaches, at two o’clock in the afternoon, I went on foot, when alone, and walked as fast as possible, that I might arrive the sooner.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0070",
+      "w": "The Confessions",
+      "s": "Klupssel had furnished a lodging for a little girl, who, notwithstanding this, was at the service of anybody, because he could not support her entirely himself.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0071",
+      "w": "The Confessions",
+      "s": "This it could never have done except by means of the persons to whom I intrusted it, nor did it until after my rupture with them.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0072",
+      "w": "The Confessions",
+      "s": "The succeeding part of these memoirs will explain this odious conspiracy.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0073",
+      "w": "The Confessions",
+      "s": "Gautier, of Nancy, the first who fell under the lash of my pen, was very roughly treated in a letter to M.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0074",
+      "w": "The Confessions",
+      "s": "I was glad he succeeded in the world; but I did not wish him to do this by forgetting his friend.",
+      "src": {
+        "work": "The Confessions"
+      }
+    },
+    {
+      "id": "rousseau.p0075",
+      "w": "The Social Contract",
+      "s": "If, they say, the General Will is not the Will of All, if it cannot be arrived at by a majority vote or by any system of voting whatsoever, then it is nothing; it is a mere abstraction, neither general, nor a I will.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0076",
+      "w": "The Social Contract",
+      "s": "Henri Rodet's _Le Contrat Social et les idées politiques de J.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0077",
+      "w": "The Social Contract",
+      "s": "Such a renunciation is incompatible with man's nature; to remove all liberty from his will is to remove all morality from his acts.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0078",
+      "w": "The Social Contract",
+      "s": "The man in question, even if he has enslaved half the world, is still only an individual; his interest, apart from that of others, is still a purely private interest.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0079",
+      "w": "The Social Contract",
+      "s": "We shall also see later on that It cannot hurt any in particular.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0080",
+      "w": "The Social Contract",
+      "s": "This paradox may easily be explained by the distinction between the rights which the Sovereign and the proprietor have over the same estate, as we shall see later on.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0081",
+      "w": "The Social Contract",
+      "s": "If, when the people, being furnished with adequate information, held its deliberations, the citizens had no communication one with another, the grand total of the small differences would always give the general will, and the decision would always be good.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0082",
+      "w": "The Social Contract",
+      "s": "What are they doing that they would not do more often and with greater danger in the state of nature, in which they would inevitably have to fight battles at the peril of their lives in defence of that which is the means of their preservation?",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0083",
+      "w": "The Social Contract",
+      "s": "Humanly speaking, in default of natural sanctions, the laws of justice are ineffective among men: they merely make for the good of the wicked and the undoing of the just, when the just man observes them towards everybody and nobody observes them towards him.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0084",
+      "w": "The Social Contract",
+      "s": "The former must be compelled to bring their wills into conformity with their reason; the latter must be taught to know what it wills.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0085",
+      "w": "The Social Contract",
+      "s": "1] A people becomes famous only when its legislation begins to decline.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0086",
+      "w": "The Social Contract",
+      "s": "Different laws lead only to trouble and confusion among peoples which, living under the same rulers and in constant communication one with another, intermingle and intermarry, and, coming under the sway of new customs, never know if they can call their very patrimony their own.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0087",
+      "w": "The Social Contract",
+      "s": "1] If there were two neighbouring peoples, one of which could not do without the other, it would be very hard on the former, and very dangerous for the latter.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0088",
+      "w": "The Social Contract",
+      "s": "With this the great legislator concerns himself in secret, though he seems to confine himself to particular regulations; for these are only the arc of the arch, while manners and morals, slower to arise, form in the end its immovable keystone.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0089",
+      "w": "The Social Contract",
+      "s": "The government, then, to be good, should be proportionately stronger as the people is more numerous.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0090",
+      "w": "The Social Contract",
+      "s": "The first societies governed themselves aristocratically.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0091",
+      "w": "The Social Contract",
+      "s": "There is then too great a distance between prince and people and the State lacks a bond of union.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0092",
+      "w": "The Social Contract",
+      "s": "Monarchy therefore suits only wealthy nations; aristocracy, States of middling size and wealth; and democracy, States that are small and poor.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0093",
+      "w": "The Social Contract",
+      "s": "In climates in which the changes of season are prompt and violent, men have better and simpler clothes; where they clothe themselves only for adornment, what is striking is more thought of than what is useful; clothes themselves are then a luxury.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0094",
+      "w": "The Social Contract",
+      "s": "Seek then nowhere else this mark that is in dispute.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0095",
+      "w": "The Social Contract",
+      "s": "But at first it took on no constant form, because, by not abolishing the patriciate, it left half its work undone.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0096",
+      "w": "The Social Contract",
+      "s": "The last census showed that there were in Rome four hundred thousand citizens capable of bearing arms, and the last computation of the population of the Empire showed over four million citizens, excluding subjects, foreigners, women, children and slaves.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0097",
+      "w": "The Social Contract",
+      "s": "Men surrender a part of their profits in order to have time to increase them at leisure.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0098",
+      "w": "The Social Contract",
+      "s": "Your severer climates add to your needs;[1] for half the year your public squares are uninhabitable; the flatness of your languages unfits them for being heard in the open air; you sacrifice more for profit than for liberty, and fear slavery less than poverty.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0099",
+      "w": "The Social Contract",
+      "s": "The difficulty is to understand how there can be a governmental act before government exists, and how the people, which is only Sovereign or subject, can, under certain circumstances, become a prince or magistrate.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0100",
+      "w": "The Social Contract",
+      "s": "But the exception is rather apparent than real; for then, through the defect that is inherent in the body politic, there were, so to speak, two States in one, and what is not true of the two together is true of either separately.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0101",
+      "w": "The Social Contract",
+      "s": "First, the more grave and important the questions discussed, the nearer should the opinion that is to prevail approach unanimity.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0102",
+      "w": "The Social Contract",
+      "s": "Experience teaches us every day what causes lead to the revolutions of empires; but, as no new peoples are now formed, we have almost nothing beyond conjecture to go upon in explaining how they were created.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0103",
+      "w": "The Social Contract",
+      "s": "Lastly, he ordered that the assembly should be held in the Campus Martius, and that all who were of age to serve should come there armed.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0104",
+      "w": "The Social Contract",
+      "s": "But, under the pretext of hastening matters, the abolition of this custom was achieved, and both elections were held on the same day.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0105",
+      "w": "The Social Contract",
+      "s": "These intervals, which should not be long enough to give abuses time to grow strong, may be so fixed by law that they can easily be shortened at need by extraordinary commissions.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0106",
+      "w": "The Social Contract",
+      "s": "In the crises which lead to its adoption, the State is either soon lost, or soon saved; and, the present need passed, the dictatorship becomes either tyrannical or idle.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0107",
+      "w": "The Social Contract",
+      "s": "From the mere fact that God was set over every political society, it followed that there were as many gods as peoples.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0108",
+      "w": "The Social Contract",
+      "s": "Christianity as a religion is entirely spiritual, occupied solely with heavenly things; the country of the Christian is not of this world.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0109",
+      "w": "The Social Contract",
+      "s": "The dogmas of civil religion ought to be few, simple, and exactly worded, without explanation or commentary.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0110",
+      "w": "The Social Contract",
+      "s": "It is not concerned, however, with those metaphysical subtleties, which of late have found their way into every department of literature, and from which even our academic curricula are not always free.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0111",
+      "w": "The Social Contract",
+      "s": "It was the stupid Mussulman, the eternal scourge of letters, who was the immediate cause of their revival among us.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0112",
+      "w": "The Social Contract",
+      "s": "Some vices indeed are condemned and others grown dishonourable; but we have still many that are honoured with the names of virtues, and it is become necessary that we should either have, or at least pretend to have them.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0113",
+      "w": "The Social Contract",
+      "s": "They were not ignorant that in other countries there were men who spent their time in disputing idly about the sovereign good, and about vice and virtue.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0114",
+      "w": "The Social Contract",
+      "s": "What is the meaning of these statues, paintings and buildings?",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0115",
+      "w": "The Social Contract",
+      "s": "But, what of all that, says he, they can't run to a pair of breeches!",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0116",
+      "w": "The Social Contract",
+      "s": "They smile contemptuously at such old names as patriotism and religion, and consecrate their talents and philosophy to the destruction; and defamation of all that men hold sacred.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0117",
+      "w": "The Social Contract",
+      "s": "Further, if by chance there be found among men of average ability, an individual with enough strength of mind to refuse to comply with the spirit of the age, and to debase himself by puerile productions, his lot will be hard.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0118",
+      "w": "The Social Contract",
+      "s": "If the cultivation of the sciences is prejudicial to military qualities, it is still more so to moral qualities.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0119",
+      "w": "The Social Contract",
+      "s": "So much precaution proves but too evidently the need for it.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0120",
+      "w": "The Social Contract",
+      "s": "But if we are desirous that nothing should be above their genius, nothing should be beyond their hopes.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0121",
+      "w": "The Social Contract",
+      "s": "Men will always be what women choose to make them.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0122",
+      "w": "The Social Contract",
+      "s": "Such must have been the rude constitution of primitive governments, directly emerging from a state of nature; and this was another of the vices that contributed to the downfall of the Republic of Athens.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0123",
+      "w": "The Social Contract",
+      "s": "I see him still, living by the work of his hands, and feeding his soul on the sublimest truths.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0124",
+      "w": "The Social Contract",
+      "s": "If we look at human society with a calm and disinterested eye, it seems, at first, to show us only the violence of the powerful and the oppression of the weak.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0125",
+      "w": "The Social Contract",
+      "s": "If he had had an axe, would he have been able with his naked arm to break so large a branch from a tree?",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0126",
+      "w": "The Social Contract",
+      "s": "It is thus with man also: as he becomes sociable and a slave, he grows weak, timid and servile; his effeminate way of life totally enervates his strength and courage.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0127",
+      "w": "The Social Contract",
+      "s": "But who does not see, without recurring to the uncertain testimony of history, that everything seems to remove from savage man both the temptation and the means of changing his condition?",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0128",
+      "w": "The Social Contract",
+      "s": "Such an institution could only be made by common consent, and must have been effected in a manner not very easy for men whose gross organs had not been accustomed to any such exercise.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0129",
+      "w": "The Social Contract",
+      "s": "In instinct alone, he had all he required for living in the state of nature; and with a developed understanding he has only just enough to support life in society.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0130",
+      "w": "The Social Contract",
+      "s": "The consequences, however, which I mean to deduce will not be barely conjectural; as, on the principles just laid down, it would be impossible to form any other theory that would not furnish the same results, and from which I could not draw the same conclusions.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0131",
+      "w": "The Social Contract",
+      "s": "In the latter case, every one sought his own private advantage, either by open force, if he thought himself strong enough, or by address and cunning, if he felt himself the weaker.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0132",
+      "w": "The Social Contract",
+      "s": "Whoever sang or danced best, whoever was the handsomest, the strongest, the most dexterous, or the most eloquent, came to be of most consideration; and this was the first step towards inequality, and at the same time towards vice.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0133",
+      "w": "The Social Contract",
+      "s": "I shall confine myself to a glance at mankind in this new situation.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0134",
+      "w": "The Social Contract",
+      "s": "That which I have just laid down, however, appears to me the most natural for the following reasons.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0135",
+      "w": "The Social Contract",
+      "s": "As then, to establish slavery, it was necessary to do violence to nature, so, in order to perpetuate such a right, nature would have to be changed.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0136",
+      "w": "The Social Contract",
+      "s": "Thus, there must have been; a time, when the eyes of the people were so fascinated, that their rulers had only to say to the least of men, \"Be great, you and all your posterity,\" to make him immediately appear great in the eyes of every one as well as in his own.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0137",
+      "w": "The Social Contract",
+      "s": "It is sufficient that I have proved that this is not by any means the original state of man, but that it is merely the spirit of society, and the inequality which society produces, that thus transform and alter all our natural inclinations.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0138",
+      "w": "The Social Contract",
+      "s": "Savage man, when he has dined, is at peace with all nature, and the friend of all his fellow-creatures.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0139",
+      "w": "The Social Contract",
+      "s": "Thus nature has made a multitude of good fathers of families; but it is doubtful whether, from the very beginning of the world, human wisdom has made ten men capable of governing their peers.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0140",
+      "w": "The Social Contract",
+      "s": "How can it be that all should obey, yet nobody take upon him to command, and that all should serve, and yet have no masters, but be the more free, as, in apparent subjection, each loses no part of his liberty but what might be hurtful; to that of another?",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0141",
+      "w": "The Social Contract",
+      "s": "There is seldom any injustice to be repaired; in the meantime, the Emperor, being satisfied that public outcry does not arise without cause, always discovers, through the seditious clamours which he punishes, just grievances to redress.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0142",
+      "w": "The Social Contract",
+      "s": "Now, as this sentiment can be useful only to those with whom we have to live, it is proper that our humanity should confine itself to our fellow-citizens, and should receive a new force because we are in the habit of seeing them, and by reason of the common interest which unites them.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0143",
+      "w": "The Social Contract",
+      "s": "Never exceed your rights, and they will soon become unlimited.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0144",
+      "w": "The Social Contract",
+      "s": "Since the world has been divided into nations too great to admit of being well governed, this method has been no longer practicable, and the reader will readily perceive other reasons why such a thing has never been attempted by any modern people.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0145",
+      "w": "The Social Contract",
+      "s": "Never mind, then, about account books and papers; place the management of finance in honest hands: that is the only way to get it faithfully conducted.",
+      "src": {
+        "work": "The Social Contract"
+      }
+    },
+    {
+      "id": "rousseau.p0146",
+      "w": "Discourse on Inequality",
+      "s": "And how is it possible this should be the case, if we inflict more diseases upon ourselves than medicine can supply us with remedies!",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0147",
+      "w": "Discourse on Inequality",
+      "s": "Man therefore, in a state of nature where there are so few sources of sickness, can have no great occasion for physic, and still less for physicians; neither is the human species more to be pitied in this respect, than any other species of animals.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0148",
+      "w": "Discourse on Inequality",
+      "s": "Nature behaves towards all animals left to her care with a predilection, that seems to prove how jealous she is of that prerogative.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0149",
+      "w": "Discourse on Inequality",
+      "s": "As yet I have considered man merely in his physical capacity; let us now endeavour to examine him in a metaphysical and moral light.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0150",
+      "w": "Discourse on Inequality",
+      "s": "One chooses by instinct; the other by an act of liberty; for which reason the beast cannot deviate from the rules that have been prescribed to it, even in cases where such deviation might be useful, and man often deviates from the rules laid down for him to his prejudice.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0151",
+      "w": "Discourse on Inequality",
+      "s": "Is it not, because he thus returns to his primitive condition?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0152",
+      "w": "Discourse on Inequality",
+      "s": "It is by the activity of our passions, that our reason improves: we covet knowledge merely because we covet enjoyment, and it is impossible to conceive why a man exempt from fears and desires should take the trouble to reason.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0153",
+      "w": "Discourse on Inequality",
+      "s": "It is constantly the same order, constantly the same revolutions; he has not sense enough to feel surprise at the sight of the greatest wonders; and it is not in his mind we must look for that philosophy, which man must have to know how to observe once, what he has every day seen.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0154",
+      "w": "Discourse on Inequality",
+      "s": "How many ages perhaps revolved, before men beheld any other fire but that of the heavens?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0155",
+      "w": "Discourse on Inequality",
+      "s": "And how often perhaps has not every one of these secrets perished with the discoverer?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0156",
+      "w": "Discourse on Inequality",
+      "s": "What progress could mankind make in the forests, scattered up and down among the other animals?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0157",
+      "w": "Discourse on Inequality",
+      "s": "The first that offers is how languages could become necessary; for as there was no correspondence between men, nor the least necessity for any, there is no conceiving the necessity of this invention, nor the possibility of it, if it was not indispensable.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0158",
+      "w": "Discourse on Inequality",
+      "s": "The first language of man, the most universal and most energetic of all languages, in short, the only language he had occasion for, before there was a necessity of persuading assembled multitudes, was the cry of nature.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0159",
+      "w": "Discourse on Inequality",
+      "s": "At first they gave every object a peculiar name, without any regard to its genus or species, things which these first institutors of language were in no condition to distinguish; and every individual presented itself solitary to their minds, as it stands in the table of nature.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0160",
+      "w": "Discourse on Inequality",
+      "s": "When a monkey leaves without the least hesitation one nut for another, are we to think he has any general idea of that kind of fruit, and that he compares these two individual bodies with his archetype notion of them?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0161",
+      "w": "Discourse on Inequality",
+      "s": "We must therefore make use of propositions; we must therefore speak to have general ideas; for the moment the imagination stops, the mind must stop too, if not assisted by speech.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0162",
+      "w": "Discourse on Inequality",
+      "s": "And which is aptest to become insupportable to those who enjoy it, a civil or a natural life?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0163",
+      "w": "Discourse on Inequality",
+      "s": "Let us therefore judge with less pride on which side real misery is to be placed.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0164",
+      "w": "Discourse on Inequality",
+      "s": "He had in his instinct alone everything requisite to live in a state of nature; in his cultivated reason he has barely what is necessary to live in a state of society.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0165",
+      "w": "Discourse on Inequality",
+      "s": "That if this man, when robust, depended on others as much as when feeble, there is no excess that he would not be guilty of.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0166",
+      "w": "Discourse on Inequality",
+      "s": "Man is weak when dependent, and his own master before he grows robust.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0167",
+      "w": "Discourse on Inequality",
+      "s": "Mandeville was very sensible that men, in spite of all their morality, would never have been better than monsters, if nature had not given them pity to assist reason: but he did not perceive that from this quality alone flow all the social virtues, which he would dispute mankind the possession of.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0168",
+      "w": "Discourse on Inequality",
+      "s": "One man may with impunity murder another under his windows; he has nothing to do but clap his hands to his ears, argue a little with himself to hinder nature, that startles within him, from identifying him with the unhappy sufferer.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0169",
+      "w": "Discourse on Inequality",
+      "s": "They are the dregs of the people, the poor basket and barrow-women, that part the combatants, and hinder gentle folks from cutting one another's throats.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0170",
+      "w": "Discourse on Inequality",
+      "s": "The physical part of it is that general desire which prompts the sexes to unite with each other; the moral part is that which determines that desire, and fixes it upon a particular object to the exclusion of all others, or at least gives it a greater degree of energy for this preferred object.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0171",
+      "w": "Discourse on Inequality",
+      "s": "If he happened to make any discovery, he could the less communicate it as he did not even know his children.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0172",
+      "w": "Discourse on Inequality",
+      "s": "What will wit avail people who don't speak, or craft those who have no affairs to transact?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0173",
+      "w": "Discourse on Inequality",
+      "s": "One man might, indeed, seize on the fruits which another had gathered, on the game which another had killed, on the cavern which another had occupied for shelter; but how is it possible he should ever exact obedience from him, and what chains of dependence can there be among men who possess nothing?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0174",
+      "w": "Discourse on Inequality",
+      "s": "Having proved that the inequality, which may subsist between man and man in a state of nature, is almost imperceivable, and that it has very little influence, I must now proceed to show its origin, and trace its progress, in the successive developments of the human mind.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0175",
+      "w": "Discourse on Inequality",
+      "s": "The first sentiment of man was that of his existence, his first care that of preserving it.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0176",
+      "w": "Discourse on Inequality",
+      "s": "The present heat once allayed, the sexes took no further notice of each other, and even the child ceased to have any tie in his mother, the moment he ceased to want her assistance.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0177",
+      "w": "Discourse on Inequality",
+      "s": "He learned to surmount the obstacles of nature, to contend in case of necessity with other animals, to dispute his subsistence even with other men, or indemnify himself for the loss of whatever he found himself obliged to part with to the strongest.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0178",
+      "w": "Discourse on Inequality",
+      "s": "On the sea shore, and the banks of rivers, they invented the line and the hook, and became fishermen and ichthyophagous.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0179",
+      "w": "Discourse on Inequality",
+      "s": "Though other men were not to him what they are to us, and he had scarce more intercourse with them than with other animals, they were not overlooked in his observations.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0180",
+      "w": "Discourse on Inequality",
+      "s": "Every one saw that to succeed he must faithfully stand to his post; but suppose a hare to have slipped by within reach of any one of them, it is not to be doubted but he pursued it without scruple, and when he had seized his prey never reproached himself with having made his companions miss theirs.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0181",
+      "w": "Discourse on Inequality",
+      "s": "At length, these first improvements enabled man to improve at a greater rate.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0182",
+      "w": "Discourse on Inequality",
+      "s": "The women became more sedentary, and accustomed themselves to stay at home and look after the children, while the men rambled abroad in quest of subsistence for the whole family.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0183",
+      "w": "Discourse on Inequality",
+      "s": "It is obvious that among men thus collected, and forced to live together, a common idiom must have started up much sooner, than among those who freely wandered through the forests of the main land.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0184",
+      "w": "Discourse on Inequality",
+      "s": "The transitory commerce required by nature soon produced, among the youth of both sexes living in contiguous cabins, another kind of commerce, which besides being equally agreeable is rendered more durable by mutual intercourse.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0185",
+      "w": "Discourse on Inequality",
+      "s": "Tender and agreeable sentiments steal into the soul, and are by the smallest opposition wound up into the most impetuous fury: Jealousy kindles with love; discord triumphs; and the gentlest of passions requires sacrifices of human blood to appease it.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0186",
+      "w": "Discourse on Inequality",
+      "s": "He who sings or dances best; the handsomest, the strongest, the most dexterous, the most eloquent, comes to be the most respected: this was the first step towards inequality, and at the same time towards vice.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0187",
+      "w": "Discourse on Inequality",
+      "s": "Hence the first duties of civility and politeness, even among savages; and hence every voluntary injury became an affront, as besides the mischief, which resulted from it as an injury, the party offended was sure to find in it a contempt for his person more intolerable than the mischief itself.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0188",
+      "w": "Discourse on Inequality",
+      "s": "For according to the axiom of the wise Locke, Where there is no property, there can be no injury.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0189",
+      "w": "Discourse on Inequality",
+      "s": "With the poet, it is gold and silver, but with the philosopher it is iron and corn, which have civilized men, and ruined mankind.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0190",
+      "w": "Discourse on Inequality",
+      "s": "For this reason the invention of other arts must have been necessary to oblige mankind to apply to that of agriculture.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0191",
+      "w": "Discourse on Inequality",
+      "s": "Hence on the one hand husbandry and agriculture, and on the other the art of working metals and of multiplying the uses of them.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0192",
+      "w": "Discourse on Inequality",
+      "s": "The ancients, says Grotius, by giving to Ceres the epithet of Legislatrix, and to a festival celebrated in her honour the name of Thesmorphoria, insinuated that the distribution of lands produced a new kind of right; that is, the right of property different from that which results from the law of nature.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0193",
+      "w": "Discourse on Inequality",
+      "s": "I shall just give a glance at mankind placed in this new order of things.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0194",
+      "w": "Discourse on Inequality",
+      "s": "In a word, sometimes nothing was to be seen but a contention of endeavours on the one hand, and an opposition of interests on the other, while a secret desire of thriving at the expense of others constantly prevailed.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0195",
+      "w": "Discourse on Inequality",
+      "s": "And hence began to flow, according to the different characters of each, domination and slavery, or violence and rapine.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0196",
+      "w": "Discourse on Inequality",
+      "s": "There arose between the title of the strongest, and that of the first occupier a perpetual conflict, which always ended in battery and bloodshed.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0197",
+      "w": "Discourse on Inequality",
+      "s": "Don't you know that numbers of your brethren perish, or suffer grievously for want of what you possess more than suffices nature, and that you should have had the express and unanimous consent of mankind to appropriate to yourself of their common, more than was requisite for your private subsistence?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0198",
+      "w": "Discourse on Inequality",
+      "s": "Political bodies, thus remaining in a state of nature among themselves, soon experienced the inconveniences which had obliged individuals to quit it; and this state became much more fatal to these great bodies, than it had been before to the individuals which now composed them.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0199",
+      "w": "Discourse on Inequality",
+      "s": "Government in its infancy had no regular and permanent form.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0200",
+      "w": "Discourse on Inequality",
+      "s": "Men were continually repairing; whereas, to erect a good edifice, they should have begun as Lycurgus did at Sparta, by clearing the area, and removing the old materials.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0201",
+      "w": "Discourse on Inequality",
+      "s": "In fact, why did they give themselves superiors, if it was not to be defended by them against oppression, and protected in their lives, liberties, and properties, which are in a manner the constitutional elements of their being?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0202",
+      "w": "Discourse on Inequality",
+      "s": "What worse treatment can we expect from an enemy?",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0203",
+      "w": "Discourse on Inequality",
+      "s": "As an unbroken courser erects his mane, paws the ground, and rages at the bare sight of the bit, while a trained horse patiently suffers both whip and spur, just so the barbarian will never reach his neck to the yoke which civilized man carries without murmuring but prefers the most stormy liberty to a calm subjection.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0204",
+      "w": "Discourse on Inequality",
+      "s": "Instead of saying that civil society is derived from paternal authority, we should rather say that it is to the former that the latter owes its principal force: No one individual was acknowledged as the father of several other individuals, till they settled about him.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0205",
+      "w": "Discourse on Inequality",
+      "s": "This odious system is even, at this day, far from being that of wise and good monarchs, and especially of the kings of France, as may be seen by divers passages in their edicts, and particularly by that of a celebrated piece published in 1667 in the name and by the orders of Louis XIV.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0206",
+      "w": "Discourse on Inequality",
+      "s": "I shall not now enter upon the inquiries which still remain to be made into the nature of the fundamental pacts of every kind of government, but, following the common opinion, confine myself in this place to the establishment of the political body as a real contract between the multitude and the chiefs elected by it.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0207",
+      "w": "Discourse on Inequality",
+      "s": "To this power are added honours, that may render the laws and the ministers of them respectable; and the persons of the ministers are distinguished by certain prerogatives, which may make them amends for the great fatigues inseparable from a good administration.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0208",
+      "w": "Discourse on Inequality",
+      "s": "But to resume the thread of our hypothesis.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0209",
+      "w": "Discourse on Inequality",
+      "s": "Some remained altogether subject to the laws; others soon bowed their necks to masters.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0210",
+      "w": "Discourse on Inequality",
+      "s": "In these various modes of government the offices at first were all elective; and when riches did not preponderate, the preference was given to merit, which gives a natural ascendant, and to age, which is the parent of deliberateness in council, and experience in execution.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0211",
+      "w": "Discourse on Inequality",
+      "s": "The magistrate can not usurp any illegal power without making himself creatures, with whom he must divide it.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0212",
+      "w": "Discourse on Inequality",
+      "s": "By this observation we are enabled to judge with tolerable exactness, how much any people has deviated from its primitive institution, and what steps it has still to make to the extreme term of corruption.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0213",
+      "w": "Discourse on Inequality",
+      "s": "We should see the champions of their country sooner or later become her enemies, and perpetually holding their poniards to the breasts of their fellow citizens.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0214",
+      "w": "Discourse on Inequality",
+      "s": "The times immediately preceding this last alteration would be times of calamity and trouble: but at last everything would be swallowed up by the monster; and the people would no longer have chiefs or laws, but only tyrants.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0215",
+      "w": "Discourse on Inequality",
+      "s": "Force alone upheld him, force alone overturns him.",
+      "src": {
+        "work": "Discourse on Inequality"
+      }
+    },
+    {
+      "id": "rousseau.p0216",
+      "w": "Julie, or the New Heloise",
+      "s": "The ardent and tender friendship which hath united us, almost from our cradles, expanded our hearts, and ripened them into sensibility perhaps a little premature.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0217",
+      "w": "Julie, or the New Heloise",
+      "s": "Must I relinquish all hope, without the satisfaction of a voluntary sacrifice?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0218",
+      "w": "Julie, or the New Heloise",
+      "s": "How entirely was my Eloisa in the right when she said that I did not yet know her sufficiently!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0219",
+      "w": "Julie, or the New Heloise",
+      "s": "We find ourselves, from our first conception of things, instructed with so valuable a treasure, that our dread of consequences soon unfolds our judgment, and an early sense of our danger excites our vigilance.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0220",
+      "w": "Julie, or the New Heloise",
+      "s": "In short, they tell us that men are alike in all ages, that their virtues and vices are the same, and that we admire the ancients only because they are ancients.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0221",
+      "w": "Julie, or the New Heloise",
+      "s": "I seemed all over sensible of the ravishing condescension, and my heart sunk down oppressed with insupportable delight; when all at once, I perceived your colour change, your eyes close; you leant upon your cousin, and fainted away.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0222",
+      "w": "Julie, or the New Heloise",
+      "s": "If you return the box without a justification, or if your justification be not satisfactory, we must meet no more.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0223",
+      "w": "Julie, or the New Heloise",
+      "s": "I set out, dejected with my own sufferings, but consoled with your joy; which held me suspended in a state of languor that is not disagreeable to true sensibility.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0224",
+      "w": "Julie, or the New Heloise",
+      "s": "In short, I drank to shew my gratitude, and since they refused to take my money, I made them a compliment of my reason.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0225",
+      "w": "Julie, or the New Heloise",
+      "s": "How is it possible for a woman to honour a man who dishonours himself?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0226",
+      "w": "Julie, or the New Heloise",
+      "s": "I can neither renounce you, nor get the better of my cruel destiny; I can neither subdue my desires, nor better my fortune.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0227",
+      "w": "Julie, or the New Heloise",
+      "s": "And am I indebted to his care for a life, which he has since made insupportable by his cruelty?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0228",
+      "w": "Julie, or the New Heloise",
+      "s": "Freed as I have been from the temptation, it reflects no honour on my virtue.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0229",
+      "w": "Julie, or the New Heloise",
+      "s": "O my dear, my lovely wife, my tender and chaste companion, thou soother of all my cares, and object of all my wishes, oh think it not a crime to have listened to your love; but rather think it will be one to disobey it for the future.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0230",
+      "w": "Julie, or the New Heloise",
+      "s": "Since I am no longer any thing, be thou my whole existence.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0231",
+      "w": "Julie, or the New Heloise",
+      "s": "With what a greedy impatience did I explore the beautiful symmetry of thy person!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0232",
+      "w": "Julie, or the New Heloise",
+      "s": "My sorrows must have preyed on my heart for a long time before I could ever be prevailed on to discover the source of them to their author; and being firmly persuaded that there can be no offence without intention, I would much rather submit to a thousand real subjects of complaint than ever come to an explanation.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0233",
+      "w": "Julie, or the New Heloise",
+      "s": "The one assuming the character of master of the house, will consequently do the honours, while the other with less parade will do the honours of a dairy-house, and this rural hut dedicated to love, will be to them the temple of Gnidus.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0234",
+      "w": "Julie, or the New Heloise",
+      "s": "Since you mentioned that rural spot, I have been continually rambling in the fields, and am always insensibly led towards the same place.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0235",
+      "w": "Julie, or the New Heloise",
+      "s": "Forgive the liberty I have taken; you are the only person I could think of, and I feel so distressed, that I can write no more about it.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0236",
+      "w": "Julie, or the New Heloise",
+      "s": "Is not she too beautiful and too unfortunate to remain long unmarried, without some disaster?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0237",
+      "w": "Julie, or the New Heloise",
+      "s": "Your zeal to apologize for Lord B---- was unnecessary, as I was never inclined to think ill of him.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0238",
+      "w": "Julie, or the New Heloise",
+      "s": "Orbe sat snoring in an armed chair, and when I awoke him with my exclamations, all the praise he bestowed was to ask, whether your cousin understood Italian.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0239",
+      "w": "Julie, or the New Heloise",
+      "s": "Surely this is sufficient to calm your fears; at least it is as much as it concerns you to know.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0240",
+      "w": "Julie, or the New Heloise",
+      "s": "Alas, I am but too far from it; I have not been even discreet.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0241",
+      "w": "Julie, or the New Heloise",
+      "s": "With regard to your resolution of renouncing your bottle for ever; it has not so much weight with me as perhaps you may imagine; strong passions think nothing of these trifling sacrifices, and love will not be satisfied with gallantry.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0242",
+      "w": "Julie, or the New Heloise",
+      "s": "Every sense is at once intoxicated with imaginary bliss.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0243",
+      "w": "Julie, or the New Heloise",
+      "s": "We will examine into the validity of this argument.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0244",
+      "w": "Julie, or the New Heloise",
+      "s": "Believe me, he, who has a proper esteem for himself, is little sensible to the unjust reproach cast on him by others, and is only afraid of deserving it.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0245",
+      "w": "Julie, or the New Heloise",
+      "s": "I am convinced, that in a combat in which you have so little to fear, his intrepid heart will impatiently rush upon the point of your sword.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0246",
+      "w": "Julie, or the New Heloise",
+      "s": "Yours are such extraordinary minds that they are not to be guided by common rules: your happiness is not to be attained in the same manner, nor is it of the same species with that of others.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0247",
+      "w": "Julie, or the New Heloise",
+      "s": "You have borne arms in the service and pay of a foreign prince; his father fought without pay in the service of his country.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0248",
+      "w": "Julie, or the New Heloise",
+      "s": "He has done it, Madam, and will do worse, if I do not take proper care to prevent him; but, for the future, I shall take upon myself the charge you have executed so ill.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0249",
+      "w": "Julie, or the New Heloise",
+      "s": "Can you have the courage to go through it?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0250",
+      "w": "Julie, or the New Heloise",
+      "s": "No, returned I, not so, you should still live for her who loves you.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0251",
+      "w": "Julie, or the New Heloise",
+      "s": "How often have I taken up, and flung down, my pen!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0252",
+      "w": "Julie, or the New Heloise",
+      "s": "Being arrived at Besançon, I take the first opportunity to write you the particulars of our journey; which, if not passed very agreeably, has at least been attended with no ill accident.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0253",
+      "w": "Julie, or the New Heloise",
+      "s": "I beg you will not trust it to a messenger, but give it her with your own hands.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0254",
+      "w": "Julie, or the New Heloise",
+      "s": "May you enjoy in that peaceful retirement, and with the same sentiments that united you, the happiness of souls truly refined!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0255",
+      "w": "Julie, or the New Heloise",
+      "s": "Do you know, Eloisa, what this something is?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0256",
+      "w": "Julie, or the New Heloise",
+      "s": "For once, at least, I will do my duty; and shall not be totally unworthy of your friendship.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0257",
+      "w": "Julie, or the New Heloise",
+      "s": "Barbarous man!----How comes it that remorse did not hold your hand?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0258",
+      "w": "Julie, or the New Heloise",
+      "s": "Last night we returned home pretty late, and I knew he had received a packet from Switzerland, of which however he took no notice when we retired.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0259",
+      "w": "Julie, or the New Heloise",
+      "s": "O that I knew as well when we shall meet again, as I know the distance that divides us!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0260",
+      "w": "Julie, or the New Heloise",
+      "s": "Hence it is, that there is but a small number of both sexes, who think for all the rest, and for whom all the rest talk and act.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0261",
+      "w": "Julie, or the New Heloise",
+      "s": "She says, it is to teach you to respect Marini, whom she patronizes and you have the presumption to ridicule.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0262",
+      "w": "Julie, or the New Heloise",
+      "s": "Discouragement would otherwise overtake me at every step, and I must entirely relinquish my observations on mankind, if you refuse to hear me.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0263",
+      "w": "Julie, or the New Heloise",
+      "s": "Of this kind, Eloisa, is all the tenderness and affection I have observed in the intimacies of this country: those of a more private nature, with only a second person, I have not, nor ever shall have experienced.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0264",
+      "w": "Julie, or the New Heloise",
+      "s": "I hate them for their presumption, in pretending to a heart which is yours, without the least merit to dispute it with you; yet if they had ever so much, I should hate them the more; but where could they acquire it?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0265",
+      "w": "Julie, or the New Heloise",
+      "s": "They are slender rather than well- made, and therefore they gladly embrace the fashions which disguise them most; but, I find that in other countries, the women are foolish enough to imitate there fashions, tho’ contrived merely to hide defects which they have not.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0266",
+      "w": "Julie, or the New Heloise",
+      "s": "Adultery is considered as no crime, and conveys no indecency in the idea: their romances, which are universally read for instruction, are full of it, and there appears nothing shocking in its consequences, provided the lovers do not render themselves contemptible by their fidelity.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0267",
+      "w": "Julie, or the New Heloise",
+      "s": "But, though they generally love no body but themselves, long habit will frequently produce in them the effects of a sincere friendship.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0268",
+      "w": "Julie, or the New Heloise",
+      "s": "This assemblage, so magnificent and well conducted, is regarded by the spectators as if all the things and characters exhibited were real.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0269",
+      "w": "Julie, or the New Heloise",
+      "s": "However this be, the opera here may, for aught I know, be a good political institution, in that it pleases persons of taste no better.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0270",
+      "w": "Julie, or the New Heloise",
+      "s": "You had then no other head-dress than your long tresses, turned up and fastened at top with a golden bodkin, in the manner of the villagers of Berne.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0271",
+      "w": "Julie, or the New Heloise",
+      "s": "But it was too late, the mischief was already done, and the intoxicating effects of what I had already drank soon deprived me of the little sense that remained.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0272",
+      "w": "Julie, or the New Heloise",
+      "s": "Relying on the sublimity of your sentiments, I have promised, in your name, every thing you ought to perform: dare to undeceive me, if I have presumed too much on your merit, or be now what you ought to be.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0273",
+      "w": "Julie, or the New Heloise",
+      "s": "She saw me without a guide, and void of hope, overwhelmed by my misfortunes and my crime: to her, death was nothing; she grieved only to leave her daughter in such a state of misery.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0274",
+      "w": "Julie, or the New Heloise",
+      "s": "How can I cease to love you, when my esteem for you is daily increasing?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0275",
+      "w": "Julie, or the New Heloise",
+      "s": "If you are determined to persist, your triumph will be certain, but you will never possess the same Eloisa.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0276",
+      "w": "Julie, or the New Heloise",
+      "s": "He took my hand, not disgusted with its appearance, and fearless of the sad infection, eagerly kissed and bathed it with his tears.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0277",
+      "w": "Julie, or the New Heloise",
+      "s": "Once in my life I traversed them----about the same hour ----with the same mysterious caution----I trembled as I do now----My heart fluttered with the same emotion----O!",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0278",
+      "w": "Julie, or the New Heloise",
+      "s": "Is it in our power to separate them, or ought we even to attempt it?",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0279",
+      "w": "Julie, or the New Heloise",
+      "s": "The love I felt, could not arise but from a mutual conformity and harmony of souls.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0280",
+      "w": "Julie, or the New Heloise",
+      "s": "But it is not so easy, as many imagine to forsake virtue.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0281",
+      "w": "Julie, or the New Heloise",
+      "s": "I endeavoured to stifle the detestable passion which had brought them upon me, and to renounce you for ever.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0282",
+      "w": "Julie, or the New Heloise",
+      "s": "Two tender lovers spent a whole year together in painful silence; they scarce ventured to breathe a sigh, but their hearts understood each other; they thought their sufferings great, but, had they known it, they were happy.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0283",
+      "w": "Julie, or the New Heloise",
+      "s": "I eagerly, said I, embrace the professed good, of which Thou alone art the author.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0284",
+      "w": "Julie, or the New Heloise",
+      "s": "An infidel, who is otherwise well inclined, praises those virtues he admires; he acts from taste, not from choice.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0285",
+      "w": "Julie, or the New Heloise",
+      "s": "Thy merit claims homage from the whole world.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    },
+    {
+      "id": "rousseau.p0286",
+      "w": "Julie, or the New Heloise",
+      "s": "In spite of his natural indifference, his heart, seconding my father’s inclinations, entertained a liking for me, and for the first time formed a tender attachment.",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "rousseau.f.v0001",
+      "kind": "verbatim",
+      "text": "Hobbes very plainly saw the flaws in all the modern definitions of natural right: but the consequences, which he draws from his own definition, show that it is, in the sense he understands it, equally exceptionable.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "rousseau.f.v0002",
+      "kind": "verbatim",
+      "text": "From these first preferences there proceeded on one side vanity and contempt, on the other envy and shame; and the fermentation raised by these new leavens at length produced combinations fatal to happiness and innocence.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "rousseau.f.v0003",
+      "kind": "verbatim",
+      "text": "The monarchy of Cyrus was conquered by thirty thousand men, led by a prince poorer than the meanest of Persian Satraps: in like manner the Scythians, the poorest of all nations, were able to resist the most powerful monarchs of the universe.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "rousseau.f.v0004",
+      "kind": "verbatim",
+      "text": "It is in a word, in this natural sentiment, rather than in fine-spun arguments, that we must look for the cause of that reluctance which every man would experience to do evil, even independently of the maxims of education.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "rousseau.f.v0005",
+      "kind": "verbatim",
+      "text": "I was recommended to their care; they were likewise made my purse-bearers, which had been augmented by Madam de Warens, who, not contented with these kindnesses, added secretly a pecuniary reinforcement, attended with the most ample instructions, and we departed on the Wednesday before Easter.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "rousseau.f.v0006",
+      "kind": "verbatim",
+      "text": "This second Egistus was sure to grumble whenever he saw me go into his mistress’ apartment, treating me with a degree of disdain which she took care to repay him with interest; seeming pleased to caress me in his presence, on purpose to torment him.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "rousseau.f.v0007",
+      "kind": "verbatim",
+      "text": "I had written her an account of my reception at the Count de Gauvon’s; she knew my expectancies, and, in congratulating me on my good fortune, had added some wise lessons on the return I ought to make for the kindness with which they treated me.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "rousseau.f.v0008",
+      "kind": "verbatim",
+      "text": "I turn round, hear myself called by name, and approaching, find two young people of my acquaintance, Mademoiselle de G---- and Mademoiselle Galley, who, not being very excellent horsewomen, could not make their horses cross the rivulet.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "rousseau.f.v0009",
+      "kind": "verbatim",
+      "text": "Though our situations in life were very little connected with each other, as I received some useful lessons from him, I thought gratitude demanded that I should dedicate a few sentences to his memory.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "rousseau.f.v0010",
+      "kind": "verbatim",
+      "text": "I showed this scribble to Madam de Merveilleux, who, instead of discouraging me, as she ought to have done, laughed heartily at my sarcasms, as well as her son, who, I believe, did not like M.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "rousseau.f.v0011",
+      "kind": "verbatim",
+      "text": "Though as young as herself, he was so grave and thoughtful, that he looked on us as two children who required indulgence, and we regarded him as a respectable man, whose esteem we had to preserve.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "rousseau.f.v0012",
+      "kind": "verbatim",
+      "text": "After a thousand proofs of the inefficacy of my remonstrances, what remained but to turn away my eyes from the ruin I could not prevent; and fly myself from the door I could not guard!",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "rousseau.f.v0013",
+      "kind": "verbatim",
+      "text": "Algebra followed, and Father Lama was still my guide: when I made some progress, I perused Father Reynaud’s Science of Calculation, and then his Analysis Demonstrated; but I never went far enough thoroughly to understand the application of algebra to geometry.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "rousseau.f.v0014",
+      "kind": "verbatim",
+      "text": "She spoke much and earnestly on the care of my health, conjured me to consult skilful physicians, and be attentive and exact in following their prescriptions whatever they might happen to be.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "rousseau.f.v0015",
+      "kind": "verbatim",
+      "text": "Between my repasts, when I did not either read or write or work at the furnishing of my apartment, I went to walk in the burying-ground of the Protestants, which served me as a courtyard.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "rousseau.f.v0016",
+      "kind": "verbatim",
+      "text": "As he read nothing of what I laid before him, except the despatches for the court, and signed those to other ambassadors without reading them, this left me more at liberty to give what turn I thought proper to the latter, and in these therefore I made the articles of information cross each other.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "rousseau.f.v0017",
+      "kind": "verbatim",
+      "text": "I had brought with me from Paris the prejudice of that city against Italian music; but I had also received from nature a sensibility and niceness of distinction which prejudice cannot withstand.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "rousseau.f.v0018",
+      "kind": "verbatim",
+      "text": "I know not whether or not her ardor would have been more satisfied with this visit, her pride at least would have been flattered by it, and I already rejoiced at the idea of my convincing her, in every respect, that I knew how to repair the wrongs I had done.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "rousseau.f.v0019",
+      "kind": "verbatim",
+      "text": "The first time I saw this girl at table, I was struck with her modesty; and still more so with her lively yet charming look, which, with respect to the impression it made upon me, was never equalled.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "rousseau.f.v0020",
+      "kind": "verbatim",
+      "text": "The state of my finances not permitting me to pay for hackney coaches, at two o’clock in the afternoon, I went on foot, when alone, and walked as fast as possible, that I might arrive the sooner.",
+      "work": "The Confessions",
+      "lang": "en",
+      "src": {
+        "work": "The Confessions"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "rousseau.f.v0021",
+      "kind": "verbatim",
+      "text": "If, they say, the General Will is not the Will of All, if it cannot be arrived at by a majority vote or by any system of voting whatsoever, then it is nothing; it is a mere abstraction, neither general, nor a I will.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "rousseau.f.v0022",
+      "kind": "verbatim",
+      "text": "If, when the people, being furnished with adequate information, held its deliberations, the citizens had no communication one with another, the grand total of the small differences would always give the general will, and the decision would always be good.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "rousseau.f.v0023",
+      "kind": "verbatim",
+      "text": "What are they doing that they would not do more often and with greater danger in the state of nature, in which they would inevitably have to fight battles at the peril of their lives in defence of that which is the means of their preservation?",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "rousseau.f.v0024",
+      "kind": "verbatim",
+      "text": "Humanly speaking, in default of natural sanctions, the laws of justice are ineffective among men: they merely make for the good of the wicked and the undoing of the just, when the just man observes them towards everybody and nobody observes them towards him.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "rousseau.f.v0025",
+      "kind": "verbatim",
+      "text": "Different laws lead only to trouble and confusion among peoples which, living under the same rulers and in constant communication one with another, intermingle and intermarry, and, coming under the sway of new customs, never know if they can call their very patrimony their own.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "rousseau.f.v0026",
+      "kind": "verbatim",
+      "text": "With this the great legislator concerns himself in secret, though he seems to confine himself to particular regulations; for these are only the arc of the arch, while manners and morals, slower to arise, form in the end its immovable keystone.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "rousseau.f.v0027",
+      "kind": "verbatim",
+      "text": "In climates in which the changes of season are prompt and violent, men have better and simpler clothes; where they clothe themselves only for adornment, what is striking is more thought of than what is useful; clothes themselves are then a luxury.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "rousseau.f.v0028",
+      "kind": "verbatim",
+      "text": "The last census showed that there were in Rome four hundred thousand citizens capable of bearing arms, and the last computation of the population of the Empire showed over four million citizens, excluding subjects, foreigners, women, children and slaves.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "rousseau.f.v0029",
+      "kind": "verbatim",
+      "text": "Your severer climates add to your needs;[1] for half the year your public squares are uninhabitable; the flatness of your languages unfits them for being heard in the open air; you sacrifice more for profit than for liberty, and fear slavery less than poverty.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "rousseau.f.v0030",
+      "kind": "verbatim",
+      "text": "The difficulty is to understand how there can be a governmental act before government exists, and how the people, which is only Sovereign or subject, can, under certain circumstances, become a prince or magistrate.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "rousseau.f.v0031",
+      "kind": "verbatim",
+      "text": "Some vices indeed are condemned and others grown dishonourable; but we have still many that are honoured with the names of virtues, and it is become necessary that we should either have, or at least pretend to have them.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "rousseau.f.v0032",
+      "kind": "verbatim",
+      "text": "Further, if by chance there be found among men of average ability, an individual with enough strength of mind to refuse to comply with the spirit of the age, and to debase himself by puerile productions, his lot will be hard.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "rousseau.f.v0033",
+      "kind": "verbatim",
+      "text": "Such an institution could only be made by common consent, and must have been effected in a manner not very easy for men whose gross organs had not been accustomed to any such exercise.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "rousseau.f.v0034",
+      "kind": "verbatim",
+      "text": "The consequences, however, which I mean to deduce will not be barely conjectural; as, on the principles just laid down, it would be impossible to form any other theory that would not furnish the same results, and from which I could not draw the same conclusions.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "rousseau.f.v0035",
+      "kind": "verbatim",
+      "text": "In the latter case, every one sought his own private advantage, either by open force, if he thought himself strong enough, or by address and cunning, if he felt himself the weaker.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "rousseau.f.v0036",
+      "kind": "verbatim",
+      "text": "Whoever sang or danced best, whoever was the handsomest, the strongest, the most dexterous, or the most eloquent, came to be of most consideration; and this was the first step towards inequality, and at the same time towards vice.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "rousseau.f.v0037",
+      "kind": "verbatim",
+      "text": "It is sufficient that I have proved that this is not by any means the original state of man, but that it is merely the spirit of society, and the inequality which society produces, that thus transform and alter all our natural inclinations.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 240
+      }
+    },
+    {
+      "id": "rousseau.f.v0038",
+      "kind": "verbatim",
+      "text": "How can it be that all should obey, yet nobody take upon him to command, and that all should serve, and yet have no masters, but be the more free, as, in apparent subjection, each loses no part of his liberty but what might be hurtful; to that of another?",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "rousseau.f.v0039",
+      "kind": "verbatim",
+      "text": "There is seldom any injustice to be repaired; in the meantime, the Emperor, being satisfied that public outcry does not arise without cause, always discovers, through the seditious clamours which he punishes, just grievances to redress.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "rousseau.f.v0040",
+      "kind": "verbatim",
+      "text": "Now, as this sentiment can be useful only to those with whom we have to live, it is proper that our humanity should confine itself to our fellow-citizens, and should receive a new force because we are in the habit of seeing them, and by reason of the common interest which unites them.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "rousseau.f.v0041",
+      "kind": "verbatim",
+      "text": "Since the world has been divided into nations too great to admit of being well governed, this method has been no longer practicable, and the reader will readily perceive other reasons why such a thing has never been attempted by any modern people.",
+      "work": "The Social Contract",
+      "lang": "en",
+      "src": {
+        "work": "The Social Contract"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "rousseau.f.v0042",
+      "kind": "verbatim",
+      "text": "Man therefore, in a state of nature where there are so few sources of sickness, can have no great occasion for physic, and still less for physicians; neither is the human species more to be pitied in this respect, than any other species of animals.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "rousseau.f.v0043",
+      "kind": "verbatim",
+      "text": "One chooses by instinct; the other by an act of liberty; for which reason the beast cannot deviate from the rules that have been prescribed to it, even in cases where such deviation might be useful, and man often deviates from the rules laid down for him to his prejudice.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "rousseau.f.v0044",
+      "kind": "verbatim",
+      "text": "It is by the activity of our passions, that our reason improves: we covet knowledge merely because we covet enjoyment, and it is impossible to conceive why a man exempt from fears and desires should take the trouble to reason.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "rousseau.f.v0045",
+      "kind": "verbatim",
+      "text": "It is constantly the same order, constantly the same revolutions; he has not sense enough to feel surprise at the sight of the greatest wonders; and it is not in his mind we must look for that philosophy, which man must have to know how to observe once, what he has every day seen.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "rousseau.f.v0046",
+      "kind": "verbatim",
+      "text": "The first that offers is how languages could become necessary; for as there was no correspondence between men, nor the least necessity for any, there is no conceiving the necessity of this invention, nor the possibility of it, if it was not indispensable.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "rousseau.f.v0047",
+      "kind": "verbatim",
+      "text": "The first language of man, the most universal and most energetic of all languages, in short, the only language he had occasion for, before there was a necessity of persuading assembled multitudes, was the cry of nature.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "rousseau.f.v0048",
+      "kind": "verbatim",
+      "text": "At first they gave every object a peculiar name, without any regard to its genus or species, things which these first institutors of language were in no condition to distinguish; and every individual presented itself solitary to their minds, as it stands in the table of nature.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "rousseau.f.v0049",
+      "kind": "verbatim",
+      "text": "When a monkey leaves without the least hesitation one nut for another, are we to think he has any general idea of that kind of fruit, and that he compares these two individual bodies with his archetype notion of them?",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "rousseau.f.v0050",
+      "kind": "verbatim",
+      "text": "Mandeville was very sensible that men, in spite of all their morality, would never have been better than monsters, if nature had not given them pity to assist reason: but he did not perceive that from this quality alone flow all the social virtues, which he would dispute mankind the possession of.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "rousseau.f.v0051",
+      "kind": "verbatim",
+      "text": "One man may with impunity murder another under his windows; he has nothing to do but clap his hands to his ears, argue a little with himself to hinder nature, that startles within him, from identifying him with the unhappy sufferer.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "rousseau.f.v0052",
+      "kind": "verbatim",
+      "text": "The physical part of it is that general desire which prompts the sexes to unite with each other; the moral part is that which determines that desire, and fixes it upon a particular object to the exclusion of all others, or at least gives it a greater degree of energy for this preferred object.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "rousseau.f.v0053",
+      "kind": "verbatim",
+      "text": "One man might, indeed, seize on the fruits which another had gathered, on the game which another had killed, on the cavern which another had occupied for shelter; but how is it possible he should ever exact obedience from him, and what chains of dependence can there be among men who possess nothing?",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 300
+      }
+    },
+    {
+      "id": "rousseau.f.v0054",
+      "kind": "verbatim",
+      "text": "Having proved that the inequality, which may subsist between man and man in a state of nature, is almost imperceivable, and that it has very little influence, I must now proceed to show its origin, and trace its progress, in the successive developments of the human mind.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "rousseau.f.v0055",
+      "kind": "verbatim",
+      "text": "The present heat once allayed, the sexes took no further notice of each other, and even the child ceased to have any tie in his mother, the moment he ceased to want her assistance.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "rousseau.f.v0056",
+      "kind": "verbatim",
+      "text": "He learned to surmount the obstacles of nature, to contend in case of necessity with other animals, to dispute his subsistence even with other men, or indemnify himself for the loss of whatever he found himself obliged to part with to the strongest.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "rousseau.f.v0057",
+      "kind": "verbatim",
+      "text": "Every one saw that to succeed he must faithfully stand to his post; but suppose a hare to have slipped by within reach of any one of them, it is not to be doubted but he pursued it without scruple, and when he had seized his prey never reproached himself with having made his companions miss theirs.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "rousseau.f.v0058",
+      "kind": "verbatim",
+      "text": "It is obvious that among men thus collected, and forced to live together, a common idiom must have started up much sooner, than among those who freely wandered through the forests of the main land.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "rousseau.f.v0059",
+      "kind": "verbatim",
+      "text": "The transitory commerce required by nature soon produced, among the youth of both sexes living in contiguous cabins, another kind of commerce, which besides being equally agreeable is rendered more durable by mutual intercourse.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "rousseau.f.v0060",
+      "kind": "verbatim",
+      "text": "Tender and agreeable sentiments steal into the soul, and are by the smallest opposition wound up into the most impetuous fury: Jealousy kindles with love; discord triumphs; and the gentlest of passions requires sacrifices of human blood to appease it.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "rousseau.f.v0061",
+      "kind": "verbatim",
+      "text": "Hence the first duties of civility and politeness, even among savages; and hence every voluntary injury became an affront, as besides the mischief, which resulted from it as an injury, the party offended was sure to find in it a contempt for his person more intolerable than the mischief itself.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "rousseau.f.v0062",
+      "kind": "verbatim",
+      "text": "In a word, sometimes nothing was to be seen but a contention of endeavours on the one hand, and an opposition of interests on the other, while a secret desire of thriving at the expense of others constantly prevailed.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "rousseau.f.v0063",
+      "kind": "verbatim",
+      "text": "Political bodies, thus remaining in a state of nature among themselves, soon experienced the inconveniences which had obliged individuals to quit it; and this state became much more fatal to these great bodies, than it had been before to the individuals which now composed them.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "rousseau.f.v0064",
+      "kind": "verbatim",
+      "text": "In fact, why did they give themselves superiors, if it was not to be defended by them against oppression, and protected in their lives, liberties, and properties, which are in a manner the constitutional elements of their being?",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "rousseau.f.v0065",
+      "kind": "verbatim",
+      "text": "Instead of saying that civil society is derived from paternal authority, we should rather say that it is to the former that the latter owes its principal force: No one individual was acknowledged as the father of several other individuals, till they settled about him.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "rousseau.f.v0066",
+      "kind": "verbatim",
+      "text": "To this power are added honours, that may render the laws and the ministers of them respectable; and the persons of the ministers are distinguished by certain prerogatives, which may make them amends for the great fatigues inseparable from a good administration.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "rousseau.f.v0067",
+      "kind": "verbatim",
+      "text": "In these various modes of government the offices at first were all elective; and when riches did not preponderate, the preference was given to merit, which gives a natural ascendant, and to age, which is the parent of deliberateness in council, and experience in execution.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 273
+      }
+    },
+    {
+      "id": "rousseau.f.v0068",
+      "kind": "verbatim",
+      "text": "The times immediately preceding this last alteration would be times of calamity and trouble: but at last everything would be swallowed up by the monster; and the people would no longer have chiefs or laws, but only tyrants.",
+      "work": "Discourse on Inequality",
+      "lang": "en",
+      "src": {
+        "work": "Discourse on Inequality"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "rousseau.f.v0069",
+      "kind": "verbatim",
+      "text": "I seemed all over sensible of the ravishing condescension, and my heart sunk down oppressed with insupportable delight; when all at once, I perceived your colour change, your eyes close; you leant upon your cousin, and fainted away.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "rousseau.f.v0070",
+      "kind": "verbatim",
+      "text": "O my dear, my lovely wife, my tender and chaste companion, thou soother of all my cares, and object of all my wishes, oh think it not a crime to have listened to your love; but rather think it will be one to disobey it for the future.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "rousseau.f.v0071",
+      "kind": "verbatim",
+      "text": "The one assuming the character of master of the house, will consequently do the honours, while the other with less parade will do the honours of a dairy-house, and this rural hut dedicated to love, will be to them the temple of Gnidus.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 235
+      }
+    },
+    {
+      "id": "rousseau.f.v0072",
+      "kind": "verbatim",
+      "text": "With regard to your resolution of renouncing your bottle for ever; it has not so much weight with me as perhaps you may imagine; strong passions think nothing of these trifling sacrifices, and love will not be satisfied with gallantry.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 235
+      }
+    },
+    {
+      "id": "rousseau.f.v0073",
+      "kind": "verbatim",
+      "text": "Yours are such extraordinary minds that they are not to be guided by common rules: your happiness is not to be attained in the same manner, nor is it of the same species with that of others.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "rousseau.f.v0074",
+      "kind": "verbatim",
+      "text": "Being arrived at Besançon, I take the first opportunity to write you the particulars of our journey; which, if not passed very agreeably, has at least been attended with no ill accident.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "rousseau.f.v0075",
+      "kind": "verbatim",
+      "text": "Of this kind, Eloisa, is all the tenderness and affection I have observed in the intimacies of this country: those of a more private nature, with only a second person, I have not, nor ever shall have experienced.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "rousseau.f.v0076",
+      "kind": "verbatim",
+      "text": "I hate them for their presumption, in pretending to a heart which is yours, without the least merit to dispute it with you; yet if they had ever so much, I should hate them the more; but where could they acquire it?",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "rousseau.f.v0077",
+      "kind": "verbatim",
+      "text": "They are slender rather than well- made, and therefore they gladly embrace the fashions which disguise them most; but, I find that in other countries, the women are foolish enough to imitate there fashions, tho’ contrived merely to hide defects which they have not.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 265
+      }
+    },
+    {
+      "id": "rousseau.f.v0078",
+      "kind": "verbatim",
+      "text": "Adultery is considered as no crime, and conveys no indecency in the idea: their romances, which are universally read for instruction, are full of it, and there appears nothing shocking in its consequences, provided the lovers do not render themselves contemptible by their fidelity.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "rousseau.f.v0079",
+      "kind": "verbatim",
+      "text": "She saw me without a guide, and void of hope, overwhelmed by my misfortunes and my crime: to her, death was nothing; she grieved only to leave her daughter in such a state of misery.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "rousseau.f.v0080",
+      "kind": "verbatim",
+      "text": "Two tender lovers spent a whole year together in painful silence; they scarce ventured to breathe a sigh, but their hearts understood each other; they thought their sufferings great, but, had they known it, they were happy.",
+      "work": "Julie, or the New Heloise",
+      "lang": "en",
+      "src": {
+        "work": "Julie, or the New Heloise"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "rousseau.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 8,
+      "worksSpan": 3,
+      "examples": [
+        "If, they say, the General Will is not the Will of All, if it cannot be arrived at by a majority vote or by any system of voting whatsoever, then it is nothing; it is a mere abstraction, neither general, nor a I will.",
+        "If, when the people, being furnished with adequate information, held its deliberations, the citizens had no communication one with another, the grand total of the small differences would always give the general will, and the decision would always be good."
+      ]
+    },
+    {
+      "id": "rousseau.f.p02",
+      "kind": "pattern",
+      "label": "maxime",
+      "shape": "(Il faut|Il ne faut|Il est |C'est |One must|We must|Never |No one |Nothing )",
+      "attested": 4,
+      "worksSpan": 3,
+      "examples": [
+        "Nothing more was necessary; behold me fascinated with chess!",
+        "Never exceed your rights, and they will soon become unlimited."
+      ]
+    }
+  ],
+  "concepts": [
+    "volonté générale",
+    "liberté",
+    "égalité",
+    "pitié",
+    "inégalité",
+    "contrat social"
+  ],
+  "entities": [],
+  "doctrine": {
+    "concepts": [
+      "volonté générale",
+      "liberté",
+      "égalité",
+      "pitié",
+      "inégalité",
+      "contrat social"
+    ],
+    "theses": {
+      "justice": {
+        "*": {
+          "fr": "la justice ne se règle pas sur la force : le droit naturel ne se déduit pas d’un fait",
+          "en": "justice is not ruled by force: natural right is not deduced from a fact",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "Hobbes very plainly saw the flaws in all the mod"
+            }
+          ]
+        }
+      },
+      "bonheur": {
+        "*": {
+          "fr": "le bonheur s’est perdu avec les comparaisons : vanité et envie sont les ferments de l’inégalité",
+          "en": "happiness was lost with comparisons: vanity and envy are the leaven of inequality",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "From these first preferences there proceeded on "
+            }
+          ]
+        }
+      },
+      "liberte": {
+        "*": {
+          "fr": "la liberté s’applique aux institutions par la volonté générale",
+          "en": "freedom applies itself to institutions through the general will",
+          "anchors": [
+            {
+              "work": "The Social Contract",
+              "startsWith": "The General Will, then, is the application of hu"
+            }
+          ]
+        }
+      },
+      "verite": {
+        "*": {
+          "fr": "la parole est l’organe de la vérité ; prostituée, elle ne distingue plus l’homme de la bête",
+          "en": "speech is the organ of truth; prostituted, it no longer distinguishes man from beast",
+          "anchors": [
+            {
+              "work": "Julie, or the New Heloise",
+              "startsWith": "Shall the organ of truth, the most worthy organ "
+            }
+          ]
+        }
+      },
+      "pouvoir": {
+        "*": {
+          "fr": "la puissance n’est pas la légitimité : les peuples les plus pauvres ont résisté aux plus puissants des monarques",
+          "en": "might is not legitimacy: the poorest peoples resisted the most powerful monarchs",
+          "anchors": [
+            {
+              "work": "The Social Contract",
+              "startsWith": "The monarchy of Cyrus was conquered by thirty th"
+            }
+          ]
+        }
+      },
+      "vertu": {
+        "*": {
+          "fr": "la vertu précède les maximes : c’est le sentiment naturel qui retient la main",
+          "en": "virtue precedes maxims: a natural sentiment stays the hand",
+          "anchors": [
+            {
+              "work": "Discourse on Inequality",
+              "startsWith": "It is in a word, in this natural sentiment, rath"
+            }
+          ]
+        }
+      }
+    },
+    "works": {
+      "The Social Contract": {
+        "summary": {
+          "fr": "La liberté appliquée aux institutions : volonté générale et loi.",
+          "en": "Freedom applied to institutions: general will and law."
+        },
+        "domains": [
+          "liberte",
+          "pouvoir"
+        ]
+      },
+      "Discourse on Inequality": {
+        "summary": {
+          "fr": "Comment l’inégalité naît des comparaisons et de la propriété.",
+          "en": "How inequality is born of comparisons and property."
+        },
+        "domains": [
+          "bonheur",
+          "justice",
+          "vertu"
+        ]
+      },
+      "Julie, or the New Heloise": {
+        "summary": {
+          "fr": "La passion éprouvée par le devoir et par la parole.",
+          "en": "Passion tried by duty and by speech."
+        },
+        "domains": [
+          "verite"
+        ]
+      }
+    }
+  },
+  "stats": {
+    "sentences": 286,
+    "formulas": 82,
+    "verbatim": 80,
+    "patterns": 2
+  },
+  "checksum": "sha256:5c1b90849886b49b93b677cc1841b54f23bddde16b809e58cbcf8d3f0f3aa52f"
+}

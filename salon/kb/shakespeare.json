@@ -1,0 +1,2991 @@
+{
+  "authorId": "shakespeare",
+  "kbVersion": "shakespeare@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.325Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Hamlet",
+      "sentences": 46
+    },
+    {
+      "title": "The Tragedy of Macbeth",
+      "sentences": 45
+    },
+    {
+      "title": "A Midsummer Night's Dream",
+      "sentences": 47
+    },
+    {
+      "title": "Othello",
+      "sentences": 42
+    },
+    {
+      "title": "Shakespeare's Sonnets",
+      "sentences": 57
+    }
+  ],
+  "passages": [
+    {
+      "id": "shakespeare.p0001",
+      "w": "Hamlet",
+      "s": "How weary, stale, flat, and vnprofitable Seemes to me all the vses of this world?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0002",
+      "w": "Hamlet",
+      "s": "I am very glad to see you: good euen Sir.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0003",
+      "w": "Hamlet",
+      "s": "Season your admiration for a while With an attent eare; till I may deliuer Vpon the witnesse of these Gentlemen, This maruell to you Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0004",
+      "w": "Hamlet",
+      "s": "My necessaries are imbark't; Farewell: And Sister, as the Winds giue Benefit, And Conuoy is assistant; doe not sleepe, But let me heare from you Ophel.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0005",
+      "w": "Hamlet",
+      "s": "And they in France of the best ranck and station, Are of a most select and generous cheff in that.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0006",
+      "w": "Hamlet",
+      "s": "Doe you beleeue his tenders, as you call them?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0007",
+      "w": "Hamlet",
+      "s": "Being a thing immortall as it selfe: It waues me forth againe; Ile follow it Hor.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0008",
+      "w": "Hamlet",
+      "s": "Come one you here this fellow in the selleredge Consent to sweare Hor.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0009",
+      "w": "Hamlet",
+      "s": "I was about say somthing: where did I leaue?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0010",
+      "w": "Hamlet",
+      "s": "Thankes Rosincrance, and gentle Guildensterne Qu.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0011",
+      "w": "Hamlet",
+      "s": "Most faire returne of Greetings, and Desires.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0012",
+      "w": "Hamlet",
+      "s": "Doubt thou, the Starres are fire, Doubt, that the Sunne doth moue: Doubt Truth to be a Lier, But neuer Doubt, I loue.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0013",
+      "w": "Hamlet",
+      "s": "A goodly one, in which there are many Confines, Wards, and Dungeons; Denmarke being one o'th' worst Rosin.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0014",
+      "w": "Hamlet",
+      "s": "Will they pursue the Quality no longer then they can sing?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0015",
+      "w": "Hamlet",
+      "s": "Hearke you Guildensterne, and you too: at each eare a hearer: that great Baby you see there, is not yet out of his swathing clouts Rosin.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0016",
+      "w": "Hamlet",
+      "s": "Run bare-foot vp and downe, Threatning the flame With Bisson Rheume: A clout about that head, Where late the Diadem stood, and for a Robe About her lanke and all ore-teamed Loines, A blanket in th' Alarum of feare caught vp.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0017",
+      "w": "Hamlet",
+      "s": "Follow that Lord, and looke you mock him not.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0018",
+      "w": "Hamlet",
+      "s": "The Spirit that I haue seene May be the Diuell, and the Diuel hath power T' assume a pleasing shape, yea and perhaps Out of my Weaknesse, and my Melancholly, As he is very potent with such Spirits, Abuses me to damne me.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0019",
+      "w": "Hamlet",
+      "s": "Good my Lord, How does your Honor for this many a day?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0020",
+      "w": "Hamlet",
+      "s": "Why would'st thou be a breeder of Sinners?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0021",
+      "w": "Hamlet",
+      "s": "Go too, Ile no more on't, it hath made me mad.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0022",
+      "w": "Hamlet",
+      "s": "I prythee, when thou see'st that Acte a-foot, Euen with the verie Comment of my Soule Obserue mine Vnkle: If his occulted guilt, Do not it selfe vnkennell in one speech, It is a damned Ghost that we haue seene: And my Imaginations are as foule As Vulcans Stythe.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0023",
+      "w": "Hamlet",
+      "s": "So many iournies may the Sunne and Moone Make vs againe count o're, ere loue be done.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0024",
+      "w": "Hamlet",
+      "s": "Nor Earth to giue me food, nor Heauen light, Sport and repose locke from me day and night: Each opposite that blankes the face of ioy, Meet what I would haue well, and it destroy: Both heere, and hence, pursue me lasting strife, If once a Widdow, euer I be Wife Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0025",
+      "w": "Hamlet",
+      "s": "You are keene my Lord, you are keene Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0026",
+      "w": "Hamlet",
+      "s": "Nay, good my Lord, this courtesie is not of the right breed.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0027",
+      "w": "Hamlet",
+      "s": "How can that be, when you haue the voyce of the King himselfe, for your Succession in Denmarke?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0028",
+      "w": "Hamlet",
+      "s": "Mother, you haue my Father much offended Qu.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0029",
+      "w": "Hamlet",
+      "s": "Makes marriage vowes As false as Dicers Oathes.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0030",
+      "w": "Hamlet",
+      "s": "Oh gentle Sonne, Vpon the heate and flame of thy distemper Sprinkle coole patience.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0031",
+      "w": "Hamlet",
+      "s": "O throw away the worser part of it, And liue the purer with the other halfe.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0032",
+      "w": "Hamlet",
+      "s": "Ah my good Lord, what haue I seene to night?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0033",
+      "w": "Hamlet",
+      "s": "Where the dead body is bestow'd my Lord, We cannot get from him King.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0034",
+      "w": "Hamlet",
+      "s": "Therefore prepare thy selfe, The Barke is readie, and the winde at helpe, Th' Associates tend, and euery thing at bent For England Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0035",
+      "w": "Hamlet",
+      "s": "She is importunate, indeed distract, her moode will needs be pittied Qu.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0036",
+      "w": "Hamlet",
+      "s": "Nature is fine in Loue, and where 'tis fine, It sends some precious instance of it selfe After the thing it loues Ophe.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0037",
+      "w": "Hamlet",
+      "s": "In the Grapple, I boorded them: On the instant they got cleare of our Shippe, so I alone became their Prisoner.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0038",
+      "w": "Hamlet",
+      "s": "So that my Arrowes Too slightly timbred for so loud a Winde, Would haue reuerted to my Bow againe, And not where I had arm'd them Laer.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0039",
+      "w": "Hamlet",
+      "s": "I know him well, he is the Brooch indeed, And Iemme of all our Nation Kin.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0040",
+      "w": "Hamlet",
+      "s": "I like thy wit well in good faith, the Gallowes does well; but how does it well?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0041",
+      "w": "Hamlet",
+      "s": "There's another: why might not that bee the Scull of a Lawyer?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0042",
+      "w": "Hamlet",
+      "s": "Enter King, Queene, Laertes, and a Coffin, with Lords attendant.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0043",
+      "w": "Hamlet",
+      "s": "I hop'd thou should'st haue bin my Hamlets wife: I thought thy Bride-bed to haue deckt (sweet Maid) And not t'haue strew'd thy Graue Laer.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0044",
+      "w": "Hamlet",
+      "s": "It is indifferent cold my Lord indeed Ham.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0045",
+      "w": "Hamlet",
+      "s": "Yours, yours; hee does well to commend it himselfe, there are no tongues else for's tongue Hor.",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0046",
+      "w": "Hamlet",
+      "s": "If Hamlet from himselfe be tane away: And when he's not himselfe, do's wrong Laertes, Then Hamlet does it not, Hamlet denies it: Who does it then?",
+      "src": {
+        "work": "Hamlet"
+      }
+    },
+    {
+      "id": "shakespeare.p0047",
+      "w": "The Tragedy of Macbeth",
+      "s": "The Earth hath bubbles, as the Water ha's, And these are of them: whither are they vanish'd?",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0048",
+      "w": "The Tragedy of Macbeth",
+      "s": "And for an earnest of a greater Honor, He bad me, from him, call thee Thane of Cawdor: In which addition, haile most worthy Thane, For it is thine Banq.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0049",
+      "w": "The Tragedy of Macbeth",
+      "s": "He was a Gentleman, on whom I built An absolute Trust.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0050",
+      "w": "The Tragedy of Macbeth",
+      "s": "My plenteous Ioyes, Wanton in fulnesse, seeke to hide themselues In drops of sorrow.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0051",
+      "w": "The Tragedy of Macbeth",
+      "s": "They met me in the day of successe: and I haue learn'd by the perfect'st report, they haue more in them, then mortall knowledge.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0052",
+      "w": "The Tragedy of Macbeth",
+      "s": "This Guest of Summer, The Temple-haunting Barlet does approue, By his loued Mansonry, that the Heauens breath Smells wooingly here: no Iutty frieze, Buttrice, nor Coigne of Vantage, but this Bird Hath made his pendant Bed, and procreant Cradle, Where they must breed, and haunt: I haue obseru'd The ayre is delicate.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0053",
+      "w": "The Tragedy of Macbeth",
+      "s": "If it were done, when 'tis done, then 'twer well, It were done quickly: If th' Assassination Could trammell vp the Consequence, and catch With his surcease, Successe: that but this blow Might be the be all, and the end all.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0054",
+      "w": "The Tragedy of Macbeth",
+      "s": "Bring forth Men-Children onely: For thy vndaunted Mettle should compose Nothing but Males.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0055",
+      "w": "The Tragedy of Macbeth",
+      "s": "Hold, take my Sword: There's Husbandry in Heauen, Their Candles are all out: take thee that too.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0056",
+      "w": "The Tragedy of Macbeth",
+      "s": "I thinke not of them: Yet when we can entreat an houre to serue, We would spend it in some words vpon that Businesse, If you would graunt the time Banq.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0057",
+      "w": "The Tragedy of Macbeth",
+      "s": "Hearke, peace: it was the Owle that shriek'd, The fatall Bell-man, which giues the stern'st good-night.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0058",
+      "w": "The Tragedy of Macbeth",
+      "s": "A foolish thought, to say a sorry sight Macb.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0059",
+      "w": "The Tragedy of Macbeth",
+      "s": "I beleeue, Drinke gaue thee the Lye last Night Port.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0060",
+      "w": "The Tragedy of Macbeth",
+      "s": "What should be spoken here, Where our Fate hid in an augure hole, May rush, and seize vs?",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0061",
+      "w": "The Tragedy of Macbeth",
+      "s": "Enter Macbeth as King, Lady Lenox, Rosse, Lords, and Attendants.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0062",
+      "w": "The Tragedy of Macbeth",
+      "s": "There is none but he, Whose being I doe feare: and vnder him, My Genius is rebuk'd, as it is said Mark Anthonies was by Caesar.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0063",
+      "w": "The Tragedy of Macbeth",
+      "s": "Of sorryest Fancies your Companions making, Vsing those Thoughts, which should indeed haue dy'd With them they thinke on: things without all remedie Should be without regard: what's done, is done Macb.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0064",
+      "w": "The Tragedy of Macbeth",
+      "s": "There's comfort yet, they are assaileable, Then be thou iocund: ere the Bat hath flowne His Cloyster'd flight, ere to black Heccats summons The shard-borne Beetle, with his drowsie hums, Hath rung Nights yawning Peale, There shall be done a deed of dreadfull note Lady.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0065",
+      "w": "The Tragedy of Macbeth",
+      "s": "Enter Macbeth, Lady, Rosse, Lenox, Lords, and Attendants.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0066",
+      "w": "The Tragedy of Macbeth",
+      "s": "Then comes my Fit againe: I had else beene perfect; Whole as the Marble, founded as the Rocke, As broad, and generall, as the casing Ayre: But now I am cabin'd, crib'd, confin'd, bound in To sawcy doubts, and feares.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0067",
+      "w": "The Tragedy of Macbeth",
+      "s": "Pleas't your Highnesse To grace vs with your Royall Company?",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0068",
+      "w": "The Tragedy of Macbeth",
+      "s": "My worthy Lord Your Noble Friends do lacke you Macb.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0069",
+      "w": "The Tragedy of Macbeth",
+      "s": "Why so, being gone I am a man againe: pray you sit still La.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0070",
+      "w": "The Tragedy of Macbeth",
+      "s": "Almost at oddes with morning, which is which Macb.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0071",
+      "w": "The Tragedy of Macbeth",
+      "s": "I, and wisely too: For 'twould haue anger'd any heart aliue To heare the men deny't.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0072",
+      "w": "The Tragedy of Macbeth",
+      "s": "Had I three eares, Il'd heare thee Appar.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0073",
+      "w": "The Tragedy of Macbeth",
+      "s": "Yet my Hart Throbs to know one thing: Tell me, if your Art Can tell so much: Shall Banquo's issue euer Reigne in this Kingdome?",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0074",
+      "w": "The Tragedy of Macbeth",
+      "s": "Enter Macduffes Wife, her Son, and Rosse.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0075",
+      "w": "The Tragedy of Macbeth",
+      "s": "I dare not speake much further, But cruell are the times, when we are Traitors And do not know our selues: when we hold Rumor From what we feare, yet know not what we feare, But floate vpon a wilde and violent Sea Each way, and moue.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0076",
+      "w": "The Tragedy of Macbeth",
+      "s": "Poore Bird, Thou'dst neuer Feare the Net, nor Lime, The Pitfall, nor the Gin Son.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0077",
+      "w": "The Tragedy of Macbeth",
+      "s": "Me thinkes I am too sauage: To do worse to you, were fell Cruelty, Which is too nie your person.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0078",
+      "w": "The Tragedy of Macbeth",
+      "s": "What I beleeue, Ile waile; What know, beleeue; and what I can redresse, As I shall finde the time to friend: I wil.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0079",
+      "w": "The Tragedy of Macbeth",
+      "s": "Perchance euen there Where I did finde my doubts.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0080",
+      "w": "The Tragedy of Macbeth",
+      "s": "Nay, had I powre, I should Poure the sweet Milke of Concord, into Hell, Vprore the vniuersall peace, confound All vnity on earth Macd.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0081",
+      "w": "The Tragedy of Macbeth",
+      "s": "Diuellish Macbeth, By many of these traines, hath sought to win me Into his power: and modest Wisedome pluckes me From ouer-credulous hast: but God aboue Deale betweene thee and me; For euen now I put my selfe to thy Direction, and Vnspeake mine owne detraction.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0082",
+      "w": "The Tragedy of Macbeth",
+      "s": "But I haue words That would be howl'd out in the desert ayre, Where hearing should not latch them Macd.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0083",
+      "w": "The Tragedy of Macbeth",
+      "s": "Let's make vs Med'cines of our great Reuenge, To cure this deadly greefe Macd.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0084",
+      "w": "The Tragedy of Macbeth",
+      "s": "Enter a Doctor of Physicke, and a Wayting Gentlewoman.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0085",
+      "w": "The Tragedy of Macbeth",
+      "s": "Heark, she speaks, I will set downe what comes from her, to satisfie my remembrance the more strongly La.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0086",
+      "w": "The Tragedy of Macbeth",
+      "s": "Heere's the smell of the blood still: all the perfumes of Arabia will not sweeten this little hand.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0087",
+      "w": "The Tragedy of Macbeth",
+      "s": "Enter Menteth, Cathnes, Angus, Lenox, Soldiers.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0088",
+      "w": "The Tragedy of Macbeth",
+      "s": "Ile put it on: Send out moe Horses, skirre the Country round, Hang those that talke of Feare.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0089",
+      "w": "The Tragedy of Macbeth",
+      "s": "Bring it after me: I will not be affraid of Death and Bane, Till Birnane Forrest come to Dunsinane Doct.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0090",
+      "w": "The Tragedy of Macbeth",
+      "s": "It is a Tale Told by an Ideot, full of sound and fury Signifying nothing.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0091",
+      "w": "The Tragedy of Macbeth",
+      "s": "I 'ginne to be a-weary of the Sun, And wish th' estate o'th' world were now vndon.",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      }
+    },
+    {
+      "id": "shakespeare.p0092",
+      "w": "A Midsummer Night's Dream",
+      "s": "Or else it stood vpon the choise of merit Her.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0093",
+      "w": "A Midsummer Night's Dream",
+      "s": "O that your frownes would teach my smiles such skil Her.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0094",
+      "w": "A Midsummer Night's Dream",
+      "s": "Helen, to you our mindes we will vnfold, To morrow night, when Phoebe doth behold Her siluer visage, in the watry glasse, Decking with liquid pearle, the bladed grasse (A time that Louers flights doth still conceale) Through Athens gates, haue we deuis'd to steale Her.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0095",
+      "w": "A Midsummer Night's Dream",
+      "s": "You Nicke Bottome are set downe for Pyramus Bot.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0096",
+      "w": "A Midsummer Night's Dream",
+      "s": "Enter a Fairie at one dore, and Robin goodfellow at another.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0097",
+      "w": "A Midsummer Night's Dream",
+      "s": "And then the whole quire hold their hips, and loffe, And waxen in their mirth, and neeze, and sweare, A merrier houre was neuer wasted there.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0098",
+      "w": "A Midsummer Night's Dream",
+      "s": "Yet markt I where the bolt of Cupid fell.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0099",
+      "w": "A Midsummer Night's Dream",
+      "s": "And I am sicke when I looke not on you Dem.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0100",
+      "w": "A Midsummer Night's Dream",
+      "s": "Enter Queene of Fairies, with her traine.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0101",
+      "w": "A Midsummer Night's Dream",
+      "s": "What thou seest when thou dost wake, Do it for thy true Loue take: Loue and languish for his sake.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0102",
+      "w": "A Midsummer Night's Dream",
+      "s": "Lysander riddles very prettily; Now much beshrew my manners and my pride, If Hermia meant to say, Lysander lied.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0103",
+      "w": "A Midsummer Night's Dream",
+      "s": "Lysander on the ground; Deade or asleepe?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0104",
+      "w": "A Midsummer Night's Dream",
+      "s": "Wherefore was I to this keene mockery borne?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0105",
+      "w": "A Midsummer Night's Dream",
+      "s": "Lysander, Lord, What, out of hearing, gone?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0106",
+      "w": "A Midsummer Night's Dream",
+      "s": "No, I am no such thing, I am a man as other men are; and there indeed let him name his name, and tell him plainly hee is Snug the ioyner Quin.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0107",
+      "w": "A Midsummer Night's Dream",
+      "s": "Some man or other must present wall, and let him haue some Plaster, or some Lome, or some rough cast about him, to signifie wall; or let him hold his fingers thus; and through that cranny shall Piramus and Thisby whisper Quin.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0108",
+      "w": "A Midsummer Night's Dream",
+      "s": "A stranger Piramus, then ere plaid here This.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0109",
+      "w": "A Midsummer Night's Dream",
+      "s": "For indeede, who would set his wit to so foolish a bird?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0110",
+      "w": "A Midsummer Night's Dream",
+      "s": "Out of this wood, do not desire to goe, Thou shalt remaine here, whether thou wilt or no.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0111",
+      "w": "A Midsummer Night's Dream",
+      "s": "For thou (I feare) hast giuen me cause to curse, If thou hast slaine Lysander in his sleepe, Being oreshooes in bloud, plunge in the deepe, and kill me too: The Sunne was not so true vnto the day, As he to me.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0112",
+      "w": "A Midsummer Night's Dream",
+      "s": "There is no following her in this fierce vaine, Here therefore for a while I will remaine.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0113",
+      "w": "A Midsummer Night's Dream",
+      "s": "You doe aduance your cunning more & more, When truth kils truth, O diuelish holy fray!",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0114",
+      "w": "A Midsummer Night's Dream",
+      "s": "O let me kisse This Princesse of pure white, this seale of blisse Hell.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0115",
+      "w": "A Midsummer Night's Dream",
+      "s": "Disparage not the faith thou dost not know, Lest to thy perill thou abide it deare.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0116",
+      "w": "A Midsummer Night's Dream",
+      "s": "Haue you not set Lysander, as in scorne To follow me, and praise my eies and face?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0117",
+      "w": "A Midsummer Night's Dream",
+      "s": "And are you growne so high in his esteeme, Because I am so dwarfish, and so low?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0118",
+      "w": "A Midsummer Night's Dream",
+      "s": "No sir, she shall not, though you take her part Hel.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0119",
+      "w": "A Midsummer Night's Dream",
+      "s": "Thou coward, art thou bragging to the stars, Telling the bushes that thou look'st for wars, And wilt not come?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0120",
+      "w": "A Midsummer Night's Dream",
+      "s": "What, wilt thou heare some musicke, my sweet loue Clow.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0121",
+      "w": "A Midsummer Night's Dream",
+      "s": "Sleepe thou, and I will winde thee in my arms, Fairies be gone, and be alwaies away.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0122",
+      "w": "A Midsummer Night's Dream",
+      "s": "And gentle Pucke, take this transformed scalpe, From off the head of this Athenian swaine; That he awaking when the other doe, May all to Athens backe againe repaire, And thinke no more of this nights accidents, But as the fierce vexation of dreame.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0123",
+      "w": "A Midsummer Night's Dream",
+      "s": "Enter Theseus, Egeus, Hippolita and all his traine.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0124",
+      "w": "A Midsummer Night's Dream",
+      "s": "A cry more tuneable Was neuer hallowed to, nor cheer'd with horne, In Creete, in Sparta, nor in Thessaly; Iudge when you heare.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0125",
+      "w": "A Midsummer Night's Dream",
+      "s": "How comes this gentle concord in the world, That hatred is so farre from iealousie, To sleepe by hate, and feare no enmity Lys.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0126",
+      "w": "A Midsummer Night's Dream",
+      "s": "Peraduenture, to make it the more gracious, I shall sing it at her death.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0127",
+      "w": "A Midsummer Night's Dream",
+      "s": "Masters, the Duke is comming from the Temple, and there is two or three Lords & Ladies more married.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0128",
+      "w": "A Midsummer Night's Dream",
+      "s": "Such tricks hath strong imagination, That if it would but apprehend some ioy, It comprehends some bringer of that ioy.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0129",
+      "w": "A Midsummer Night's Dream",
+      "s": "Is there no play, To ease the anguish of a torturing houre?",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0130",
+      "w": "A Midsummer Night's Dream",
+      "s": "That is some Satire keene and criticall, Not sorting with a nuptiall ceremonie Lis.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0131",
+      "w": "A Midsummer Night's Dream",
+      "s": "Trust me sweete, Out of this silence yet, I pickt a welcome: And in the modesty of fearefull duty, I read as much, as from the ratling tongue Of saucy and audacious eloquence.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0132",
+      "w": "A Midsummer Night's Dream",
+      "s": "This fellow doth not stand vpon points Lys.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0133",
+      "w": "A Midsummer Night's Dream",
+      "s": "This man, with Lanthorne, dog, and bush of thorne, Presenteth moone-shine.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0134",
+      "w": "A Midsummer Night's Dream",
+      "s": "O kisse me through the hole of this vile wall This.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0135",
+      "w": "A Midsummer Night's Dream",
+      "s": "If wee imagine no worse of them then they of themselues, they may passe for excellent men.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0136",
+      "w": "A Midsummer Night's Dream",
+      "s": "I am wearie of this Moone; would he would change Du.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0137",
+      "w": "A Midsummer Night's Dream",
+      "s": "Sweet Moone, I thank thee for thy sunny beames, I thanke thee Moone, for shining now so bright: For by thy gracious, golden, glittering beames, I trust to taste of truest Thisbies sight.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0138",
+      "w": "A Midsummer Night's Dream",
+      "s": "No Die, but an ace for him; for he is but one Lis.",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      }
+    },
+    {
+      "id": "shakespeare.p0139",
+      "w": "Othello",
+      "s": "Happie, So opposite to Marriage, that she shun'd The wealthy curled Deareling of our Nation, Would euer haue (t' encurre a generall mocke) Run from her Guardage to the sootie bosome, Of such a thing as thou: to feare, not to delight?",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0140",
+      "w": "Othello",
+      "s": "So did I yours: Good your Grace pardon me.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0141",
+      "w": "Othello",
+      "s": "The rob'd that smiles, steales something from the Thiefe, He robs himselfe, that spends a bootelesse griefe Bra.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0142",
+      "w": "Othello",
+      "s": "So that (deere Lords) if I be left behind A Moth of Peace, and he go to the Warre, The Rites for why I loue him, are bereft me: And I a heauie interim shall support By his deere absence.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0143",
+      "w": "Othello",
+      "s": "I haue profest me thy Friend, and I confesse me knit to thy deseruing, with Cables of perdurable toughnesse.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0144",
+      "w": "Othello",
+      "s": "If thou canst Cuckold him, thou dost thy selfe a pleasure, me a sport.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0145",
+      "w": "Othello",
+      "s": "If that the Turkish Fleete Be not enshelter'd, and embay'd, they are drown'd, It is impossible to beare it out.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0146",
+      "w": "Othello",
+      "s": "What miserable praise hast thou for her that's Foule, and Foolish Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0147",
+      "w": "Othello",
+      "s": "Very good: well kiss'd, and excellent Curtsie: 'tis so indeed.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0148",
+      "w": "Othello",
+      "s": "Why none, why none: A slipper, and subtle knaue, a finder of occasion: that he's an eye can stampe, and counterfeit Aduantages, though true Aduantage neuer present it selfe.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0149",
+      "w": "Othello",
+      "s": "So shall you haue a shorter iourney to your desires, by the meanes I shall then haue to preferre them.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0150",
+      "w": "Othello",
+      "s": "Blesse the Isle of Cyprus, and our Noble Generall Othello.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0151",
+      "w": "Othello",
+      "s": "Good-faith a litle one: not past a pint, as I am a Souldier Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0152",
+      "w": "Othello",
+      "s": "For mine owne part, no offence to the Generall, nor any man of qualitie: I hope to be saued Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0153",
+      "w": "Othello",
+      "s": "Now by Heauen, My blood begins my safer Guides to rule, And passion (hauing my best iudgement collied) Assaies to leade the way.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0154",
+      "w": "Othello",
+      "s": "Oh thou invisible spirit of Wine, if thou hast no name to be knowne by, let vs call thee Diuell Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0155",
+      "w": "Othello",
+      "s": "For if he be not one, that truly loues you, That erres in Ignorance, and not in Cunning, I haue no iudgement in an honest face.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0156",
+      "w": "Othello",
+      "s": "If thou do'st loue me, Shew me thy thought Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0157",
+      "w": "Othello",
+      "s": "Should you do so (my Lord) My speech should fall into such vilde successe, Which my Thoughts aym'd not.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0158",
+      "w": "Othello",
+      "s": "I had rather be a Toad, And liue vpon the vapour of a Dungeon, Then keepe a corner in the thing I loue For others vses.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0159",
+      "w": "Othello",
+      "s": "I did so; and take heede on't, Make it a Darling, like your precious eye: To loose't, or giue't away, were such perdition, As nothing else could match Des.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0160",
+      "w": "Othello",
+      "s": "How now (good Cassio) what's the newes with you?",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0161",
+      "w": "Othello",
+      "s": "It is a Monster Begot vpon it selfe, borne on it selfe Des.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0162",
+      "w": "Othello",
+      "s": "Or heard him say (as Knaues be such abroad, Who hauing by their owne importunate suit, Or voluntary dotage of some Mistris, Conuinced or supply'd them, cannot chuse But they must blab.) Oth.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0163",
+      "w": "Othello",
+      "s": "I mocke you not, by Heauen: Would you would beare your Fortune like a Man Othe.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0164",
+      "w": "Othello",
+      "s": "The worser, that you giue me the addition, Whose want euen killes me Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0165",
+      "w": "Othello",
+      "s": "This faile you not to do, as you will- Lod.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0166",
+      "w": "Othello",
+      "s": "Nor euer heard: nor euer did suspect Othe.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0167",
+      "w": "Othello",
+      "s": "Oh thou weed: Who art so louely faire, and smell'st so sweete, That the Sense akes at thee, Would thou had'st neuer bin borne Des.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0168",
+      "w": "Othello",
+      "s": "Hath she forsooke so many Noble Matches?",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0169",
+      "w": "Othello",
+      "s": "Heere I kneele: If ere my will did trespasse 'gainst his Loue, Either in discourse of thought, or actuall deed, Or that mine Eyes, mine Eares, or any Sence Delighted them: or any other Forme.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0170",
+      "w": "Othello",
+      "s": "Nay I think it is scuruy: and begin to finde my selfe fopt in it Iago.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0171",
+      "w": "Othello",
+      "s": "It was his bidding: therefore good aemilia, Giue me my nightly wearing, and adieu.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0172",
+      "w": "Othello",
+      "s": "The fresh Streames ran by her, and murmur'd her moanes Sing Willough, &c.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0173",
+      "w": "Othello",
+      "s": "Introth I thinke I should, and vndoo't when I had done.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0174",
+      "w": "Othello",
+      "s": "Nobody come: then shall I bleed to death.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0175",
+      "w": "Othello",
+      "s": "One more, one more: Be thus when thou art dead, and I will kill thee, And loue thee after.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0176",
+      "w": "Othello",
+      "s": "That death's vnnaturall, that kils for louing.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0177",
+      "w": "Othello",
+      "s": "No: his mouth is stopp'd: Honest Iago hath 'tane order for't Des.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0178",
+      "w": "Othello",
+      "s": "Oh the more Angell she, and you the blacker Diuell Oth.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0179",
+      "w": "Othello",
+      "s": "Thou hast not halfe that powre to do me harm, As I haue to be hurt.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0180",
+      "w": "Othello",
+      "s": "Good Gentlemen, let me haue leaue to speake: 'Tis proper I obey him; but not now: Perchance Iago, I will ne're go home Oth.",
+      "src": {
+        "work": "Othello"
+      }
+    },
+    {
+      "id": "shakespeare.p0181",
+      "w": "Shakespeare's Sonnets",
+      "s": "To give away yourself, keeps yourself still, And you must live, drawn by your own sweet skill.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0182",
+      "w": "Shakespeare's Sonnets",
+      "s": "Yet do thy worst, old Time; despite thy wrong, My love shall in my verse ever live young.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0183",
+      "w": "Shakespeare's Sonnets",
+      "s": "With sun and moon, with earth and sea’s rich gems, With April’s first-born flowers, and all things rare, That heaven’s air in this huge rondure hems.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0184",
+      "w": "Shakespeare's Sonnets",
+      "s": "Great princes’ favourites their fair leaves spread But as the marigold at the sun’s eye, And in themselves their pride lies buried, For at a frown they in their glory die.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0185",
+      "w": "Shakespeare's Sonnets",
+      "s": "I tell the day, to please him thou art bright, And dost him grace when clouds do blot the heaven: So flatter I the swart-complexion’d night, When sparkling stars twire not thou gild’st the even.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0186",
+      "w": "Shakespeare's Sonnets",
+      "s": "How many a holy and obsequious tear Hath dear religious love stol’n from mine eye, As interest of the dead, which now appear But things remov’d that hidden in thee lie!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0187",
+      "w": "Shakespeare's Sonnets",
+      "s": "XXXVIII How can my Muse want subject to invent, While thou dost breathe, that pour’st into my verse Thine own sweet argument, too excellent For every vulgar paper to rehearse?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0188",
+      "w": "Shakespeare's Sonnets",
+      "s": "And what is’t but mine own when I praise thee?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0189",
+      "w": "Shakespeare's Sonnets",
+      "s": "Then, if for my love, thou my love receivest, I cannot blame thee, for my love thou usest; But yet be blam’d, if thou thyself deceivest By wilful taste of what thyself refusest.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0190",
+      "w": "Shakespeare's Sonnets",
+      "s": "XLIII When most I wink, then do mine eyes best see, For all the day they view things unrespected; But when I sleep, in dreams they look on thee, And darkly bright, are bright in dark directed.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0191",
+      "w": "Shakespeare's Sonnets",
+      "s": "XLIV If the dull substance of my flesh were thought, Injurious distance should not stop my way; For then despite of space I would be brought, From limits far remote, where thou dost stay.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0192",
+      "w": "Shakespeare's Sonnets",
+      "s": "My heart doth plead that thou in him dost lie, A closet never pierced with crystal eyes; But the defendant doth that plea deny, And says in him thy fair appearance lies.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0193",
+      "w": "Shakespeare's Sonnets",
+      "s": "Blessed are you whose worthiness gives scope, Being had, to triumph; being lacked, to hope.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0194",
+      "w": "Shakespeare's Sonnets",
+      "s": "In all external grace you have some part, But you like none, none you, for constant heart.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0195",
+      "w": "Shakespeare's Sonnets",
+      "s": "Sweet roses do not so; Of their sweet deaths, are sweetest odours made: And so of you, beauteous and lovely youth, When that shall vade, by verse distills your truth.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0196",
+      "w": "Shakespeare's Sonnets",
+      "s": "LVIII That god forbid, that made me first your slave, I should in thought control your times of pleasure, Or at your hand the account of hours to crave, Being your vassal, bound to stay your leisure!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0197",
+      "w": "Shakespeare's Sonnets",
+      "s": "That I might see what the old world could say To this composed wonder of your frame; Wh’r we are mended, or wh’r better they, Or whether revolution be the same.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0198",
+      "w": "Shakespeare's Sonnets",
+      "s": "LXI Is it thy will, thy image should keep open My heavy eyelids to the weary night?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0199",
+      "w": "Shakespeare's Sonnets",
+      "s": "Or what strong hand can hold his swift foot back?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0200",
+      "w": "Shakespeare's Sonnets",
+      "s": "Why should he live, now Nature bankrupt is, Beggar’d of blood to blush through lively veins?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0201",
+      "w": "Shakespeare's Sonnets",
+      "s": "They look into the beauty of thy mind, And that in guess they measure by thy deeds; Then churls their thoughts, although their eyes were kind, To thy fair flower add the rank smell of weeds: But why thy odour matcheth not thy show, The soil is this, that thou dost common grow.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0202",
+      "w": "Shakespeare's Sonnets",
+      "s": "In me thou see’st the glowing of such fire, That on the ashes of his youth doth lie, As the death-bed, whereon it must expire, Consum’d with that which it was nourish’d by.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0203",
+      "w": "Shakespeare's Sonnets",
+      "s": "The worth of that is that which it contains, And that is this, and this with thee remains.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0204",
+      "w": "Shakespeare's Sonnets",
+      "s": "Why with the time do I not glance aside To new-found methods, and to compounds strange?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0205",
+      "w": "Shakespeare's Sonnets",
+      "s": "LXXIX Whilst I alone did call upon thy aid, My verse alone had all thy gentle grace; But now my gracious numbers are decay’d, And my sick Muse doth give an other place.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0206",
+      "w": "Shakespeare's Sonnets",
+      "s": "LXXX O how I faint when I of you do write, Knowing a better spirit doth use your name, And in the praise thereof spends all his might, To make me tongue-tied speaking of your fame!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0207",
+      "w": "Shakespeare's Sonnets",
+      "s": "Your name from hence immortal life shall have, Though I, once gone, to all the world must die: The earth can yield me but a common grave, When you entombed in men’s eyes shall lie.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0208",
+      "w": "Shakespeare's Sonnets",
+      "s": "Then others, for the breath of words respect, Me for my dumb thoughts, speaking in effect.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0209",
+      "w": "Shakespeare's Sonnets",
+      "s": "He, nor that affable familiar ghost Which nightly gulls him with intelligence, As victors of my silence cannot boast; I was not sick of any fear from thence: But when your countenance fill’d up his line, Then lacked I matter; that enfeebled mine.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0210",
+      "w": "Shakespeare's Sonnets",
+      "s": "Such is my love, to thee I so belong, That for thy right, myself will bear all wrong.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0211",
+      "w": "Shakespeare's Sonnets",
+      "s": "If thou wilt leave me, do not leave me last, When other petty griefs have done their spite, But in the onset come: so shall I taste At first the very worst of fortune’s might; And other strains of woe, which now seem woe, Compar’d with loss of thee, will not seem so.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0212",
+      "w": "Shakespeare's Sonnets",
+      "s": "I see a better state to me belongs Than that which on thy humour doth depend: Thou canst not vex me with inconstant mind, Since that my life on thy revolt doth lie.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0213",
+      "w": "Shakespeare's Sonnets",
+      "s": "That tongue that tells the story of thy days, Making lascivious comments on thy sport, Cannot dispraise, but in a kind of praise; Naming thy name, blesses an ill report.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0214",
+      "w": "Shakespeare's Sonnets",
+      "s": "How many lambs might the stern wolf betray, If like a lamb he could his looks translate!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0215",
+      "w": "Shakespeare's Sonnets",
+      "s": "What freezings have I felt, what dark days seen!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0216",
+      "w": "Shakespeare's Sonnets",
+      "s": "C Where art thou Muse that thou forget’st so long, To speak of that which gives thee all thy might?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0217",
+      "w": "Shakespeare's Sonnets",
+      "s": "Give my love fame faster than Time wastes life, So thou prevent’st his scythe and crooked knife.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0218",
+      "w": "Shakespeare's Sonnets",
+      "s": "Because he needs no praise, wilt thou be dumb?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0219",
+      "w": "Shakespeare's Sonnets",
+      "s": "Three winters cold, Have from the forests shook three summers’ pride, Three beauteous springs to yellow autumn turn’d, In process of the seasons have I seen, Three April perfumes in three hot Junes burn’d, Since first I saw you fresh, which yet are green.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0220",
+      "w": "Shakespeare's Sonnets",
+      "s": "Now with the drops of this most balmy time, My love looks fresh, and Death to me subscribes, Since, spite of him, I’ll live in this poor rime, While he insults o’er dull and speechless tribes: And thou in this shalt find thy monument, When tyrants’ crests and tombs of brass are spent.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0221",
+      "w": "Shakespeare's Sonnets",
+      "s": "Pity me then, dear friend, and I assure ye, Even that your pity is enough to cure me.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0222",
+      "w": "Shakespeare's Sonnets",
+      "s": "Mark how with my neglect I do dispense: You are so strongly in my purpose bred, That all the world besides methinks are dead.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0223",
+      "w": "Shakespeare's Sonnets",
+      "s": "CXV Those lines that I before have writ do lie, Even those that said I could not love you dearer: Yet then my judgement knew no reason why My most full flame should afterwards burn clearer.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0224",
+      "w": "Shakespeare's Sonnets",
+      "s": "What wretched errors hath my heart committed, Whilst it hath thought itself so blessed never!",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0225",
+      "w": "Shakespeare's Sonnets",
+      "s": "For if you were by my unkindness shaken, As I by yours, you’ve pass’d a hell of time; And I, a tyrant, have no leisure taken To weigh how once I suffer’d in your crime.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0226",
+      "w": "Shakespeare's Sonnets",
+      "s": "No, I am that I am, and they that level At my abuses reckon up their own: I may be straight though they themselves be bevel; By their rank thoughts, my deeds must not be shown; Unless this general evil they maintain, All men are bad and in their badness reign.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0227",
+      "w": "Shakespeare's Sonnets",
+      "s": "No; let me be obsequious in thy heart, And take thou my oblation, poor but free, Which is not mix’d with seconds, knows no art, But mutual render, only me for thee.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0228",
+      "w": "Shakespeare's Sonnets",
+      "s": "She may detain, but not still keep, her treasure: Her audit (though delayed) answered must be, And her quietus is to render thee.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0229",
+      "w": "Shakespeare's Sonnets",
+      "s": "CXXXI Thou art as tyrannous, so as thou art, As those whose beauties proudly make them cruel; For well thou know’st to my dear doting heart Thou art the fairest and most precious jewel.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0230",
+      "w": "Shakespeare's Sonnets",
+      "s": "CXXXII Thine eyes I love, and they, as pitying me, Knowing thy heart torment me with disdain, Have put on black and loving mourners be, Looking with pretty ruth upon my pain.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0231",
+      "w": "Shakespeare's Sonnets",
+      "s": "Is’t not enough to torture me alone, But slave to slavery my sweet’st friend must be?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0232",
+      "w": "Shakespeare's Sonnets",
+      "s": "They know what beauty is, see where it lies, Yet what the best is take the worst to be.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0233",
+      "w": "Shakespeare's Sonnets",
+      "s": "CXXXVIII When my love swears that she is made of truth, I do believe her though I know she lies, That she might think me some untutor’d youth, Unlearned in the world’s false subtleties.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0234",
+      "w": "Shakespeare's Sonnets",
+      "s": "For, if I should despair, I should grow mad, And in my madness might speak ill of thee; Now this ill-wresting world is grown so bad, Mad slanderers by mad ears believed be.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0235",
+      "w": "Shakespeare's Sonnets",
+      "s": "And whether that my angel be turn’d fiend, Suspect I may, yet not directly tell; But being both from me, both to each friend, I guess one angel in another’s hell: Yet this shall I ne’er know, but live in doubt, Till my bad angel fire my good one out.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0236",
+      "w": "Shakespeare's Sonnets",
+      "s": "Then soul, live thou upon thy servant’s loss, And let that pine to aggravate thy store; Buy terms divine in selling hours of dross; Within be fed, without be rich no more: So shall thou feed on Death, that feeds on men, And Death once dead, there’s no more dying then.",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    },
+    {
+      "id": "shakespeare.p0237",
+      "w": "Shakespeare's Sonnets",
+      "s": "If that be fair whereon my false eyes dote, What means the world to say it is not so?",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "shakespeare.f.v0001",
+      "kind": "verbatim",
+      "text": "Season your admiration for a while With an attent eare; till I may deliuer Vpon the witnesse of these Gentlemen, This maruell to you Ham.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "shakespeare.f.v0002",
+      "kind": "verbatim",
+      "text": "My necessaries are imbark't; Farewell: And Sister, as the Winds giue Benefit, And Conuoy is assistant; doe not sleepe, But let me heare from you Ophel.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "shakespeare.f.v0003",
+      "kind": "verbatim",
+      "text": "Doubt thou, the Starres are fire, Doubt, that the Sunne doth moue: Doubt Truth to be a Lier, But neuer Doubt, I loue.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "shakespeare.f.v0004",
+      "kind": "verbatim",
+      "text": "A goodly one, in which there are many Confines, Wards, and Dungeons; Denmarke being one o'th' worst Rosin.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "shakespeare.f.v0005",
+      "kind": "verbatim",
+      "text": "Hearke you Guildensterne, and you too: at each eare a hearer: that great Baby you see there, is not yet out of his swathing clouts Rosin.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "shakespeare.f.v0006",
+      "kind": "verbatim",
+      "text": "Run bare-foot vp and downe, Threatning the flame With Bisson Rheume: A clout about that head, Where late the Diadem stood, and for a Robe About her lanke and all ore-teamed Loines, A blanket in th' Alarum of feare caught vp.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "shakespeare.f.v0007",
+      "kind": "verbatim",
+      "text": "The Spirit that I haue seene May be the Diuell, and the Diuel hath power T' assume a pleasing shape, yea and perhaps Out of my Weaknesse, and my Melancholly, As he is very potent with such Spirits, Abuses me to damne me.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "shakespeare.f.v0008",
+      "kind": "verbatim",
+      "text": "I prythee, when thou see'st that Acte a-foot, Euen with the verie Comment of my Soule Obserue mine Vnkle: If his occulted guilt, Do not it selfe vnkennell in one speech, It is a damned Ghost that we haue seene: And my Imaginations are as foule As Vulcans Stythe.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "shakespeare.f.v0009",
+      "kind": "verbatim",
+      "text": "Nor Earth to giue me food, nor Heauen light, Sport and repose locke from me day and night: Each opposite that blankes the face of ioy, Meet what I would haue well, and it destroy: Both heere, and hence, pursue me lasting strife, If once a Widdow, euer I be Wife Ham.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "shakespeare.f.v0010",
+      "kind": "verbatim",
+      "text": "Nature is fine in Loue, and where 'tis fine, It sends some precious instance of it selfe After the thing it loues Ophe.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "shakespeare.f.v0011",
+      "kind": "verbatim",
+      "text": "In the Grapple, I boorded them: On the instant they got cleare of our Shippe, so I alone became their Prisoner.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "shakespeare.f.v0012",
+      "kind": "verbatim",
+      "text": "I hop'd thou should'st haue bin my Hamlets wife: I thought thy Bride-bed to haue deckt (sweet Maid) And not t'haue strew'd thy Graue Laer.",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "shakespeare.f.v0013",
+      "kind": "verbatim",
+      "text": "If Hamlet from himselfe be tane away: And when he's not himselfe, do's wrong Laertes, Then Hamlet does it not, Hamlet denies it: Who does it then?",
+      "work": "Hamlet",
+      "lang": "en",
+      "src": {
+        "work": "Hamlet"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "shakespeare.f.v0014",
+      "kind": "verbatim",
+      "text": "They met me in the day of successe: and I haue learn'd by the perfect'st report, they haue more in them, then mortall knowledge.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "shakespeare.f.v0015",
+      "kind": "verbatim",
+      "text": "This Guest of Summer, The Temple-haunting Barlet does approue, By his loued Mansonry, that the Heauens breath Smells wooingly here: no Iutty frieze, Buttrice, nor Coigne of Vantage, but this Bird Hath made his pendant Bed, and procreant Cradle, Where they must breed, and haunt: I haue obseru'd The ayre is delicate.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 316
+      }
+    },
+    {
+      "id": "shakespeare.f.v0016",
+      "kind": "verbatim",
+      "text": "If it were done, when 'tis done, then 'twer well, It were done quickly: If th' Assassination Could trammell vp the Consequence, and catch With his surcease, Successe: that but this blow Might be the be all, and the end all.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "shakespeare.f.v0017",
+      "kind": "verbatim",
+      "text": "I thinke not of them: Yet when we can entreat an houre to serue, We would spend it in some words vpon that Businesse, If you would graunt the time Banq.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "shakespeare.f.v0018",
+      "kind": "verbatim",
+      "text": "Hearke, peace: it was the Owle that shriek'd, The fatall Bell-man, which giues the stern'st good-night.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "shakespeare.f.v0019",
+      "kind": "verbatim",
+      "text": "There is none but he, Whose being I doe feare: and vnder him, My Genius is rebuk'd, as it is said Mark Anthonies was by Caesar.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "shakespeare.f.v0020",
+      "kind": "verbatim",
+      "text": "Of sorryest Fancies your Companions making, Vsing those Thoughts, which should indeed haue dy'd With them they thinke on: things without all remedie Should be without regard: what's done, is done Macb.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "shakespeare.f.v0021",
+      "kind": "verbatim",
+      "text": "There's comfort yet, they are assaileable, Then be thou iocund: ere the Bat hath flowne His Cloyster'd flight, ere to black Heccats summons The shard-borne Beetle, with his drowsie hums, Hath rung Nights yawning Peale, There shall be done a deed of dreadfull note Lady.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "shakespeare.f.v0022",
+      "kind": "verbatim",
+      "text": "I dare not speake much further, But cruell are the times, when we are Traitors And do not know our selues: when we hold Rumor From what we feare, yet know not what we feare, But floate vpon a wilde and violent Sea Each way, and moue.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "shakespeare.f.v0023",
+      "kind": "verbatim",
+      "text": "What I beleeue, Ile waile; What know, beleeue; and what I can redresse, As I shall finde the time to friend: I wil.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 115
+      }
+    },
+    {
+      "id": "shakespeare.f.v0024",
+      "kind": "verbatim",
+      "text": "Nay, had I powre, I should Poure the sweet Milke of Concord, into Hell, Vprore the vniuersall peace, confound All vnity on earth Macd.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "shakespeare.f.v0025",
+      "kind": "verbatim",
+      "text": "Diuellish Macbeth, By many of these traines, hath sought to win me Into his power: and modest Wisedome pluckes me From ouer-credulous hast: but God aboue Deale betweene thee and me; For euen now I put my selfe to thy Direction, and Vnspeake mine owne detraction.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "shakespeare.f.v0026",
+      "kind": "verbatim",
+      "text": "Heark, she speaks, I will set downe what comes from her, to satisfie my remembrance the more strongly La.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "shakespeare.f.v0027",
+      "kind": "verbatim",
+      "text": "Bring it after me: I will not be affraid of Death and Bane, Till Birnane Forrest come to Dunsinane Doct.",
+      "work": "The Tragedy of Macbeth",
+      "lang": "en",
+      "src": {
+        "work": "The Tragedy of Macbeth"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "shakespeare.f.v0028",
+      "kind": "verbatim",
+      "text": "Helen, to you our mindes we will vnfold, To morrow night, when Phoebe doth behold Her siluer visage, in the watry glasse, Decking with liquid pearle, the bladed grasse (A time that Louers flights doth still conceale) Through Athens gates, haue we deuis'd to steale Her.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "shakespeare.f.v0029",
+      "kind": "verbatim",
+      "text": "Lysander riddles very prettily; Now much beshrew my manners and my pride, If Hermia meant to say, Lysander lied.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 112
+      }
+    },
+    {
+      "id": "shakespeare.f.v0030",
+      "kind": "verbatim",
+      "text": "No, I am no such thing, I am a man as other men are; and there indeed let him name his name, and tell him plainly hee is Snug the ioyner Quin.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "shakespeare.f.v0031",
+      "kind": "verbatim",
+      "text": "Some man or other must present wall, and let him haue some Plaster, or some Lome, or some rough cast about him, to signifie wall; or let him hold his fingers thus; and through that cranny shall Piramus and Thisby whisper Quin.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "shakespeare.f.v0032",
+      "kind": "verbatim",
+      "text": "Thou coward, art thou bragging to the stars, Telling the bushes that thou look'st for wars, And wilt not come?",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "shakespeare.f.v0033",
+      "kind": "verbatim",
+      "text": "A cry more tuneable Was neuer hallowed to, nor cheer'd with horne, In Creete, in Sparta, nor in Thessaly; Iudge when you heare.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "shakespeare.f.v0034",
+      "kind": "verbatim",
+      "text": "How comes this gentle concord in the world, That hatred is so farre from iealousie, To sleepe by hate, and feare no enmity Lys.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "shakespeare.f.v0035",
+      "kind": "verbatim",
+      "text": "Such tricks hath strong imagination, That if it would but apprehend some ioy, It comprehends some bringer of that ioy.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "shakespeare.f.v0036",
+      "kind": "verbatim",
+      "text": "Trust me sweete, Out of this silence yet, I pickt a welcome: And in the modesty of fearefull duty, I read as much, as from the ratling tongue Of saucy and audacious eloquence.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "shakespeare.f.v0037",
+      "kind": "verbatim",
+      "text": "Sweet Moone, I thank thee for thy sunny beames, I thanke thee Moone, for shining now so bright: For by thy gracious, golden, glittering beames, I trust to taste of truest Thisbies sight.",
+      "work": "A Midsummer Night's Dream",
+      "lang": "en",
+      "src": {
+        "work": "A Midsummer Night's Dream"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "shakespeare.f.v0038",
+      "kind": "verbatim",
+      "text": "Happie, So opposite to Marriage, that she shun'd The wealthy curled Deareling of our Nation, Would euer haue (t' encurre a generall mocke) Run from her Guardage to the sootie bosome, Of such a thing as thou: to feare, not to delight?",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "shakespeare.f.v0039",
+      "kind": "verbatim",
+      "text": "The rob'd that smiles, steales something from the Thiefe, He robs himselfe, that spends a bootelesse griefe Bra.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 112
+      }
+    },
+    {
+      "id": "shakespeare.f.v0040",
+      "kind": "verbatim",
+      "text": "I haue profest me thy Friend, and I confesse me knit to thy deseruing, with Cables of perdurable toughnesse.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "shakespeare.f.v0041",
+      "kind": "verbatim",
+      "text": "If that the Turkish Fleete Be not enshelter'd, and embay'd, they are drown'd, It is impossible to beare it out.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "shakespeare.f.v0042",
+      "kind": "verbatim",
+      "text": "Why none, why none: A slipper, and subtle knaue, a finder of occasion: that he's an eye can stampe, and counterfeit Aduantages, though true Aduantage neuer present it selfe.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "shakespeare.f.v0043",
+      "kind": "verbatim",
+      "text": "Now by Heauen, My blood begins my safer Guides to rule, And passion (hauing my best iudgement collied) Assaies to leade the way.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "shakespeare.f.v0044",
+      "kind": "verbatim",
+      "text": "Oh thou invisible spirit of Wine, if thou hast no name to be knowne by, let vs call thee Diuell Iago.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "shakespeare.f.v0045",
+      "kind": "verbatim",
+      "text": "Should you do so (my Lord) My speech should fall into such vilde successe, Which my Thoughts aym'd not.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "shakespeare.f.v0046",
+      "kind": "verbatim",
+      "text": "I had rather be a Toad, And liue vpon the vapour of a Dungeon, Then keepe a corner in the thing I loue For others vses.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "shakespeare.f.v0047",
+      "kind": "verbatim",
+      "text": "I did so; and take heede on't, Make it a Darling, like your precious eye: To loose't, or giue't away, were such perdition, As nothing else could match Des.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "shakespeare.f.v0048",
+      "kind": "verbatim",
+      "text": "Oh thou weed: Who art so louely faire, and smell'st so sweete, That the Sense akes at thee, Would thou had'st neuer bin borne Des.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "shakespeare.f.v0049",
+      "kind": "verbatim",
+      "text": "Heere I kneele: If ere my will did trespasse 'gainst his Loue, Either in discourse of thought, or actuall deed, Or that mine Eyes, mine Eares, or any Sence Delighted them: or any other Forme.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "shakespeare.f.v0050",
+      "kind": "verbatim",
+      "text": "Good Gentlemen, let me haue leaue to speake: 'Tis proper I obey him; but not now: Perchance Iago, I will ne're go home Oth.",
+      "work": "Othello",
+      "lang": "en",
+      "src": {
+        "work": "Othello"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "shakespeare.f.v0051",
+      "kind": "verbatim",
+      "text": "With sun and moon, with earth and sea’s rich gems, With April’s first-born flowers, and all things rare, That heaven’s air in this huge rondure hems.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "shakespeare.f.v0052",
+      "kind": "verbatim",
+      "text": "Great princes’ favourites their fair leaves spread But as the marigold at the sun’s eye, And in themselves their pride lies buried, For at a frown they in their glory die.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "shakespeare.f.v0053",
+      "kind": "verbatim",
+      "text": "I tell the day, to please him thou art bright, And dost him grace when clouds do blot the heaven: So flatter I the swart-complexion’d night, When sparkling stars twire not thou gild’st the even.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "shakespeare.f.v0054",
+      "kind": "verbatim",
+      "text": "How many a holy and obsequious tear Hath dear religious love stol’n from mine eye, As interest of the dead, which now appear But things remov’d that hidden in thee lie!",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "shakespeare.f.v0055",
+      "kind": "verbatim",
+      "text": "XXXVIII How can my Muse want subject to invent, While thou dost breathe, that pour’st into my verse Thine own sweet argument, too excellent For every vulgar paper to rehearse?",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "shakespeare.f.v0056",
+      "kind": "verbatim",
+      "text": "XLIII When most I wink, then do mine eyes best see, For all the day they view things unrespected; But when I sleep, in dreams they look on thee, And darkly bright, are bright in dark directed.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "shakespeare.f.v0057",
+      "kind": "verbatim",
+      "text": "XLIV If the dull substance of my flesh were thought, Injurious distance should not stop my way; For then despite of space I would be brought, From limits far remote, where thou dost stay.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "shakespeare.f.v0058",
+      "kind": "verbatim",
+      "text": "My heart doth plead that thou in him dost lie, A closet never pierced with crystal eyes; But the defendant doth that plea deny, And says in him thy fair appearance lies.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "shakespeare.f.v0059",
+      "kind": "verbatim",
+      "text": "Sweet roses do not so; Of their sweet deaths, are sweetest odours made: And so of you, beauteous and lovely youth, When that shall vade, by verse distills your truth.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "shakespeare.f.v0060",
+      "kind": "verbatim",
+      "text": "LVIII That god forbid, that made me first your slave, I should in thought control your times of pleasure, Or at your hand the account of hours to crave, Being your vassal, bound to stay your leisure!",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "shakespeare.f.v0061",
+      "kind": "verbatim",
+      "text": "That I might see what the old world could say To this composed wonder of your frame; Wh’r we are mended, or wh’r better they, Or whether revolution be the same.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "shakespeare.f.v0062",
+      "kind": "verbatim",
+      "text": "They look into the beauty of thy mind, And that in guess they measure by thy deeds; Then churls their thoughts, although their eyes were kind, To thy fair flower add the rank smell of weeds: But why thy odour matcheth not thy show, The soil is this, that thou dost common grow.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "shakespeare.f.v0063",
+      "kind": "verbatim",
+      "text": "In me thou see’st the glowing of such fire, That on the ashes of his youth doth lie, As the death-bed, whereon it must expire, Consum’d with that which it was nourish’d by.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "shakespeare.f.v0064",
+      "kind": "verbatim",
+      "text": "LXXIX Whilst I alone did call upon thy aid, My verse alone had all thy gentle grace; But now my gracious numbers are decay’d, And my sick Muse doth give an other place.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "shakespeare.f.v0065",
+      "kind": "verbatim",
+      "text": "LXXX O how I faint when I of you do write, Knowing a better spirit doth use your name, And in the praise thereof spends all his might, To make me tongue-tied speaking of your fame!",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "shakespeare.f.v0066",
+      "kind": "verbatim",
+      "text": "Your name from hence immortal life shall have, Though I, once gone, to all the world must die: The earth can yield me but a common grave, When you entombed in men’s eyes shall lie.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "shakespeare.f.v0067",
+      "kind": "verbatim",
+      "text": "He, nor that affable familiar ghost Which nightly gulls him with intelligence, As victors of my silence cannot boast; I was not sick of any fear from thence: But when your countenance fill’d up his line, Then lacked I matter; that enfeebled mine.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "shakespeare.f.v0068",
+      "kind": "verbatim",
+      "text": "If thou wilt leave me, do not leave me last, When other petty griefs have done their spite, But in the onset come: so shall I taste At first the very worst of fortune’s might; And other strains of woe, which now seem woe, Compar’d with loss of thee, will not seem so.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "shakespeare.f.v0069",
+      "kind": "verbatim",
+      "text": "I see a better state to me belongs Than that which on thy humour doth depend: Thou canst not vex me with inconstant mind, Since that my life on thy revolt doth lie.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "shakespeare.f.v0070",
+      "kind": "verbatim",
+      "text": "That tongue that tells the story of thy days, Making lascivious comments on thy sport, Cannot dispraise, but in a kind of praise; Naming thy name, blesses an ill report.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "shakespeare.f.v0071",
+      "kind": "verbatim",
+      "text": "Three winters cold, Have from the forests shook three summers’ pride, Three beauteous springs to yellow autumn turn’d, In process of the seasons have I seen, Three April perfumes in three hot Junes burn’d, Since first I saw you fresh, which yet are green.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "shakespeare.f.v0072",
+      "kind": "verbatim",
+      "text": "Now with the drops of this most balmy time, My love looks fresh, and Death to me subscribes, Since, spite of him, I’ll live in this poor rime, While he insults o’er dull and speechless tribes: And thou in this shalt find thy monument, When tyrants’ crests and tombs of brass are spent.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "shakespeare.f.v0073",
+      "kind": "verbatim",
+      "text": "Mark how with my neglect I do dispense: You are so strongly in my purpose bred, That all the world besides methinks are dead.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "shakespeare.f.v0074",
+      "kind": "verbatim",
+      "text": "CXV Those lines that I before have writ do lie, Even those that said I could not love you dearer: Yet then my judgement knew no reason why My most full flame should afterwards burn clearer.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "shakespeare.f.v0075",
+      "kind": "verbatim",
+      "text": "No, I am that I am, and they that level At my abuses reckon up their own: I may be straight though they themselves be bevel; By their rank thoughts, my deeds must not be shown; Unless this general evil they maintain, All men are bad and in their badness reign.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "shakespeare.f.v0076",
+      "kind": "verbatim",
+      "text": "No; let me be obsequious in thy heart, And take thou my oblation, poor but free, Which is not mix’d with seconds, knows no art, But mutual render, only me for thee.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "shakespeare.f.v0077",
+      "kind": "verbatim",
+      "text": "She may detain, but not still keep, her treasure: Her audit (though delayed) answered must be, And her quietus is to render thee.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "shakespeare.f.v0078",
+      "kind": "verbatim",
+      "text": "CXXXI Thou art as tyrannous, so as thou art, As those whose beauties proudly make them cruel; For well thou know’st to my dear doting heart Thou art the fairest and most precious jewel.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "shakespeare.f.v0079",
+      "kind": "verbatim",
+      "text": "CXXXII Thine eyes I love, and they, as pitying me, Knowing thy heart torment me with disdain, Have put on black and loving mourners be, Looking with pretty ruth upon my pain.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "shakespeare.f.v0080",
+      "kind": "verbatim",
+      "text": "CXXXVIII When my love swears that she is made of truth, I do believe her though I know she lies, That she might think me some untutor’d youth, Unlearned in the world’s false subtleties.",
+      "work": "Shakespeare's Sonnets",
+      "lang": "en",
+      "src": {
+        "work": "Shakespeare's Sonnets"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "shakespeare.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 8,
+      "worksSpan": 5,
+      "examples": [
+        "If Hamlet from himselfe be tane away: And when he's not himselfe, do's wrong Laertes, Then Hamlet does it not, Hamlet denies it: Who does it then?",
+        "If it were done, when 'tis done, then 'twer well, It were done quickly: If th' Assassination Could trammell vp the Consequence, and catch With his surcease, Successe: that but this blow Might be the be all, and the end all."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 237,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:36e8fe77d424b3ffb29d335d1f3fa15a904432ebffc933653f293cdd607def39"
+}

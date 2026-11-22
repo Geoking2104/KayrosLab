@@ -1,0 +1,3179 @@
+{
+  "authorId": "goethe",
+  "kbVersion": "goethe@bootstrap-2026-11-22",
+  "builtAt": "2026-11-22T11:09:33.626Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Iphigenie auf Tauris",
+      "sentences": 52
+    },
+    {
+      "title": "Egmont",
+      "sentences": 44
+    },
+    {
+      "title": "Reineke Fuchs",
+      "sentences": 55
+    },
+    {
+      "title": "West-östlicher Divan",
+      "sentences": 57
+    },
+    {
+      "title": "Novelle",
+      "sentences": 54
+    }
+  ],
+  "passages": [
+    {
+      "id": "goethe.p0001",
+      "w": "Iphigenie auf Tauris",
+      "s": "Zwar seh' ich nicht, Wie ich dem Rath des Treuen folgen soll; Doch folg' ich gern der Pflicht, dem Könige Für seine Wohlthat gutes Wort zu geben, Und wünsche mir, daß ich dem Mächtigen, Was ihm gefällt, mit Wahrheit sagen möge.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0002",
+      "w": "Iphigenie auf Tauris",
+      "s": "Ein jeder sinnt was künftig werden wird, Und folgt dem Kinderlosen, weil er muß.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0003",
+      "w": "Iphigenie auf Tauris",
+      "s": "Was auch der Rath der Götter mit dir sei, Und was sie deinem Haus und dir gedenken; So fehlt es doch, seitdem du bei uns wohnst Und eines frommen Gastes Recht genießest, An Segen nicht, der mir von oben kommt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0004",
+      "w": "Iphigenie auf Tauris",
+      "s": "Rath, Mäßigung und Weisheit und Geduld Verbarg er ihrem scheuen düstern Blick; Zur Wuth ward ihnen jegliche Begier, Und gränzenlos drang ihre Wuth umher.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0005",
+      "w": "Iphigenie auf Tauris",
+      "s": "Lange konnte nicht Die Eintracht dauern.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0006",
+      "w": "Iphigenie auf Tauris",
+      "s": "Hat nicht die Göttin, die mich rettete, Allein das Recht auf mein geweihtes Leben?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0007",
+      "w": "Iphigenie auf Tauris",
+      "s": "Daß in den alten Hallen, wo die Trauer Noch manchmal stille meinen Namen lispelt, Die Freude, wie um eine Neugeborne, Den schönsten Kranz von Säul an Säulen schlinge.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0008",
+      "w": "Iphigenie auf Tauris",
+      "s": "Auf's Ungehoffte war ich nicht bereitet; Doch sollt' ich's auch erwarten: wußt' ich nicht, Daß ich mit einem Weibe handeln ging?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0009",
+      "w": "Iphigenie auf Tauris",
+      "s": "Du hattest mir die Sinnen eingewiegt, Das Murren meines Volks vernahm ich nicht; Nun rufen sie die Schuld von meines Sohnes Frühzeit'gem Tode lauter über mich.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0010",
+      "w": "Iphigenie auf Tauris",
+      "s": "Mit diesen nehme deine Göttin wieder Ihr erstes, rechtes, lang entbehrtes Opfer!",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0011",
+      "w": "Iphigenie auf Tauris",
+      "s": "Wie leicht wird's mir, dem eine Götterhand Das Herz zusammendrückt, den Sinn betäubt, Dem schönen Licht der Sonne zu entsagen.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0012",
+      "w": "Iphigenie auf Tauris",
+      "s": "Wie oft, wenn still Elektra, meine Schwester, Am Feuer in der tiefen Halle saß, Drängt' ich beklommen mich an ihren Schoos, Und starrte, wie sie bitter weinte, sie Mit großen Augen an.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0013",
+      "w": "Iphigenie auf Tauris",
+      "s": "So haben die, die dich erhielten, Für mich gesorgt: denn was ich worden wäre, Wenn du nicht lebtest, kann ich mir nicht denken; Da ich mit dir und deinetwillen nur Seit meiner Kindheit leb' und leben mag.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0014",
+      "w": "Iphigenie auf Tauris",
+      "s": "Wir möchten jede That So groß gleich thun, als wie sie wächs't und wird, Wenn Jahre lang durch Länder und Geschlechter Der Mund der Dichter sie vermehrend wälzt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0015",
+      "w": "Iphigenie auf Tauris",
+      "s": "Ganz anders denk' ich, und nicht ungeschickt Hab' ich das schon Geschehne mit dem Künft'gen Verbunden und im stillen ausgelegt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0016",
+      "w": "Iphigenie auf Tauris",
+      "s": "Er trockne gnädig Die Quelle, die, mir aus der Mutter Wunden Entgegen sprudelnd, ewig mich befleckt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0017",
+      "w": "Iphigenie auf Tauris",
+      "s": "Von unsern Wächtern Hab' ich bisher gar vieles ausgelockt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0018",
+      "w": "Iphigenie auf Tauris",
+      "s": "Vergessen hab' ich einen Augenblick, Wie sehr ich dein bedarf, und meinen Geist Der herrlichen Erscheinung zugewendet.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0019",
+      "w": "Iphigenie auf Tauris",
+      "s": "O sag' ihm bald ein gutes holdes Wort; Doch schone seiner wenn du mit ihm sprichst, Das bitt' ich eifrig: denn es wird gar leicht Durch Freud' und Schmerz und durch Erinnerung Sein Innerstes ergriffen und zerrüttet.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0020",
+      "w": "Iphigenie auf Tauris",
+      "s": "Sag' an, wie ward die schwere That vollbracht?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0021",
+      "w": "Iphigenie auf Tauris",
+      "s": "Und niemand, wer es sei, darf euer Haupt, So lang ich Priesterin Dianens bin, Berühren.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0022",
+      "w": "Iphigenie auf Tauris",
+      "s": "Hab' ich an dieser Nachricht nicht genug?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0023",
+      "w": "Iphigenie auf Tauris",
+      "s": "So haben mich die Götter ausersehn Zum Boten einer That, die ich so gern In's klanglos-dumpfe Höhlenreich der Nacht Verbergen möchte?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0024",
+      "w": "Iphigenie auf Tauris",
+      "s": "Kaum reicht mein Blick dir an die Hände, die Mit Furcht und Segenskränzen angefüllt Die Schätze des Olympus niederbringen.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0025",
+      "w": "Iphigenie auf Tauris",
+      "s": "Laß allein und unbegleitet Mich zu den Todten gehn.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0026",
+      "w": "Iphigenie auf Tauris",
+      "s": "O löse meine Zweifel, laß des Glückes, Des lang erflehten, mich auch sicher werden.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0027",
+      "w": "Iphigenie auf Tauris",
+      "s": "Er irrt umher Auf jenem Felsenpfade; such' ihn auf, Weis' ihn zurecht und schone meiner.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0028",
+      "w": "Iphigenie auf Tauris",
+      "s": "Und laß dir rathen, habe Die Sonne nicht zu lieb und nicht die Sterne; Komm, folge mir in's dunkle Reich hinab!",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0029",
+      "w": "Iphigenie auf Tauris",
+      "s": "Ja, sie sind's, Die Ahnherrn meines Hauses!--Mit Thyesten Geht Atreus in vertraulichen Gesprächen; Die Knaben schlüpfen scherzend um sie her.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0030",
+      "w": "Iphigenie auf Tauris",
+      "s": "Fühlst du den Arm des Freundes und der Schwester, Die dich noch fest, noch lebend halten?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0031",
+      "w": "Iphigenie auf Tauris",
+      "s": "Es greift die Furie Vielleicht den Bruder auf dem Boden wieder Des ungeweihten Ufers grimmig an.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0032",
+      "w": "Iphigenie auf Tauris",
+      "s": "Die Götter haben ihn noch nicht beschlossen.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0033",
+      "w": "Iphigenie auf Tauris",
+      "s": "Oft wird der Mächtige zum Schein gefragt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0034",
+      "w": "Iphigenie auf Tauris",
+      "s": "Ja, mancher, den ein widriges Geschick An fremdes Ufer trug, empfand es selbst, Wie göttergleich dem armen Irrenden, Umhergetrieben an der fremden Gränze, Ein freundlich Menschenangesicht begegnet.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0035",
+      "w": "Iphigenie auf Tauris",
+      "s": "Ja, wenn der Edle, was sich nicht geziemt, Statt meines Dankes mich erwerben will.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0036",
+      "w": "Iphigenie auf Tauris",
+      "s": "Widersetzet sich Ein neues Unheil unserm Glück?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0037",
+      "w": "Iphigenie auf Tauris",
+      "s": "So wirst du, reine Seele, dich und uns Zu Grunde richten.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0038",
+      "w": "Iphigenie auf Tauris",
+      "s": "Deine Hand soll ihnen Weihrauch Zuerst aus goldnen Schalen streuen.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0039",
+      "w": "Iphigenie auf Tauris",
+      "s": "Wenn wir zu Grunde gehen, wartet dein Ein härtrer Vorwurf, der Verzweiflung trägt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0040",
+      "w": "Iphigenie auf Tauris",
+      "s": "Mein eigen Schicksal macht mir bang und bänger.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0041",
+      "w": "Iphigenie auf Tauris",
+      "s": "So sangen die Parzen; Es horcht der Verbannte In nächtlichen Höhlen Der Alte die Lieder, Denkt Kinder und Enkel Und schüttelt das Haupt.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0042",
+      "w": "Iphigenie auf Tauris",
+      "s": "Entsetzlich wechselt mir der Grimm im Busen; Erst gegen sie, die ich so heilig hielt; Dann gegen mich, der ich sie zum Verrath Durch Nachsicht und durch Güte bildete.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0043",
+      "w": "Iphigenie auf Tauris",
+      "s": "Die Göttin gibt dir Frist zur Überlegung.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0044",
+      "w": "Iphigenie auf Tauris",
+      "s": "Beschönige nicht die Gewalt, Die sich der Schwachheit eines Weibes freut.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0045",
+      "w": "Iphigenie auf Tauris",
+      "s": "Die Vorsicht stellt der List sich klug entgegen.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0046",
+      "w": "Iphigenie auf Tauris",
+      "s": "Sie sind--sie scheinen--für Griechen halt' ich sie.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0047",
+      "w": "Iphigenie auf Tauris",
+      "s": "So haben die Betrüger künstlich-dichtend Der lang Verschloss'nen, ihre Wünsche leicht Und willig Glaubenden, ein solch Gespinnst Um's Haupt geworfen!",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0048",
+      "w": "Iphigenie auf Tauris",
+      "s": "Unwillig, wie sich Feuer gegen Wasser Im Kampfe wehrt und gischend seinen Feind Zu Tilgen sucht, so wehret sich der Zorn In meinem Busen gegen deine Worte.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0049",
+      "w": "Iphigenie auf Tauris",
+      "s": "Weicht Der Menge nicht, und deckt den Weg zum Schiffe Mir und der Schwester.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0050",
+      "w": "Iphigenie auf Tauris",
+      "s": "Gelassen, wie es dir, o König, ziemt, Stehst du den Feinden gegenüber.",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0051",
+      "w": "Iphigenie auf Tauris",
+      "s": "Womit Bezeugst du, daß du Agamemnons Sohn Und Dieser Bruder bist?",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0052",
+      "w": "Iphigenie auf Tauris",
+      "s": "Fall ich, so ist ihr Urtheil mit dem meinen Gesprochen; aber gönnet mir das Glück, Zu überwinden, so betrete nie Ein Mann dies Ufer, dem der schnelle Blick Hülfreicher Liebe nicht begegnet, und Getröstet scheide jeglicher hinweg!",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      }
+    },
+    {
+      "id": "goethe.p0053",
+      "w": "Egmont",
+      "s": "Würde ich nicht alles Vertrauen, allen Glauben bei ihm verlieren?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0054",
+      "w": "Egmont",
+      "s": "Ich hielt meinen Schmerz nicht an, ich beklagte mich laut und rief, indem ich mich zu ihm wendete: \"Seht, was in Eurer Provinz entsteht!",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0055",
+      "w": "Egmont",
+      "s": "Sein Gewissen hat einen gefälligen Spiegel.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0056",
+      "w": "Egmont",
+      "s": "Dann sende schnell den bewährten Vaska nach Madrid; er ist unermüdet und treu; daß mein Bruder zuerst durch ihn die Nachricht erfahre, daß der Ruf ihn nicht übereile.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0057",
+      "w": "Egmont",
+      "s": "Welch Glück sondergleichen, Ein Mannsbild zu sein!",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0058",
+      "w": "Egmont",
+      "s": "O Mutter--meine Mutter, so redetet Ihr sonst nicht.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0059",
+      "w": "Egmont",
+      "s": "Wie neulich bei dem Vetter, wie du den Holzschnitt und die Beschreibung fandst und mit einem Schrei riefst: Graf Egmont!--Ich ward feuerrot.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0060",
+      "w": "Egmont",
+      "s": "Wir hätten eher, in der Ordnung, und standhaft, unsere Gerechtsame der Regentin vortragen und drauf halten sollen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0061",
+      "w": "Egmont",
+      "s": "Es wird unruhig und geht schief aus!--Hütet euch, daß ihr stille bleibt, daß man euch nicht auch für Aufwiegler hält.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0062",
+      "w": "Egmont",
+      "s": "Laßt ihn reden; man erfährt immer etwas mehr.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0063",
+      "w": "Egmont",
+      "s": "Ich vergesse niemanden leicht, den ich einmal gesehen und gesprochen habe.--Was an euch ist, Ruhe zu erhalten, Leute, das thut; ihr seid übel genug angeschrieben.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0064",
+      "w": "Egmont",
+      "s": "Von der Regentin ist er nun schon zwei Stunden weg; wer weiß, wen er unterwegs angefaßt hat.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0065",
+      "w": "Egmont",
+      "s": "Er fragt an, ob er sie auch wie die andern soll hängen lassen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0066",
+      "w": "Egmont",
+      "s": "Sie sollen ihn in der Stille an die Grenze bringen und ihm versichern, daß er das zweite Mal nicht so wegkommt.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0067",
+      "w": "Egmont",
+      "s": "Daß ich fröhlich bin, die Sachen leicht nehme, rasch lebe, das ist mein Glück; und ich vertausch' es nicht gegen die Sicherheit eines Totengewölbes.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0068",
+      "w": "Egmont",
+      "s": "Wenn ihr das Leben gar zu ernsthaft nehmt, was ist denn dran?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0069",
+      "w": "Egmont",
+      "s": "Fertige aus, was am nötigsten ist, daß die Boten fortkommen, eh' die Thore geschlossen werden.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0070",
+      "w": "Egmont",
+      "s": "Dort wollen wir uns verstärken; mit offner Gewalt fängt er nicht an.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0071",
+      "w": "Egmont",
+      "s": "Es ist klug und kühn, dem unvermeidlichen Übel entgegenzugehn.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0072",
+      "w": "Egmont",
+      "s": "So viel zärtliche Aufmerksamkeit für mich, als Sorgfalt für seine Staaten.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0073",
+      "w": "Egmont",
+      "s": "Ziemt keinem Soldaten noch Liebhaber, die Arme eingewickelt zu haben.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0074",
+      "w": "Egmont",
+      "s": "Ich erkenne auf Erden keinen Richter über meine Handlungen, als den Großmeister des Ordens mit dem versammelten Kapitel der Ritter.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0075",
+      "w": "Egmont",
+      "s": "Ich mache ihr viel zu schaffen, weil sie hinter meinem Betragen immer Geheimnisse sucht, und ich keine habe.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0076",
+      "w": "Egmont",
+      "s": "Es schnürt einem das Herz ein, wenn man so einen Haufen die Gassen hinab marschieren sieht.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0077",
+      "w": "Egmont",
+      "s": "Im Anfange geht's rasch; nachher wird er auch finden, daß in der Speisekammer unter den Speckseiten besser leben ist und des Nachts zu ruhen, als auf dem Fruchtboden einzelne Mäuschen zu erlisten.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0078",
+      "w": "Egmont",
+      "s": "Alle tägliche Runden sind beordert, zur bestimmten Zeit an verschiedenen Plätzen einzutreffen, die ich ihnen bezeichnet habe; sie gehen indes, wie gewöhnlich, durch die Stadt, um Ordnung zu erhalten.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0079",
+      "w": "Egmont",
+      "s": "In den Provinzen ist es viel ruhiger geworden; und wenn sich noch einer bewegt, so ist es, um zu entfliehen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0080",
+      "w": "Egmont",
+      "s": "Verweile, bis die Fürsten kommen; dann gieb Gomez die Ordre, die Straßen zu besetzen, und eile selbst, Egmonts Schreiber und die übrigen gefangen zu nehmen, die dir bezeichnet sind.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0081",
+      "w": "Egmont",
+      "s": "Er werde mich noch heute wiedersehn, sagte er, und komme auf Euer Verlangen, mit Euch zu ratschlagen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0082",
+      "w": "Egmont",
+      "s": "Was werd' ich dir nicht für diese Liebe schuldig, die du mir allein zuwendest, indem ein ganzes Reich vor dir zittert.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0083",
+      "w": "Egmont",
+      "s": "Wer bürgt uns, daß sie sich ferner treu und unterthänig zeigen werden?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0084",
+      "w": "Egmont",
+      "s": "Glaubst du, daß du sie alle erreichen wirst?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0085",
+      "w": "Egmont",
+      "s": "Ich würde ihm sagen: Leicht kann der Hirt eine ganze Herde Schafe vor sich hintreiben, der Stier zieht seinen Pflug ohne Widerstand; aber dem edeln Pferde, das du reiten willst, mußt du seine Gedanken ablernen, du mußt nichts Unkluges, nichts unklug von ihm verlangen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0086",
+      "w": "Egmont",
+      "s": "Würden aber neue Menschen ohne Not gesendet, die sich zum zweitenmale auf Unkosten der Nation bereichern wollten, sähe man sich einer strengen, kühnen, unbedingten Habsucht ausgesetzt, das würde eine Gärung machen, die sich nicht leicht in sich selbst auflöste.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0087",
+      "w": "Egmont",
+      "s": "Ich habe keinen Auftrag, jedes Für und Wider noch einmal durchzugehen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0088",
+      "w": "Egmont",
+      "s": "Es fehlt nur an der Stimme, die sie zusammenruft.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0089",
+      "w": "Egmont",
+      "s": "Versagt es dir, den nie gescheuten Tod im Angesicht der Sonne rasch zu gönnen, um dir des Grabes Vorgeschmack im ekeln Moder zu bereiten?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0090",
+      "w": "Egmont",
+      "s": "Entsetzliche Gewißheit!--Egmont verurteilt!--Welch Gericht darf ihn fordern?",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0091",
+      "w": "Egmont",
+      "s": "Noch wankten Fackeln hie und da herum; allmählich wichen sie und erloschen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0092",
+      "w": "Egmont",
+      "s": "Noch ist nicht jedes Licht erloschen, noch mancher Tag!-- Klärchen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0093",
+      "w": "Egmont",
+      "s": "Uns schickt der Herzog, dir dein Urteil anzukündigen.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0094",
+      "w": "Egmont",
+      "s": "Sag' ihm, daß er weder mich, noch die Welt belügt.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0095",
+      "w": "Egmont",
+      "s": "Des Kindes Hoffnung ist der Jüngling, des Jünglings der Mann.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0096",
+      "w": "Egmont",
+      "s": "Nur diese Mauern, nur wenige Meilen entfernen mich von meinen Freunden.",
+      "src": {
+        "work": "Egmont"
+      }
+    },
+    {
+      "id": "goethe.p0097",
+      "w": "Reineke Fuchs",
+      "s": "Und Rüsteviel eilte, zu schlagen, Alle fielen ihn an, die mit dem Meister gekommen; Ihn zu töten, war ihr Begehr.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0098",
+      "w": "Reineke Fuchs",
+      "s": "Mit solchen Gebeten Schwamm er weiter, es trieb ihn der Strom, der reißend und groß war, Binnen weniger Zeit fast eine Meile hinunter; Und da kroch er ans Land am selbigen Ufer und keichte.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0099",
+      "w": "Reineke Fuchs",
+      "s": "Und Reineke sagte: Ärmlich behelfen wir uns; doch wenn Ihr bleibet, so bring ich Frische Honigscheiben hervor, ich wähle die klärsten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0100",
+      "w": "Reineke Fuchs",
+      "s": "Wüßte Martinchen doch nur, daß Ihr sein Wildbret verzehret; Sicher brächt er Euch Senf: er ist ein höflicher Knabe.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0101",
+      "w": "Reineke Fuchs",
+      "s": "Grimbart hatte gesprochen, und Reineke sagte dagegen: Oheim, Ihr ratet mir wohl, daß ich zu Hofe mich stelle, Meines Rechtes selber zu wahren.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0102",
+      "w": "Reineke Fuchs",
+      "s": "Confiteor tibi Pater et Mater, daß ich der Otter, Daß ich dem Kater und manchen gar manche Tücke versetzte, Ich bekenn es und lasse mir gern die Buße gefallen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0103",
+      "w": "Reineke Fuchs",
+      "s": "Ach, wie klagt' er sie an, die ungetreue, sie ließ ihn Hungrig hinein und wollte dem Satten die Rückkehr verwehren.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0104",
+      "w": "Reineke Fuchs",
+      "s": "Es dienten geistliche Frauen, Spat und früh, dem Herren daselbst und nährten im Hofe Viele Hühner und Hähne, mit manchem schönen Kapaune, Welche nach Futter zuweilen sich außer der Mauer zerstreuten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0105",
+      "w": "Reineke Fuchs",
+      "s": "Mutig kam er heran und gelassen, als wär er des Königs Eigener Sohn und frei und ledig von allen Gebrechen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0106",
+      "w": "Reineke Fuchs",
+      "s": "Da begann der Widder Bellyn: Die Zeit ist gekommen, Laßt uns klagen!",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0107",
+      "w": "Reineke Fuchs",
+      "s": "Braun versetzte: Stellt nur die Leiter, ich will ihn schon halten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0108",
+      "w": "Reineke Fuchs",
+      "s": "Ein Lämmchen biß ich zu Tode, Leckte das Blut, es schmeckte mir köstlich!",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0109",
+      "w": "Reineke Fuchs",
+      "s": "Die lange Heimfahrt steht Euch bevor, entladet reuig die Seele; Saget die lautere Wahrheit und redet mir deutlich vom Morde.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0110",
+      "w": "Reineke Fuchs",
+      "s": "Herr, ich sorgte für Euch und hoffte beßre Belohnung.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0111",
+      "w": "Reineke Fuchs",
+      "s": "Was sie beschlossen, das werdet Ihr hören und werdet erschrecken.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0112",
+      "w": "Reineke Fuchs",
+      "s": "Leben läßt Euch mein Herr, und das Vergangne vergißt er.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0113",
+      "w": "Reineke Fuchs",
+      "s": "Bist du im Banne, so wär mirs ein Vorwurf, dich mit mir zu führen, Lampe kann mich oder ein andrer zum Borne begleiten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0114",
+      "w": "Reineke Fuchs",
+      "s": "Aber die Königin bat er, auch Schuh ihm zu schaffen, und sagte: Ihr erkennt mich, gnädige Frau, nun einmal für Euren Pilger; helfet mir nun, daß ich die Reise vollbringe.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0115",
+      "w": "Reineke Fuchs",
+      "s": "Könnte man freilich die Sache vermitteln, und sollt es kein Vorwurf Mir beim Bischof, Herrn Ohnegrund, werden, zürnte nicht etwa Mir darüber der Propst, Herr Losefund, oder der Dechant Rapiamus, ich segnet ihn gern nach Eurem Befehle.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0116",
+      "w": "Reineke Fuchs",
+      "s": "Kommt nun, sagt' er: und essen wir schnell, denn fett ist der Hase, Guten Geschmackes.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0117",
+      "w": "Reineke Fuchs",
+      "s": "Und Frau Ermelyn sagte betrübt: Was wollte das werden?",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0118",
+      "w": "Reineke Fuchs",
+      "s": "Lampen hört ich; er rief mir: Bellyn, zu Hilfe!",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0119",
+      "w": "Reineke Fuchs",
+      "s": "O hätt ich Seinen schändlichen Lügen nicht Glauben gegeben!",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0120",
+      "w": "Reineke Fuchs",
+      "s": "Ohne weiteres tastet sie an, ihr möget im Walde, Möget im Felde sie finden, sie sind euch alle gegeben.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0121",
+      "w": "Reineke Fuchs",
+      "s": "Da wollt ich behende Meines Weges vorbei, zu Eurem Hofe zu kommen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0122",
+      "w": "Reineke Fuchs",
+      "s": "Dabei ist seines Geschlechtes Große Verbindung wohl zu bedenken.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0123",
+      "w": "Reineke Fuchs",
+      "s": "Malepartus, die Burg, belegen wir, was er im Haus hat, Wollen wir sehen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0124",
+      "w": "Reineke Fuchs",
+      "s": "Es bleibt mir das liebste von allen Gerichten!",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0125",
+      "w": "Reineke Fuchs",
+      "s": "Auch muß ich bekennen, die Krähe beklagt sich Nicht mit Unrecht, ich habe Frau Scharfenebbe, sein Weibchen, Aufgegessen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0126",
+      "w": "Reineke Fuchs",
+      "s": "Handelt einer mit Honig, er leckt zuweilen die Finger.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0127",
+      "w": "Reineke Fuchs",
+      "s": "Man will mir sagen, sie haben Kinder wie andre verehlichte Leute; und sie zu versorgen, Sind sie eifrig bemüht und bringen sie hoch in die Höhe.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0128",
+      "w": "Reineke Fuchs",
+      "s": "Die Schüsseln werden gar ungleich Aufgetragen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0129",
+      "w": "Reineke Fuchs",
+      "s": "Und er schwur, so könnt er nicht leben, man halt ihn zu strenge, Lange könn er nicht fasten und könne nicht immer so lesen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0130",
+      "w": "Reineke Fuchs",
+      "s": "Doch als er die vielen Feinde beisammen erblickte, wie alle standen und alle Sich zu rächen begehrten und ihn am Leben zu strafen, Fiel ihm der Mut; er zweifelte nun, doch ging er mit Kühnheit Grade durch alle Baronen, und Grimbart ging ihm zur Seite.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0131",
+      "w": "Reineke Fuchs",
+      "s": "Nun bin ich mir aber Keines übels bewußt, und also bin ich gekommen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0132",
+      "w": "Reineke Fuchs",
+      "s": "Ich riß ihm, sagt er, ein Ohr ab; Ehre hat er genossen und hat ein Zeichen behalten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0133",
+      "w": "Reineke Fuchs",
+      "s": "Diese merkte des Königs Verdruß und sprach mit Bedachte Wenn Ihr, gnädiger Herr, auf meine Bitte zuweilen Hörtet, gereut' es Euch nie, und Ihr vergabt mir die Kühnheit, Wenn Ihr zürntet, ein Wort gelinder Meinung zu sagen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0134",
+      "w": "Reineke Fuchs",
+      "s": "Und es sagte der Wurm: Ich will mich so lange gedulden.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0135",
+      "w": "Reineke Fuchs",
+      "s": "Aber die Schlange leugnete nicht: Es zwingt mich des Hungers Allgewaltige Not, sie kennet keine Gesetze.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0136",
+      "w": "Reineke Fuchs",
+      "s": "Reineke sagte: sie waren so köstlich, wir finden sie nimmer; Wer sie besitzt, verwahrt sie gewiß.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0137",
+      "w": "Reineke Fuchs",
+      "s": "Ebenso vertilgt sie den Haß, und sollte gleich mancher Den Besitzer nicht lieben, er fühlt sich in kurzem verändert.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0138",
+      "w": "Reineke Fuchs",
+      "s": "Und es waren Schilder umher mit künstlichen Schriften; Jeder durfte nur lesen, und so verstand er die Fabel.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0139",
+      "w": "Reineke Fuchs",
+      "s": "Auf dem Anger fand er ein Pferd, woran nur die Knochen Übrig waren; doch hungert' ihn sehr, er nagte sie gierig, Und es kam ihm ein spitziges Bein die Quer in den Kragen; Ängstlich stellt' er sich an, es war ihm übel geraten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0140",
+      "w": "Reineke Fuchs",
+      "s": "Krank lag Euer Vater, sein Leben rettete meiner, Und doch sagt Ihr, ich habe noch nie, es habe mein Vater Euch nichts Gutes erzeigt.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0141",
+      "w": "Reineke Fuchs",
+      "s": "Euer Vater verehrt' ihm hernach, ich weiß es am besten, Eine goldene Spange mit einem roten Barette, Sie vor allen Herren zu tragen; so haben ihn alle Hoch in Ehren gehalten.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0142",
+      "w": "Reineke Fuchs",
+      "s": "Alles, was ich besitze und was ich nur immer gewinne, Alles widm ich Euch gern und Eurer Königin; sei es Wenig oder auch viel, Ihr nehmt das meiste von allem.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0143",
+      "w": "Reineke Fuchs",
+      "s": "So glaubt Ihr wieder dem Diebe, Der Euch zwei- und dreifach belog?",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0144",
+      "w": "Reineke Fuchs",
+      "s": "Ein Wunder fürwahr, daß mir das Herz nicht gebrochen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0145",
+      "w": "Reineke Fuchs",
+      "s": "Ich ließ mich betören, Dumm, wie ich war, und stieg in den Eimer; da ging er hernieder Und der andere wieder herauf, Ihr kamt mir entgegen.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0146",
+      "w": "Reineke Fuchs",
+      "s": "Er schickte mich tückisch In das abscheuliche Nest, ich dacht, es wäre die Hölle.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0147",
+      "w": "Reineke Fuchs",
+      "s": "Wenn es die meinigen wären, Ich erdrosselte sie.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0148",
+      "w": "Reineke Fuchs",
+      "s": "Doch Isegrim sagte dagegen: Muhme das Weib zu begrüßen?",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0149",
+      "w": "Reineke Fuchs",
+      "s": "Ist der Tor nicht kühler geworden, so soll er am Ende Seinen Willen nicht haben, es koste, was es auch wolle.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0150",
+      "w": "Reineke Fuchs",
+      "s": "Ja, ich verdiene die Strafe, Denn ich hab ihn zu übel behandelt, zu gröblich beleidigt.",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0151",
+      "w": "Reineke Fuchs",
+      "s": "Schlagt Ihr mich tot, was habt Ihr davon?",
+      "src": {
+        "work": "Reineke Fuchs"
+      }
+    },
+    {
+      "id": "goethe.p0152",
+      "w": "West-östlicher Divan",
+      "s": "Hegire Nord und West und Süd zersplittern, Throne bersten, Reiche zittern: Flüchte du, im reinen Osten Patriarchenluft zu kosten, Unter Lieben, Trinken, Singen Soll dich Chisers Quell verjüngen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0153",
+      "w": "West-östlicher Divan",
+      "s": "Männer hängen die Papiere Gläubig um als Skapuliere.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0154",
+      "w": "West-östlicher Divan",
+      "s": "Nord- und südliches Gelände Ruht im Frieden seiner Hände!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0155",
+      "w": "West-östlicher Divan",
+      "s": "Erschaffen und Beleben Hans Adam war ein Erdenkloß, Den Gott zum Menschen machte, Doch bracht' er aus der Mutter Schoß Noch vieles Ungeschlachte.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0156",
+      "w": "West-östlicher Divan",
+      "s": "Rot und weiß, gemischt, gesprenkelt Wüßt ich Schönres nicht zu schauen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0157",
+      "w": "West-östlicher Divan",
+      "s": "Lied und Gebilde Mag der Grieche seinen Ton Zu Gestalten drücken, An der eignen Hände Sohn Steigern sein Entzücken.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0158",
+      "w": "West-östlicher Divan",
+      "s": "Doch schon längst, daß liebe Pforten Mir auf ihren Angeln schwiegen!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0159",
+      "w": "West-östlicher Divan",
+      "s": "Buch Hafis Hafis Nameh: Buch Hafis Sei das Wort die Braut genannt, Bräutigam der Geist; Diese Hochzeit hat gekannt, Wer Hafisen preist.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0160",
+      "w": "West-östlicher Divan",
+      "s": "Hafis insbesondre schaffet ärgernisse, Mirza sprengt den Geist ins Ungewisse: Saget, was man tun und lassen müsse!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0161",
+      "w": "West-östlicher Divan",
+      "s": "Zugemeßne Rhythmen reizen freilich, Das Talent erfreut sich wohl darin, Doch wie schnelle widern sie abscheulich, Hohle Masken ohne Blut und Sinn.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0162",
+      "w": "West-östlicher Divan",
+      "s": "Wie Wurzelfasern schleicht ihr Fuß Und buhlet mit dem Boden, Wie leicht Gewölk verschmilzt ihr Gruß, Wie Ost-Gekos' ihr Oden.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0163",
+      "w": "West-östlicher Divan",
+      "s": "Buch der Liebe Ushk Nameh: Buch der Liebe Sage mir, Was mein Herz begehrt?",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0164",
+      "w": "West-östlicher Divan",
+      "s": "Und so, Hafis, wär's wie dir Deinem Freund ergangen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0165",
+      "w": "West-östlicher Divan",
+      "s": "Manchmal ist ein Wort von nöten, Oft ist's besser, daß man schweigt.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0166",
+      "w": "West-östlicher Divan",
+      "s": "Das könnte mich nun garnicht freuen, Sie versteht sich auf Schmeicheleien.\" Dichter Ich bin zufrieden, daß ich's habe!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0167",
+      "w": "West-östlicher Divan",
+      "s": "Darum war's der höchste Jammer, Als einst Medschnun sterbend wollte, Daß vor Leila seinen Namen Man forthin nicht nennen sollte.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0168",
+      "w": "West-östlicher Divan",
+      "s": "Reitest du bei einem Schmied vorbei Reitest du bei einem Schmied vorbei, Weißt du nicht, wann er dein Pferd beschlägt; Siehst du eine Hütte im Felde frei, Weißt nicht, ob sie dir ein Liebchen hegt; Einem Jüngling begegnest du, schön und kühn, Er überwindet dich künftig oder du ihn.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0169",
+      "w": "West-östlicher Divan",
+      "s": "Märkte reizen dich zum Kauf Märkte reizen dich zum Kauf; Doch das Wissen blähet auf.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0170",
+      "w": "West-östlicher Divan",
+      "s": "Ganz anders ist's in dieser Welt, Wo alles vorwärts drücket: Wenn einer stolpert oder fällt, Keine Seele rückwärts blicket.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0171",
+      "w": "West-östlicher Divan",
+      "s": "Und so haltet's auch, ihr Hohen, Gegen Gott wie der Geringe: Tut und leidet, wie sich's findet, Bleibt nur immer guter Dinge!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0172",
+      "w": "West-östlicher Divan",
+      "s": "Vor Gott muß alles ewig stehn; In mir liebt ihn für diesen Augenblick!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0173",
+      "w": "West-östlicher Divan",
+      "s": "Auf dem Weg, da ist's ein Wort, Niemand wird's verdammen: \"Wollen wir an einen Ort, Nun wir gehn zusammen!\" Vieles wird sich da und hie Uns entgegenstellen: In der Liebe mag man nie Helfer und Gesellen; Geld und Ehre hätte man Gern allein zur Spende; Und der Wein, der treue Mann, Der entzweit am Ende.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0174",
+      "w": "West-östlicher Divan",
+      "s": "Wenn die Brust, die redlich volle, Sich entladet, euch zu retten, Ruft ihr nicht: \"Das ist der Tolle!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0175",
+      "w": "West-östlicher Divan",
+      "s": "Wandrer!--Gegen solche Not Wolltest du dich sträuben?",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0176",
+      "w": "West-östlicher Divan",
+      "s": "Und immer sehnt sich fort das Herz, Ich weiß nicht recht, ob himmelwärts; Fort aber will es hin und hin, Und möchte vor sich selber fliehn.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0177",
+      "w": "West-östlicher Divan",
+      "s": "Die Zeit ist mein Besitz, mein Acker ist die Zeit.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0178",
+      "w": "West-östlicher Divan",
+      "s": "Sich im Respekt zu erhalten, Muß man recht borstig sein.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0179",
+      "w": "West-östlicher Divan",
+      "s": "Ein Herre mit zwei Gesind, Er wird nicht wohl gepflegt.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0180",
+      "w": "West-östlicher Divan",
+      "s": "Herr, laß dir gefallen Dieses kleine Haus!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0181",
+      "w": "West-östlicher Divan",
+      "s": "Denn wer nicht fehlt, weiß wohl, wenn andre fehlen; Allein wer fehlt, der ist erst recht daran, Er weiß nun deutlich, wie sie wohl getan.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0182",
+      "w": "West-östlicher Divan",
+      "s": "Hat nicht Myriaden Seelen Timurs Herrschaft aufgezehrt?",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0183",
+      "w": "West-östlicher Divan",
+      "s": "Sich liebend aneinander zu laben, Wird Paradieses Wonne sein.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0184",
+      "w": "West-östlicher Divan",
+      "s": "Ists möglich Ists möglich, daß ich, Liebchen, dich kose, Vernehme der göttlichen Stimme Schall!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0185",
+      "w": "West-östlicher Divan",
+      "s": "Dir sollten Timurs Reiche dienen, Gehorchen sein gebietend Heer, Badakschan zollte dir Rubinen, Türkise das Hyrkan'sche Meer.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0186",
+      "w": "West-östlicher Divan",
+      "s": "Wenn du, Suleika, Mich überschwenglich beglückst, Deine Leidenschaft mir zuwirfst, Als wär's ein Ball, Daß ich ihn fange, Dir zurückwerfe Mein gewidmetes Ich: Das ist ein Augenblick!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0187",
+      "w": "West-östlicher Divan",
+      "s": "Mädchen Dichter will so gerne Knecht sein, Weil die Herrschaft draus entspringet; Doch vor allem sollt' ihm recht sein, Wenn das Liebchen selber singet.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0188",
+      "w": "West-östlicher Divan",
+      "s": "Wenn ich dich sehe, wünsch ich taub zu sein, Wenn ich dich höre, blind.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0189",
+      "w": "West-östlicher Divan",
+      "s": "Ist's nicht der Liebe hochverklärtes All?",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0190",
+      "w": "West-östlicher Divan",
+      "s": "Hochbild Die Sonne, Helios der Griechen, Fährt prächtig auf der Himmelsbahn, Gewiß, das Weltall zu besiegen, Blickt er umher, hinab, hinan.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0191",
+      "w": "West-östlicher Divan",
+      "s": "Rasch in wilden, wüsten Träumen Jedes nach der Weite rang, Starr, in ungemeßnen Räumen, Ohne Sehnsucht, ohne Klang.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0192",
+      "w": "West-östlicher Divan",
+      "s": "Denkst du deinen Mundgeschwistern Noch ein Pärchen herzuziehn?",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0193",
+      "w": "West-östlicher Divan",
+      "s": "Suleika Wie mit innigstem Behagen, Lied, empfind ich deinen Sinn!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0194",
+      "w": "West-östlicher Divan",
+      "s": "Meinen Wein Trink ich allein; Und niemand setzt mir Schranken; Ich hab so meine eignen Gedanken.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0195",
+      "w": "West-östlicher Divan",
+      "s": "Solang man nüchtern ist Solang man nüchtern ist, Gefällt das Schlechte; Wie man getrunken hat, Weiß man das Rechte; Nur ist das übermaß Auch gleich zu Handen, Hafis, o lehre mich, Wie du's verstanden!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0196",
+      "w": "West-östlicher Divan",
+      "s": "Du sollst mir künftig der Schenke sein; Jeder Wein ist schmackhaft und helle.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0197",
+      "w": "West-östlicher Divan",
+      "s": "Jene garstige Vettel Jene garstige Vettel, Die buhlerische, Welt heißt man sie, Mich hat sie betrogen, Wie die übrigen alle.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0198",
+      "w": "West-östlicher Divan",
+      "s": "Schenke Nennen dich den großen Dichter, Wenn dich auf dem Markte zeigest; Gerne hör ich, wenn du singest, Und ich horche, wenn du schweigest.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0199",
+      "w": "West-östlicher Divan",
+      "s": "Prasselnd blitzen tausend Funken, Und du weißt nicht, wo es faßt.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0200",
+      "w": "West-östlicher Divan",
+      "s": "Nun aber kommt Gesundheit holder Fülle Dir in die Glieder, daß du dich erneust.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0201",
+      "w": "West-östlicher Divan",
+      "s": "An dir, wie an des Himmels Sternen Ist Gottes Größe im kleinen zu lernen Daß er, der Welten überblickt, Sein Auge hier hat aufgedrückt, Und so den leichten Flaum geschmückt, Daß Könige kaum unternahmen, Die Pracht des Vogels nachzuahmen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0202",
+      "w": "West-östlicher Divan",
+      "s": "Es ist gut Bei Mondenschein im Paradeis Fand Jehovah im Schlafe tief Adam versunken, legte leis Zur Seit ein Evchen, das auch entschlief.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0203",
+      "w": "West-östlicher Divan",
+      "s": "Will dem Ufer Senderuds entsagen, Auf zum Darnawend die Flügel schlagen, Wie sie tagt, ihr freudig zu begegnen Und von dorther ewig euch zu segnen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0204",
+      "w": "West-östlicher Divan",
+      "s": "Und sie sehn es bald an deiner Wunden, Die sich selbst ein Ehrendenkmal schreibt.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0205",
+      "w": "West-östlicher Divan",
+      "s": "Diese finden wir alldorten; Und wer Frauenlob gepriesen, Der verdient an ewgen Orten Lustzuwandeln wohl mit diesen.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0206",
+      "w": "West-östlicher Divan",
+      "s": "Huri Wir sind aus den Elementen geschaffen, Aus Wasser, Feuer, Erd und Luft, Unmittelbar, und irdischer Duft Ist unserm Wesen ganz zuwider.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0207",
+      "w": "West-östlicher Divan",
+      "s": "Und wir darüber sind frisch und froh, Daß sie meinen, es wäre so.",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0208",
+      "w": "West-östlicher Divan",
+      "s": "Mannigfaltiger frischer Genuß, Ewig bräutlich keuscher Kuß!-- Wenn jeder Augenblick mich durchschauert, Was soll ich fragen, wie lang es gedauert!",
+      "src": {
+        "work": "West-östlicher Divan"
+      }
+    },
+    {
+      "id": "goethe.p0209",
+      "w": "Novelle",
+      "s": "Nun haben wir manches getan, um diese Wildnis zugänglicher zu machen, denn mehr bedarf es nicht, um jeden Wanderer, jeden Besuchenden in Erstaunen zu setzen, zu entzücken\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0210",
+      "w": "Novelle",
+      "s": "Ferner sieht man seitwärts Mauern angeschlossen und Zwinger terrassenmäßig herab sich erstreckend.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0211",
+      "w": "Novelle",
+      "s": "Seit hundertundfunfzig Jahren hat keine Axt hier geklungen, und überall sind die mächtigsten Stämme emporgewachsen.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0212",
+      "w": "Novelle",
+      "s": "Novelle, Kapitel 2 Tiefe Blätterschichten wegräumend, haben wir den merkwürdigsten Platz geebnet gefunden, dessengleichen in der Welt vielleicht nicht wieder zu sehen ist.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0213",
+      "w": "Novelle",
+      "s": "Aber auch hier verweilt man bequem im Schatten, denn dieser Baum ist es, der sich über das Ganze wunderbar hoch in die Luft hebt.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0214",
+      "w": "Novelle",
+      "s": "Danken wir also dem wackern Künstler, der uns so löblich in verschiedenen Bildern von allem überzeugt, als wenn wir gegenwärtig wären; er hat die schönsten Stunden des Tages und der Jahrszeit dazu angewendet und sich wochenlang um diese Gegenstände herumbewegt.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0215",
+      "w": "Novelle",
+      "s": "Honorio trat ein und meldete, die Pferde seien vorgeführt; da sagte die Fürstin, zum Oheim gewendet: \"reiten wir hinauf, und lassen Sie mich in der Wirklichkeit sehen, was Sie mir hier im Bilde zeigten!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0216",
+      "w": "Novelle",
+      "s": "Seitdem der Fürst gestern mir Anlaß zu diesem übersichten gegeben, ist es mir gar angenehm zu denken, wie hier, wo Gebirg und flaches Land aneinandergrenzen, beide so deutlich aussprechen, was sie brauchen und was sie wünschen.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0217",
+      "w": "Novelle",
+      "s": "Ich weiß\", versetzte der Fürst, \"daß mein Neffe hierauf die größte Aufmerksamkeit wendet, denn gerade zu dieser Jahrszeit kommt es hauptsächlich darauf an, daß man mehr empfange als gebe; dies zu bewirken, ist am Ende die Summe des ganzen Staatshaushaltes so wie der kleinsten häuslichen Wirtschaft.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0218",
+      "w": "Novelle",
+      "s": "Und so war auch Honorio von der sonst so ersehnten Jagd willig zurückgeblieben, um ihr ausschließlich dienstbar zu sein.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0219",
+      "w": "Novelle",
+      "s": "Ich wiederhole\", sagte sie, \"meine gestrige Lektion, da denn doch die Notwendigkeit unsere Geduld prüfen will\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0220",
+      "w": "Novelle",
+      "s": "Das Volk schaute mit Freuden die junge Dame, und auf so viel lächelnden Gesichtern zeigte sich das entschiedene Behagen, zu sehen, daß die erste Frau im Lande auch die schönste und anmutigste sei.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0221",
+      "w": "Novelle",
+      "s": "Zur Bude näher gelangt, durften sie die bunten, kolossalen Gemälde nicht übersehen, die mit heftigen Farben und kräftigen Bildern jene fremden Tiere darstellten, welche der friedliche Staatsbürger zu schauen unüberwindliche Lust empfinden sollte.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0222",
+      "w": "Novelle",
+      "s": "Die guten Menschen wollen eingeschüchtert sein, um hinterdrein erst recht zu fühlen, wie schön und löblich es sei, frei Atem zu holen\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0223",
+      "w": "Novelle",
+      "s": "Der Weg führte zuerst am Flusse hinan, an einem zwar noch schmalen, nur leichte Kähne tragenden Wasser, das aber nach und nach als größter Strom seinen Namen behalten und ferne Länder beleben sollte.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0224",
+      "w": "Novelle",
+      "s": "Mächtige Felsen standen von Urzeiten her, jedem Wechsel unangetastet, fest, wohlgegründet voran, und so türmte sichs aufwärts; das sazwischen Herabgestürzte lag in mächtigen Platten und Trümmern unregelmäßig übereinander und schien dem Kühnsten jeden Angriff zu verbieten.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0225",
+      "w": "Novelle",
+      "s": "Auf dem Markte fängt es an zu brennen!\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0226",
+      "w": "Novelle",
+      "s": "Das Feuer greift weiter um sich!\" rief man, immer durch die Gläser schauend; auch wurde das Unheil den guten, unbewaffneten Augen der Fürstin bemerklich.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0227",
+      "w": "Novelle",
+      "s": "Ich fürchtete immer, das Unglück zum zweiten Male zu erleben\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0228",
+      "w": "Novelle",
+      "s": "In der Stadt wie auf dem Schloß sind die Feueranstalten in bester Ordnung, man wird sich durch einen so unerwartet außerordentlichen Fall nicht irre machen lassen.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0229",
+      "w": "Novelle",
+      "s": "Hier aber ist ein böser Boden, kleine Steine und kurzes Gras, schnelles Reiten ist unsicher; ohnehin, bis wir hineinkommen, wird das Feuer schon nieder sein\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0230",
+      "w": "Novelle",
+      "s": "Dann aber mit kreischendem Geheul rettete jeder, was zur Hand lag; Diener und Knechte mit den Herren bemühten sich, von Flammen ergriffene Ballen fortzuschleppen, von dem brennenden Gestell noch einiges wegzureißen, um es in die Kiste zu packen, die sie denn doch zuletzt den eilenden Flammen zum Raube lassen mußten.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0231",
+      "w": "Novelle",
+      "s": "Der Jüngling aber, dem Untier entgegen, zog die Pistole und schoß, als er sich nahe genug glaubte.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0232",
+      "w": "Novelle",
+      "s": "Sie sprengte, was das Pferd vermochte, die steile, steinige Strecke hinan, kaum fürchtend, daß ein zartes Geschöpf, solcher Anstrengung ungewohnt, sie nicht aushalten werde.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0233",
+      "w": "Novelle",
+      "s": "Der Jüngling war schön, er war herangesprengt, wie ihn die Fürstin oft im Lanzen- und Ringelspiel gesehen hatte.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0234",
+      "w": "Novelle",
+      "s": "In allen solchen Künsten war er gewandt und glücklich, hier kam beides zustatten.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0235",
+      "w": "Novelle",
+      "s": "Reisende strömen von allen Orten her, und wenn von einer Stadt, von einem wichtigen Punkte irgendeines Weltteils gesprochen wird, ergeht an den Eurigen jedesmal die Frage, ob er daselbst gewesen sei.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0236",
+      "w": "Novelle",
+      "s": "Niemanden traut man Verstand zu, als wer das alles gesehen hat; es ist, als wenn man sich nur für andere zu unterrichten hätte\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0237",
+      "w": "Novelle",
+      "s": "Seine Absicht war, Euch zum selbständigen Edelmann herangereift zu sehen, der sich und ihm auch auswärts Ehre machte wie bisher am Hofe, und ich dächte, Eure Tat wäre ein so empfehlender Reisepaß, als ein junger Mann nur in die Welt mitnehmen kann\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0238",
+      "w": "Novelle",
+      "s": "Du warst zahm und hättest dich gern ruhig niedergelassen und auf uns gewartet; denn deine Fußballen schmerzten dich, und deine Krallen hatten keine Kraft mehr!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0239",
+      "w": "Novelle",
+      "s": "Du warst der Schönste deinesgleichen; wer hat je einen königlichen Tiger so herrlich ausgestreckt im Schlaf gesehen, wie du nun hier liegst, tot, um nicht wieder aufzustehen!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0240",
+      "w": "Novelle",
+      "s": "Wenn du des Morgens aufwachtest beim frühen Tagschein und den Rachen aufsperrtest, ausstreckend die rote Zunge, so schienst du uns zu lächeln, und wenn schon brüllend, nahmst du doch spielend dein Futter aus den Händen einer Frau, von den Fingern eines Kindes!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0241",
+      "w": "Novelle",
+      "s": "Sie hatte nicht ausgeklagt, als über die mittlere Höhe des Bergs am Schlosse herab Reiter heransprengten, die alsobald für das Jagdgefolge des Fürsten erkannt wurden, er selbst voran.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0242",
+      "w": "Novelle",
+      "s": "Nach dem ersten Erkennen verstummte man, und nach einigem Erholen ward, was der Anblick nicht selbst ergab, mit wenigen Worten erläutert.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0243",
+      "w": "Novelle",
+      "s": "Unschlüssig war man nicht, was zu tun sei; anzuordnen, auszuführen war der Fürst beschäftigt, als ein Mann sich in den Kreis drängte, groß von Gestalt, bunt und wunderlich gekleidet wie Frau und Kind.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0244",
+      "w": "Novelle",
+      "s": "Hätte ich sie bei der Hand gehabt, er wäre nicht wieder aufgestanden, das Fell wäre doch mein gewesen, und ich hätte mich dessen, wie billig, zeitlebens gebrüstet\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0245",
+      "w": "Novelle",
+      "s": "Hier diese Frau und dieses Kind\", erwiderte der Vater hastig, \"erbieten sich, ihn zu zähmen, ihn ruhig zu erhalten, bis ich den beschlagenen Kasten heraufschaffe, da wir ihn denn unschädlich und unbeschädigt wieder zurückbringen werden\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0246",
+      "w": "Novelle",
+      "s": "Besetze den schmalen Weg!--Haltet eure Büchsen bereit, aber schießt nicht eher, als bis ihr das Geschöpf nicht sonst zurückscheuchen könnt; allenfalls macht ein Feuer an, vor dem er sich fürchtet, wenn er herunter will!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0247",
+      "w": "Novelle",
+      "s": "Eilig schickte Honorio sich an, die Befehle zu vollführen.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0248",
+      "w": "Novelle",
+      "s": "Seht den Felsen, wie er fest steht und sich nicht rührt, der Witterung trotzt und dem Sonnenschein!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0249",
+      "w": "Novelle",
+      "s": "Doch wer preist den Ruhm des Herrn, den die Sterne loben von Ewigkeit zu Ewigkeit!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0250",
+      "w": "Novelle",
+      "s": "Sie kennt ihren Weg und verliert ihn nicht, sie baut sich eine Wohnung aus Grashalmen, Erdbröslein und Kiefernadeln, sie baut es in die Höhe und wölbet es zu; aber sie hat umsonst gearbeitet, denn das Pferd stampft und scharrt alles auseinander.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0251",
+      "w": "Novelle",
+      "s": "Doch der Mensch weiß ihn zu zähmen, und das grausamste der Geschöpfe hat Ehrfurcht vor dem Ebenbilde Gottes, wornach auch die Engel gemacht sind, die dem Herrn dienen und seinen Dienern.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0252",
+      "w": "Novelle",
+      "s": "Löw und Löwin, hin und wider, schmiegen sich um ihn heran; ja, die sanften, frommen Lieder habens ihnen angetan!\" Der Vater fuhr fort, die Strophe mit der Flöte zu begleiten; die Mutter trat hie und da als zweite Stimme mit ein.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0253",
+      "w": "Novelle",
+      "s": "Engel schweben auf und nieder, uns in Tönen zu erlaben, welch ein himmlischer Gesang!",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0254",
+      "w": "Novelle",
+      "s": "Blankes Schwert erstarrt im Hiebe, Glaub und Hoffnung sind erfüllt; wundertätig ist die Liebe, die sich im Gebet enthüllt\".",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0255",
+      "w": "Novelle",
+      "s": "Alles war still, hörte, horchte, und nur erst, als die Töne verhallten, konnte man den Eindruck bemerken und allenfalls beobachten.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0256",
+      "w": "Novelle",
+      "s": "Der Fürst, als wenn er erst jetzt das Unheil übersähe, das ihn vor kurzem bedroht hatte, blickte nieder auf seine Gemahlin, die, an ihn gelehnt, sich nicht versagte, das gestickte Tüchlein hervorzuziehen und die Augen damit zu bedecken.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0257",
+      "w": "Novelle",
+      "s": "Vor dem Eintritt in den Hohlweg, der den Zugang zu dem Schloß eröffnete, fanden sie die Jäger beschäftigt, dürres Reisig zu häufen, damit sie auf jeden Fall ein großes Feuer anzünden könnten.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0258",
+      "w": "Novelle",
+      "s": "Weiter hin, auf einem Mauerstücke sitzend, erblickten sie Honorio, seine Doppelbüchse in den Schoß gelegt, auf einem Posten als wie zu jedem Ereignis gefaßt.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0259",
+      "w": "Novelle",
+      "s": "Die Frau sprach ihn an mit Bitte, das Feuer nicht anzünden zu lassen; er schien jedoch ihrer Rede wenig Aufmerksamkeit zu schenken.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0260",
+      "w": "Novelle",
+      "s": "Novelle, Kapitel 7 \"Du schaust nach Abend\", rief die Frau; \"du tust wohl daran, dort gibts viel zu tun; eile nur, säume nicht, du wirst überwinden.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0261",
+      "w": "Novelle",
+      "s": "Lockt ihn das Kind hinein, so kann ich die öffnung mit leichter Mühe schließen, und der Knabe, wenn es ihm gut deucht, durch eine der kleinen Wendeltreppen, die er in der Ecke sieht, dem Tiere entschlüpfen.",
+      "src": {
+        "work": "Novelle"
+      }
+    },
+    {
+      "id": "goethe.p0262",
+      "w": "Novelle",
+      "s": "Die Umstände sind alle nicht nötig; Gott und Kunst, Frömmigkeit und Glück müssen das Beste tun\".--\"Es sei\", versetzte der Wärtel; \"aber ich kenne meine Pflichten.",
+      "src": {
+        "work": "Novelle"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "goethe.f.v0001",
+      "kind": "verbatim",
+      "text": "Zwar seh' ich nicht, Wie ich dem Rath des Treuen folgen soll; Doch folg' ich gern der Pflicht, dem Könige Für seine Wohlthat gutes Wort zu geben, Und wünsche mir, daß ich dem Mächtigen, Was ihm gefällt, mit Wahrheit sagen möge.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "goethe.f.v0002",
+      "kind": "verbatim",
+      "text": "Was auch der Rath der Götter mit dir sei, Und was sie deinem Haus und dir gedenken; So fehlt es doch, seitdem du bei uns wohnst Und eines frommen Gastes Recht genießest, An Segen nicht, der mir von oben kommt.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "goethe.f.v0003",
+      "kind": "verbatim",
+      "text": "Rath, Mäßigung und Weisheit und Geduld Verbarg er ihrem scheuen düstern Blick; Zur Wuth ward ihnen jegliche Begier, Und gränzenlos drang ihre Wuth umher.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "goethe.f.v0004",
+      "kind": "verbatim",
+      "text": "Daß in den alten Hallen, wo die Trauer Noch manchmal stille meinen Namen lispelt, Die Freude, wie um eine Neugeborne, Den schönsten Kranz von Säul an Säulen schlinge.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "en",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "goethe.f.v0005",
+      "kind": "verbatim",
+      "text": "Du hattest mir die Sinnen eingewiegt, Das Murren meines Volks vernahm ich nicht; Nun rufen sie die Schuld von meines Sohnes Frühzeit'gem Tode lauter über mich.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "goethe.f.v0006",
+      "kind": "verbatim",
+      "text": "Wie oft, wenn still Elektra, meine Schwester, Am Feuer in der tiefen Halle saß, Drängt' ich beklommen mich an ihren Schoos, Und starrte, wie sie bitter weinte, sie Mit großen Augen an.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "en",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "goethe.f.v0007",
+      "kind": "verbatim",
+      "text": "Wir möchten jede That So groß gleich thun, als wie sie wächs't und wird, Wenn Jahre lang durch Länder und Geschlechter Der Mund der Dichter sie vermehrend wälzt.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "en",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "goethe.f.v0008",
+      "kind": "verbatim",
+      "text": "O sag' ihm bald ein gutes holdes Wort; Doch schone seiner wenn du mit ihm sprichst, Das bitt' ich eifrig: denn es wird gar leicht Durch Freud' und Schmerz und durch Erinnerung Sein Innerstes ergriffen und zerrüttet.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "goethe.f.v0009",
+      "kind": "verbatim",
+      "text": "Ja, sie sind's, Die Ahnherrn meines Hauses!--Mit Thyesten Geht Atreus in vertraulichen Gesprächen; Die Knaben schlüpfen scherzend um sie her.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "goethe.f.v0010",
+      "kind": "verbatim",
+      "text": "Ja, mancher, den ein widriges Geschick An fremdes Ufer trug, empfand es selbst, Wie göttergleich dem armen Irrenden, Umhergetrieben an der fremden Gränze, Ein freundlich Menschenangesicht begegnet.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "en",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "goethe.f.v0011",
+      "kind": "verbatim",
+      "text": "Entsetzlich wechselt mir der Grimm im Busen; Erst gegen sie, die ich so heilig hielt; Dann gegen mich, der ich sie zum Verrath Durch Nachsicht und durch Güte bildete.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "goethe.f.v0012",
+      "kind": "verbatim",
+      "text": "Unwillig, wie sich Feuer gegen Wasser Im Kampfe wehrt und gischend seinen Feind Zu Tilgen sucht, so wehret sich der Zorn In meinem Busen gegen deine Worte.",
+      "work": "Iphigenie auf Tauris",
+      "lang": "en",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "goethe.f.v0013",
+      "kind": "verbatim",
+      "text": "Fall ich, so ist ihr Urtheil mit dem meinen Gesprochen; aber gönnet mir das Glück, Zu überwinden, so betrete nie Ein Mann dies Ufer, dem der schnelle Blick Hülfreicher Liebe nicht begegnet, und Getröstet scheide jeglicher hinweg!",
+      "work": "Iphigenie auf Tauris",
+      "lang": "fr",
+      "src": {
+        "work": "Iphigenie auf Tauris"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "goethe.f.v0014",
+      "kind": "verbatim",
+      "text": "Dann sende schnell den bewährten Vaska nach Madrid; er ist unermüdet und treu; daß mein Bruder zuerst durch ihn die Nachricht erfahre, daß der Ruf ihn nicht übereile.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "goethe.f.v0015",
+      "kind": "verbatim",
+      "text": "Wie neulich bei dem Vetter, wie du den Holzschnitt und die Beschreibung fandst und mit einem Schrei riefst: Graf Egmont!--Ich ward feuerrot.",
+      "work": "Egmont",
+      "lang": "en",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 140
+      }
+    },
+    {
+      "id": "goethe.f.v0016",
+      "kind": "verbatim",
+      "text": "Ich vergesse niemanden leicht, den ich einmal gesehen und gesprochen habe.--Was an euch ist, Ruhe zu erhalten, Leute, das thut; ihr seid übel genug angeschrieben.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "goethe.f.v0017",
+      "kind": "verbatim",
+      "text": "Daß ich fröhlich bin, die Sachen leicht nehme, rasch lebe, das ist mein Glück; und ich vertausch' es nicht gegen die Sicherheit eines Totengewölbes.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "goethe.f.v0018",
+      "kind": "verbatim",
+      "text": "Im Anfange geht's rasch; nachher wird er auch finden, daß in der Speisekammer unter den Speckseiten besser leben ist und des Nachts zu ruhen, als auf dem Fruchtboden einzelne Mäuschen zu erlisten.",
+      "work": "Egmont",
+      "lang": "en",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "goethe.f.v0019",
+      "kind": "verbatim",
+      "text": "Alle tägliche Runden sind beordert, zur bestimmten Zeit an verschiedenen Plätzen einzutreffen, die ich ihnen bezeichnet habe; sie gehen indes, wie gewöhnlich, durch die Stadt, um Ordnung zu erhalten.",
+      "work": "Egmont",
+      "lang": "en",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "goethe.f.v0020",
+      "kind": "verbatim",
+      "text": "Verweile, bis die Fürsten kommen; dann gieb Gomez die Ordre, die Straßen zu besetzen, und eile selbst, Egmonts Schreiber und die übrigen gefangen zu nehmen, die dir bezeichnet sind.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "goethe.f.v0021",
+      "kind": "verbatim",
+      "text": "Ich würde ihm sagen: Leicht kann der Hirt eine ganze Herde Schafe vor sich hintreiben, der Stier zieht seinen Pflug ohne Widerstand; aber dem edeln Pferde, das du reiten willst, mußt du seine Gedanken ablernen, du mußt nichts Unkluges, nichts unklug von ihm verlangen.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "goethe.f.v0022",
+      "kind": "verbatim",
+      "text": "Würden aber neue Menschen ohne Not gesendet, die sich zum zweitenmale auf Unkosten der Nation bereichern wollten, sähe man sich einer strengen, kühnen, unbedingten Habsucht ausgesetzt, das würde eine Gärung machen, die sich nicht leicht in sich selbst auflöste.",
+      "work": "Egmont",
+      "lang": "fr",
+      "src": {
+        "work": "Egmont"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "goethe.f.v0023",
+      "kind": "verbatim",
+      "text": "Mit solchen Gebeten Schwamm er weiter, es trieb ihn der Strom, der reißend und groß war, Binnen weniger Zeit fast eine Meile hinunter; Und da kroch er ans Land am selbigen Ufer und keichte.",
+      "work": "Reineke Fuchs",
+      "lang": "en",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "goethe.f.v0024",
+      "kind": "verbatim",
+      "text": "Grimbart hatte gesprochen, und Reineke sagte dagegen: Oheim, Ihr ratet mir wohl, daß ich zu Hofe mich stelle, Meines Rechtes selber zu wahren.",
+      "work": "Reineke Fuchs",
+      "lang": "en",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 142
+      }
+    },
+    {
+      "id": "goethe.f.v0025",
+      "kind": "verbatim",
+      "text": "Confiteor tibi Pater et Mater, daß ich der Otter, Daß ich dem Kater und manchen gar manche Tücke versetzte, Ich bekenn es und lasse mir gern die Buße gefallen.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "goethe.f.v0026",
+      "kind": "verbatim",
+      "text": "Es dienten geistliche Frauen, Spat und früh, dem Herren daselbst und nährten im Hofe Viele Hühner und Hähne, mit manchem schönen Kapaune, Welche nach Futter zuweilen sich außer der Mauer zerstreuten.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "goethe.f.v0027",
+      "kind": "verbatim",
+      "text": "Aber die Königin bat er, auch Schuh ihm zu schaffen, und sagte: Ihr erkennt mich, gnädige Frau, nun einmal für Euren Pilger; helfet mir nun, daß ich die Reise vollbringe.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "goethe.f.v0028",
+      "kind": "verbatim",
+      "text": "Könnte man freilich die Sache vermitteln, und sollt es kein Vorwurf Mir beim Bischof, Herrn Ohnegrund, werden, zürnte nicht etwa Mir darüber der Propst, Herr Losefund, oder der Dechant Rapiamus, ich segnet ihn gern nach Eurem Befehle.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "goethe.f.v0029",
+      "kind": "verbatim",
+      "text": "Man will mir sagen, sie haben Kinder wie andre verehlichte Leute; und sie zu versorgen, Sind sie eifrig bemüht und bringen sie hoch in die Höhe.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "goethe.f.v0030",
+      "kind": "verbatim",
+      "text": "Doch als er die vielen Feinde beisammen erblickte, wie alle standen und alle Sich zu rächen begehrten und ihn am Leben zu strafen, Fiel ihm der Mut; er zweifelte nun, doch ging er mit Kühnheit Grade durch alle Baronen, und Grimbart ging ihm zur Seite.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "goethe.f.v0031",
+      "kind": "verbatim",
+      "text": "Diese merkte des Königs Verdruß und sprach mit Bedachte Wenn Ihr, gnädiger Herr, auf meine Bitte zuweilen Hörtet, gereut' es Euch nie, und Ihr vergabt mir die Kühnheit, Wenn Ihr zürntet, ein Wort gelinder Meinung zu sagen.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "goethe.f.v0032",
+      "kind": "verbatim",
+      "text": "Auf dem Anger fand er ein Pferd, woran nur die Knochen Übrig waren; doch hungert' ihn sehr, er nagte sie gierig, Und es kam ihm ein spitziges Bein die Quer in den Kragen; Ängstlich stellt' er sich an, es war ihm übel geraten.",
+      "work": "Reineke Fuchs",
+      "lang": "fr",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "goethe.f.v0033",
+      "kind": "verbatim",
+      "text": "Euer Vater verehrt' ihm hernach, ich weiß es am besten, Eine goldene Spange mit einem roten Barette, Sie vor allen Herren zu tragen; so haben ihn alle Hoch in Ehren gehalten.",
+      "work": "Reineke Fuchs",
+      "lang": "en",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "goethe.f.v0034",
+      "kind": "verbatim",
+      "text": "Alles, was ich besitze und was ich nur immer gewinne, Alles widm ich Euch gern und Eurer Königin; sei es Wenig oder auch viel, Ihr nehmt das meiste von allem.",
+      "work": "Reineke Fuchs",
+      "lang": "en",
+      "src": {
+        "work": "Reineke Fuchs"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "goethe.f.v0035",
+      "kind": "verbatim",
+      "text": "Hegire Nord und West und Süd zersplittern, Throne bersten, Reiche zittern: Flüchte du, im reinen Osten Patriarchenluft zu kosten, Unter Lieben, Trinken, Singen Soll dich Chisers Quell verjüngen.",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "goethe.f.v0036",
+      "kind": "verbatim",
+      "text": "Erschaffen und Beleben Hans Adam war ein Erdenkloß, Den Gott zum Menschen machte, Doch bracht' er aus der Mutter Schoß Noch vieles Ungeschlachte.",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 145
+      }
+    },
+    {
+      "id": "goethe.f.v0037",
+      "kind": "verbatim",
+      "text": "Zugemeßne Rhythmen reizen freilich, Das Talent erfreut sich wohl darin, Doch wie schnelle widern sie abscheulich, Hohle Masken ohne Blut und Sinn.",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "goethe.f.v0038",
+      "kind": "verbatim",
+      "text": "Reitest du bei einem Schmied vorbei Reitest du bei einem Schmied vorbei, Weißt du nicht, wann er dein Pferd beschlägt; Siehst du eine Hütte im Felde frei, Weißt nicht, ob sie dir ein Liebchen hegt; Einem Jüngling begegnest du, schön und kühn, Er überwindet dich künftig oder du ihn.",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "goethe.f.v0039",
+      "kind": "verbatim",
+      "text": "Auf dem Weg, da ist's ein Wort, Niemand wird's verdammen: \"Wollen wir an einen Ort, Nun wir gehn zusammen!\" Vieles wird sich da und hie Uns entgegenstellen: In der Liebe mag man nie Helfer und Gesellen; Geld und Ehre hätte man Gern allein zur Spende; Und der Wein, der treue Mann, Der entzweit am Ende.",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 302
+      }
+    },
+    {
+      "id": "goethe.f.v0040",
+      "kind": "verbatim",
+      "text": "Wenn du, Suleika, Mich überschwenglich beglückst, Deine Leidenschaft mir zuwirfst, Als wär's ein Ball, Daß ich ihn fange, Dir zurückwerfe Mein gewidmetes Ich: Das ist ein Augenblick!",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "goethe.f.v0041",
+      "kind": "verbatim",
+      "text": "Mädchen Dichter will so gerne Knecht sein, Weil die Herrschaft draus entspringet; Doch vor allem sollt' ihm recht sein, Wenn das Liebchen selber singet.",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "goethe.f.v0042",
+      "kind": "verbatim",
+      "text": "Solang man nüchtern ist Solang man nüchtern ist, Gefällt das Schlechte; Wie man getrunken hat, Weiß man das Rechte; Nur ist das übermaß Auch gleich zu Handen, Hafis, o lehre mich, Wie du's verstanden!",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "goethe.f.v0043",
+      "kind": "verbatim",
+      "text": "Schenke Nennen dich den großen Dichter, Wenn dich auf dem Markte zeigest; Gerne hör ich, wenn du singest, Und ich horche, wenn du schweigest.",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "goethe.f.v0044",
+      "kind": "verbatim",
+      "text": "An dir, wie an des Himmels Sternen Ist Gottes Größe im kleinen zu lernen Daß er, der Welten überblickt, Sein Auge hier hat aufgedrückt, Und so den leichten Flaum geschmückt, Daß Könige kaum unternahmen, Die Pracht des Vogels nachzuahmen.",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "goethe.f.v0045",
+      "kind": "verbatim",
+      "text": "Will dem Ufer Senderuds entsagen, Auf zum Darnawend die Flügel schlagen, Wie sie tagt, ihr freudig zu begegnen Und von dorther ewig euch zu segnen.",
+      "work": "West-östlicher Divan",
+      "lang": "fr",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "goethe.f.v0046",
+      "kind": "verbatim",
+      "text": "Mannigfaltiger frischer Genuß, Ewig bräutlich keuscher Kuß!-- Wenn jeder Augenblick mich durchschauert, Was soll ich fragen, wie lang es gedauert!",
+      "work": "West-östlicher Divan",
+      "lang": "en",
+      "src": {
+        "work": "West-östlicher Divan"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "goethe.f.v0047",
+      "kind": "verbatim",
+      "text": "Nun haben wir manches getan, um diese Wildnis zugänglicher zu machen, denn mehr bedarf es nicht, um jeden Wanderer, jeden Besuchenden in Erstaunen zu setzen, zu entzücken\".",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "goethe.f.v0048",
+      "kind": "verbatim",
+      "text": "Novelle, Kapitel 2 Tiefe Blätterschichten wegräumend, haben wir den merkwürdigsten Platz geebnet gefunden, dessengleichen in der Welt vielleicht nicht wieder zu sehen ist.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "goethe.f.v0049",
+      "kind": "verbatim",
+      "text": "Danken wir also dem wackern Künstler, der uns so löblich in verschiedenen Bildern von allem überzeugt, als wenn wir gegenwärtig wären; er hat die schönsten Stunden des Tages und der Jahrszeit dazu angewendet und sich wochenlang um diese Gegenstände herumbewegt.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "goethe.f.v0050",
+      "kind": "verbatim",
+      "text": "Honorio trat ein und meldete, die Pferde seien vorgeführt; da sagte die Fürstin, zum Oheim gewendet: \"reiten wir hinauf, und lassen Sie mich in der Wirklichkeit sehen, was Sie mir hier im Bilde zeigten!",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "goethe.f.v0051",
+      "kind": "verbatim",
+      "text": "Seitdem der Fürst gestern mir Anlaß zu diesem übersichten gegeben, ist es mir gar angenehm zu denken, wie hier, wo Gebirg und flaches Land aneinandergrenzen, beide so deutlich aussprechen, was sie brauchen und was sie wünschen.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "goethe.f.v0052",
+      "kind": "verbatim",
+      "text": "Ich weiß\", versetzte der Fürst, \"daß mein Neffe hierauf die größte Aufmerksamkeit wendet, denn gerade zu dieser Jahrszeit kommt es hauptsächlich darauf an, daß man mehr empfange als gebe; dies zu bewirken, ist am Ende die Summe des ganzen Staatshaushaltes so wie der kleinsten häuslichen Wirtschaft.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "goethe.f.v0053",
+      "kind": "verbatim",
+      "text": "Das Volk schaute mit Freuden die junge Dame, und auf so viel lächelnden Gesichtern zeigte sich das entschiedene Behagen, zu sehen, daß die erste Frau im Lande auch die schönste und anmutigste sei.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "goethe.f.v0054",
+      "kind": "verbatim",
+      "text": "Zur Bude näher gelangt, durften sie die bunten, kolossalen Gemälde nicht übersehen, die mit heftigen Farben und kräftigen Bildern jene fremden Tiere darstellten, welche der friedliche Staatsbürger zu schauen unüberwindliche Lust empfinden sollte.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "goethe.f.v0055",
+      "kind": "verbatim",
+      "text": "Der Weg führte zuerst am Flusse hinan, an einem zwar noch schmalen, nur leichte Kähne tragenden Wasser, das aber nach und nach als größter Strom seinen Namen behalten und ferne Länder beleben sollte.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "goethe.f.v0056",
+      "kind": "verbatim",
+      "text": "Mächtige Felsen standen von Urzeiten her, jedem Wechsel unangetastet, fest, wohlgegründet voran, und so türmte sichs aufwärts; das sazwischen Herabgestürzte lag in mächtigen Platten und Trümmern unregelmäßig übereinander und schien dem Kühnsten jeden Angriff zu verbieten.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "goethe.f.v0057",
+      "kind": "verbatim",
+      "text": "Das Feuer greift weiter um sich!\" rief man, immer durch die Gläser schauend; auch wurde das Unheil den guten, unbewaffneten Augen der Fürstin bemerklich.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "goethe.f.v0058",
+      "kind": "verbatim",
+      "text": "In der Stadt wie auf dem Schloß sind die Feueranstalten in bester Ordnung, man wird sich durch einen so unerwartet außerordentlichen Fall nicht irre machen lassen.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "goethe.f.v0059",
+      "kind": "verbatim",
+      "text": "Hier aber ist ein böser Boden, kleine Steine und kurzes Gras, schnelles Reiten ist unsicher; ohnehin, bis wir hineinkommen, wird das Feuer schon nieder sein\".",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "goethe.f.v0060",
+      "kind": "verbatim",
+      "text": "Dann aber mit kreischendem Geheul rettete jeder, was zur Hand lag; Diener und Knechte mit den Herren bemühten sich, von Flammen ergriffene Ballen fortzuschleppen, von dem brennenden Gestell noch einiges wegzureißen, um es in die Kiste zu packen, die sie denn doch zuletzt den eilenden Flammen zum Raube lassen mußten.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 317
+      }
+    },
+    {
+      "id": "goethe.f.v0061",
+      "kind": "verbatim",
+      "text": "Sie sprengte, was das Pferd vermochte, die steile, steinige Strecke hinan, kaum fürchtend, daß ein zartes Geschöpf, solcher Anstrengung ungewohnt, sie nicht aushalten werde.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "goethe.f.v0062",
+      "kind": "verbatim",
+      "text": "Reisende strömen von allen Orten her, und wenn von einer Stadt, von einem wichtigen Punkte irgendeines Weltteils gesprochen wird, ergeht an den Eurigen jedesmal die Frage, ob er daselbst gewesen sei.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "goethe.f.v0063",
+      "kind": "verbatim",
+      "text": "Seine Absicht war, Euch zum selbständigen Edelmann herangereift zu sehen, der sich und ihm auch auswärts Ehre machte wie bisher am Hofe, und ich dächte, Eure Tat wäre ein so empfehlender Reisepaß, als ein junger Mann nur in die Welt mitnehmen kann\".",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "goethe.f.v0064",
+      "kind": "verbatim",
+      "text": "Du warst zahm und hättest dich gern ruhig niedergelassen und auf uns gewartet; denn deine Fußballen schmerzten dich, und deine Krallen hatten keine Kraft mehr!",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "goethe.f.v0065",
+      "kind": "verbatim",
+      "text": "Du warst der Schönste deinesgleichen; wer hat je einen königlichen Tiger so herrlich ausgestreckt im Schlaf gesehen, wie du nun hier liegst, tot, um nicht wieder aufzustehen!",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "goethe.f.v0066",
+      "kind": "verbatim",
+      "text": "Wenn du des Morgens aufwachtest beim frühen Tagschein und den Rachen aufsperrtest, ausstreckend die rote Zunge, so schienst du uns zu lächeln, und wenn schon brüllend, nahmst du doch spielend dein Futter aus den Händen einer Frau, von den Fingern eines Kindes!",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "goethe.f.v0067",
+      "kind": "verbatim",
+      "text": "Sie hatte nicht ausgeklagt, als über die mittlere Höhe des Bergs am Schlosse herab Reiter heransprengten, die alsobald für das Jagdgefolge des Fürsten erkannt wurden, er selbst voran.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "goethe.f.v0068",
+      "kind": "verbatim",
+      "text": "Unschlüssig war man nicht, was zu tun sei; anzuordnen, auszuführen war der Fürst beschäftigt, als ein Mann sich in den Kreis drängte, groß von Gestalt, bunt und wunderlich gekleidet wie Frau und Kind.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "goethe.f.v0069",
+      "kind": "verbatim",
+      "text": "Hätte ich sie bei der Hand gehabt, er wäre nicht wieder aufgestanden, das Fell wäre doch mein gewesen, und ich hätte mich dessen, wie billig, zeitlebens gebrüstet\".",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "goethe.f.v0070",
+      "kind": "verbatim",
+      "text": "Hier diese Frau und dieses Kind\", erwiderte der Vater hastig, \"erbieten sich, ihn zu zähmen, ihn ruhig zu erhalten, bis ich den beschlagenen Kasten heraufschaffe, da wir ihn denn unschädlich und unbeschädigt wieder zurückbringen werden\".",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "goethe.f.v0071",
+      "kind": "verbatim",
+      "text": "Besetze den schmalen Weg!--Haltet eure Büchsen bereit, aber schießt nicht eher, als bis ihr das Geschöpf nicht sonst zurückscheuchen könnt; allenfalls macht ein Feuer an, vor dem er sich fürchtet, wenn er herunter will!",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "goethe.f.v0072",
+      "kind": "verbatim",
+      "text": "Sie kennt ihren Weg und verliert ihn nicht, sie baut sich eine Wohnung aus Grashalmen, Erdbröslein und Kiefernadeln, sie baut es in die Höhe und wölbet es zu; aber sie hat umsonst gearbeitet, denn das Pferd stampft und scharrt alles auseinander.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "goethe.f.v0073",
+      "kind": "verbatim",
+      "text": "Doch der Mensch weiß ihn zu zähmen, und das grausamste der Geschöpfe hat Ehrfurcht vor dem Ebenbilde Gottes, wornach auch die Engel gemacht sind, die dem Herrn dienen und seinen Dienern.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "goethe.f.v0074",
+      "kind": "verbatim",
+      "text": "Löw und Löwin, hin und wider, schmiegen sich um ihn heran; ja, die sanften, frommen Lieder habens ihnen angetan!\" Der Vater fuhr fort, die Strophe mit der Flöte zu begleiten; die Mutter trat hie und da als zweite Stimme mit ein.",
+      "work": "Novelle",
+      "lang": "en",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "goethe.f.v0075",
+      "kind": "verbatim",
+      "text": "Der Fürst, als wenn er erst jetzt das Unheil übersähe, das ihn vor kurzem bedroht hatte, blickte nieder auf seine Gemahlin, die, an ihn gelehnt, sich nicht versagte, das gestickte Tüchlein hervorzuziehen und die Augen damit zu bedecken.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "goethe.f.v0076",
+      "kind": "verbatim",
+      "text": "Vor dem Eintritt in den Hohlweg, der den Zugang zu dem Schloß eröffnete, fanden sie die Jäger beschäftigt, dürres Reisig zu häufen, damit sie auf jeden Fall ein großes Feuer anzünden könnten.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "goethe.f.v0077",
+      "kind": "verbatim",
+      "text": "Weiter hin, auf einem Mauerstücke sitzend, erblickten sie Honorio, seine Doppelbüchse in den Schoß gelegt, auf einem Posten als wie zu jedem Ereignis gefaßt.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "goethe.f.v0078",
+      "kind": "verbatim",
+      "text": "Novelle, Kapitel 7 \"Du schaust nach Abend\", rief die Frau; \"du tust wohl daran, dort gibts viel zu tun; eile nur, säume nicht, du wirst überwinden.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "goethe.f.v0079",
+      "kind": "verbatim",
+      "text": "Lockt ihn das Kind hinein, so kann ich die öffnung mit leichter Mühe schließen, und der Knabe, wenn es ihm gut deucht, durch eine der kleinen Wendeltreppen, die er in der Ecke sieht, dem Tiere entschlüpfen.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "goethe.f.v0080",
+      "kind": "verbatim",
+      "text": "Die Umstände sind alle nicht nötig; Gott und Kunst, Frömmigkeit und Glück müssen das Beste tun\".--\"Es sei\", versetzte der Wärtel; \"aber ich kenne meine Pflichten.",
+      "work": "Novelle",
+      "lang": "fr",
+      "src": {
+        "work": "Novelle"
+      },
+      "quality": {
+        "chars": 162
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 262,
+    "formulas": 80,
+    "verbatim": 80,
+    "patterns": 0
+  },
+  "checksum": "sha256:4e1eb1d125e73deaed15ca2a3a00c2110bdf7f229040291d59752cab2678fe67"
+}

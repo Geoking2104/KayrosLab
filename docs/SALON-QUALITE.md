@@ -42,6 +42,9 @@ node salon/scripts/publish_gate.mjs --works 6 --max 360 --workmax 90
 node salon/scripts/publish_gate.mjs --skip-build          # teste les packs existants
 node salon/scripts/publish_gate.mjs --llm                 # ajoute des tours modèle réel
 node --test tests/salon-speech.test.mjs                   # tests unitaires de qualité
+
+# 4. Publier la page et les packs sur GitHub Pages (/salon/)
+node salon/scripts/publish_pages.mjs
 ```
 
 ## Seuils du portail
@@ -84,6 +87,18 @@ comptés dans le rapport.
 - `salon/scripts/reports/publish-gate-<date>.json`
 - `salon/scripts/reports/harvest-<date>.json`
 - `salon/scripts/reports/catalog-enrich-<date>.json`
+
+## Deux miroirs de publication
+
+- `backend/web/public/salon/` : miroir complet (corpus, formules, packs) lu par
+  l'API `/v1/salon/*` et assemblé sur le VPS.
+- `salon/` (racine) : page autonome + `catalog.json`, `doctrine.json`,
+  `kb-manifest.json` et `kb/` — servie par GitHub Pages sur
+  `https://www.kayroslab.com/salon/`. Synchronisation : `publish_pages.mjs`.
+
+`www.kayroslab.com` pointe actuellement vers GitHub Pages (CNAME
+`geoking2104.github.io`) ; le vhost VPS `/salon/` reste prêt pour un basculement
+DNS ultérieur.
 
 ## Mémoire : plafonds et cache
 

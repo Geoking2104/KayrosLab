@@ -1,0 +1,3223 @@
+{
+  "authorId": "hobbes",
+  "kbVersion": "hobbes@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.392Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Leviathan",
+      "sentences": 66
+    },
+    {
+      "title": "Philosophical Rudiments (De Cive)",
+      "sentences": 70
+    },
+    {
+      "title": "Tripos: Human Nature, Liberty and Necessity",
+      "sentences": 64
+    },
+    {
+      "title": "Behemoth",
+      "sentences": 68
+    }
+  ],
+  "passages": [
+    {
+      "id": "hobbes.p0001",
+      "w": "Leviathan",
+      "s": "Cruelty-- Contempt, or little sense of the calamity of others, is that which men call CRUELTY; proceeding from Security of their own fortune.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0002",
+      "w": "Leviathan",
+      "s": "Felicity Continual Successe in obtaining those things which a man from time to time desireth, that is to say, continual prospering, is that men call FELICITY; I mean the Felicity of this life.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0003",
+      "w": "Leviathan",
+      "s": "For if I should not believe all that is written By Historians, of the glorious acts of Alexander, or Caesar; I do not think the Ghost of Alexander, or Caesar, had any just cause to be offended; or any body else, but the Historian.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0004",
+      "w": "Leviathan",
+      "s": "Judgement therefore without Fancy is Wit, but Fancy without Judgement not.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0005",
+      "w": "Leviathan",
+      "s": "And if this be Madnesse in the multitude, it is the same in every particular man.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0006",
+      "w": "Leviathan",
+      "s": "And hence it came to passe, when our Saviour (Mark 3.21.) was compassed about with the multitude, those of the house doubted he was mad, and went out to hold him: but the Scribes said he had Belzebub, and that was it, by which he cast out divels; as if the greater mad-man had awed the lesser.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0007",
+      "w": "Leviathan",
+      "s": "The Registers of Science, are such Books as contain the Demonstrations of Consequences of one Affirmation, to another; and are commonly called Books of Philosophy; whereof the sorts are many, according to the diversity of the Matter; And may be divided in such manner as I have divided them in the following Table.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0008",
+      "w": "Leviathan",
+      "s": "Forme is Power; because being a promise of Good, it recommendeth men to the favour of women and strangers.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0009",
+      "w": "Leviathan",
+      "s": "To hearken to a mans counsell, or discourse of what kind soever, is to Honour; as a signe we think him wise, or eloquent, or witty.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0010",
+      "w": "Leviathan",
+      "s": "But if it seem to proceed from a purpose to appear grave, it is Dishonourable.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0011",
+      "w": "Leviathan",
+      "s": "Worthinesse Fitnesse WORTHINESSE, is a thing different from the worth, or value of a man; and also from his merit, or desert; and consisteth in a particular power, or ability for that, whereof he is said to be worthy: which particular ability, is usually named FITNESSE, or Aptitude.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0012",
+      "w": "Leviathan",
+      "s": "And therefore Eloquent speakers are enclined to Ambition; for Eloquence seemeth wisdome, both to themselves and others Irresolution, From Too Great Valuing Of Small Matters Pusillanimity disposeth men to Irresolution, and consequently to lose the occasions, and fittest opportunities of action.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0013",
+      "w": "Leviathan",
+      "s": "And the Religion of the later sort is Divine Politiques; and containeth Precepts to those that have yeelded themselves subjects in the Kingdome of God.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0014",
+      "w": "Leviathan",
+      "s": "That the Clergy, and Regulars, in what Country soever, shall be exempt from the Jurisdiction of their King, in cases criminall?",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0015",
+      "w": "Leviathan",
+      "s": "But because they uphold thereby, the Industry of their Subjects; there does not follow from it, that misery, which accompanies the Liberty of particular men.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0016",
+      "w": "Leviathan",
+      "s": "Covenants How Made Voyd Men are freed of their Covenants two wayes; by Performing; or by being Forgiven.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0017",
+      "w": "Leviathan",
+      "s": "For though men have sometimes used to swear by their Kings, for feare, or flattery; yet they would have it thereby understood, they attributed to them Divine honour.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0018",
+      "w": "Leviathan",
+      "s": "Nothing Done To A Man, By His Own Consent Can Be Injury Whatsoever is done to a man, conformable to his own Will signified to the doer, is no Injury to him.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0019",
+      "w": "Leviathan",
+      "s": "Arbitrary, is that which is agreed on by the Competitors; Naturall, is either Primogeniture, (which the Greek calls Kleronomia, which signifies, Given by Lot;) or First Seisure.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0020",
+      "w": "Leviathan",
+      "s": "14) of the nature of Covenants between man and man in their naturall capacity, is true also when they are made by their Actors, Representers, or Procurators, that have authority from them, so far-forth as is in their Commission, but no farther.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0021",
+      "w": "Leviathan",
+      "s": "The first simply so called; which I have before defined to be him, that owneth the Action of another simply.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0022",
+      "w": "Leviathan",
+      "s": "No Man Can Without Injustice Protest Against The Institution Of The Soveraigne Declared By The Major Part.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0023",
+      "w": "Leviathan",
+      "s": "The dignities of Lord, Earle, Duke, and Prince are his Creatures.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0024",
+      "w": "Leviathan",
+      "s": "If therefore a Monarch declare expresly, that such a man shall be his Heire, either by Word or Writing, then is that man immediately after the decease of his Predecessor, Invested in the right of being Monarch.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0025",
+      "w": "Leviathan",
+      "s": "Or Education; If there be no Contract, the Dominion is in the Mother.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0026",
+      "w": "Leviathan",
+      "s": "He shall take your man-servants, and your maid-servants, and the choice of your youth, and employ them in his businesse.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0027",
+      "w": "Leviathan",
+      "s": "For whatsoever is so tyed, or environed, as it cannot move, but within a certain space, which space is determined by the opposition of some externall body, we say it hath not Liberty to go further.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0028",
+      "w": "Leviathan",
+      "s": "And when the same errour is confirmed by the authority of men in reputation for their writings in this subject, it is no wonder if it produce sedition, and change of Government.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0029",
+      "w": "Leviathan",
+      "s": "For the right men have by Nature to protect themselves, when none else can protect them, can by no Covenant be relinquished.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0030",
+      "w": "Leviathan",
+      "s": "If the Common-wealth impose a Tax upon the Body, it is understood to be layd upon every member proportionably to his particular adventure in the Company.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0031",
+      "w": "Leviathan",
+      "s": "And because Silver and Gold, have their value from the matter it self; they have first this priviledge, that the value of them cannot be altered by the power of one, nor of a few Common-wealths; as being a common measure of the commodities of all places.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0032",
+      "w": "Leviathan",
+      "s": "And this is not attained to, without much experience.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0033",
+      "w": "Leviathan",
+      "s": "And the Common-wealth only, praescribes, and commandeth the observation of those rules, which we call Law: Therefore the Common-wealth is the Legislator.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0034",
+      "w": "Leviathan",
+      "s": "Item, that the two arms of a Common-wealth, are Force, and Justice; The First Whereof Is In The King; The Other Deposited In The Hands Of The Parlament.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0035",
+      "w": "Leviathan",
+      "s": "The difficulty consisteth in the evidence of the Authority derived from him; The removing whereof, dependeth on the knowledge of the publique Registers, publique Counsels, publique Ministers, and publique Seales; by which all Lawes are sufficiently verified.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0036",
+      "w": "Leviathan",
+      "s": "For Commentaries are commonly more subject to cavill, than the Text; and therefore need other Commentaries; and so there will be no end of such Interpretation.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0037",
+      "w": "Leviathan",
+      "s": "Like to these, were the Orders of the House of Commons in England.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0038",
+      "w": "Leviathan",
+      "s": "For in whatsoever is not regulated by the Common-wealth, tis Equity (which is the Law of Nature, and therefore an eternall Law of God) that every man equally enjoy his liberty.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0039",
+      "w": "Leviathan",
+      "s": "When therefore his Intention is Right, his fact is no Sinne: if otherwise, his fact is Sinne; but not Crime.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0040",
+      "w": "Leviathan",
+      "s": "And yet in many cases a Crime may be committed through Feare.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0041",
+      "w": "Leviathan",
+      "s": "And therefore To kill against the Law, is a greater Crime, that any other injury, life preserved.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0042",
+      "w": "Leviathan",
+      "s": "For he that goes about the violation of a Law, wherein no penalty is determined, expecteth an indeterminate, that is to say, an arbitrary Punishment.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0043",
+      "w": "Leviathan",
+      "s": "Faith, and Sanctity, are indeed not very frequent; but yet they are not Miracles, but brought to passe by education, discipline, correction, and other naturall wayes, by which God worketh them in his elect, as such time as he thinketh fit.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0044",
+      "w": "Leviathan",
+      "s": "And this proceeding of popular, and ambitious men, is plain Rebellion; and may be resembled to the effects of Witchcraft.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0045",
+      "w": "Leviathan",
+      "s": "The Use Of Universities As for the Means, and Conduits, by which the people may receive this Instruction, wee are to search, by what means so may Opinions, contrary to the peace of Man-kind, upon weak and false Principles, have neverthelesse been so deeply rooted in them.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0046",
+      "w": "Leviathan",
+      "s": "Commanders A Commander of an Army in chiefe, if he be not Popular, shall not be beloved, nor feared as he ought to be by his Army; and consequently cannot performe that office with good successe.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0047",
+      "w": "Leviathan",
+      "s": "The Right Of Gods Soveraignty Is Derived From His Omnipotence The Right of Nature, whereby God reigneth over men, and punisheth those that break his Lawes, is to be derived, not from his Creating them, as if he required obedience, as of Gratitude for his benefits; but from his Irresistible Power.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0048",
+      "w": "Leviathan",
+      "s": "For where a man seeth another worshipped he supposeth him powerfull, and is the readier to obey him; which makes his Power greater.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0049",
+      "w": "Leviathan",
+      "s": "But whereas there be an infinite number of Actions, and Gestures, of an indifferent nature; such of them as the Common-wealth shall ordain to be Publiquely and Universally in use, as signes of Honour, and part of Gods Worship, are to be taken and used for such by the Subjects.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0050",
+      "w": "Leviathan",
+      "s": "1,2,3,4,5 ) \"If a Prophet rise amongst you, or a Dreamer of dreams, and shall pretend the doing of a miracle, and the miracle come to passe; if he say, Let us follow strange Gods, which thou hast not known, thou shalt not hearken to him, &c.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0051",
+      "w": "Leviathan",
+      "s": "The light therefore that must guide us in this question, must be that which is held out unto us from the Bookes themselves: And this light, though it show us not the writer of every book, yet it is not unusefull to give us knowledge of the time, wherein they were written.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0052",
+      "w": "Leviathan",
+      "s": "Ecclesiastes And The Canticles The Books of Ecclesiastes and the Canticles have nothing that was not Solomons, except it be the Titles, or Inscriptions.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0053",
+      "w": "Leviathan",
+      "s": "Again, if it be not the Legislative Authority of the Common-wealth, that giveth them the force of Laws, it must bee some other Authority derived from God, either private, or publique: if private, it obliges onely him, to whom in particular God hath been pleased to reveale it.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0054",
+      "w": "Leviathan",
+      "s": "Likewise these words (Luke 4.1.) \"And Jesus full of the Holy Ghost\" (that is, as it is exprest, Mat.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0055",
+      "w": "Leviathan",
+      "s": "For it is a word, which in Gods Kingdome answereth to that, which men in their Kingdomes use to call Publique, or the Kings.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0056",
+      "w": "Leviathan",
+      "s": "12.) in a dream; that is to say (as are the words of the text) \"Jacob dreamed that he saw a ladder, &c.\" And (Gen.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0057",
+      "w": "Leviathan",
+      "s": "For God disposeth men to Piety, Justice, Mercy, Truth, Faith, and all manner of Vertue, both Morall, and Intellectuall, by doctrine, example, and by severall occasions, naturall, and ordinary.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0058",
+      "w": "Leviathan",
+      "s": "In like manner if we consider all the Miracles done by the hand of Moses, and all the rest of the Prophets, till the Captivity; and those of our Saviour, and his Apostles afterward; we shall find, their end was alwaies to beget, or confirm beleefe, that they came not of their own motion, but were sent by God.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0059",
+      "w": "Leviathan",
+      "s": "22.) \"he hath spoken it presumptuously, thou shalt not fear him.\" If he say ’tis done, then he is not to contradict it.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0060",
+      "w": "Leviathan",
+      "s": "3.13.) that \"no man hath ascended into Heaven, but he that came down from Heaven, even the Son of man, that is in Heaven.\" Where I observe by the way, that these words are not, as those which go immediately before, the words of our Saviour, but of St.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0061",
+      "w": "Leviathan",
+      "s": "But that the Subjects of God should have any place as high as his throne, or higher than his Footstoole, it seemeth not sutable to the dignity of a King, nor can I find any evident text for it in holy Scripture.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0062",
+      "w": "Leviathan",
+      "s": "The Doctors of the Church, are called Pastors; so also are Civill Soveraignes: But if Pastors be not subordinate one to another, so as that there may bee one chief Pastor, men will be taught contrary Doctrines, whereof both may be, and one must be false.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0063",
+      "w": "Leviathan",
+      "s": "Lastly, the question of the Authority of Aaron, by occasion of his and Miriams mutiny against Moses, was (Numbers 12.) judged by God himself for Moses.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0064",
+      "w": "Leviathan",
+      "s": "In which is contained also the ordering of Religion; for there was no other Word of God in that time, by which to regulate Religion, but the Law of Moses, which was their Civill Law.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0065",
+      "w": "Leviathan",
+      "s": "OF POWER ECCLESIASTICALL For the understanding of POWER ECCLESIASTICALL, what, and in whom it is, we are to distinguish the time from the Ascension of our Saviour, into two parts; one before the Conversion of Kings, and men endued with Soveraign Civill Power; the other after their Conversion.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0066",
+      "w": "Leviathan",
+      "s": "Servants obey in all things your Masters according to the flesh, not with eye-service, as men-pleasers, but in singlenesse of heart, as fearing the Lord;\" This is spoken to them whose Masters were Infidells; and yet they are bidden to obey them In All Things.",
+      "src": {
+        "work": "Leviathan"
+      }
+    },
+    {
+      "id": "hobbes.p0067",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "That the law of nature is not an agreement of men, but the dictate of reason.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0068",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "An oath ought not to be pressed, but where the breach of compacts may be kept private, or cannot be punished but from God himself.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0069",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The will of the receiver must necessarily be declared, before the right be conveyed.] 5.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0070",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The definition of contract and covenant.] 9.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0071",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Now I call him the obliger, to whom any one is tied; and the obliged, him who is tied.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0072",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For he hath no longer right to do or to omit aught, who by former contracts hath conveyed it to another.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0073",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Likewise no man is tied by any compacts whatsoever to accuse himself, or any other, by whose damage he is like to procure himself a bitter life.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0074",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The distinction of commutative and distributive justice examined.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0075",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The laws of nature are sometimes broke by doing things agreeable to those laws.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0076",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For if a master command his servant, who hath promised to obey him, to pay a sum of money, or carry some present to a third man; the servant, if he do it not, hath indeed damaged this third party, but he injured his master only.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0077",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Whence it follows, (which we were to show), that it is a precept of nature, that every man accommodate himself to others.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0078",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "We may take less if we will; for that sometimes is an argument of modesty.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0079",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The eighteenth law, of witnesses.] 23.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0080",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For I cannot understand what drunkenness or cruelty, that is, revenge which respects not the future good, can advance toward peace, or the preservation of any man.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0081",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For as oft as another’s good action displeaseth any man, that action hath the name given of some neighbouring vice; likewise the bad actions which please them, are ever intituled to some virtue.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0082",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: Also of the second law of nature, concerning faith to be kept.] 5.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0083",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Jesus said unto him, Thou shalt love the Lord thy God with all thine heart, and with all thy soul, and with all thy mind; this is the first and great commandment; and the second is like unto it, Thou shalt love thy neighbour as thyself.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0084",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "And although a man should order all his actions so much as belongs to external obedience just as the law commands, but not for the law’s sake, but by reason of some punishment annexed unto it, or out of vain glory; yet he is unjust.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0085",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "It is of itself manifest that the actions of men proceed from the will, and the will from hope and fear, insomuch as when they shall see a greater good or less evil likely to happen to them by the breach than observation of the laws, they will wittingly violate them.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0086",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Which power and right of commanding, consists in this, that each citizen hath conveyed all his strength and power to that man or council; which to have done, because no man can transfer his power in a natural manner, is nothing else than to have parted with his right of resisting.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0087",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "By the laws of the city only we come to know what theft, murder, adultery, and injury is.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0088",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "When we say the people or multitude wills, commands, or doth anything, it is understood that the city which commands, wills and acts by the will of one, or the concurring wills of more; which cannot be done but in an assembly.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0089",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For in vain would he give judgment, who could not execute his commands; or, if he executed them by the power of another, he himself is not said to have the power of the sword, but that other, to whom he is only an officer.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0090",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "There is so much obedience joined to this absolute right of the chief ruler, as is necessarily required for the government of the city, that is to say, so much as that right of his may not be granted in vain.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0091",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But grant then, that thou hadst given him a power which were not absolute, but so much only as sufficed to defend thee from the injuries of others; which, if thou wilt be safe, is necessary for thee to give; are not all the same things to be feared?",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0092",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "In like manner, not every killing of a man is murder, but only that which the civil law forbids; neither is all encounter with women adultery, but only that which the civil law prohibits.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0093",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Now the notes of supreme command are these: to make and abrogate laws, to determine war and peace, to know and judge of all controversies, either by himself, or by judges appointed by him; to elect all magistrates, ministers, and counsellors.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0094",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "That a tyranny is not a diverse state from a legitimate monarchy.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0095",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But we must discover by reason, and not by passion, what the difference is between a king and a tyrant.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0096",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For if it were otherwise, they would be guilty by whom the decree was absolutely disliked.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0097",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The lord may sell his servant, or alienate him by testament.] 6.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0098",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Dominion over infants is originally the mother’s.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0099",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But each man is an enemy to that other, whom he neither obeys nor commands.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0100",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "All other liberty is an exemption from the laws of the city, and proper only to those that bear rule.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0101",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: And his brother, if he want issue, before all others.] 18.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0102",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "That these inconveniences adhere to democracy, forasmuch as men are naturally delighted with the esteem of wit.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0103",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For if every man would grant the same liberty to another, which he desires for himself, as is commanded by the law of nature; that same natural state would return again, in which all men may by right do all things; which if they knew, they would abhor, as being worse than all kinds of civil subjection whatsoever.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0104",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Insomuch as the laws do float here and there, as it were upon the waters.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0105",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Such was the beginning of God’s government over the Jews instituted by Moses, (Exod.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0106",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The most evident places in the Old Testament are these: Deut.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0107",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "We have confirmed the same truth in chap.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0108",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "This therefore, that a subject may have an action of law against his supreme magistrate, is not strength of argument sufficient to prove, that he is tied to his own laws.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0109",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For they could not poison the people with those absurd opinions contrary to peace and civil society, unless they held them themselves; which sure is an ignorance greater than can well befall any wise man.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0110",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But where he to whom the right of ruling doth belong, is himself present in all judicatures, consultations, and public actions, there the administration is such, as if God, beyond the ordinary course of nature, should immediately apply himself unto all matters.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0111",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For the state of commonwealths considered in themselves, is natural, that is to say, hostile.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0112",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "With much earnestness therefore men strive to be freed from taxes; and in this conflict the less happy, as being overcome, do envy the more fortunate.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0113",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For a city constituted in an island of the sea, no greater than will serve for dwelling, may grow rich without sowing or fishing, by merchandize and handicrafts only; but there is no doubt, if they have a territory, that they may be richer with the same number, or equally rich being a greater number.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0114",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For in that place, a city is taken either for one civil person, having one will; or for a multitude of men, who have each of them the liberty of their private wills.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0115",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For the natural law, although it be distinguished from the civil, forasmuch as it commands the will; yet so far forth as it relates to our actions, it is civil.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0116",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Of which sort are traitors, regicides, and such as take up arms against the city, or during a war fly to the enemy’s side.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0117",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The proposition of the following contents.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0118",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "And again the same psalmist, (Psalm xcix.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0119",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The laws of God in his natural kingdom, are those which are above set down in chaps.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0120",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For even men count it an affront that their children should dispute their right, or measure their justice otherwise than by the rule of their commands.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0121",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Nay, they must do it; for else all manner of absurd opinions concerning the nature of God, and all ridiculous ceremonies which have been used by any nations, will be seen at once in the same city.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0122",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "They were also united in the kings until the captivity.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0123",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "14, there we have showed such a kind of worship to be irrational.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0124",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "24, 25): _Let not the priests and the people break through, to come up unto the Lord, lest he break forth upon them.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0125",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Samuel, says he, Eli being dead and Saul slain, declares the old law abolished.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0126",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "What the promises of the new covenant are, on both parts.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0127",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The prophecies concerning Christ’s dignity.] 1.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0128",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Paul, speaking of the day of judgment (1 Cor.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0129",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "I will offer him up for a burnt offering unto the Lord_; and his vow was accepted of God.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0130",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The other, as laws, by divine authority, in showing the will of God to be such; and thus to teach, belongs only to him to whom the will of God is supernaturally known, that is to say, to Christ.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0131",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "So as there cannot, in any written interpretation whatsoever, be a canon or rule of Christian doctrine, whereby the controversies of religion may be determined.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0132",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "But by what Church, but that to which that epistle was written?",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0133",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "For all Christians were baptized into remission of sins.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0134",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "Sidenote: The interpretation of Scripture depends on the authority of the city.] 27.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0135",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "By what covenants passed between you and me?",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0136",
+      "w": "Philosophical Rudiments (De Cive)",
+      "s": "The doctrines which this day are controverted about religion, do for the most part relate to the right of dominion.",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      }
+    },
+    {
+      "id": "hobbes.p0137",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And the contraries and defects of these signs are dishonourable; and according to the signs of honour and dishonour, so we estimate and make the value or worth of a man: for so much worth is every thing, as a man will give for the use of all it can do.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0138",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For when a jest is broken upon ourselves, or friends of whose dishonour we participate, we never laugh thereat.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0139",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The like also is to be held in two contradictory expressions of a man’s intention and will, for the same reason.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0140",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: Right to the end, implieth right to the means.] 7.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0141",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: Contract, and the sorts of it.] 8.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0142",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For both the one and the other maketh the action voluntary.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0143",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And it is most certain, that as the truth of a conclusion, is no more but the truth of the premises that make it; so the force of the command, or law of nature, is no more than the force of the reasons inducing thereunto.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0144",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: And that man forgive, upon caution for the future.] 9.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0145",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For he putteth so much difference between the powers of men by nature, that he doubteth not to set down, as the ground of all his politics, that some men are by nature worthy to govern, and others by nature ought to serve.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0146",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For whatsoever action is against reason, though it be reiterated never so often, or that there be never so many precedents thereof, is still against reason, and therefore not a law of nature, but contrary to it.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0147",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And that the law divine, for so much as is moral, are those precepts which tend to peace, seemeth to be much confirmed by such places of Scripture as these: Rom.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0148",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: That union is necessary for the maintaining of concord.] 6.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0149",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: A multitude before their union, &c.] 2.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0150",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And this mixture is it that imposeth, as if it were the mixture of sovereignty.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0151",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: Democracy precedeth all other, &c.] 1.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0152",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "In this case, at the death of him that was chosen, they that meet for a new election, have no new, but their old authority for the same.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0153",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Lastly, ignorance of the succession dischargeth obedience.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0154",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For he that captiveth, which is done by accepting what the captive transferreth to him, setteth again at liberty, by transferring back the same.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0155",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The eldest before the rest of the brothers.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0156",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And the man is called the husband, and the woman the wife.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0157",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Further, it is to be supposed, his intention was, that his own children should be preferred in the succession, when nothing to the contrary is expressly declared, before any other.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0158",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "No more is the opinion of them that hold it to be no city, which consisteth of a master and his servants.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0159",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: A difficulty concerning absolute subjection to man, arising from our absolute subjection to God Almighty, propounded.] 1.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0160",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "29-31: _The keeper of the prison fell down before Paul and Silas, and said, Sirs, what shall I do to be saved?",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0161",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Paul showed, that the raising of questions by human ratiocination, though it be from the fundamental points themselves, is not only not necessary, but most dangerous to the faith of a Christian.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0162",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Nor can a man be said to submit himself to Holy Scripture, that doth not submit himself to some or other for the interpretation thereof.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0163",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "2) in these words: _What hath the Lord spoken but only by Moses?",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0164",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "But concerning the authority of the apostles or bishops over those who were already converted and within the church, there be that think it greater than over them without.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0165",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Four heads of hope of success in rebellion.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0166",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: Six heads of pretences to rebellion.] 4.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0167",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: The sixth, that tyrannicide is lawful, confuted.] 10.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0168",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And therefore the authors of sedition must be ignorant of the right of state, that is to say, unwise.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0169",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For the temporal good of the people, it consisteth in four points: 1.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0170",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Sidenote: That the divine moral law, and the law of nature, is the same.] 7.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0171",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The second place of Scripture is Joshua, xxiv.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0172",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The same may be proved also in this manner.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0173",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "He is grateful to the man of whom he receives a good turn, that confesseth, or maketh appear he is pleased with the benefit he receiveth.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0174",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And because the atheist thinks he has reason, where he has none, I think him the more irrational of the two.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0175",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "But metaphorically, faith is called (Heb.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0176",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "It is granted, he says, that the nature of God is incomprehensible.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0177",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And we may say also of many other texts of Scripture alleged to prove the Trinity, that they are not so firm as that high article requireth.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0178",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Peter sinned in denying Christ; and so does every pastor, that denieth Christ, having undertaken the charge of preaching the gospel in the kingdom of an infidel, where he could expect at the undertaking of his charge no less than death.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0179",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "H._ Yes, I know there is a difference between blood and blood, but not any such as can make a difference in the case here questioned.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0180",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "My ground is this; that Christ in right of his Father was king of the Jews, and consequently supreme prophet, and judge of all prophets.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0181",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The commandment of God was, that he should not spare Agag.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0182",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The four hundred pronounced victory; Micaiah alone the contrary.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0183",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "D._ We are taught in our creed to believe the catholic or universal church.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0184",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "All that the Bishop does in this argument is but a heaving at the King’s supremacy.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0185",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Solomon did it; and the book of canons says, that the King of England has all the right that any good king of Israel had; it might have added, that any other king or sovereign assembly had in their own dominions.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0186",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Nor does his Lordship go about to disprove it, but only seems to wonder at it.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0187",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And the order of the divine process is made good, of not inflicting torments before the condemnation pronounced.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0188",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "68) I refer the reader to the place itself; and for the words concerning Satan, I leave them to the judgment of the learned.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0189",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "But his Lordship is still at this, that there ought to be, for the Divine laws, that is to say for the interpretation of Scripture, a legislative power in the church, distinct from that of the King, which under him they enjoy already.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0190",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "Nothing could be written more false in his sense, more dishonourable to God, more inglorious to the human nature; than that God should create man, and leave him presently without any rules, to his own ordering of himself, as the ostrich leaveth her eggs in the sand.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0191",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "One would not think he was in France, nor that this doctrine was written in the year 1658, but rather in the year 1648, in some cabal of the King’s enemies.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0192",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "I know but very few, and those are such as his Lordship was not much acquainted with.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0193",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "This may perhaps seem a greater indifferency, than would in these days be approved of.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0194",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "For one baptism is not there put as opposite to several sorts or manners of baptism, but to the iteration of it.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0195",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The third of November following, there began a new Parliament, consisting for the greatest part of such men as the people had elected only for their averseness to the King’s interest.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0196",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "You see, then, that this submission to Oliver, or to your then masters, is allowed by Mr.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0197",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "And methinks you should not dare to deny it; for it is a manifest relapse into your former crimes.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0198",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "160); _Whereas some men have pretended for their disobedience to their sovereign, a new covenant made, not with men, but with God; this also is unjust.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0199",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "But he has no reason to take it for a favour: because hereafter the invention may be taken, by that means, not for his, but theirs.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0200",
+      "w": "Tripos: Human Nature, Liberty and Necessity",
+      "s": "The former obliges me to say something, by the way, of the nature and differences of poesy.",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      }
+    },
+    {
+      "id": "hobbes.p0201",
+      "w": "Behemoth",
+      "s": "For the rivers also are, as well as their banks, within or a part of one country or other.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0202",
+      "w": "Behemoth",
+      "s": "For there is scarce anything so clearly written, that when the cause thereof is forgotten, may not be wrested by an ignorant grammarian, or a cavilling logician, to the injury, oppression, or perhaps destruction of an honest man.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0203",
+      "w": "Behemoth",
+      "s": "But yet this clause in the statute of _Edw.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0204",
+      "w": "Behemoth",
+      "s": "For in those days, the lives of all sorts of men were valued by money, and the value set down in their written laws.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0205",
+      "w": "Behemoth",
+      "s": "14_, which makes it felony in any of the King’s household servants, under the degree of a Lord, to compass the death of any of the King’s Privy Council.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0206",
+      "w": "Behemoth",
+      "s": "For whatsoever is freehold is inheritance, and descended to the heir, and nothing can descend to the executors but what is merely personal.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0207",
+      "w": "Behemoth",
+      "s": "15_, heresy is laid down, as a preaching or writing of such doctrine as is contrary to the determination of Holy Church.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0208",
+      "w": "Behemoth",
+      "s": "Lastly, in the first year of Queen Elizabeth, _c.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0209",
+      "w": "Behemoth",
+      "s": "For he lives secretly at the mercy of those that know where he is, and cannot, without the like peril to themselves, but discover him.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0210",
+      "w": "Behemoth",
+      "s": "I will examine his doctrine concerning cases criminal no further.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0211",
+      "w": "Behemoth",
+      "s": "VII_, that giveth them power to punish sometimes by discretion.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0212",
+      "w": "Behemoth",
+      "s": "But what statute is there that forbids the King to do it?",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0213",
+      "w": "Behemoth",
+      "s": "For that was pretended in the late civil war, when they took from the King his town of Kingston-upon-Hull.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0214",
+      "w": "Behemoth",
+      "s": "And you are to believe, that those men that hold their land by the service of husbandry, were all bound with their bodies and fortunes to defend the kingdom against invaders, by the law of nature.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0215",
+      "w": "Behemoth",
+      "s": "You know that this land was invaded by the Saxons at several times, and conquered by pieces in several wars; so that there were in England many Kings at once, and every of them had his Parliament.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0216",
+      "w": "Behemoth",
+      "s": "But of that point you will be better informed in the pursuit of this narration.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0217",
+      "w": "Behemoth",
+      "s": "For it is likely enough, if he had told him so plainly, or but made him suspect it, he would either have been no Christian at all, or but a counterfeit one.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0218",
+      "w": "Behemoth",
+      "s": "So that all sorts of people were fully resolved, that both the doctrine was true, and the Pope’s authority no more than what was due to him.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0219",
+      "w": "Behemoth",
+      "s": "In Scotland, King James being then young, soon with the help of some of the powerful nobility they brought it to pass.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0220",
+      "w": "Behemoth",
+      "s": "But whatsoever was the cause of their hatred to bishops, the pulling of them down was not all they aimed at: if it had, now that episcopacy was abolished by act of Parliament, they would have rested satisfied, which they did not.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0221",
+      "w": "Behemoth",
+      "s": "And therefore for my part I think they were mistaken, both English and Scotch, in calling one another foreigners.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0222",
+      "w": "Behemoth",
+      "s": "The Universities have been to this nation, as the wooden horse was to the Trojans.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0223",
+      "w": "Behemoth",
+      "s": "Liberality also is a royal virtue: for the commonwealth cannot be well served without extraordinary diligence and service of ministers, and great fidelity to their Sovereign; who ought therefore to be encouraged, and especially those that do him service in the wars.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0224",
+      "w": "Behemoth",
+      "s": "For that is the thing you call in question.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0225",
+      "w": "Behemoth",
+      "s": "Peter and John had seen and daily conversed with our Saviour; and by the miracles he wrought, did know he was God, and consequently knew certainly that their disobedience to the high-priest’s present command was just.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0226",
+      "w": "Behemoth",
+      "s": "I confess, that for aught I have observed in history, and other writings of the heathens, Greek and Latin, that those heathens were not at all behind us in point of virtue and moral duties, notwithstanding that we have had much preaching, and they none at all.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0227",
+      "w": "Behemoth",
+      "s": "The manner of the discovery, and the murders they committed in the country afterwards, I need not tell you, since the whole story of it is extant.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0228",
+      "w": "Behemoth",
+      "s": "It had been, I confess, a great massacre; but the killing of 100,000 is a greater.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0229",
+      "w": "Behemoth",
+      "s": "Whereupon his Majesty sent a message to both Houses from Huntingdon, requiring obedience to the laws established, and prohibiting all subjects, upon pretence of their ordinance, to execute anything concerning the militia which is not by those laws warranted.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0230",
+      "w": "Behemoth",
+      "s": "That he would be pleased to rest satisfied with that course that the Lords and Commons have appointed for ordering the militia, and recal his declarations and proclamations against it.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0231",
+      "w": "Behemoth",
+      "s": "For the Parliament, the Earl of Essex, after the Parliament had voted the war, was made general of all their forces both in England and Ireland, from whom all other commanders were to receive their commissions.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0232",
+      "w": "Behemoth",
+      "s": "I shall only make use of such a thread as is necessary for the filling up of such knavery, and folly also, as I shall observe in their several actions.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0233",
+      "w": "Behemoth",
+      "s": "For he could not want either men or ammunition, whereof the city of London, which was wholly at the Parliament’s devotion, had store enough.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0234",
+      "w": "Behemoth",
+      "s": "This messenger was taken, and condemned at a council of war, and hanged for a spy.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0235",
+      "w": "Behemoth",
+      "s": "The King himself thought so; and the Parliament in a manner confessed the same, by commanding Fairfax to rise from the siege, and endeavour to give the King battle.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0236",
+      "w": "Behemoth",
+      "s": "After this, the city of Geneva, and divers other places beyond sea, having revolted from the papacy, set up presbyteries for the government of their several churches.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0237",
+      "w": "Behemoth",
+      "s": "But what might an army not do, after it had mastered all the laws of the land?",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0238",
+      "w": "Behemoth",
+      "s": "The propositions were these: First, that the Parliament should have the militia, and the power of levying money to maintain it, for twenty years; and after that term, the exercise thereof to return to the King, in case the Parliament think the safety of the kingdom concerned in it.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0239",
+      "w": "Behemoth",
+      "s": "And as for natural philosophy, is it not removed from Oxford and Cambridge to Gresham College in London, and to be learned out of their gazettes?",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0240",
+      "w": "Behemoth",
+      "s": "I am now therefore to show you their proceedings.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0241",
+      "w": "Behemoth",
+      "s": "This affrighted divers of the King’s party out of the land; for not only they, but all that had borne arms for the King, were at that time in very great danger of their lives.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0242",
+      "w": "Behemoth",
+      "s": "Did they mean that England should not be subject to any foreign kingdom or commonwealth?",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0243",
+      "w": "Behemoth",
+      "s": "And in the same time the Scots crowned the King at Scone.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0244",
+      "w": "Behemoth",
+      "s": "But the people were generally against it, calling the ambassadors and their followers, as they were, traitors and murderers, and made such tumults about their house that their followers durst not go abroad till the States had quieted them.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0245",
+      "w": "Behemoth",
+      "s": "About a fortnight after there happened another fight upon the like occasion.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0246",
+      "w": "Behemoth",
+      "s": "In Scotland the English built some citadels for the bridling of that stubborn nation.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0247",
+      "w": "Behemoth",
+      "s": "Harrison and they of his sect were troubled hereat, and made speeches against it; but Cromwell’s party, of whom the speaker was one, left the House, and with the mace before them went to Whitehall, and surrendered their power to Cromwell that had given it to them.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0248",
+      "w": "Behemoth",
+      "s": "Upon this account it was that fortune-tellers and astrologers were so often banished out of Rome.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0249",
+      "w": "Behemoth",
+      "s": "Richard’s authority and business in town being thus at an end, he retired into the country; where within a few days, upon promise of the payment of his debts, which his father’s funeral had made great, he signed a resignation of his Protectorship.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0250",
+      "w": "Behemoth",
+      "s": "And this so far awed them, as to teach them so much good manners as to promise to take it presently into debate.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0251",
+      "w": "Behemoth",
+      "s": "This coming to the knowledge of their army in the north, they deserted Lambert; and the Rump, the 26th of December, repossessed the House.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0252",
+      "w": "Behemoth",
+      "s": "The first of them, being an abridgment containing the most useful part of Aristotle’s rhetoric, was written some thirty years since.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0253",
+      "w": "Behemoth",
+      "s": "To full men, strength of body fit for the wars, and countenance sweet with a mixture of terror.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0254",
+      "w": "Behemoth",
+      "s": "And what we do for other men, especially for benefactors.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0255",
+      "w": "Behemoth",
+      "s": "Also those things to which we have an appetite upon persuasion and reason.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0256",
+      "w": "Behemoth",
+      "s": "And such as can escape their trial at law.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0257",
+      "w": "Behemoth",
+      "s": "And such as, by doing them an injury, we shall gratify our friends or superiors.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0258",
+      "w": "Behemoth",
+      "s": "That men seek not equity because it is good simply, but because good for them.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0259",
+      "w": "Behemoth",
+      "s": "And such as have honoured us, if they continue not.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0260",
+      "w": "Behemoth",
+      "s": "Because the offender has suffered more than they meant to inflict.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0261",
+      "w": "Behemoth",
+      "s": "And in this, that anger is curable; hatred not.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0262",
+      "w": "Behemoth",
+      "s": "To deny that which is committed to one’s trust, a sign of injustice.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0263",
+      "w": "Behemoth",
+      "s": "Nor that which is nought, if the giver know the fault.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0264",
+      "w": "Behemoth",
+      "s": "And men of poor spirits; for every thing appears great to them.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0265",
+      "w": "Behemoth",
+      "s": "Doers of injury, rather for contumely than for damage.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0266",
+      "w": "Behemoth",
+      "s": "To undervalue their ancestors' equals; for the goods of fortune seem the more precious for their antiquity.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0267",
+      "w": "Behemoth",
+      "s": "And if that for whose cause we do this, then this.",
+      "src": {
+        "work": "Behemoth"
+      }
+    },
+    {
+      "id": "hobbes.p0268",
+      "w": "Behemoth",
+      "s": "In this the hearer has always somewhat set out, and terminated to him; in the other he foresees no end, and has nothing finished to him.",
+      "src": {
+        "work": "Behemoth"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "hobbes.f.v0001",
+      "kind": "verbatim",
+      "text": "Cruelty-- Contempt, or little sense of the calamity of others, is that which men call CRUELTY; proceeding from Security of their own fortune.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "hobbes.f.v0002",
+      "kind": "verbatim",
+      "text": "Felicity Continual Successe in obtaining those things which a man from time to time desireth, that is to say, continual prospering, is that men call FELICITY; I mean the Felicity of this life.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "hobbes.f.v0003",
+      "kind": "verbatim",
+      "text": "The Registers of Science, are such Books as contain the Demonstrations of Consequences of one Affirmation, to another; and are commonly called Books of Philosophy; whereof the sorts are many, according to the diversity of the Matter; And may be divided in such manner as I have divided them in the following Table.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 314
+      }
+    },
+    {
+      "id": "hobbes.f.v0004",
+      "kind": "verbatim",
+      "text": "To hearken to a mans counsell, or discourse of what kind soever, is to Honour; as a signe we think him wise, or eloquent, or witty.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 131
+      }
+    },
+    {
+      "id": "hobbes.f.v0005",
+      "kind": "verbatim",
+      "text": "Worthinesse Fitnesse WORTHINESSE, is a thing different from the worth, or value of a man; and also from his merit, or desert; and consisteth in a particular power, or ability for that, whereof he is said to be worthy: which particular ability, is usually named FITNESSE, or Aptitude.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 283
+      }
+    },
+    {
+      "id": "hobbes.f.v0006",
+      "kind": "verbatim",
+      "text": "That the Clergy, and Regulars, in what Country soever, shall be exempt from the Jurisdiction of their King, in cases criminall?",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "hobbes.f.v0007",
+      "kind": "verbatim",
+      "text": "Nothing Done To A Man, By His Own Consent Can Be Injury Whatsoever is done to a man, conformable to his own Will signified to the doer, is no Injury to him.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "hobbes.f.v0008",
+      "kind": "verbatim",
+      "text": "Arbitrary, is that which is agreed on by the Competitors; Naturall, is either Primogeniture, (which the Greek calls Kleronomia, which signifies, Given by Lot;) or First Seisure.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "hobbes.f.v0009",
+      "kind": "verbatim",
+      "text": "14) of the nature of Covenants between man and man in their naturall capacity, is true also when they are made by their Actors, Representers, or Procurators, that have authority from them, so far-forth as is in their Commission, but no farther.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "hobbes.f.v0010",
+      "kind": "verbatim",
+      "text": "If therefore a Monarch declare expresly, that such a man shall be his Heire, either by Word or Writing, then is that man immediately after the decease of his Predecessor, Invested in the right of being Monarch.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "hobbes.f.v0011",
+      "kind": "verbatim",
+      "text": "He shall take your man-servants, and your maid-servants, and the choice of your youth, and employ them in his businesse.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "hobbes.f.v0012",
+      "kind": "verbatim",
+      "text": "If the Common-wealth impose a Tax upon the Body, it is understood to be layd upon every member proportionably to his particular adventure in the Company.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "hobbes.f.v0013",
+      "kind": "verbatim",
+      "text": "Item, that the two arms of a Common-wealth, are Force, and Justice; The First Whereof Is In The King; The Other Deposited In The Hands Of The Parlament.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "hobbes.f.v0014",
+      "kind": "verbatim",
+      "text": "The difficulty consisteth in the evidence of the Authority derived from him; The removing whereof, dependeth on the knowledge of the publique Registers, publique Counsels, publique Ministers, and publique Seales; by which all Lawes are sufficiently verified.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "hobbes.f.v0015",
+      "kind": "verbatim",
+      "text": "Faith, and Sanctity, are indeed not very frequent; but yet they are not Miracles, but brought to passe by education, discipline, correction, and other naturall wayes, by which God worketh them in his elect, as such time as he thinketh fit.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "hobbes.f.v0016",
+      "kind": "verbatim",
+      "text": "The Use Of Universities As for the Means, and Conduits, by which the people may receive this Instruction, wee are to search, by what means so may Opinions, contrary to the peace of Man-kind, upon weak and false Principles, have neverthelesse been so deeply rooted in them.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "hobbes.f.v0017",
+      "kind": "verbatim",
+      "text": "Commanders A Commander of an Army in chiefe, if he be not Popular, shall not be beloved, nor feared as he ought to be by his Army; and consequently cannot performe that office with good successe.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "hobbes.f.v0018",
+      "kind": "verbatim",
+      "text": "The Right Of Gods Soveraignty Is Derived From His Omnipotence The Right of Nature, whereby God reigneth over men, and punisheth those that break his Lawes, is to be derived, not from his Creating them, as if he required obedience, as of Gratitude for his benefits; but from his Irresistible Power.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "hobbes.f.v0019",
+      "kind": "verbatim",
+      "text": "1,2,3,4,5 ) \"If a Prophet rise amongst you, or a Dreamer of dreams, and shall pretend the doing of a miracle, and the miracle come to passe; if he say, Let us follow strange Gods, which thou hast not known, thou shalt not hearken to him, &c.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "hobbes.f.v0020",
+      "kind": "verbatim",
+      "text": "The light therefore that must guide us in this question, must be that which is held out unto us from the Bookes themselves: And this light, though it show us not the writer of every book, yet it is not unusefull to give us knowledge of the time, wherein they were written.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "hobbes.f.v0021",
+      "kind": "verbatim",
+      "text": "Ecclesiastes And The Canticles The Books of Ecclesiastes and the Canticles have nothing that was not Solomons, except it be the Titles, or Inscriptions.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "hobbes.f.v0022",
+      "kind": "verbatim",
+      "text": "Again, if it be not the Legislative Authority of the Common-wealth, that giveth them the force of Laws, it must bee some other Authority derived from God, either private, or publique: if private, it obliges onely him, to whom in particular God hath been pleased to reveale it.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 276
+      }
+    },
+    {
+      "id": "hobbes.f.v0023",
+      "kind": "verbatim",
+      "text": "In like manner if we consider all the Miracles done by the hand of Moses, and all the rest of the Prophets, till the Captivity; and those of our Saviour, and his Apostles afterward; we shall find, their end was alwaies to beget, or confirm beleefe, that they came not of their own motion, but were sent by God.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 310
+      }
+    },
+    {
+      "id": "hobbes.f.v0024",
+      "kind": "verbatim",
+      "text": "22.) \"he hath spoken it presumptuously, thou shalt not fear him.\" If he say ’tis done, then he is not to contradict it.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "hobbes.f.v0025",
+      "kind": "verbatim",
+      "text": "3.13.) that \"no man hath ascended into Heaven, but he that came down from Heaven, even the Son of man, that is in Heaven.\" Where I observe by the way, that these words are not, as those which go immediately before, the words of our Saviour, but of St.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "hobbes.f.v0026",
+      "kind": "verbatim",
+      "text": "The Doctors of the Church, are called Pastors; so also are Civill Soveraignes: But if Pastors be not subordinate one to another, so as that there may bee one chief Pastor, men will be taught contrary Doctrines, whereof both may be, and one must be false.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "hobbes.f.v0027",
+      "kind": "verbatim",
+      "text": "Lastly, the question of the Authority of Aaron, by occasion of his and Miriams mutiny against Moses, was (Numbers 12.) judged by God himself for Moses.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hobbes.f.v0028",
+      "kind": "verbatim",
+      "text": "In which is contained also the ordering of Religion; for there was no other Word of God in that time, by which to regulate Religion, but the Law of Moses, which was their Civill Law.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "hobbes.f.v0029",
+      "kind": "verbatim",
+      "text": "OF POWER ECCLESIASTICALL For the understanding of POWER ECCLESIASTICALL, what, and in whom it is, we are to distinguish the time from the Ascension of our Saviour, into two parts; one before the Conversion of Kings, and men endued with Soveraign Civill Power; the other after their Conversion.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "hobbes.f.v0030",
+      "kind": "verbatim",
+      "text": "Servants obey in all things your Masters according to the flesh, not with eye-service, as men-pleasers, but in singlenesse of heart, as fearing the Lord;\" This is spoken to them whose Masters were Infidells; and yet they are bidden to obey them In All Things.",
+      "work": "Leviathan",
+      "lang": "en",
+      "src": {
+        "work": "Leviathan"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "hobbes.f.v0031",
+      "kind": "verbatim",
+      "text": "An oath ought not to be pressed, but where the breach of compacts may be kept private, or cannot be punished but from God himself.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "hobbes.f.v0032",
+      "kind": "verbatim",
+      "text": "Likewise no man is tied by any compacts whatsoever to accuse himself, or any other, by whose damage he is like to procure himself a bitter life.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "hobbes.f.v0033",
+      "kind": "verbatim",
+      "text": "Whence it follows, (which we were to show), that it is a precept of nature, that every man accommodate himself to others.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "hobbes.f.v0034",
+      "kind": "verbatim",
+      "text": "Jesus said unto him, Thou shalt love the Lord thy God with all thine heart, and with all thy soul, and with all thy mind; this is the first and great commandment; and the second is like unto it, Thou shalt love thy neighbour as thyself.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hobbes.f.v0035",
+      "kind": "verbatim",
+      "text": "It is of itself manifest that the actions of men proceed from the will, and the will from hope and fear, insomuch as when they shall see a greater good or less evil likely to happen to them by the breach than observation of the laws, they will wittingly violate them.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "hobbes.f.v0036",
+      "kind": "verbatim",
+      "text": "Which power and right of commanding, consists in this, that each citizen hath conveyed all his strength and power to that man or council; which to have done, because no man can transfer his power in a natural manner, is nothing else than to have parted with his right of resisting.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "hobbes.f.v0037",
+      "kind": "verbatim",
+      "text": "When we say the people or multitude wills, commands, or doth anything, it is understood that the city which commands, wills and acts by the will of one, or the concurring wills of more; which cannot be done but in an assembly.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "hobbes.f.v0038",
+      "kind": "verbatim",
+      "text": "There is so much obedience joined to this absolute right of the chief ruler, as is necessarily required for the government of the city, that is to say, so much as that right of his may not be granted in vain.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 208
+      }
+    },
+    {
+      "id": "hobbes.f.v0039",
+      "kind": "verbatim",
+      "text": "In like manner, not every killing of a man is murder, but only that which the civil law forbids; neither is all encounter with women adultery, but only that which the civil law prohibits.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "hobbes.f.v0040",
+      "kind": "verbatim",
+      "text": "Now the notes of supreme command are these: to make and abrogate laws, to determine war and peace, to know and judge of all controversies, either by himself, or by judges appointed by him; to elect all magistrates, ministers, and counsellors.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "hobbes.f.v0041",
+      "kind": "verbatim",
+      "text": "This therefore, that a subject may have an action of law against his supreme magistrate, is not strength of argument sufficient to prove, that he is tied to his own laws.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "hobbes.f.v0042",
+      "kind": "verbatim",
+      "text": "With much earnestness therefore men strive to be freed from taxes; and in this conflict the less happy, as being overcome, do envy the more fortunate.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "hobbes.f.v0043",
+      "kind": "verbatim",
+      "text": "Of which sort are traitors, regicides, and such as take up arms against the city, or during a war fly to the enemy’s side.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 122
+      }
+    },
+    {
+      "id": "hobbes.f.v0044",
+      "kind": "verbatim",
+      "text": "Nay, they must do it; for else all manner of absurd opinions concerning the nature of God, and all ridiculous ceremonies which have been used by any nations, will be seen at once in the same city.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "hobbes.f.v0045",
+      "kind": "verbatim",
+      "text": "The other, as laws, by divine authority, in showing the will of God to be such; and thus to teach, belongs only to him to whom the will of God is supernaturally known, that is to say, to Christ.",
+      "work": "Philosophical Rudiments (De Cive)",
+      "lang": "en",
+      "src": {
+        "work": "Philosophical Rudiments (De Cive)"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "hobbes.f.v0046",
+      "kind": "verbatim",
+      "text": "In this case, at the death of him that was chosen, they that meet for a new election, have no new, but their old authority for the same.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "hobbes.f.v0047",
+      "kind": "verbatim",
+      "text": "Further, it is to be supposed, his intention was, that his own children should be preferred in the succession, when nothing to the contrary is expressly declared, before any other.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "hobbes.f.v0048",
+      "kind": "verbatim",
+      "text": "Sidenote: A difficulty concerning absolute subjection to man, arising from our absolute subjection to God Almighty, propounded.] 1.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 131
+      }
+    },
+    {
+      "id": "hobbes.f.v0049",
+      "kind": "verbatim",
+      "text": "Paul showed, that the raising of questions by human ratiocination, though it be from the fundamental points themselves, is not only not necessary, but most dangerous to the faith of a Christian.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "hobbes.f.v0050",
+      "kind": "verbatim",
+      "text": "Nor can a man be said to submit himself to Holy Scripture, that doth not submit himself to some or other for the interpretation thereof.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "hobbes.f.v0051",
+      "kind": "verbatim",
+      "text": "He is grateful to the man of whom he receives a good turn, that confesseth, or maketh appear he is pleased with the benefit he receiveth.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "hobbes.f.v0052",
+      "kind": "verbatim",
+      "text": "Peter sinned in denying Christ; and so does every pastor, that denieth Christ, having undertaken the charge of preaching the gospel in the kingdom of an infidel, where he could expect at the undertaking of his charge no less than death.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hobbes.f.v0053",
+      "kind": "verbatim",
+      "text": "H._ Yes, I know there is a difference between blood and blood, but not any such as can make a difference in the case here questioned.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "hobbes.f.v0054",
+      "kind": "verbatim",
+      "text": "My ground is this; that Christ in right of his Father was king of the Jews, and consequently supreme prophet, and judge of all prophets.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "hobbes.f.v0055",
+      "kind": "verbatim",
+      "text": "Solomon did it; and the book of canons says, that the King of England has all the right that any good king of Israel had; it might have added, that any other king or sovereign assembly had in their own dominions.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "hobbes.f.v0056",
+      "kind": "verbatim",
+      "text": "68) I refer the reader to the place itself; and for the words concerning Satan, I leave them to the judgment of the learned.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "hobbes.f.v0057",
+      "kind": "verbatim",
+      "text": "Nothing could be written more false in his sense, more dishonourable to God, more inglorious to the human nature; than that God should create man, and leave him presently without any rules, to his own ordering of himself, as the ostrich leaveth her eggs in the sand.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "hobbes.f.v0058",
+      "kind": "verbatim",
+      "text": "One would not think he was in France, nor that this doctrine was written in the year 1658, but rather in the year 1648, in some cabal of the King’s enemies.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "hobbes.f.v0059",
+      "kind": "verbatim",
+      "text": "The third of November following, there began a new Parliament, consisting for the greatest part of such men as the people had elected only for their averseness to the King’s interest.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "hobbes.f.v0060",
+      "kind": "verbatim",
+      "text": "160); _Whereas some men have pretended for their disobedience to their sovereign, a new covenant made, not with men, but with God; this also is unjust.",
+      "work": "Tripos: Human Nature, Liberty and Necessity",
+      "lang": "en",
+      "src": {
+        "work": "Tripos: Human Nature, Liberty and Necessity"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hobbes.f.v0061",
+      "kind": "verbatim",
+      "text": "14_, which makes it felony in any of the King’s household servants, under the degree of a Lord, to compass the death of any of the King’s Privy Council.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "hobbes.f.v0062",
+      "kind": "verbatim",
+      "text": "15_, heresy is laid down, as a preaching or writing of such doctrine as is contrary to the determination of Holy Church.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "hobbes.f.v0063",
+      "kind": "verbatim",
+      "text": "You know that this land was invaded by the Saxons at several times, and conquered by pieces in several wars; so that there were in England many Kings at once, and every of them had his Parliament.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "hobbes.f.v0064",
+      "kind": "verbatim",
+      "text": "In Scotland, King James being then young, soon with the help of some of the powerful nobility they brought it to pass.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "hobbes.f.v0065",
+      "kind": "verbatim",
+      "text": "Liberality also is a royal virtue: for the commonwealth cannot be well served without extraordinary diligence and service of ministers, and great fidelity to their Sovereign; who ought therefore to be encouraged, and especially those that do him service in the wars.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "hobbes.f.v0066",
+      "kind": "verbatim",
+      "text": "Peter and John had seen and daily conversed with our Saviour; and by the miracles he wrought, did know he was God, and consequently knew certainly that their disobedience to the high-priest’s present command was just.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "hobbes.f.v0067",
+      "kind": "verbatim",
+      "text": "I confess, that for aught I have observed in history, and other writings of the heathens, Greek and Latin, that those heathens were not at all behind us in point of virtue and moral duties, notwithstanding that we have had much preaching, and they none at all.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "hobbes.f.v0068",
+      "kind": "verbatim",
+      "text": "The manner of the discovery, and the murders they committed in the country afterwards, I need not tell you, since the whole story of it is extant.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 146
+      }
+    },
+    {
+      "id": "hobbes.f.v0069",
+      "kind": "verbatim",
+      "text": "Whereupon his Majesty sent a message to both Houses from Huntingdon, requiring obedience to the laws established, and prohibiting all subjects, upon pretence of their ordinance, to execute anything concerning the militia which is not by those laws warranted.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "hobbes.f.v0070",
+      "kind": "verbatim",
+      "text": "That he would be pleased to rest satisfied with that course that the Lords and Commons have appointed for ordering the militia, and recal his declarations and proclamations against it.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "hobbes.f.v0071",
+      "kind": "verbatim",
+      "text": "I shall only make use of such a thread as is necessary for the filling up of such knavery, and folly also, as I shall observe in their several actions.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hobbes.f.v0072",
+      "kind": "verbatim",
+      "text": "The King himself thought so; and the Parliament in a manner confessed the same, by commanding Fairfax to rise from the siege, and endeavour to give the King battle.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "hobbes.f.v0073",
+      "kind": "verbatim",
+      "text": "After this, the city of Geneva, and divers other places beyond sea, having revolted from the papacy, set up presbyteries for the government of their several churches.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "hobbes.f.v0074",
+      "kind": "verbatim",
+      "text": "The propositions were these: First, that the Parliament should have the militia, and the power of levying money to maintain it, for twenty years; and after that term, the exercise thereof to return to the King, in case the Parliament think the safety of the kingdom concerned in it.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "hobbes.f.v0075",
+      "kind": "verbatim",
+      "text": "This affrighted divers of the King’s party out of the land; for not only they, but all that had borne arms for the King, were at that time in very great danger of their lives.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hobbes.f.v0076",
+      "kind": "verbatim",
+      "text": "Harrison and they of his sect were troubled hereat, and made speeches against it; but Cromwell’s party, of whom the speaker was one, left the House, and with the mace before them went to Whitehall, and surrendered their power to Cromwell that had given it to them.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "hobbes.f.v0077",
+      "kind": "verbatim",
+      "text": "Richard’s authority and business in town being thus at an end, he retired into the country; where within a few days, upon promise of the payment of his debts, which his father’s funeral had made great, he signed a resignation of his Protectorship.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "hobbes.f.v0078",
+      "kind": "verbatim",
+      "text": "This coming to the knowledge of their army in the north, they deserted Lambert; and the Rump, the 26th of December, repossessed the House.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "hobbes.f.v0079",
+      "kind": "verbatim",
+      "text": "The first of them, being an abridgment containing the most useful part of Aristotle’s rhetoric, was written some thirty years since.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "hobbes.f.v0080",
+      "kind": "verbatim",
+      "text": "In this the hearer has always somewhat set out, and terminated to him; in the other he foresees no end, and has nothing finished to him.",
+      "work": "Behemoth",
+      "lang": "en",
+      "src": {
+        "work": "Behemoth"
+      },
+      "quality": {
+        "chars": 136
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 268,
+    "formulas": 80,
+    "verbatim": 80,
+    "patterns": 0
+  },
+  "checksum": "sha256:524fea9b50f2110330de49115f76299a358fa9967a30c2e25b218181df2c00a9"
+}

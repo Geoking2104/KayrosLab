@@ -1,0 +1,3283 @@
+{
+  "authorId": "darwin",
+  "kbVersion": "darwin@bootstrap-2026-10-03",
+  "builtAt": "2026-11-22T11:09:33.116Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "On the Origin of Species",
+      "sentences": 55
+    },
+    {
+      "title": "The Voyage of the Beagle",
+      "sentences": 58
+    },
+    {
+      "title": "The Descent of Man, and Selection in Relation to Sex",
+      "sentences": 53
+    },
+    {
+      "title": "The Expression of the Emotions in Man and Animals",
+      "sentences": 55
+    },
+    {
+      "title": "The Autobiography of Charles Darwin",
+      "sentences": 54
+    }
+  ],
+  "passages": [
+    {
+      "id": "darwin.p0001",
+      "w": "On the Origin of Species",
+      "s": "Some effect may be attributed to the direct and definite action of the external conditions of life, and some to habit; but he would be a bold man who would account by such agencies for the differences between a dray and race-horse, a greyhound and bloodhound, a carrier and tumbler pigeon.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0002",
+      "w": "On the Origin of Species",
+      "s": "The savages in South Africa match their draught cattle by colour, as do some of the Esquimaux their teams of dogs.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0003",
+      "w": "On the Origin of Species",
+      "s": "He can never act by selection, excepting on variations which are first given to him in some slight degree by nature.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0004",
+      "w": "On the Origin of Species",
+      "s": "It would never have been expected that the branching of the main nerves close to the great central ganglion of an insect would have been variable in the same species; it might have been thought that changes of this nature could have been effected only by slow degrees; yet Sir J.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0005",
+      "w": "On the Origin of Species",
+      "s": "Many years ago, when comparing, and seeing others compare, the birds from the closely neighbouring islands of the Galapagos Archipelago, one with another, and with those from the American mainland, I was much struck how entirely vague and arbitrary is the distinction between species and varieties.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0006",
+      "w": "On the Origin of Species",
+      "s": "But if he confine his attention to one class within one country he will soon make up his mind how to rank most of the doubtful forms.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0007",
+      "w": "On the Origin of Species",
+      "s": "How do those groups of species, which constitute what are called distinct genera, and which differ from each other more than do the species of the same genus, arise?",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0008",
+      "w": "On the Origin of Species",
+      "s": "Their geometrical ratio of increase, the result of which never fails to be surprising, simply explains their extraordinarily rapid increase and wide diffusion in their new homes.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0009",
+      "w": "On the Origin of Species",
+      "s": "I should add that the good effects of intercrossing, and the ill effects of close interbreeding, no doubt come into play in many of these cases; but I will not here enlarge on this subject.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0010",
+      "w": "On the Origin of Species",
+      "s": "Can it then be thought improbable, seeing that variations useful to man have undoubtedly occurred, that other variations useful in some way to each being in the great and complex battle of life, should occur in the course of many successive generations?",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0011",
+      "w": "On the Origin of Species",
+      "s": "Can we wonder, then, that Nature’s productions should be far “truer” in character than man’s productions; that they should be infinitely better adapted to the most complex conditions of life, and should plainly bear the stamp of far higher workmanship?",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0012",
+      "w": "On the Origin of Species",
+      "s": "Fabre, fighting for a particular female who sits by, an apparently unconcerned beholder of the struggle, and then retires with the conqueror.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0013",
+      "w": "On the Origin of Species",
+      "s": "But still there are many hermaphrodite animals which certainly do not habitually pair, and a vast majority of plants are hermaphrodites.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0014",
+      "w": "On the Origin of Species",
+      "s": "In the case of methodical selection, a breeder selects for some definite object, and if the individuals be allowed freely to intercross, his work will completely fail.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0015",
+      "w": "On the Origin of Species",
+      "s": "To sum up, as far as the extreme intricacy of the subject permits, the circumstances favourable and unfavourable for the production of new species through natural selection.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0016",
+      "w": "On the Origin of Species",
+      "s": "We have, also, seen that the species, which are the commonest and most widely-diffused, vary more than do the rare and restricted species.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0017",
+      "w": "On the Origin of Species",
+      "s": "We may suppose that only one (F) of the two species (E and F) which were least closely related to the other nine original species, has transmitted descendants to this late stage of descent.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0018",
+      "w": "On the Origin of Species",
+      "s": "And it may be asked what advantage, as far as we can see, would it be to an infusorian animalcule—to an intestinal worm—or even to an earth-worm, to be highly organised.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0019",
+      "w": "On the Origin of Species",
+      "s": "These slightly varying organisms are interesting in as far as they present characters analogous to those possessed by the species which are confined to similar conditions.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0020",
+      "w": "On the Origin of Species",
+      "s": "One of the most obvious real cases is, that variations of structure arising in the young or larvæ naturally tend to affect the structure of the mature animal.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0021",
+      "w": "On the Origin of Species",
+      "s": "As, however, we do not know the common ancestor of any natural group, we cannot distinguish between reversionary and analogous characters.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0022",
+      "w": "On the Origin of Species",
+      "s": "In four coloured drawings, which I have seen, of hybrids between the ass and zebra, the legs were much more plainly barred than the rest of the body; and in one of them there was a double shoulder-stripe.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0023",
+      "w": "On the Origin of Species",
+      "s": "For forms existing in larger numbers will have a better chance, within any given period, of presenting further favourable variations for natural selection to seize on, than will the rarer forms which exist in lesser numbers.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0024",
+      "w": "On the Origin of Species",
+      "s": "Have we any right to assume that the Creator works by intellectual powers like those of man?",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0025",
+      "w": "On the Origin of Species",
+      "s": "This line of argument seems to have had great weight in leading Fritz Müller to accept the views maintained by me in this volume.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0026",
+      "w": "On the Origin of Species",
+      "s": "On the theory of natural selection, we can clearly understand why she should not; for natural selection acts only by taking advantage of slight successive variations; she can never take a great and sudden leap, but must advance by the short and sure, though slow steps.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0027",
+      "w": "On the Origin of Species",
+      "s": "We may infer from all this that a nearly similar taste for beautiful colours and for musical sounds runs through a large part of the animal kingdom.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0028",
+      "w": "On the Origin of Species",
+      "s": "To these may be added the numerical divisions in the parts of the flower, the position of the ovules, the shape of the seed, when not of any use for dissemination, &c.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0029",
+      "w": "On the Origin of Species",
+      "s": "In certain Umbelliferæ the exterior seeds, according to Tausch, are orthospermous, and the central one cœlospermous, and this is a character which was considered by De Candolle to be in other species of the highest systematic importance.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0030",
+      "w": "On the Origin of Species",
+      "s": "Mivart, selecting those which are the most illustrative, as want of space prevents me from considering all.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0031",
+      "w": "On the Origin of Species",
+      "s": "From this stage, in which the lamellæ would be two-thirds of the length of the plates of baleen in the Balænoptera rostrata, gradations, which may be observed in still-existing Cetaceans, lead us onward to the enormous plates of baleen in the Greenland whale.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0032",
+      "w": "On the Origin of Species",
+      "s": "From the colourless state of the ventral surface of most fishes and of many other animals, we may reasonably suppose that the absence of colour in flat-fish on the side, whether it be the right or left, which is under-most, is due to the exclusion of light.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0033",
+      "w": "On the Origin of Species",
+      "s": "We next find one corner of the broad penultimate segment slightly prominent, sometimes furnished with irregular teeth, and against these the terminal segment shuts down.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0034",
+      "w": "On the Origin of Species",
+      "s": "As twining is the simplest means of ascending a support, and forms the basis of our series, it may naturally be asked how did plants acquire this power in an incipient degree, afterwards to be improved and increased through natural selection.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0035",
+      "w": "On the Origin of Species",
+      "s": "Many species must have been prevented from increasing in numbers through destructive agencies, which stood in no relation to certain structures, which we imagine would have been gained through natural selection from appearing to us advantageous to the species.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0036",
+      "w": "On the Origin of Species",
+      "s": "If Mozart, instead of playing the pianoforte at three years old with wonderfully little practice, had played a tune with no practice at all, be might truly be said to have done so instinctively.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0037",
+      "w": "On the Origin of Species",
+      "s": "We shall thus be enabled to see the part which habit and the selection of so-called spontaneous variations have played in modifying the mental qualities of our domestic animals.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0038",
+      "w": "On the Origin of Species",
+      "s": "This rare event is probably a case of reversion to the long-lost, aboriginal instinct of nidification.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0039",
+      "w": "On the Origin of Species",
+      "s": "This difference in the usual habits of the masters and slaves in the two countries, probably depends merely on the slaves being captured in greater numbers in Switzerland than in England.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0040",
+      "w": "On the Origin of Species",
+      "s": "These rhombs have certain angles, and the three which form the pyramidal base of a single cell on one side of the comb, enter into the composition of the bases of three adjoining cells on the opposite side.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0041",
+      "w": "On the Origin of Species",
+      "s": "The work of construction seems to be a sort of balance struck between many bees, all instinctively standing at the same relative distance from each other, all trying to sweep equal spheres, and then building up, or leaving ungnawed, the planes of intersection between these spheres.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0042",
+      "w": "On the Origin of Species",
+      "s": "This view certainly seems at first highly probable, for species living together could hardly have been kept distinct had they been capable of freely crossing.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0043",
+      "w": "On the Origin of Species",
+      "s": "The practical experiments of horticulturists, though not made with scientific precision, deserve some notice.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0044",
+      "w": "On the Origin of Species",
+      "s": "The fertility, both of first crosses and of hybrids, is more easily affected by unfavourable conditions, than is that of pure species.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0045",
+      "w": "On the Origin of Species",
+      "s": "Until becoming acquainted with these facts, I was unwilling to believe in the frequent early death of hybrid embryos; for hybrids, when once born, are generally healthy and long-lived, as we see in the case of the common mule.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0046",
+      "w": "On the Origin of Species",
+      "s": "In all these respects, and in others which might be added, the forms of the same undoubted species, when illegitimately united, behave in exactly the same manner as do two distinct species when crossed.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0047",
+      "w": "On the Origin of Species",
+      "s": "The real difficulty in our present subject is not, as it appears to me, why domestic varieties have not become mutually infertile when crossed, but why this has so generally occurred with natural varieties, as soon as they have been permanently modified in a sufficient degree to take rank as species.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0048",
+      "w": "On the Origin of Species",
+      "s": "The main cause, however, of innumerable intermediate links not now occurring everywhere throughout nature depends, on the very process of natural selection, through which new varieties continually take the places of and supplant their parent-forms.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0049",
+      "w": "On the Origin of Species",
+      "s": "The consideration of these various facts impresses the mind almost in the same manner as does the vain endeavour to grapple with the idea of eternity.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0050",
+      "w": "On the Origin of Species",
+      "s": "Forbes, entirely disbelieve in the change of species.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0051",
+      "w": "On the Origin of Species",
+      "s": "Falconer, namely, that the period during which each species underwent modification, though long as measured by years, was probably short in comparison with that during which it remained without undergoing any change.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0052",
+      "w": "On the Origin of Species",
+      "s": "Cuvier used to urge that no monkey occurred in any tertiary stratum; but now extinct species have been discovered in India, South America and in Europe, as far back as the miocene stage.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0053",
+      "w": "On the Origin of Species",
+      "s": "Had this horse been still living, but in some degree rare, no naturalist would have felt the least surprise at its rarity; for rarity is the attribute of a vast number of species of all classes, in all countries.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0054",
+      "w": "On the Origin of Species",
+      "s": "We shall see this more clearly when we treat of the present distribution of organic beings, and find how slight is the relation between the physical conditions of various countries and the nature of their inhabitants.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0055",
+      "w": "On the Origin of Species",
+      "s": "On the principle of the continued tendency to divergence of character, which was formerly illustrated by this diagram, the more recent any form is the more it will generally differ from its ancient progenitor.",
+      "src": {
+        "work": "On the Origin of Species"
+      }
+    },
+    {
+      "id": "darwin.p0056",
+      "w": "The Voyage of the Beagle",
+      "s": "Abbott, who made his observations in Georgia; see Mr.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0057",
+      "w": "The Voyage of the Beagle",
+      "s": "The outskirting houses rose out of the plain like isolated beings, without the accompaniment of gardens or courtyards.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0058",
+      "w": "The Voyage of the Beagle",
+      "s": "The desire to signalize any event, on the highest point of the neighbouring land, seems an universal passion with mankind.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0059",
+      "w": "The Voyage of the Beagle",
+      "s": "They attempt, also, together with the Chimango, to pick off the scabs from the sore backs of horses and mules.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0060",
+      "w": "The Voyage of the Beagle",
+      "s": "The sand is entirely, or in greater part, siliceous; but some points are of a black colour, and from their glossy surface possess a metallic lustre.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0061",
+      "w": "The Voyage of the Beagle",
+      "s": "A man present at one gave me a very lively description of what took place.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0062",
+      "w": "The Voyage of the Beagle",
+      "s": "The men were a tall, fine race, yet it was afterwards easy to see in the Fuegian savage the same countenance rendered hideous by cold, want of food, and less civilization.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0063",
+      "w": "The Voyage of the Beagle",
+      "s": "This posta was commanded by a negro lieutenant, born in Africa: to his credit be it said, there was not a ranche between the Colorado and Buenos Ayres in nearly such neat order as his.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0064",
+      "w": "The Voyage of the Beagle",
+      "s": "I have described this man's conduct, because he acted under the full impression that they were Indians.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0065",
+      "w": "The Voyage of the Beagle",
+      "s": "Captain Sturt, [11] when descending the Murrumbidgee, in Australia, saw two emus in the act of swimming.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0066",
+      "w": "The Voyage of the Beagle",
+      "s": "This small family of birds is one of those which, from its varied relations to other families, although at present offering only difficulties to the systematic naturalist, ultimately may assist in revealing the grand scheme, common to the present and past ages, on which organized beings have been created.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0067",
+      "w": "The Voyage of the Beagle",
+      "s": "The stem at one extremity is truncate, but at the other is terminated by a vermiform fleshy appendage.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0068",
+      "w": "The Voyage of the Beagle",
+      "s": "It was very different from the circulation of the fluid in the elastic bag, containing the thin extremity of the axis.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0069",
+      "w": "The Voyage of the Beagle",
+      "s": "The wind was very strong and cold, but I never slept more comfortably.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0070",
+      "w": "The Voyage of the Beagle",
+      "s": "The country on the whole resembled the better parts of the Cambridgeshire fens.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0071",
+      "w": "The Voyage of the Beagle",
+      "s": "3] Two species of Tinamus and Eudromia elegans of A.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0072",
+      "w": "The Voyage of the Beagle",
+      "s": "Occasionally in the evening they may be heard hooting.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0073",
+      "w": "The Voyage of the Beagle",
+      "s": "This vertical section clearly tells us of a large bay of pure salt-water, gradually encroached on, and at last converted into the bed of a muddy estuary, into which floating carcasses were swept.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0074",
+      "w": "The Voyage of the Beagle",
+      "s": "He professed a great liking to the English, but stoutly maintained that the battle of Trafalgar was merely won by the Spanish captains having been all bought over; and that the only really gallant action on either side was performed by the Spanish admiral.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0075",
+      "w": "The Voyage of the Beagle",
+      "s": "10] These droughts to a certain degree seem to be almost periodical; I was told the dates of several others, and the intervals were about fifteen years.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0076",
+      "w": "The Voyage of the Beagle",
+      "s": "Each troop is recognized by a few peculiarly marked animals, and its number is known: so that, one being lost out of ten thousand, it is perceived by its absence from one of the tropillas.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0077",
+      "w": "The Voyage of the Beagle",
+      "s": "Then making a demi-volte in the air, with the other arm outstretched in a like manner, he wheeled round, with astonishing force, in an opposite direction.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0078",
+      "w": "The Voyage of the Beagle",
+      "s": "The head man in the post-office sold forged government franks.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0079",
+      "w": "The Voyage of the Beagle",
+      "s": "They were more than a yard in length, and diverged in an ascending direction from the orifices.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0080",
+      "w": "The Voyage of the Beagle",
+      "s": "I was at first much surprised how a large quadruped could so lately have subsisted, in lat.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0081",
+      "w": "The Voyage of the Beagle",
+      "s": "Captain Fitz Roy now determined to follow its course as far as time would allow.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0082",
+      "w": "The Voyage of the Beagle",
+      "s": "Except when rising from the ground, I do not recollect ever having seen one of these birds flap its wings.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0083",
+      "w": "The Voyage of the Beagle",
+      "s": "Nor would it be so, if the horse, when left to itself without its rider, did not soon learn, for its own safety, to keep the lazo tight, so that, if the cow or ox moves forward, the horse moves just as quickly forward; otherwise, it stands motionless leaning on one side.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0084",
+      "w": "The Voyage of the Beagle",
+      "s": "The Gauchos also have frequently in the evening killed them, by holding out a piece of meat in one hand, and in the other a knife ready to stick them.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0085",
+      "w": "The Voyage of the Beagle",
+      "s": "It seems now pretty well established that plants propagated by buds all partake of a common duration of life; and it is familiar to every one, what singular and numerous peculiarities are transmitted with certainty, by buds, layers, and grafts, which by seminal propagation never or only casually reappear.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0086",
+      "w": "The Voyage of the Beagle",
+      "s": "The language of these people, according to our notions, scarcely deserves to be called articulate.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0087",
+      "w": "The Voyage of the Beagle",
+      "s": "These, from the effects of the elevation and of the impetuous winds, were low, thick and crooked.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0088",
+      "w": "The Voyage of the Beagle",
+      "s": "Nor is it easy to teach them our superiority except by striking a fatal blow.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0089",
+      "w": "The Voyage of the Beagle",
+      "s": "On one occasion I saw two of these monsters, probably male and female, slowly swimming one after the other, within less than a stone's throw of the shore, over which the beech-tree extended its branches.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0090",
+      "w": "The Voyage of the Beagle",
+      "s": "Simple circumstances--such as the beauty of scarlet cloth or blue beads, the absence of women, our care in washing ourselves,--excited their admiration far more than any grand or complicated object, such as our ship.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0091",
+      "w": "The Voyage of the Beagle",
+      "s": "The correspondence of the cliffs is far from proving any junction; because such cliffs generally are formed by the intersection of sloping deposits, which, before the elevation of the land, had been accumulated near the then existing shores.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0092",
+      "w": "The Voyage of the Beagle",
+      "s": "We were in consequence obliged to stand off and on in this narrow arm of the sea, during a pitch-dark night of fourteen hours long.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0093",
+      "w": "The Voyage of the Beagle",
+      "s": "It is 15 miles long, and in one part 7 broad and descends to the sea-coast.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0094",
+      "w": "The Voyage of the Beagle",
+      "s": "My object in coming here was to see the great beds of shells, which stand some yards above the level of the sea, and are burnt for lime.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0095",
+      "w": "The Voyage of the Beagle",
+      "s": "It is well in this case to call to mind the vast shingle and sedimentary beds of Patagonia, which, if heaped on the Cordillera, would increase its height by so many thousand feet.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0096",
+      "w": "The Voyage of the Beagle",
+      "s": "I attempted to reach a lake which the inhabitants, from some unaccountable reason, believe to be an arm of the sea.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0097",
+      "w": "The Voyage of the Beagle",
+      "s": "Never having heard of these plains, I was much surprised at meeting with such scenery in Chile.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0098",
+      "w": "The Voyage of the Beagle",
+      "s": "4] It is a remarkable fact, that Molina, though describing in detail all the birds and animals of Chile, never once mentions this genus, the species of which are so common, and so remarkable in their habits.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0099",
+      "w": "The Voyage of the Beagle",
+      "s": "Their manner of life is the same with that of the other poor inhabitants, and they are all Christians; but it is said that they yet retain some strange superstitious ceremonies, and that they pretend to hold communication with the devil in certain caves.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0100",
+      "w": "The Voyage of the Beagle",
+      "s": "The scenery was remarkable The chief part of the range was composed of grand, solid, abrupt masses of granite, which appeared as if they had been coeval with the beginning of the world.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0101",
+      "w": "The Voyage of the Beagle",
+      "s": "The Myopotamus Coypus (like a beaver, but with a round tail) is well known from its fine fur, which is an object of trade throughout the tributaries of La Plata.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0102",
+      "w": "The Voyage of the Beagle",
+      "s": "Carlos, which is no less than ninety-three miles from the Corcovado.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0103",
+      "w": "The Voyage of the Beagle",
+      "s": "The evergreens do not appear to be quite so numerous, and the forest in consequence has a brighter tint.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0104",
+      "w": "The Voyage of the Beagle",
+      "s": "Captain Fitz Roy and some officers were at the town during the shock, and there the scene was more striking; for although the houses, from being built of wood, did not fall, they were violently shaken, and the boards creaked and rattled together.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0105",
+      "w": "The Voyage of the Beagle",
+      "s": "The great wave must have travelled slowly, for the inhabitants of Talcahuano had time to run up the hills behind the town; and some sailors pulled out seaward, trusting successfully to their boat riding securely over the swell, if they could reach it before it broke.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0106",
+      "w": "The Voyage of the Beagle",
+      "s": "In this south part of Chile, the men who drive cattle into the Cordillera, and who frequent every ravine where there is a little pasture, are the usual discoverers.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0107",
+      "w": "The Voyage of the Beagle",
+      "s": "As the observations have been chiefly made in summer, this wind must be an upper and return current.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0108",
+      "w": "The Voyage of the Beagle",
+      "s": "This was a spectacle to which I had always looked forward with interest, but I was disappointed: at the first glance it much resembled a distant view of the ocean, but in the northern parts many irregularities were soon distinguishable.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0109",
+      "w": "The Voyage of the Beagle",
+      "s": "I have often seen these islets in the sky, marking the position of the Cordillera, when the far-distant mountains have been hidden beneath the horizon.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0110",
+      "w": "The Voyage of the Beagle",
+      "s": "This thoughtlessness, as with sailors, is evidently the result of a similar manner of life.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0111",
+      "w": "The Voyage of the Beagle",
+      "s": "The terraces are there much broader, and may be called plains, in some parts there are six of them, but generally only five; they run up the valley for thirty-seven miles from the coast.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0112",
+      "w": "The Voyage of the Beagle",
+      "s": "These bare questions at once satisfied and silenced the greater number; some, however (like a few in England who are a century behindhand), thought that all such inquiries were useless and impious; and that it was quite sufficient that God had thus made the mountains.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0113",
+      "w": "The Voyage of the Beagle",
+      "s": "Gill, a civil engineer, who had seen much of the interior country.",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      }
+    },
+    {
+      "id": "darwin.p0114",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "1866-1868.) Monstrosities, which graduate into slight variations, are likewise so similar in man and the lower animals, that the same classification and the same terms can be used for both, as has been shewn by Isidore Geoffroy St.-Hilaire.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0115",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "It is asserted that the hands of English labourers are at birth larger than those of the gentry.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0116",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "50, 125, 169, 171, 184-198.) Their skulls are smaller, and the convolutions of the brain are less complex than in normal men.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0117",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "In only two out of thirty female subjects was this muscle developed on both sides, but in three others the rudimentary ligament was present.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0118",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "6, 517.) At the former rate, the present population of the United States (thirty millions), would in 657 years cover the whole terraqueous globe so thickly, that four men would have to stand on each square yard of surface.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0119",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "We have now seen that man is variable in body and mind; and that the variations are induced, either directly or indirectly, by the same general causes, and obey the same general laws, as with the lower animals.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0120",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "No one, I presume, doubts that the large proportion which the size of man’s brain bears to his body, compared to the same proportion in the gorilla or orang, is closely connected with his higher mental powers.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0121",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Uniformity of character would, however, naturally follow from the assumed uniformity of the exciting causes, and likewise from the free intercrossing of many individuals.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0122",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Therefore I tried, and found that I could readily seize with my own teeth the sharp little claws of a kitten nearly five weeks old.) In the Zoological Gardens, I heard from the keeper that an old baboon (C.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0123",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Hardly any faculty is more important for the intellectual progress of man than ATTENTION.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0124",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Westropp, informs me that he observed in Vienna a bear deliberately making with his paw a current in some water, which was close to the bars of his cage, so as to draw a piece of floating bread within his reach.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0125",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "When my voice awakened a train of old associations in the mind of the before-mentioned dog, he must have retained his mental individuality, although every atom of his brain had probably undergone change more than once during the interval of five years.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0126",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "The strong tendency in our nearest allies, the monkeys, in microcephalous idiots (56.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0127",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "In the spelling also of words, letters often remain as the rudiments of ancient forms of pronunciation.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0128",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Mill speaks, in his celebrated work, ‘Utilitarianism,’ (1864, pp.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0129",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "The bird apparently feared to attack as long as it remained face to face; and Mr.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0130",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Some instincts are determined solely by painful feelings, as by fear, which leads to self-preservation, and is in some cases directed towards special enemies.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0131",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Nor is it easy, perhaps hardly possible, to call up with complete vividness the feeling, for instance, of hunger; nor indeed, as has often been remarked, of any suffering.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0132",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "We even say that a pointer OUGHT to point, and a retriever to retrieve game.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0133",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "As a consequence of this, the senseless practice of celibacy has been ranked from a remote period as a virtue.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0134",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "At what age does the new-born infant possess the power of abstraction, or become self-conscious, and reflect on its own existence?",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0135",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "They would have felt uneasy when separated from their comrades, for whom they would have felt some degree of love; they would have warned each other of danger, and have given mutual aid in attack or defence.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0136",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "309.), from some such accident as the seeds of a fruit-tree falling on a heap of refuse, and producing an unusually fine variety.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0137",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Duncan remarks (‘Fecundity, Fertility, etc.’ 1871, p.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0138",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "The Fuegians were probably compelled by other conquering hordes to settle in their inhospitable country, and they may have become in consequence somewhat more degraded; but it would be difficult to prove that they have fallen much below the Botocudos, who inhabit the finest parts of Brazil.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0139",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Ants certainly communicate information to each other, and several unite for the same work, or for games of play.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0140",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "410.) Every naturalist, who believes in the principle of evolution, will grant that the two main divisions of the Simiadae, namely the Catarrhine and Platyrrhine monkeys, with their sub-groups, have all proceeded from some one extremely ancient progenitor.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0141",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "42) says, that he considers the phylum or lines of descent of the Vertebrata to be admirably discussed by Haeckel, although he differs on some points.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0142",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "44.), positively asserts that he has known mulatto families which have intermarried for several generations, and have continued on an average as fertile as either pure whites or pure blacks.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0143",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "For instance, with the aborigines of America and Australia, Prof.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0144",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "The result seems trustworthy, and shows that during the fourteen years, previous to 1858, the decrease was 19.42 per cent.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0145",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Quatrefages (‘Unité de l’Espèce Humaine,’ 1861, p.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0146",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "But it is also clear, that none of these differences constitutes a sharp demarcation between the man’s and the ape’s brain.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0147",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "In this, and in the fourth month, the cerebral hemispheres are smooth and rounded (with the exception of the sylvian depression), and they project backwards far beyond the cerebellum.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0148",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Jenner Weir, who has carefully attended to the habits of birds during many years.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0149",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "On Cynocephalus, Brehm, ‘Thierleben,’ B.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0150",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Hence it appears that amongst birds there often exists a close relation between polygamy and the development of strongly-marked sexual differences.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0151",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Conversely, the same thing is evident, more or less plainly, with castrated males.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0152",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "1872) from so experienced a breeder as Mr.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0153",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Victor Carus for having made enquiries for me, from the highest authorities, with respect to the merino sheep of Saxony.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0154",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "If we take the English and Scotch returns together, the total number amounts to 59,650, consisting of 29,478 males and 30,172 females, or as 97.7 to 100.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0155",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Tristram found “the male flocks appearing greatly to exceed the female in number.” (67.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0156",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Janson stated at the Entomological Society that the females of the bark feeding Tomicus villosus are so common as to be a plague, whilst the males are so rare as to be hardly known.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0157",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "I formerly thought that when a tendency to produce the two sexes in equal numbers was advantageous to the species, it would follow from natural selection, but I now see that the whole problem is so intricate that it is safer to leave its solution for the future.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0158",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "5, 6, and 7), the smaller one resembling that of the female.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0159",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "I am informed by Fritz Müller, that in the female of a Brazilian species of Gelasimus, the whole body is of a nearly uniform greyish-brown.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0160",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "The innumerable contrivances, therefore, by which the male is able to seize the female, may be briefly passed over.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0161",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Douglas knows, with exotic species, the sexes do not commonly differ much in colour; but in about six British species the male is considerably darker than the female, and in about four other species the female is darker than the male.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0162",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Teeth of Nervure of Gryllus domesticus (from Landois).] In the three Families the sounds are differently produced.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0163",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Landois has observed another important fact, namely, that in the females of the Acridiidae, the stridulating teeth on the femora remain throughout life in the same condition in which they first appear during the larval state in both sexes.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0164",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Walsh, is black, the female (the so-called O.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0165",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Some male beetles, which seem ill-fitted for fighting, nevertheless engage in conflicts for the possession of the females.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0166",
+      "w": "The Descent of Man, and Selection in Relation to Sex",
+      "s": "Crotch for having sent me many prepared specimens of various beetles belonging to these three families and to others, as well as for valuable information.",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      }
+    },
+    {
+      "id": "darwin.p0167",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "It was obviously impossible that a carefully-guarded infant could have learnt by experience that a rattling sound near its eyes indicated danger to them.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0168",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "As he prepares to spring with a savage growl on his enemy, the canine teeth are uncovered, and the ears are pressed close backwards on the head; but with these latter actions, we are not here concerned.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0169",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The most striking case, though a rare and abnormal one, which can be adduced of the direct influence of the nervous system, when strongly affected, on the body, is the loss of colour in the hair, which has occasionally been observed after extreme terror or grief.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0170",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "As Hippocrates long ago observed, if two pains are felt at the same time, the severer one dulls the other.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0171",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The above purposeless movements and increased heart-action may be attributed in chief part to the excited state of the sensorium,[310] and to the consequent undirected overflow, as Mr.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0172",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "When a flock of sheep is scattered, the ewes bleat incessantly for their lambs, and their mutual pleasure at coming together is manifest.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0173",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "These effects must indeed, in some way or other, be connected with the well-known arithmetical relations between the rates of vibration of the sounds which form a musical scale.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0174",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The action serves to make the animal appear larger and more frightful to its enemies or rivals, and is generally accompanied by various voluntary movements adapted for the same purpose, and by the utterance of savage sounds.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0175",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The latter animal is made, in AEsop’s fable of the ‘Ox and the Frog,’ to blow itself up from vanity and envy until it burst.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0176",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The movement is different from the falling down and slight drawing back of the ears, when a dog feels pleased and is caressed by his master.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0177",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "At the same time they generally raise their heads, as all their organs of sense are there situated, and some of the smaller animals rise on their hind-legs.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0178",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "This tucking in of the fail is accompanied by the ears being drawn backwards; but they are not pressed closely to the head, as in snarling, and they are not lowered, as when a dog is pleased or affectionate.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0179",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "She is also much more accustomed than a dog to lie concealed and suddenly spring on her prey.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0180",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "His eyes and ears were directed intently forwards; and I could feel through the saddle the palpitations of his heart.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0181",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Both orangs and chimpanzees, when a little more angered, protrude their lips greatly, and make a harsh barking noise.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0182",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "On the other hand, some of the larger baboons were greatly terrified, and grinned as if on the point of screaming out.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0183",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The reader who is unacquainted with the anatomy of the face, ought to refer to p.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0184",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Bell states and as I have often observed, during screaming, loud laughter, coughing, and sneezing, but during several other analogous actions.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0185",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The fact of tears streaming down the face during violent laughter is common to all the races of mankind, as we shall see in a future chapter.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0186",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "When the small arteries of the face, including those of the retina, are relaxed under very different circumstances, namely, during an intense blush, the lacrymal glands are sometimes affected in a like manner, for the eyes become suffused with tears.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0187",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The skin over the exterior parts of both eyebrows is at the same time drawn downwards and smooth, by the contraction of the outer portions of the orbicular muscles.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0188",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "He informs me that they may constantly be seen in energetic action in cases of melancholia, and especially of hypochondria; and that the persistent lines or furrows, due to their habitual contraction, are characteristic of the physiognomy of the insane belonging to these two classes.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0189",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "His eyes then wavered from side to side; his “mouth was partially closed, with the corners very decidedly depressed.” At last the poor man seemed to make up his mind that he must part with his goat, and then, as Mr.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0190",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The parts of the body which are most easily tickled are those which are not commonly touched, such as the armpits or between the toes, or parts such as the soles of the feet, which are habitually touched by a broad surface; but the surface on which we sit offers a marked exception to this rule.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0191",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Constant tremulous agitation of the inferior palpebral and great zygomatic muscles is pathognomic of the earlier stages of general paralysis.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0192",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Whether the principle of antithesis has here come into play in producing these opposite expressions, in aid of the direct causes which have been specified and which are sufficiently plain, I will not pretend to say.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0193",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Sympathy with the distresses of others, even with the imaginary distresses of a heroine in a pathetic story, for whom we feel no affection, readily excites tears.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0194",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "A half-starved man may think intently how to obtain food, but he probably will not frown unless he encounters either in thought or action some difficulty, or finds the food when obtained nauseous.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0195",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Dyson Lacy remarks that the natives of Australia, when in this frame of mind, sometimes fold their arms across their breasts, an attitude which may be seen with us.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0196",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Bell maintains[913] that the chest is distended with air, and is kept distended at such times, in order to give a fixed support to the muscles which are thereto attached.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0197",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "But the muscular system is often affected in a wholly different way; for trembling is a frequent consequence of extreme rage.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0198",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "In such cases it may be presumed that neither party expects to receive a blow from the other.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0199",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Sutton has never noticed a snarling action in our nearest allies, namely, the monkeys in the Zoological Gardens, and he is positive that the baboons, though furnished with great canines, never act thus, but uncover all their teeth when feeling savage and ready for an attack.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0200",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The term ‘disgust,’ in its simplest sense, means something offensive to the taste.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0201",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "In this latter case we have a good instance, like those given in a former chapter, of the inheritance of a trick or gesture; for no one, I presume, will attribute to mere coincidence so peculiar a habit as this, which was common to the grandfather and his two grandchildren who had never seen him.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0202",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "None of the above movements are of the least service.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0203",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "With the wild Indians of North America, according to Mr.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0204",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Now when we start at any sudden sound or sight, almost all the muscles of the body are involuntarily and momentarily thrown into strong action, for the sake of guarding ourselves against or jumping away from the danger, which we habitually associate with anything unexpected.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0205",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Captain Speedy informs me that the Abyssinians place their right hand to the forehead, with the palm outside.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0206",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "But even here there is room for doubt, for the muscle which appeared to be unusually developed, was seen by Dr.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0207",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Many a man must have felt, before the blessed discovery of chloroform, great horror at the thought of an impending surgical operation.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0208",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The young blush much more freely than the old, but not during infancy,[1302] which is remarkable, as we know that infants at a very early age redden from passion.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0209",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Swinhoe has seen the Chinese blushing, but he thinks it is rare; yet they have the expression “to redden with shame.” Mr.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0210",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "An intense blush is sometimes accompanied by a slight effusion of tears;[1321] and this, I presume, is due to the lacrymal glands partaking of the increased supply of blood, which we know rushes into the capillaries of the adjoining parts, including the retina.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0211",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Many reasons can be assigned for believing that originally self-attention directed to personal appearance, in relation to the opinion of others, was the exciting cause; the same effect being subsequently produced, through the force of association, by self-attention in relation to moral conduct.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0212",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "A blush due to this form of modesty is, moreover, apt to be intense, because it generally relates to the opposite sex; and we have seen how in all cases our liability to blush is thus increased.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0213",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "This is familiar to every one in the increased flow of saliva, when the thought, for instance, of intensely acid fruit is kept before the mind.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0214",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "The face has been the chief object of attention, though, when man aboriginally went naked, the whole surface of his body would have been attended to.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0215",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Nevertheless, all those included under our first principle were at first voluntarily performed for a definite object,—namely, to escape some danger, to relieve some distress, or to gratify some desire.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0216",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "But as far as I can make out, after repeated trials, they do not understand any movement confined to the features, excepting a smile or laugh; and this they appear, at least in some cases, to recognize.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0217",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "But we must here exercise some caution, for as certain monkeys, which are not closely related to man, weep, this habit might have been developed long ago in a sub-branch of the group from which man is derived.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0218",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "198.] 19 (return) [ See remarks to this effect in Lessing’s ‘Lacooon,’ translated by W.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0219",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "She performs it, likewise, with the right hand, but in a slightly modified form; for, after raising the arm, she does not allow the wrist to drop upon the bridge of the nose, but the palm of the half-closed hand falls over and down the nose, striking it rather rapidly.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0220",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Spencer, ‘Essays, Scientific, Political,’ &c., Second Series, 1863, pp.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0221",
+      "w": "The Expression of the Emotions in Man and Animals",
+      "s": "Marshall’s account of an idiot in Philosoph.",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      }
+    },
+    {
+      "id": "darwin.p0222",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Early in my school days a boy had a copy of the ‘Wonders of the World,’ which I often read, and disputed with other boys about the veracity of some of the statements; and I believe that this book first gave me a wish to travel in remote countries, which was ultimately fulfilled by the voyage of the “Beagle”.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0223",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I must have observed insects with some little care, for when ten years old (1819) I went for three weeks to Plas Edwards on the sea-coast in Wales, I was very much interested and surprised at seeing a large black and scarlet Hemipterous insect, many moths (Zygaena), and a Cicindela which are not found in Shropshire.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0224",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Butler, for thus wasting my time on such useless subjects; and he called me very unjustly a “poco curante,” and as I did not understand what he meant, it seemed to me a fearful reproach.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0225",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "My brother stayed only one year at the University, so that during the second year I was left to my own resources; and this was an advantage, for I became well acquainted with several young men fond of natural science.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0226",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I listened in silent astonishment, and as far as I can judge without any effect on my mind.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0227",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "The Plinian Society was encouraged and, I believe, founded by Professor Jameson: it consisted of students and met in an underground room in the University for the sake of reading papers on natural science and discussing them.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0228",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "So that I felt the keenest delight when I first read of the action of icebergs in transporting boulders, and I gloried in the progress of Geology.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0229",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "During the summer of 1826 I took a long walking tour with two friends with knapsacks on our backs through North Wales.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0230",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I asked for some time to consider, as from what little I had heard or thought on the subject I had scruples about declaring my belief in all the dogmas of the Church of England; though otherwise I liked the thought of being a country clergyman.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0231",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I attempted mathematics, and even went during the summer of 1828 with a private tutor (a very dull man) to Barmouth, but I got on very slowly.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0232",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "The logic of this book and, as I may add, of his ‘Natural Theology,’ gave me as much delight as did Euclid.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0233",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Canon of Durham, formerly Reader in Natural Philosophy in Durham University.), who was afterwards Senior Wrangler, and we used continually to take long walks together.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0234",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "This gave me intense pleasure, so that my backbone would sometimes shiver.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0235",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I will give a proof of my zeal: one day, on tearing off some old bark, I saw two rare beetles, and seized one in each hand; then I saw a third and new kind, which I could not bear to lose, so that I popped the one which I held in my right hand into my mouth.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0236",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Before long I became well acquainted with Henslow, and during the latter half of my time at Cambridge took long walks with him on most days; so that I was called by some of the dons “the man who walks with Henslow;” and in the evening I was very often asked to join his family dinner.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0237",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "His temper was imperturbably good, with the most winning and courteous manners; yet, as I have seen, he could be roused by any bad action to the warmest indignation and prompt action.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0238",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Henslow’s benevolence was unbounded, as he proved by his many excellent schemes for his poor parishioners, when in after years he held the living of Hitcham.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0239",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "These men and others of the same standing, together with Henslow, used sometimes to take distant excursions into the country, which I was allowed to join, and they were most agreeable.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0240",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Upon the whole the three years which I spent at Cambridge were the most joyful in my happy life; for I was then in excellent health, and almost always in high spirits.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0241",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "These gravel-beds belong in fact to the glacial period, and in after years I found in them broken arctic shells.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0242",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "He would undertake any sort of trouble to assist those whom he thought deserved assistance.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0243",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "This made him excessively angry, and he said that as I doubted his word we could not live any longer together.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0244",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Everything about which I thought or read was made to bear directly on what I had seen or was likely to see; and this habit of mind was continued during the five years of the voyage.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0245",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "We made two earlier attempts to sail, but were driven back each time by heavy gales.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0246",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Many of my excursions on horseback through wild countries, or in the boats, some of which lasted several weeks, were deeply interesting: their discomfort and some degree of danger were at that time hardly a drawback, and none at all afterwards.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0247",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I do not mean to say that a favourable review or a large sale of my books did not please me greatly, but the pleasure was a fleeting one, and I am sure that I have never turned one inch out of my course to gain fame.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0248",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "1838, pages 446-449.) On March 7th, 1837, I took lodgings in Great Marlborough Street in London, and remained there for nearly two years, until I was married.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0249",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Having been deeply impressed with what I had seen of the elevation of the land of South America, I attributed the parallel lines to the action of the sea; but I had to give up this view when Agassiz propounded his glacier-lake theory.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0250",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Besides my work on coral-reefs, during my residence in London, I read before the Geological Society papers on the Erratic Boulders of South America (‘Geolog.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0251",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I will give my impressions with respect to some of them, though I have little to say worth saying.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0252",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "This I did, and believe now that it was the marvellous currents of protoplasm in some vegetable cell.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0253",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I saw him, also, on a few other occasions.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0254",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I asked him how at first he could judge what facts would be serviceable, and he answered that he did not know, but that a sort of instinct guided him.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0255",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "He had strongly marked features, with a brown complexion, and his clothes, when I saw him, were all brown.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0256",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "After dinner Babbage, in his grimmest manner, thanked Carlyle for his very interesting lecture on silence.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0257",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "From the same cause I have been able to invite here very few scientific acquaintances.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0258",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Even to this day it sells steadily in England and the United States, and has been translated for the second time into German, and into French and other languages.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0259",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Lately an allied burrowing genus has been found on the shores of Portugal.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0260",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "My first note-book was opened in July 1837.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0261",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "In June 1842 I first allowed myself the satisfaction of writing a very brief abstract of my theory in pencil in 35 pages; and this was enlarged during the summer of 1844 into one of 230 pages, which I had fairly copied out and still possess.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0262",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Wallace expressed the wish that if I thought well of his essay, I should sent it to Lyell for perusal.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0263",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Sixteen thousand copies have now (1876) been sold in England; and considering how stiff a book it is, this is a large sale.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0264",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "By this means I was enabled to select the more striking facts and conclusions.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0265",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I gained much by my delay in publishing from about 1839, when the theory was clearly conceived, to 1859; and I lost nothing by it, for I cared very little whether men attributed most originality to me or Wallace; and his essay no doubt aided in the reception of the theory.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0266",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "This I have done to the best of my abilities, and critics may say what they like, but they cannot destroy this conviction.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0267",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "During the same year I published in the ‘Journal of the Linnean Society’ a paper “On the Two Forms, or Dimorphic Condition of Primula,” and during the next five years, five other papers on dimorphic and trimorphic plants.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0268",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I afterwards found that the offspring from the union of two plants belonging to the same forms presented a close and curious analogy with hybrids from the union of two distinct species.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0269",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "In 1875 a second and largely corrected edition, which cost me a good deal of labour, was brought out.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0270",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "The ‘Descent of Man’ took me three years to write, but then as usual some of this time was lost by ill health, and some was consumed by preparing new editions and other minor works.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0271",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "In the summer of 1860 I was idling and resting near Hartfield, where two species of Drosera abound; and I noticed that numerous insects had been entrapped by the leaves.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0272",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I am not conscious of any change in my mind during the last thirty years, excepting in one point presently to be mentioned; nor, indeed, could any change have been expected unless one of general deterioration.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0273",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "Each one of these headings is again enlarged and often transferred before I begin to write in extenso.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0274",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "I am therefore a poor critic: a paper or book, when first read, generally excites my admiration, and it is only after considerable reflection that I perceive the weak points.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    },
+    {
+      "id": "darwin.p0275",
+      "w": "The Autobiography of Charles Darwin",
+      "s": "My industry has been nearly as great as it could have been in the observation and collection of facts.",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "darwin.f.v0001",
+      "kind": "verbatim",
+      "text": "Some effect may be attributed to the direct and definite action of the external conditions of life, and some to habit; but he would be a bold man who would account by such agencies for the differences between a dray and race-horse, a greyhound and bloodhound, a carrier and tumbler pigeon.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "darwin.f.v0002",
+      "kind": "verbatim",
+      "text": "It would never have been expected that the branching of the main nerves close to the great central ganglion of an insect would have been variable in the same species; it might have been thought that changes of this nature could have been effected only by slow degrees; yet Sir J.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "darwin.f.v0003",
+      "kind": "verbatim",
+      "text": "Many years ago, when comparing, and seeing others compare, the birds from the closely neighbouring islands of the Galapagos Archipelago, one with another, and with those from the American mainland, I was much struck how entirely vague and arbitrary is the distinction between species and varieties.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "darwin.f.v0004",
+      "kind": "verbatim",
+      "text": "Their geometrical ratio of increase, the result of which never fails to be surprising, simply explains their extraordinarily rapid increase and wide diffusion in their new homes.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "darwin.f.v0005",
+      "kind": "verbatim",
+      "text": "I should add that the good effects of intercrossing, and the ill effects of close interbreeding, no doubt come into play in many of these cases; but I will not here enlarge on this subject.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "darwin.f.v0006",
+      "kind": "verbatim",
+      "text": "Can it then be thought improbable, seeing that variations useful to man have undoubtedly occurred, that other variations useful in some way to each being in the great and complex battle of life, should occur in the course of many successive generations?",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "darwin.f.v0007",
+      "kind": "verbatim",
+      "text": "Can we wonder, then, that Nature’s productions should be far “truer” in character than man’s productions; that they should be infinitely better adapted to the most complex conditions of life, and should plainly bear the stamp of far higher workmanship?",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "darwin.f.v0008",
+      "kind": "verbatim",
+      "text": "We may suppose that only one (F) of the two species (E and F) which were least closely related to the other nine original species, has transmitted descendants to this late stage of descent.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "darwin.f.v0009",
+      "kind": "verbatim",
+      "text": "On the theory of natural selection, we can clearly understand why she should not; for natural selection acts only by taking advantage of slight successive variations; she can never take a great and sudden leap, but must advance by the short and sure, though slow steps.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "darwin.f.v0010",
+      "kind": "verbatim",
+      "text": "In certain Umbelliferæ the exterior seeds, according to Tausch, are orthospermous, and the central one cœlospermous, and this is a character which was considered by De Candolle to be in other species of the highest systematic importance.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "darwin.f.v0011",
+      "kind": "verbatim",
+      "text": "From this stage, in which the lamellæ would be two-thirds of the length of the plates of baleen in the Balænoptera rostrata, gradations, which may be observed in still-existing Cetaceans, lead us onward to the enormous plates of baleen in the Greenland whale.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "darwin.f.v0012",
+      "kind": "verbatim",
+      "text": "From the colourless state of the ventral surface of most fishes and of many other animals, we may reasonably suppose that the absence of colour in flat-fish on the side, whether it be the right or left, which is under-most, is due to the exclusion of light.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "darwin.f.v0013",
+      "kind": "verbatim",
+      "text": "As twining is the simplest means of ascending a support, and forms the basis of our series, it may naturally be asked how did plants acquire this power in an incipient degree, afterwards to be improved and increased through natural selection.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "darwin.f.v0014",
+      "kind": "verbatim",
+      "text": "Many species must have been prevented from increasing in numbers through destructive agencies, which stood in no relation to certain structures, which we imagine would have been gained through natural selection from appearing to us advantageous to the species.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "darwin.f.v0015",
+      "kind": "verbatim",
+      "text": "If Mozart, instead of playing the pianoforte at three years old with wonderfully little practice, had played a tune with no practice at all, be might truly be said to have done so instinctively.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "darwin.f.v0016",
+      "kind": "verbatim",
+      "text": "We shall thus be enabled to see the part which habit and the selection of so-called spontaneous variations have played in modifying the mental qualities of our domestic animals.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "darwin.f.v0017",
+      "kind": "verbatim",
+      "text": "This difference in the usual habits of the masters and slaves in the two countries, probably depends merely on the slaves being captured in greater numbers in Switzerland than in England.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "darwin.f.v0018",
+      "kind": "verbatim",
+      "text": "The work of construction seems to be a sort of balance struck between many bees, all instinctively standing at the same relative distance from each other, all trying to sweep equal spheres, and then building up, or leaving ungnawed, the planes of intersection between these spheres.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "darwin.f.v0019",
+      "kind": "verbatim",
+      "text": "Until becoming acquainted with these facts, I was unwilling to believe in the frequent early death of hybrid embryos; for hybrids, when once born, are generally healthy and long-lived, as we see in the case of the common mule.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "darwin.f.v0020",
+      "kind": "verbatim",
+      "text": "The main cause, however, of innumerable intermediate links not now occurring everywhere throughout nature depends, on the very process of natural selection, through which new varieties continually take the places of and supplant their parent-forms.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "darwin.f.v0021",
+      "kind": "verbatim",
+      "text": "Falconer, namely, that the period during which each species underwent modification, though long as measured by years, was probably short in comparison with that during which it remained without undergoing any change.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "darwin.f.v0022",
+      "kind": "verbatim",
+      "text": "Cuvier used to urge that no monkey occurred in any tertiary stratum; but now extinct species have been discovered in India, South America and in Europe, as far back as the miocene stage.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "darwin.f.v0023",
+      "kind": "verbatim",
+      "text": "Had this horse been still living, but in some degree rare, no naturalist would have felt the least surprise at its rarity; for rarity is the attribute of a vast number of species of all classes, in all countries.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "darwin.f.v0024",
+      "kind": "verbatim",
+      "text": "We shall see this more clearly when we treat of the present distribution of organic beings, and find how slight is the relation between the physical conditions of various countries and the nature of their inhabitants.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "darwin.f.v0025",
+      "kind": "verbatim",
+      "text": "On the principle of the continued tendency to divergence of character, which was formerly illustrated by this diagram, the more recent any form is the more it will generally differ from its ancient progenitor.",
+      "work": "On the Origin of Species",
+      "lang": "en",
+      "src": {
+        "work": "On the Origin of Species"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "darwin.f.v0026",
+      "kind": "verbatim",
+      "text": "This posta was commanded by a negro lieutenant, born in Africa: to his credit be it said, there was not a ranche between the Colorado and Buenos Ayres in nearly such neat order as his.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "darwin.f.v0027",
+      "kind": "verbatim",
+      "text": "This vertical section clearly tells us of a large bay of pure salt-water, gradually encroached on, and at last converted into the bed of a muddy estuary, into which floating carcasses were swept.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "darwin.f.v0028",
+      "kind": "verbatim",
+      "text": "He professed a great liking to the English, but stoutly maintained that the battle of Trafalgar was merely won by the Spanish captains having been all bought over; and that the only really gallant action on either side was performed by the Spanish admiral.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "darwin.f.v0029",
+      "kind": "verbatim",
+      "text": "Each troop is recognized by a few peculiarly marked animals, and its number is known: so that, one being lost out of ten thousand, it is perceived by its absence from one of the tropillas.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "darwin.f.v0030",
+      "kind": "verbatim",
+      "text": "Nor would it be so, if the horse, when left to itself without its rider, did not soon learn, for its own safety, to keep the lazo tight, so that, if the cow or ox moves forward, the horse moves just as quickly forward; otherwise, it stands motionless leaning on one side.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "darwin.f.v0031",
+      "kind": "verbatim",
+      "text": "Simple circumstances--such as the beauty of scarlet cloth or blue beads, the absence of women, our care in washing ourselves,--excited their admiration far more than any grand or complicated object, such as our ship.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "darwin.f.v0032",
+      "kind": "verbatim",
+      "text": "The correspondence of the cliffs is far from proving any junction; because such cliffs generally are formed by the intersection of sloping deposits, which, before the elevation of the land, had been accumulated near the then existing shores.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "darwin.f.v0033",
+      "kind": "verbatim",
+      "text": "It is well in this case to call to mind the vast shingle and sedimentary beds of Patagonia, which, if heaped on the Cordillera, would increase its height by so many thousand feet.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "darwin.f.v0034",
+      "kind": "verbatim",
+      "text": "Their manner of life is the same with that of the other poor inhabitants, and they are all Christians; but it is said that they yet retain some strange superstitious ceremonies, and that they pretend to hold communication with the devil in certain caves.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "darwin.f.v0035",
+      "kind": "verbatim",
+      "text": "The scenery was remarkable The chief part of the range was composed of grand, solid, abrupt masses of granite, which appeared as if they had been coeval with the beginning of the world.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "darwin.f.v0036",
+      "kind": "verbatim",
+      "text": "Captain Fitz Roy and some officers were at the town during the shock, and there the scene was more striking; for although the houses, from being built of wood, did not fall, they were violently shaken, and the boards creaked and rattled together.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "darwin.f.v0037",
+      "kind": "verbatim",
+      "text": "The great wave must have travelled slowly, for the inhabitants of Talcahuano had time to run up the hills behind the town; and some sailors pulled out seaward, trusting successfully to their boat riding securely over the swell, if they could reach it before it broke.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "darwin.f.v0038",
+      "kind": "verbatim",
+      "text": "This was a spectacle to which I had always looked forward with interest, but I was disappointed: at the first glance it much resembled a distant view of the ocean, but in the northern parts many irregularities were soon distinguishable.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "darwin.f.v0039",
+      "kind": "verbatim",
+      "text": "The terraces are there much broader, and may be called plains, in some parts there are six of them, but generally only five; they run up the valley for thirty-seven miles from the coast.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "darwin.f.v0040",
+      "kind": "verbatim",
+      "text": "These bare questions at once satisfied and silenced the greater number; some, however (like a few in England who are a century behindhand), thought that all such inquiries were useless and impious; and that it was quite sufficient that God had thus made the mountains.",
+      "work": "The Voyage of the Beagle",
+      "lang": "en",
+      "src": {
+        "work": "The Voyage of the Beagle"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "darwin.f.v0041",
+      "kind": "verbatim",
+      "text": "We have now seen that man is variable in body and mind; and that the variations are induced, either directly or indirectly, by the same general causes, and obey the same general laws, as with the lower animals.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "darwin.f.v0042",
+      "kind": "verbatim",
+      "text": "No one, I presume, doubts that the large proportion which the size of man’s brain bears to his body, compared to the same proportion in the gorilla or orang, is closely connected with his higher mental powers.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "darwin.f.v0043",
+      "kind": "verbatim",
+      "text": "Westropp, informs me that he observed in Vienna a bear deliberately making with his paw a current in some water, which was close to the bars of his cage, so as to draw a piece of floating bread within his reach.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "darwin.f.v0044",
+      "kind": "verbatim",
+      "text": "When my voice awakened a train of old associations in the mind of the before-mentioned dog, he must have retained his mental individuality, although every atom of his brain had probably undergone change more than once during the interval of five years.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "darwin.f.v0045",
+      "kind": "verbatim",
+      "text": "The Fuegians were probably compelled by other conquering hordes to settle in their inhospitable country, and they may have become in consequence somewhat more degraded; but it would be difficult to prove that they have fallen much below the Botocudos, who inhabit the finest parts of Brazil.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 291
+      }
+    },
+    {
+      "id": "darwin.f.v0046",
+      "kind": "verbatim",
+      "text": "44.), positively asserts that he has known mulatto families which have intermarried for several generations, and have continued on an average as fertile as either pure whites or pure blacks.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "darwin.f.v0047",
+      "kind": "verbatim",
+      "text": "In this, and in the fourth month, the cerebral hemispheres are smooth and rounded (with the exception of the sylvian depression), and they project backwards far beyond the cerebellum.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "darwin.f.v0048",
+      "kind": "verbatim",
+      "text": "Janson stated at the Entomological Society that the females of the bark feeding Tomicus villosus are so common as to be a plague, whilst the males are so rare as to be hardly known.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "darwin.f.v0049",
+      "kind": "verbatim",
+      "text": "I formerly thought that when a tendency to produce the two sexes in equal numbers was advantageous to the species, it would follow from natural selection, but I now see that the whole problem is so intricate that it is safer to leave its solution for the future.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "darwin.f.v0050",
+      "kind": "verbatim",
+      "text": "Douglas knows, with exotic species, the sexes do not commonly differ much in colour; but in about six British species the male is considerably darker than the female, and in about four other species the female is darker than the male.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "darwin.f.v0051",
+      "kind": "verbatim",
+      "text": "Landois has observed another important fact, namely, that in the females of the Acridiidae, the stridulating teeth on the femora remain throughout life in the same condition in which they first appear during the larval state in both sexes.",
+      "work": "The Descent of Man, and Selection in Relation to Sex",
+      "lang": "en",
+      "src": {
+        "work": "The Descent of Man, and Selection in Relation to Sex"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "darwin.f.v0052",
+      "kind": "verbatim",
+      "text": "The most striking case, though a rare and abnormal one, which can be adduced of the direct influence of the nervous system, when strongly affected, on the body, is the loss of colour in the hair, which has occasionally been observed after extreme terror or grief.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "darwin.f.v0053",
+      "kind": "verbatim",
+      "text": "The action serves to make the animal appear larger and more frightful to its enemies or rivals, and is generally accompanied by various voluntary movements adapted for the same purpose, and by the utterance of savage sounds.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "darwin.f.v0054",
+      "kind": "verbatim",
+      "text": "When the small arteries of the face, including those of the retina, are relaxed under very different circumstances, namely, during an intense blush, the lacrymal glands are sometimes affected in a like manner, for the eyes become suffused with tears.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "darwin.f.v0055",
+      "kind": "verbatim",
+      "text": "He informs me that they may constantly be seen in energetic action in cases of melancholia, and especially of hypochondria; and that the persistent lines or furrows, due to their habitual contraction, are characteristic of the physiognomy of the insane belonging to these two classes.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 284
+      }
+    },
+    {
+      "id": "darwin.f.v0056",
+      "kind": "verbatim",
+      "text": "His eyes then wavered from side to side; his “mouth was partially closed, with the corners very decidedly depressed.” At last the poor man seemed to make up his mind that he must part with his goat, and then, as Mr.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "darwin.f.v0057",
+      "kind": "verbatim",
+      "text": "The parts of the body which are most easily tickled are those which are not commonly touched, such as the armpits or between the toes, or parts such as the soles of the feet, which are habitually touched by a broad surface; but the surface on which we sit offers a marked exception to this rule.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "darwin.f.v0058",
+      "kind": "verbatim",
+      "text": "Whether the principle of antithesis has here come into play in producing these opposite expressions, in aid of the direct causes which have been specified and which are sufficiently plain, I will not pretend to say.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "darwin.f.v0059",
+      "kind": "verbatim",
+      "text": "A half-starved man may think intently how to obtain food, but he probably will not frown unless he encounters either in thought or action some difficulty, or finds the food when obtained nauseous.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "darwin.f.v0060",
+      "kind": "verbatim",
+      "text": "Sutton has never noticed a snarling action in our nearest allies, namely, the monkeys in the Zoological Gardens, and he is positive that the baboons, though furnished with great canines, never act thus, but uncover all their teeth when feeling savage and ready for an attack.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "darwin.f.v0061",
+      "kind": "verbatim",
+      "text": "In this latter case we have a good instance, like those given in a former chapter, of the inheritance of a trick or gesture; for no one, I presume, will attribute to mere coincidence so peculiar a habit as this, which was common to the grandfather and his two grandchildren who had never seen him.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "darwin.f.v0062",
+      "kind": "verbatim",
+      "text": "Now when we start at any sudden sound or sight, almost all the muscles of the body are involuntarily and momentarily thrown into strong action, for the sake of guarding ourselves against or jumping away from the danger, which we habitually associate with anything unexpected.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "darwin.f.v0063",
+      "kind": "verbatim",
+      "text": "Many reasons can be assigned for believing that originally self-attention directed to personal appearance, in relation to the opinion of others, was the exciting cause; the same effect being subsequently produced, through the force of association, by self-attention in relation to moral conduct.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "darwin.f.v0064",
+      "kind": "verbatim",
+      "text": "A blush due to this form of modesty is, moreover, apt to be intense, because it generally relates to the opposite sex; and we have seen how in all cases our liability to blush is thus increased.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "darwin.f.v0065",
+      "kind": "verbatim",
+      "text": "She performs it, likewise, with the right hand, but in a slightly modified form; for, after raising the arm, she does not allow the wrist to drop upon the bridge of the nose, but the palm of the half-closed hand falls over and down the nose, striking it rather rapidly.",
+      "work": "The Expression of the Emotions in Man and Animals",
+      "lang": "en",
+      "src": {
+        "work": "The Expression of the Emotions in Man and Animals"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "darwin.f.v0066",
+      "kind": "verbatim",
+      "text": "Butler, for thus wasting my time on such useless subjects; and he called me very unjustly a “poco curante,” and as I did not understand what he meant, it seemed to me a fearful reproach.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "darwin.f.v0067",
+      "kind": "verbatim",
+      "text": "My brother stayed only one year at the University, so that during the second year I was left to my own resources; and this was an advantage, for I became well acquainted with several young men fond of natural science.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "darwin.f.v0068",
+      "kind": "verbatim",
+      "text": "The Plinian Society was encouraged and, I believe, founded by Professor Jameson: it consisted of students and met in an underground room in the University for the sake of reading papers on natural science and discussing them.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "darwin.f.v0069",
+      "kind": "verbatim",
+      "text": "I asked for some time to consider, as from what little I had heard or thought on the subject I had scruples about declaring my belief in all the dogmas of the Church of England; though otherwise I liked the thought of being a country clergyman.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "darwin.f.v0070",
+      "kind": "verbatim",
+      "text": "I will give a proof of my zeal: one day, on tearing off some old bark, I saw two rare beetles, and seized one in each hand; then I saw a third and new kind, which I could not bear to lose, so that I popped the one which I held in my right hand into my mouth.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "darwin.f.v0071",
+      "kind": "verbatim",
+      "text": "Before long I became well acquainted with Henslow, and during the latter half of my time at Cambridge took long walks with him on most days; so that I was called by some of the dons “the man who walks with Henslow;” and in the evening I was very often asked to join his family dinner.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 284
+      }
+    },
+    {
+      "id": "darwin.f.v0072",
+      "kind": "verbatim",
+      "text": "His temper was imperturbably good, with the most winning and courteous manners; yet, as I have seen, he could be roused by any bad action to the warmest indignation and prompt action.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "darwin.f.v0073",
+      "kind": "verbatim",
+      "text": "These men and others of the same standing, together with Henslow, used sometimes to take distant excursions into the country, which I was allowed to join, and they were most agreeable.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "darwin.f.v0074",
+      "kind": "verbatim",
+      "text": "Everything about which I thought or read was made to bear directly on what I had seen or was likely to see; and this habit of mind was continued during the five years of the voyage.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "darwin.f.v0075",
+      "kind": "verbatim",
+      "text": "Many of my excursions on horseback through wild countries, or in the boats, some of which lasted several weeks, were deeply interesting: their discomfort and some degree of danger were at that time hardly a drawback, and none at all afterwards.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "darwin.f.v0076",
+      "kind": "verbatim",
+      "text": "I do not mean to say that a favourable review or a large sale of my books did not please me greatly, but the pleasure was a fleeting one, and I am sure that I have never turned one inch out of my course to gain fame.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "darwin.f.v0077",
+      "kind": "verbatim",
+      "text": "Having been deeply impressed with what I had seen of the elevation of the land of South America, I attributed the parallel lines to the action of the sea; but I had to give up this view when Agassiz propounded his glacier-lake theory.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "darwin.f.v0078",
+      "kind": "verbatim",
+      "text": "During the same year I published in the ‘Journal of the Linnean Society’ a paper “On the Two Forms, or Dimorphic Condition of Primula,” and during the next five years, five other papers on dimorphic and trimorphic plants.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "darwin.f.v0079",
+      "kind": "verbatim",
+      "text": "I afterwards found that the offspring from the union of two plants belonging to the same forms presented a close and curious analogy with hybrids from the union of two distinct species.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "darwin.f.v0080",
+      "kind": "verbatim",
+      "text": "The ‘Descent of Man’ took me three years to write, but then as usual some of this time was lost by ill health, and some was consumed by preparing new editions and other minor works.",
+      "work": "The Autobiography of Charles Darwin",
+      "lang": "en",
+      "src": {
+        "work": "The Autobiography of Charles Darwin"
+      },
+      "quality": {
+        "chars": 181
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 275,
+    "formulas": 80,
+    "verbatim": 80,
+    "patterns": 0
+  },
+  "checksum": "sha256:1e63c1fdc32ff9c8edcc5832818c47f5bd2d6f481b206d46340c34a17b025d13"
+}
