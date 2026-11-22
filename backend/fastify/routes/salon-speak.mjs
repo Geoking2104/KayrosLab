@@ -15,6 +15,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const MIRROR = fileURLToPath(new URL('../../web/public/salon/', import.meta.url));
+const INDEX_DIR = fileURLToPath(new URL('../data/salon-emb/', import.meta.url));
 
 const STOP = new Set([
   'dans', 'cette', 'avec', 'pour', 'plus', 'tout', 'tous', 'leur', 'leurs',
@@ -308,6 +309,47 @@ function quoteMatches(q, source) {
   return cq.length >= 20 && cs.startsWith(cq);
 }
 
+const INDEX_CACHE = new Map();
+
+/** Charge l'index bge-m3 d'un auteur (mémoïsé). */
+function loadEmbeddingIndex(authorId) {
+  if (INDEX_CACHE.has(authorId)) return INDEX_CACHE.get(authorId);
+  try {
+    const meta = JSON.parse(readFileSync(join(INDEX_DIR, `${authorId}.json`), 'utf8'));
+    const buf = readFileSync(join(INDEX_DIR, `${authorId}.f32`));
+    const copy = buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength);
+    const vectors = new Float32Array(copy);
+    if (!meta.dims || vectors.length !== meta.count * meta.dims) throw new Error('index shape');
+    const index = { ...meta, vectors };
+    INDEX_CACHE.set(authorId, index);
+    return index;
+  } catch {
+    INDEX_CACHE.set(authorId, null);
+    return null;
+  }
+}
+
+/** Classe les phrases de l'index par cosine avec la question. */
+async function indexRerank(embeddings, question, index) {
+  if (!embeddings || typeof embeddings.embedBatch !== 'function' || !index) return null;
+  try {
+    const [q] = await embeddings.embedBatch([question]);
+    if (!q || !q.length) return null;
+    const dims = index.dims;
+    const dot = (offset) => {
+      let s = 0;
+      for (let i = 0; i < dims; i += 1) s += q[i] * index.vectors[offset + i];
+      return s;
+    };
+    return index.sentences
+      .map((s, i) => ({ work: s.work, sentence: s.text, score: dot(i * dims) }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 12);
+  } catch {
+    return null;
+  }
+}
+
 function classifyLang(text) {
   const s = String(text || '');
   const fr = (s.match(/[àâçéèêëîïôùûüÿœ]/gi) || []).length * 3
@@ -403,11 +445,20 @@ export default async function salonSpeakRoutes(app) {
     try {
       const vectors = await embeddings.embedBatch(['bonheur']);
       const vector = Array.isArray(vectors) ? vectors[0] : null;
+      let index = null;
+      try { index = JSON.parse(readFileSync(join(INDEX_DIR, 'manifest.json'), 'utf8')); } catch { index = null; }
       return {
         ok: true,
         model: embeddings.model || null,
         dims: Array.isArray(vector) ? vector.length : 0,
         latencyMs: Date.now() - started,
+        index: index ? {
+          model: index.model || null,
+          dims: index.dims || null,
+          authors: Object.keys(index.authors || {}).length,
+          sentences: index.total || 0,
+          builtAt: index.builtAt || null,
+        } : null,
       };
     } catch (e) {
       return reply.code(503).send({ ok: false, error: String(e.message || e), code: e.code || null });
@@ -452,7 +503,15 @@ export default async function salonSpeakRoutes(app) {
     const coverage = candidates.length ? candidates[0].coverage : 0;
     const principalSet = new Set([principal, ...(CONCEPTS[principal] || [])].filter(Boolean));
     const withPrincipal = candidates.filter((c) => words(c.sentence).some((w) => principalSet.has(w)));
-    const top = withPrincipal[0] || null;
+    const index = loadEmbeddingIndex(authorId);
+    const indexed = index
+      ? await indexRerank(app.kayrosContext && app.kayrosContext.embeddings, question, index)
+      : null;
+    const indexPool = indexed
+      ? indexed.filter((c) => words(c.sentence).some((w) => principalSet.has(w)))
+      : [];
+    const pool = indexPool.length ? indexPool : withPrincipal;
+    const top = pool[0] || null;
 
     // Ancrage insuffisant : aucun passage ne porte le concept de la question.
     if (!top) {
@@ -465,13 +524,16 @@ export default async function salonSpeakRoutes(app) {
         engine: 'fallback',
         provider: null,
         degraded: 'ancrage insuffisant',
-        retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: false },
+        retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: false, index: index ? { sentences: index.count, model: index.model } : null },
       };
     }
 
-    const dense = await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, withPrincipal);
-    const reranked = dense ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
-    const selected = (dense && dense.length ? dense : (reranked && reranked.length ? reranked : withPrincipal)).slice(0, 5);
+    const dense = indexPool.length ? null : await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, withPrincipal);
+    const reranked = (indexPool.length || dense) ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
+    const selected = (indexPool.length
+      ? indexPool
+      : (dense && dense.length ? dense : (reranked && reranked.length ? reranked : withPrincipal))).slice(0, 5);
+    const mode = indexPool.length ? 'hybrid+index' : (dense ? 'hybrid+dense' : 'hybrid');
     const cleaned = selected.filter((x) => x.sentence);
     const strong = true;
     const sources = cleaned.map((x) => x.sentence);
@@ -572,7 +634,7 @@ export default async function salonSpeakRoutes(app) {
         engine: 'fallback',
         provider: result ? result.provider || null : null,
         degraded: isMock ? 'mock' : (errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
-        retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
+        retrieval: { mode, coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), index: index ? { sentences: index.count, model: index.model } : null, ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
       };
     }
 
@@ -614,7 +676,7 @@ export default async function salonSpeakRoutes(app) {
       provider: result.provider || null,
       degraded: result.degraded || null,
       to: toward === 'author' ? toName : 'hôte',
-      retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
+      retrieval: { mode, coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense), index: index ? { sentences: index.count, model: index.model } : null, ...(DENSE_ERROR ? { denseError: DENSE_ERROR } : {}) },
     };
   });
 }

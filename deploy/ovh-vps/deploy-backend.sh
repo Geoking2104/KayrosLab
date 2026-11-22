@@ -52,6 +52,14 @@ case "${lock_status}" in
     ;;
 esac
 
+# ── Index vectoriel bge-m3 (une seule fois, persistant dans data/) ──────────
+if [ -f "${APP_DIR}/salon/scripts/build_embeddings.mjs" ] && [ ! -f "${APP_DIR}/backend/fastify/data/salon-emb/manifest.json" ]; then
+  echo "Construction de l'index bge-m3 (une fois)…"
+  mkdir -p "${APP_DIR}/backend/fastify/data/salon-emb"
+  timeout 1200 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 160 \
+    || echo "AVERTISSEMENT : index bge-m3 non construit (repli dense/lexical)." >&2
+fi
+
 # ── Postgres local (idempotent, opt-in) ─────────────────────────────────────
 # Provisionne une base sur cette machine si demande. Le script s'abstient si une
 # DATABASE_URL est deja presente : il ne remplace jamais une base existante.
