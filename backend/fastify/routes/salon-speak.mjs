@@ -343,8 +343,7 @@ async function indexRerank(embeddings, question, index) {
     };
     return index.sentences
       .map((s, i) => ({ work: s.work, sentence: s.text, score: dot(i * dims) }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 12);
+      .sort((a, b) => b.score - a.score);
   } catch {
     return null;
   }
@@ -639,8 +638,8 @@ export default async function salonSpeakRoutes(app) {
     }
 
     const citationsOut = citationsChecked.map((c) => {
-      const hit = cleaned.find((x) => canonical(x.sentence).includes(canonical(c.text)))
-        || (c.original ? cleaned.find((x) => canonical(x.sentence).includes(canonical(c.original))) : null);
+      const hit = cleaned.find((x) => quoteMatches(c.text, x.sentence))
+        || (c.original ? cleaned.find((x) => quoteMatches(c.original, x.sentence)) : null);
       return {
         work: hit ? hit.work : '',
         text: c.text,
