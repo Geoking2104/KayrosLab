@@ -79,6 +79,15 @@
     return best;
   }
 
+  function coverageOf(question, text) {
+    const q = new Set(terms(question));
+    if (!q.size) return 0;
+    const w = new Set(terms(text));
+    let hit = 0;
+    for (const t of q) if (w.has(t)) hit += 1;
+    return hit / q.size;
+  }
+
   function retrieve(pack, query, k = 5) {
     const all = (pack && pack.passages) || [];
     return all
@@ -154,8 +163,19 @@
 
   function composeLocal({ author, question, passages, act }) {
     const first = passages && passages[0];
+    const coverage = first ? coverageOf(question, first.sentence) : 0;
     const work = first ? first.work : ((author.works && author.works[0] && author.works[0].title) || 'mes œuvres');
     const quote = first ? first.sentence : '';
+    if (!first || coverage < 0.34) {
+      const thesis = author.blurb || 'ma thèse reste à préciser';
+      return {
+        text: `L’hôte, je ne trouve dans mes œuvres aucune phrase qui réponde vraiment à cette question ; je ne citerai donc pas à faux. Ce que je peux signer, sans citation : ${thesis} C'est peu, mais c'est à moi ; le reste, la table le dira. La question reste ouverte, et je la rends à qui voudra objecter.`,
+        prise: 'Sur cette question, mes livres ne fournissent pas de passage décisif.',
+        citations: [],
+        engine: 'local',
+        degraded: 'ancrage insuffisant',
+      };
+    }
     const prise = act === 'objection'
       ? "J’accorde un point, puis je distingue."
       : 'Sur cette question, je réponds depuis mes livres, non depuis une politesse.';

@@ -100,6 +100,23 @@ comptés dans le rapport.
 `geoking2104.github.io`) ; le vhost VPS `/salon/` reste prêt pour un basculement
 DNS ultérieur.
 
+## Retrieval hybride (runtime `/v1/salon/speak`)
+
+1. **Rappel lexical élargi** : BM25 simplifié + expansion conceptuelle FR/EN
+   (rire, vice, liberté, justice, pouvoir, vérité, bonheur, vertu, dieu, nature,
+   amour, mort, guerre, richesse, travail, éducation, société, temps, art).
+2. **Diversité** : 22 candidats, 4 phrases maximum par œuvre.
+3. **Rerank par le modèle** : le proxy classe les 22 candidats et renvoie les
+   3 meilleurs (parseur tolérant JSON ou indices).
+4. **Garde d'ancrage** : si la couverture de la question est < 0,34 et qu'un
+   seul terme est couvert (questions de 5 termes et plus), le tour devient un
+   **aveu du manque** — aucune citation hors sujet.
+5. **Vérification** : citation sous-chaîne exacte, œuvre du registre, rejet des
+   œuvres d'autres auteurs, longueur et première personne.
+
+La réponse expose `retrieval: { mode: "hybrid", coverage, candidates, rerank }`
+ainsi que `engine`, `provider`, `degraded` et les `citations` vérifiées.
+
 ## Mémoire : plafonds et cache
 
 - `--works N` : œuvres lues par auteur (6 par défaut) ; les œuvres portant une
