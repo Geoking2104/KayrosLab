@@ -8,6 +8,7 @@ BACKEND_DIR="${APP_DIR}/backend/fastify"
 DATA_DIR="${DATA_DIR:-/opt/kayroslab/data}"
 
 mkdir -p "${DATA_DIR}"
+mkdir -p "${DATA_DIR}/salon"
 chmod 700 "${DATA_DIR}"
 mkdir -p /var/log/pm2
 mkdir -p /opt/kayroslab/backups

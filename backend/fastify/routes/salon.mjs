@@ -47,7 +47,7 @@ export default async function salonRoutes(app) {
     if (!store) return reply.code(503).send({ ok: false, error: 'salon indisponible' });
     const state = await store.get(`anon-${id}`);
     const room = state && Array.isArray(state.rooms) ? state.rooms[0] : null;
-    return { ok: true, room: room || null, updatedAt: (state && state.updatedAt) || null };
+    return { ok: true, room: room || null, updatedAt: (state && state.updatedAt) || null, storage: store.dir ? 'file' : 'memory' };
   });
 
   app.post('/v1/salon/room', {

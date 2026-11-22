@@ -193,6 +193,7 @@ jobs:
               ANTHROPIC_API_KEY: process.env.ANTHROPIC_API_KEY,
               ANTHROPIC_MODEL: process.env.ANTHROPIC_MODEL,
               KAYROS_RUNS_FILE: '/opt/kayroslab/data/runs.json',
+              KAYROS_SALON_DIR: '/opt/kayroslab/data/salon',
               KAYROS_CONSOLE_URL: 'https://www.kayroslab.com/console/',
               KAYROS_PASSWORD_RESET_TTL_SEC: '1800',
               KAYROS_MAIL_FROM: process.env.KAYROS_MAIL_FROM || 'KayrosLab <geoffroydelatournelle@gmail.com>',
