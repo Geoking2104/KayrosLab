@@ -503,15 +503,19 @@
   }
 
   /** Applique un cercle serveur (init et synchronisation entre onglets). */
-  function applyRemoteRoom(remote, updatedAt, { scroll = false } = {}) {
+  function applyRemoteRoom(remote, updatedAt, { scroll = false, keepDraft = false } = {}) {
     if (!remote || !state.catalog) return false;
     const published = new Set(Object.keys((state.manifest && state.manifest.authors) || {}));
     const byId = new Map((state.catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
     const seated = (remote.authorIds || []).map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
     if (!seated.length) return false;
+    // Une synchro ne doit pas effacer une question en cours de frappe.
+    const draft = keepDraft && ui.question.value.trim() && ui.question.value.trim() !== state.question.trim()
+      ? ui.question.value
+      : '';
     state.seated = seated;
     state.question = String(remote.question || '');
-    ui.question.value = state.question;
+    ui.question.value = draft || state.question;
     state.turns = (remote.turns || []).map((t) => {
       const author = byId.get(t.authorId);
       if (!author) return null;
@@ -546,7 +550,7 @@
       if (!data.room) return;
       const at = Date.parse(data.updatedAt || 0);
       if (!Number.isFinite(at) || at <= lastSync) return;
-      if (applyRemoteRoom(data.room, data.updatedAt)) setStatus('cercle synchronisé');
+      if (applyRemoteRoom(data.room, data.updatedAt, { keepDraft: true })) setStatus('cercle synchronisé');
     } catch { /* hors ligne */ }
   }
 
@@ -722,7 +726,7 @@
   if (ui.share) ui.share.addEventListener('click', shareRoom);
   document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshRoom(); });
   window.addEventListener('focus', refreshRoom);
-  setInterval(refreshRoom, 20000);
+  setInterval(refreshRoom, 15000);
   ui.form.addEventListener('submit', (event) => {
     event.preventDefault();
     const q = ui.question.value.trim();
