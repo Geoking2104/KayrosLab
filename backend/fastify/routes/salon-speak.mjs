@@ -85,6 +85,114 @@ function topTerms(list, n = 8) {
   return [...freq.entries()].sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0])).slice(0, n).map(([w]) => w);
 }
 
+/* ---------------------------------------------------- expansion conceptuelle */
+
+const CONCEPTS = {
+  rire: ['rire', 'ris', 'rires', 'ridicule', 'ridicules', 'comedie', 'comique', 'moquerie', 'railler', 'sourire', 'laughter', 'comedy'],
+  vice: ['vice', 'vices', 'defaut', 'defauts', 'corruption', 'moeurs', 'hypocrisie', 'hypocrite', 'passion', 'passions'],
+  corriger: ['corriger', 'correction', 'corrige', 'guerir', 'guerison', 'reformer', 'reforme', 'amender', 'amendement'],
+  liberte: ['liberte', 'libertes', 'libre', 'autonomie', 'independance', 'freedom', 'liberty'],
+  justice: ['justice', 'juste', 'injustice', 'droit', 'droits', 'law', 'right'],
+  pouvoir: ['pouvoir', 'pouvoirs', 'gouvernement', 'gouverner', 'souverain', 'autorite', 'power', 'state'],
+  verite: ['verite', 'vrai', 'faux', 'erreur', 'science', 'connaissance', 'truth', 'knowledge'],
+  bonheur: ['bonheur', 'heureux', 'plaisir', 'joie', 'happiness', 'pleasure'],
+  vertu: ['vertu', 'vertus', 'morale', 'bien', 'virtue', 'moral'],
+  dieu: ['dieu', 'dieux', 'providence', 'religion', 'foi', 'god', 'faith'],
+  nature: ['nature', 'naturel', 'monde', 'cosmos', 'world'],
+  amour: ['amour', 'aimer', 'passion', 'desir', 'love', 'desire'],
+  mort: ['mort', 'mourir', 'destin', 'fate', 'death'],
+  guerre: ['guerre', 'combat', 'armee', 'strategie', 'war', 'strategy'],
+  richesse: ['richesse', 'riche', 'argent', 'wealth', 'money', 'capital'],
+  travail: ['travail', 'travailler', 'labour', 'work', 'industry'],
+  education: ['education', 'instruire', 'instruction', 'apprendre', 'learn'],
+  societe: ['societe', 'citoyen', 'peuple', 'society', 'people', 'citizen'],
+  temps: ['temps', 'histoire', 'memoire', 'time', 'history'],
+  art: ['art', 'beaute', 'poesie', 'style', 'beauty', 'poetry'],
+};
+
+function expandTerms(base) {
+  const out = new Set(base);
+  for (const w of base) {
+    for (const [key, list] of Object.entries(CONCEPTS)) {
+      if (key === w || list.includes(w)) list.forEach((x) => out.add(x));
+    }
+  }
+  return out;
+}
+
+/** BM25 simplifié + couverture des termes de la question. */
+function scoreSentence(sentence, expanded, baseTerms, cache) {
+  if (cache.has(sentence)) return cache.get(sentence);
+  const st = words(sentence);
+  const freq = new Map();
+  for (const t of st) freq.set(t, (freq.get(t) || 0) + 1);
+  let score = 0;
+  let hit = 0;
+  for (const t of expanded) {
+    if (freq.has(t)) {
+      hit += 1;
+      score += 1 + Math.log(1 + freq.get(t));
+    }
+  }
+  score = score / Math.sqrt(st.length + 1) + hit * 0.12;
+  const covered = baseTerms.filter((t) => freq.has(t)).length;
+  const result = { score, coverage: baseTerms.length ? covered / baseTerms.length : 0, covered };
+  cache.set(sentence, result);
+  return result;
+}
+
+function diversify(rows, max = 22, perWork = 4) {
+  const count = new Map();
+  const out = [];
+  for (const r of rows) {
+    const n = count.get(r.work) || 0;
+    if (n >= perWork) continue;
+    count.set(r.work, n + 1);
+    out.push(r);
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
+/** Rerank par le modèle : la précision après le rappel lexical. */
+async function rerankWithModel(llm, question, candidates) {
+  if (!llm || typeof llm.complete !== 'function' || candidates.length < 6) return null;
+  const list = candidates.map((c, i) => `${i}. [${c.work}] ${c.sentence}`).join('\n').slice(0, 10000);
+  try {
+    const r = await llm.complete({
+      messages: [
+        { role: 'system', content: "Tu es un bibliothécaire. Classe les passages par utilité pour répondre à la question. Réponds uniquement par un tableau JSON d'indices (3 maximum), du meilleur au moins bon." },
+        { role: 'user', content: `Question : ${question}\n\n${list}` },
+      ],
+      temperature: 0,
+      role: 'salon-rerank',
+    }, {});
+    const raw = String((r && r.text) || '').trim();
+    if (!raw || /^\[mock\]/i.test(raw)) return null;
+    const m = raw.match(/\[[\d,\s]+\]/);
+    if (!m) return null;
+    const arr = JSON.parse(m[0]);
+    const out = arr
+      .filter((i) => Number.isInteger(i) && i >= 0 && i < candidates.length)
+      .slice(0, 3)
+      .map((i) => candidates[i]);
+    return out.length ? out : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Aveu du manque : aucune citation, une thèse signée, la question rendue à la table. */
+function avowal({ author, doctrine, question, toName = "l’hôte" }) {
+  const t = theses(doctrine, author.id, question, 1)[0];
+  const thesis = t ? t.text : (author.blurb || 'ma thèse reste à préciser');
+  const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
+  return {
+    prise: 'Sur cette question, mes livres ne fournissent pas de passage décisif.',
+    text: `${who}, je ne trouve dans mes œuvres aucune phrase qui réponde vraiment à cette question ; je ne citerai donc pas à faux. Ce que je peux signer, sans citation : ${thesis} C'est peu, mais c'est à moi ; le reste, la table le dira. La question reste ouverte, et je la rends à qui voudra objecter.`,
+  };
+}
+
 function theses(doctrine, authorId, question, limit = 4) {
   const entry = doctrine && doctrine[authorId];
   if (!entry || !entry.theses) return [];
@@ -187,12 +295,43 @@ export default async function salonSpeakRoutes(app) {
     const query = `${question} ${last && last.prise ? last.prise : ''} ${last && last.text ? last.text : ''}`.trim();
 
     const all = (p.passages || []).filter((x) => x && x.s);
+    const baseTerms = [...new Set(words(question))];
+    const expanded = expandTerms(baseTerms);
+    const cache = new Map();
     const ranked = all
-      .map((x) => ({ work: x.w, sentence: bestSentence(query, x.s), score: relevance(query, `${x.w} ${x.s}`) }))
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 5);
-    const cleaned = ranked.filter((x) => x.sentence);
-    const weak = !cleaned.length || cleaned[0].score < 0.05;
+      .map((x) => {
+        const sentence = bestSentence(query, x.s);
+        const { score, coverage, covered } = scoreSentence(sentence, expanded, baseTerms, cache);
+        return { work: x.w, sentence, score, coverage, covered };
+      })
+      .filter((x) => x.sentence)
+      .sort((a, b) => b.score - a.score);
+    const candidates = diversify(ranked, 22, 4);
+    const coverage = candidates.length ? candidates[0].coverage : 0;
+    const covered = candidates.length ? candidates[0].covered : 0;
+    const strong = candidates.length > 0 && (
+      coverage >= 0.34 || covered >= 2 || (covered >= 1 && baseTerms.length <= 4 && coverage >= 0.25)
+    );
+
+    // Ancrage insuffisant : aveu du manque, aucune citation hors sujet.
+    if (!strong) {
+      const av = avowal({ author, doctrine: doctrine(), question, toName: "l’hôte" });
+      return {
+        ok: true,
+        text: av.text,
+        prise: av.prise,
+        citations: [],
+        engine: 'fallback',
+        provider: null,
+        degraded: 'ancrage insuffisant',
+        retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: false },
+      };
+    }
+
+    const reranked = await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, candidates);
+    const selected = (reranked && reranked.length ? reranked : candidates).slice(0, 5);
+    const cleaned = selected.filter((x) => x.sentence);
+    const weak = false;
 
     const messages = [
       { role: 'system', content: buildPersona({ author, doctrine: doctrine(), question }) },
@@ -257,6 +396,7 @@ export default async function salonSpeakRoutes(app) {
         engine: 'fallback',
         provider: result ? result.provider || null : null,
         degraded: isMock ? 'mock' : (checked.errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
+        retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked) },
       };
     }
 
@@ -273,6 +413,7 @@ export default async function salonSpeakRoutes(app) {
       engine: 'llm',
       provider: result.provider || null,
       degraded: result.degraded || null,
+      retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked) },
     };
   });
 }
