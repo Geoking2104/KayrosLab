@@ -555,11 +555,20 @@ export default async function salonSpeakRoutes(app) {
     if (!valid) {
       const passage = cleaned[0] || null;
       const fb = composeFallback({ author, question, passage, act, toName: userLang === 'en' ? 'the host' : "l’hôte", lang: userLang });
+      const fallbackCitations = passage ? [{ work: passage.work, text: passage.sentence }] : [];
+      const fallbackLang = fallbackCitations.length ? classifyLang(fallbackCitations[0].text) : '';
+      if (fallbackLang && fallbackLang !== userLang) {
+        const translated = await translateBatch(app.kayrosContext && app.kayrosContext.llm, [fallbackCitations[0].text], userLang);
+        if (translated && translated[0] && translated[0] !== fallbackCitations[0].text) {
+          fallbackCitations[0].translation = translated[0];
+          fallbackCitations[0].translationLang = userLang;
+        }
+      }
       return {
         ok: true,
         text: fb.text,
         prise: fb.prise,
-        citations: passage ? [{ work: passage.work, text: passage.sentence }] : [],
+        citations: fallbackCitations,
         engine: 'fallback',
         provider: result ? result.provider || null : null,
         degraded: isMock ? 'mock' : (errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
