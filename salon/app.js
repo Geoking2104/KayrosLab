@@ -1,38 +1,90 @@
-/* Le Salon — client autonome (sans build).
- * Charge le catalogue publié et les packs mémoire, interroge /v1/salon/speak,
- * et retombe sur un composeur déterministe si l'API ou le modèle manque.
+/* Le Salon — table philosophique multi-auteurs (client autonome, sans build).
+ * Les auteurs sont des agents : chacun répond depuis SON pack d'œuvres.
+ * L'API /v1/salon/speak fait le retrieval hybride et la vérification ;
+ * en cas d'indisponibilité, un composeur local prend le relais.
  */
 (() => {
   'use strict';
 
   const BASE = new URL('./', window.location.href);
-  // En production la page est servie par www.kayroslab.com et l'API par
-  // api.kayroslab.com (CORS déjà autorisé). En local, on reste en same-origin
-  // et l'absence d'API déclenche le repli déterministe.
   const API = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(window.location.hostname)
     ? ''
     : 'https://api.kayroslab.com';
+
   const $ = (id) => document.getElementById(id);
   const ui = {
-    author: $('author'),
-    card: $('card'),
+    seated: $('seated'),
+    seatCount: $('seatCount'),
+    search: $('search'),
+    candidates: $('candidates'),
+    circles: $('circles'),
+    questionLabel: $('questionLabel'),
     thread: $('thread'),
     form: $('ask'),
     question: $('question'),
+    open: $('open'),
+    debate: $('debate'),
     reset: $('reset'),
     status: $('status'),
+    phase: $('phase'),
+    tensionFill: $('tensionFill'),
+    tensionLabel: $('tensionLabel'),
+    prises: $('prises'),
+    turnCount: $('turnCount'),
   };
 
   const state = {
     catalog: null,
     manifest: null,
-    author: null,
-    pack: null,
-    history: [],
+    packs: new Map(),
+    seated: [],
+    question: '',
+    turns: [],
     busy: false,
+    round: 0,
   };
 
-  /* ------------------------------------------------------------ données */
+  const CIRCLES = [
+    { name: 'Lumières', ids: ['voltaire', 'rousseau', 'montaigne'] },
+    { name: 'Le pouvoir', ids: ['machiavel', 'marcaurele', 'suntzu'] },
+    { name: 'Académie', ids: ['platon', 'aristote', 'montaigne'] },
+    { name: 'Les voix du roman', ids: ['balzac', 'flaubert', 'maupassant'] },
+  ];
+
+  const MAX_SEATS = 4;
+
+  /* ------------------------------------------------------------- outils */
+
+  function hash(text) {
+    let h = 0;
+    for (let i = 0; i < String(text).length; i += 1) h = ((h * 31) + String(text).charCodeAt(i)) | 0;
+    return Math.abs(h);
+  }
+
+  function initials(name) {
+    return String(name || '')
+      .split(/[\s'’-]+/).filter(Boolean).slice(0, 2)
+      .map((w) => w[0]).join('').toUpperCase();
+  }
+
+  function el(tag, cls, text) {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text != null) node.textContent = text;
+    return node;
+  }
+
+  function picto(author, size = 'md') {
+    const node = el('span', `picto ${size}`, (author.monogram || initials(author.name)).slice(0, 3));
+    node.style.setProperty('--hue', String(hash(author.id) % 360));
+    node.title = author.name;
+    node.setAttribute('aria-hidden', 'true');
+    return node;
+  }
+
+  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+
+  function setStatus(text) { ui.status.textContent = text || ''; }
 
   async function loadJSON(name) {
     const res = await fetch(new URL(name, BASE), { cache: 'no-store' });
@@ -40,13 +92,19 @@
     return res.json();
   }
 
-  function sentencesOf(text) {
-    const clean = String(text || '').replace(/\s+/g, ' ').trim();
-    if (!clean) return [];
-    return clean.split(/(?<=[.!?…])\s+(?=["«“„]?[A-ZÀ-ÖØ-Þ0-9])/u)
-      .map((s) => s.replace(/^["«“„\][\s]+/, '').replace(/\s*["»”]\s*$/, '').trim())
-      .filter((s) => s.length >= 40 && s.length <= 320 && /[.!?…»"]$/.test(s));
+  async function loadPack(id) {
+    if (state.packs.has(id)) return state.packs.get(id);
+    try {
+      const pack = await loadJSON(`kb/${id}.json`);
+      state.packs.set(id, pack);
+      return pack;
+    } catch {
+      state.packs.set(id, null);
+      return null;
+    }
   }
+
+  /* --------------------------------------------------------- texte local */
 
   const STOP = new Set(['dans', 'cette', 'avec', 'pour', 'plus', 'tout', 'tous', 'leur', 'leurs', 'comme', 'mais', 'donc', 'alors', 'ainsi', 'sans', 'sous', 'entre', 'apres', 'avant', 'encore', 'aussi', 'bien', 'tres', 'fait', 'faire', 'etre', 'avoir', 'cela', 'ceux', 'celles', 'nous', 'vous', 'elle', 'elles', 'that', 'this', 'with', 'from', 'have', 'been', 'were', 'which', 'their', 'there', 'about', 'would', 'could', 'should', 'the', 'and']);
 
@@ -67,6 +125,14 @@
     return hit / Math.sqrt(q.size * Math.max(w.length, 8));
   }
 
+  function sentencesOf(text) {
+    const clean = String(text || '').replace(/\s+/g, ' ').trim();
+    if (!clean) return [];
+    return clean.split(/(?<=[.!?…])\s+(?=["«“„]?[A-ZÀ-ÖØ-Þ0-9])/u)
+      .map((s) => s.replace(/^["«“„\][\s]+/, '').replace(/\s*["»”]\s*$/, '').trim())
+      .filter((s) => s.length >= 40 && s.length <= 320 && /[.!?…»"]$/.test(s));
+  }
+
   function bestSentence(query, text) {
     const list = sentencesOf(text);
     if (!list.length) return '';
@@ -81,193 +147,405 @@
 
   function coverageOf(question, text) {
     const q = new Set(terms(question));
-    if (!q.size) return 0;
+    if (!q.size) return { ratio: 0, covered: 0, total: 0 };
     const w = new Set(terms(text));
     let hit = 0;
     for (const t of q) if (w.has(t)) hit += 1;
-    return hit / q.size;
+    return { ratio: hit / q.size, covered: hit, total: q.size };
   }
 
-  function retrieve(pack, query, k = 5) {
+  const CONCEPTS = {
+    rire: ['rire', 'ris', 'rires', 'ridicule', 'ridicules', 'comedie', 'comique', 'moquerie', 'railler', 'sourire', 'laughter', 'comedy'],
+    vice: ['vice', 'vices', 'defaut', 'defauts', 'corruption', 'moeurs', 'hypocrisie', 'hypocrite', 'passion', 'passions'],
+    corriger: ['corriger', 'correction', 'corrige', 'guerir', 'guerison', 'reformer', 'reforme', 'amender', 'amendement'],
+    liberte: ['liberte', 'libertes', 'libre', 'autonomie', 'independance', 'freedom', 'liberty'],
+    justice: ['justice', 'juste', 'injustice', 'droit', 'droits', 'law', 'right'],
+    pouvoir: ['pouvoir', 'pouvoirs', 'gouvernement', 'gouverner', 'souverain', 'autorite', 'power', 'state'],
+    verite: ['verite', 'vrai', 'faux', 'erreur', 'science', 'connaissance', 'truth', 'knowledge'],
+    bonheur: ['bonheur', 'heureux', 'plaisir', 'joie', 'happiness', 'pleasure'],
+    vertu: ['vertu', 'vertus', 'morale', 'bien', 'virtue', 'moral'],
+    dieu: ['dieu', 'dieux', 'providence', 'religion', 'foi', 'god', 'faith'],
+    nature: ['nature', 'naturel', 'monde', 'cosmos', 'world'],
+    amour: ['amour', 'aimer', 'passion', 'desir', 'love', 'desire'],
+    mort: ['mort', 'mourir', 'destin', 'fate', 'death'],
+    guerre: ['guerre', 'combat', 'armee', 'strategie', 'war', 'strategy'],
+    richesse: ['richesse', 'riche', 'argent', 'wealth', 'money', 'capital'],
+    travail: ['travail', 'travailler', 'labour', 'work', 'industry'],
+    education: ['education', 'instruire', 'instruction', 'apprendre', 'learn'],
+    societe: ['societe', 'citoyen', 'peuple', 'society', 'people', 'citizen'],
+    temps: ['temps', 'histoire', 'memoire', 'time', 'history'],
+    art: ['art', 'beaute', 'poesie', 'style', 'beauty', 'poetry'],
+  };
+
+  function expandedQuery(query) {
+    const base = terms(query);
+    const out = new Set(base);
+    for (const w of base) {
+      for (const [key, list] of Object.entries(CONCEPTS)) {
+        if (key === w || list.includes(w)) list.forEach((x) => out.add(x));
+      }
+    }
+    return [...out].join(' ');
+  }
+
+  function principalTerm(base) {
+    const concept = base.find((w) => Object.prototype.hasOwnProperty.call(CONCEPTS, w));
+    if (concept) return concept;
+    return base.slice().sort((a, b) => b.length - a.length)[0] || '';
+  }
+
+  function retrieveLocal(pack, query, k = 5) {
+    const expanded = expandedQuery(query);
     const all = (pack && pack.passages) || [];
     return all
-      .map((p) => ({ work: p.w, sentence: bestSentence(query, p.s), score: relevance(query, `${p.w} ${p.s}`) }))
+      .map((p) => ({ work: p.w, sentence: bestSentence(expanded, p.s), score: relevance(expanded, `${p.w} ${p.s}`) }))
       .filter((p) => p.sentence)
       .sort((a, b) => b.score - a.score)
       .slice(0, k);
   }
 
-  /* --------------------------------------------------------- rendu */
-
-  function el(tag, cls, text) {
-    const node = document.createElement(tag);
-    if (cls) node.className = cls;
-    if (text != null) node.textContent = text;
-    return node;
+  function avowalLocal(author, toName) {
+    const thesis = author.blurb || 'ma thèse reste à préciser';
+    const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
+    return {
+      text: `${who}, je ne trouve dans mes œuvres aucune phrase qui réponde vraiment à cette question ; je ne citerai donc pas à faux. Ce que je peux signer, sans citation : ${thesis} C'est peu, mais c'est à moi ; le reste, la table le dira. La question reste ouverte, et je la rends à qui voudra objecter.`,
+      prise: 'Sur cette question, mes livres ne fournissent pas de passage décisif.',
+      citations: [],
+      engine: 'local',
+      provider: '',
+      degraded: 'ancrage insuffisant',
+      retrieval: null,
+    };
   }
 
-  function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
-
-  function setStatus(text) { ui.status.textContent = text || ''; }
-
-  function renderCard() {
-    const a = state.author;
-    if (!a) { clear(ui.card); return; }
-    clear(ui.card);
-    ui.card.append(
-      el('h2', null, a.name),
-      el('p', 'era', [a.era, a.kind].filter(Boolean).join(' · ')),
-      el('p', 'blurb', a.blurb || ''),
-    );
-    const info = state.manifest && state.manifest.authors ? state.manifest.authors[a.id] : null;
-    const works = (a.works || []).length;
-    const sentences = info ? info.sentences : 0;
-    const stats = el('p', 'stats');
-    stats.append(
-      el('span', 'pill', `${works} œuvres`),
-      el('span', 'pill', `${sentences} phrases en mémoire`),
-      el('span', 'pill', 'domaine public'),
-    );
-    ui.card.append(stats);
-    if (a.sample) ui.card.append(el('blockquote', 'sample', `« ${a.sample} »`));
-  }
-
-  function addMessage({ role, name, text, prise, citations, meta }) {
-    const empty = ui.thread.querySelector('.empty');
-    if (empty) empty.remove();
-    const article = el('article', `turn ${role}`);
-    const head = el('header', 'turn-head');
-    head.append(el('span', 'who', name));
-    if (role === 'author') head.append(el('span', 'badge', 'voix simulée'));
-    article.append(head);
-    if (prise) article.append(el('p', 'prise', `Prise : ${prise}`));
-    article.append(el('p', 'said', text));
-    if (citations && citations.length) {
-      const details = el('details', 'cites');
-      details.append(el('summary', null, `Citations vérifiées (${citations.length})`));
-      const list = el('ul');
-      for (const c of citations) {
-        const li = el('li');
-        li.append(el('em', null, c.work ? `« ${c.work} »` : 'Œuvre'), document.createTextNode(c.text ? ` — « ${c.text} »` : ''));
-        list.append(li);
-      }
-      details.append(list);
-      article.append(details);
-    }
-    if (meta) article.append(el('p', 'meta', meta));
-    ui.thread.append(article);
-    article.scrollIntoView({ block: 'end', behavior: 'smooth' });
-  }
-
-  /* --------------------------------------------------- repli déterministe */
-
-  function composeLocal({ author, question, passages, act }) {
+  function composeLocal({ author, question, passages, act, toName }) {
     const first = passages && passages[0];
-    const coverage = first ? coverageOf(question, first.sentence) : 0;
-    const work = first ? first.work : ((author.works && author.works[0] && author.works[0].title) || 'mes œuvres');
-    const quote = first ? first.sentence : '';
-    if (!first || coverage < 0.34) {
-      const thesis = author.blurb || 'ma thèse reste à préciser';
-      return {
-        text: `L’hôte, je ne trouve dans mes œuvres aucune phrase qui réponde vraiment à cette question ; je ne citerai donc pas à faux. Ce que je peux signer, sans citation : ${thesis} C'est peu, mais c'est à moi ; le reste, la table le dira. La question reste ouverte, et je la rends à qui voudra objecter.`,
-        prise: 'Sur cette question, mes livres ne fournissent pas de passage décisif.',
-        citations: [],
-        engine: 'local',
-        degraded: 'ancrage insuffisant',
-      };
-    }
+    const info = first ? coverageOf(question, first.sentence) : { ratio: 0, covered: 0, total: 0 };
+    const principal = principalTerm(terms(question));
+    const present = Boolean(first && principal && terms(first.sentence).includes(principal));
+    const strong = present && (
+      info.ratio >= 0.34 || info.covered >= 2 || (info.covered >= 1 && info.total <= 4 && info.ratio >= 0.25)
+    );
+    if (!strong) return avowalLocal(author, toName);
+    const work = first.work;
+    const quote = first.sentence;
+    const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
     const prise = act === 'objection'
       ? "J’accorde un point, puis je distingue."
       : 'Sur cette question, je réponds depuis mes livres, non depuis une politesse.';
     const text = act === 'objection'
-      ? `L’hôte, je te l’accorde en partie. Pourtant la question demeure, et « ${work} » la déplace : « ${quote} » Ce n’est pas ta personne que je presse, c’est ce que cette phrase ne peut plus soutenir. Ainsi la difficulté n’est pas dans les mots, mais dans ce que ta thèse engage.`
-      : `L’hôte, voici ce que je peux signer. Dans « ${work} » : « ${quote} » Cela répond à ce que tu viens de poser, et cela suffit pour aujourd’hui : la suite est à qui voudra objecter. Je m’en tiens là, sans ajouter de maxime inutile. La question reste ouverte, et je la rends à la table.`;
-    return { text, prise, citations: first ? [{ work, text: quote }] : [], engine: 'local' };
+      ? `${who}, je te l’accorde en partie. Pourtant la question demeure, et « ${work} » la déplace : « ${quote} » Ce n’est pas ta personne que je presse, c’est ce que cette phrase ne peut plus soutenir. Ainsi la difficulté n’est pas dans les mots, mais dans ce que ta thèse engage.`
+      : `${who}, voici ce que je peux signer. Dans « ${work} » : « ${quote} » Cela répond à ce que tu viens de poser, et cela suffit pour aujourd’hui : la suite est à qui voudra objecter. Je m’en tiens là, sans ajouter de maxime inutile. La question reste ouverte, et je la rends à la table.`;
+    return {
+      text, prise,
+      citations: [{ work, text: quote }],
+      engine: 'local', provider: '', degraded: '',
+      retrieval: { mode: 'lexical', coverage: Number(info.ratio.toFixed(2)), candidates: passages.length, rerank: false },
+    };
   }
 
-  /* ------------------------------------------------------------- tour */
+  /* ----------------------------------------------------------- évolution */
 
-  async function ask(question) {
-    if (state.busy || !state.author || !state.pack) return;
-    state.busy = true;
-    setStatus('Le convive relit ses œuvres…');
-    ui.question.value = '';
-    addMessage({ role: 'user', name: 'Vous', text: question });
-    state.history.push({ name: 'L’hôte', text: question });
+  function linkOf(turn, prev) {
+    if (!prev) return 'ouvre';
+    const blob = `${turn.prise || ''} ${turn.text || ''}`.toLowerCase();
+    if (turn.act === 'objection') {
+      return /(distingue|pas encore|pourtant|cependant|en partie)/.test(blob) ? 'distingue' : 'contredit';
+    }
+    if (/(j['’]accorde|je te l['’]accorde|d['’]accord)/.test(blob)) return 'accorde';
+    if (/(précise|precise|je tiens|autrement dit)/.test(blob)) return 'précise';
+    return 'précise';
+  }
 
-    const passages = retrieve(state.pack, `${question} ${state.history.slice(-2).map((h) => h.text).join(' ')}`, 5);
-    let turn = null;
+  function tensionOf(turns) {
+    const links = turns.map((t, i) => linkOf(t, turns[i - 1]));
+    const contredit = links.filter((l) => l === 'contredit').length;
+    const distingue = links.filter((l) => l === 'distingue').length;
+    const acc = links.filter((l) => l === 'accorde').length;
+    return Math.max(8, Math.min(100, 12 + contredit * 24 + distingue * 12 - acc * 4));
+  }
 
-    try {
-      const res = await fetch(`${API}/v1/salon/speak`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          authorId: state.author.id,
-          question,
-          history: state.history.slice(-6),
-          act: 'reponse',
-        }),
+  function phaseOf(tension) {
+    if (tension >= 70) return 'opposition vive';
+    if (tension >= 40) return 'tension ouverte';
+    if (tension >= 20) return 'discussion';
+    return 'apaisement';
+  }
+
+  const LINK_LABEL = {
+    ouvre: 'ouvre', accorde: 'accorde', distingue: 'distingue',
+    contredit: 'contredit', précise: 'précise', compose: 'compose',
+  };
+
+  /* --------------------------------------------------------------- rendu */
+
+  function renderSeated() {
+    clear(ui.seated);
+    if (!state.seated.length) {
+      ui.seated.append(el('p', 'empty-small', 'Aucun convive. Invitez un auteur ou choisissez un cercle.'));
+    }
+    for (const author of state.seated) {
+      const card = el('article', 'seat');
+      card.append(picto(author, 'md'));
+      const body = el('div', 'seat-body');
+      body.append(
+        el('h3', null, author.name),
+        el('p', 'seat-meta', [author.era, author.kind].filter(Boolean).join(' · ')),
+        el('p', 'seat-works', `${(author.works || []).length} œuvres en contexte`),
+      );
+      card.append(body);
+      const remove = el('button', 'remove', '×');
+      remove.type = 'button';
+      remove.setAttribute('aria-label', `Retirer ${author.name}`);
+      remove.addEventListener('click', () => unseat(author.id));
+      card.append(remove);
+      ui.seated.append(card);
+    }
+    ui.seatCount.textContent = `${state.seated.length}/${MAX_SEATS}`;
+  }
+
+  function renderCandidates() {
+    if (!state.catalog) return;
+    const needle = ui.search.value.trim().toLowerCase();
+    const seated = new Set(state.seated.map((a) => a.id));
+    const published = new Set(Object.keys((state.manifest && state.manifest.authors) || {}));
+    const list = state.catalog.authors
+      .filter((a) => published.has(a.id) && !seated.has(a.id))
+      .filter((a) => !needle || [a.name, a.kind, a.era].filter(Boolean).join(' ').toLowerCase().includes(needle))
+      .slice(0, 12);
+    clear(ui.candidates);
+    if (!list.length) {
+      ui.candidates.append(el('p', 'empty-small', 'Aucun auteur disponible.'));
+      return;
+    }
+    for (const author of list) {
+      const btn = el('button', 'candidate');
+      btn.type = 'button';
+      btn.append(picto(author, 'sm'));
+      const body = el('span', 'candidate-body');
+      body.append(el('strong', null, author.name), el('small', null, `${author.kind} · ${author.era || ''}`));
+      btn.append(body);
+      btn.addEventListener('click', () => seat(author.id));
+      ui.candidates.append(btn);
+    }
+  }
+
+  function renderCircles() {
+    clear(ui.circles);
+    for (const circle of CIRCLES) {
+      const ids = circle.ids.filter((id) => (state.catalog.authors || []).some((a) => a.id === id));
+      if (ids.length < 2) continue;
+      const btn = el('button', 'chip', circle.name);
+      btn.type = 'button';
+      btn.addEventListener('click', () => {
+        for (const id of ids) seat(id);
       });
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data.ok && data.text) {
-          turn = {
-            text: data.text,
-            prise: data.prise || '',
-            citations: data.citations || [],
-            engine: data.engine || 'api',
-            provider: data.provider || '',
-            degraded: data.degraded || '',
-          };
-        }
-      }
-    } catch (e) {
-      /* repli local */
+      ui.circles.append(btn);
     }
-
-    if (!turn) turn = composeLocal({ author: state.author, question, passages, act: 'reponse' });
-
-    const deg = turn.degraded;
-    const degText = typeof deg === 'string' ? deg : (deg && (deg.reason || deg.to)) || '';
-    addMessage({
-      role: 'author',
-      name: state.author.name,
-      text: turn.text,
-      prise: turn.prise,
-      citations: turn.citations,
-      meta: [turn.engine, turn.provider, degText].filter(Boolean).join(' · '),
-    });
-    state.history.push({ name: state.author.name, text: turn.text, prise: turn.prise });
-    state.busy = false;
-    setStatus('prêt');
   }
 
-  /* ------------------------------------------------------------- init */
+  function renderQuestion() {
+    ui.questionLabel.textContent = state.question || 'Aucune question posée.';
+  }
 
-  function resetThread() {
+  function actLabel(turn, index) {
+    if (turn.toward === 'author' && turn.act === 'objection') return `objection à ${turn.toName}`;
+    if (turn.toward === 'author') return `réponse à ${turn.toName}`;
+    if (turn.act === 'objection') return 'objection à l’hôte';
+    return index === 0 ? 'ouverture' : 'réponse à l’hôte';
+  }
+
+  function renderThread(scroll = false) {
     clear(ui.thread);
-    ui.thread.append(el('p', 'empty', 'Posez une question pour ouvrir la table.'));
-    state.history = [];
+    if (!state.turns.length) {
+      ui.thread.append(el('p', 'empty', state.question
+        ? 'La table est prête. Lancez le premier tour.'
+        : 'Invitez au moins deux auteurs, puis posez une question pour ouvrir la table.'));
+      return;
+    }
+    state.turns.forEach((turn, index) => {
+      const card = el('article', 'turn');
+      card.id = `turn-${index}`;
+      card.style.setProperty('--hue', String(hash(turn.author.id) % 360));
+      const head = el('header', 'turn-head');
+      head.append(picto(turn.author, 'sm'));
+      const who = el('div', 'who');
+      who.append(el('h3', null, turn.author.name), el('p', 'sub', `${actLabel(turn, index)} · voix simulée`));
+      head.append(who);
+      card.append(head);
+      if (turn.prise) card.append(el('p', 'prise', `Prise — ${turn.prise}`));
+      card.append(el('p', 'said', turn.text));
+      if (turn.citations && turn.citations.length) {
+        const details = el('details', 'cites');
+        details.append(el('summary', null, `Citations vérifiées (${turn.citations.length})`));
+        const list = el('ul');
+        for (const c of turn.citations) {
+          const li = el('li');
+          li.append(el('em', null, c.work ? `« ${c.work} »` : 'Œuvre'));
+          li.append(document.createTextNode(c.text ? ` — « ${c.text} »` : ''));
+          list.append(li);
+        }
+        details.append(list);
+        card.append(details);
+      }
+      const degraded = typeof turn.degraded === 'string'
+        ? turn.degraded
+        : (turn.degraded && (turn.degraded.reason || turn.degraded.to)) || '';
+      const bits = [turn.engine, turn.provider, degraded].filter(Boolean);
+      if (turn.retrieval && typeof turn.retrieval.coverage === 'number') bits.push(`couverture ${turn.retrieval.coverage}`);
+      if (bits.length) card.append(el('p', 'meta', bits.join(' · ')));
+      ui.thread.append(card);
+    });
+    if (scroll) {
+      const last = ui.thread.lastElementChild;
+      if (last) last.scrollIntoView({ block: 'end', behavior: 'smooth' });
+    }
+  }
+
+  function renderEvolution() {
+    clear(ui.prises);
+    ui.turnCount.textContent = `${state.turns.length} tour${state.turns.length > 1 ? 's' : ''}`;
+    if (!state.turns.length) {
+      ui.phase.textContent = 'La table n’a pas commencé.';
+      ui.tensionFill.style.width = '0%';
+      ui.tensionLabel.textContent = 'tension —';
+      return;
+    }
+    const tension = tensionOf(state.turns);
+    ui.phase.textContent = phaseOf(tension);
+    ui.tensionFill.style.width = `${tension}%`;
+    ui.tensionLabel.textContent = `tension ${tension}/100`;
+    state.turns.forEach((turn, index) => {
+      const link = linkOf(turn, state.turns[index - 1]);
+      const li = el('li');
+      const btn = el('button', 'prise-item');
+      btn.type = 'button';
+      const top = el('span', 'prise-top');
+      top.append(picto(turn.author, 'xs'), el('span', 'p-name', turn.author.name), el('span', `link ${link}`, LINK_LABEL[link] || link));
+      btn.append(top, el('span', 'p-text', turn.prise || turn.text.slice(0, 120)));
+      btn.addEventListener('click', () => {
+        const target = document.getElementById(`turn-${index}`);
+        if (target) target.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      });
+      li.append(btn);
+      ui.prises.append(li);
+    });
+  }
+
+  function updateControls() {
+    ui.open.disabled = state.busy || state.seated.length < 2;
+    ui.debate.disabled = state.busy || !state.question || state.turns.length < 2;
+    ui.question.disabled = state.busy;
+    ui.seatCount.textContent = `${state.seated.length}/${MAX_SEATS}`;
+  }
+
+  /* ------------------------------------------------------------- actions */
+
+  function seat(id) {
+    if (state.seated.length >= MAX_SEATS) { setStatus('La table est pleine (4 convives).'); return; }
+    if (state.seated.some((a) => a.id === id)) return;
+    const author = state.catalog.authors.find((a) => a.id === id);
+    if (!author) return;
+    state.seated.push(author);
+    localStorage.setItem('salon-seated-v2', JSON.stringify(state.seated.map((a) => a.id)));
+    renderSeated(); renderCandidates(); updateControls();
+    setStatus(`${author.name} prend place.`);
+  }
+
+  function unseat(id) {
+    state.seated = state.seated.filter((a) => a.id !== id);
+    localStorage.setItem('salon-seated-v2', JSON.stringify(state.seated.map((a) => a.id)));
+    renderSeated(); renderCandidates(); updateControls();
+  }
+
+  function addTurn(turn) {
+    state.turns.push(turn);
+    renderThread(true);
+    renderEvolution();
+    updateControls();
+  }
+
+  async function callAPI(author, act, toward, toName) {
+    const history = state.turns.slice(-6).map((t) => ({ name: t.author.name, text: t.text, prise: t.prise }));
+    const res = await fetch(`${API}/v1/salon/speak`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        authorId: author.id,
+        question: state.question,
+        history,
+        act,
+        toward,
+        toName,
+      }),
+      signal: AbortSignal.timeout(120000),
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (!data || !data.ok || !data.text) return null;
+    return data;
+  }
+
+  async function speakOne({ author, act, toward, toName }) {
+    setStatus(`${author.name} parle…`);
+    let data = null;
+    try {
+      data = await callAPI(author, act, toward, toName);
+    } catch {
+      data = null;
+    }
+    if (data) {
+      addTurn({
+        author,
+        text: data.text,
+        prise: data.prise || '',
+        citations: data.citations || [],
+        act, toward, toName,
+        engine: data.engine || 'llm',
+        provider: data.provider || '',
+        degraded: data.degraded || '',
+        retrieval: data.retrieval || null,
+      });
+      return;
+    }
+    const pack = await loadPack(author.id);
+    const passages = pack ? retrieveLocal(pack, `${state.question} ${state.turns.at(-1)?.text || ''}`, 5) : [];
+    const local = composeLocal({ author, question: state.question, passages, act, toName });
+    addTurn({ author, act, toward, toName, ...local });
+  }
+
+  async function runRound(kind) {
+    if (state.busy || state.seated.length < 2 || !state.question) return;
+    state.busy = true;
+    updateControls();
+    const order = state.seated.slice();
+    if (kind === 'debate') order.push(order.shift());
+    for (let i = 0; i < order.length; i += 1) {
+      const author = order[i];
+      const prev = state.turns[state.turns.length - 1];
+      let act = 'reponse';
+      let toward = 'user';
+      let toName = 'l’hôte';
+      if (prev) {
+        toward = 'author';
+        toName = prev.author.name;
+        act = i % 2 === 1 ? 'objection' : 'reponse';
+      }
+      await speakOne({ author, act, toward, toName });
+    }
+    state.busy = false;
+    state.round += 1;
+    updateControls();
     setStatus('prêt');
   }
 
-  async function selectAuthor(id) {
-    const a = state.catalog.authors.find((x) => x.id === id);
-    if (!a) return;
-    state.author = a;
-    state.pack = null;
-    renderCard();
-    resetThread();
-    setStatus('chargement de la mémoire…');
-    try {
-      state.pack = await loadJSON(`kb/${a.id}.json`);
-      renderCard();
-      setStatus('prêt');
-      ui.question.focus();
-    } catch (e) {
-      setStatus(`mémoire indisponible : ${e.message}`);
-    }
+  function resetDebate() {
+    if (state.busy) return;
+    state.question = '';
+    state.turns = [];
+    state.round = 0;
+    ui.question.value = '';
+    renderQuestion(); renderThread(); renderEvolution(); updateControls(); setStatus('prêt');
   }
 
   async function init() {
@@ -275,35 +553,38 @@
       const [catalog, manifest] = await Promise.all([loadJSON('catalog.json'), loadJSON('kb-manifest.json')]);
       state.catalog = catalog;
       state.manifest = manifest;
-      const ids = new Set(Object.keys((manifest && manifest.authors) || {}));
-      const authors = (catalog.authors || []).filter((a) => ids.has(a.id)).sort((a, b) => a.name.localeCompare(b.name, 'fr'));
-      ui.author.replaceChildren();
-      for (const a of authors) {
-        const opt = document.createElement('option');
-        opt.value = a.id;
-        opt.textContent = `${a.name} — ${a.kind}`;
-        ui.author.append(opt);
+      const published = new Set(Object.keys((manifest && manifest.authors) || {}));
+      const byId = new Map((catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
+      let seatedIds = [];
+      try { seatedIds = JSON.parse(localStorage.getItem('salon-seated-v2') || '[]'); } catch { seatedIds = []; }
+      if (!Array.isArray(seatedIds) || !seatedIds.length) seatedIds = ['voltaire', 'rousseau', 'montaigne'];
+      state.seated = seatedIds.map((id) => byId.get(id)).filter(Boolean).slice(0, MAX_SEATS);
+      if (!state.seated.length) {
+        const first = [...byId.values()].slice(0, 2);
+        state.seated = first;
       }
-      if (!authors.length) throw new Error('aucun auteur publié');
-      const preferred = authors.find((a) => a.id === 'voltaire') || authors[0];
-      ui.author.value = preferred.id;
-      await selectAuthor(preferred.id);
+      renderSeated(); renderCandidates(); renderCircles(); renderQuestion(); renderThread(); renderEvolution(); updateControls();
       setStatus('prêt');
     } catch (e) {
-      clear(ui.card);
-      ui.card.append(el('p', 'error', `Le Salon n'a pas pu charger sa mémoire : ${e.message}`));
+      clear(ui.thread);
+      ui.thread.append(el('p', 'error', `Le Salon n'a pas pu charger sa mémoire : ${e.message}`));
       setStatus('indisponible');
     }
   }
 
-  ui.author.addEventListener('change', () => selectAuthor(ui.author.value));
-  ui.reset.addEventListener('click', resetThread);
+  ui.search.addEventListener('input', renderCandidates);
   ui.form.addEventListener('submit', (event) => {
     event.preventDefault();
     const q = ui.question.value.trim();
-    if (q.length < 2) return;
-    ask(q);
+    if (q.length < 2 || state.seated.length < 2) return;
+    state.question = q;
+    state.turns = [];
+    state.round = 0;
+    renderQuestion(); renderThread(); renderEvolution();
+    runRound('open');
   });
+  ui.debate.addEventListener('click', () => runRound('debate'));
+  ui.reset.addEventListener('click', resetDebate);
 
   init();
 })();

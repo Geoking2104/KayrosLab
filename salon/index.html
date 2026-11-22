@@ -3,43 +3,78 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Le Salon — voix d'auteurs du domaine public</title>
-  <meta name="description" content="Conversez avec Voltaire, Molière, Platon, Dickinson et 64 autres auteurs du domaine public. Chaque réponse est ancrée dans leurs œuvres, citation vérifiée." />
+  <title>Le Salon — table philosophique d'auteurs du domaine public</title>
+  <meta name="description" content="Invitez Voltaire, Rousseau, Molière, Platon et 64 autres auteurs du domaine public. Ils dialoguent, objectent et font évoluer la pensée — chacun depuis ses propres œuvres." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="masthead">
     <p class="kicker">KayrosLab</p>
     <h1>Le Salon</h1>
-    <p class="lede">Une table, des auteurs du domaine public, une question. Chaque réplique est ancrée dans leurs œuvres — ou avoue le manque.</p>
+    <p class="lede">Une table, plusieurs auteurs du domaine public, une question. Chacun parle depuis ses propres œuvres, objecte à la prise précédente — et la pensée se déplace.</p>
   </header>
 
   <main class="stage">
-    <section class="panel" aria-label="Choix du convive">
-      <label for="author">Convive</label>
-      <select id="author"></select>
-      <div id="card" class="card" aria-live="polite"></div>
-      <p class="notice">Voix simulée d'après les œuvres. Les citations sont vérifiées ; aucune œuvre n'est inventée.</p>
-    </section>
-
-    <section class="thread-panel" aria-label="Conversation">
-      <div id="thread" class="thread" aria-live="polite">
-        <p class="empty">Posez une question pour ouvrir la table.</p>
+    <aside class="panel table-panel" aria-label="La table">
+      <div class="panel-head">
+        <h2>La table</h2>
+        <span id="seatCount" class="count">0/4</span>
       </div>
+      <div id="seated" class="seated"></div>
+      <p class="hint">2 à 4 convives. Chaque auteur est un agent IA dont le contexte est l'ensemble de ses œuvres chargées.</p>
+
+      <div class="invite">
+        <label for="search" class="kicker">Inviter un auteur</label>
+        <input id="search" type="search" autocomplete="off" placeholder="Voltaire, Molière, Platon…" />
+        <div id="candidates" class="candidates" role="listbox" aria-label="Auteurs disponibles"></div>
+      </div>
+
+      <div class="circles">
+        <p class="kicker">Cercles</p>
+        <div id="circles" class="circle-buttons"></div>
+      </div>
+    </aside>
+
+    <section class="debate" aria-label="Débat">
+      <div class="question-head">
+        <p class="kicker">Question de table</p>
+        <h2 id="questionLabel">Aucune question posée.</h2>
+      </div>
+
+      <div id="thread" class="thread" aria-live="polite">
+        <p class="empty">Invitez au moins deux auteurs, puis posez une question pour ouvrir la table.</p>
+      </div>
+
       <form id="ask" class="ask">
         <label class="sr-only" for="question">Votre question</label>
         <input id="question" name="question" autocomplete="off" maxlength="1000" placeholder="Que reste-t-il de la liberté une fois qu'on a tout expliqué ?" required />
-        <button type="submit">Faire parler</button>
+        <button id="open" type="submit">Ouvrir le débat</button>
       </form>
+
       <div class="tools">
-        <button type="button" id="reset" class="ghost">Recommencer</button>
+        <button id="debate" type="button" class="ghost" disabled>Laisser débattre</button>
+        <button id="reset" type="button" class="ghost">Recommencer</button>
         <span id="status" class="status" role="status"></span>
       </div>
     </section>
+
+    <aside class="panel evolution-panel" aria-label="Évolution de la pensée">
+      <div class="panel-head">
+        <h2>Évolution</h2>
+        <span id="turnCount" class="count">0 tour</span>
+      </div>
+      <div id="phase" class="phase">La table n'a pas commencé.</div>
+      <div class="tension" aria-hidden="true">
+        <div class="tension-bar"><span id="tensionFill"></span></div>
+        <p id="tensionLabel" class="hint">tension —</p>
+      </div>
+      <ol id="prises" class="prises"></ol>
+      <p class="hint">Chaque prise est la thèse ajoutée par un tour. Les liens disent ce qu'elle fait à la précédente : ouvre, accorde, distingue, contredit, précise.</p>
+    </aside>
   </main>
 
   <footer class="foot">
-    <p>Textes du domaine public (Project Gutenberg). Interface et mémoire compilées par KayrosLab. Aucune affiliation avec les auteurs.</p>
+    <p>Textes du domaine public (Project Gutenberg). Voix simulées d'après les œuvres ; citations vérifiées, aucune œuvre inventée. Aucune affiliation avec les auteurs.</p>
   </footer>
 
   <script src="app.js"></script>

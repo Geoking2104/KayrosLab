@@ -120,6 +120,13 @@ function expandTerms(base) {
   return out;
 }
 
+/** Terme principal : le concept de la question, sinon le mot le plus long. */
+function principalTerm(base) {
+  const concept = base.find((w) => Object.prototype.hasOwnProperty.call(CONCEPTS, w));
+  if (concept) return concept;
+  return base.slice().sort((a, b) => b.length - a.length)[0] || '';
+}
+
 /** BM25 simplifié + couverture des termes de la question. */
 function scoreSentence(sentence, expanded, baseTerms, cache) {
   if (cache.has(sentence)) return cache.get(sentence);
@@ -297,12 +304,15 @@ export default async function salonSpeakRoutes(app) {
 
     const history = Array.isArray(body.history) ? body.history.slice(-6) : [];
     const act = body.act === 'objection' ? 'objection' : 'reponse';
+    const toName = String(body.toName || '').slice(0, 80);
+    const toward = body.toward === 'author' ? 'author' : 'user';
     const last = history.length ? history[history.length - 1] : null;
     const query = `${question} ${last && last.prise ? last.prise : ''} ${last && last.text ? last.text : ''}`.trim();
 
     const all = (p.passages || []).filter((x) => x && x.s);
     const baseTerms = [...new Set(words(question))];
     const expanded = expandTerms(baseTerms);
+    const principal = principalTerm(baseTerms);
     const cache = new Map();
     const ranked = all
       .map((x) => {
@@ -315,7 +325,9 @@ export default async function salonSpeakRoutes(app) {
     const candidates = diversify(ranked, 22, 4);
     const coverage = candidates.length ? candidates[0].coverage : 0;
     const covered = candidates.length ? candidates[0].covered : 0;
-    const strong = candidates.length > 0 && (
+    const principalPresent = Boolean(principal && candidates.length
+      && new Set(words(candidates[0].sentence)).has(principal));
+    const strong = principalPresent && candidates.length > 0 && (
       coverage >= 0.34 || covered >= 2 || (covered >= 1 && baseTerms.length <= 4 && coverage >= 0.25)
     );
 
@@ -346,7 +358,13 @@ export default async function salonSpeakRoutes(app) {
         content: [
           `Question de table : ${question}`,
           last ? `Dernier tour à enchaîner : ${last.name || 'un convive'}${last.prise ? ` — prise : ${last.prise}` : ''}. ${last.text || ''}` : 'Tu ouvres la table.',
-          act === 'objection' ? `Acte : objection, adressée à l’hôte. Nomme-le une fois.` : `Acte : réponse à l’hôte. Nomme-le une fois.`,
+          act === 'objection'
+            ? (toward === 'author' && toName
+              ? `Acte : objection. Tu t’adresses à ${toName}. Tu objectes à SA PRISE, pas à un autre problème.`
+              : 'Acte : objection, adressée à l’hôte. Nomme-le une fois.')
+            : (toward === 'author' && toName
+              ? `Acte : réponse. Tu t’adresses à ${toName}. Tu fais avancer SA dernière prise d’un cran, toujours sur la question de table.`
+              : 'Acte : réponse à l’hôte. Nomme-le une fois.'),
           weak
             ? 'Les passages sont fragiles ou hors sujet : ne les cite pas. Argumente depuis tes œuvres nommées, ou avoue le manque.'
             : `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
@@ -418,6 +436,7 @@ export default async function salonSpeakRoutes(app) {
       engine: 'llm',
       provider: result.provider || null,
       degraded: result.degraded || null,
+      to: toward === 'author' ? toName : 'hôte',
       retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked) },
     };
   });
