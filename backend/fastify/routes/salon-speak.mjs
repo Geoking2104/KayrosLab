@@ -255,11 +255,27 @@ function verifyQuotes(text, author, sources, otherTitles = []) {
   const known = (author.works || []).map((w) => canonical(w.title)).filter(Boolean);
   const citations = [];
   const errors = [];
+  const matches = (q, source) => {
+    const cq = canonical(q).replace(/\s*\.\.\.\s*$/, '');
+    const cs = canonical(source);
+    if (cs.includes(cq)) return true;
+    const parts = cq.split(/\s*\.\.\.\s*/).filter((p) => p.length >= 12);
+    if (parts.length > 1) {
+      let pos = 0;
+      for (const part of parts) {
+        const at = cs.indexOf(part, pos);
+        if (at < 0) return false;
+        pos = at + part.length;
+      }
+      return true;
+    }
+    return cq.length >= 20 && cs.startsWith(cq);
+  };
   for (const m of String(text || '').matchAll(/[«"“]([^«»"“”]{20,400})[»"”]/g)) {
     const q = m[1].trim();
     const cq = canonical(q);
     if (known.some((t) => t === cq || t.includes(cq) || cq.includes(t.split(':')[0]))) continue;
-    const hit = sources.find((s) => canonical(s).includes(cq));
+    const hit = sources.find((s) => matches(q, s));
     if (hit) citations.push({ text: q, source: hit });
     else errors.push(`citation non vérifiée : « ${q.slice(0, 60)}… »`);
   }

@@ -30,12 +30,26 @@ export function bestSentenceFor(query: string, text: string): string {
   return list.slice().sort((a, b) => b.length - a.length)[0];
 }
 
-/** Une citation n'est recevable que si elle est une sous-chaîne exacte d'une source. */
+/** Une citation n'est recevable que si elle est une sous-chaîne exacte d'une source
+ *  (ou un préfixe / une citation elliptique « … » dont les fragments se suivent). */
 export function verifyQuote(quote: string, sources: string[]): { ok: boolean; source?: string } {
-  const needle = canonical(quote);
+  const needle = canonical(quote).replace(/\s*\.\.\.\s*$/, '');
   if (needle.length < 20) return { ok: false };
   for (const src of sources) {
-    if (canonical(src).includes(needle)) return { ok: true, source: src };
+    const hay = canonical(src);
+    if (hay.includes(needle)) return { ok: true, source: src };
+    const parts = needle.split(/\s*\.\.\.\s*/).filter((p) => p.length >= 12);
+    if (parts.length > 1) {
+      let pos = 0;
+      let ok = true;
+      for (const part of parts) {
+        const at = hay.indexOf(part, pos);
+        if (at < 0) { ok = false; break; }
+        pos = at + part.length;
+      }
+      if (ok) return { ok: true, source: src };
+    }
+    if (hay.startsWith(needle)) return { ok: true, source: src };
   }
   return { ok: false };
 }
