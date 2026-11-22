@@ -344,6 +344,7 @@ input:focus, button:focus-visible, select:focus {
 .cites ul { margin: 8px 0 0; padding-left: 18px; }
 .cites li { margin: 5px 0; font-size: 13px; color: var(--ink-soft); }
 .cites em { font-family: var(--serif); color: var(--ink); }
+.cites .translated { display: block; margin-top: 2px; font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--oxblood); }
 
 .meta {
   margin: 10px 0 0;

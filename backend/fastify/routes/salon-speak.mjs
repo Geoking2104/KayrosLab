@@ -255,29 +255,14 @@ function verifyQuotes(text, author, sources, otherTitles = []) {
   const known = (author.works || []).map((w) => canonical(w.title)).filter(Boolean);
   const citations = [];
   const errors = [];
-  const matches = (q, source) => {
-    const cq = canonical(q).replace(/\s*\.\.\.\s*$/, '');
-    const cs = canonical(source);
-    if (cs.includes(cq)) return true;
-    const parts = cq.split(/\s*\.\.\.\s*/).filter((p) => p.length >= 12);
-    if (parts.length > 1) {
-      let pos = 0;
-      for (const part of parts) {
-        const at = cs.indexOf(part, pos);
-        if (at < 0) return false;
-        pos = at + part.length;
-      }
-      return true;
-    }
-    return cq.length >= 20 && cs.startsWith(cq);
-  };
+  const unmatched = [];
   for (const m of String(text || '').matchAll(/[«"“]([^«»"“”]{20,400})[»"”]/g)) {
     const q = m[1].trim();
     const cq = canonical(q);
     if (known.some((t) => t === cq || t.includes(cq) || cq.includes(t.split(':')[0]))) continue;
-    const hit = sources.find((s) => matches(q, s));
+    const hit = sources.find((s) => quoteMatches(q, s));
     if (hit) citations.push({ text: q, source: hit });
-    else errors.push(`citation non vérifiée : « ${q.slice(0, 60)}… »`);
+    else { errors.push(`citation non vérifiée : « ${q.slice(0, 60)}… »`); unmatched.push(q); }
   }
   // Une œuvre d'un autre auteur glissée dans la bouche du convive est une
   // hallucination d'attribution : on la refuse, même hors guillemets.
@@ -285,7 +270,83 @@ function verifyQuotes(text, author, sources, otherTitles = []) {
   for (const t of otherTitles) {
     if (t.length >= 8 && body.includes(t)) errors.push(`œuvre d'un autre auteur : « ${t} »`);
   }
-  return { citations, errors };
+  return { citations, errors, unmatched };
+}
+
+/** Correspondance exacte, préfixe, ou citation elliptique « … » par fragments. */
+function quoteMatches(q, source) {
+  const cq = canonical(q).replace(/\s*\.\.\.\s*$/, '');
+  const cs = canonical(source);
+  if (cs.includes(cq)) return true;
+  const parts = cq.split(/\s*\.\.\.\s*/).filter((p) => p.length >= 12);
+  if (parts.length > 1) {
+    let pos = 0;
+    for (const part of parts) {
+      const at = cs.indexOf(part, pos);
+      if (at < 0) return false;
+      pos = at + part.length;
+    }
+    return true;
+  }
+  return cq.length >= 20 && cs.startsWith(cq);
+}
+
+function classifyLang(text) {
+  const s = String(text || '');
+  const fr = (s.match(/[àâçéèêëîïôùûüÿœ]/gi) || []).length * 3
+    + (s.match(/\b(le|la|les|des|une?|est|et|que|qui|dans|pour|pas|plus|sur|avec|nous|vous|ils|elles|du|au|aux|ce|cette|son|sa|ses)\b/gi) || []).length;
+  const en = (s.match(/\b(the|of|and|to|in|that|is|it|with|for|as|not|this|his|her|their)\b/gi) || []).length;
+  if (!fr && !en) return '';
+  return fr >= en ? 'fr' : 'en';
+}
+
+const TRANSLATIONS = new Map();
+
+/** Traduction de lot (i18n) — l'original reste la source de vérité. */
+async function translateBatch(llm, texts, to) {
+  const key = to + '::' + texts.join('|');
+  if (TRANSLATIONS.has(key)) return TRANSLATIONS.get(key);
+  if (!llm || typeof llm.complete !== 'function' || !texts.length) return null;
+  const label = to === 'fr' ? 'français' : 'anglais';
+  try {
+    const r = await llm.complete({
+      messages: [
+        { role: 'system', content: `Traduis fidèlement chaque élément du tableau JSON en ${label}. Réponds uniquement par un tableau JSON de chaînes, même longueur et même ordre, sans commentaire ni balise.` },
+        { role: 'user', content: JSON.stringify(texts) },
+      ],
+      temperature: 0.2,
+      role: 'salon-traduire',
+    }, {});
+    const raw = String((r && r.text) || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/```\s*$/, '').trim();
+    const arr = JSON.parse(raw);
+    if (Array.isArray(arr) && arr.length === texts.length && arr.every((x) => typeof x === 'string')) {
+      TRANSLATIONS.set(key, arr);
+      return arr;
+    }
+  } catch { /* repli : non traduit */ }
+  return null;
+}
+
+/** Rerank dense bge-m3 : le question + les candidats, cosine. */
+async function denseRerank(embeddings, question, candidates) {
+  if (!embeddings || typeof embeddings.embedBatch !== 'function' || candidates.length < 2) return null;
+  try {
+    const texts = [question, ...candidates.map((c) => c.sentence)];
+    const vectors = await embeddings.embedBatch(texts);
+    if (!Array.isArray(vectors) || vectors.length !== texts.length) return null;
+    const q = vectors[0];
+    const dot = (a, b) => {
+      let s = 0;
+      const n = Math.min(a.length, b.length);
+      for (let i = 0; i < n; i += 1) s += a[i] * b[i];
+      return s;
+    };
+    return candidates
+      .map((c, i) => ({ ...c, dense: dot(q, vectors[i + 1]) }))
+      .sort((a, b) => b.dense - a.dense);
+  } catch {
+    return null;
+  }
 }
 
 export default async function salonSpeakRoutes(app) {
@@ -305,12 +366,35 @@ export default async function salonSpeakRoutes(app) {
     return cache.packs.get(authorId);
   }
 
+  app.get('/v1/salon/embeddings/status', {
+    config: { rateLimit: { max: 10, timeWindow: '1 minute' } },
+  }, async (req, reply) => {
+    const embeddings = app.kayrosContext && app.kayrosContext.embeddings;
+    if (!embeddings || typeof embeddings.embedBatch !== 'function') {
+      return { ok: false, error: 'embeddings indisponibles' };
+    }
+    const started = Date.now();
+    try {
+      const vectors = await embeddings.embedBatch(['bonheur']);
+      const vector = Array.isArray(vectors) ? vectors[0] : null;
+      return {
+        ok: true,
+        model: embeddings.model || null,
+        dims: Array.isArray(vector) ? vector.length : 0,
+        latencyMs: Date.now() - started,
+      };
+    } catch (e) {
+      return reply.code(503).send({ ok: false, error: String(e.message || e), code: e.code || null });
+    }
+  });
+
   app.post('/v1/salon/speak', {
     config: { rateLimit: { max: 40, timeWindow: '1 minute' } },
   }, async (req, reply) => {
     const body = req.body || {};
     const authorId = String(body.authorId || '').trim();
     const question = String(body.question || '').trim().slice(0, 1000);
+    const userLang = body.locale === 'en' ? 'en' : 'fr';
     if (!authorId || !question) return reply.code(400).send({ ok: false, error: 'authorId et question requis' });
 
     const cat = catalog();
@@ -359,10 +443,12 @@ export default async function salonSpeakRoutes(app) {
       };
     }
 
-    const reranked = await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
-    const selected = (reranked && reranked.length ? reranked : withPrincipal).slice(0, 5);
+    const dense = await denseRerank(app.kayrosContext && app.kayrosContext.embeddings, question, withPrincipal);
+    const reranked = dense ? null : await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
+    const selected = (dense && dense.length ? dense : (reranked && reranked.length ? reranked : withPrincipal)).slice(0, 5);
     const cleaned = selected.filter((x) => x.sentence);
     const strong = true;
+    const sources = cleaned.map((x) => x.sentence);
 
     const messages = [
       { role: 'system', content: buildPersona({ author, doctrine: doctrine(), question }) },
@@ -379,6 +465,10 @@ export default async function salonSpeakRoutes(app) {
               ? `Acte : réponse. Tu t’adresses à ${toName}. Tu fais avancer SA dernière prise d’un cran, toujours sur la question de table.`
               : 'Acte : réponse à l’hôte. Nomme-le une fois.'),
           `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
+          `Langue de réponse : ${userLang === 'fr' ? 'français' : 'anglais'}.`,
+          sources.some((s) => { const l = classifyLang(s); return l && l !== userLang; })
+            ? `Les passages sont dans une autre langue : tu peux citer l’original exact ou sa traduction fidèle en ${userLang === 'fr' ? 'français' : 'anglais'}. Une citation traduite sera signalée comme telle.`
+            : '',
           cleaned.length ? cleaned.map((x) => `« ${x.work} »\n${x.sentence}`).join('\n\n') : 'Aucun passage pertinent.',
           'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>\nObligation : la REPLIQUE contient une citation EXACTE, entre guillemets « … », copiée mot pour mot d’un passage fourni. Sans citation, la réponse est refusée.',
         ].join('\n\n'),
@@ -407,16 +497,33 @@ export default async function salonSpeakRoutes(app) {
       if (!text) text = raw.replace(/^\s*PRISE\s*:.*$/im, '').trim();
     }
 
-    const sources = cleaned.map((x) => x.sentence);
     const otherTitles = (cat.authors || [])
       .filter((a) => a.id !== authorId)
       .flatMap((a) => (a.works || []).map((w) => canonical(w.title)))
       .filter((t) => t && t.length >= 8)
       .filter((t) => !(author.works || []).some((w) => canonical(w.title).includes(t)));
-    const checked = text ? verifyQuotes(text, author, sources, otherTitles) : { citations: [], errors: ['réponse vide'] };
+    const checked = text ? verifyQuotes(text, author, sources, otherTitles) : { citations: [], errors: ['réponse vide'], unmatched: [] };
+    let citationsChecked = checked.citations;
+    let errors = checked.errors;
+    if (text && checked.unmatched.length && sources.some((s) => { const l = classifyLang(s); return l && l !== userLang; })) {
+      const translated = await translateBatch(app.kayrosContext && app.kayrosContext.llm, sources, userLang);
+      if (translated && translated.length === sources.length) {
+        const still = [];
+        const added = [];
+        for (const q of checked.unmatched) {
+          const idx = translated.findIndex((t) => quoteMatches(q, t));
+          if (idx >= 0) added.push({ text: q, original: sources[idx], translated: true, lang: userLang });
+          else still.push(q);
+        }
+        if (added.length) {
+          citationsChecked = [...citationsChecked, ...added];
+          errors = still.map((q) => `citation non vérifiée : « ${q.slice(0, 60)}… »`);
+        }
+      }
+    }
     const wordCount = (text.match(/[\p{L}\p{N}'’-]+/gu) || []).length;
-    const grounded = checked.citations.length > 0;
-    const valid = text && checked.errors.length === 0 && wordCount >= 40 && wordCount <= 240
+    const grounded = citationsChecked.length > 0;
+    const valid = text && errors.length === 0 && wordCount >= 40 && wordCount <= 240
       && (!strong || grounded);
 
     if (!valid) {
@@ -429,26 +536,31 @@ export default async function salonSpeakRoutes(app) {
         citations: passage ? [{ work: passage.work, text: passage.quote }] : [],
         engine: 'fallback',
         provider: result ? result.provider || null : null,
-        degraded: isMock ? 'mock' : (checked.errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
-        retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked) },
+        degraded: isMock ? 'mock' : (errors[0] || (strong && !grounded ? 'citation absente' : 'hors contrat')),
+        retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense) },
       };
     }
 
-    const citations = checked.citations.map((c) => {
-      const hit = cleaned.find((x) => canonical(x.sentence).includes(canonical(c.text)));
-      return { work: hit ? hit.work : '', text: c.text };
+    const citationsOut = citationsChecked.map((c) => {
+      const hit = cleaned.find((x) => canonical(x.sentence).includes(canonical(c.text)))
+        || (c.original ? cleaned.find((x) => canonical(x.sentence).includes(canonical(c.original))) : null);
+      return {
+        work: hit ? hit.work : '',
+        text: c.text,
+        ...(c.translated ? { translated: true, original: c.original, lang: c.lang } : {}),
+      };
     }).filter((c) => c.work);
 
     return {
       ok: true,
       text,
       prise: prise || (text.split(/(?<=[.!?])\s+/)[0] || '').slice(0, 220),
-      citations,
+      citations: citationsOut,
       engine: 'llm',
       provider: result.provider || null,
       degraded: result.degraded || null,
       to: toward === 'author' ? toName : 'hôte',
-      retrieval: { mode: 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked) },
+      retrieval: { mode: dense ? 'hybrid+dense' : 'hybrid', coverage: Number(coverage.toFixed(2)), candidates: candidates.length, rerank: Boolean(reranked), dense: Boolean(dense) },
     };
   });
 }

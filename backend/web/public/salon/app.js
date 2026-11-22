@@ -380,6 +380,9 @@
           const li = el('li');
           li.append(el('em', null, c.work ? `« ${c.work} »` : 'Œuvre'));
           li.append(document.createTextNode(c.text ? ` — « ${c.text} »` : ''));
+          if (c.translated) {
+            li.append(el('span', 'translated', `traduction de « ${c.original || ''} »`));
+          }
           list.append(li);
         }
         details.append(list);
