@@ -71,6 +71,8 @@ on:
       - 'studio.css'
       - 'legal/**'
       - 'backend/web/public/console/**'
+      - 'backend/web/public/salon/**'
+      - 'salon/scripts/**'
       - 'kayroslab-complete-with-ai-agents.html'
       - 'whitepaper-*.html'
   workflow_dispatch:
