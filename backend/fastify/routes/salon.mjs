@@ -50,7 +50,7 @@ export default async function salonRoutes(app) {
     return { ok: true, room: room || null };
   });
 
-  app.put('/v1/salon/room', {
+  app.post('/v1/salon/room', {
     config: { rateLimit: { max: 60, timeWindow: '1 minute' } },
   }, async (req, reply) => {
     const id = roomClient(req);

@@ -485,7 +485,7 @@
         })),
       };
       fetch(`${API}/v1/salon/room?id=${CLIENT_ID}`, {
-        method: 'PUT',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ room }),
         signal: AbortSignal.timeout(8000),
