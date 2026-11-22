@@ -169,11 +169,17 @@ async function rerankWithModel(llm, question, candidates) {
     }, {});
     const raw = String((r && r.text) || '').trim();
     if (!raw || /^\[mock\]/i.test(raw)) return null;
-    const m = raw.match(/\[[\d,\s]+\]/);
-    if (!m) return null;
-    const arr = JSON.parse(m[0]);
+    let arr = null;
+    const bracket = raw.match(/\[[\d,\s]+\]/);
+    if (bracket) {
+      try { arr = JSON.parse(bracket[0]); } catch { arr = null; }
+    }
+    if (!Array.isArray(arr)) {
+      arr = [...raw.matchAll(/\b(\d{1,2})\b/g)].map((m) => Number(m[1]));
+    }
     const out = arr
       .filter((i) => Number.isInteger(i) && i >= 0 && i < candidates.length)
+      .filter((i, idx, a) => a.indexOf(i) === idx)
       .slice(0, 3)
       .map((i) => candidates[i]);
     return out.length ? out : null;
@@ -345,7 +351,7 @@ export default async function salonSpeakRoutes(app) {
             ? 'Les passages sont fragiles ou hors sujet : ne les cite pas. Argumente depuis tes œuvres nommées, ou avoue le manque.'
             : `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
           cleaned.length ? cleaned.map((x) => `« ${x.work} »\n${x.sentence}`).join('\n\n') : 'Aucun passage pertinent.',
-          'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>',
+          'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>\nObligation : la REPLIQUE contient une citation EXACTE, entre guillemets « … », copiée mot pour mot d’un passage fourni. Sans citation, la réponse est refusée.',
         ].join('\n\n'),
       },
     ];
