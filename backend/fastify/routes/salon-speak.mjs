@@ -38,6 +38,20 @@ function words(text) {
     .filter((w) => w.length >= 4 && !STOP.has(w));
 }
 
+/** Une prise est une thèse courte, pas une citation ni du balisage.
+ * Le modèle renvoie parfois une phrase entre guillemets, en anglais, ou avec
+ * des astérisques Markdown : on retombe alors sur la première phrase du texte. */
+function cleanPrise(prise, text, lang) {
+  const p = String(prise || '').replace(/^[*_>\s]+/, '').replace(/[*_\s]+$/, '').replace(/\s+/g, ' ').trim();
+  const detected = p ? classifyLang(p) : '';
+  const usable = p.length >= 12 && p.length <= 240
+    && !/[«»"]/.test(p) && !/[*_#]/.test(p)
+    && (!detected || !lang || detected === lang);
+  if (usable) return p;
+  const first = String(text || '').split(/(?<=[.!?])\s+/)[0] || '';
+  return first.replace(/[«»"*_#]/g, '').replace(/\s+/g, ' ').trim().slice(0, 220);
+}
+
 function relevance(query, text) {
   const q = new Set(words(query));
   if (!q.size) return 0;
@@ -583,7 +597,7 @@ export default async function salonSpeakRoutes(app) {
         return {
           ok: true,
           text,
-          prise: prise || (text.split(/(?<=[.!?])\s+/)[0] || '').slice(0, 220),
+          prise: cleanPrise(prise, text, userLang),
           citations: [],
           engine: 'llm',
           provider: result ? result.provider || null : null,
@@ -646,7 +660,7 @@ export default async function salonSpeakRoutes(app) {
     return {
       ok: true,
       text,
-      prise: prise || (text.split(/(?<=[.!?])\s+/)[0] || '').slice(0, 220),
+      prise: cleanPrise(prise, text, userLang),
       citations: citationsOut,
       engine: 'llm',
       provider: result.provider || null,
