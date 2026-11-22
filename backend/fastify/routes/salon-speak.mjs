@@ -380,7 +380,6 @@ export default async function salonSpeakRoutes(app) {
       .filter((t) => !(author.works || []).some((w) => canonical(w.title).includes(t)));
     const checked = text ? verifyQuotes(text, author, sources, otherTitles) : { citations: [], errors: ['réponse vide'] };
     const wordCount = (text.match(/[\p{L}\p{N}'’-]+/gu) || []).length;
-    const strong = cleaned.length > 0 && cleaned[0].score >= 0.08;
     const grounded = checked.citations.length > 0;
     const valid = text && checked.errors.length === 0 && wordCount >= 40 && wordCount <= 240
       && (!strong || grounded);
