@@ -106,17 +106,34 @@ DNS ultérieur.
    (rire, vice, liberté, justice, pouvoir, vérité, bonheur, vertu, dieu, nature,
    amour, mort, guerre, richesse, travail, éducation, société, temps, art).
 2. **Diversité** : 22 candidats, 4 phrases maximum par œuvre.
-3. **Rerank dense `bge-m3`** : les 8 meilleurs candidats sont ré-embeddés avec
-   la question (1024 dimensions, Ollama local) et classés par cosine ; repli sur
-   le rerank modèle puis sur le lexical si les embeddings échouent.
-4. **Rerank modèle** : si le dense est indisponible, le proxy classe les
-   candidats et renvoie les 3 meilleurs.
+3. **Index vectoriel persistant `bge-m3`** (prioritaire) : 50 phrases par auteur
+   couvrant les 20 concepts, embeddées une fois au déploiement (1024 dimensions,
+   Ollama local), stockées dans `backend/fastify/data/salon-emb/`. L'API classe
+   les phrases par cosine, puis rerank modèle sur les 12 meilleures.
+4. **Repli dense à la requête** : si l'index manque, les 8 meilleurs candidats
+   sont ré-embeddés avec la question ; repli suivant : rerank modèle puis lexical.
 5. **Garde d'ancrage** : si aucun passage ne porte le concept principal (ou un
    synonyme), le tour devient un **aveu du manque** — aucune citation hors sujet.
 6. **Vérification** : citation sous-chaîne exacte, œuvre du registre, rejet des
    œuvres d'autres auteurs, longueur et première personne.
 
-La réponse expose `retrieval: { mode, coverage, candidates, rerank, dense }`.
+La réponse expose `retrieval: { mode, coverage, candidates, rerank, dense, index }`.
+
+## Construction de l'index
+
+```bash
+node salon/scripts/build_embeddings.mjs --max-per-author 50 --batch 32
+```
+
+- Sélection : un passage par concept (rire, vice, liberté, justice, pouvoir,
+  vérité, bonheur, vertu, dieu, nature, amour, mort, guerre, richesse, travail,
+  éducation, société, temps, art), puis échantillonnage régulier.
+- Sorties : `<auteur>.f32` (vecteurs normalisés), `<auteur>.json` (phrases +
+  provenance), `manifest.json` (version, modèle, dimensions, compteurs).
+- Version d'index (`version: 2`) : un manifeste obsolète déclenche un rebuild ;
+  les auteurs déjà calculés sont réutilisés (reprise après timeout).
+- Le déploiement VPS lance ce script à chaque passage ; il skip si l'index est
+  déjà à la bonne version.
 
 ## Citations multilingues (i18n)
 
@@ -132,11 +149,14 @@ La réponse expose `retrieval: { mode, coverage, candidates, rerank, dense }`.
 
 ## Diagnostic `bge-m3`
 
-`GET /v1/salon/embeddings/status` renvoie le modèle, la dimension et la latence
-sans exposer de secret :
+`GET /v1/salon/embeddings/status` renvoie le modèle, la dimension, la latence et
+l'état de l'index, sans exposer de secret :
 
 ```json
-{ "ok": true, "model": "bge-m3", "dims": 1024, "latencyMs": 4155 }
+{
+  "ok": true, "model": "bge-m3", "dims": 1024, "latencyMs": 4155,
+  "index": { "model": "bge-m3", "dims": 1024, "authors": 68, "sentences": 3400, "builtAt": "…" }
+}
 ```
 
 Le déploiement VPS installe Ollama en loopback et exécute `ollama pull bge-m3`
