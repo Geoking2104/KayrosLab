@@ -324,15 +324,12 @@ export default async function salonSpeakRoutes(app) {
       .sort((a, b) => b.score - a.score);
     const candidates = diversify(ranked, 22, 4);
     const coverage = candidates.length ? candidates[0].coverage : 0;
-    const covered = candidates.length ? candidates[0].covered : 0;
-    const principalPresent = Boolean(principal && candidates.length
-      && new Set(words(candidates[0].sentence)).has(principal));
-    const strong = principalPresent && candidates.length > 0 && (
-      coverage >= 0.34 || covered >= 2 || (covered >= 1 && baseTerms.length <= 4 && coverage >= 0.25)
-    );
+    const principalSet = new Set([principal, ...(CONCEPTS[principal] || [])].filter(Boolean));
+    const withPrincipal = candidates.filter((c) => words(c.sentence).some((w) => principalSet.has(w)));
+    const top = withPrincipal[0] || null;
 
-    // Ancrage insuffisant : aveu du manque, aucune citation hors sujet.
-    if (!strong) {
+    // Ancrage insuffisant : aucun passage ne porte le concept de la question.
+    if (!top) {
       const av = avowal({ author, doctrine: doctrine(), question, toName: "l’hôte" });
       return {
         ok: true,
@@ -346,10 +343,10 @@ export default async function salonSpeakRoutes(app) {
       };
     }
 
-    const reranked = await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, candidates);
-    const selected = (reranked && reranked.length ? reranked : candidates).slice(0, 5);
+    const reranked = await rerankWithModel(app.kayrosContext && app.kayrosContext.llm, question, withPrincipal);
+    const selected = (reranked && reranked.length ? reranked : withPrincipal).slice(0, 5);
     const cleaned = selected.filter((x) => x.sentence);
-    const weak = false;
+    const strong = true;
 
     const messages = [
       { role: 'system', content: buildPersona({ author, doctrine: doctrine(), question }) },
@@ -365,9 +362,7 @@ export default async function salonSpeakRoutes(app) {
             : (toward === 'author' && toName
               ? `Acte : réponse. Tu t’adresses à ${toName}. Tu fais avancer SA dernière prise d’un cran, toujours sur la question de table.`
               : 'Acte : réponse à l’hôte. Nomme-le une fois.'),
-          weak
-            ? 'Les passages sont fragiles ou hors sujet : ne les cite pas. Argumente depuis tes œuvres nommées, ou avoue le manque.'
-            : `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
+          `Ancre-toi à un seul passage. Cite une phrase entière EXACTEMENT, entre guillemets « … ».`,
           cleaned.length ? cleaned.map((x) => `« ${x.work} »\n${x.sentence}`).join('\n\n') : 'Aucun passage pertinent.',
           'Format exact :\nPRISE: <une phrase>\nREPLIQUE:\n<90 à 170 mots, phrases complètes, première personne, sans liste>\nObligation : la REPLIQUE contient une citation EXACTE, entre guillemets « … », copiée mot pour mot d’un passage fourni. Sans citation, la réponse est refusée.',
         ].join('\n\n'),

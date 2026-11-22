@@ -219,14 +219,11 @@
   }
 
   function composeLocal({ author, question, passages, act, toName }) {
-    const first = passages && passages[0];
-    const info = first ? coverageOf(question, first.sentence) : { ratio: 0, covered: 0, total: 0 };
     const principal = principalTerm(terms(question));
-    const present = Boolean(first && principal && terms(first.sentence).includes(principal));
-    const strong = present && (
-      info.ratio >= 0.34 || info.covered >= 2 || (info.covered >= 1 && info.total <= 4 && info.ratio >= 0.25)
-    );
-    if (!strong) return avowalLocal(author, toName);
+    const principalSet = new Set([principal, ...(CONCEPTS[principal] || [])].filter(Boolean));
+    const first = (passages || []).find((p) => terms(p.sentence).some((w) => principalSet.has(w)));
+    const info = first ? coverageOf(question, first.sentence) : { ratio: 0, covered: 0, total: 0 };
+    if (!first) return avowalLocal(author, toName);
     const work = first.work;
     const quote = first.sentence;
     const who = toName ? toName.charAt(0).toUpperCase() + toName.slice(1) : 'L’hôte';
@@ -392,7 +389,9 @@
         ? turn.degraded
         : (turn.degraded && (turn.degraded.reason || turn.degraded.to)) || '';
       const bits = [turn.engine, turn.provider, degraded].filter(Boolean);
-      if (turn.retrieval && typeof turn.retrieval.coverage === 'number') bits.push(`couverture ${turn.retrieval.coverage}`);
+      if (turn.retrieval && typeof turn.retrieval.coverage === 'number' && turn.retrieval.coverage > 0) {
+        bits.push(`couverture ${turn.retrieval.coverage}`);
+      }
       if (bits.length) card.append(el('p', 'meta', bits.join(' · ')));
       ui.thread.append(card);
     });
