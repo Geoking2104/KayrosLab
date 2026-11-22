@@ -122,8 +122,11 @@ function expandTerms(base) {
 
 /** Terme principal : le concept de la question, sinon le mot le plus long. */
 function principalTerm(base) {
-  const concept = base.find((w) => Object.prototype.hasOwnProperty.call(CONCEPTS, w));
-  if (concept) return concept;
+  for (const w of base) {
+    for (const [key, list] of Object.entries(CONCEPTS)) {
+      if (key === w || list.includes(w)) return key;
+    }
+  }
   return base.slice().sort((a, b) => b.length - a.length)[0] || '';
 }
 

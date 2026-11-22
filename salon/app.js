@@ -189,8 +189,11 @@
   }
 
   function principalTerm(base) {
-    const concept = base.find((w) => Object.prototype.hasOwnProperty.call(CONCEPTS, w));
-    if (concept) return concept;
+    for (const w of base) {
+      for (const [key, list] of Object.entries(CONCEPTS)) {
+        if (key === w || list.includes(w)) return key;
+      }
+    }
     return base.slice().sort((a, b) => b.length - a.length)[0] || '';
   }
 
@@ -475,6 +478,7 @@
       body: JSON.stringify({
         authorId: author.id,
         question: state.question,
+        locale: document.documentElement.lang || 'fr',
         history,
         act,
         toward,
