@@ -33,7 +33,10 @@ test('le vhost www sert le site statique et laisse passer ACME', async () => {
   assert.match(deployWww, /assemble-www\.sh/);
   assert.match(deployWww, /sites-available\/www\.kayroslab\.com/);
   assert.match(deployBackend, /deploy-www\.sh/);
-  assert.doesNotMatch(vps, /backend\/web\/public\/salon/);
+  // Le miroir VPS de /salon/ doit suivre la page : le workflow se déclenche
+  // aussi sur les fichiers du Salon (Pages reste servi par son propre workflow).
+  assert.match(vps, /backend\/web\/public\/salon/);
+  assert.match(vps, /salon\/scripts/);
   assert.match(vps, /index\.fr\.html/);
 });
 
