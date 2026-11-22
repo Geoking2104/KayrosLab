@@ -69,9 +69,13 @@ export default async function salonRoutes(app) {
       const currentRoom = current && Array.isArray(current.rooms) ? current.rooms[0] : null;
       const conflicted = Boolean(
         currentRoom
-        && baseUpdatedAt
         && current.updatedAt
-        && Date.parse(current.updatedAt) > Date.parse(baseUpdatedAt),
+        && (baseUpdatedAt
+          // Référence connue : le serveur a bougé depuis.
+          ? Date.parse(current.updatedAt) > Date.parse(baseUpdatedAt)
+          // Aucune référence (premier envoi d'un client qui n'a pas lu) :
+          // un état avec des tours existe déjà, on ne l'écrase pas.
+          : (currentRoom.turns || []).length > 0),
       );
       const merged = conflicted && intent === 'append' && (currentRoom.turns || []).length > 0;
       const payload = merged ? mergeRooms(currentRoom, room) : { ...room, id: 'table' };
