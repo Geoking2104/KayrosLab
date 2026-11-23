@@ -380,6 +380,15 @@ input:focus, button:focus-visible, select:focus {
 
 .cites { margin-top: 12px; border-top: 1px solid var(--rule); padding-top: 9px; }
 
+.note {
+  margin: 10px 0 0;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  border-left: 2px solid var(--rule);
+  padding-left: 8px;
+}
+
 .cites summary {
   cursor: pointer;
   font-size: 11px;

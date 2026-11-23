@@ -12,7 +12,8 @@
     : 'https://api.kayroslab.com';
 
   const $ = (id) => document.getElementById(id);
-  const PREFERS_STILL = Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const FORCE_ANIM = new URL(window.location.href).searchParams.get('anim') === '1';
+  const PREFERS_STILL = !FORCE_ANIM && Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const ui = {
     seated: $('seated'),
     seatCount: $('seatCount'),
@@ -444,7 +445,8 @@
     }, step);
   }
 
-  function renderThread(scroll = false) {    clear(ui.thread);
+  function renderThread(scroll = false) {
+    clear(ui.thread);
     if (!state.turns.length) {
       ui.thread.append(el('p', 'empty', state.question
         ? 'La table est prête. Lancez le premier tour.'
@@ -471,6 +473,12 @@
       } else {
         said.textContent = turn.text;
         delete turn.fresh;
+      }
+      // Honnêteté visible : une réplique sans citation le dit, sans jargon.
+      if (turn.degraded === 'doctrine sans citation') {
+        card.append(el('p', 'note', 'Réplique de doctrine : aucun passage de ses œuvres ne porte le mot de la question, donc aucune citation.'));
+      } else if (turn.degraded === 'citation absente') {
+        card.append(el('p', 'note', 'Réplique sans citation : le modèle n’a pas repris de phrase vérifiable.'));
       }
       if (turn.citations && turn.citations.length) {
         const details = el('details', 'cites');
