@@ -115,6 +115,9 @@ jobs:
             mkdir -p deploy/salon
             cp salon/index.html salon/app.js salon/style.css salon/catalog.json salon/doctrine.json salon/kb-manifest.json deploy/salon/
             cp -r salon/kb deploy/salon/kb
+            # Portraits : optionnels, mais sans eux la table retombe en monogrammes.
+            if [ -f salon/avatars.json ]; then cp salon/avatars.json deploy/salon/; fi
+            if [ -d salon/avatars ]; then cp -r salon/avatars deploy/salon/avatars; fi
           else
             echo "ERROR: salon missing" >&2; exit 1
           fi
