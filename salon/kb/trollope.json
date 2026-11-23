@@ -1,0 +1,3791 @@
+{
+  "authorId": "trollope",
+  "kbVersion": "trollope@bootstrap-2026-11-23",
+  "builtAt": "2026-11-23T09:52:51.459Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "La Vendée",
+      "sentences": 69
+    },
+    {
+      "title": "The Warden",
+      "sentences": 68
+    },
+    {
+      "title": "Hunting Sketches",
+      "sentences": 68
+    },
+    {
+      "title": "The Prime Minister",
+      "sentences": 67
+    },
+    {
+      "title": "Framley Parsonage",
+      "sentences": 65
+    }
+  ],
+  "passages": [
+    {
+      "id": "trollope.p0001",
+      "w": "La Vendée",
+      "s": "His whole anxiety was for their welfare; but he cherished their very faults, their ignorance and their follies, to enable himself to serve them in his own manner.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0002",
+      "w": "La Vendée",
+      "s": "Remember how many are the claimants for our bounty.\" \"You have, of course, all heard what occurred at St.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0003",
+      "w": "La Vendée",
+      "s": "Why had he ridden up so boldly to the château gate?",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0004",
+      "w": "La Vendée",
+      "s": "I have no doubt you are right; and indeed I do not claim to be great in council; I only hope I may not be found backward in action.\" \"That you never, never will,\" said Agatha.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0005",
+      "w": "La Vendée",
+      "s": "He foresaw also all the horrors into which they were about to plunge; horrors, of which an honourable death on the field of battle would be the least.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0006",
+      "w": "La Vendée",
+      "s": "You will have to act then, not only for yourself, but for your child--for my daughter; and if you then give way to the violence of sorrow, who shall think and care for her?\" She laid her beautiful head upon his bosom, and wept, and promised, and prayed for him.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0007",
+      "w": "La Vendée",
+      "s": "These things all occurred within a week of the revolt at St.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0008",
+      "w": "La Vendée",
+      "s": "He had already been present at one or two affairs in which his party had been victorious, and war seemed to him twice more exciting, twice more delightful than the French Opera, or even the Jacobin Clubs.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0009",
+      "w": "La Vendée",
+      "s": "Come and meet the brave men of Fontenay, who trampled on the dirty tricolour, and drove out General Coustard from his covert, like a hunted fox.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0010",
+      "w": "La Vendée",
+      "s": "None of these were turned away unanswered; the door of the Mayor's house was not closed for a moment, and Henri, to be enabled to eat his supper at all, was obliged to give his last military orders with a crust of bread in his hand, and his mouth full of meat.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0011",
+      "w": "La Vendée",
+      "s": "The space occupied on the other side was much larger, for it was carried up so far as to darken a great portion of the window.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0012",
+      "w": "La Vendée",
+      "s": "Larochejaquelin did look so nice last Wednesday, when he was getting off his horse.\" \"That is all; but Cathelineau,\" said Annot, \"he is the finest fellow of them all.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0013",
+      "w": "La Vendée",
+      "s": "How kind you were, the last time we were here together,\" said Jacques; \"how kind and generous you were then; you are very different now.\" \"And you are very different, too, M.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0014",
+      "w": "La Vendée",
+      "s": "I suppose poor Adolphe Denot is the man you cannot love?",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0015",
+      "w": "La Vendée",
+      "s": "I, for one, am not in the least despondent.\" \"Yes, Agatha, I shall go to Saumur, determined at any rate not to lose there any little honour I may yet have won.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0016",
+      "w": "La Vendée",
+      "s": "Wait till these wars are over, and then I will gather flowers for you to present to some mistress who shall truly love you.\" \"No, Agatha, the flowers you gather for me shall never leave my own bosom.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0017",
+      "w": "La Vendée",
+      "s": "Providence can give us the victory over tried veterans as well as over untried conscripts; it were a sin to doubt it,\" said M.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0018",
+      "w": "La Vendée",
+      "s": "It is a bad messenger, I fear,\" said Cathelineau; \"but we have no better; indeed we are lucky even to find him.\" \"I wonder,\" said Peter Berrier to himself, as he ran across the fields, \"I wonder whether they'll make nothing of this job, too, as they did of that day at St.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0019",
+      "w": "La Vendée",
+      "s": "This was a great aggravation to the misery of their predicament.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0020",
+      "w": "La Vendée",
+      "s": "Stofflet was to lead a division of fifteen hundred men past the camp, between the heights of Bournan and the town, so as to intercept the republicans, should they attempt from that position, to relieve their comrades when retreating from the camp.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0021",
+      "w": "La Vendée",
+      "s": "What made this the more singular, was that the garrison at Bournan was composed of the very best soldiers of the French republican army.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0022",
+      "w": "La Vendée",
+      "s": "We all know that what Cathelineau has said of my cousin is no more than the truth.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0023",
+      "w": "La Vendée",
+      "s": "Bonchamps, and five others, declared for proceeding at once to Paris, with the view of arresting the present leaders of the Convention.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0024",
+      "w": "La Vendée",
+      "s": "And now the last of the lot was to be chosen.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0025",
+      "w": "La Vendée",
+      "s": "I should have been with them had we not heard that a strong body of republican troops is to be stationed at Parthenay.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0026",
+      "w": "La Vendée",
+      "s": "You do not think any longer of the friends who have fallen beside you; you only long to grapple with the enemy who are before you.\" \"Oh, mercy me!",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0027",
+      "w": "La Vendée",
+      "s": "The heroes of that place considered that they had somewhat celebrated themselves; in the first place, on final inquiry, it appeared, that not one person from the village, who was at all able to go to Saumur, had neglected to do so.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0028",
+      "w": "La Vendée",
+      "s": "Then they all sat down to breakfast, and Paul Rouel and old Gobelin, who had contrived to be of the party, were greatly surprised to hear and to see how civil Michael was to his sons.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0029",
+      "w": "La Vendée",
+      "s": "Henri had hardly got off the lawn, when he met a couple of servants coming from the yard, and between them a man booted, spurred, and armed, covered with dust and spattered with foam, whom he at once recognized as Foret, the friend and townsman of Cathelineau.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0030",
+      "w": "La Vendée",
+      "s": "All his spurring and his hurrying was in vain.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0031",
+      "w": "La Vendée",
+      "s": "Neither I, nor Marie will leave our brothers, nor will Madame de Lescure leave her husband; it is little we can do to hasten victory, but we can lessen suffering and administer comfort, when comfort is most required.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0032",
+      "w": "La Vendée",
+      "s": "He was a German, who had been banished from Prussia, and having entered the French army as a private soldier had gradually risen to be an officer.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0033",
+      "w": "La Vendée",
+      "s": "I doubt whether there is another leader among them, who can induce them to leave their parishes.\" \"If they won't come to us,\" said Barrère, \"we must go to them; they have gone too far now to recede.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0034",
+      "w": "La Vendée",
+      "s": "He was intimately acquainted with the royalist leaders, especially the two most popular of them, de Lescure and Larochejaquelin.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0035",
+      "w": "La Vendée",
+      "s": "You can understand that under the circumstances, such precautions must be necessary.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0036",
+      "w": "La Vendée",
+      "s": "We can have given them a check, but you know we cannot repeat the effort of this evening.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0037",
+      "w": "La Vendée",
+      "s": "Do not turn from him, Marie,\" said her sister-in-law.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0038",
+      "w": "La Vendée",
+      "s": "The poor girl was quite exhausted, and fell to the ground fainting.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0039",
+      "w": "La Vendée",
+      "s": "The grasp of the dying man was so firm that he could not extricate the cloak from his fingers.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0040",
+      "w": "La Vendée",
+      "s": "There--there--quite plain!\" \"It is Henri and Charles coming from Clisson,\" said Agatha.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0041",
+      "w": "La Vendée",
+      "s": "Indeed, after sitting still for some few minutes in that easy chair, meditating what he would do next, he found that the work which he had undertaken was one which he literally could not go through with.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0042",
+      "w": "La Vendée",
+      "s": "I suppose we must have them out before the house, and fire upon them?\" And he turned to the officer who was next to him, as though asking his advice.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0043",
+      "w": "La Vendée",
+      "s": "And that man there is a traitor and a false knave; he is not fit to be punished with a sword like a gentleman.\" \"Well crowed, my bantam,\" said Santerre; \"and be good enough to tell me where you come from.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0044",
+      "w": "La Vendée",
+      "s": "Arthur, however, was too quick for him, and pushing away his hand, fastened his own arms round his adversary.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0045",
+      "w": "La Vendée",
+      "s": "Chapeau, it was so awfully dreadful,\" said the cook.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0046",
+      "w": "La Vendée",
+      "s": "Madame de Lescure and Marie declared that they were only too happy in being able to rest quietly, with the knowledge that their friends were in safety.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0047",
+      "w": "La Vendée",
+      "s": "Henri just for ten minutes, to see him once kneeling at my feet.\" \"For ten minutes,\" said Marie.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0048",
+      "w": "La Vendée",
+      "s": "In that moment the scene in the council-room at Saumur came to his mind, and he remembered that there he had rebuked Adolphe Denot for his false ambition, and had probably been the means of driving him to the horrid crime which he had committed.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0049",
+      "w": "La Vendée",
+      "s": "Why, if I were to turn traitor, and go over to the republicans, it could hardly be worse.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0050",
+      "w": "La Vendée",
+      "s": "Is there any one whose character suffers under a more wide-spread infamy?",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0051",
+      "w": "La Vendée",
+      "s": "In allowing them to escape, we should only create difficulties for our own patriot children.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0052",
+      "w": "La Vendée",
+      "s": "Had she been a man, her democratic principle would have taught her to discontinue the aristocratic Monsieur; but, even in 1793, the accustomed courtesy of that obnoxious word was allowed to woman's lips.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0053",
+      "w": "La Vendée",
+      "s": "Robespierre, however, soon showed that he was displeased and angered; nay, worse still, that his black, unmanly suspicion was aroused.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0054",
+      "w": "La Vendée",
+      "s": "In that he said that Eleanor's conduct had been a source of great comfort to him, and that he blamed himself for still feeling any reserve with her.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0055",
+      "w": "La Vendée",
+      "s": "On their return into the house from the garden, they began to employ themselves with arranging and packing the little articles which they intended to take with them.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0056",
+      "w": "La Vendée",
+      "s": "In the presence of his sister, he asked her to marry him as soon as they reached Chatillon, so that when next the army separated, he might deem himself her natural protector.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0057",
+      "w": "La Vendée",
+      "s": "Am I now not frank and honest?\" Henri put his arms round her waist, and clasped her to his bosom before he answered her: \"You are, you are, my own, own love.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0058",
+      "w": "La Vendée",
+      "s": "No men could have fought better than did the Vendean peasants, for now they had joined some degree of discipline and method to their accustomed valour; but the number of their enemies was too great for them, and they consisted of the best soldiers of whom France could boast.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0059",
+      "w": "La Vendée",
+      "s": "Sit down, Madame de Lescure,\" said he, \"sit down, Mademoiselle,\" and he made the latter sit down on the altar step.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0060",
+      "w": "La Vendée",
+      "s": "That there was no carpet in a clergyman's house in Poitou was not remarkable; indeed it would have been very remarkable if there had been one; but the total want of any of the usual comforts of civilized life struck even Madame de Lescure, unsuited as she was at the present moment to take notice of such things.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0061",
+      "w": "La Vendée",
+      "s": "The aubergiste was resolute in refusing admittance to all; for tidings had reached him of guests who would more than fill his house, on whom he looked as entitled to more than all he could give them.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0062",
+      "w": "La Vendée",
+      "s": "There was an immense deal for Henri Larochejaquelin to do.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0063",
+      "w": "La Vendée",
+      "s": "Look up, love,\" he said; \"I haven't seen your face yet, or heard your voice.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0064",
+      "w": "La Vendée",
+      "s": "After a little while she conquered her emotion, and listened to him, and answered him with attention.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0065",
+      "w": "La Vendée",
+      "s": "Do you hear me, friend?\" added he, speaking rather hastily, for the boatman took no apparent notice of his instructions.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0066",
+      "w": "La Vendée",
+      "s": "He still had plenty of rope in his possession, and having fastened one end of a long coil with weights and blocks on the riverside, he passed over with the other end into the island, and fastened it there.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0067",
+      "w": "La Vendée",
+      "s": "Suppose this son of mine, who, as you say, was as great as the greatest among you, and as noble as the noblest; suppose he had admired your beauty, and had offered to take you home to his mother as the wife of his bosom, how would you then have answered him?",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0068",
+      "w": "La Vendée",
+      "s": "I wish he had lived now, in spite of all I said.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0069",
+      "w": "La Vendée",
+      "s": "If you mean to wait here all night, I don't,\" said the Chevalier, \"so good night to you, and if you don't get on, I'll push off without you.\" \"Stop a moment, M.",
+      "src": {
+        "work": "La Vendée"
+      }
+    },
+    {
+      "id": "trollope.p0070",
+      "w": "The Warden",
+      "s": "Immediately before him, on the extreme corner of the bench which ran round the summer-house, sat one old man, with his handkerchief smoothly lain upon his knees, who did enjoy the moment, or acted enjoyment well.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0071",
+      "w": "The Warden",
+      "s": "It's all formality in the morning; real social talk never begins till after dinner.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0072",
+      "w": "The Warden",
+      "s": "What right had he to say that John Hiram's will was not fairly carried out?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0073",
+      "w": "The Warden",
+      "s": "But somehow these arguments, though they seemed logical, were not satisfactory.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0074",
+      "w": "The Warden",
+      "s": "He is very intimate at my own house, bishop.\" The bishop stared.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0075",
+      "w": "The Warden",
+      "s": "This it was thought would pave the way for ulterior legal proceedings.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0076",
+      "w": "The Warden",
+      "s": "I once had nigh to that myself, but it didn't do me no good.\" And he gave a low sigh, as he thought of the children of his own loins who had robbed him.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0077",
+      "w": "The Warden",
+      "s": "One name and the rest marks wouldn't look well, would it?\" \"The worst in the world,\" said Handy; \"there--there\": and stooping over the petition, the learned clerk made a huge cross on the place left for his signature.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0078",
+      "w": "The Warden",
+      "s": "I quite agree with them,\" said Dr Grantly, refolding the letter.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0079",
+      "w": "The Warden",
+      "s": "Of course you have heard of the petition?\" Mr Harding owned, somewhat unwillingly, that he had heard of it.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0080",
+      "w": "The Warden",
+      "s": "He by no means wished to delegate to his son-in-law his place and authority of warden; he had expressly determined not to interfere in any step which the men might wish to take in the matter under dispute; he was most anxious neither to accuse them nor to defend himself.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0081",
+      "w": "The Warden",
+      "s": "Bunce, himself, even sat with closed lips, mute and unsatisfactory.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0082",
+      "w": "The Warden",
+      "s": "Should it ever be said that he had robbed those old men, whom he so truly and so tenderly loved in his heart of hearts?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0083",
+      "w": "The Warden",
+      "s": "Well,\" said she, \"I suppose we must write separate answers, and both say we shall be very happy.\" \"You'll go, of course, Mary,\" said he; to which she readily assented.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0084",
+      "w": "The Warden",
+      "s": "Surely, John, as a friend, as a young friend, so much younger than Mr Harding--\" \"That's woman's logic, all over, Mary.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0085",
+      "w": "The Warden",
+      "s": "At any rate let me say that you will go to this party.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0086",
+      "w": "The Warden",
+      "s": "At length a card is led, and quick three others fall upon the board.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0087",
+      "w": "The Warden",
+      "s": "I will not say that she had forgotten herself, and her own love in thinking about John Bold, and while conversing with Mary: she certainly had not done so.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0088",
+      "w": "The Warden",
+      "s": "Had Bold been judging of another lover and of another lady, he might have understood all this as well as we do; but in matters of love men do not see clearly in their own affairs.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0089",
+      "w": "The Warden",
+      "s": "Does his conscience ever entertain the question of his right to such subsidies?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0090",
+      "w": "The Warden",
+      "s": "Charles James was an exact and careful boy; he never committed himself; he well knew how much was expected from the eldest son of the Archdeacon of Barchester, and was therefore mindful not to mix too freely with other boys.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0091",
+      "w": "The Warden",
+      "s": "Henry declared that he was a false, cunning creature; and Charles James, though he always spoke of him as his dear brother Samuel, was not slow to say a word against him when opportunity offered.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0092",
+      "w": "The Warden",
+      "s": "Henry once quarrelled with me for taking his sister Grizzel's part in a contest between them as to the best mode of using a watering-pot for the garden flowers; and from that day to this he has not spoken to me, though he speaks at me often enough.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0093",
+      "w": "The Warden",
+      "s": "You see the will says, 'My lord, the bishop, being graciously pleased to see that due justice be done.' Now, it may be a question whether, in accepting and administering the patronage, your father has not accepted also the other duties assigned.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0094",
+      "w": "The Warden",
+      "s": "It is quite favourable,\" said the bishop, pressing his friend's arm.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0095",
+      "w": "The Warden",
+      "s": "As he paced up and down the room he resolved in his misery and enthusiasm that he could with pleasure, if he were allowed, give up his place, abandon his pleasant home, leave the hospital, and live poorly, happily, and with an unsullied name, on the small remainder of his means.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0096",
+      "w": "The Warden",
+      "s": "The warden still sat, and still looked at the archdeacon, till his thoughts fixed themselves wholly on the means of escape from his present position, and he felt like a bird fascinated by gazing on a snake.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0097",
+      "w": "The Warden",
+      "s": "He was still sitting in the same chair and the same posture, having hardly moved a limb for two hours, when Eleanor came back to tea, and succeeded in bringing him with her into the drawing-room.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0098",
+      "w": "The Warden",
+      "s": "How he chid himself for ever having been unhappy with such a treasure in his house, such a jewel on his bosom, with so sweet a flower in the choice garden of his heart!",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0099",
+      "w": "The Warden",
+      "s": "Dear ladies, you are right as to your appreciation of the circumstances, but very wrong as to Miss Harding's character.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0100",
+      "w": "The Warden",
+      "s": "But had she been immortal, had she flitted back to the sitting-room on a cherub's wings, she could not have had a more faithful heart, or a truer wish to save her father at any cost to herself.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0101",
+      "w": "The Warden",
+      "s": "She had no thought now of herself, no care now for her appearance; and yet he thought he had never seen her half so lovely; he was amazed at the intensity of her beauty, and could hardly believe that it was she whom he had dared to love.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0102",
+      "w": "The Warden",
+      "s": "And with a volley of impassioned love, John Bold poured forth the feelings of his heart, swearing, as men do, some truths and many falsehoods; and Eleanor repeated with every shade of vehemence the \"No, no, no,\" which had had a short time since so much effect; but now, alas!",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0103",
+      "w": "The Warden",
+      "s": "How was he to back out of a matter in which his name was already so publicly concerned?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0104",
+      "w": "The Warden",
+      "s": "Sir, your net is not strong enough to hold him; sir, your net has fallen to pieces, and you knew that well enough before I told you--and now, sir, I'll wish you good-morning, for I'm busy.\" Bold was now choking with passion.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0105",
+      "w": "The Warden",
+      "s": "He threw the reins to the servant who came to take his horse, and rushed upstairs into his drawing-room, where his sister Mary was sitting.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0106",
+      "w": "The Warden",
+      "s": "If this plea be put forward we trust Mr Harding will be forced as a witness to state the nature of his employment; the amount of work that he does; the income which he receives; and the source from whence he obtained his appointment.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0107",
+      "w": "The Warden",
+      "s": "They shall not put forward this plea on my behalf,\" continued the warden.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0108",
+      "w": "The Warden",
+      "s": "It stands alone, as it were, in a mighty city, close to the densest throng of men, but partaking neither of the noise nor the crowd; a small secluded, dreary spot, tenanted, one would say, by quite unambitious people at the easiest rents.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0109",
+      "w": "The Warden",
+      "s": "From the diggings of Australia to those of California, right round the habitable globe, does he not know, watch, and chronicle the doings of everyone?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0110",
+      "w": "The Warden",
+      "s": "Washed by the rich tide which now passes from the towers of Cæsar to Barry's halls of eloquence; and again back, with new offerings of a city's tribute, from the palaces of peers to the mart of merchants, stand those quiet walls which Law has delighted to honour by its presence.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0111",
+      "w": "The Warden",
+      "s": "It is impossible to give them too much praise for the elaborate perseverance with which they have equalled the minute perfections of the masters from whom they take their inspiration: nothing probably can exceed the painting of some of these latter-day pictures.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0112",
+      "w": "The Warden",
+      "s": "A few hundreds,\" said Bold--\"perhaps three hundred; I can't help that, and am prepared for it.\" \"That's philosophical.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0113",
+      "w": "The Warden",
+      "s": "Oh, my poor brother,\" said he, \"slaughtered partridges a score of brace to each gun, and poets gauging ale-barrels, with sixty pounds a year, at Dumfries, are not the signs of a great era!--perhaps of the smallest possible era yet written of.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0114",
+      "w": "The Warden",
+      "s": "He did not confine himself to politics in these publications, but roamed at large over all matters of public interest, and found everything bad.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0115",
+      "w": "The Warden",
+      "s": "We will suppose him to be one of the best of the good, one who has lacked no opportunities.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0116",
+      "w": "The Warden",
+      "s": "What story was ever written without a demon?",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0117",
+      "w": "The Warden",
+      "s": "To the House Mr Harding went, and left his note, not finding Sir Abraham there.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0118",
+      "w": "The Warden",
+      "s": "A florid-faced gentleman with a nice head of hair, from the south of Ireland, had succeeded in catching the speaker's eye by the time that Mr Harding had got into the gallery, and was denouncing the proposed sacrilege, his whole face glowing with a fine theatrical frenzy.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0119",
+      "w": "The Warden",
+      "s": "It appears to us a question whether any clergyman can go through our church service with decorum, morning after morning, in an immense building, surrounded by not more than a dozen listeners.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0120",
+      "w": "The Warden",
+      "s": "The archdeacon, for some years past, had paid the premium, and had secured himself by the immediate possession of a small property which was to have gone to Mrs Grantly after her father's death.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0121",
+      "w": "The Warden",
+      "s": "The woman looked somewhat surprised, but answered in the affirmative, and a slipshod girl ushered him into a long back room, filled with boxes for the accommodation of parties, in one of which he took his seat.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0122",
+      "w": "The Warden",
+      "s": "Well, sir, thank ye, sir;--as you are so good, I'll smoke it myself.\" And so Mr Harding ascended to the divan, with his ticket for coffee, but minus the cigar.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0123",
+      "w": "The Warden",
+      "s": "She, poor lady, was not unhappy; she had all that money could give her, she would probably live to be a peeress, and she really thought Sir Abraham the best of husbands.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0124",
+      "w": "The Warden",
+      "s": "Nay, my dear sir,\" continued the attorney-general, \"there is no further ground for any question; I don't see that you have the power of raising it.\" \"I can resign,\" said Mr Harding, slowly playing away with his right hand, as though the bow were beneath the chair in which he was sitting.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0125",
+      "w": "The Warden",
+      "s": "Believe me, it is sheer Quixotism.\" The warden walked away to the window, and then back to his chair; and then, irresolute what to say, took another turn to the window.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0126",
+      "w": "The Warden",
+      "s": "In the meantime he had to meet the archdeacon, and so he walked slowly down Chancery Lane and along Fleet Street, feeling sure that his work for the night was not yet over.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0127",
+      "w": "The Warden",
+      "s": "Papa has been too much for you,\" said the lady.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0128",
+      "w": "The Warden",
+      "s": "My dear warden,\" said he, \"this is all nonsense.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0129",
+      "w": "The Warden",
+      "s": "Indeed they will, my dear,\" continued he.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0130",
+      "w": "The Warden",
+      "s": "You may add to my present unhappiness by pressing me, but you cannot change my purpose; it will be a comfort to me if you will let the matter rest\": and, dipping his pen into the inkstand, he fixed his eyes intently on the paper.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0131",
+      "w": "The Warden",
+      "s": "I had at one time an idea of keeping only some moderate portion of the income; perhaps three hundred a year, and of remitting the remainder to the trustees; but it occurred to me, and I think with reason, that by so doing I should place my successors in an invidious position, and greatly damage your patronage.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0132",
+      "w": "The Warden",
+      "s": "The question never occurred to him; but it did occur to him that he had very little money at his banker's, that he could receive nothing further from the hospital, and that the sale of the furniture was his only resource.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0133",
+      "w": "The Warden",
+      "s": "I never heard of such a case in all my experience,\" said Mr Cox.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0134",
+      "w": "The Warden",
+      "s": "The archdeacon then left his father, and went down to the hospital; but Mr Harding wouldn't listen at all to the Puddingdale scheme.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0135",
+      "w": "The Warden",
+      "s": "He is generous to the poor, and hospitable to the rich; in matters of religion he is sincere, and yet no Pharisee; he is in earnest, and yet no fanatic.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0136",
+      "w": "The Warden",
+      "s": "But the gentry were of a different way of thinking,--especially the lawyers and the clergymen.",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0137",
+      "w": "The Warden",
+      "s": "And this was to be the end of all their mighty struggle,--of their fight for their rights,--of their petition, and their debates, and their hopes!",
+      "src": {
+        "work": "The Warden"
+      }
+    },
+    {
+      "id": "trollope.p0138",
+      "w": "Hunting Sketches",
+      "s": "Oh, that there might come a check, or that the brute of a fox might happily go to ground!",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0139",
+      "w": "Hunting Sketches",
+      "s": "So he puts his spurs to the brute savagely, and then at some little fence, some ignoble ditch, they come down together in the mud, and the question of any further effort is saved for the rider.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0140",
+      "w": "Hunting Sketches",
+      "s": "And no one does know how great is the misery endured by those who hunt regularly, and who do not like it.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0141",
+      "w": "Hunting Sketches",
+      "s": "He was a country gentleman who considered himself to be energetic if he went out twice a week, and in doing this he rarely left his house earlier for that purpose than he would leave it for others.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0142",
+      "w": "Hunting Sketches",
+      "s": "He desires, at any rate, a decisive answer.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0143",
+      "w": "Hunting Sketches",
+      "s": "The man who hunts and likes it scorns his ease, and resolves that he will at any rate persevere.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0144",
+      "w": "Hunting Sketches",
+      "s": "Cigars and stable-talk are all that remain to him; and it is well for him if he can refrain from the additional excitement of brandy and water.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0145",
+      "w": "Hunting Sketches",
+      "s": "So dull has been everything on this morning that even that is something, and men begin to make themselves happier in the warmth of the movement.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0146",
+      "w": "Hunting Sketches",
+      "s": "Jorrocks, gallopping along the ride with many oaths, implores those around him to hold their tongues and remain quiet.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0147",
+      "w": "Hunting Sketches",
+      "s": "But now, while the flask is yet at his mouth, he hears from some distant corner a sound that tells him that the fox is away.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0148",
+      "w": "Hunting Sketches",
+      "s": "But he perseveres, choosing his points as he goes, till the tail of his followers becomes thinner and thinner.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0149",
+      "w": "Hunting Sketches",
+      "s": "His gallant nag rolls a little under him, and he knows that he has been going too fast.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0150",
+      "w": "Hunting Sketches",
+      "s": "But on reaching Boxall Springs he finds that the farmer was right, and that Tom is already breaking up the fox.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0151",
+      "w": "Hunting Sketches",
+      "s": "It wasn't in the open,\" says Jones, reduced in his anger to diminish as far as may be the triumph of his rival.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0152",
+      "w": "Hunting Sketches",
+      "s": "There used to prevail an idea that the hunting man was of necessity loud and rough, given to strong drinks, ill adapted for the poetries of life, and perhaps a little prone to make money out of his softer friend.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0153",
+      "w": "Hunting Sketches",
+      "s": "Each always, I may say always, receives all the assistance that she may require; but the difference between the two, to the men who ride with them, is very great.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0154",
+      "w": "Hunting Sketches",
+      "s": "It is marvellous to watch the manner in which a hunting lady will become exacting, troublesome, and at last imperious, deceived and spoilt by the attention which she receives.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0155",
+      "w": "Hunting Sketches",
+      "s": "I shall never forget her voice, \"Pray, take care of that gate.\" And yet it was a pretty voice, and elsewhere she was not given to domineering more than is common to pretty women in general; but she had been taught badly from the beginning, and she was a pest.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0156",
+      "w": "Hunting Sketches",
+      "s": "The lady who rides like this is in truth seldom in the way.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0157",
+      "w": "Hunting Sketches",
+      "s": "So shall she win the hearts of those around her, and go safely through brake and brier, over ditch and dyke, and meet with a score of knights around her who will be willing and able to give her eager aid should the chance of any moment require it.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0158",
+      "w": "Hunting Sketches",
+      "s": "And this error has sprung from, or forms part of, another, which is wonderfully common among non-hunting folk.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0159",
+      "w": "Hunting Sketches",
+      "s": "It is a pernicious vice, that of succumbing to the beast that carries you, and making yourself, as it were, his servant, instead of keeping him ever as yours.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0160",
+      "w": "Hunting Sketches",
+      "s": "You cannot induce him to believe that if he held land in England, looking to make his rent from tender young grass-fields and patches of sprouting corn, he would be powerless to keep out intruders, if those intruders came in the shape of a rushing squadron of cavalry, and called themselves a hunt.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0161",
+      "w": "Hunting Sketches",
+      "s": "He puts up a wire-fence round his domain, thus fortifying himself, as it were, in his citadel, and defies the world around him.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0162",
+      "w": "Hunting Sketches",
+      "s": "Farmers, as a rule, do not think very much of their wheat.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0163",
+      "w": "Hunting Sketches",
+      "s": "The surface of such enclosures should be as smooth as a billiard-table, so that no water may lie in holes; and, moreover, any young plant cut by a horse's foot is trodden out of existence.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0164",
+      "w": "Hunting Sketches",
+      "s": "In such matters the farmer is generally right; but he is slow to communicate his ideas, and does not recognize the fact that other men have not the same opportunities for observation which belong to him.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0165",
+      "w": "Hunting Sketches",
+      "s": "But he knows very much as to the lie of the country, and should my gentle reader by chance have taken a glass or two of wine above ordinary over night, the effect of which will possibly be a temporary distaste to straight riding, no one's knowledge as to the line of the lanes is so serviceable as that of the farmer.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0166",
+      "w": "Hunting Sketches",
+      "s": "He is not to be seen loosing his girths, or looking at the beast's flanks, or examining his legs to ascertain what mischances may have occurred.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0167",
+      "w": "Hunting Sketches",
+      "s": "What is the position which his brother, his uncle, his cousin holds?",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0168",
+      "w": "Hunting Sketches",
+      "s": "A farmer's horse is never lame, never unfit to go, never throws out curbs, never breaks down before or behind.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0169",
+      "w": "Hunting Sketches",
+      "s": "We used to hear much of the Galway Blazers, and it was supposed that in County Galway a stiff-built wall six feet high was the sort of thing that you customarily met from field to field when hunting in that comfortable county.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0170",
+      "w": "Hunting Sketches",
+      "s": "He may be sure that he will not find himself alone; and he may be sure also that he will incur none of that ridicule which the non-hunting man is disposed to think must be attached to such a pursuit.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0171",
+      "w": "Hunting Sketches",
+      "s": "Nothing ever tempted him to cross the smallest fence.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0172",
+      "w": "Hunting Sketches",
+      "s": "The man who hunts and doesn't jump, presuming him not to be a duke or any man greatly established as a Nimrod in the hunting world, generally comes out in a black coat and a hat, so that he may not be specially conspicuous in his deviations from the line of the running.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0173",
+      "w": "Hunting Sketches",
+      "s": "His eye becomes accustomed to distinguish the form of a moving horseman over half-a-dozen fields; and let him see but a cap of any leading man, and he will know which way to turn himself.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0174",
+      "w": "Hunting Sketches",
+      "s": "He is good-natured for the moment, and patronizes the lost ones.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0175",
+      "w": "Hunting Sketches",
+      "s": "Well, he turned there, and ran back very near the corner; but he was headed by a sheep-dog, luckily, and went to the left across the brook.\" \"Ah, that's where I lost them,\" says one unfortunate.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0176",
+      "w": "Hunting Sketches",
+      "s": "I've hardly been out of a trot yet, but we may as well move on now.\" Then he breaks into an easy canter by the side of the road, while the unfortunates, who have been rolling among the heavy-ploughed ground in the early part of the day, make vain efforts to ride by his side.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0177",
+      "w": "Hunting Sketches",
+      "s": "But the man who never jumps is not usually of a benevolent nature, and it is almost certain that he will make up a little story against the boaster.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0178",
+      "w": "Hunting Sketches",
+      "s": "The world at large is very prone to condemn the hunting parson, regarding him as a man who is false to his profession; and, for myself, I am not prepared to say that the world is wrong.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0179",
+      "w": "Hunting Sketches",
+      "s": "But although that expressed plea as to the want of time really amounts to nothing, and although the unexpressed feeling of old ladies as to the wickedness of hunting does not in truth amount to much, I will not say that there is no other impediment in the way of a hunting parson.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0180",
+      "w": "Hunting Sketches",
+      "s": "And latterly there went forth, at any rate in one diocese, a firman against cricket!",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0181",
+      "w": "Hunting Sketches",
+      "s": "By the term old ladies it will be understood, perhaps, that I do not allude simply to matrons and spinsters who may be over the age of sixty, but to that most respectable portion of the world which has taught itself to abhor the pomps and vanities.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0182",
+      "w": "Hunting Sketches",
+      "s": "The young man must be a brazen sinner, too far gone for hunting to hurt him, who will ride with Anonyma in the field.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0183",
+      "w": "Hunting Sketches",
+      "s": "And there is another mode of dress open to him, which I can assure my readers is not an unknown costume, a tertium quid, by which semi-decorum and comfort are combined.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0184",
+      "w": "Hunting Sketches",
+      "s": "I generally find him to be about the pleasantest man in the field, with the most to say for himself, whether the talk be of hunting, of politics, of literature, or of the country.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0185",
+      "w": "Hunting Sketches",
+      "s": "But still I must confess at the end of this paper, as I hinted also at the beginning of it, that the hunting parson seems to have made a mistake.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0186",
+      "w": "Hunting Sketches",
+      "s": "The master of hounds best known by modern description is the master of the Jorrocks type.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0187",
+      "w": "Hunting Sketches",
+      "s": "It is of such a master as this, a master of the good old English sort, and not of an itinerant contractor for hunting, that I here intend to speak.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0188",
+      "w": "Hunting Sketches",
+      "s": "Men have hunted countries, doubtless, on economical principles, and the sport has been carried on from year to year; but under such circumstances it is ever dwindling and becoming frightfully less.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0189",
+      "w": "Hunting Sketches",
+      "s": "Of the latter class of sportsman, of the imperial head of a country who looks upon the coverts of all his neighbours as being almost his own property, there are, I believe, but few left.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0190",
+      "w": "Hunting Sketches",
+      "s": "As the necessity for space increased, increasing from increase of hunting ambition, the richer and more ambitious squires began to undertake the management of wider areas, and so our hunting districts were formed.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0191",
+      "w": "Hunting Sketches",
+      "s": "And he will be punctual to his time, giving quarter to none and asking none himself.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0192",
+      "w": "Hunting Sketches",
+      "s": "If four days a week be required of him, two thousand a year will be little enough.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0193",
+      "w": "Hunting Sketches",
+      "s": "To a master of hounds is given a place of great influence, and into his hands is confided an authority the possession of which among his fellow-sportsmen is very pleasant to him.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0194",
+      "w": "Hunting Sketches",
+      "s": "The master of hounds has no aldermen, no common council, no liverymen.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0195",
+      "w": "Hunting Sketches",
+      "s": "He is always learning, and always called upon to act on his knowledge suddenly.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0196",
+      "w": "Hunting Sketches",
+      "s": "How he should love his foxes, and with what pertinacity he should kill them!",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0197",
+      "w": "Hunting Sketches",
+      "s": "It used to be said that no captain of a man-of-war could hold his own without swearing.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0198",
+      "w": "Hunting Sketches",
+      "s": "Let it be understood that I am speaking of fox-hunting, and let the young beginner always remember that in hunting the fox a pack of hounds is needed.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0199",
+      "w": "Hunting Sketches",
+      "s": "His business is to ride to hounds; and let him do so from the beginning of the run, persevering through it all, taking no mean advantages, and allowing himself to be betrayed into as few mistakes as possible; but let him not begin before the beginning.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0200",
+      "w": "Hunting Sketches",
+      "s": "But though I have thus begun, striking first at the very root of the matter, I must go back with my pupil into the covert before I carry him on through the run.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0201",
+      "w": "Hunting Sketches",
+      "s": "But now we will go back to the covert, and into the covert if it be a large one.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0202",
+      "w": "Hunting Sketches",
+      "s": "In finding your right place, and keeping it when it is found, you may have difficulty; but in going away from a gorse the field will be open for you, and when the hounds are well out and upon the scent, then remember your Latin; Occupet extremum scabies.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0203",
+      "w": "Hunting Sketches",
+      "s": "He will still carry you perhaps throughout a good run, but he will not do so with that elasticity which you will love; and then, after that, the journey home is, it is occasionally something almost too frightful to be contemplated.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0204",
+      "w": "Hunting Sketches",
+      "s": "He loves not that crowd that has been abusing him, and steals away from some silent distant corner.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0205",
+      "w": "Hunting Sketches",
+      "s": "The area to be drawn is too large to admit of waiting, and your only duty is to stay as close to the hounds as your ears and eyes will permit, remembering always that your ears should serve you much more often than your eyes.",
+      "src": {
+        "work": "Hunting Sketches"
+      }
+    },
+    {
+      "id": "trollope.p0206",
+      "w": "The Prime Minister",
+      "s": "He was as convinced as ever that unless there was much to conceal there would not be so much concealment.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0207",
+      "w": "The Prime Minister",
+      "s": "It is no case for exultation, Cora, for the chances are that I shall fail.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0208",
+      "w": "The Prime Minister",
+      "s": "But your position, should it come to pass that your husband is the head of the Government, will be too high.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0209",
+      "w": "The Prime Minister",
+      "s": "When she was unhappy he was miserable, though he would hardly know the cause of his misery.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0210",
+      "w": "The Prime Minister",
+      "s": "Indeed there had been at one time a rumour that he was going to be taken into the house of Hunky and Sons as a junior partner.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0211",
+      "w": "The Prime Minister",
+      "s": "It was quite a special invitation, because it came in the form of a card,--which was unusual between the two families.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0212",
+      "w": "The Prime Minister",
+      "s": "There lived not the man or woman who had dined with Lord Mongrober.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0213",
+      "w": "The Prime Minister",
+      "s": "If it hadn't been heated before the fire--\" \"It hasn't been near the fire,\" said Dick.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0214",
+      "w": "The Prime Minister",
+      "s": "Her house was always gorgeous with flowers.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0215",
+      "w": "The Prime Minister",
+      "s": "But in such a work as the Duchess had now taken in hand, it was impossible that she should escape censure.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0216",
+      "w": "The Prime Minister",
+      "s": "But Phineas Finn had been twice married, and had gone through other phases of life, such as make a man old.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0217",
+      "w": "The Prime Minister",
+      "s": "Some people said that his temper was against him.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0218",
+      "w": "The Prime Minister",
+      "s": "And does Everett associate with scamps?\" \"Very likely.\" \"I never knew any one so much prejudiced as you are, Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0219",
+      "w": "The Prime Minister",
+      "s": "As to his estate, delightful as it was in many respects, it was hardly sufficient to maintain his position with that plentiful hospitality which he would have loved;--and other property he had none.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0220",
+      "w": "The Prime Minister",
+      "s": "I can't change myself, and I can't change you.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0221",
+      "w": "The Prime Minister",
+      "s": "All the Fletchers and everything belonging to them were almost worshipped at Wharton Hall.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0222",
+      "w": "The Prime Minister",
+      "s": "She'll never marry him without her father's consent,\" said Sir Alured.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0223",
+      "w": "The Prime Minister",
+      "s": "Then he strove to console himself by thinking that he might take a pride in his love even though it were so intolerable a burden to him.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0224",
+      "w": "The Prime Minister",
+      "s": "Fletcher that it would be hardly possible to her to be civil to the girl after she had heard that her mind and taste were so astray.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0225",
+      "w": "The Prime Minister",
+      "s": "Now all his hope was shattered, his trust was gone, and his longing disappointed.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0226",
+      "w": "The Prime Minister",
+      "s": "She had expected and had almost wished that he should kiss her.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0227",
+      "w": "The Prime Minister",
+      "s": "A man cannot be both private and public at the same time.\" \"And therefore one has to be chopped up, like 'a reed out of the river,' as the poet said, 'and yet not give sweet music afterwards.'\" The Duke of St.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0228",
+      "w": "The Prime Minister",
+      "s": "I think I shall go down with you at once to Gatherum,\" he said.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0229",
+      "w": "The Prime Minister",
+      "s": "I would not for the world say anything that should annoy you;--but pray, pray do not go on with it.\" Then again he left her.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0230",
+      "w": "The Prime Minister",
+      "s": "I never drew a bow in my life,--not a real bow in the flesh, that is, my dear,--and yet I've made 'em all out, and had them printed.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0231",
+      "w": "The Prime Minister",
+      "s": "Boffin put down his treatise on the nature of Franchises, which he was studying in order that he might lead an opposition against the Ministry next Session, and even Sir Timothy Beeswax, who had done his work with Sir Orlando, joined the throng.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0232",
+      "w": "The Prime Minister",
+      "s": "Finn has ideas--.\" \"Ah, yes;--well, your Grace.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0233",
+      "w": "The Prime Minister",
+      "s": "Wharton should continue his opposition to a marriage which would make his daughter the wife of a member of Parliament and of a special friend of the Duchess of Omnium?",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0234",
+      "w": "The Prime Minister",
+      "s": "You had better run away at once,\" said Wharton.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0235",
+      "w": "The Prime Minister",
+      "s": "Before he had reached his own door he had quite made up his mind that he himself would tell the story after his own fashion.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0236",
+      "w": "The Prime Minister",
+      "s": "She was sitting opposite to him, and after conversing for a while she touched his knee with her hand.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0237",
+      "w": "The Prime Minister",
+      "s": "Are you happy?\" \"My love; my darling!\" \"You have never doubted me, I know,--since you first knew it.\" \"Doubted you, my girl!\" \"That I would be firm!",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0238",
+      "w": "The Prime Minister",
+      "s": "But till that time shall come, I can hardly expect him to take a real interest in my welfare.\" When Lopez left London not a word had been said between him and his father-in-law as to money.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0239",
+      "w": "The Prime Minister",
+      "s": "The confidence which Sextus Parker had once felt in his friend's own resources was somewhat on the decline, but he still believed in his friend's skill and genius, and, after due inquiry, he believed entirely in his friend's father-in-law.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0240",
+      "w": "The Prime Minister",
+      "s": "That also would have been pleasant to her had her heart in the first instance followed his image; but now also the idolatry of Ferdinand Lopez had been very pleasant.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0241",
+      "w": "The Prime Minister",
+      "s": "As he had dined at the Eldon every day since his daughter had left him, and had played on an average a dozen rubbers of whist daily, he was not justified in complaining of the loneliness of London.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0242",
+      "w": "The Prime Minister",
+      "s": "The hospitality of the Duke's house had been maintained almost throughout the autumn.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0243",
+      "w": "The Prime Minister",
+      "s": "They were closeted at this time in the Prime Minister's own sanctum, and there yet remained an hour before they need dress for dinner.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0244",
+      "w": "The Prime Minister",
+      "s": "He had not hitherto been spoken to by the Duke,--a condition of things which he attributed to the Duke's shyness and timidity.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0245",
+      "w": "The Prime Minister",
+      "s": "I don't think that the Duke has made a mess of it,--or you,\" said Phineas, who had come to love the Duchess because his wife loved her.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0246",
+      "w": "The Prime Minister",
+      "s": "Lopez were to stand for Silverbridge, it could not but be known in the borough that Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0247",
+      "w": "The Prime Minister",
+      "s": "If you ask me for advice, I advise you not to try it.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0248",
+      "w": "The Prime Minister",
+      "s": "Didn't I tell you that it must necessarily injure me with the house?",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0249",
+      "w": "The Prime Minister",
+      "s": "I never thought much of these Herefordshire swells who believe themselves to be the very cream of the earth, and now I think less of them than ever.\" He was then silent, and slowly she took herself out of the room, and went away to dress.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0250",
+      "w": "The Prime Minister",
+      "s": "As for that love of honest, courageous truth which her father was wont to attribute to it, she regarded his theory as based upon legends, as in earlier years was the theory of the courage, and constancy, and loyalty of the knights of those days.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0251",
+      "w": "The Prime Minister",
+      "s": "I wonder whether you have any idea of a meaning in your head when you say that.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0252",
+      "w": "The Prime Minister",
+      "s": "Sprugeon was about to reply, she shook her head and went on about the iron plate.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0253",
+      "w": "The Prime Minister",
+      "s": "Arthur Fletcher had by no means recovered from the blow he had received that day when Emily had told him everything down by the river side; but then, it must be said of him, that he had no intention of recovery.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0254",
+      "w": "The Prime Minister",
+      "s": "He had not therefore been careful to ascertain that Arthur Fletcher would pledge himself to oppose the Coalition before he proffered his assistance in this matter of the borough.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0255",
+      "w": "The Prime Minister",
+      "s": "The two men, though they had never been intimate, had known each other, and Fletcher was determined to show that he would not quarrel with a man because that man had been his favoured rival.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0256",
+      "w": "The Prime Minister",
+      "s": "But anybody who understood the borough could see with one eye that Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0257",
+      "w": "The Prime Minister",
+      "s": "No doubt he had been insulted;--but, nevertheless, he had been wrong to speak of a horsewhip.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0258",
+      "w": "The Prime Minister",
+      "s": "Give me a kiss, old girl.\" She kissed him, but she could not even pretend to recover herself as he had done.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0259",
+      "w": "The Prime Minister",
+      "s": "He might at any rate make himself necessary to the old man, and become such a part of the household in Manchester Square as to be indispensable.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0260",
+      "w": "The Prime Minister",
+      "s": "I never quite understood where that policeman came from.\" \"They are very well off for policemen in Silverbridge,\" said Gresham.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0261",
+      "w": "The Prime Minister",
+      "s": "I don't know that Captain Gunner is worse than Sir Orlando Drought or Sir Timothy Beeswax.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0262",
+      "w": "The Prime Minister",
+      "s": "She had been unable as yet to make up her mind as to what she would say if he pressed her hard.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0263",
+      "w": "The Prime Minister",
+      "s": "It had become very evident to all the world that the Duchess of Omnium had cut Sir Orlando Drought,--that the Prime Minister's wife, who was great in hospitality, would not admit the First Lord of the Admiralty into her house.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0264",
+      "w": "The Prime Minister",
+      "s": "She had to sympathise with his desires and yet to abstain from doing that which his desires demanded from her.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0265",
+      "w": "The Prime Minister",
+      "s": "Isn't this sad about Everett?\" \"Very sad.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0266",
+      "w": "The Prime Minister",
+      "s": "He must take the sharp words of the old man,--and take all that he could get besides.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0267",
+      "w": "The Prime Minister",
+      "s": "Now, my dear, who do you think is the chosen one,--the one person who is to solace the perturbed spirit of the Prime Minister for the three months of the autumn?\" \"Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0268",
+      "w": "The Prime Minister",
+      "s": "As for the future, of course, the thing is over.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0269",
+      "w": "The Prime Minister",
+      "s": "Wharton he would be forced to tell the story of his letter to the Duke, and he was sure that Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0270",
+      "w": "The Prime Minister",
+      "s": "If you had the slightest anxiety to help me you could influence him.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0271",
+      "w": "The Prime Minister",
+      "s": "Of course it was not the way to withdraw you from his influence.\" She had nothing to say that would not anger him, and was therefore silent.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0272",
+      "w": "The Prime Minister",
+      "s": "So the Lopezes have come to live with you in Manchester Square?\" Mr.",
+      "src": {
+        "work": "The Prime Minister"
+      }
+    },
+    {
+      "id": "trollope.p0273",
+      "w": "Framley Parsonage",
+      "s": "And nobody caught any foxes,” said Miss Dunstable.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0274",
+      "w": "Framley Parsonage",
+      "s": "Come in, Robin postman, and warm theeself awhile,” said Jemima the cook, pushing a stool a little to one side, but still well in front of the big kitchen fire.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0275",
+      "w": "Framley Parsonage",
+      "s": "From the line of the argument she thought that he must have done so.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0276",
+      "w": "Framley Parsonage",
+      "s": "Very well, very well!” said Lady Lufton.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0277",
+      "w": "Framley Parsonage",
+      "s": "We think of dining at five to-morrow, my Lady Papua,” said the facetious bishop; “will that suit his lordship and the affairs of State?",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0278",
+      "w": "Framley Parsonage",
+      "s": "The aristocratic front-row felt itself to be too intimate with civilization to care much about it; and the three arm-chairs, or rather that special one which contained Mrs.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0279",
+      "w": "Framley Parsonage",
+      "s": "Where is Thomas?” said she of the Argus eyes, standing up with her book of family prayers in her hand.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0280",
+      "w": "Framley Parsonage",
+      "s": "Jones gave us the same sermon he preached the second Sunday after Easter.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0281",
+      "w": "Framley Parsonage",
+      "s": "And so you are quite settled at Boxall Hill, are you?” “Frank’s horses are settled; and the dogs nearly so,” said Frank’s wife; “but I can’t boast much of anything else yet.” “Well, there’s a good time coming.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0282",
+      "w": "Framley Parsonage",
+      "s": "Fothergill, too, was a noted politician, and was supposed to know the duke’s mind well; and Mr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0283",
+      "w": "Framley Parsonage",
+      "s": "But, nevertheless, his acres were so extensive and his money so plentiful that he was worth a duke’s notice.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0284",
+      "w": "Framley Parsonage",
+      "s": "Jones, she said to herself, more than once, must be made to depart from Framley.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0285",
+      "w": "Framley Parsonage",
+      "s": "It would have been like a bull-fight I suppose—horrible to see no doubt, but extremely interesting.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0286",
+      "w": "Framley Parsonage",
+      "s": "Sometimes the dark tint of her cheek was exquisitely rich and lovely, and the fringes of her eyes were long and soft, and her small teeth, which one so seldom saw, were white as pearls, and her hair, though short, was beautifully soft—by no means black, but yet of so dark a shade of brown.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0287",
+      "w": "Framley Parsonage",
+      "s": "I have been chasing you along the road for the last half mile.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0288",
+      "w": "Framley Parsonage",
+      "s": "For a minute or two she had forgotten that he was a lord and a stranger—had forgotten also to be stiff and guarded as was her wont.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0289",
+      "w": "Framley Parsonage",
+      "s": "When the Robarts’s party entered the drawing-room the Grantlys were already there, and the archdeacon’s voice sounded loud and imposing in Lucy’s ears, as she heard him speaking while she was yet on the threshold of the door.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0290",
+      "w": "Framley Parsonage",
+      "s": "Her ladyship had introduced Lucy and Miss Grantly, and then she naturally thought that the young people might do very well together.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0291",
+      "w": "Framley Parsonage",
+      "s": "Green Walker, Harold Smith, and other such like sinners; and on one such occasion, as the three months were nearly closing, he did meet Mr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0292",
+      "w": "Framley Parsonage",
+      "s": "She could look at him, and that alone was happiness to her.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0293",
+      "w": "Framley Parsonage",
+      "s": "But they will each of them get wrong ideas about the other, and about themselves.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0294",
+      "w": "Framley Parsonage",
+      "s": "When they had reached it, Lucy stood in the doorway instead of entering it, and said, “Fanny, let us take another turn together, if you are not tired.” “No, I’m not tired.” “It will be better that I should understand you at once,”—and then they again moved away from the house.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0295",
+      "w": "Framley Parsonage",
+      "s": "That a rector, being a big sort of parson, owned the tithes of his parish in full,—or at any rate that part of them intended for the clergyman,—and that a vicar was somebody’s deputy, and therefore entitled only to little tithes, as being a little body: of so much we that are simple in such matters have a general idea.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0296",
+      "w": "Framley Parsonage",
+      "s": "In these moments she never deserted him.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0297",
+      "w": "Framley Parsonage",
+      "s": "The Hogglestock farmers, male and female, were a rude, rough set, not bordering in their social rank on the farmer gentle; and Lady Lufton, knowing this, and hearing something of these Crawleys from Mrs.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0298",
+      "w": "Framley Parsonage",
+      "s": "She had been pretty sure that he would do so in the event of his suspecting that a plot was being laid to catch him; and now it almost appeared that he did suspect such a plot.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0299",
+      "w": "Framley Parsonage",
+      "s": "I understand,” he said; and rising from his chair, he stood against the chimney-piece with his back to the fire.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0300",
+      "w": "Framley Parsonage",
+      "s": "Proudie—that is, with that sort of hatred one Christian lady allows herself to feel towards another.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0301",
+      "w": "Framley Parsonage",
+      "s": "Proudie’s, and it did so come to pass that Griselda was seated at the corner of a sofa close to which was a vacant space in which his lordship could—“group himself.” They had not been long there before Lord Dumbello did group himself.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0302",
+      "w": "Framley Parsonage",
+      "s": "All was fair game that came in the way of his net.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0303",
+      "w": "Framley Parsonage",
+      "s": "I should not a bit mind being away during the winter,” said Lucy, thinking of what the last winter had done for her.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0304",
+      "w": "Framley Parsonage",
+      "s": "The minister did not quite like this, as it restricted him from much of his condescension, and robbed him of the incense of a petition which he had expected Mark Robarts would make to him.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0305",
+      "w": "Framley Parsonage",
+      "s": "You have told me so yourself.” “Yes, at his request to accommodate him, I have put my name to a bill.” “Only to one?” “Only to one; and then to that same renewed, or not exactly to that same, but to one which stands for it.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0306",
+      "w": "Framley Parsonage",
+      "s": "Sowerby took his leave, having certainly made himself master of the occasion.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0307",
+      "w": "Framley Parsonage",
+      "s": "Harold Smith, as he read this, seated at his breakfast-table, recognized, or said that he recognized, the hand of Mr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0308",
+      "w": "Framley Parsonage",
+      "s": "And then, when they were again standing, Lord Lufton, in the little intervals between his violent gasps for fresh breath, asked Griselda if she liked London.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0309",
+      "w": "Framley Parsonage",
+      "s": "I suppose I shall have to go into residence almost immediately,” said Mark, recurring to the more agreeable subject of the stall.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0310",
+      "w": "Framley Parsonage",
+      "s": "Crawley was pressed by his old friend to visit him at the deanery, and Dr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0311",
+      "w": "Framley Parsonage",
+      "s": "How unlucky,” thought Lucy, “that she has not got my muff with her!” But the muff lay in her lap, ponderous with its rich enclosures.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0312",
+      "w": "Framley Parsonage",
+      "s": "Smith may be placed in situations in which their talents, industry, and acknowledged official aptitudes, may be of permanent service to the country.” Supplehouse, when he read this at the club with Mr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0313",
+      "w": "Framley Parsonage",
+      "s": "I do not think that she would die for me—nor I for her.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0314",
+      "w": "Framley Parsonage",
+      "s": "The Bishop of Barchester taught me as much Latin as that at Chaldicotes; and he did add some more, but there was a long word, and I forgot it.” “The bishop was quite right, my dear, I’m sure.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0315",
+      "w": "Framley Parsonage",
+      "s": "But, my dear, I do not want that which he has got, and therefore the bargain would not be a fair one.” “But he would do his very best to make you happy.” “I am so much obliged to him; but you see, I am very happy as I am.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0316",
+      "w": "Framley Parsonage",
+      "s": "Some point of interest more serious in its nature than that of a waltz might have been found on which to connect her daughter’s sympathies with those of her future husband.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0317",
+      "w": "Framley Parsonage",
+      "s": "He did not exactly live at Barchester, because the house was not ready.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0318",
+      "w": "Framley Parsonage",
+      "s": "The soft words of which I tell you were of the kind which he speaks to you when he asks you how the cow gets on which he sent you from Ireland, or to Mark about Ponto’s shoulder.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0319",
+      "w": "Framley Parsonage",
+      "s": "And when I was there, did I not make a fool of myself, sitting in a corner, and thinking how much better placed I should have been down in the servants’ hall.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0320",
+      "w": "Framley Parsonage",
+      "s": "It seems to me that the misfortunes of this world can hardly go beyond that!",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0321",
+      "w": "Framley Parsonage",
+      "s": "I do not want to use strong language, but it will be more than ill-usage.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0322",
+      "w": "Framley Parsonage",
+      "s": "Sowerby knew that seven devils were being evoked, each worse than the first devil.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0323",
+      "w": "Framley Parsonage",
+      "s": "Gresham was this: that if the incense now offered on the altar of Fashion were accepted, Miss Dunstable would at once abandon the pomps and vanities of this wicked world, and all the sinful lusts of the flesh.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0324",
+      "w": "Framley Parsonage",
+      "s": "I am much obliged to you for coming, Lady Lufton,” she said, “and the more so, for bringing Miss Grantly with you.” Lady Lufton uttered some pretty little speech, during which Dr.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0325",
+      "w": "Framley Parsonage",
+      "s": "If you could arrive at her ladyship’s private thoughts to-morrow morning, you would find her to be quite happy in having met the duke.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0326",
+      "w": "Framley Parsonage",
+      "s": "Proudie in thinking that dancing would contaminate a conversazione.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0327",
+      "w": "Framley Parsonage",
+      "s": "The game is up with me now;”—meaning, poor, ruined ne’er-do-well, not only that that game with Miss Dunstable was up, but that the great game of his whole life was being brought to an uncomfortable termination.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0328",
+      "w": "Framley Parsonage",
+      "s": "The Hartletops and Luftons must, at any rate for her generation, live in a world apart, and she had now said all that her old friendship with Mrs.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0329",
+      "w": "Framley Parsonage",
+      "s": "I shall ask him, at any rate.” And without further parley the clergyman took up his hat and went off in search of his friend.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0330",
+      "w": "Framley Parsonage",
+      "s": "Robarts; and then again there was a pause for a moment, during which these thoughts passed through Lucy’s mind.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0331",
+      "w": "Framley Parsonage",
+      "s": "I’m turned of sixty now, and don’t want any ’stifflicates.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0332",
+      "w": "Framley Parsonage",
+      "s": "Do you mean that they will demand nine hundred pounds?” said Robarts, standing up and glaring angrily at the member of Parliament.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0333",
+      "w": "Framley Parsonage",
+      "s": "I got it from Harold Smith, and never, in my worst straits, will I again look to him for assistance.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0334",
+      "w": "Framley Parsonage",
+      "s": "You have been flirting with her—” “I hate that word; it always sounds to me to be vulgar.” “I will say making love to her, if you like it better; and gentlemen under these circumstances will sometimes become infatuated.” “You would not have a man marry a girl without making love to her.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0335",
+      "w": "Framley Parsonage",
+      "s": "Crawley is very ill,” he said, “very ill.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0336",
+      "w": "Framley Parsonage",
+      "s": "There; I am in for it now,” said Lucy, handing the note over to Mrs.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    },
+    {
+      "id": "trollope.p0337",
+      "w": "Framley Parsonage",
+      "s": "A girl that could thus speak up and explain her own position now, would be able to speak up and explain her own, and perhaps some other positions at any future time.",
+      "src": {
+        "work": "Framley Parsonage"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "trollope.f.v0001",
+      "kind": "verbatim",
+      "text": "You will have to act then, not only for yourself, but for your child--for my daughter; and if you then give way to the violence of sorrow, who shall think and care for her?\" She laid her beautiful head upon his bosom, and wept, and promised, and prayed for him.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "trollope.f.v0002",
+      "kind": "verbatim",
+      "text": "None of these were turned away unanswered; the door of the Mayor's house was not closed for a moment, and Henri, to be enabled to eat his supper at all, was obliged to give his last military orders with a crust of bread in his hand, and his mouth full of meat.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "trollope.f.v0003",
+      "kind": "verbatim",
+      "text": "Wait till these wars are over, and then I will gather flowers for you to present to some mistress who shall truly love you.\" \"No, Agatha, the flowers you gather for me shall never leave my own bosom.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "trollope.f.v0004",
+      "kind": "verbatim",
+      "text": "It is a bad messenger, I fear,\" said Cathelineau; \"but we have no better; indeed we are lucky even to find him.\" \"I wonder,\" said Peter Berrier to himself, as he ran across the fields, \"I wonder whether they'll make nothing of this job, too, as they did of that day at St.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "trollope.f.v0005",
+      "kind": "verbatim",
+      "text": "Stofflet was to lead a division of fifteen hundred men past the camp, between the heights of Bournan and the town, so as to intercept the republicans, should they attempt from that position, to relieve their comrades when retreating from the camp.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "trollope.f.v0006",
+      "kind": "verbatim",
+      "text": "The heroes of that place considered that they had somewhat celebrated themselves; in the first place, on final inquiry, it appeared, that not one person from the village, who was at all able to go to Saumur, had neglected to do so.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "trollope.f.v0007",
+      "kind": "verbatim",
+      "text": "Henri had hardly got off the lawn, when he met a couple of servants coming from the yard, and between them a man booted, spurred, and armed, covered with dust and spattered with foam, whom he at once recognized as Foret, the friend and townsman of Cathelineau.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "trollope.f.v0008",
+      "kind": "verbatim",
+      "text": "Neither I, nor Marie will leave our brothers, nor will Madame de Lescure leave her husband; it is little we can do to hasten victory, but we can lessen suffering and administer comfort, when comfort is most required.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "trollope.f.v0009",
+      "kind": "verbatim",
+      "text": "I doubt whether there is another leader among them, who can induce them to leave their parishes.\" \"If they won't come to us,\" said Barrère, \"we must go to them; they have gone too far now to recede.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "trollope.f.v0010",
+      "kind": "verbatim",
+      "text": "In that moment the scene in the council-room at Saumur came to his mind, and he remembered that there he had rebuked Adolphe Denot for his false ambition, and had probably been the means of driving him to the horrid crime which he had committed.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "trollope.f.v0011",
+      "kind": "verbatim",
+      "text": "No men could have fought better than did the Vendean peasants, for now they had joined some degree of discipline and method to their accustomed valour; but the number of their enemies was too great for them, and they consisted of the best soldiers of whom France could boast.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "trollope.f.v0012",
+      "kind": "verbatim",
+      "text": "The aubergiste was resolute in refusing admittance to all; for tidings had reached him of guests who would more than fill his house, on whom he looked as entitled to more than all he could give them.",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "trollope.f.v0013",
+      "kind": "verbatim",
+      "text": "Suppose this son of mine, who, as you say, was as great as the greatest among you, and as noble as the noblest; suppose he had admired your beauty, and had offered to take you home to his mother as the wife of his bosom, how would you then have answered him?",
+      "work": "La Vendée",
+      "lang": "en",
+      "src": {
+        "work": "La Vendée"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "trollope.f.v0014",
+      "kind": "verbatim",
+      "text": "Immediately before him, on the extreme corner of the bench which ran round the summer-house, sat one old man, with his handkerchief smoothly lain upon his knees, who did enjoy the moment, or acted enjoyment well.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "trollope.f.v0015",
+      "kind": "verbatim",
+      "text": "One name and the rest marks wouldn't look well, would it?\" \"The worst in the world,\" said Handy; \"there--there\": and stooping over the petition, the learned clerk made a huge cross on the place left for his signature.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "trollope.f.v0016",
+      "kind": "verbatim",
+      "text": "He by no means wished to delegate to his son-in-law his place and authority of warden; he had expressly determined not to interfere in any step which the men might wish to take in the matter under dispute; he was most anxious neither to accuse them nor to defend himself.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "trollope.f.v0017",
+      "kind": "verbatim",
+      "text": "Had Bold been judging of another lover and of another lady, he might have understood all this as well as we do; but in matters of love men do not see clearly in their own affairs.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "trollope.f.v0018",
+      "kind": "verbatim",
+      "text": "Charles James was an exact and careful boy; he never committed himself; he well knew how much was expected from the eldest son of the Archdeacon of Barchester, and was therefore mindful not to mix too freely with other boys.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "trollope.f.v0019",
+      "kind": "verbatim",
+      "text": "Henry declared that he was a false, cunning creature; and Charles James, though he always spoke of him as his dear brother Samuel, was not slow to say a word against him when opportunity offered.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "trollope.f.v0020",
+      "kind": "verbatim",
+      "text": "Henry once quarrelled with me for taking his sister Grizzel's part in a contest between them as to the best mode of using a watering-pot for the garden flowers; and from that day to this he has not spoken to me, though he speaks at me often enough.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "trollope.f.v0021",
+      "kind": "verbatim",
+      "text": "You see the will says, 'My lord, the bishop, being graciously pleased to see that due justice be done.' Now, it may be a question whether, in accepting and administering the patronage, your father has not accepted also the other duties assigned.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "trollope.f.v0022",
+      "kind": "verbatim",
+      "text": "As he paced up and down the room he resolved in his misery and enthusiasm that he could with pleasure, if he were allowed, give up his place, abandon his pleasant home, leave the hospital, and live poorly, happily, and with an unsullied name, on the small remainder of his means.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "trollope.f.v0023",
+      "kind": "verbatim",
+      "text": "He was still sitting in the same chair and the same posture, having hardly moved a limb for two hours, when Eleanor came back to tea, and succeeded in bringing him with her into the drawing-room.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "trollope.f.v0024",
+      "kind": "verbatim",
+      "text": "She had no thought now of herself, no care now for her appearance; and yet he thought he had never seen her half so lovely; he was amazed at the intensity of her beauty, and could hardly believe that it was she whom he had dared to love.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "trollope.f.v0025",
+      "kind": "verbatim",
+      "text": "Sir, your net is not strong enough to hold him; sir, your net has fallen to pieces, and you knew that well enough before I told you--and now, sir, I'll wish you good-morning, for I'm busy.\" Bold was now choking with passion.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "trollope.f.v0026",
+      "kind": "verbatim",
+      "text": "If this plea be put forward we trust Mr Harding will be forced as a witness to state the nature of his employment; the amount of work that he does; the income which he receives; and the source from whence he obtained his appointment.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "trollope.f.v0027",
+      "kind": "verbatim",
+      "text": "It stands alone, as it were, in a mighty city, close to the densest throng of men, but partaking neither of the noise nor the crowd; a small secluded, dreary spot, tenanted, one would say, by quite unambitious people at the easiest rents.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "trollope.f.v0028",
+      "kind": "verbatim",
+      "text": "Washed by the rich tide which now passes from the towers of Cæsar to Barry's halls of eloquence; and again back, with new offerings of a city's tribute, from the palaces of peers to the mart of merchants, stand those quiet walls which Law has delighted to honour by its presence.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "trollope.f.v0029",
+      "kind": "verbatim",
+      "text": "It is impossible to give them too much praise for the elaborate perseverance with which they have equalled the minute perfections of the masters from whom they take their inspiration: nothing probably can exceed the painting of some of these latter-day pictures.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 262
+      }
+    },
+    {
+      "id": "trollope.f.v0030",
+      "kind": "verbatim",
+      "text": "Oh, my poor brother,\" said he, \"slaughtered partridges a score of brace to each gun, and poets gauging ale-barrels, with sixty pounds a year, at Dumfries, are not the signs of a great era!--perhaps of the smallest possible era yet written of.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "trollope.f.v0031",
+      "kind": "verbatim",
+      "text": "A florid-faced gentleman with a nice head of hair, from the south of Ireland, had succeeded in catching the speaker's eye by the time that Mr Harding had got into the gallery, and was denouncing the proposed sacrilege, his whole face glowing with a fine theatrical frenzy.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "trollope.f.v0032",
+      "kind": "verbatim",
+      "text": "It appears to us a question whether any clergyman can go through our church service with decorum, morning after morning, in an immense building, surrounded by not more than a dozen listeners.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "trollope.f.v0033",
+      "kind": "verbatim",
+      "text": "The archdeacon, for some years past, had paid the premium, and had secured himself by the immediate possession of a small property which was to have gone to Mrs Grantly after her father's death.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "trollope.f.v0034",
+      "kind": "verbatim",
+      "text": "The woman looked somewhat surprised, but answered in the affirmative, and a slipshod girl ushered him into a long back room, filled with boxes for the accommodation of parties, in one of which he took his seat.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "trollope.f.v0035",
+      "kind": "verbatim",
+      "text": "Nay, my dear sir,\" continued the attorney-general, \"there is no further ground for any question; I don't see that you have the power of raising it.\" \"I can resign,\" said Mr Harding, slowly playing away with his right hand, as though the bow were beneath the chair in which he was sitting.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 288
+      }
+    },
+    {
+      "id": "trollope.f.v0036",
+      "kind": "verbatim",
+      "text": "You may add to my present unhappiness by pressing me, but you cannot change my purpose; it will be a comfort to me if you will let the matter rest\": and, dipping his pen into the inkstand, he fixed his eyes intently on the paper.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "trollope.f.v0037",
+      "kind": "verbatim",
+      "text": "The question never occurred to him; but it did occur to him that he had very little money at his banker's, that he could receive nothing further from the hospital, and that the sale of the furniture was his only resource.",
+      "work": "The Warden",
+      "lang": "en",
+      "src": {
+        "work": "The Warden"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "trollope.f.v0038",
+      "kind": "verbatim",
+      "text": "He was a country gentleman who considered himself to be energetic if he went out twice a week, and in doing this he rarely left his house earlier for that purpose than he would leave it for others.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "trollope.f.v0039",
+      "kind": "verbatim",
+      "text": "There used to prevail an idea that the hunting man was of necessity loud and rough, given to strong drinks, ill adapted for the poetries of life, and perhaps a little prone to make money out of his softer friend.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "trollope.f.v0040",
+      "kind": "verbatim",
+      "text": "I shall never forget her voice, \"Pray, take care of that gate.\" And yet it was a pretty voice, and elsewhere she was not given to domineering more than is common to pretty women in general; but she had been taught badly from the beginning, and she was a pest.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "trollope.f.v0041",
+      "kind": "verbatim",
+      "text": "You cannot induce him to believe that if he held land in England, looking to make his rent from tender young grass-fields and patches of sprouting corn, he would be powerless to keep out intruders, if those intruders came in the shape of a rushing squadron of cavalry, and called themselves a hunt.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "trollope.f.v0042",
+      "kind": "verbatim",
+      "text": "The surface of such enclosures should be as smooth as a billiard-table, so that no water may lie in holes; and, moreover, any young plant cut by a horse's foot is trodden out of existence.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "trollope.f.v0043",
+      "kind": "verbatim",
+      "text": "We used to hear much of the Galway Blazers, and it was supposed that in County Galway a stiff-built wall six feet high was the sort of thing that you customarily met from field to field when hunting in that comfortable county.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "trollope.f.v0044",
+      "kind": "verbatim",
+      "text": "He may be sure that he will not find himself alone; and he may be sure also that he will incur none of that ridicule which the non-hunting man is disposed to think must be attached to such a pursuit.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "trollope.f.v0045",
+      "kind": "verbatim",
+      "text": "The man who hunts and doesn't jump, presuming him not to be a duke or any man greatly established as a Nimrod in the hunting world, generally comes out in a black coat and a hat, so that he may not be specially conspicuous in his deviations from the line of the running.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "trollope.f.v0046",
+      "kind": "verbatim",
+      "text": "His eye becomes accustomed to distinguish the form of a moving horseman over half-a-dozen fields; and let him see but a cap of any leading man, and he will know which way to turn himself.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "trollope.f.v0047",
+      "kind": "verbatim",
+      "text": "Well, he turned there, and ran back very near the corner; but he was headed by a sheep-dog, luckily, and went to the left across the brook.\" \"Ah, that's where I lost them,\" says one unfortunate.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "trollope.f.v0048",
+      "kind": "verbatim",
+      "text": "I've hardly been out of a trot yet, but we may as well move on now.\" Then he breaks into an easy canter by the side of the road, while the unfortunates, who have been rolling among the heavy-ploughed ground in the early part of the day, make vain efforts to ride by his side.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "trollope.f.v0049",
+      "kind": "verbatim",
+      "text": "The world at large is very prone to condemn the hunting parson, regarding him as a man who is false to his profession; and, for myself, I am not prepared to say that the world is wrong.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "trollope.f.v0050",
+      "kind": "verbatim",
+      "text": "By the term old ladies it will be understood, perhaps, that I do not allude simply to matrons and spinsters who may be over the age of sixty, but to that most respectable portion of the world which has taught itself to abhor the pomps and vanities.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "trollope.f.v0051",
+      "kind": "verbatim",
+      "text": "I generally find him to be about the pleasantest man in the field, with the most to say for himself, whether the talk be of hunting, of politics, of literature, or of the country.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "trollope.f.v0052",
+      "kind": "verbatim",
+      "text": "Men have hunted countries, doubtless, on economical principles, and the sport has been carried on from year to year; but under such circumstances it is ever dwindling and becoming frightfully less.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "trollope.f.v0053",
+      "kind": "verbatim",
+      "text": "Of the latter class of sportsman, of the imperial head of a country who looks upon the coverts of all his neighbours as being almost his own property, there are, I believe, but few left.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "trollope.f.v0054",
+      "kind": "verbatim",
+      "text": "As the necessity for space increased, increasing from increase of hunting ambition, the richer and more ambitious squires began to undertake the management of wider areas, and so our hunting districts were formed.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "trollope.f.v0055",
+      "kind": "verbatim",
+      "text": "To a master of hounds is given a place of great influence, and into his hands is confided an authority the possession of which among his fellow-sportsmen is very pleasant to him.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "trollope.f.v0056",
+      "kind": "verbatim",
+      "text": "His business is to ride to hounds; and let him do so from the beginning of the run, persevering through it all, taking no mean advantages, and allowing himself to be betrayed into as few mistakes as possible; but let him not begin before the beginning.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "trollope.f.v0057",
+      "kind": "verbatim",
+      "text": "In finding your right place, and keeping it when it is found, you may have difficulty; but in going away from a gorse the field will be open for you, and when the hounds are well out and upon the scent, then remember your Latin; Occupet extremum scabies.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "trollope.f.v0058",
+      "kind": "verbatim",
+      "text": "He will still carry you perhaps throughout a good run, but he will not do so with that elasticity which you will love; and then, after that, the journey home is, it is occasionally something almost too frightful to be contemplated.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "trollope.f.v0059",
+      "kind": "verbatim",
+      "text": "The area to be drawn is too large to admit of waiting, and your only duty is to stay as close to the hounds as your ears and eyes will permit, remembering always that your ears should serve you much more often than your eyes.",
+      "work": "Hunting Sketches",
+      "lang": "en",
+      "src": {
+        "work": "Hunting Sketches"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "trollope.f.v0060",
+      "kind": "verbatim",
+      "text": "As to his estate, delightful as it was in many respects, it was hardly sufficient to maintain his position with that plentiful hospitality which he would have loved;--and other property he had none.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "trollope.f.v0061",
+      "kind": "verbatim",
+      "text": "Boffin put down his treatise on the nature of Franchises, which he was studying in order that he might lead an opposition against the Ministry next Session, and even Sir Timothy Beeswax, who had done his work with Sir Orlando, joined the throng.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "trollope.f.v0062",
+      "kind": "verbatim",
+      "text": "The confidence which Sextus Parker had once felt in his friend's own resources was somewhat on the decline, but he still believed in his friend's skill and genius, and, after due inquiry, he believed entirely in his friend's father-in-law.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "trollope.f.v0063",
+      "kind": "verbatim",
+      "text": "As he had dined at the Eldon every day since his daughter had left him, and had played on an average a dozen rubbers of whist daily, he was not justified in complaining of the loneliness of London.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "trollope.f.v0064",
+      "kind": "verbatim",
+      "text": "I never thought much of these Herefordshire swells who believe themselves to be the very cream of the earth, and now I think less of them than ever.\" He was then silent, and slowly she took herself out of the room, and went away to dress.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "trollope.f.v0065",
+      "kind": "verbatim",
+      "text": "As for that love of honest, courageous truth which her father was wont to attribute to it, she regarded his theory as based upon legends, as in earlier years was the theory of the courage, and constancy, and loyalty of the knights of those days.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "trollope.f.v0066",
+      "kind": "verbatim",
+      "text": "Arthur Fletcher had by no means recovered from the blow he had received that day when Emily had told him everything down by the river side; but then, it must be said of him, that he had no intention of recovery.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "trollope.f.v0067",
+      "kind": "verbatim",
+      "text": "He had not therefore been careful to ascertain that Arthur Fletcher would pledge himself to oppose the Coalition before he proffered his assistance in this matter of the borough.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "trollope.f.v0068",
+      "kind": "verbatim",
+      "text": "The two men, though they had never been intimate, had known each other, and Fletcher was determined to show that he would not quarrel with a man because that man had been his favoured rival.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "trollope.f.v0069",
+      "kind": "verbatim",
+      "text": "It had become very evident to all the world that the Duchess of Omnium had cut Sir Orlando Drought,--that the Prime Minister's wife, who was great in hospitality, would not admit the First Lord of the Admiralty into her house.",
+      "work": "The Prime Minister",
+      "lang": "en",
+      "src": {
+        "work": "The Prime Minister"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "trollope.f.v0070",
+      "kind": "verbatim",
+      "text": "Sometimes the dark tint of her cheek was exquisitely rich and lovely, and the fringes of her eyes were long and soft, and her small teeth, which one so seldom saw, were white as pearls, and her hair, though short, was beautifully soft—by no means black, but yet of so dark a shade of brown.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "trollope.f.v0071",
+      "kind": "verbatim",
+      "text": "When the Robarts’s party entered the drawing-room the Grantlys were already there, and the archdeacon’s voice sounded loud and imposing in Lucy’s ears, as she heard him speaking while she was yet on the threshold of the door.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "trollope.f.v0072",
+      "kind": "verbatim",
+      "text": "When they had reached it, Lucy stood in the doorway instead of entering it, and said, “Fanny, let us take another turn together, if you are not tired.” “No, I’m not tired.” “It will be better that I should understand you at once,”—and then they again moved away from the house.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "trollope.f.v0073",
+      "kind": "verbatim",
+      "text": "Proudie’s, and it did so come to pass that Griselda was seated at the corner of a sofa close to which was a vacant space in which his lordship could—“group himself.” They had not been long there before Lord Dumbello did group himself.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "trollope.f.v0074",
+      "kind": "verbatim",
+      "text": "The minister did not quite like this, as it restricted him from much of his condescension, and robbed him of the incense of a petition which he had expected Mark Robarts would make to him.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "trollope.f.v0075",
+      "kind": "verbatim",
+      "text": "You have told me so yourself.” “Yes, at his request to accommodate him, I have put my name to a bill.” “Only to one?” “Only to one; and then to that same renewed, or not exactly to that same, but to one which stands for it.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "trollope.f.v0076",
+      "kind": "verbatim",
+      "text": "The Bishop of Barchester taught me as much Latin as that at Chaldicotes; and he did add some more, but there was a long word, and I forgot it.” “The bishop was quite right, my dear, I’m sure.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "trollope.f.v0077",
+      "kind": "verbatim",
+      "text": "The soft words of which I tell you were of the kind which he speaks to you when he asks you how the cow gets on which he sent you from Ireland, or to Mark about Ponto’s shoulder.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "trollope.f.v0078",
+      "kind": "verbatim",
+      "text": "I am much obliged to you for coming, Lady Lufton,” she said, “and the more so, for bringing Miss Grantly with you.” Lady Lufton uttered some pretty little speech, during which Dr.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "trollope.f.v0079",
+      "kind": "verbatim",
+      "text": "The game is up with me now;”—meaning, poor, ruined ne’er-do-well, not only that that game with Miss Dunstable was up, but that the great game of his whole life was being brought to an uncomfortable termination.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "trollope.f.v0080",
+      "kind": "verbatim",
+      "text": "You have been flirting with her—” “I hate that word; it always sounds to me to be vulgar.” “I will say making love to her, if you like it better; and gentlemen under these circumstances will sometimes become infatuated.” “You would not have a man marry a girl without making love to her.",
+      "work": "Framley Parsonage",
+      "lang": "en",
+      "src": {
+        "work": "Framley Parsonage"
+      },
+      "quality": {
+        "chars": 287
+      }
+    },
+    {
+      "id": "trollope.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 7,
+      "worksSpan": 5,
+      "examples": [
+        "If you mean to wait here all night, I don't,\" said the Chevalier, \"so good night to you, and if you don't get on, I'll push off without you.\" \"Stop a moment, M.",
+        "If this plea be put forward we trust Mr Harding will be forced as a witness to state the nature of his employment; the amount of work that he does; the income which he receives; and the source from whence he obtained his appointment."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 337,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:b31a1826034884b540056e5823d9ae0de439cdb894d8a7e33d6c1d4a519e66c2"
+}

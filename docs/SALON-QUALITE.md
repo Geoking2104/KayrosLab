@@ -189,8 +189,26 @@ Le déploiement VPS installe Ollama en loopback et exécute `ollama pull bge-m3`
 
 1. Ajouter le seed dans `NEW_AUTHORS` (`salon/scripts/enrich_catalog.mjs`) :
    `id`, `name`, `kind`, `lang`, `era`, `blurb`, `wikipedia`, `monogram`, `match`.
-2. Lancer `enrich_catalog.mjs --dry-run` et contrôler les titres retenus.
-3. Lancer la récolte puis le portail ; un auteur sans ≥ 120 phrases est refusé.
+   Ajouter si besoin `exclude` (liste de motifs) pour les homonymes :
+   `exclude: ['Shelley']` pour Mary Wollstonecraft, `['Ritchie']` pour
+   Thackeray, etc. L'exclusion s'applique à l'auteur GUTINDEX puis au premier
+   agent RDF.
+2. Lancer un dry-run limité aux nouveaux seeds, sans toucher aux auteurs
+   existants :
+   `node salon/scripts/enrich_catalog.mjs --dry-run --new-only --no-prune \
+     --max-new-works 6 --seed-ids auteur1,auteur2`
+   Contrôler les titres retenus : un homonyme ou un volume composite se voit
+   ici. Écrire le catalogue sans `--dry-run`, puis vérifier chaque
+   `gutenbergId` par le RDF (`dcterms:rights`, langue, `pgterms:agent`).
+3. Récolter : `node salon/scripts/harvest_corpus.mjs --author <id> --out <tmp>`
+   et compter les phrases. Un auteur dont le pack fait moins de 120 phrases est
+   écarté plutôt que publié maigre (70 s'il n'a qu'une œuvre).
+4. Pour une édition critique (appareil biographique en tête), ajouter un
+   `startAt` (regex) à l'œuvre dans le catalogue : la récolte saute au texte.
+   Les fichiers Gutenberg `-8.txt` sont en Latin-1 ; `textlib.mjs` les décode
+   en windows-1252 si l'UTF-8 laisse des U+FFFD.
+5. Passer le portail (`publish_gate.mjs`) puis `publish_pages.mjs`. En cas
+   d'échec, le miroir publié reste intact.
 
 ## Intégration CI
 

@@ -232,6 +232,12 @@ export async function fetchWorkText(id, { timeoutMs = 15000, retries = 0, maxByt
             }
             const buf = Buffer.concat(chunks.map((c) => Buffer.from(c))).subarray(0, maxBytes);
             text = new TextDecoder('utf-8', { fatal: false }).decode(buf);
+            // Les fichiers « -8.txt » de Gutenberg sont en Latin-1 : un décodage
+            // UTF-8 y laisse des U+FFFD. On rebascule alors sur windows-1252.
+            const bad = (text.match(/\uFFFD/g) || []).length;
+            if (bad > 0 && bad / Math.max(text.length, 1) > 0.0005) {
+              try { text = new TextDecoder('windows-1252', { fatal: false }).decode(buf); } catch { /* garde utf-8 */ }
+            }
           } else {
             text = await res.text();
             if (text.length > maxBytes) text = text.slice(0, maxBytes);

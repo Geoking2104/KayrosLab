@@ -57,7 +57,9 @@ esac
 if [ -f "${APP_DIR}/salon/scripts/build_embeddings.mjs" ]; then
   echo "Index bge-m3 : vérification / construction…"
   mkdir -p "${APP_DIR}/backend/fastify/data/salon-emb"
-  timeout 900 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 50 --batch 32 \
+  # 84 auteurs : ~16 min sur le VPS ; au-delà du délai, la construction reprend
+  # au déploiement suivant (script reprenable, skip si version à jour).
+  timeout 1200 node "${APP_DIR}/salon/scripts/build_embeddings.mjs" --max-per-author 50 --batch 32 \
     || echo "AVERTISSEMENT : index bge-m3 non construit (repli dense/lexical)." >&2
 fi
 

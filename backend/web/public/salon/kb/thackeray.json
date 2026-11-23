@@ -1,0 +1,3563 @@
+{
+  "authorId": "thackeray",
+  "kbVersion": "thackeray@bootstrap-2026-11-23",
+  "builtAt": "2026-11-23T09:52:51.347Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Vanity Fair",
+      "sentences": 48
+    },
+    {
+      "title": "The Rose and the Ring",
+      "sentences": 53
+    },
+    {
+      "title": "Some Roundabout Papers",
+      "sentences": 51
+    },
+    {
+      "title": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "sentences": 53
+    },
+    {
+      "title": "The Tremendous Adventures of Major Gahagan",
+      "sentences": 54
+    },
+    {
+      "title": "Catherine: A Story",
+      "sentences": 49
+    }
+  ],
+  "passages": [
+    {
+      "id": "thackeray.p0001",
+      "w": "Vanity Fair",
+      "s": "How dare you, sir, break it?\" says Cuff; \"you blundering little thief.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0002",
+      "w": "Vanity Fair",
+      "s": "Suppose we had laid the scene in Grosvenor Square, with the very same adventures--would not some people have listened?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0003",
+      "w": "Vanity Fair",
+      "s": "I call the dog Gorer,\" said Sir Pitt; \"he's killed a man that dog has, and is master of a bull, and the mother I used to call Flora; but now I calls her Aroarer, for she's too old to bite.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0004",
+      "w": "Vanity Fair",
+      "s": "When we retired, she took from her work-drawer an enormous interminable piece of knitting; the young ladies began to play at cribbage with a dirty pack of cards.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0005",
+      "w": "Vanity Fair",
+      "s": "How, when she comes to pay us a visit, we generally find an opportunity to let our friends know her station in the world!",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0006",
+      "w": "Vanity Fair",
+      "s": "Are we to suppose from this curiosity and prying into dictionaries, could our heroine suppose that Mr.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0007",
+      "w": "Vanity Fair",
+      "s": "Glauber, she was welcome to ornament the surgery!",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0008",
+      "w": "Vanity Fair",
+      "s": "He looks down upon us country people as so many blackamoors.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0009",
+      "w": "Vanity Fair",
+      "s": "I'm so delighted you like dear Amelia,\" she said quite eagerly to Mr.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0010",
+      "w": "Vanity Fair",
+      "s": "He conducted her to his sisters; where he left her talking and prattling in a way that astonished those ladies, who thought that George might make something of her; and he then went off to transact his business.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0011",
+      "w": "Vanity Fair",
+      "s": "What I want to know, George,\" the old gentleman said, after slowly smacking his first bumper--\"what I want to know is, how you and--ah--that little thing upstairs, are carrying on?\" \"I think, sir, it is not hard to see,\" George said, with a self-satisfied grin.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0012",
+      "w": "Vanity Fair",
+      "s": "Why, they never condescended to speak to me, or to ask me into their house, whilst I was staying with Amelia; but we poor governesses, you know, are used to slights of this sort.\" \"My dear Miss Sharp!\" Osborne ejaculated.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0013",
+      "w": "Vanity Fair",
+      "s": "She had sold it to become Sir Pitt Crawley's wife.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0014",
+      "w": "Vanity Fair",
+      "s": "And you shall have him: indeed you shall.\" \"Don't ask me now,\" Rebecca said.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0015",
+      "w": "Vanity Fair",
+      "s": "I, Ma'am, ask a member of this family to marry a drawing-master's daughter?\" \"Her mother was a Montmorency,\" cried out the old lady, pulling at the bell with all her might.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0016",
+      "w": "Vanity Fair",
+      "s": "The Hebrew aide-de-camp in the service of the officer at the table bid against the Hebrew gentleman employed by the elephant purchasers, and a brisk battle ensued over this little piano, the combatants being greatly encouraged by Mr.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0017",
+      "w": "Vanity Fair",
+      "s": "To how many people can any one tell all?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0018",
+      "w": "Vanity Fair",
+      "s": "That effort was too much for her; she placed them back in her bosom again--as you have seen a woman nurse a child that is dead.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0019",
+      "w": "Vanity Fair",
+      "s": "I'm coming,\" Emmy said, not looking round.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0020",
+      "w": "Vanity Fair",
+      "s": "Bute showed a perfect family interest and knowledge of Rawdon's history.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0021",
+      "w": "Vanity Fair",
+      "s": "He will be here again to-day,\" Amelia thought.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0022",
+      "w": "Vanity Fair",
+      "s": "We are going to hunt him out, sir--the Duke's in Belgium already, and we expect marching orders every day.\" \"Give him no quarter.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0023",
+      "w": "Vanity Fair",
+      "s": "Add to all that the junior Osborne was quite as obstinate as the senior: when he wanted a thing, quite as firm in his resolution to get it; and quite as violent when angered, as his father in his most stern moments.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0024",
+      "w": "Vanity Fair",
+      "s": "I say she's the best, the kindest, the gentlest, the sweetest girl in England; and that, bankrupt or no, my sisters are not fit to hold candles to her.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0025",
+      "w": "Vanity Fair",
+      "s": "Osborne's \"I will\" was sounded in very deep bass.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0026",
+      "w": "Vanity Fair",
+      "s": "As they were coming into the hotel from a sea-side walk one afternoon, on whom should they light but Rebecca and her husband.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0027",
+      "w": "Vanity Fair",
+      "s": "Would you counsel him to do so?\" What could Miss Jane say to such a question, and with her own peculiar views?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0028",
+      "w": "Vanity Fair",
+      "s": "Amelia, too, MIGHT have recovered the shock of losing him.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0029",
+      "w": "Vanity Fair",
+      "s": "Could a prince have been better cared for?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0030",
+      "w": "Vanity Fair",
+      "s": "Recruits had come in during the stay of the regiment at Chatham; and the old General hoped that the regiment which had helped to beat Montcalm in Canada, and to rout Mr.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0031",
+      "w": "Vanity Fair",
+      "s": "How shall I be a companion for him, she thought--so clever and so brilliant, and I such a humble foolish creature?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0032",
+      "w": "Vanity Fair",
+      "s": "What cared she so long as her husband was near her?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0033",
+      "w": "Vanity Fair",
+      "s": "I made the sentences short and brisk on purpose.\" And this authentic missive was despatched under cover to Miss Briggs.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0034",
+      "w": "Vanity Fair",
+      "s": "She looks so cut up and altered that I'm sure she can't last long.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0035",
+      "w": "Vanity Fair",
+      "s": "Damn the shillings and halfpence, sir,\" he added, as the lawyer was making out the amount of the draft; and, flattering himself that by this stroke of magnanimity he had put the old quiz to the blush, he stalked out of the office with the paper in his pocket.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0036",
+      "w": "Vanity Fair",
+      "s": "Peggy was one of five sisters, and eleven children of the noble house of Glenmalony; but her husband, though her own cousin, was of the mother's side, and so had not the inestimable advantage of being allied to the Malonys, whom she believed to be the most famous family in the world.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0037",
+      "w": "Vanity Fair",
+      "s": "We have an acre of hot-houses, and pines as common as pays in the sayson.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0038",
+      "w": "Vanity Fair",
+      "s": "She spoke French so perfectly that there might be some truth in this report, and it was agreed that her manners were fine, and her air distingue.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0039",
+      "w": "Vanity Fair",
+      "s": "Indeed Captain Rawdon himself was much more affected at the leave-taking than the resolute little woman to whom he bade farewell.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0040",
+      "w": "Vanity Fair",
+      "s": "Osborne had no watch, though, to do George justice, she might have had one for the asking, and the Honourable Mrs.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0041",
+      "w": "Vanity Fair",
+      "s": "Here's the proclamation of his Majesty the Emperor and King,\" said the now declared partisan of Napoleon, and taking the document from his pocket, Isidor sternly thrust it into his master's face, and already looked upon the frogged coat and valuables as his own spoil.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0042",
+      "w": "Vanity Fair",
+      "s": "From Solomon downwards, have not wiser men than he been cajoled and befooled by women?",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0043",
+      "w": "Vanity Fair",
+      "s": "Women rushed to the churches, and crowded the chapels, and knelt and prayed on the flags and steps.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0044",
+      "w": "Vanity Fair",
+      "s": "His regiment had performed prodigies of courage, and had withstood for a while the onset of the whole French army.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0045",
+      "w": "Vanity Fair",
+      "s": "One of the armies opposed to the Emperor was scattered to the winds already.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0046",
+      "w": "Vanity Fair",
+      "s": "It is as well to begin soothingly at first.\" \"Stop, my dear ladies,\" said Pitt, the diplomatist.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0047",
+      "w": "Vanity Fair",
+      "s": "Haw, haw,\" laughed James, encouraged by these compliments; \"Senior Wrangler, indeed; that's at the other shop.\" \"What is the other shop, my dear child?\" said the lady.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0048",
+      "w": "Vanity Fair",
+      "s": "Firkin, who was shocked at the frightful prodigality of gin; and took the bill to Miss Briggs as accountant-general; who thought it her duty to mention the circumstance to her principal, Miss Crawley.",
+      "src": {
+        "work": "Vanity Fair"
+      }
+    },
+    {
+      "id": "thackeray.p0049",
+      "w": "The Rose and the Ring",
+      "s": "About the same time the Queen of Paflagonia presented His Majesty with a son and heir; and guns were fired, the capital illuminated, and no end of feasts ordained to celebrate the young Prince’s birth.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0050",
+      "w": "The Rose and the Ring",
+      "s": "One of King Cavolfiore’s vassals, the Duke Padella just mentioned, rebelled against the King, who went out to chastise his rebellious subject.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0051",
+      "w": "The Rose and the Ring",
+      "s": "And then the Queen had a fancy to have the colour of the door altered; and the painters dabbed him over the mouth and eyes, and nearly choked him, as they painted him pea-green.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0052",
+      "w": "The Rose and the Ring",
+      "s": "So Angelica said to the Queen, ‘Mamma, my parrot flew away yesterday out of its cage, and I don’t care any more for any of my toys; and I think this funny little dirty child will amuse me.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0053",
+      "w": "The Rose and the Ring",
+      "s": "But then the Princess got a monkey, and afterwards a little dog, and afterwards a doll, and did not care for Betsinda any more, who became very melancholy and quiet, and sang no more funny songs, because nobody cared to hear her.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0054",
+      "w": "The Rose and the Ring",
+      "s": "So you see, Angelica, though she liked Giglio pretty well, despised him on account of his ignorance.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0055",
+      "w": "The Rose and the Ring",
+      "s": "Detractors and tale-bearers (in my humble opinion) had much better look at HOME.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0056",
+      "w": "The Rose and the Ring",
+      "s": "Each day it seemed to grow handsomer and handsomer, and the Princess grew so fond of looking at it, that she would often spill the tea over the cloth, at which her father and mother would wink and wag their heads, and say to each other, ‘Aha!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0057",
+      "w": "The Rose and the Ring",
+      "s": "You don’t know whether Crim Tartary is on the Red Sea or on the Black Sea, I dare say.’ ‘Yes, I do, it’s on the Red Sea,’ says Giglio, at which the Princess burst out laughing at him, and said, ‘Oh, you ninny!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0058",
+      "w": "The Rose and the Ring",
+      "s": "Is THIS the woman I have been in love with all my life?",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0059",
+      "w": "The Rose and the Ring",
+      "s": "He was an ugly little wretch, in some of the late groom-porter’s old clothes cut down, and much too tight for him; and yet, when he had taken up the ring (as it turned out to be), and was carrying it to his mistress, she thought he looked like a little cupid.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0060",
+      "w": "The Rose and the Ring",
+      "s": "Then people wondered why they had laughed; there was nothing particularly ridiculous in him.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0061",
+      "w": "The Rose and the Ring",
+      "s": "I am too weak to recover it--I am alone, and have no friend.’ ‘Oh, say not so, dear Prince!’ says Gruffanuff.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0062",
+      "w": "The Rose and the Ring",
+      "s": "Oh, fie, the Prince will hear!’ ‘Well, I don’t mind,’ says Giglio, louder still.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0063",
+      "w": "The Rose and the Ring",
+      "s": "No doubt the magic rose which Bulbo wore caused this infatuation on Angelica’s part; but is she the first young woman who has thought a silly fellow charming?",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0064",
+      "w": "The Rose and the Ring",
+      "s": "Gruffanuff, for reply, said, ‘Hau-au-ho!--Grauhawhoo!--Hong-hrho!’ In fact, she was snoring sound asleep.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0065",
+      "w": "The Rose and the Ring",
+      "s": "You angel--you peri--you rosebud, let me be thy bulbul--thy Bulbo, too!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0066",
+      "w": "The Rose and the Ring",
+      "s": "He goes down on his own knees to Betsinda, takes her hand, begs her to accept his heart, and offers to marry her that moment.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0067",
+      "w": "The Rose and the Ring",
+      "s": "Betsinda had left the warming-pan on the floor while the princes were going on with their conversation, and as they began now to quarrel and be very fierce with one another, she thought proper to run away.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0068",
+      "w": "The Rose and the Ring",
+      "s": "I love Betsinda, and Betsinda only!’ And in a fit of terror he ran from her as quickly as he could.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0069",
+      "w": "The Rose and the Ring",
+      "s": "As soon as they saw her they began, ‘You wretch!’ says the Queen.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0070",
+      "w": "The Rose and the Ring",
+      "s": "V., some more sugar!’ ‘Sire, I am afraid if we wait till after breakfast it will be too late,’ says Glumboso.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0071",
+      "w": "The Rose and the Ring",
+      "s": "It’s a doosid awkward mistake, and upon my word, Hedzoff, I have the greatest mind to have you hanged too.’ ‘Sire, I did but my duty; a soldier has but his orders.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0072",
+      "w": "The Rose and the Ring",
+      "s": "Up the scaffold stairs she sprang, with the agility of a lighter of lamps; and flinging herself in Bulbo’s arms, regardless of all ceremony, she cried out, ‘Oh, my Prince!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0073",
+      "w": "The Rose and the Ring",
+      "s": "As he began to speak to Angelica, he forgot about the rose, and of course it dropped out of his mouth.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0074",
+      "w": "The Rose and the Ring",
+      "s": "When after travelling on and on, evening came, and all the black pines were bending with snow, and there, at last, was the comfortable light beaming in the woodman’s windows; and so they arrived, and went into his cottage.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0075",
+      "w": "The Rose and the Ring",
+      "s": "The acquaintance HER MAJESTY showed with the history, and noble families of her empire, was wonderful.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0076",
+      "w": "The Rose and the Ring",
+      "s": "When they came close to his park gates, this nobleman sent to say he would wait upon Her Majesty: he was a most powerful warrior, and his name was Count Hogginarmo, whose helmet it took two strong negroes to carry.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0077",
+      "w": "The Rose and the Ring",
+      "s": "No, no; depend on’s, two such rogues do not trust one another.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0078",
+      "w": "The Rose and the Ring",
+      "s": "Then he sprang up gaily on to the roof of the diligence, and made himself very comfortable in the straw.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0079",
+      "w": "The Rose and the Ring",
+      "s": "He owned, with many blushes, how ignorant he was; on which the lady said, ‘My dear Gigl--my good Mr.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0080",
+      "w": "The Rose and the Ring",
+      "s": "When he had done dressing himself, the bag gave another little hop, and he went to it and took out-- 1.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0081",
+      "w": "The Rose and the Ring",
+      "s": "He took a modest lodging opposite the Schools, paid his bill at the inn, and went to his apartment with his trunk, carpet-bag, and not forgetting, we may be sure, his OTHER bag.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0082",
+      "w": "The Rose and the Ring",
+      "s": "He never got into any riots or disturbances.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0083",
+      "w": "The Rose and the Ring",
+      "s": "With an air of indescribable dignity, Giglio checked their natural, but no more seemly, familiarity.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0084",
+      "w": "The Rose and the Ring",
+      "s": "She looked with her skew eyes upon young Bulbo, Crim Tartary’s stupid heir, and she preferred him.’ Twas then I turned my eyes upon Betsinda--Rosalba, as she now is.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0085",
+      "w": "The Rose and the Ring",
+      "s": "The troops all made for the tavern at once, and as they came up Giglio exclaimed, on beholding their leader, ‘Whom do I see?",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0086",
+      "w": "The Rose and the Ring",
+      "s": "Giglio give up his sword!’ cried the Prince; and stepping well forward on to the balcony, the royal youth, WITHOUT PREPARATION, delivered a speech so magnificent, that no report can do justice to it.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0087",
+      "w": "The Rose and the Ring",
+      "s": "Adjoining his castle was an amphitheatre where the Prince indulged in bull-baiting, rat-hunting, and other ferocious sports.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0088",
+      "w": "The Rose and the Ring",
+      "s": "There was a hum and a buzz all through the circus, and the fierce King Padella even felt a little compassion.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0089",
+      "w": "The Rose and the Ring",
+      "s": "Take this Count Hogginarmo and fling him into the circus!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0090",
+      "w": "The Rose and the Ring",
+      "s": "In about two minutes The Count Hogginarmo was GOBBLED UP by those lions, bones, boots, and all, and There was an End of him.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0091",
+      "w": "The Rose and the Ring",
+      "s": "After the battle of Bombardaro--’ ‘Of what?’ asked the surprised Padella.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0092",
+      "w": "The Rose and the Ring",
+      "s": "But justly dear as Bulbo is to me,--joy of my eyes, fond treasure of my soul!--Ha, ha, ha, ha!",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0093",
+      "w": "The Rose and the Ring",
+      "s": "The noble Giglio could not restrain his tears, nor could the Grenadiers, nor the officers, nor could Bulbo himself, when the matter was explained to him, and he was brought to understand that His Majesty’s promise, of course, was ABOVE EVERY THING, and Bulbo must submit.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0094",
+      "w": "The Rose and the Ring",
+      "s": "The Cook brought him dishes which he once used to like; but he wouldn’t touch them: he sat down and began writing an adieu to Angelica, as the clock kept always ticking, and the hands drawing nearer to next morning.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0095",
+      "w": "The Rose and the Ring",
+      "s": "Then he ordered out his whole army, horse, foot, and artillery; and set forth at the head of an innumerable host, and I should think twenty thousand drummers, trumpeters, and fifers.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0096",
+      "w": "The Rose and the Ring",
+      "s": "And he never thought about Angelica, now Princess Bulbo, whom he had left at home, and who, as we know, did not care much about him.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0097",
+      "w": "The Rose and the Ring",
+      "s": "With such a weapon at command, I wonder, for my part, he thought of ordering his army out; but forth they all came, in magnificent new uniforms, Hedzoff and the Prince’s two college friends each commanding a division, and His Majesty prancing in person at the head of them all.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0098",
+      "w": "The Rose and the Ring",
+      "s": "Queen Rosalba wore the Paflagonian Ribbon of the Cucumber across her riding-habit, whilst King Giglio never appeared without the grand Cordon of the Pumpkin.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0099",
+      "w": "The Rose and the Ring",
+      "s": "The Duke seized Glumboso, the Ex-Prime Minister, and made him refund that considerable sum of money which the old scoundrel had secreted out of the late King’s treasure.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0100",
+      "w": "The Rose and the Ring",
+      "s": "Did you ask her to be your bridesmaid, my dear?’ says Giglio to Rosalba.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0101",
+      "w": "The Rose and the Ring",
+      "s": "And all the courtiers exhibited by their countenances and expressions, marks of surprise, or ridicule, or incredulity, or wonder.",
+      "src": {
+        "work": "The Rose and the Ring"
+      }
+    },
+    {
+      "id": "thackeray.p0102",
+      "w": "Some Roundabout Papers",
+      "s": "With the help of a “Wade’s Chronology,” I can make out ever so queer a history for you, my poor old body, and a pedigree as authentic as many in the peerage-books.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0103",
+      "w": "Some Roundabout Papers",
+      "s": "Don’t talk to me your nonsense about Exhibitions, and Prince Dukes, and toads in coals, or coals in toads, or what is it?” says granny.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0104",
+      "w": "Some Roundabout Papers",
+      "s": "I was a prisoner almost so much as you are.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0105",
+      "w": "Some Roundabout Papers",
+      "s": "Did I understand you, my good Twoshoes, to say that your mother was seven-and-twenty years old when you were born, and that she married your esteemed father when she herself was twenty-five?",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0106",
+      "w": "Some Roundabout Papers",
+      "s": "Those Sans Souci carps may live to be a thousand years old and have nothing to tell but that one day is like another; and the history of friend Goody Twoshoes has not much more variety than theirs.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0107",
+      "w": "Some Roundabout Papers",
+      "s": "If I were eighty, would I like to feel the hunger always gnawing, gnawing?",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0108",
+      "w": "Some Roundabout Papers",
+      "s": "Be kind to the poor old school-girl of ninety, who has had leave to come out for a day of Christmas holiday.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0109",
+      "w": "Some Roundabout Papers",
+      "s": "If you were in her place, would you like to have a remembrance of better early days, when you were young and happy, and loving, perhaps; or would you prefer to have no past on which your mind could rest?",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0110",
+      "w": "Some Roundabout Papers",
+      "s": "The rapture of the meeting, the terrible, terrible parting, again and again the tragedy is acted over.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0111",
+      "w": "Some Roundabout Papers",
+      "s": "Once, a lady gave her a half-sovereign, which was a source of great pain and anxiety to Goody Twoshoes.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0112",
+      "w": "Some Roundabout Papers",
+      "s": "To that pond at Potsdam where the carps live for hundreds of hundreds of years, with hunches of blue mould on their back, I daresay the little Prince and Princess of Preussen-Britannien come sometimes with crumbs and cakes to feed the mouldy ones.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0113",
+      "w": "Some Roundabout Papers",
+      "s": "As I hope for beef at Christmas, I vow a note shall be sent to Saint Lazarus Union House, in which Mr Roundabout requests the honour of Mrs Twoshoes’ company on Friday, 26th December.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0114",
+      "w": "Some Roundabout Papers",
+      "s": "There will be but ten præ-railroadites left: then three—then two—then one—then 0!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0115",
+      "w": "Some Roundabout Papers",
+      "s": "Not long since, a company of horseriders paid a visit to our watering-place.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0116",
+      "w": "Some Roundabout Papers",
+      "s": "We sent to Walter’s mother, requesting that he might join us, and the kind lady replied that the boy had already been at the morning performance of the equestrians, but was most eager to go in the evening likewise.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0117",
+      "w": "Some Roundabout Papers",
+      "s": "Queer jokes, which caused a thousand simple mouths to grin!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0118",
+      "w": "Some Roundabout Papers",
+      "s": "Lady Jones invites us, and we yawn; she ceases to invite us, and we are resigned.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0119",
+      "w": "Some Roundabout Papers",
+      "s": "To see these nymphs—gracious powers, how beautiful they were!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0120",
+      "w": "Some Roundabout Papers",
+      "s": "There has never been anything like it—never.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0121",
+      "w": "Some Roundabout Papers",
+      "s": "I tell you the women are dreary old creatures.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0122",
+      "w": "Some Roundabout Papers",
+      "s": "I remember being behind the scenes at the opera (where numbers of us young fellows of fashion used to go), and seeing Sontag let her hair fall down over her shoulders previous to her murder by Donzelli.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0123",
+      "w": "Some Roundabout Papers",
+      "s": "When I remember the Adelphi, and the actresses there: when I think of Miss Chester, and Miss Love, and Mrs Serle at Sadler’s Wells, and her forty glorious pupils—of the Opera and Noblet, and the exquisite young Taglioni, and Pauline Leroux, and a host more!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0124",
+      "w": "Some Roundabout Papers",
+      "s": "The school apothecary was sent for: a couple of small globules at night, a trifling preparation of senna in the morning, and we had not to go to school, so that the draught was an actual pleasure.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0125",
+      "w": "Some Roundabout Papers",
+      "s": "O Mysteries of Udolpho, didn’t I and Briggs Minor draw pictures out of you, as I have said?",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0126",
+      "w": "Some Roundabout Papers",
+      "s": "Then, above all, we had WALTER SCOTT, the kindly, the generous, the pure—the companion of what countless delightful hours; the purveyor of how much happiness; the friend whom we recall as the constant benefactor of our youth!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0127",
+      "w": "Some Roundabout Papers",
+      "s": "Those books, and perhaps those eyes with which we read them; and, it may be, the brains behind the eyes!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0128",
+      "w": "Some Roundabout Papers",
+      "s": "It used to belong to a fellow’s sisters generally; but though he pretended to despise it, and said, “Oh, stuff for girls!” he read it; and I think there were one or two passages which would try my eyes now, were I to meet with the little book.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0129",
+      "w": "Some Roundabout Papers",
+      "s": "First, there is Jerry arriving from the country, in a green coat and leather gaiters, and being measured for a fashionable suit at Corinthian House, by Corinthian Tom’s tailor.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0130",
+      "w": "Some Roundabout Papers",
+      "s": "What hardened ferocity in the countenance of the desperado in yellow breeches!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0131",
+      "w": "Some Roundabout Papers",
+      "s": "Kate without any hesitation immediately stood up.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0132",
+      "w": "Some Roundabout Papers",
+      "s": "They are as good as jokes, though you mayn’t quite preceive the point.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0133",
+      "w": "Some Roundabout Papers",
+      "s": "In the midst of a great peace and calm, the stars look out from the heavens.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0134",
+      "w": "Some Roundabout Papers",
+      "s": "The town and the fair landscape sleep under the starlight, wreathed in the autumn mists.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0135",
+      "w": "Some Roundabout Papers",
+      "s": "As for Dolly, Merry, and Bell, who are standing at the tree, they don’t care about the love-riddle part, but understand the sweet-almoned portion very well.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0136",
+      "w": "Some Roundabout Papers",
+      "s": "A dozen merry Christmases more, and you will be reading those wonderful love-conundrums, too.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0137",
+      "w": "Some Roundabout Papers",
+      "s": "Yet but a few days, Bob, and flakes of paint will have cracked off the fairy flower-bowers, and the revolving temples of adamantine lustre will be as shabby as the city of Pekin.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0138",
+      "w": "Some Roundabout Papers",
+      "s": "And then to think that these festivities are prepared months before—that these Christmas pieces are prophetic!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0139",
+      "w": "Some Roundabout Papers",
+      "s": "I often think with gratitude of the famous Mr Nelson Lee—the author of I don’t know how many hundred glorious pantomimes—walking by the summer wave at Margate, or Brighton perhaps, revolving in his mind the idea of some new gorgeous spectacle of faëry, which the winter shall see complete.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0140",
+      "w": "Some Roundabout Papers",
+      "s": "At the Fancy, we saw “Harlequin Hamlet, or Daddy’s Ghost and Nunky’s Pison,” which is all very well—but, gentlemen, if you don’t respect Shakspeare, to whom will you be civil?",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0141",
+      "w": "Some Roundabout Papers",
+      "s": "He and his two friends stamp on each other’s toes to keep them warm.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0142",
+      "w": "Some Roundabout Papers",
+      "s": "The gas-lamps along the street are wrenched from their foundations, and shoot through the troubled air.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0143",
+      "w": "Some Roundabout Papers",
+      "s": "Quicker, quicker ply the violins of Phoebus Apollo.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0144",
+      "w": "Some Roundabout Papers",
+      "s": "Purple shadows of morn “slant o’er the snowy sward,” the city wakes up in life and sunshine, and we confess we are very much relieved at the disappearance of the ghost.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0145",
+      "w": "Some Roundabout Papers",
+      "s": "The irascible William is acted with great vigour by Snoxall, and the battle of Hastings is a good piece of burlesque.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0146",
+      "w": "Some Roundabout Papers",
+      "s": "The Fairy Edith hereupon comes forward, and finds his body, which straightway leaps up a live harlequin, whilst the Conqueror makes an excellent clown, and the Archbishop of Bayeux a diverting pantaloon, &c.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0147",
+      "w": "Some Roundabout Papers",
+      "s": "Likewise to the gentleman who picked up a party in Piccadilly, who had slipped and fallen in the snow, and was there on his back, uttering energetic expressions: that party begs to offer thanks, and compliments of the season.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0148",
+      "w": "Some Roundabout Papers",
+      "s": "And he greatly advanced in my good opinion by praising the punch, which was of my own manufacture, and which some gentlemen present (Mr O’M—g—n, amongst others) pronounced to be too weak.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0149",
+      "w": "Some Roundabout Papers",
+      "s": "Perhaps he is of Dr Johnson’s opinion about lectures: “Lectures, sir!",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0150",
+      "w": "Some Roundabout Papers",
+      "s": "We drive up the hill, Bob and I; we make the last two miles in eleven minutes; we pass that poor, armless man who sits there in the cold, following you with his eyes.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0151",
+      "w": "Some Roundabout Papers",
+      "s": "The stalls, the columns, the fountains, courts, statues, splendours, are all crowned for Christmas.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0152",
+      "w": "Some Roundabout Papers",
+      "s": "Mr Punch is performing his surprising actions, and hanging the beadle.",
+      "src": {
+        "work": "Some Roundabout Papers"
+      }
+    },
+    {
+      "id": "thackeray.p0153",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Gann and Co., of Thames Street, in the City of London!\" I have been thus particular in my account of the West Diddlesex Insurance Office, and of Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0154",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "There stood Gus, his mouth wide open, his eyes staring, a smoking cheroot in his hand, wondering with all his might at the strange thing that had just happened to me.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0155",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Who is his father, then?\" \"Ma'am, Gus's father's a leatherseller in Skinner Street, Snow Hill,--a very respectable house, ma'am.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0156",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Titmarsh.\" But, instead of taking off his hat, as I did mine, his Lordship growled out that he hoped for another opportunity, and galloped off again on his black horse.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0157",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Poor Clan!--a cousin of yours and mine, Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0158",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "An enormous piece of raw mutton, as I thought it was; but Mrs.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0159",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "As to Gus, she never so much as spoke to him all the evening; but he consoled himself with a great lot of muffins, and sat most of the evening (it was a cruel hot summer) whistling and talking with Roundhand on the verandah.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0160",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "There was my dear Mary a hundred and twenty miles off, in Somersetshire, walking home from church along with Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0161",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "As we were going to dine at Roundhand's, and I had no black satin stock to set it off, I was obliged to place it in the frill of my best shirt, which tore the muslin sadly, by the way.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0162",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "There is no use to describe the grand gala, nor the number of lamps in the lodge and in the garden, nor the crowd of carriages that came in at the gates, nor the troops of curious people outside; nor the ices, fiddlers, wreaths of flowers, and cold supper within.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0163",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Brough's grand party, our director called me up to his room at the West Diddlesex, and after examining my accounts, and speaking awhile about business, said, \"That's a very fine diamond-pin, Master Titmarsh\" (he spoke in a grave patronising way), \"and I called you on purpose to speak to you upon the subject.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0164",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "The date and My dear So-and-so one writes off immediately--it is the next part which is hard; and I put my pen in my mouth, flung myself back in my chair, and began to think about it.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0165",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Brough was an out-and-out Tory; but Hodge and Smithers is a most respectable firm.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0166",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "I suppose, sir, you speak it commonly at the office, Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0167",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Be it a duke or a shoeblack, what do I care, hey?--what do I care?\" \"O-o-oh!\" sighed the gent who went by the name of Bill Tidd: a very pale young man, with a black riband round his neck instead of a handkerchief, and his collars turned down like Lord Byron.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0168",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Tidd,\" says the Captain, \"and a little less eyebrow.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0169",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "I say what I think; and you may tell Miss Brough if you like.\" And so presently this conversation ended, and we were summoned in to coffee.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0170",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Our terms are lower than any office, and we can bear to have them lower, and a great business will come to us that way.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0171",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Brough, sir, would canvass and wheedle a chimney-sweep in the way of business.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0172",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Our shares rose to a premium; our Director, his lady, and daughter were presented at Court; and the great West Diddlesex Association bid fair to be the first Assurance Office in the kingdom.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0173",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Well, sir, a fortnight after you were with us at Fulham, I met Preston in the House, and made a merit of having given the place to his cousin.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0174",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "In this way I was prepared, and in this way I took leave of my dear Gus.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0175",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Hoggarty informed us that she was sick of the country, and was determined to go to London with her dear nephew and niece, and keep house for them, and introduce them to her friends in the metropolis.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0176",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "John Brough, in their splendid carriage-and-four, called upon Mrs.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0177",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "As dinner was laid for three persons only, Gus took his seat with fear and trembling; and then Mrs.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0178",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Well, I dare say I shan't live long, and some folks won't be sorry to have me in my grave.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0179",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "He was tried at Lancaster in the year '14 for forgery, and narrowly escaped with his neck.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0180",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Predatory is a mild word, Sam: if I had said robbery at once, I should express my meaning clearer.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0181",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "As luck would have it,\" continued he, \"Miss Brough was in the drawing- room twangling on a guitar, and singing most atrociously out of tune; but as I entered at the door, I cried 'Hush!' to the footman, as loud as possible, stood stock-still, and then walked forward on tip-toe lightly.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0182",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Brough, with his four greys, was entering the lodge-gate; and I should like to have seen the looks of these two gentlemen, as the one was carrying the other's prey off, out of his own very den, under his very nose.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0183",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Still ours were at a high premium; and the Independent West Diddlesex held its head up as proudly as any office in London.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0184",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Edmund Preston, complaining of the insolence of the servants of that right honourable gent, Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0185",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Under the reverend gentleman's guidance and advice, she, after a time, separated from St.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0186",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "And now I saw very well the truth of a remark of Gus's--viz., that life-assurance companies go on excellently for a year or two after their establishment, but that it is much more difficult to make them profitable when the assured parties begin to die.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0187",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Shall I tell how the money was procured?",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0188",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Aminadab of Chancery Lane, who arrested me as a shareholder of the Independent West Diddlesex Association, at the suit of Von Stiltz of Clifford Street, tailor and draper.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0189",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "On the walls hung all sorts of trumpery pictures in tawdry frames (how different from those capital performances of my cousin Michael Angelo!); on the mantelpiece huge French clocks, vases, and candlesticks; on the sideboards, enormous trays of Birmingham plated ware: for Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0190",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "In for three hundred thousand pound,\" says Aminadab: \"Brough's right- hand man, and only three-and-twenty.\" \"Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0191",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "B.,--\"sit down, and wet your whistle, my piper!",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0192",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "A pretty note was that which you sent to your aunt this morning, and here you have an answer to it.\" I drank the wine, and trembled rather as I read as follows:-- \"Sir,--If, because you knew I had desined to leave you my proparty, you wished to murdar me, and so stepp into it, you are dissapointed.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0193",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "You should have taken the lady when she was in the humour, sir, and have borrowed the money elsewhere.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0194",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "At ten o'clock on that night there was a great rattling and ringing at the outer door, and presently my poor girl fell into my arms; and Gus Hoskins sat blubbering in a corner, as I tried my best to console her.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0195",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "I declare before Heaven, that of all the joys and happy moments it has given me, that was the crowning one--that little ride, with my wife's cheek on my shoulder, down Holborn to the prison!",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0196",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Titmarsh, I have had the good fortune to see a list of your debts from the Insolvent Court, and find that you are indebted to Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0197",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Brough, who dictated the letter which I wrote, and who I really thought then was as rich as Mr.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0198",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "But this time, officer as he was, Gus took him by the collar, and shoved him back, and said, \"Look at the lady, you brute, and hold your tongue!\" And when he looked at my wife's situation, Captain Sparr became redder for shame than he had before been for anger.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0199",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "The Fives Court was opposite our window; and here I used, very unwillingly at first, but afterwards, I do confess, with much eagerness, to take a couple of hours' daily sport.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0200",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "For some time she did not speak, but looked as pale as death, and wept as she kissed me.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0201",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Think of it you who are rich, and take heed how you turn a beggar away.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0202",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Stokes proceeded:-- \"When the fu--- when the seminary, ma'am, was concluded this morning, your poor daughter-in-law was glad to take shelter in my humble parlour, ma'am; where she wept, and told a thousand stories of the little cherub that's gone.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0203",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Titmarsh,' said I, 'you know how poor and how good your husband is?' \"'Yes,' says she, rather surprised.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0204",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "My Lady looked at her for a moment, and then ran into the next room and brought her the baby; and the baby clung to her as if he knew her: and a pretty sight it was to see that dear woman with the child at her bosom.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0205",
+      "w": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "s": "Here, meanwhile, my good mother kept me company; and what should we read of one day but the marriage of Mrs.",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      }
+    },
+    {
+      "id": "thackeray.p0206",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Sawbone, would have neither mother nor daughter: there was no help for it, Julia and her mother must have a house together, and Jowler knew that his wife would fill it with her odious blackamoor friends.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0207",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Eat a bit o’ currie-bhaut,”—and she thrust the dish towards me, securing a heap as it passed.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0208",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "His head, cut clean in two between the eyebrows and nostrils, even between the two front teeth, fell one side on each shoulder, and he galloped on till his horse was stopped by my men, who were not a little amused at the feat.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0209",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "As I had distinguished myself not a little during the war, General Lake sent me up with despatches to Calcutta, where Lord Wellesley received me with the greatest distinction.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0210",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "There are others, however—the disgrace of a disgraceful trade—who, borrowing from distance a despicable courage, have ventured to assail me.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0211",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I don’t know how it happened that, at the end of the war, the poor Shah was not a whit better off than at the beginning; and that though Holkar was beaten, and Scindiah annihilated, Shah Allum was much such a puppet as before.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0212",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "And here I must pause to give thanks to Fortune, which so marvellously preserved me, Sergeant-Major Higgory, and Runty Goss.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0213",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "His Excellency had a favourite horn snuff-box (for, though exalted in station, he was in his habits most simple): of this, and about a quarter of an ounce of high-dried Welsh, which he always took, he made me a present, saying, in front of the line, “Accept this, Mr.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0214",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "It was a burning hot day, and we were all refreshing ourselves after the morning’s march, when I, who was on the advanced picket along with O’Gawler of the King’s Dragoons, was made aware of the enemy’s neighbourhood in a very singular manner.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0215",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "In five minutes we heard the trumpets in our camp, and in twenty more the greater part of the cavalry had joined us.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0216",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "In the month of March, 1817, I was passenger on board the “Prince Regent,” Captain Harris, which touched at St.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0217",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I have had many a proud moment in my life, but never such a proud one as this; and I would readily pardon the word “coward,” as applied to me by Montholon, in consideration of the testimony which his master bore in my favour.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0218",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Sheeny was with the Queen’s people, not in a military capacity, but as representative of an English journal; to which, for a trifling weekly remuneration, he was in the habit of transmitting accounts of the movements of the belligerents, and his own opinion of the politics of Spain.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0219",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "GAHAGAN!” shouted out half-a-dozen scoundrelly voices, and fifty more shots came rattling after me.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0220",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "If I could but get that fellow’s horse, thought I, I am safe; and I executed at once the plan which I hoped was to effect my rescue.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0221",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Valdepeñas madrileños,” growled out Tristany.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0222",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "It took me two hours daily to curl my hair in ten thousand little corkscrew ringlets, which waved over my shoulders, and to get my moustaches well round to the corners of my eyelids.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0223",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Propitious Heaven must sure a hero save Like Paris handsome, and like Hector brave!’ “My officers (Captains Biggs and Mackanulty, Lieutenants Glogger, Pappendick, Stuffle, &c.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0224",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Woman, lovely woman, was there in abundance and variety!",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0225",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Flix, Hicks, Wicks, and many more too numerous to mention.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0226",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "They had better never have been born than have done as they did: as you shall hear.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0227",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "It is an encouraging prospect: know you not that the ruffian Holkar, if it be he, will with to- morrow’s dawn beleaguer our little fort, and throw thousands of men against our walls?",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0228",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I read the letter, and saw at once there was no time to be lost.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0229",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I hear the merry jingle of the tambourine, and the cheery voices of the girls and peasants, as they dance beneath my casement, under the shadow of the clustering vines.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0230",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "As we rode along, I heard two of the men commenting upon my unusual silence (for I suppose, I—that is the Indian—was a talkative officer).",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0231",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I am told the soldiers who first get in are to have their pick.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0232",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "There was such a cloud raised by their smoke you could hardly see a yard before you- -another piece of good-luck for me—as it diminished the chances of my detection.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0233",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "By the hundred and eleven incarnations of Vishnu,” said I, solemnly (an oath which no Indian was ever known to break), “I swear that so it is: so at least he told me, and I have good cause to know his power.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0234",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I never heard such a din before or after.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0235",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Were I not in your august presence, O star of the faithful, I would crop Loll Mahommed’s nose from his face, and wear his ears as an ornament in my own pugree!",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0236",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Your wife, the incomparable Puttee Rooge” (white and red rose), “has arrived in camp.” “My WIFE, my lord!” said I, aghast.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0237",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "As soon as I entered the tents a host of menials sprang forward, some to ease me of my armour, some to offer me refreshments, some with hookahs, attar of roses (in great quart bottles), and the thousand delicacies of Eastern life.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0238",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "And is this,” said she, “a welcome, O Khan!",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0239",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "The torments of hell are not so terrible as the tortures that Holkar will invent for thee.” “Tortures, madam?” answered I, coolly.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0240",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I pray you, father, to go, and to pass no more such shameless jests on your daughter.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0241",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "The warrior at the gate gave the word and was admitted; the woman returned slowly to the Indian camp.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0242",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Of the former commodity we had only three rounds for each piece.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0243",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Joy (deft link-boy!) lit his lamps in each of her eyes as I entered.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0244",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I am commander, too, in this fort—the enemy is without it; another word of mockery—another glance of scorn—and, by Heaven, I will hurl every man and woman from the battlements, a prey to the ruffianly Holkar!” This quieted them.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0245",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Of course I did not accede to it—why should I?",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0246",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "The fort, in my absence, had been left in command of Lieutenant Macgillicuddy, a countryman of my own (with whom, as may be seen in an early chapter of my memoirs, I had an affair of honour); and the prisoner Bobbachy Bahawder, whom I had only stunned, never wishing to kill him, had been left in charge of that officer.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0247",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Opening it, there, where I had left ingots, sacks of bright tomauns, kopeks and rupees, strings of diamonds as big as ducks’ eggs, rubies as red as the lips of my Belinda, countless strings of pearls, amethysts, emeralds, piles upon piles of bank-notes—I found—a piece of paper!",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0248",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "At that distance—it was about the spot where the Futtyghur hill began gradually to rise—the invading force stopped; the elephants drew up in a line, at right angles with our wall (the fools!",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0249",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "It was well that I had obtained this supply, for, during my absence on the works, Mrs.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0250",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Vandegobbleschroy’s despairing look, as I saw her sitting alone, attempting to make some impression on the little white elephant’s roasted tail.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0251",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "They came panting up the hill: I was black with rage, but it was the cold concentrated rage of despair.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0252",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I gave one thought to my blessed, my beautiful Belinda, and then, stepping into the front, took down one of the swivels;—a shower of matchlock balls came whizzing round my head.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0253",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Who will follow Gahagan on a foraging party?” I expected that, as on former occasions, every man would offer to accompany me.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0254",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I descended calmly the hill, a very steep one, and coming to the spot, took my pick of the animals, choosing a tolerably small and plump one, of about thirteen feet high, which the vultures had respected.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0255",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "I had no wound; my repeated swoons had been brought on (as indeed well they might) by my gigantic efforts in carrying the elephant up a steep hill a quarter of a mile in length.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0256",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Strength is deceitful, valour is unavailing, fame is only wind—the nightingale sings of the rose all night—where is the rose in the morning?",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0257",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Look, here is his commission signed with the celestial seal, and attested by the sacred names of the forty-nine Imaums.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0258",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Holkar sulkily sheathed his scimitar, and muttered, “’Tis better as it is; had I killed him now, I had spared him the torture.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0259",
+      "w": "The Tremendous Adventures of Major Gahagan",
+      "s": "Three o’clock came: the sun was at this time making his appearance in the heavens, and with it came the guards, who were appointed to conduct me to the torture.",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      }
+    },
+    {
+      "id": "thackeray.p0260",
+      "w": "Catherine: A Story",
+      "s": "He sighed and drank, sighed and drank, and drank again, until he had swallowed so much of the Corporal's liquor, as to be induced to accept a guinea from his purse also; and found himself, on returning to reason and sobriety, a soldier of Queen Anne's.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0261",
+      "w": "Catherine: A Story",
+      "s": "Run down, child, to Farmer Brigg's and get one: pluck it before you bring it, you know, and we will make his Lordship a pretty breakfast.” Catherine took up her basket, and away she went by the back-yard, through the stables.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0262",
+      "w": "Catherine: A Story",
+      "s": "The poor fellow, who at the first cut still held on to the rein, dropped it at the second, and as the pair galloped off, sat down on the roadside and fairly began to weep.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0263",
+      "w": "Catherine: A Story",
+      "s": "That woman will do for your honour some day, if you provoke her.” “Do for ME?",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0264",
+      "w": "Catherine: A Story",
+      "s": "And so they kept on together, he treating her with simple insult, and she hanging on desperately, by whatever feeble twig she could find, to the rock beyond which all was naught, or death, to her.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0265",
+      "w": "Catherine: A Story",
+      "s": "However, the noble Count kept the key, and bound her by many solemn oaths (that he discharged at her himself) not to reveal to any other person the existence of the chest and its contents.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0266",
+      "w": "Catherine: A Story",
+      "s": "A mighty pleasant man,” said she; “only not very wise, and seemingly a good deal in liquor.” “A good deal indeed!” said the Corporal.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0267",
+      "w": "Catherine: A Story",
+      "s": "And when, the next morning, the doctor came to visit his patient, he brought with him a story how, at the dead of night, Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0268",
+      "w": "Catherine: A Story",
+      "s": "Catherine's pocket there was only the sum of three and fourpence, said, archly, “There was no need of money, for the Captain took care of that.” Mrs.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0269",
+      "w": "Catherine: A Story",
+      "s": "Do you dare for to come with your airs here, and call yourself a nobleman's lady, and sleep in the best bed, when you're no better nor a common tramper?",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0270",
+      "w": "Catherine: A Story",
+      "s": "Catherine: and whether she ran away with him, or he with her, I shall not make it my business to inquire; but certainly at the end of three months (which must be crowded up into this one little sentence), another elopement took place in the village.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0271",
+      "w": "Catherine: A Story",
+      "s": "He with the patch on his eye seized incontinently on Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0272",
+      "w": "Catherine: A Story",
+      "s": "Brock alone partook of this, the other two gentlemen preferring the society of their pipes and the landlady in the kitchen.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0273",
+      "w": "Catherine: A Story",
+      "s": "Addison, and lent many a piece to Dick Steele (a sad debauched rogue, my dear); and, above all, I'll tell you what I did--the noblest stroke that sure ever a gentleman performed in my situation.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0274",
+      "w": "Catherine: A Story",
+      "s": "I just told him the whole story: at which he laughed, and swore that it was the best piece of GENERALSHIP he ever heard on.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0275",
+      "w": "Catherine: A Story",
+      "s": "Of the two, the Corporal's whistle was much more innocent than the girl's sobbing: he was a rogue; but a good-natured old fellow when his humour was not crossed.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0276",
+      "w": "Catherine: A Story",
+      "s": "Flinging himself off the steed with much agility, Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0277",
+      "w": "Catherine: A Story",
+      "s": "Hayes “I know little about it one way or other, but shall take it for granted, if you will explain a little more of this business.” “I sildom condescind to explean,” said Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0278",
+      "w": "Catherine: A Story",
+      "s": "After a third flagon of ale, he discovered that the liquor was sour, and emptied, with much spluttering and grimaces, the remainder of the beer into the fire.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0279",
+      "w": "Catherine: A Story",
+      "s": "What is this here idolatrous string of beads?” said the clerk.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0280",
+      "w": "Catherine: A Story",
+      "s": "Who has Nosey brought with him now?” said Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0281",
+      "w": "Catherine: A Story",
+      "s": "The news did not at all please the old lady; who received Mrs.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0282",
+      "w": "Catherine: A Story",
+      "s": "Silverkoop would have been neither rich nor a widow, nor a wife to Count von Galgenstein.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0283",
+      "w": "Catherine: A Story",
+      "s": "For about six months after their capture and release of Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0284",
+      "w": "Catherine: A Story",
+      "s": "You remember that man and his wife, whom we took in pawn at the 'Three Rooks'?” “And the landlady only hung last Michaelmas?” said the tall man, parenthetically.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0285",
+      "w": "Catherine: A Story",
+      "s": "Suppose we go and see the old girl?” suggested Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0286",
+      "w": "Catherine: A Story",
+      "s": "John Hayes received the news with anything but pleasure.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0287",
+      "w": "Catherine: A Story",
+      "s": "Wild takes three-fourths of the produce?",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0288",
+      "w": "Catherine: A Story",
+      "s": "Why did not Hayes discard the boy altogether?",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0289",
+      "w": "Catherine: A Story",
+      "s": "Here, however, the day of retribution arrived; for, having stolen three pewter-pots from a public-house, they, under false names, were tried at Exeter, and transported for seven years beyond the sea.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0290",
+      "w": "Catherine: A Story",
+      "s": "Had he not some charm about him that she must needs obey when he whispered in her ear, “Come, follow me!” As she walked towards the lane that morning, how well she remembered each spot as she passed it, and the look it wore for the last time!",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0291",
+      "w": "Catherine: A Story",
+      "s": "In the morning of youth,” and when seen along with whole troops of their companions, these flowers look gaudy and brilliant enough; but there is no object more dismal than one of them alone, and in its autumnal, or seedy state.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0292",
+      "w": "Catherine: A Story",
+      "s": "The Abbe, who had a seat and a table by the bedside, resumed the labours which had brought him into the room in the morning, and busied himself with papers, which occasionally he handed over to his superior for approval.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0293",
+      "w": "Catherine: A Story",
+      "s": "I was put out to a nurse along with John Billings, a blacksmith; and my father run away.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0294",
+      "w": "Catherine: A Story",
+      "s": "That will do”--and he held out a very lean yellow hand, peering from a pair of yellow ruffles.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0295",
+      "w": "Catherine: A Story",
+      "s": "His Lordship looked for some time at his son; who returned the gaze with his mouth wide open.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0296",
+      "w": "Catherine: A Story",
+      "s": "Gazing in your abysmal depths, the feeble ratioci--” ***** There, now, are six columns[*] of the best writing to be found in this or any other book.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0297",
+      "w": "Catherine: A Story",
+      "s": "And as the reader may remember that, on the day of Tommy's first interview with his father, he had previously paid a visit to Mrs.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0298",
+      "w": "Catherine: A Story",
+      "s": "Hayes took another line of argument, and said, “The neighbours would talk, madam.” “Ay, that they will, no doubt,” said Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0299",
+      "w": "Catherine: A Story",
+      "s": "Why was I bound to this wretch?” thought Catherine: “I, who am high-spirited and beautiful (did not HE tell me so?); I who, born a beggar, have raised myself to competence, and might have mounted--who knows whither?--if cursed Fortune had not baulked me!” As Mrs.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0300",
+      "w": "Catherine: A Story",
+      "s": "He had often struck her before when angry, and heaped all kinds of bitter words upon her; but, in the morning, she bore no malice, and the previous quarrel was forgotten, or, at least, passed over.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0301",
+      "w": "Catherine: A Story",
+      "s": "She felt that she was separated from him for ever, and could no more be brought to consider her interests as connected with his own.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0302",
+      "w": "Catherine: A Story",
+      "s": "They are all leagued against me: they WILL kill me: they are only biding their time.” Fear seized him, and he thought of flying that instant and leaving all; and he stole into his room and gathered his money together.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0303",
+      "w": "Catherine: A Story",
+      "s": "Wood knew what she was thinking of, and smiled grimly.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0304",
+      "w": "Catherine: A Story",
+      "s": "I believe it is this wondrous chastity of the lady that has elicited this wondrous constancy of the gentleman.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0305",
+      "w": "Catherine: A Story",
+      "s": "The latter case had been put to him, and annoyed him, as we have seen; the former had actually been pressed upon him by Mrs.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0306",
+      "w": "Catherine: A Story",
+      "s": "Wood was smoking, according to his wont, in the little back-parlour; and as Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0307",
+      "w": "Catherine: A Story",
+      "s": "Hayes; and seasoned by many songs from the recueil of Mr.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    },
+    {
+      "id": "thackeray.p0308",
+      "w": "Catherine: A Story",
+      "s": "Two fellows are sitting shuddering under a doorway; to one of them Tom Billings flung a sixpence.",
+      "src": {
+        "work": "Catherine: A Story"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "thackeray.f.v0001",
+      "kind": "verbatim",
+      "text": "I call the dog Gorer,\" said Sir Pitt; \"he's killed a man that dog has, and is master of a bull, and the mother I used to call Flora; but now I calls her Aroarer, for she's too old to bite.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "thackeray.f.v0002",
+      "kind": "verbatim",
+      "text": "He conducted her to his sisters; where he left her talking and prattling in a way that astonished those ladies, who thought that George might make something of her; and he then went off to transact his business.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "thackeray.f.v0003",
+      "kind": "verbatim",
+      "text": "What I want to know, George,\" the old gentleman said, after slowly smacking his first bumper--\"what I want to know is, how you and--ah--that little thing upstairs, are carrying on?\" \"I think, sir, it is not hard to see,\" George said, with a self-satisfied grin.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "thackeray.f.v0004",
+      "kind": "verbatim",
+      "text": "Why, they never condescended to speak to me, or to ask me into their house, whilst I was staying with Amelia; but we poor governesses, you know, are used to slights of this sort.\" \"My dear Miss Sharp!\" Osborne ejaculated.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "thackeray.f.v0005",
+      "kind": "verbatim",
+      "text": "I, Ma'am, ask a member of this family to marry a drawing-master's daughter?\" \"Her mother was a Montmorency,\" cried out the old lady, pulling at the bell with all her might.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "thackeray.f.v0006",
+      "kind": "verbatim",
+      "text": "The Hebrew aide-de-camp in the service of the officer at the table bid against the Hebrew gentleman employed by the elephant purchasers, and a brisk battle ensued over this little piano, the combatants being greatly encouraged by Mr.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "thackeray.f.v0007",
+      "kind": "verbatim",
+      "text": "Add to all that the junior Osborne was quite as obstinate as the senior: when he wanted a thing, quite as firm in his resolution to get it; and quite as violent when angered, as his father in his most stern moments.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "thackeray.f.v0008",
+      "kind": "verbatim",
+      "text": "Damn the shillings and halfpence, sir,\" he added, as the lawyer was making out the amount of the draft; and, flattering himself that by this stroke of magnanimity he had put the old quiz to the blush, he stalked out of the office with the paper in his pocket.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "thackeray.f.v0009",
+      "kind": "verbatim",
+      "text": "Peggy was one of five sisters, and eleven children of the noble house of Glenmalony; but her husband, though her own cousin, was of the mother's side, and so had not the inestimable advantage of being allied to the Malonys, whom she believed to be the most famous family in the world.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 284
+      }
+    },
+    {
+      "id": "thackeray.f.v0010",
+      "kind": "verbatim",
+      "text": "Here's the proclamation of his Majesty the Emperor and King,\" said the now declared partisan of Napoleon, and taking the document from his pocket, Isidor sternly thrust it into his master's face, and already looked upon the frogged coat and valuables as his own spoil.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "thackeray.f.v0011",
+      "kind": "verbatim",
+      "text": "Firkin, who was shocked at the frightful prodigality of gin; and took the bill to Miss Briggs as accountant-general; who thought it her duty to mention the circumstance to her principal, Miss Crawley.",
+      "work": "Vanity Fair",
+      "lang": "en",
+      "src": {
+        "work": "Vanity Fair"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "thackeray.f.v0012",
+      "kind": "verbatim",
+      "text": "Each day it seemed to grow handsomer and handsomer, and the Princess grew so fond of looking at it, that she would often spill the tea over the cloth, at which her father and mother would wink and wag their heads, and say to each other, ‘Aha!",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "thackeray.f.v0013",
+      "kind": "verbatim",
+      "text": "You don’t know whether Crim Tartary is on the Red Sea or on the Black Sea, I dare say.’ ‘Yes, I do, it’s on the Red Sea,’ says Giglio, at which the Princess burst out laughing at him, and said, ‘Oh, you ninny!",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "thackeray.f.v0014",
+      "kind": "verbatim",
+      "text": "He was an ugly little wretch, in some of the late groom-porter’s old clothes cut down, and much too tight for him; and yet, when he had taken up the ring (as it turned out to be), and was carrying it to his mistress, she thought he looked like a little cupid.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "thackeray.f.v0015",
+      "kind": "verbatim",
+      "text": "Betsinda had left the warming-pan on the floor while the princes were going on with their conversation, and as they began now to quarrel and be very fierce with one another, she thought proper to run away.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "thackeray.f.v0016",
+      "kind": "verbatim",
+      "text": "Up the scaffold stairs she sprang, with the agility of a lighter of lamps; and flinging herself in Bulbo’s arms, regardless of all ceremony, she cried out, ‘Oh, my Prince!",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "thackeray.f.v0017",
+      "kind": "verbatim",
+      "text": "When after travelling on and on, evening came, and all the black pines were bending with snow, and there, at last, was the comfortable light beaming in the woodman’s windows; and so they arrived, and went into his cottage.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "thackeray.f.v0018",
+      "kind": "verbatim",
+      "text": "When they came close to his park gates, this nobleman sent to say he would wait upon Her Majesty: he was a most powerful warrior, and his name was Count Hogginarmo, whose helmet it took two strong negroes to carry.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "thackeray.f.v0019",
+      "kind": "verbatim",
+      "text": "He took a modest lodging opposite the Schools, paid his bill at the inn, and went to his apartment with his trunk, carpet-bag, and not forgetting, we may be sure, his OTHER bag.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "thackeray.f.v0020",
+      "kind": "verbatim",
+      "text": "Giglio give up his sword!’ cried the Prince; and stepping well forward on to the balcony, the royal youth, WITHOUT PREPARATION, delivered a speech so magnificent, that no report can do justice to it.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "thackeray.f.v0021",
+      "kind": "verbatim",
+      "text": "The noble Giglio could not restrain his tears, nor could the Grenadiers, nor the officers, nor could Bulbo himself, when the matter was explained to him, and he was brought to understand that His Majesty’s promise, of course, was ABOVE EVERY THING, and Bulbo must submit.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "thackeray.f.v0022",
+      "kind": "verbatim",
+      "text": "The Cook brought him dishes which he once used to like; but he wouldn’t touch them: he sat down and began writing an adieu to Angelica, as the clock kept always ticking, and the hands drawing nearer to next morning.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "thackeray.f.v0023",
+      "kind": "verbatim",
+      "text": "With such a weapon at command, I wonder, for my part, he thought of ordering his army out; but forth they all came, in magnificent new uniforms, Hedzoff and the Prince’s two college friends each commanding a division, and His Majesty prancing in person at the head of them all.",
+      "work": "The Rose and the Ring",
+      "lang": "en",
+      "src": {
+        "work": "The Rose and the Ring"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "thackeray.f.v0024",
+      "kind": "verbatim",
+      "text": "Did I understand you, my good Twoshoes, to say that your mother was seven-and-twenty years old when you were born, and that she married your esteemed father when she herself was twenty-five?",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "thackeray.f.v0025",
+      "kind": "verbatim",
+      "text": "Those Sans Souci carps may live to be a thousand years old and have nothing to tell but that one day is like another; and the history of friend Goody Twoshoes has not much more variety than theirs.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "thackeray.f.v0026",
+      "kind": "verbatim",
+      "text": "To that pond at Potsdam where the carps live for hundreds of hundreds of years, with hunches of blue mould on their back, I daresay the little Prince and Princess of Preussen-Britannien come sometimes with crumbs and cakes to feed the mouldy ones.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "thackeray.f.v0027",
+      "kind": "verbatim",
+      "text": "As I hope for beef at Christmas, I vow a note shall be sent to Saint Lazarus Union House, in which Mr Roundabout requests the honour of Mrs Twoshoes’ company on Friday, 26th December.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "thackeray.f.v0028",
+      "kind": "verbatim",
+      "text": "We sent to Walter’s mother, requesting that he might join us, and the kind lady replied that the boy had already been at the morning performance of the equestrians, but was most eager to go in the evening likewise.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "thackeray.f.v0029",
+      "kind": "verbatim",
+      "text": "When I remember the Adelphi, and the actresses there: when I think of Miss Chester, and Miss Love, and Mrs Serle at Sadler’s Wells, and her forty glorious pupils—of the Opera and Noblet, and the exquisite young Taglioni, and Pauline Leroux, and a host more!",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "thackeray.f.v0030",
+      "kind": "verbatim",
+      "text": "The school apothecary was sent for: a couple of small globules at night, a trifling preparation of senna in the morning, and we had not to go to school, so that the draught was an actual pleasure.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "thackeray.f.v0031",
+      "kind": "verbatim",
+      "text": "It used to belong to a fellow’s sisters generally; but though he pretended to despise it, and said, “Oh, stuff for girls!” he read it; and I think there were one or two passages which would try my eyes now, were I to meet with the little book.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "thackeray.f.v0032",
+      "kind": "verbatim",
+      "text": "First, there is Jerry arriving from the country, in a green coat and leather gaiters, and being measured for a fashionable suit at Corinthian House, by Corinthian Tom’s tailor.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "thackeray.f.v0033",
+      "kind": "verbatim",
+      "text": "I often think with gratitude of the famous Mr Nelson Lee—the author of I don’t know how many hundred glorious pantomimes—walking by the summer wave at Margate, or Brighton perhaps, revolving in his mind the idea of some new gorgeous spectacle of faëry, which the winter shall see complete.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "thackeray.f.v0034",
+      "kind": "verbatim",
+      "text": "At the Fancy, we saw “Harlequin Hamlet, or Daddy’s Ghost and Nunky’s Pison,” which is all very well—but, gentlemen, if you don’t respect Shakspeare, to whom will you be civil?",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "thackeray.f.v0035",
+      "kind": "verbatim",
+      "text": "The Fairy Edith hereupon comes forward, and finds his body, which straightway leaps up a live harlequin, whilst the Conqueror makes an excellent clown, and the Archbishop of Bayeux a diverting pantaloon, &c.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "thackeray.f.v0036",
+      "kind": "verbatim",
+      "text": "Likewise to the gentleman who picked up a party in Piccadilly, who had slipped and fallen in the snow, and was there on his back, uttering energetic expressions: that party begs to offer thanks, and compliments of the season.",
+      "work": "Some Roundabout Papers",
+      "lang": "en",
+      "src": {
+        "work": "Some Roundabout Papers"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "thackeray.f.v0037",
+      "kind": "verbatim",
+      "text": "As to Gus, she never so much as spoke to him all the evening; but he consoled himself with a great lot of muffins, and sat most of the evening (it was a cruel hot summer) whistling and talking with Roundhand on the verandah.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "thackeray.f.v0038",
+      "kind": "verbatim",
+      "text": "As we were going to dine at Roundhand's, and I had no black satin stock to set it off, I was obliged to place it in the frill of my best shirt, which tore the muslin sadly, by the way.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "thackeray.f.v0039",
+      "kind": "verbatim",
+      "text": "There is no use to describe the grand gala, nor the number of lamps in the lodge and in the garden, nor the crowd of carriages that came in at the gates, nor the troops of curious people outside; nor the ices, fiddlers, wreaths of flowers, and cold supper within.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "thackeray.f.v0040",
+      "kind": "verbatim",
+      "text": "The date and My dear So-and-so one writes off immediately--it is the next part which is hard; and I put my pen in my mouth, flung myself back in my chair, and began to think about it.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "thackeray.f.v0041",
+      "kind": "verbatim",
+      "text": "Our shares rose to a premium; our Director, his lady, and daughter were presented at Court; and the great West Diddlesex Association bid fair to be the first Assurance Office in the kingdom.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "thackeray.f.v0042",
+      "kind": "verbatim",
+      "text": "Hoggarty informed us that she was sick of the country, and was determined to go to London with her dear nephew and niece, and keep house for them, and introduce them to her friends in the metropolis.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "thackeray.f.v0043",
+      "kind": "verbatim",
+      "text": "As luck would have it,\" continued he, \"Miss Brough was in the drawing- room twangling on a guitar, and singing most atrociously out of tune; but as I entered at the door, I cried 'Hush!' to the footman, as loud as possible, stood stock-still, and then walked forward on tip-toe lightly.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 286
+      }
+    },
+    {
+      "id": "thackeray.f.v0044",
+      "kind": "verbatim",
+      "text": "Brough, with his four greys, was entering the lodge-gate; and I should like to have seen the looks of these two gentlemen, as the one was carrying the other's prey off, out of his own very den, under his very nose.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "thackeray.f.v0045",
+      "kind": "verbatim",
+      "text": "On the walls hung all sorts of trumpery pictures in tawdry frames (how different from those capital performances of my cousin Michael Angelo!); on the mantelpiece huge French clocks, vases, and candlesticks; on the sideboards, enormous trays of Birmingham plated ware: for Mr.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 276
+      }
+    },
+    {
+      "id": "thackeray.f.v0046",
+      "kind": "verbatim",
+      "text": "A pretty note was that which you sent to your aunt this morning, and here you have an answer to it.\" I drank the wine, and trembled rather as I read as follows:-- \"Sir,--If, because you knew I had desined to leave you my proparty, you wished to murdar me, and so stepp into it, you are dissapointed.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "thackeray.f.v0047",
+      "kind": "verbatim",
+      "text": "At ten o'clock on that night there was a great rattling and ringing at the outer door, and presently my poor girl fell into my arms; and Gus Hoskins sat blubbering in a corner, as I tried my best to console her.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "thackeray.f.v0048",
+      "kind": "verbatim",
+      "text": "I declare before Heaven, that of all the joys and happy moments it has given me, that was the crowning one--that little ride, with my wife's cheek on my shoulder, down Holborn to the prison!",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "thackeray.f.v0049",
+      "kind": "verbatim",
+      "text": "The Fives Court was opposite our window; and here I used, very unwillingly at first, but afterwards, I do confess, with much eagerness, to take a couple of hours' daily sport.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "thackeray.f.v0050",
+      "kind": "verbatim",
+      "text": "Stokes proceeded:-- \"When the fu--- when the seminary, ma'am, was concluded this morning, your poor daughter-in-law was glad to take shelter in my humble parlour, ma'am; where she wept, and told a thousand stories of the little cherub that's gone.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "thackeray.f.v0051",
+      "kind": "verbatim",
+      "text": "My Lady looked at her for a moment, and then ran into the next room and brought her the baby; and the baby clung to her as if he knew her: and a pretty sight it was to see that dear woman with the child at her bosom.",
+      "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond",
+      "lang": "en",
+      "src": {
+        "work": "The History of Samuel Titmarsh and the Great Hoggarty Diamond"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "thackeray.f.v0052",
+      "kind": "verbatim",
+      "text": "His head, cut clean in two between the eyebrows and nostrils, even between the two front teeth, fell one side on each shoulder, and he galloped on till his horse was stopped by my men, who were not a little amused at the feat.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "thackeray.f.v0053",
+      "kind": "verbatim",
+      "text": "As I had distinguished myself not a little during the war, General Lake sent me up with despatches to Calcutta, where Lord Wellesley received me with the greatest distinction.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "thackeray.f.v0054",
+      "kind": "verbatim",
+      "text": "I don’t know how it happened that, at the end of the war, the poor Shah was not a whit better off than at the beginning; and that though Holkar was beaten, and Scindiah annihilated, Shah Allum was much such a puppet as before.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "thackeray.f.v0055",
+      "kind": "verbatim",
+      "text": "His Excellency had a favourite horn snuff-box (for, though exalted in station, he was in his habits most simple): of this, and about a quarter of an ounce of high-dried Welsh, which he always took, he made me a present, saying, in front of the line, “Accept this, Mr.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "thackeray.f.v0056",
+      "kind": "verbatim",
+      "text": "It was a burning hot day, and we were all refreshing ourselves after the morning’s march, when I, who was on the advanced picket along with O’Gawler of the King’s Dragoons, was made aware of the enemy’s neighbourhood in a very singular manner.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "thackeray.f.v0057",
+      "kind": "verbatim",
+      "text": "I have had many a proud moment in my life, but never such a proud one as this; and I would readily pardon the word “coward,” as applied to me by Montholon, in consideration of the testimony which his master bore in my favour.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "thackeray.f.v0058",
+      "kind": "verbatim",
+      "text": "Sheeny was with the Queen’s people, not in a military capacity, but as representative of an English journal; to which, for a trifling weekly remuneration, he was in the habit of transmitting accounts of the movements of the belligerents, and his own opinion of the politics of Spain.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 283
+      }
+    },
+    {
+      "id": "thackeray.f.v0059",
+      "kind": "verbatim",
+      "text": "It took me two hours daily to curl my hair in ten thousand little corkscrew ringlets, which waved over my shoulders, and to get my moustaches well round to the corners of my eyelids.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "thackeray.f.v0060",
+      "kind": "verbatim",
+      "text": "Propitious Heaven must sure a hero save Like Paris handsome, and like Hector brave!’ “My officers (Captains Biggs and Mackanulty, Lieutenants Glogger, Pappendick, Stuffle, &c.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "thackeray.f.v0061",
+      "kind": "verbatim",
+      "text": "It is an encouraging prospect: know you not that the ruffian Holkar, if it be he, will with to- morrow’s dawn beleaguer our little fort, and throw thousands of men against our walls?",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "thackeray.f.v0062",
+      "kind": "verbatim",
+      "text": "By the hundred and eleven incarnations of Vishnu,” said I, solemnly (an oath which no Indian was ever known to break), “I swear that so it is: so at least he told me, and I have good cause to know his power.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "thackeray.f.v0063",
+      "kind": "verbatim",
+      "text": "As soon as I entered the tents a host of menials sprang forward, some to ease me of my armour, some to offer me refreshments, some with hookahs, attar of roses (in great quart bottles), and the thousand delicacies of Eastern life.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "thackeray.f.v0064",
+      "kind": "verbatim",
+      "text": "I am commander, too, in this fort—the enemy is without it; another word of mockery—another glance of scorn—and, by Heaven, I will hurl every man and woman from the battlements, a prey to the ruffianly Holkar!” This quieted them.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "thackeray.f.v0065",
+      "kind": "verbatim",
+      "text": "Opening it, there, where I had left ingots, sacks of bright tomauns, kopeks and rupees, strings of diamonds as big as ducks’ eggs, rubies as red as the lips of my Belinda, countless strings of pearls, amethysts, emeralds, piles upon piles of bank-notes—I found—a piece of paper!",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "thackeray.f.v0066",
+      "kind": "verbatim",
+      "text": "At that distance—it was about the spot where the Futtyghur hill began gradually to rise—the invading force stopped; the elephants drew up in a line, at right angles with our wall (the fools!",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "thackeray.f.v0067",
+      "kind": "verbatim",
+      "text": "I gave one thought to my blessed, my beautiful Belinda, and then, stepping into the front, took down one of the swivels;—a shower of matchlock balls came whizzing round my head.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "thackeray.f.v0068",
+      "kind": "verbatim",
+      "text": "I descended calmly the hill, a very steep one, and coming to the spot, took my pick of the animals, choosing a tolerably small and plump one, of about thirteen feet high, which the vultures had respected.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "thackeray.f.v0069",
+      "kind": "verbatim",
+      "text": "I had no wound; my repeated swoons had been brought on (as indeed well they might) by my gigantic efforts in carrying the elephant up a steep hill a quarter of a mile in length.",
+      "work": "The Tremendous Adventures of Major Gahagan",
+      "lang": "en",
+      "src": {
+        "work": "The Tremendous Adventures of Major Gahagan"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "thackeray.f.v0070",
+      "kind": "verbatim",
+      "text": "He sighed and drank, sighed and drank, and drank again, until he had swallowed so much of the Corporal's liquor, as to be induced to accept a guinea from his purse also; and found himself, on returning to reason and sobriety, a soldier of Queen Anne's.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "thackeray.f.v0071",
+      "kind": "verbatim",
+      "text": "Run down, child, to Farmer Brigg's and get one: pluck it before you bring it, you know, and we will make his Lordship a pretty breakfast.” Catherine took up her basket, and away she went by the back-yard, through the stables.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "thackeray.f.v0072",
+      "kind": "verbatim",
+      "text": "Catherine: and whether she ran away with him, or he with her, I shall not make it my business to inquire; but certainly at the end of three months (which must be crowded up into this one little sentence), another elopement took place in the village.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "thackeray.f.v0073",
+      "kind": "verbatim",
+      "text": "Addison, and lent many a piece to Dick Steele (a sad debauched rogue, my dear); and, above all, I'll tell you what I did--the noblest stroke that sure ever a gentleman performed in my situation.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "thackeray.f.v0074",
+      "kind": "verbatim",
+      "text": "Hayes “I know little about it one way or other, but shall take it for granted, if you will explain a little more of this business.” “I sildom condescind to explean,” said Mr.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "thackeray.f.v0075",
+      "kind": "verbatim",
+      "text": "Here, however, the day of retribution arrived; for, having stolen three pewter-pots from a public-house, they, under false names, were tried at Exeter, and transported for seven years beyond the sea.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "thackeray.f.v0076",
+      "kind": "verbatim",
+      "text": "Had he not some charm about him that she must needs obey when he whispered in her ear, “Come, follow me!” As she walked towards the lane that morning, how well she remembered each spot as she passed it, and the look it wore for the last time!",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "thackeray.f.v0077",
+      "kind": "verbatim",
+      "text": "In the morning of youth,” and when seen along with whole troops of their companions, these flowers look gaudy and brilliant enough; but there is no object more dismal than one of them alone, and in its autumnal, or seedy state.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "thackeray.f.v0078",
+      "kind": "verbatim",
+      "text": "The Abbe, who had a seat and a table by the bedside, resumed the labours which had brought him into the room in the morning, and busied himself with papers, which occasionally he handed over to his superior for approval.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "thackeray.f.v0079",
+      "kind": "verbatim",
+      "text": "He had often struck her before when angry, and heaped all kinds of bitter words upon her; but, in the morning, she bore no malice, and the previous quarrel was forgotten, or, at least, passed over.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "thackeray.f.v0080",
+      "kind": "verbatim",
+      "text": "They are all leagued against me: they WILL kill me: they are only biding their time.” Fear seized him, and he thought of flying that instant and leaving all; and he stole into his room and gathered his money together.",
+      "work": "Catherine: A Story",
+      "lang": "en",
+      "src": {
+        "work": "Catherine: A Story"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "thackeray.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 3,
+      "worksSpan": 2,
+      "examples": [
+        "If I were eighty, would I like to feel the hunger always gnawing, gnawing?",
+        "If you were in her place, would you like to have a remembrance of better early days, when you were young and happy, and loving, perhaps; or would you prefer to have no past on which your mind could rest?"
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 308,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:e34baf66b9ad55d6bbaaf2a6a35980631b751d96c7dffe67c3a9849131909c7e"
+}

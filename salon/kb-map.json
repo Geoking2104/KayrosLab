@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-22T11:09:37.176Z",
+  "updatedAt": "2026-11-23T09:53:03.415Z",
   "authors": {
     "smith": {
       "kb": "salon-smith",
@@ -20,7 +20,7 @@
       ],
       "pack": {
         "path": "kb/smith.json",
-        "builtAt": "2026-11-22T11:09:33.054Z",
+        "builtAt": "2026-11-23T09:52:48.932Z",
         "sentences": 227,
         "formulas": 82,
         "checksum": "sha256:cd10485b9ddceac8250456253eb9fdf4ea69524a44e84cd4db0fdd919cdfd73a"
@@ -53,7 +53,7 @@
       ],
       "pack": {
         "path": "kb/aristote.json",
-        "builtAt": "2026-11-22T11:09:33.078Z",
+        "builtAt": "2026-11-23T09:52:49.039Z",
         "sentences": 296,
         "formulas": 81,
         "checksum": "sha256:b86cec33d161ed10960e4ca56b87646a3a3d4270cf5dbee934d49655dd1b247a"
@@ -86,7 +86,7 @@
       ],
       "pack": {
         "path": "kb/spinoza.json",
-        "builtAt": "2026-11-22T11:09:33.098Z",
+        "builtAt": "2026-11-23T09:52:49.107Z",
         "sentences": 276,
         "formulas": 81,
         "checksum": "sha256:274906f182fe46efa1e5f7818738c3af47b4c356a6793c94ef82c8e8fca37fce"
@@ -119,7 +119,7 @@
       ],
       "pack": {
         "path": "kb/darwin.json",
-        "builtAt": "2026-11-22T11:09:33.116Z",
+        "builtAt": "2026-11-23T09:52:49.162Z",
         "sentences": 275,
         "formulas": 80,
         "checksum": "sha256:1e63c1fdc32ff9c8edcc5832818c47f5bd2d6f481b206d46340c34a17b025d13"
@@ -144,7 +144,7 @@
       ],
       "pack": {
         "path": "kb/confucius.json",
-        "builtAt": "2026-11-22T11:09:33.127Z",
+        "builtAt": "2026-11-23T09:52:49.200Z",
         "sentences": 226,
         "formulas": 83,
         "checksum": "sha256:c339af4d86fe955ea1b43e0617048b63227e874aa8a94a6d4fc53c865f03eeaf"
@@ -177,7 +177,7 @@
       ],
       "pack": {
         "path": "kb/poe.json",
-        "builtAt": "2026-11-22T11:09:33.141Z",
+        "builtAt": "2026-11-23T09:52:49.233Z",
         "sentences": 275,
         "formulas": 81,
         "checksum": "sha256:8e677caec700db7b9d5a654cfb1de4dbfac962b6d2a287d08cce2d334843b71d"
@@ -210,7 +210,7 @@
       ],
       "pack": {
         "path": "kb/kant.json",
-        "builtAt": "2026-11-22T11:09:33.155Z",
+        "builtAt": "2026-11-23T09:52:49.265Z",
         "sentences": 284,
         "formulas": 81,
         "checksum": "sha256:37c7bc1f1d5720dc0712d7ca66eb797b03fad1d7d9b6a89bd84698d26f6e0ff2"
@@ -243,7 +243,7 @@
       ],
       "pack": {
         "path": "kb/dostoevski.json",
-        "builtAt": "2026-11-22T11:09:33.165Z",
+        "builtAt": "2026-11-23T09:52:49.300Z",
         "sentences": 255,
         "formulas": 80,
         "checksum": "sha256:37a1ded6642c44230e3d4aeb1bb717d8014b29ddcd3022e1afe563bfd12a4d4c"
@@ -276,7 +276,7 @@
       ],
       "pack": {
         "path": "kb/kafka.json",
-        "builtAt": "2026-11-22T11:09:33.173Z",
+        "builtAt": "2026-11-23T09:52:49.330Z",
         "sentences": 263,
         "formulas": 81,
         "checksum": "sha256:c4d3572a6dc1f279682ad1a524ebbe357d40d5debeb467656a6182dffa15dffc"
@@ -309,7 +309,7 @@
       ],
       "pack": {
         "path": "kb/nietzsche.json",
-        "builtAt": "2026-11-22T11:09:33.182Z",
+        "builtAt": "2026-11-23T09:52:49.365Z",
         "sentences": 276,
         "formulas": 80,
         "checksum": "sha256:9d48a94a1029b95649bc4238d39d32d9a2c998e751199642e29c88e2e057de88"
@@ -342,7 +342,7 @@
       ],
       "pack": {
         "path": "kb/balzac.json",
-        "builtAt": "2026-11-22T11:09:33.190Z",
+        "builtAt": "2026-11-23T09:52:49.391Z",
         "sentences": 260,
         "formulas": 81,
         "checksum": "sha256:f2757882aaef2a577ed62667468ab7276856ba8a2ee73beff2df6c9282e945ad"
@@ -375,7 +375,7 @@
       ],
       "pack": {
         "path": "kb/austen.json",
-        "builtAt": "2026-11-22T11:09:33.198Z",
+        "builtAt": "2026-11-23T09:52:49.421Z",
         "sentences": 261,
         "formulas": 81,
         "checksum": "sha256:214beab318bcc2401b77739c1ff495ab2a53bedfd04a597e48c7b0ead1efee22"
@@ -404,7 +404,7 @@
       ],
       "pack": {
         "path": "kb/rousseau.json",
-        "builtAt": "2026-11-22T11:09:33.207Z",
+        "builtAt": "2026-11-23T09:52:49.454Z",
         "sentences": 286,
         "formulas": 82,
         "checksum": "sha256:5c1b90849886b49b93b677cc1841b54f23bddde16b809e58cbcf8d3f0f3aa52f"
@@ -437,7 +437,7 @@
       ],
       "pack": {
         "path": "kb/verne.json",
-        "builtAt": "2026-11-22T11:09:33.215Z",
+        "builtAt": "2026-11-23T09:52:49.484Z",
         "sentences": 264,
         "formulas": 80,
         "checksum": "sha256:f250e3b48360487ec301a57cd810bb224efc3805bd3629555c7d91f6c8c170ae"
@@ -470,7 +470,7 @@
       ],
       "pack": {
         "path": "kb/marx.json",
-        "builtAt": "2026-11-22T11:09:33.222Z",
+        "builtAt": "2026-11-23T09:52:49.509Z",
         "sentences": 278,
         "formulas": 80,
         "checksum": "sha256:219bc134b20083253a6a673bec4bbfd7c1fb38a12dae89c9d895236b6e2bc313"
@@ -503,7 +503,7 @@
       ],
       "pack": {
         "path": "kb/tolstoi.json",
-        "builtAt": "2026-11-22T11:09:33.231Z",
+        "builtAt": "2026-11-23T09:52:49.535Z",
         "sentences": 263,
         "formulas": 80,
         "checksum": "sha256:99229fa54434d25cf853e98086eb0e8393f4765a37c779ab4f8133e6bceedb49"
@@ -520,7 +520,7 @@
       ],
       "pack": {
         "path": "kb/marcaurele.json",
-        "builtAt": "2026-11-22T11:09:33.238Z",
+        "builtAt": "2026-11-23T09:52:49.567Z",
         "sentences": 227,
         "formulas": 81,
         "checksum": "sha256:8a229cda9b403b6bf27aba112d8dccb1c8841a1a2ca22fdfcb61f111a4790056"
@@ -549,7 +549,7 @@
       ],
       "pack": {
         "path": "kb/montaigne.json",
-        "builtAt": "2026-11-22T11:09:33.248Z",
+        "builtAt": "2026-11-23T09:52:49.606Z",
         "sentences": 272,
         "formulas": 81,
         "checksum": "sha256:056269c9d4bff0b633ff558d8a74ffd6f9236fe2ed925c8604b17bc68a992a0f"
@@ -582,7 +582,7 @@
       ],
       "pack": {
         "path": "kb/cervantes.json",
-        "builtAt": "2026-11-22T11:09:33.256Z",
+        "builtAt": "2026-11-23T09:52:49.662Z",
         "sentences": 276,
         "formulas": 81,
         "checksum": "sha256:ff07db6888408094b4cb923d262326fecbecf2a707b8ad9fa5fd6fbe3ba0af8c"
@@ -615,7 +615,7 @@
       ],
       "pack": {
         "path": "kb/machiavel.json",
-        "builtAt": "2026-11-22T11:09:33.265Z",
+        "builtAt": "2026-11-23T09:52:49.753Z",
         "sentences": 281,
         "formulas": 80,
         "checksum": "sha256:59bcf341fccf854676954416ec3f5d396178e8871b6ddd07b38b09ed978a88a4"
@@ -648,7 +648,7 @@
       ],
       "pack": {
         "path": "kb/wilde.json",
-        "builtAt": "2026-11-22T11:09:33.271Z",
+        "builtAt": "2026-11-23T09:52:49.825Z",
         "sentences": 208,
         "formulas": 81,
         "checksum": "sha256:39a2e74f4246365636ddd999e84769730035989e522cbe23908ab4f71df6ce52"
@@ -681,7 +681,7 @@
       ],
       "pack": {
         "path": "kb/platon.json",
-        "builtAt": "2026-11-22T11:09:33.279Z",
+        "builtAt": "2026-11-23T09:52:49.903Z",
         "sentences": 268,
         "formulas": 80,
         "checksum": "sha256:8399c020c4c17457c13342bee0774f8e0751366399f5728b1a268c5bc2c69ba7"
@@ -710,7 +710,7 @@
       ],
       "pack": {
         "path": "kb/descartes.json",
-        "builtAt": "2026-11-22T11:09:33.288Z",
+        "builtAt": "2026-11-23T09:52:49.937Z",
         "sentences": 253,
         "formulas": 82,
         "checksum": "sha256:d975e7782ebdf56d88f34a66b8d6ec4e13c6506815c5c0fe50e3d6365632cc68"
@@ -743,7 +743,7 @@
       ],
       "pack": {
         "path": "kb/stendhal.json",
-        "builtAt": "2026-11-22T11:09:33.296Z",
+        "builtAt": "2026-11-23T09:52:49.969Z",
         "sentences": 265,
         "formulas": 83,
         "checksum": "sha256:94192bbba100b4dfe82ffc64d9b2c19ae41245d4a402a782abb81e66edc6fa2e"
@@ -760,7 +760,7 @@
       ],
       "pack": {
         "path": "kb/suntzu.json",
-        "builtAt": "2026-11-22T11:09:33.304Z",
+        "builtAt": "2026-11-23T09:52:50.001Z",
         "sentences": 222,
         "formulas": 81,
         "checksum": "sha256:7e717e4dfa61acfba1ec449da3ae396e0850e6fdacfad9b7386a9a8b355e9e12"
@@ -793,7 +793,7 @@
       ],
       "pack": {
         "path": "kb/hugo.json",
-        "builtAt": "2026-11-22T11:09:33.310Z",
+        "builtAt": "2026-11-23T09:52:50.025Z",
         "sentences": 242,
         "formulas": 82,
         "checksum": "sha256:a722b91b4252d596cefc81b16f796bf9beaf396ec506f497a1a4ba0e534c2b8d"
@@ -826,7 +826,7 @@
       ],
       "pack": {
         "path": "kb/voltaire.json",
-        "builtAt": "2026-11-22T11:09:33.319Z",
+        "builtAt": "2026-11-23T09:52:50.060Z",
         "sentences": 285,
         "formulas": 82,
         "checksum": "sha256:7bb94108b493f10fa9fe43938307e1704ce8aafcde983fbeffa8c70badfaba5d"
@@ -859,7 +859,7 @@
       ],
       "pack": {
         "path": "kb/shakespeare.json",
-        "builtAt": "2026-11-22T11:09:33.325Z",
+        "builtAt": "2026-11-23T09:52:50.081Z",
         "sentences": 237,
         "formulas": 81,
         "checksum": "sha256:36e8fe77d424b3ffb29d335d1f3fa15a904432ebffc933653f293cdd607def39"
@@ -892,7 +892,7 @@
       ],
       "pack": {
         "path": "kb/seneca.json",
-        "builtAt": "2026-11-22T11:09:33.333Z",
+        "builtAt": "2026-11-23T09:52:50.102Z",
         "sentences": 258,
         "formulas": 81,
         "checksum": "sha256:c4435cf67f12b17c46fd7175e06fb0fd70c0daec1aa846cbb6c988bc80c0969e"
@@ -925,7 +925,7 @@
       ],
       "pack": {
         "path": "kb/ciceron.json",
-        "builtAt": "2026-11-22T11:09:33.342Z",
+        "builtAt": "2026-11-23T09:52:50.130Z",
         "sentences": 276,
         "formulas": 81,
         "checksum": "sha256:6513989ae683cdcff7abda211717c50dc7fb1206ef736bb9c67f097a56d67712"
@@ -954,7 +954,7 @@
       ],
       "pack": {
         "path": "kb/epictete.json",
-        "builtAt": "2026-11-22T11:09:33.351Z",
+        "builtAt": "2026-11-23T09:52:50.153Z",
         "sentences": 271,
         "formulas": 81,
         "checksum": "sha256:b49a060377398ab266fc4efbcd4e2c8e7652841730478c64c3a1b4d622076763"
@@ -971,7 +971,7 @@
       ],
       "pack": {
         "path": "kb/epicure.json",
-        "builtAt": "2026-11-22T11:09:33.359Z",
+        "builtAt": "2026-11-23T09:52:50.172Z",
         "sentences": 78,
         "formulas": 43,
         "checksum": "sha256:887abeadd02b9ab3efa1bb67ff16ab1faf2091723623f50fc7a4c05a52600e1b"
@@ -1000,7 +1000,7 @@
       ],
       "pack": {
         "path": "kb/augustin.json",
-        "builtAt": "2026-11-22T11:09:33.372Z",
+        "builtAt": "2026-11-23T09:52:50.197Z",
         "sentences": 274,
         "formulas": 81,
         "checksum": "sha256:78d76fdd60ceb513015e7a0d9bdeea918b97b208685ba33aeb481714cc5cd942"
@@ -1017,7 +1017,7 @@
       ],
       "pack": {
         "path": "kb/boece.json",
-        "builtAt": "2026-11-22T11:09:33.379Z",
+        "builtAt": "2026-11-23T09:52:50.218Z",
         "sentences": 228,
         "formulas": 81,
         "checksum": "sha256:bc0f02565c4dff348803c0a1bc753205b26238e94f0cddeb8f22d66489b556e4"
@@ -1038,7 +1038,7 @@
       ],
       "pack": {
         "path": "kb/aquinas.json",
-        "builtAt": "2026-11-22T11:09:33.384Z",
+        "builtAt": "2026-11-23T09:52:50.233Z",
         "sentences": 152,
         "formulas": 80,
         "checksum": "sha256:afcc8760f608b6c6526a58e2387e88070a77bcaae2a167eb4e86841861dc22b5"
@@ -1067,7 +1067,7 @@
       ],
       "pack": {
         "path": "kb/hobbes.json",
-        "builtAt": "2026-11-22T11:09:33.392Z",
+        "builtAt": "2026-11-23T09:52:50.256Z",
         "sentences": 268,
         "formulas": 80,
         "checksum": "sha256:524fea9b50f2110330de49115f76299a358fa9967a30c2e25b218181df2c00a9"
@@ -1092,7 +1092,7 @@
       ],
       "pack": {
         "path": "kb/locke.json",
-        "builtAt": "2026-11-22T11:09:33.400Z",
+        "builtAt": "2026-11-23T09:52:50.283Z",
         "sentences": 223,
         "formulas": 81,
         "checksum": "sha256:7c85740a59e96f4dda32ed1797d775b838eaae47dfc717afee3dbddebd6665bd"
@@ -1125,7 +1125,7 @@
       ],
       "pack": {
         "path": "kb/hume.json",
-        "builtAt": "2026-11-22T11:09:33.409Z",
+        "builtAt": "2026-11-23T09:52:50.311Z",
         "sentences": 286,
         "formulas": 81,
         "checksum": "sha256:d2943e22f62014de96f452efd1bc710623aa218fb0130661c3557cdded224675"
@@ -1150,7 +1150,7 @@
       ],
       "pack": {
         "path": "kb/leibniz.json",
-        "builtAt": "2026-11-22T11:09:33.415Z",
+        "builtAt": "2026-11-23T09:52:50.334Z",
         "sentences": 229,
         "formulas": 82,
         "checksum": "sha256:0d8645917f75f7b30e20d2b2a114be083cab989e94e8bed3850f697a2ffed19a"
@@ -1175,7 +1175,7 @@
       ],
       "pack": {
         "path": "kb/pascal.json",
-        "builtAt": "2026-11-22T11:09:33.422Z",
+        "builtAt": "2026-11-23T09:52:50.355Z",
         "sentences": 216,
         "formulas": 82,
         "checksum": "sha256:e2069e5d5cd08d3f04133322bc1c1af87655a4ec866f4deb9cd686d6782fd7fb"
@@ -1208,7 +1208,7 @@
       ],
       "pack": {
         "path": "kb/berkeley.json",
-        "builtAt": "2026-11-22T11:09:33.429Z",
+        "builtAt": "2026-11-23T09:52:50.378Z",
         "sentences": 278,
         "formulas": 81,
         "checksum": "sha256:1caac45ed88cce3eaae885966772c4b87c768e20b2d43b91423d17c7b8933868"
@@ -1241,7 +1241,7 @@
       ],
       "pack": {
         "path": "kb/hegel.json",
-        "builtAt": "2026-11-22T11:09:33.437Z",
+        "builtAt": "2026-11-23T09:52:50.404Z",
         "sentences": 290,
         "formulas": 81,
         "checksum": "sha256:bb05871c4d7d4283d6838f405ee400401c11380fecacb0324c507478fa9aac88"
@@ -1274,7 +1274,7 @@
       ],
       "pack": {
         "path": "kb/schopenhauer.json",
-        "builtAt": "2026-11-22T11:09:33.447Z",
+        "builtAt": "2026-11-23T09:52:50.435Z",
         "sentences": 281,
         "formulas": 81,
         "checksum": "sha256:53a26dbbeb15953fc47d64a8a3c9241e47bec6b2b56b7845f1513bf08e216f69"
@@ -1295,7 +1295,7 @@
       ],
       "pack": {
         "path": "kb/kierkegaard.json",
-        "builtAt": "2026-11-22T11:09:33.454Z",
+        "builtAt": "2026-11-23T09:52:50.455Z",
         "sentences": 145,
         "formulas": 80,
         "checksum": "sha256:78a529693b83afe679d53600da56be597897f3dcecd015fa2ffdb2c1f8aea5c6"
@@ -1328,7 +1328,7 @@
       ],
       "pack": {
         "path": "kb/mill.json",
-        "builtAt": "2026-11-22T11:09:33.462Z",
+        "builtAt": "2026-11-23T09:52:50.483Z",
         "sentences": 280,
         "formulas": 81,
         "checksum": "sha256:d61c32c8796dfb54793549c57b1c907771174052ae19487dc625f3176c447046"
@@ -1361,7 +1361,7 @@
       ],
       "pack": {
         "path": "kb/emerson.json",
-        "builtAt": "2026-11-22T11:09:33.469Z",
+        "builtAt": "2026-11-23T09:52:50.507Z",
         "sentences": 270,
         "formulas": 80,
         "checksum": "sha256:e0bdd72805bb3d3f819f6e3fc6289d670005d8956fbdfdced5bab712a7f8f3cf"
@@ -1394,7 +1394,7 @@
       ],
       "pack": {
         "path": "kb/james.json",
-        "builtAt": "2026-11-22T11:09:33.478Z",
+        "builtAt": "2026-11-23T09:52:50.534Z",
         "sentences": 278,
         "formulas": 81,
         "checksum": "sha256:7ab5fc6838557e0ad7041eb1868c55ea96580f50b5f7b7eea9c4a8c7edf13123"
@@ -1427,7 +1427,7 @@
       ],
       "pack": {
         "path": "kb/diderot.json",
-        "builtAt": "2026-11-22T11:09:33.485Z",
+        "builtAt": "2026-11-23T09:52:50.559Z",
         "sentences": 255,
         "formulas": 83,
         "checksum": "sha256:8358511d404bb2c3475157c6cf727280fb9cad7b7e64d64ac7f8682376394ecf"
@@ -1460,7 +1460,7 @@
       ],
       "pack": {
         "path": "kb/christianisme.json",
-        "builtAt": "2026-11-22T11:09:33.492Z",
+        "builtAt": "2026-11-23T09:52:50.575Z",
         "sentences": 290,
         "formulas": 80,
         "checksum": "sha256:f03d9b9e4031bd3fdefbe3bfb52e11cd5ed354cb586a0fcb55a4e15e5c6de423"
@@ -1493,7 +1493,7 @@
       ],
       "pack": {
         "path": "kb/judaisme.json",
-        "builtAt": "2026-11-22T11:09:33.499Z",
+        "builtAt": "2026-11-23T09:52:50.595Z",
         "sentences": 294,
         "formulas": 80,
         "checksum": "sha256:4232592aedba6705f41471da844e2e721e88d682a4f62d40bb1f0ac14f6bf740"
@@ -1510,7 +1510,7 @@
       ],
       "pack": {
         "path": "kb/islam.json",
-        "builtAt": "2026-11-22T11:09:33.505Z",
+        "builtAt": "2026-11-23T09:52:50.622Z",
         "sentences": 204,
         "formulas": 82,
         "checksum": "sha256:69886572ddd6190bb87dfc343b1b3a16c987046304e8f257407b861c2fa80e2f"
@@ -1539,7 +1539,7 @@
       ],
       "pack": {
         "path": "kb/hindouisme.json",
-        "builtAt": "2026-11-22T11:09:33.516Z",
+        "builtAt": "2026-11-23T09:52:50.649Z",
         "sentences": 270,
         "formulas": 81,
         "checksum": "sha256:d9ee3111bb3867e2417ff65be37f85e15301113648d386dbc222d1f08938eb8b"
@@ -1564,7 +1564,7 @@
       ],
       "pack": {
         "path": "kb/bouddhisme.json",
-        "builtAt": "2026-11-22T11:09:33.527Z",
+        "builtAt": "2026-11-23T09:52:50.676Z",
         "sentences": 217,
         "formulas": 81,
         "checksum": "sha256:3ed4fd67e1b3af8d843377144ca0d88375482ec5db63fd6a987c6e1b82cfd7d5"
@@ -1585,7 +1585,7 @@
       ],
       "pack": {
         "path": "kb/taoisme.json",
-        "builtAt": "2026-11-22T11:09:33.533Z",
+        "builtAt": "2026-11-23T09:52:50.697Z",
         "sentences": 145,
         "formulas": 81,
         "checksum": "sha256:06ca82dd8c6b7dee6604b6b99a80fdaadfe2473fe637b33160de2f641025ec40"
@@ -1618,7 +1618,7 @@
       ],
       "pack": {
         "path": "kb/moliere.json",
-        "builtAt": "2026-11-22T11:09:33.539Z",
+        "builtAt": "2026-11-23T09:52:50.721Z",
         "sentences": 261,
         "formulas": 83,
         "checksum": "sha256:38b5ba69745e5f346ff06317690fb1a294d2400da9dd82b0ea8658e52b4825a1"
@@ -1639,7 +1639,7 @@
       ],
       "pack": {
         "path": "kb/racine.json",
-        "builtAt": "2026-11-22T11:09:33.544Z",
+        "builtAt": "2026-11-23T09:52:50.740Z",
         "sentences": 136,
         "formulas": 77,
         "checksum": "sha256:41e059aa4c2503462b5e7f41596e142ea0254f43e127d00920c67f4d2868bad7"
@@ -1664,7 +1664,7 @@
       ],
       "pack": {
         "path": "kb/montesquieu.json",
-        "builtAt": "2026-11-22T11:09:33.550Z",
+        "builtAt": "2026-11-23T09:52:50.771Z",
         "sentences": 219,
         "formulas": 84,
         "checksum": "sha256:dacd00fc610fffd69e84bbca4d20325352a46fed51ca9583fead2183dee655a5"
@@ -1697,7 +1697,7 @@
       ],
       "pack": {
         "path": "kb/flaubert.json",
-        "builtAt": "2026-11-22T11:09:33.559Z",
+        "builtAt": "2026-11-23T09:52:50.790Z",
         "sentences": 248,
         "formulas": 81,
         "checksum": "sha256:10fe3af89fcdba0cd3662c3c73eddfd5e728d57951e5328739d68bd67906fcaf"
@@ -1730,7 +1730,7 @@
       ],
       "pack": {
         "path": "kb/maupassant.json",
-        "builtAt": "2026-11-22T11:09:33.565Z",
+        "builtAt": "2026-11-23T09:52:50.812Z",
         "sentences": 234,
         "formulas": 81,
         "checksum": "sha256:f49c88dde31432a4833096b0f179cfa4783615fbe2575ac762e44eb10bd2e37e"
@@ -1763,7 +1763,7 @@
       ],
       "pack": {
         "path": "kb/baudelaire.json",
-        "builtAt": "2026-11-22T11:09:33.573Z",
+        "builtAt": "2026-11-23T09:52:50.839Z",
         "sentences": 268,
         "formulas": 82,
         "checksum": "sha256:a91372e0a03fbd9874255c4297e809885b2946183dc829dbd3c9fd38819ec724"
@@ -1796,7 +1796,7 @@
       ],
       "pack": {
         "path": "kb/dickens.json",
-        "builtAt": "2026-11-22T11:09:33.581Z",
+        "builtAt": "2026-11-23T09:52:50.867Z",
         "sentences": 261,
         "formulas": 80,
         "checksum": "sha256:83e8dbef7cde648cf22c224470135e47739036ed5ee230930384b2b05e874ce8"
@@ -1829,7 +1829,7 @@
       ],
       "pack": {
         "path": "kb/melville.json",
-        "builtAt": "2026-11-22T11:09:33.589Z",
+        "builtAt": "2026-11-23T09:52:50.897Z",
         "sentences": 272,
         "formulas": 81,
         "checksum": "sha256:42d878ade4197fbd6c714829380b2588bc03e515574342607708b5b810db7657"
@@ -1862,7 +1862,7 @@
       ],
       "pack": {
         "path": "kb/twain.json",
-        "builtAt": "2026-11-22T11:09:33.597Z",
+        "builtAt": "2026-11-23T09:52:50.927Z",
         "sentences": 256,
         "formulas": 80,
         "checksum": "sha256:8d833fb56abe22d292f35d61c099d9c70829cf1cd1ceb1413eb9648573cb5e20"
@@ -1891,7 +1891,7 @@
       ],
       "pack": {
         "path": "kb/whitman.json",
-        "builtAt": "2026-11-22T11:09:33.605Z",
+        "builtAt": "2026-11-23T09:52:50.952Z",
         "sentences": 258,
         "formulas": 80,
         "checksum": "sha256:7926abf03c61969f8c0a9f77ad4492341cd10ec8aa5cbfa73ca2f7d12748e33d"
@@ -1908,7 +1908,7 @@
       ],
       "pack": {
         "path": "kb/bronte.json",
-        "builtAt": "2026-11-22T11:09:33.612Z",
+        "builtAt": "2026-11-23T09:52:50.976Z",
         "sentences": 213,
         "formulas": 81,
         "checksum": "sha256:8dece70dc8fa155c1990ee3d245428bf8ca7a72037e988913b7f4f349e162e41"
@@ -1941,7 +1941,7 @@
       ],
       "pack": {
         "path": "kb/hardy.json",
-        "builtAt": "2026-11-22T11:09:33.620Z",
+        "builtAt": "2026-11-23T09:52:51.002Z",
         "sentences": 264,
         "formulas": 81,
         "checksum": "sha256:19784663c4a5eddb25715d4e058432db93a86fe08b6ffad7689dda50502de5ce"
@@ -1974,7 +1974,7 @@
       ],
       "pack": {
         "path": "kb/goethe.json",
-        "builtAt": "2026-11-22T11:09:33.626Z",
+        "builtAt": "2026-11-23T09:52:51.025Z",
         "sentences": 262,
         "formulas": 80,
         "checksum": "sha256:4e1eb1d125e73deaed15ca2a3a00c2110bdf7f229040291d59752cab2678fe67"
@@ -1991,12 +1991,204 @@
       ],
       "pack": {
         "path": "kb/dante.json",
-        "builtAt": "2026-11-22T11:09:33.634Z",
+        "builtAt": "2026-11-23T09:52:51.053Z",
         "sentences": 226,
         "formulas": 80,
         "checksum": "sha256:ca004d7410af496c82d2f909a9ea4eeabbd5bd008b60e9a3f84c29fe7761ace8"
       },
       "kbVersion": "dante@bootstrap-2026-11-22"
+    },
+    "corneille": {
+      "kb": "salon-corneille",
+      "works": [],
+      "pack": {
+        "path": "kb/corneille.json",
+        "builtAt": "2026-11-23T09:52:51.082Z",
+        "sentences": 329,
+        "formulas": 83,
+        "checksum": "sha256:dd172cf961dbe25095dc90e6c7efda6cb073974ca3cea7d8f82e2c188742da79"
+      },
+      "kbVersion": "corneille@bootstrap-2026-11-23"
+    },
+    "labruyere": {
+      "kb": "salon-labruyere",
+      "works": [],
+      "pack": {
+        "path": "kb/labruyere.json",
+        "builtAt": "2026-11-23T09:52:51.105Z",
+        "sentences": 226,
+        "formulas": 83,
+        "checksum": "sha256:424031c99ebf6b0bb33f3e43d9370d6b84b472180a190467272345c1428b697a"
+      },
+      "kbVersion": "labruyere@bootstrap-2026-11-23"
+    },
+    "tocqueville": {
+      "kb": "salon-tocqueville",
+      "works": [],
+      "pack": {
+        "path": "kb/tocqueville.json",
+        "builtAt": "2026-11-23T09:52:51.130Z",
+        "sentences": 353,
+        "formulas": 84,
+        "checksum": "sha256:6dd84c105d9ff4ec4d87d85b38b9a4b7f9b4737e2705766679f7698a7bf3ffd7"
+      },
+      "kbVersion": "tocqueville@bootstrap-2026-11-23"
+    },
+    "thoreau": {
+      "kb": "salon-thoreau",
+      "works": [],
+      "pack": {
+        "path": "kb/thoreau.json",
+        "builtAt": "2026-11-23T09:52:51.164Z",
+        "sentences": 329,
+        "formulas": 82,
+        "checksum": "sha256:d6a9fa8c18000fe6f2d5a31a695376365361ad9205225fbdfd1428c8d0f9b17b"
+      },
+      "kbVersion": "thoreau@bootstrap-2026-11-23"
+    },
+    "burke": {
+      "kb": "salon-burke",
+      "works": [],
+      "pack": {
+        "path": "kb/burke.json",
+        "builtAt": "2026-11-23T09:52:51.182Z",
+        "sentences": 170,
+        "formulas": 82,
+        "checksum": "sha256:7460cb37ba02e68b2c5bfe583302435fd66d3f0693d7950c500cc6f24defce5d"
+      },
+      "kbVersion": "burke@bootstrap-2026-11-23"
+    },
+    "wollstonecraft": {
+      "kb": "salon-wollstonecraft",
+      "works": [],
+      "pack": {
+        "path": "kb/wollstonecraft.json",
+        "builtAt": "2026-11-23T09:52:51.205Z",
+        "sentences": 338,
+        "formulas": 81,
+        "checksum": "sha256:e0a4491cfb552b8c15bf4a05104d2ed7f0235fe7e033ee0f4345049c819256c0"
+      },
+      "kbVersion": "wollstonecraft@bootstrap-2026-11-23"
+    },
+    "paine": {
+      "kb": "salon-paine",
+      "works": [],
+      "pack": {
+        "path": "kb/paine.json",
+        "builtAt": "2026-11-23T09:52:51.235Z",
+        "sentences": 333,
+        "formulas": 81,
+        "checksum": "sha256:6f915c7acbdc2df58da0d7ae899136dfbc5fa0a5e84854ca6f89eb00eccb1394"
+      },
+      "kbVersion": "paine@bootstrap-2026-11-23"
+    },
+    "eliot": {
+      "kb": "salon-eliot",
+      "works": [],
+      "pack": {
+        "path": "kb/eliot.json",
+        "builtAt": "2026-11-23T09:52:51.291Z",
+        "sentences": 320,
+        "formulas": 81,
+        "checksum": "sha256:67384d603ce83c215be4532e246d1fa6941ce32b3fca5f1cfdc7f06ef494821f"
+      },
+      "kbVersion": "eliot@bootstrap-2026-11-23"
+    },
+    "thackeray": {
+      "kb": "salon-thackeray",
+      "works": [],
+      "pack": {
+        "path": "kb/thackeray.json",
+        "builtAt": "2026-11-23T09:52:51.347Z",
+        "sentences": 308,
+        "formulas": 81,
+        "checksum": "sha256:e34baf66b9ad55d6bbaaf2a6a35980631b751d96c7dffe67c3a9849131909c7e"
+      },
+      "kbVersion": "thackeray@bootstrap-2026-11-23"
+    },
+    "gaskell": {
+      "kb": "salon-gaskell",
+      "works": [],
+      "pack": {
+        "path": "kb/gaskell.json",
+        "builtAt": "2026-11-23T09:52:51.404Z",
+        "sentences": 313,
+        "formulas": 81,
+        "checksum": "sha256:dcbb9a1256f9a26d45bb19e6cf17255faa530cbcdf3a5954dd0c57378d62a964"
+      },
+      "kbVersion": "gaskell@bootstrap-2026-11-23"
+    },
+    "trollope": {
+      "kb": "salon-trollope",
+      "works": [],
+      "pack": {
+        "path": "kb/trollope.json",
+        "builtAt": "2026-11-23T09:52:51.459Z",
+        "sentences": 337,
+        "formulas": 81,
+        "checksum": "sha256:b31a1826034884b540056e5823d9ae0de439cdb894d8a7e33d6c1d4a519e66c2"
+      },
+      "kbVersion": "trollope@bootstrap-2026-11-23"
+    },
+    "ruskin": {
+      "kb": "salon-ruskin",
+      "works": [],
+      "pack": {
+        "path": "kb/ruskin.json",
+        "builtAt": "2026-11-23T09:52:51.550Z",
+        "sentences": 324,
+        "formulas": 82,
+        "checksum": "sha256:25228122741174cd3500ffe88ec0f9f3570e7bec7691a21280ea0ddeb5acb577"
+      },
+      "kbVersion": "ruskin@bootstrap-2026-11-23"
+    },
+    "plutarch": {
+      "kb": "salon-plutarch",
+      "works": [],
+      "pack": {
+        "path": "kb/plutarch.json",
+        "builtAt": "2026-11-23T09:52:51.609Z",
+        "sentences": 337,
+        "formulas": 80,
+        "checksum": "sha256:ffbe0ba8b888140eb0a362311e9ec0a139da15faf41fec5273e7945bba5dc522"
+      },
+      "kbVersion": "plutarch@bootstrap-2026-11-23"
+    },
+    "lucretius": {
+      "kb": "salon-lucretius",
+      "works": [],
+      "pack": {
+        "path": "kb/lucretius.json",
+        "builtAt": "2026-11-23T09:52:51.655Z",
+        "sentences": 223,
+        "formulas": 80,
+        "checksum": "sha256:f6232f7176c0067082d21ffcba5a9acec17cbbe8180b45b091f6de483e29c143"
+      },
+      "kbVersion": "lucretius@bootstrap-2026-11-23"
+    },
+    "erasmus": {
+      "kb": "salon-erasmus",
+      "works": [],
+      "pack": {
+        "path": "kb/erasmus.json",
+        "builtAt": "2026-11-23T09:52:51.706Z",
+        "sentences": 330,
+        "formulas": 81,
+        "checksum": "sha256:081299d6c731e144b7d9f073b53188d103e21dea98e2edf6c3be39d9efe6e466"
+      },
+      "kbVersion": "erasmus@bootstrap-2026-11-23"
+    },
+    "more": {
+      "kb": "salon-more",
+      "works": [],
+      "pack": {
+        "path": "kb/more.json",
+        "builtAt": "2026-11-23T09:52:51.754Z",
+        "sentences": 166,
+        "formulas": 81,
+        "checksum": "sha256:f0ec620ec4e66c758c357d1d7619671e8158ff08181e2a94814ca9877fadff39"
+      },
+      "kbVersion": "more@bootstrap-2026-11-23"
     }
   }
 }

@@ -137,6 +137,126 @@ export const NEW_AUTHORS = [
     blurbEn: 'Cosmic order and the city: love, justice, exile, vernacular raised to art.',
     match: ['Dante', 'Dante Alighieri', 'Alighieri'],
   },
+  {
+    id: 'corneille', name: 'Pierre Corneille', kind: 'dramaturge', lang: 'fr',
+    era: '1606–1684 · tragédie classique', wikipedia: 'Pierre Corneille', monogram: 'PC',
+    blurb: "Le héros face à la loi : gloire, devoir et politique, dans une langue qui pèse chaque mot.",
+    blurbEn: 'The hero against the law: glory, duty and politics in a language that weighs every word.',
+    match: ['Corneille', 'Pierre Corneille'],
+    exclude: ['Thomas Corneille', 'Corneille, Thomas'],
+  },
+  {
+    id: 'labruyere', name: 'Jean de La Bruyère', kind: 'moraliste', lang: 'fr',
+    era: '1645–1696 · classicisme', wikipedia: 'Jean de La Bruyère', monogram: 'LB',
+    blurb: "Le portrait comme diagnostic : vanité, fortune et mérite observés à la loupe.",
+    blurbEn: 'The portrait as diagnosis: vanity, fortune and merit under the magnifying glass.',
+    match: ['La Bruyère', 'La Bruyere', 'Jean de La Bruyère'],
+  },
+  {
+    id: 'tocqueville', name: 'Alexis de Tocqueville', kind: 'philosophe', lang: 'fr',
+    era: '1805–1859 · démocratie et liberté', wikipedia: 'Alexis de Tocqueville', monogram: 'TC',
+    blurb: "L’égalité comme fait providentiel : ses mœurs, ses tyrannies douces, ses remèdes institutionnels.",
+    blurbEn: 'Equality as providence: its mores, its soft tyrannies, its institutional remedies.',
+    match: ['Tocqueville', 'Alexis de Tocqueville'],
+  },
+  {
+    id: 'thoreau', name: 'Henry David Thoreau', kind: 'essayiste', lang: 'en',
+    era: '1817–1862 · transcendantalisme', wikipedia: 'Henry David Thoreau', monogram: 'HT',
+    blurb: "La vie examinée au bord de l’étang : sobriété, désobéissance, nature comme maîtresse de morale.",
+    blurbEn: 'The examined life at the pond: simplicity, disobedience, nature as moral teacher.',
+    match: ['Thoreau', 'Henry David Thoreau'],
+  },
+  {
+    id: 'burke', name: 'Edmund Burke', kind: 'philosophe', lang: 'en',
+    era: '1729–1797 · conservatisme', wikipedia: 'Edmund Burke', monogram: 'EB',
+    blurb: "La prudence contre l’abstraction : institutions héritées, droits concrets, réforme sans table rase.",
+    blurbEn: 'Prudence against abstraction: inherited institutions, concrete rights, reform without erasure.',
+    match: ['Edmund Burke', 'Burke, Edmund'],
+  },
+  {
+    id: 'wollstonecraft', name: 'Mary Wollstonecraft', kind: 'philosophe', lang: 'en',
+    era: '1759–1797 · Lumières radicales', wikipedia: 'Mary Wollstonecraft', monogram: 'MW',
+    blurb: "La raison sans sexe : éducation, indépendance et droits des femmes contre les mœurs reçues.",
+    blurbEn: 'Reason without sex: education, independence and women’s rights against received manners.',
+    match: ['Wollstonecraft', 'Mary Wollstonecraft'],
+    exclude: ['Shelley'],
+  },
+  {
+    id: 'paine', name: 'Thomas Paine', kind: 'philosophe', lang: 'en',
+    era: '1737–1809 · républicanisme', wikipedia: 'Thomas Paine', monogram: 'TP',
+    blurb: "Le sens commun contre la couronne : droits naturels, gouvernement représentatif, langue du pamphlet.",
+    blurbEn: 'Common sense against the crown: natural rights, representative government, the language of pamphlets.',
+    match: ['Thomas Paine', 'Paine, Thomas'],
+    exclude: ['Hammond'],
+  },
+  {
+    id: 'eliot', name: 'George Eliot', kind: 'écrivain', lang: 'en',
+    era: '1819–1880 · roman victorien', wikipedia: 'George Eliot', monogram: 'GE',
+    blurb: "La sympathie comme méthode : destins ordinaires, conscience morale et ironie patiente.",
+    blurbEn: 'Sympathy as method: ordinary destinies, moral conscience and patient irony.',
+    match: ['George Eliot', 'Eliot, George'],
+  },
+  {
+    id: 'thackeray', name: 'William Makepeace Thackeray', kind: 'écrivain', lang: 'en',
+    era: '1811–1863 · roman victorien', wikipedia: 'William Makepeace Thackeray', monogram: 'WT',
+    blurb: "La foire aux vanités : ambition, snobisme et morale du monde sans tribunal ni leçon.",
+    blurbEn: 'The vanity fair: ambition, snobbery and the morality of the world without a judge.',
+    match: ['Thackeray', 'William Makepeace Thackeray'],
+    exclude: ['Ritchie', 'Anne Thackeray', 'Miss Thackeray'],
+  },
+  {
+    id: 'gaskell', name: 'Elizabeth Gaskell', kind: 'écrivain', lang: 'en',
+    era: '1810–1865 · roman industriel', wikipedia: 'Elizabeth Gaskell', monogram: 'EG',
+    blurb: "La ville qui fabrique : patrons et ouvriers, grèves et dignité, sous le regard d’une femme de pasteur.",
+    blurbEn: 'The manufacturing city: masters and workers, strikes and dignity, seen by a minister’s wife.',
+    match: ['Gaskell', 'Elizabeth Gaskell', 'Elizabeth Cleghorn Gaskell'],
+    exclude: ['Walter Holbrook', 'Walter Gaskell'],
+  },
+  {
+    id: 'trollope', name: 'Anthony Trollope', kind: 'écrivain', lang: 'en',
+    era: '1815–1882 · roman victorien', wikipedia: 'Anthony Trollope', monogram: 'AT',
+    blurb: "La comédie des institutions : carrières, mariages et petites compromissions dans l’Angleterre victorienne.",
+    blurbEn: 'The comedy of institutions: careers, marriages and small compromises in Victorian England.',
+    match: ['Anthony Trollope', 'Trollope, Anthony'],
+    exclude: ['Frances', 'Adolphus'],
+  },
+  {
+    id: 'ruskin', name: 'John Ruskin', kind: 'essayiste', lang: 'en',
+    era: '1819–1900 · critique et économie politique', wikipedia: 'John Ruskin', monogram: 'RK',
+    blurb: "Le beau comme question sociale : travail, goût, richesse véritable contre l’économie abstraite.",
+    blurbEn: 'Beauty as a social question: labour, taste and true wealth against abstract economics.',
+    match: ['Ruskin', 'John Ruskin'],
+  },
+  {
+    id: 'plutarch', name: 'Plutarque', kind: 'philosophe', lang: 'en',
+    era: '46–125 · philosophie morale', wikipedia: 'Plutarque', monogram: 'PL',
+    blurb: "La vertu en exemples : vies parallèles, conseils domestiques et politique comme école du caractère.",
+    blurbEn: 'Virtue by example: parallel lives, domestic counsel and politics as a school of character.',
+    match: ['Plutarch', 'Plutarque'],
+    exclude: ['Seneca'],
+  },
+  {
+    id: 'lucretius', name: 'Lucrèce', kind: 'philosophe', lang: 'en',
+    era: '99–55 av. J.-C. · épicurisme', wikipedia: 'Lucrèce', monogram: 'LU',
+    blurb: "La nature sans les dieux : atomes, vide, plaisir mesuré et peur de la mort dissoute par la raison.",
+    blurbEn: 'Nature without the gods: atoms, void, measured pleasure and the fear of death dissolved by reason.',
+    match: ['Lucretius'],
+  },
+  {
+    id: 'erasmus', name: 'Érasme', kind: 'philosophe', lang: 'en',
+    era: '1466–1536 · humanisme', wikipedia: 'Érasme', monogram: 'ER',
+    blurb: "La folie comme miroir : savoir, piété et paix, contre la vanité des doctes et des princes.",
+    blurbEn: 'Folly as a mirror: learning, piety and peace against the vanity of scholars and princes.',
+    match: ['Erasmus', 'Desiderius Erasmus'],
+    exclude: ['Darwin', 'Erasmus W. Jones', 'Jones, Erasmus'],
+  },
+  {
+    id: 'more', name: 'Thomas More', kind: 'philosophe', lang: 'en',
+    era: '1478–1535 · utopie politique', wikipedia: 'Thomas More', monogram: 'TM',
+    blurb: "L’ailleurs comme critique : propriété, travail et justice imaginés depuis une île impossible.",
+    blurbEn: 'Elsewhere as critique: property, labour and justice imagined from an impossible island.',
+    match: ['Thomas More', 'More, Thomas'],
+  },
 ];
 
 /* ------------------------------------------------------------- parsing */
@@ -199,8 +319,11 @@ function familyKeys(author) {
     if (last && last.length >= 4) keys.add(norm(last).replace(/\s/g, ''));
   }
   for (const m of author.match || []) {
-    const parts = String(m).split(/[\s’'-]+/).filter(Boolean);
-    const last = parts[parts.length - 1];
+    const raw = String(m).trim();
+    // Forme inversée « Trollope, Anthony » : le nom de famille est avant la virgule.
+    const last = raw.includes(',')
+      ? raw.split(',')[0].trim()
+      : raw.split(/[\s’'-]+/).filter(Boolean).pop();
     if (last) keys.add(norm(last).replace(/\s/g, ''));
   }
   return [...keys].filter(Boolean);
@@ -233,6 +356,15 @@ function matchesAuthor(entryAuthor, author) {
     return false;
   }
   return families.some((f) => hay.includes(f));
+}
+
+/** Homonymes déclarés au seed : « Shelley » pour Mary Wollstonecraft,
+ *  « Ritchie » pour Thackeray, etc. Une entrée qui nomme un homonyme est
+ *  écartée avant même le RDF, puis re-vérifiée sur les agents RDF. */
+function excluded(text, author) {
+  if (!author.exclude || !author.exclude.length) return false;
+  const hay = String(text || '');
+  return author.exclude.some((p) => new RegExp(p, 'i').test(hay));
 }
 
 function langOk(entryLang, authorLang) {
@@ -344,7 +476,9 @@ async function main() {
   const args = parseArgs();
   const maxNew = args['max-new-works'] ? Number(args['max-new-works']) : 8;
   const onlyAuthor = args.author ? String(args.author) : null;
-  const addAuthors = args['no-new-authors'] ? [] : NEW_AUTHORS.filter((a) => !onlyAuthor || a.id === onlyAuthor);
+  const onlyNew = Boolean(args['new-only']);
+  const seedIds = args['seed-ids'] ? String(args['seed-ids']).split(',').map((s) => s.trim()).filter(Boolean) : null;
+  const addAuthors = args['no-new-authors'] ? [] : NEW_AUTHORS.filter((a) => (!onlyAuthor || a.id === onlyAuthor) && (!seedIds || seedIds.includes(a.id)));
   const catalog = readJSON(CATALOG_FILE);
   if (!catalog || !Array.isArray(catalog.authors)) throw new Error('catalog illisible');
 
@@ -362,6 +496,7 @@ async function main() {
 
   // 1. Auteurs existants : œuvres supplémentaires.
   for (const author of catalog.authors) {
+    if (onlyNew) break;
     if (onlyAuthor && author.id !== onlyAuthor) continue;
     targets.push({ author, isNew: false });
   }
@@ -378,6 +513,7 @@ async function main() {
     const candidates = index
       .filter((e) => !existingIds.has(Number(e.id)))
       .filter((e) => matchesAuthor(e.author, author))
+      .filter((e) => !excluded(e.author, author))
       .filter((e) => langOk(e.lang, author.lang))
       .filter((e) => !existingTitles.has(norm(e.title)))
       .filter((e) => !existingKeys.has(titleKey(e.title)))
@@ -405,6 +541,10 @@ async function main() {
         continue;
       }
       if (meta.agents && meta.agents.length) {
+        if (excluded(meta.agents[0], author)) {
+          rejected.push({ id: c.id, title: finalTitle, why: `homonyme RDF (${meta.agents.join('; ')})` });
+          continue;
+        }
         if (!matchesAuthor(meta.agents.join('; '), author)) {
           rejected.push({ id: c.id, title: finalTitle, why: `auteur RDF différent (${meta.agents.join('; ')})` });
           continue;
@@ -456,6 +596,7 @@ async function main() {
         const meta = await rdfMeta(w.gutenbergId);
         if (!meta) { keep.push(w); continue; }
         if (!publicDomain(meta)) { report.pruned.push({ author: author.id, title: w.title, why: 'droits' }); continue; }
+        if (excluded(meta.agents && meta.agents.length ? meta.agents[0] : '', author)) { report.pruned.push({ author: author.id, title: w.title, why: 'homonyme RDF' }); continue; }
         if (meta.agents && meta.agents.length && !matchesAuthor(meta.agents.join('; '), author)) {
           report.pruned.push({ author: author.id, title: w.title, why: `auteur RDF (${meta.agents.join('; ')})` });
           continue;

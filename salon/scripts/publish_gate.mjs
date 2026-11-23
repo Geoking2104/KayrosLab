@@ -21,7 +21,7 @@ import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } fr
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import {
-  MIRROR_DIR, REPORTS_DIR, REPO, KBMAP_FILE, nowIso, parseArgs, readJSON, saveKbMap, writeJSON,
+  CATALOG_FILE, MIRROR_DIR, REPORTS_DIR, REPO, KBMAP_FILE, nowIso, parseArgs, readJSON, saveKbMap, writeJSON,
 } from './openkb_common.mjs';
 
 const args = parseArgs();
@@ -105,6 +105,9 @@ try {
   }
 
   // Promotion atomique : le miroir ne reçoit que des artefacts validés.
+  // Le registre fait partie des artefacts : sans lui, la page publierait un
+  // catalogue plus ancien que les packs promus.
+  cpSync(CATALOG_FILE, join(STAGING, 'catalog.json'));
   cpSync(STAGING, MIRROR, { recursive: true, force: true });
   const manifest = readJSON(join(MIRROR, 'kb-manifest.json'), { authors: {}, totals: {} });
   manifest.published = true;

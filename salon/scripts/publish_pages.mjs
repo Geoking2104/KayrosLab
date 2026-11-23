@@ -17,7 +17,7 @@ import { REPO, parseArgs } from './openkb_common.mjs';
 const args = parseArgs();
 const SRC = join(REPO, 'backend', 'web', 'public', 'salon');
 const DEST = join(REPO, 'salon');
-const FILES = ['index.html', 'app.js', 'style.css', 'catalog.json', 'doctrine.json', 'kb-manifest.json'];
+const FILES = ['index.html', 'app.js', 'style.css', 'catalog.json', 'doctrine.json', 'kb-manifest.json', 'avatars.json'];
 
 if (!existsSync(join(SRC, 'index.html'))) {
   console.error(`✗ ${SRC}/index.html absent — lancer publish_gate d'abord.`);
@@ -53,6 +53,11 @@ if (!args['dry-run']) {
   // Les packs : copie complète, remplacement atomique du dossier.
   rmSync(join(DEST, 'kb'), { recursive: true, force: true });
   cpSync(join(SRC, 'kb'), join(DEST, 'kb'), { recursive: true });
+  // Les portraits : optionnels, copiés seulement s'ils existent.
+  if (existsSync(join(SRC, 'avatars'))) {
+    rmSync(join(DEST, 'avatars'), { recursive: true, force: true });
+    cpSync(join(SRC, 'avatars'), join(DEST, 'avatars'), { recursive: true });
+  }
 }
 
 const manifest = JSON.parse(readFileSync(join(SRC, 'kb-manifest.json'), 'utf8'));

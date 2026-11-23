@@ -1,0 +1,3659 @@
+{
+  "authorId": "eliot",
+  "kbVersion": "eliot@bootstrap-2026-11-23",
+  "builtAt": "2026-11-23T09:52:51.291Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Middlemarch",
+      "sentences": 52
+    },
+    {
+      "title": "Adam Bede",
+      "sentences": 52
+    },
+    {
+      "title": "Silas Marner",
+      "sentences": 54
+    },
+    {
+      "title": "The Lifted Veil",
+      "sentences": 53
+    },
+    {
+      "title": "Brother Jacob",
+      "sentences": 54
+    },
+    {
+      "title": "The Mill on the Floss",
+      "sentences": 55
+    }
+  ],
+  "passages": [
+    {
+      "id": "eliot.p0001",
+      "w": "Middlemarch",
+      "s": "However, my dear, I have always said that people should do as they like in these things, up to a certain point.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0002",
+      "w": "Middlemarch",
+      "s": "Casaubon,” said Celia, resorting, as usual, to the simplest statement of fact, and enjoying this opportunity of speaking to the Rector’s wife alone.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0003",
+      "w": "Middlemarch",
+      "s": "What business has an old bachelor like that to marry?” said Sir James.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0004",
+      "w": "Middlemarch",
+      "s": "Happily, the Rector was at home, and his visitor was shown into the study, where all the fishing tackle hung.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0005",
+      "w": "Middlemarch",
+      "s": "As to the line he took on the Catholic Question, that was unexpected; but he has always been civil to me, and I don’t see why I should spoil his sport.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0006",
+      "w": "Middlemarch",
+      "s": "Are kings such monsters that a wish like that must be reckoned a royal virtue?” “And if he wished them a skinny fowl,” said Celia, “that would not be nice.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0007",
+      "w": "Middlemarch",
+      "s": "On leaving Rugby he declined to go to an English university, where I would gladly have placed him, and chose what I must consider the anomalous course of studying at Heidelberg.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0008",
+      "w": "Middlemarch",
+      "s": "Renfrew’s account of symptoms, and into the amazing futility in her case of all strengthening medicines.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0009",
+      "w": "Middlemarch",
+      "s": "Brooke, after he had handed out Lady Chettam, and had returned to be civil to a group of Middlemarchers.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0010",
+      "w": "Middlemarch",
+      "s": "You only said you were going to your uncle’s.” “Oh, I dined at Plymdale’s.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0011",
+      "w": "Middlemarch",
+      "s": "What are you driving at there?” said Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0012",
+      "w": "Middlemarch",
+      "s": "I’ll try and walk round the room.” Fred, in spite of his irritation, had kindness enough in him to be a little sorry for the unloved, unvenerated old man, who with his dropsical legs looked more than usually pitiable in walking.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0013",
+      "w": "Middlemarch",
+      "s": "And only suppose, if he should have no fortune left him?” “I can suppose that very well,” said Mary, dryly.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0014",
+      "w": "Middlemarch",
+      "s": "He seems a very bright pleasant little fellow.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0015",
+      "w": "Middlemarch",
+      "s": "And I should have thought—but I may be wrong—that there was no religion to hinder a man from believing the best of a young fellow, when you don’t know worse.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0016",
+      "w": "Middlemarch",
+      "s": "A wild shriek pierced the house, and the Provencale fell swooning: a shriek and a swoon were demanded by the play, but the swooning too was real this time.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0017",
+      "w": "Middlemarch",
+      "s": "Vincy liked well enough the notion of the chaplain’s having a salary, supposing it were given to Farebrother, who was as good a little fellow as ever breathed, and the best preacher anywhere, and companionable too.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0018",
+      "w": "Middlemarch",
+      "s": "I say, keep hold of a few plain truths, and make everything square with them.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0019",
+      "w": "Middlemarch",
+      "s": "I look for the man who will bring the arsenic, and don’t mind about his incantations.” “Very good.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0020",
+      "w": "Middlemarch",
+      "s": "Tyke, except that they could not bear him, and suspected him of cant.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0021",
+      "w": "Middlemarch",
+      "s": "Bulstrode, in a subdued tone, “the merits of the question may be very briefly stated, and if any one present doubts that every gentleman who is about to give his vote has not been fully informed, I can now recapitulate the considerations that should weigh on either side.” “I don’t see the good of that,” said Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0022",
+      "w": "Middlemarch",
+      "s": "Your painting and Plastik are poor stuff after all.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0023",
+      "w": "Middlemarch",
+      "s": "Casaubon’s face had a quick angry flush upon it.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0024",
+      "w": "Middlemarch",
+      "s": "At least, you implied that.” Will could laugh now as well as smile.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0025",
+      "w": "Middlemarch",
+      "s": "Casaubon, who received this offhand treatment of symbolism very uneasily, and bowed with a neutral air.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0026",
+      "w": "Middlemarch",
+      "s": "Casaubon is not to be talked of as if she were a model,” said Will.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0027",
+      "w": "Middlemarch",
+      "s": "Promise me that you will not again, to any one, speak of that subject—I mean about Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0028",
+      "w": "Middlemarch",
+      "s": "Garth?” said Fred, when the children were gone and it was needful to say something that would pass the time.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0029",
+      "w": "Middlemarch",
+      "s": "I wanted to ask you, Mary—don’t you think that Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0030",
+      "w": "Middlemarch",
+      "s": "It would have been to contravene these arrangements if Rosamond had consented to go away to Stone Court or elsewhere, as her parents wished her to do, especially since Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0031",
+      "w": "Middlemarch",
+      "s": "Lemon’s favorite pupil, who by general consent (Fred’s excepted) was a rare compound of beauty, cleverness, and amiability.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0032",
+      "w": "Middlemarch",
+      "s": "It would not suit all—not you, dear, for example,” said Dorothea, quietly.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0033",
+      "w": "Middlemarch",
+      "s": "The work had been easier to define because Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0034",
+      "w": "Middlemarch",
+      "s": "Since Celia was going to marry immediately, it would be very pleasant to have a young fellow at table with him, at least for a time.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0035",
+      "w": "Middlemarch",
+      "s": "Lydgate answered curtly, no—he had work to do—he must give up going out in the evening.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0036",
+      "w": "Middlemarch",
+      "s": "Probabilities are as various as the faces to be seen at will in fretwork or paper-hangings: every form is there, from Jupiter to Judy, if you only look with creative inclination.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0037",
+      "w": "Middlemarch",
+      "s": "I shall take a mere mouthful of ham and a glass of ale,” he said, reassuringly.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0038",
+      "w": "Middlemarch",
+      "s": "Jonah Featherstone and young Cranch are sleeping here.” “Oh ay, they stick, do they?",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0039",
+      "w": "Middlemarch",
+      "s": "I dare say Dodo likes it: she is fond of melancholy things and ugly people.” “I am fond of knowing something about the people I live among,” said Dorothea, who had been watching everything with the interest of a monk on his holiday tour.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0040",
+      "w": "Middlemarch",
+      "s": "He repays your expense in him, Casaubon,” he went on, nodding encouragingly.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0041",
+      "w": "Middlemarch",
+      "s": "It took some time for the company to recover the power of expression.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0042",
+      "w": "Middlemarch",
+      "s": "Good-by.” In a very short time Stone Court was cleared of well-brewed Featherstones and other long-accustomed visitors.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0043",
+      "w": "Middlemarch",
+      "s": "Lydgate had not entered into such a union; but my relations with him are limited to that use of his gifts for God’s purposes which is taught us by the divine government under each dispensation.” Mrs.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0044",
+      "w": "Middlemarch",
+      "s": "Remember, we are looking forward to a better sort of happiness even than this—being continually together, independent of others, and ordering our lives as we will.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0045",
+      "w": "Middlemarch",
+      "s": "He seems to me a kind of Shelley, you know,” Mr.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0046",
+      "w": "Middlemarch",
+      "s": "I can read Latin a little, and I am beginning to understand just a little Greek.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0047",
+      "w": "Middlemarch",
+      "s": "No,” she answered immediately, “he did not say that he came to ask your opinion.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0048",
+      "w": "Middlemarch",
+      "s": "And I think he ought at once to be provided for on that understanding.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0049",
+      "w": "Middlemarch",
+      "s": "He got rid of Garth twelve years ago, and everything has been going wrong since.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0050",
+      "w": "Middlemarch",
+      "s": "He says Bulstrode the banker will do you harm.” “And that if you got pelted,” interposed Mrs.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0051",
+      "w": "Middlemarch",
+      "s": "They were looking at each other like two fond children who were talking confidentially of birds.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0052",
+      "w": "Middlemarch",
+      "s": "Another day, another day,” he added, turning as if to go.",
+      "src": {
+        "work": "Middlemarch"
+      }
+    },
+    {
+      "id": "eliot.p0053",
+      "w": "Adam Bede",
+      "s": "He had worked off his anger now, and whenever he wished to be especially kind to his mother, he fell into his strongest native accent and dialect, with which at other times his speech was less deeply tinged.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0054",
+      "w": "Adam Bede",
+      "s": "If the outline had been less finely cut, his face might have been called jolly; but that was not the right word for its mixture of bonhomie and distinction.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0055",
+      "w": "Adam Bede",
+      "s": "I should have been sure you would turn out a Donnithorne.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0056",
+      "w": "Adam Bede",
+      "s": "See them in the bright sunlight, interrupted every now and then by rolling masses of cloud, ascending the slope from the Broxton side, where the tall gables and elms of the rectory predominate over the tiny whitewashed church.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0057",
+      "w": "Adam Bede",
+      "s": "Poyser to stand there quite pleasantly and see what was going on in the yard, the grey worsted stocking making a steady progress in her hands all the while.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0058",
+      "w": "Adam Bede",
+      "s": "I think I should be doing you a service to turn you out of such a place.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0059",
+      "w": "Adam Bede",
+      "s": "And those were always times of great blessing, though I had never thought it could be so with me before a congregation of people.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0060",
+      "w": "Adam Bede",
+      "s": "Then there had been the work of cleansing to the strictest purity every object in the sacred chamber, and of removing from it every trace of common daily occupation.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0061",
+      "w": "Adam Bede",
+      "s": "An’ I shall be nought but cumber, a-sittin’ i’ th’ chimney-corner.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0062",
+      "w": "Adam Bede",
+      "s": "He had been in bed and asleep when Dinah had come in, in the evening, and now he wondered whose step this could be.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0063",
+      "w": "Adam Bede",
+      "s": "We’re all served now.” “Aye, come an’ sit ye down—do,” said Lisbeth, “an’ ate a morsel; ye’d need, arter bein’ upo’ your legs this hour an’ half a’ready.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0064",
+      "w": "Adam Bede",
+      "s": "In such circumstances a man necessarily gets in an ill humour, and works off the irritation by some excess or other.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0065",
+      "w": "Adam Bede",
+      "s": "I wonder how late it is,” he added, pulling out his watch.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0066",
+      "w": "Adam Bede",
+      "s": "But what’s Seth got to do with marryin’, as is on’y three-an’-twenty?",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0067",
+      "w": "Adam Bede",
+      "s": "Poyser, on her way, peeped into the room where her two boys lay; just to see their ruddy round cheeks on the pillow, and to hear for a moment their light regular breathing.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0068",
+      "w": "Adam Bede",
+      "s": "If anything ever goes wrong, it must be the husband’s fault there: he can make her what he likes—that is plain.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0069",
+      "w": "Adam Bede",
+      "s": "Shall I sit down with you while you do up your hair?” “Oh yes,” said Hetty, hastily turning round and reaching the second chair in the room, glad that Dinah looked as if she did not notice her ear-rings.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0070",
+      "w": "Adam Bede",
+      "s": "It’s just the same back, only broader, as when you used to carry me on it.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0071",
+      "w": "Adam Bede",
+      "s": "My grandfather will never let me have any power while he lives, but there’s nothing I should like better than to undertake the Stonyshire side of the estate—it’s in a dismal condition—and set improvements on foot, and gallop about from one place to another and overlook them.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0072",
+      "w": "Adam Bede",
+      "s": "In a piece of machinery, too, I believe there is often a small unnoticeable wheel which has a great deal to do with the motion of the large obvious ones.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0073",
+      "w": "Adam Bede",
+      "s": "Ryde was like a dose o’ physic, he gripped you and worreted you, and after all he left you much the same.” “But didn’t Mr.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0074",
+      "w": "Adam Bede",
+      "s": "Poyser; “they’re satisfied wi’ looking, no matter what they’re looking at.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0075",
+      "w": "Adam Bede",
+      "s": "Irwine’s reading a special service for her husband; and besides, she knew the funeral psalm was going to be sung for him.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0076",
+      "w": "Adam Bede",
+      "s": "Irwine was pronouncing the solemn “Absolution” in her deaf ears, and through all the tones of petition that followed!",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0077",
+      "w": "Adam Bede",
+      "s": "Why, I know upo’ good authority as it’s a big Frenchman as reaches five foot high, an’ they live upo’ spoon-meat mostly.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0078",
+      "w": "Adam Bede",
+      "s": "He had long made up his mind that it would be wrong as well as foolish for him to marry a blooming young girl, so long as he had no other prospect than that of growing poverty with a growing family.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0079",
+      "w": "Adam Bede",
+      "s": "She was not indifferent to his presence after all; she had blushed when she saw him, and then there was that touch of sadness about her which must surely mean love, since it was the opposite of her usual manner, which had often impressed him as indifference.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0080",
+      "w": "Adam Bede",
+      "s": "Why, Dinah Morris looks very nice, for all she wears such a plain cap and gown.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0081",
+      "w": "Adam Bede",
+      "s": "Massey’s day-school as soon as he was old enough.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0082",
+      "w": "Adam Bede",
+      "s": "You never told me about it,” said Bartle.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0083",
+      "w": "Adam Bede",
+      "s": "Bartle kept his eye on the moving figure till it passed into the darkness, while Vixen, in a state of divided affection, had twice run back to the house to bestow a parenthetic lick on her puppies.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0084",
+      "w": "Adam Bede",
+      "s": "There’s a table for the women and children below as well.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0085",
+      "w": "Adam Bede",
+      "s": "It has long been my wish that he should have the management of the woods on the estate, which happen to be very valuable, not only because I think so highly of his character, but because he has the knowledge and the skill which fit him for the place.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0086",
+      "w": "Adam Bede",
+      "s": "They were afraid of the noise of the toasts, but it would be a shame for them not to see you at table.” He walked on, speaking to the mothers and patting the children, while Mr.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0087",
+      "w": "Adam Bede",
+      "s": "Rann to accompany him on the fiddle, and Joshua felt quite sure that though there might not be much in the dancing, the music would make up for it.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0088",
+      "w": "Adam Bede",
+      "s": "I know it’s a grit honour for thee to be so looked on—an’ who’s to be prouder on it nor thy mother?",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0089",
+      "w": "Adam Bede",
+      "s": "But then, why had she been so frightened about it at first, and changed colour so, and afterwards pretended not to care?",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0090",
+      "w": "Adam Bede",
+      "s": "Oh, do come in with me!” she said, as he was going to shake hands with her at the gate, and he could not resist that.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0091",
+      "w": "Adam Bede",
+      "s": "I throw back your favours, for you’re not the man I took you for.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0092",
+      "w": "Adam Bede",
+      "s": "I’ll go to the Hermitage—I think I’ve got some brandy there.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0093",
+      "w": "Adam Bede",
+      "s": "But, after a few steps, he stood still again, and said, coldly, “I believe I must trouble you.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0094",
+      "w": "Adam Bede",
+      "s": "But—but Hetty might have had the trouble in some other way if not in this.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0095",
+      "w": "Adam Bede",
+      "s": "Perhaps the resemblance was not much the less because Hetty felt very unhappy all the while.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0096",
+      "w": "Adam Bede",
+      "s": "And think—there’s nobody but me knows about this, and I’ll take care of you as if I was your brother.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0097",
+      "w": "Adam Bede",
+      "s": "My heart cleaves to her and her children as the nearest of all to me in the flesh—yea, and to all in that house.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0098",
+      "w": "Adam Bede",
+      "s": "I have told you where you are to direct a letter to, if you want to write, but I put it down below lest you should have forgotten.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0099",
+      "w": "Adam Bede",
+      "s": "I’ll do better for you nor letting you go for a lady’s maid.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0100",
+      "w": "Adam Bede",
+      "s": "I have not seen it for years, and I hear on all hands about your fine cheese and butter,” said the squire, looking politely unconscious that there could be any question on which he and Mrs.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0101",
+      "w": "Adam Bede",
+      "s": "Poyser a pension for life, and wanted to invite her to the parsonage that she might hear an account of the scene from Mrs.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0102",
+      "w": "Adam Bede",
+      "s": "It is more than a woman’s love that moves us in a woman’s eyes—it seems to be a far-off mighty love that has come near to us, and made speech for itself there; the rounded neck, the dimpled arm, move us by something more than their prettiness—by their close kinship with all we have known of tenderness and peace.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0103",
+      "w": "Adam Bede",
+      "s": "The tears rose as she gave him the last look.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0104",
+      "w": "Adam Bede",
+      "s": "Now, for the first time, she remembered without indifference the affectionate kindness Dinah had shown her, and those words of Dinah in the bed-chamber—that Hetty must think of her as a friend in trouble.",
+      "src": {
+        "work": "Adam Bede"
+      }
+    },
+    {
+      "id": "eliot.p0105",
+      "w": "Silas Marner",
+      "s": "The prominent eyes that used to look trusting and dreamy, now looked as if they had been made to see only one kind of thing that was very small, like tiny grain, for which they hunted everywhere: and he was so withered and yellow, that, though he was not yet forty, the children always called him “Old Master Marner”.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0106",
+      "w": "Silas Marner",
+      "s": "Betty Jay scented the boiling of Squire Cass’s hams, but her longing was arrested by the unctuous liquor in which they were boiled; and when the seasons brought round the great merry-makings, they were regarded on all hands as a fine thing for the poor.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0107",
+      "w": "Silas Marner",
+      "s": "And it’s a lie that you’d slip into my place: you’d get yourself turned out too, that’s all.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0108",
+      "w": "Silas Marner",
+      "s": "So, don’t flatter yourself that your secrecy’s worth any price you choose to ask.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0109",
+      "w": "Silas Marner",
+      "s": "And if Godfrey could have felt himself simply a victim, the iron bit that destiny had put into his mouth would have chafed him less intolerably.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0110",
+      "w": "Silas Marner",
+      "s": "That was Dunstan’s first thought as he approached it; the second was, that the old fool of a weaver, whose loom he heard rattling already, had a great deal of money hidden somewhere.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0111",
+      "w": "Silas Marner",
+      "s": "But he felt the ground before him cautiously with his whip-handle, and at last arrived safely at the door.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0112",
+      "w": "Silas Marner",
+      "s": "A dull mind, once arriving at an inference that flatters a desire, is rarely able to retain the impression that the notion from which the inference started was purely problematic.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0113",
+      "w": "Silas Marner",
+      "s": "His loom, as he wrought in it without ceasing, had in its turn wrought on him, and confirmed more and more the monotonous craving for its monotonous response.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0114",
+      "w": "Silas Marner",
+      "s": "He turned, and tottered towards his loom, and got into the seat where he worked, instinctively seeking this as the strongest assurance of reality.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0115",
+      "w": "Silas Marner",
+      "s": "There’s my little lad Aaron, he’s got a gift—he can sing a tune off straight, like a throstle.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0116",
+      "w": "Silas Marner",
+      "s": "Drumlow—poor old gentleman, I was fond on him, though he’d got a bit confused in his head, what wi’ age and wi’ taking a drop o’ summat warm when the service come of a cold morning.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0117",
+      "w": "Silas Marner",
+      "s": "For there was allays a talk as nobody could get rich on the Warrens: though he holds it cheap, for it’s what they call Charity Land.” “Aye, and there’s few folks know so well as you how it come to be Charity Land, eh, Mr.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0118",
+      "w": "Silas Marner",
+      "s": "I want the constable—and the Justice—and Squire Cass—and Mr.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0119",
+      "w": "Silas Marner",
+      "s": "I don’t accuse you—I won’t accuse anybody—only,” he added, lifting up his hands to his head, and turning away with bewildered misery, “I try—I try to think where my guineas can be.” “Aye, aye, they’re gone where it’s hot enough to melt ’em, I doubt,” said Mr.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0120",
+      "w": "Silas Marner",
+      "s": "Osgood’s party at midnight, he was not much surprised to learn that Dunsey had not come home.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0121",
+      "w": "Silas Marner",
+      "s": "Godfrey Cass, indeed, entering the Rainbow during one of Mr.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0122",
+      "w": "Silas Marner",
+      "s": "The horse had been dead a pretty good while when he was found.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0123",
+      "w": "Silas Marner",
+      "s": "Godfrey waited, before he spoke again, until the ale had been brought and the door closed—an interval during which Fleet, the deer-hound, had consumed enough bits of beef to make a poor man’s holiday dinner.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0124",
+      "w": "Silas Marner",
+      "s": "He paid it to me, when I was over there one day last month.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0125",
+      "w": "Silas Marner",
+      "s": "I suppose, if I’d said you nay, you’d ha’ kept on with it; but, for want o’ contradiction, you’ve changed your mind.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0126",
+      "w": "Silas Marner",
+      "s": "And if you know where he’s sneaking—I daresay you do—you may tell him to spare himself the journey o’ coming back home.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0127",
+      "w": "Silas Marner",
+      "s": "And yet he was not utterly forsaken in his trouble.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0128",
+      "w": "Silas Marner",
+      "s": "Come, Master Marner, have you got nothing to say to that?” said Mr.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0129",
+      "w": "Silas Marner",
+      "s": "She looked at Silas pityingly as she went on.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0130",
+      "w": "Silas Marner",
+      "s": "Oh, for shame, Aaron,” said his mother, taking him on her lap, however; “why, you don’t want cake again yet awhile.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0131",
+      "w": "Silas Marner",
+      "s": "I can see Nancy’s eyes, just as they will look at me, and feel her hand in mine already.” But Anxiety went on, though in noisy Christmas company; refusing to be utterly quieted even by much drinking.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0132",
+      "w": "Silas Marner",
+      "s": "Partly, Miss Ladbrook felt that her own skirt must be regarded as unduly lax by the Miss Gunns, and partly, that it was a pity the Miss Gunns did not show that judgment which she herself would show if she were in their place, by stopping a little on this side of the fashion.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0133",
+      "w": "Silas Marner",
+      "s": "Time out of mind the Raveloe doctor had been a Kimble; Kimble was inherently a doctor’s name; and it was difficult to contemplate firmly the melancholy fact that the actual Kimble had no son, so that his practice might one day be handed over to a successor with the incongruous name of Taylor or Johnson.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0134",
+      "w": "Silas Marner",
+      "s": "Osgood,” said Ben Winthrop, who was holding his son Aaron between his knees.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0135",
+      "w": "Silas Marner",
+      "s": "You know one dance with you matters more to me than all the other pleasures in the world.” It was a long, long while since Godfrey had said anything so direct as that, and Nancy was startled.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0136",
+      "w": "Silas Marner",
+      "s": "She knew this well; and yet, in the moments of wretched unbenumbed consciousness, the sense of her want and degradation transformed itself continually into bitterness towards Godfrey.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0137",
+      "w": "Silas Marner",
+      "s": "Gold!—his own gold—brought back to him as mysteriously as it had been taken away!",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0138",
+      "w": "Silas Marner",
+      "s": "Presently she slipped from his knee and began to toddle about, but with a pretty stagger that made Silas jump up and follow her lest she should fall against anything that would hurt her.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0139",
+      "w": "Silas Marner",
+      "s": "It’s a nasty business turning out now, eh, Kimble?” said the Squire.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0140",
+      "w": "Silas Marner",
+      "s": "Godfrey was too painfully preoccupied to feel a twinge of self-reproach at this undeserved praise.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0141",
+      "w": "Silas Marner",
+      "s": "Has Miss Nancy been cruel, and do you want to spite her by spoiling your pumps?” “Oh, everything has been disagreeable to-night.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0142",
+      "w": "Silas Marner",
+      "s": "Silas had shown her the half-guinea given to him by Godfrey, and had asked her what he should do about getting some clothes for the child.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0143",
+      "w": "Silas Marner",
+      "s": "What is it as you mean by ‘christened?’” he said at last, timidly.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0144",
+      "w": "Silas Marner",
+      "s": "That was what I did wi’ Aaron; for I was that silly wi’ the youngest lad, as I could never bear to smack him.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0145",
+      "w": "Silas Marner",
+      "s": "And now something had come to replace his hoard which gave a growing purpose to the earnings, drawing his hope and joy continually onward beyond the money.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0146",
+      "w": "Silas Marner",
+      "s": "The gods of the hearth exist for us still; and let all new faith be tolerant of that fetishism, lest it bruise its own roots.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0147",
+      "w": "Silas Marner",
+      "s": "And that’s all as ever I can be sure on, and everything else is a big puzzle to me when I think on it.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0148",
+      "w": "Silas Marner",
+      "s": "But I told him that wasn’t true: for, I said, look at father—he’s never been married.” “No, child,” said Silas, “your father was a lone man till you was sent to him.” “But you’ll never be lone again, father,” said Eppie, tenderly.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0149",
+      "w": "Silas Marner",
+      "s": "Mayn’t you just as well stay with us?—such a beautiful evening as it’s likely to be.” The old gentleman had been talking with Godfrey about the increasing poor-rate and the ruinous times, and had not heard the dialogue between his daughters.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0150",
+      "w": "Silas Marner",
+      "s": "Perhaps it was this very severity towards any indulgence of what she held to be sinful regret in herself, that made her shrink from applying her own standard to her husband.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0151",
+      "w": "Silas Marner",
+      "s": "But, then, he didn’t go to seek her, as we should be doing.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0152",
+      "w": "Silas Marner",
+      "s": "Nancy wished more and more that Godfrey would come in.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0153",
+      "w": "Silas Marner",
+      "s": "No, he fell in,” said Godfrey, in a low but distinct voice, as if he felt some deep meaning in the fact.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0154",
+      "w": "Silas Marner",
+      "s": "It’s another you did the wrong to; and I doubt it can never be all made up for.” “But we can take Eppie now,” said Godfrey.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0155",
+      "w": "Silas Marner",
+      "s": "If you hadn’t been sent to save me, I should ha’ gone to the grave in my misery.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0156",
+      "w": "Silas Marner",
+      "s": "It ’ud be a great comfort to you to see her well provided for, wouldn’t it?",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0157",
+      "w": "Silas Marner",
+      "s": "I’ll hinder nothing.” Even Nancy, with all the acute sensibility of her own affections, shared her husband’s view, that Marner was not justifiable in his wish to retain Eppie, after her real father had avowed himself.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0158",
+      "w": "Silas Marner",
+      "s": "When your father opens his home to you, I think it’s right you shouldn’t turn your back on it.” “I can’t feel as I’ve got any father but one,” said Eppie, impetuously, while the tears gathered.",
+      "src": {
+        "work": "Silas Marner"
+      }
+    },
+    {
+      "id": "eliot.p0159",
+      "w": "The Lifted Veil",
+      "s": "There is no need to dwell on this part of my life.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0160",
+      "w": "The Lifted Veil",
+      "s": "I mingled them confusedly in my thought with glimpses of blue water and delicate floating cloud, with the notes of birds and the distant glitter of the glacier.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0161",
+      "w": "The Lifted Veil",
+      "s": "Then came the languid monotony of convalescence, the days gradually breaking into variety and distinctness as my strength enabled me to take longer and longer drives.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0162",
+      "w": "The Lifted Veil",
+      "s": "Nothing of this sort had ever occurred in my dreaming experience before, for I had often been humiliated because my dreams were only saved from being utterly disjointed and commonplace by the frequent terrors of nightmare.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0163",
+      "w": "The Lifted Veil",
+      "s": "No, it was not a dream; was it--the thought was full of tremulous exultation--was it the poet's nature in me, hitherto only a troubled yearning sensibility, now manifesting itself suddenly as spontaneous creation?",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0164",
+      "w": "The Lifted Veil",
+      "s": "I concentrated my thoughts on Venice; I stimulated my imagination with poetic memories, and strove to feel myself present in Venice, as I had felt myself present in Prague.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0165",
+      "w": "The Lifted Veil",
+      "s": "I sent my thoughts ranging over my world of knowledge, in the hope that they would find some object which would send a reawakening vibration through my slumbering genius.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0166",
+      "w": "The Lifted Veil",
+      "s": "I had heard no footstep, I had not seen the door open; but I saw my father, and at his right hand our neighbour Mrs.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0167",
+      "w": "The Lifted Veil",
+      "s": "The pale-green dress, and the green leaves that seemed to form a border about her pale blond hair, made me think of a Water-Nixie--for my mind was full of German lyrics, and this pale, fatal-eyed woman, with the green weeds, looked like a birth from some cold sedgy stream, the daughter of an aged river.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0168",
+      "w": "The Lifted Veil",
+      "s": "I'm tired of waiting, Pierre,\" I said, as distinctly and emphatically as I could, like a man determined to be sober in spite of wine; \"I'm afraid something has happened to my father--he's usually so punctual.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0169",
+      "w": "The Lifted Veil",
+      "s": "In front of the Chinese folding-screen there was my father, with Mrs.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0170",
+      "w": "The Lifted Veil",
+      "s": "Shortly after this last occurrence--I think the very next day--I began to be aware of a phase in my abnormal sensibility, to which, from the languid and slight nature of my intercourse with others since my illness, I had not been alive before.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0171",
+      "w": "The Lifted Veil",
+      "s": "I might have believed this importunate insight to be merely a diseased activity of the imagination, but that my prevision of incalculable words and actions proved it to have a fixed relation to the mental process in other minds.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0172",
+      "w": "The Lifted Veil",
+      "s": "As it was, he became in a few weeks an object of intense hatred to me; and when he entered the room, still more when he spoke, it was as if a sensation of grating metal had set my teeth on edge.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0173",
+      "w": "The Lifted Veil",
+      "s": "That effect was chiefly determined by the fact that she made the only exception, among all the human beings about me, to my unhappy gift of insight.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0174",
+      "w": "The Lifted Veil",
+      "s": "Me she openly petted in my brother's presence, as if I were too young and sickly ever to be thought of as a lover; and that was the view he took of me.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0175",
+      "w": "The Lifted Veil",
+      "s": "The fluctuations of hope and fear, confined to this one channel, made each day in her presence a delicious torment.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0176",
+      "w": "The Lifted Veil",
+      "s": "I was completely fooled by this, and for two days shut myself up in my own room whenever Bertha was absent, that I might intoxicate myself afresh with the thought of this scene and all it implied.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0177",
+      "w": "The Lifted Veil",
+      "s": "She was my oasis of mystery in the dreary desert of knowledge.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0178",
+      "w": "The Lifted Veil",
+      "s": "Just as I reached the gravel-walk, I felt an arm slipped within mine, and a light hand gently pressing my wrist.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0179",
+      "w": "The Lifted Veil",
+      "s": "Gradually the hearth, the dim library, the candle-light disappeared--seemed to melt away into a background of light, the green serpent with the diamond eyes remaining a dark image on the retina.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0180",
+      "w": "The Lifted Veil",
+      "s": "Meanwhile, I was no sooner in Bertha's society again than I was as completely under her sway as before.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0181",
+      "w": "The Lifted Veil",
+      "s": "You have known the powerlessness of ideas before the might of impulse; and my visions, when once they had passed into memory, were mere ideas--pale shadows that beckoned in vain, while my hand was grasped by the living and the loved.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0182",
+      "w": "The Lifted Veil",
+      "s": "Those darkened dusty Christian saints, with their loftier arches and their larger candles, needed the consolatory scorn with which they might point to a more shrivelled death-in-life than their own.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0183",
+      "w": "The Lifted Veil",
+      "s": "I assented to this, and set off with Schmidt towards the bridge.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0184",
+      "w": "The Lifted Veil",
+      "s": "My self-consciousness was heightened to that pitch of intensity in which our own emotions take the form of a drama which urges itself imperatively on our contemplation, and we begin to weep, less under the sense of our suffering than at the thought of it.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0185",
+      "w": "The Lifted Veil",
+      "s": "It is to such as you that the good of this world falls: ready dulness, healthy selfishness, good-tempered conceit--these are the keys to happiness.\" The quick thought came, that my selfishness was even stronger than his--it was only a suffering selfishness instead of an enjoying one.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0186",
+      "w": "The Lifted Veil",
+      "s": "I suppose I must have shuddered, or betrayed in some other way my momentary chill of horror.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0187",
+      "w": "The Lifted Veil",
+      "s": "I had let slip words which, if she reflected on them, might rouse in her a suspicion of my abnormal mental condition--a suspicion which of all things I dreaded.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0188",
+      "w": "The Lifted Veil",
+      "s": "The heaviest trouble that had befallen him was the death of his first wife.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0189",
+      "w": "The Lifted Veil",
+      "s": "That son's existence was the best motive that could be alleged for making new purchases of land every year to round off the estate.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0190",
+      "w": "The Lifted Veil",
+      "s": "She behaved with a certain new consciousness and distance towards me after my brother's death; and I too was under a double constraint--that of delicacy towards my brother's memory and of anxiety as to the impression my abrupt words had left on her mind.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0191",
+      "w": "The Lifted Veil",
+      "s": "And she made me believe that she loved me.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0192",
+      "w": "The Lifted Veil",
+      "s": "He kept that hope a little while after our first year of marriage, and it was not quite extinct when paralysis came and saved him from utter disappointment.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0193",
+      "w": "The Lifted Veil",
+      "s": "In that state of mind I joined Bertha in her private sitting-room.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0194",
+      "w": "The Lifted Veil",
+      "s": "We were front to front with each other, and judged each other.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0195",
+      "w": "The Lifted Veil",
+      "s": "She was really pitiable to have such a husband, and so all the world thought.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0196",
+      "w": "The Lifted Veil",
+      "s": "I was kind and just to my dependants, but I excited in them a shrinking, half-contemptuous pity; for this class of men and women are but slightly determined in their estimate of others by general considerations, or even experience, of character.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0197",
+      "w": "The Lifted Veil",
+      "s": "That would have been the logic of one who had desires to gratify, and I had no desires.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0198",
+      "w": "The Lifted Veil",
+      "s": "So much misery--so slow and hideous a growth of hatred and sin, may be compressed into a sentence!",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0199",
+      "w": "The Lifted Veil",
+      "s": "I had not seen her in the library, which was my habitual place, for months.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0200",
+      "w": "The Lifted Veil",
+      "s": "The apparently indifferent nature of the errand seemed to make a ridiculous anticlimax to my prevision and my agitation.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0201",
+      "w": "The Lifted Veil",
+      "s": "Archer, with a face handsome enough to give her coarse hard nature the odious finish of bold, self-confident coquetry.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0202",
+      "w": "The Lifted Veil",
+      "s": "My insight into the minds of those around me was becoming dimmer and more fitful, and the ideas that crowded my double consciousness became less and less dependent on any personal contact.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0203",
+      "w": "The Lifted Veil",
+      "s": "To my surprise she had of late seemed to seek opportunities of remaining in my society, and had cultivated that kind of distant yet familiar talk which is customary between a husband and wife who live in polite and irrevocable alienation.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0204",
+      "w": "The Lifted Veil",
+      "s": "Just at this time there occurred an event which roused me somewhat from my inertia, and gave me an interest in the passing moment that I had thought impossible for me.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0205",
+      "w": "The Lifted Veil",
+      "s": "Might there not at least lie some comprehension and sympathy ready for me in his large and susceptible mind?",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0206",
+      "w": "The Lifted Veil",
+      "s": "I have reserved to this moment the mention of a circumstance which had forced itself on my notice shortly before Meunier's arrival, namely, that there had been some quarrel between Bertha and this maid, apparently during a visit to a distant family, in which she had accompanied her mistress.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0207",
+      "w": "The Lifted Veil",
+      "s": "I have the small tubes necessary, in a case I have with me, and the rest of the apparatus could be prepared readily.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0208",
+      "w": "The Lifted Veil",
+      "s": "A disagreeable foolish version of the thing might get abroad.\" \"Have you spoken to my wife on the subject?\" I said, \"because she appears to be peculiarly sensitive about this woman: she has been a favourite maid.\" \"To tell you the truth,\" said Meunier, \"I don't want her to know about it.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0209",
+      "w": "The Lifted Veil",
+      "s": "Meunier and I sat up together in the library, he making frequent visits to the sick-room, and returning with the information that the case was taking precisely the course he expected.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0210",
+      "w": "The Lifted Veil",
+      "s": "He stayed away longer than usual, and on returning, said to me quietly, \"Come now.\" I followed him to the chamber where death was hovering.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0211",
+      "w": "The Lifted Veil",
+      "s": "I turned my eyes from her with a horrible dread lest my insight should return, and I should be obliged to see what had been breeding about two unloving women's hearts.",
+      "src": {
+        "work": "The Lifted Veil"
+      }
+    },
+    {
+      "id": "eliot.p0212",
+      "w": "Brother Jacob",
+      "s": "In the same moment he looked up and saw his dear brother Jacob close upon him, holding the pitchfork so that the bright smooth prongs were a yard in advance of his own body, and about a foot off David’s.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0213",
+      "w": "Brother Jacob",
+      "s": "But an idiot with equivocal intentions and a pitchfork is as well worth flattering and cajoling as if he were Louis Napoleon.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0214",
+      "w": "Brother Jacob",
+      "s": "But the moment must come when Jacob would move his right hand to draw off the lid of the tin box, and then David would sweep the guineas into the hole with the utmost address and swiftness, and immediately seat himself upon them.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0215",
+      "w": "Brother Jacob",
+      "s": "Then he held out the empty box, and said, “Here’s the box, Jacob!",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0216",
+      "w": "Brother Jacob",
+      "s": "Hush—sh—sh!” Jacob, to whom this once indifferent brother had all at once become a sort of sweet-tasted fetish, stroked David’s best coat with his adhesive fingers, and then hugged him with an accompaniment of that mingled chuckling and gurgling by which he was accustomed to express the milder passions.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0217",
+      "w": "Brother Jacob",
+      "s": "But he had yet to learn that it is a dreadful thing to make an idiot fond of you, when you yourself are not of an affectionate disposition: especially an idiot with a pitchfork—obviously a difficult friend to shake off by rough usage.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0218",
+      "w": "Brother Jacob",
+      "s": "It was probable that some Princess Yarico would want him to marry her, and make him presents of very large jewels beforehand; after which, he needn’t marry her unless he liked.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0219",
+      "w": "Brother Jacob",
+      "s": "His brothers, of course, were early risers, but he should anticipate them by at least an hour and a half, and the little room which he had to himself as only an occasional visitor, had its window over the horse-block, so that he could slip out through the window without the least difficulty.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0220",
+      "w": "Brother Jacob",
+      "s": "If he had been of an impetuous disposition, he would have snatched the pitchfork from the ground and impaled this fraternal demon.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0221",
+      "w": "Brother Jacob",
+      "s": "Let us see.” Jacob, finding the lid rather tight, gave the box to his brother in perfect faith.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0222",
+      "w": "Brother Jacob",
+      "s": "Go, Jacob,” he said, when they were out of the thicket—pointing towards the house as he spoke; “go and fetch me a spade—a spade.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0223",
+      "w": "Brother Jacob",
+      "s": "Jacob would get tired of following him, or, at all events, could be eluded.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0224",
+      "w": "Brother Jacob",
+      "s": "Now every one who has worn a coat will understand the sensibilities that must keep a man from starting away in a hurry when there is a grasp on his coat-tail.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0225",
+      "w": "Brother Jacob",
+      "s": "His expectation was partly fulfilled: Jacob did go to sleep in the cart, but it was in a peculiar attitude—it was with his arms tightly fastened round his dear brother’s body; and if ever David attempted to move, the grasp tightened with the force of an affectionate boa-constrictor.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0226",
+      "w": "Brother Jacob",
+      "s": "He was rid of Jacob—he was bound for the Indies, where a gullible princess awaited him.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0227",
+      "w": "Brother Jacob",
+      "s": "Grimworth, to a discerning eye, was a good place to set up shopkeeping in.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0228",
+      "w": "Brother Jacob",
+      "s": "Moffat, the auctioneer and broker, had died without leaving anybody to follow him in the business, and Mrs.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0229",
+      "w": "Brother Jacob",
+      "s": "Edward Freely, as he called himself, was deceived, if he thought Grimworth money was to flow into his pockets on such terms.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0230",
+      "w": "Brother Jacob",
+      "s": "Gate, at the large carding-mill, who, having high connexions frequently visiting her, might be expected to have a large consumption of ratafias and macaroons.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0231",
+      "w": "Brother Jacob",
+      "s": "This brutal man had invited a supper-party for Christmas eve, when he would expect to see mince-pies on the table.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0232",
+      "w": "Brother Jacob",
+      "s": "Mole, who had already guessed it, and who subsequently encouraged herself in buying a mould of jelly, instead of exerting her own skill, by the reflection that “other people” did the same sort of thing.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0233",
+      "w": "Brother Jacob",
+      "s": "And so it came to pass, that the progress of civilization at Grimworth was not otherwise apparent than in the impoverishment of men, the gossiping idleness of women, and the heightening prosperity of Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0234",
+      "w": "Brother Jacob",
+      "s": "Fathers and mothers were naturally more slow and cautious in their recognition of the newcomer’s merits.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0235",
+      "w": "Brother Jacob",
+      "s": "For some time he was quite general in his attentions to the fair sex, combining the gallantries of a lady’s man with a severity of criticism on the person and manners of absent belles, which tended rather to stimulate in the feminine breast the desire to conquer the approval of so fastidious a judge.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0236",
+      "w": "Brother Jacob",
+      "s": "It was the general talk among the young people at Grimworth.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0237",
+      "w": "Brother Jacob",
+      "s": "Even the great people there were far behind those of their own standing in other parts of this realm.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0238",
+      "w": "Brother Jacob",
+      "s": "Freely “that sugar-plum fellow.” Oh, it was very cruel, when true love was crossed in that way, and all because Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0239",
+      "w": "Brother Jacob",
+      "s": "I have known young ladies, much better educated, and with an outward world diversified by instructive lectures, to say nothing of literature and highly-developed fancy-work, who have spun a cocoon of visionary joys and sorrows for themselves, just as Penny did.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0240",
+      "w": "Brother Jacob",
+      "s": "And the first idea that occurred to him in the matter was, that Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0241",
+      "w": "Brother Jacob",
+      "s": "Freely was seized with an irrepressible ambition to posses Mrs.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0242",
+      "w": "Brother Jacob",
+      "s": "But—so blind sometimes are parents—neither Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0243",
+      "w": "Brother Jacob",
+      "s": "But, however he might make the offer, she would not accept it without her father’s consent: she would always be true to Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0244",
+      "w": "Brother Jacob",
+      "s": "Palfrey’s brawn, he would find the very best of cold eating.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0245",
+      "w": "Brother Jacob",
+      "s": "It was nothing very surprising for one of the Freely family to have an estate left him, considering the lands that family had possessed in time gone by—nay, still possessed in the Northumberland branch.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0246",
+      "w": "Brother Jacob",
+      "s": "Strutt, attorney, of Rodham, he will hear of something to his advantage.” “Father’s dead!” exclaimed Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0247",
+      "w": "Brother Jacob",
+      "s": "It is possible to pass a great many bad half pennies and bad half-crowns, but I believe there has no instance been known of passing a halfpenny or a half-crown as a sovereign.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0248",
+      "w": "Brother Jacob",
+      "s": "Fate was too strong for him; he had thought to master her inclination and had fled over the seas to that end; but she caught him, tied an apron round him, and snatching him from all other devices, made him devise cakes and patties in a kitchen at Kingstown.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0249",
+      "w": "Brother Jacob",
+      "s": "David, you know, had expected to be disinherited; and so he would have been, if he had not, like some other indifferent sons, come of excellent parents, whose conscience made them scrupulous where much more highly-instructed people often feel themselves warranted in following the bent of their indignation.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0250",
+      "w": "Brother Jacob",
+      "s": "But for some time his family thought it likely that David would never reappear; and the eldest son, who had the charge of Jacob on his hands, often thought it a little hard that David might perhaps be dead, and yet, for want of certitude on that point, his legacy could not fall to his legal heir.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0251",
+      "w": "Brother Jacob",
+      "s": "Palfrey should overcome her reluctance to move from home, and that she and her husband should bring their two daughters to inspect little Penny’s future abode and decide on the new arrangements to be made for the reception of the bride.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0252",
+      "w": "Brother Jacob",
+      "s": "The handsome Letitia looked rather proud and contemptuous, thought her future brother-in-law an odious person, and was vexed with her father and mother for letting Penny marry him.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0253",
+      "w": "Brother Jacob",
+      "s": "He turned cold, and trembled in his brother’s grasp.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0254",
+      "w": "Brother Jacob",
+      "s": "By this time David’s power of device had begun to return, but it was a very hard task for his prudence to master his rage and hatred towards poor Jacob.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0255",
+      "w": "Brother Jacob",
+      "s": "I love Zavy—b’other Zavy,” he said, as soon as Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0256",
+      "w": "Brother Jacob",
+      "s": "I don’t mind giving him something to eat, and letting him lie down for the night.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0257",
+      "w": "Brother Jacob",
+      "s": "Freely’s features inconveniently against the handle of the pitchfork.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0258",
+      "w": "Brother Jacob",
+      "s": "Freely, striving after the most moral view of the subject.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0259",
+      "w": "Brother Jacob",
+      "s": "Palfrey,” said the mother, rising more slowly.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0260",
+      "w": "Brother Jacob",
+      "s": "It would, perhaps, have been a longer-headed device, if he had never told any of those clever fibs about his uncles, grand and otherwise; for the Palfreys were simple people, and shared the popular prejudice against lying.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0261",
+      "w": "Brother Jacob",
+      "s": "Prettyman, looking at his neighbour Freely rather sharply.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0262",
+      "w": "Brother Jacob",
+      "s": "Don’t be ashamed of your own flesh and blood.” Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0263",
+      "w": "Brother Jacob",
+      "s": "Aye, it’s my innicent of a brother, sure enough,” said honest Jonathan.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0264",
+      "w": "Brother Jacob",
+      "s": "Is this gentleman here in the confectionery line your brother, then, sir?” said Mr.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0265",
+      "w": "Brother Jacob",
+      "s": "And he had found a paradise in his brother’s shop.",
+      "src": {
+        "work": "Brother Jacob"
+      }
+    },
+    {
+      "id": "eliot.p0266",
+      "w": "The Mill on the Floss",
+      "s": "Funerals were always conducted with peculiar propriety in the Dodson family: the hat-bands were never of a blue shade, the gloves never split at the thumb, everybody was a mourner who ought to be, and there were always scarfs for the bearers.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0267",
+      "w": "The Mill on the Floss",
+      "s": "He was no longer in the paddock behind the rickyard; where was he likely to be gone, and Yap with him?",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0268",
+      "w": "The Mill on the Floss",
+      "s": "Ah!” sighed Mrs Pullet, “she’d another complaint ever so many years before she had the dropsy, and the doctors couldn’t make out what it was.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0269",
+      "w": "The Mill on the Floss",
+      "s": "His good nature had taken off the keenest edge of her suffering, and nuts with cowslip wine began to assert their legitimate influence.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0270",
+      "w": "The Mill on the Floss",
+      "s": "Mr Deane, he considered, was the “knowingest” man of his acquaintance, and he had besides a ready causticity of tongue that made an agreeable supplement to Mr Tulliver’s own tendency that way, which had remained in rather an inarticulate condition.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0271",
+      "w": "The Mill on the Floss",
+      "s": "Tom’s going to a new school at Midsummer,—a deal of expense to me.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0272",
+      "w": "The Mill on the Floss",
+      "s": "Has she, sister?” said Mrs Tulliver, with an air of much interest.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0273",
+      "w": "The Mill on the Floss",
+      "s": "But uncle Pullet, when entreated to exhibit his accomplishment, never depreciated it by a too ready consent.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0274",
+      "w": "The Mill on the Floss",
+      "s": "Thank you, little miss,” said the man, in a less respectful and grateful tone than Maggie anticipated, and she even observed that he smiled and winked at his companion.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0275",
+      "w": "The Mill on the Floss",
+      "s": "She would willingly have given it to him, for she was not at all attached to her thimble; but the idea that she was among thieves prevented her from feeling any comfort in the revival of deference and attention toward her; all thieves, except Robin Hood, were wicked people.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0276",
+      "w": "The Mill on the Floss",
+      "s": "Ogg the son of Beorl,” says my private hagiographer, “was a boatman who gained a scanty living by ferrying passengers across the river Floss.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0277",
+      "w": "The Mill on the Floss",
+      "s": "And as to my being like a mad dog, it’s well if you’re not cried shame on by the county for your treatment of me, for it’s what I can’t bear, and I won’t bear——” Here Mrs Glegg’s voice intimated that she was going to cry, and breaking off from speech, she rang the bell violently.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0278",
+      "w": "The Mill on the Floss",
+      "s": "So, not to be at a deficiency, in case of his finding genial companions, he had taken care to carry with him a small box of percussion-caps; not that there was anything particular to be done with them, but they would serve to impress strange boys with a sense of his familiarity with guns.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0279",
+      "w": "The Mill on the Floss",
+      "s": "Mrs Stelling had given a general invitation for the little girl to come and stay with her brother; so when Mr Tulliver drove over to King’s Lorton late in October, Maggie came too, with the sense that she was taking a great journey, and beginning to see the world.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0280",
+      "w": "The Mill on the Floss",
+      "s": "I believe you!” said Tom, with an emphatic nod.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0281",
+      "w": "The Mill on the Floss",
+      "s": "I know Wakem tells him the law can’t touch him for it, but there’s folks can handle the law besides Wakem.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0282",
+      "w": "The Mill on the Floss",
+      "s": "And Tom did not see how a bad man’s son could be very good.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0283",
+      "w": "The Mill on the Floss",
+      "s": "He was a boy who adhered tenaciously to impressions once received; as with all minds in which mere perception predominates over thought and emotion, the external remained to him rigidly what it was in the first instance.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0284",
+      "w": "The Mill on the Floss",
+      "s": "He had rather a shrunken appearance, and was tremulous in the mornings, not from age, but from the extreme perversity of the King’s Lorton boys, which nothing but gin could enable him to sustain with any firmness.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0285",
+      "w": "The Mill on the Floss",
+      "s": "It will be very hard for him if he is”; and Tom’s hitherto unforgiven offences were washed out by that pity.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0286",
+      "w": "The Mill on the Floss",
+      "s": "Yes, dear Tom,” said Maggie, looking up at him with trembling.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0287",
+      "w": "The Mill on the Floss",
+      "s": "Please, sir, I must go home,” Tom said abruptly, as he met Mr Stelling in the passage.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0288",
+      "w": "The Mill on the Floss",
+      "s": "It was the letter with that news in it that made father ill, they think.” “I believe that scoundrel’s been planning all along to ruin my father,” said Tom, leaping from the vaguest impressions to a definite conclusion.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0289",
+      "w": "The Mill on the Floss",
+      "s": "Maggie could have had the large check—it never shows so well when the dishes are on it.” Tom was touched to the quick, but there was an angry reaction immediately.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0290",
+      "w": "The Mill on the Floss",
+      "s": "There was a heightened colour in his face, and he was very far from looking humbled, but he was preparing to say, in a respectful tone, something he had previously meditated, when the door opened and his mother re-entered.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0291",
+      "w": "The Mill on the Floss",
+      "s": "Other folks may be surprised, but I’m not.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0292",
+      "w": "The Mill on the Floss",
+      "s": "A fall from your horse—shook you a bit,—that’s all, I think,” said Mr Glegg.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0293",
+      "w": "The Mill on the Floss",
+      "s": "And Tom was very unhappy; he felt the humiliation as well as the prospective hardships of his lot with all the keenness of a proud nature; and with all his resolute dutifulness toward his father there mingled an irrepressible indignation against him which gave misfortune the less endurable aspect of a wrong.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0294",
+      "w": "The Mill on the Floss",
+      "s": "Your poor father went the wrong way to work in giving you an education.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0295",
+      "w": "The Mill on the Floss",
+      "s": "So he went out again into the cold damp air.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0296",
+      "w": "The Mill on the Floss",
+      "s": "So I’ll thank you to take the nine suvreigns, Mr Tom, and set yoursen up with ’em somehow, if it’s true as the master’s broke.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0297",
+      "w": "The Mill on the Floss",
+      "s": "Imagine a truly respectable and amiable hen, by some portentous anomaly, taking to reflection and inventing combinations by which she might prevail on Hodge not to wring her neck, or send her and her chicks to market; the result could hardly be other than much cackling and fluttering.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0298",
+      "w": "The Mill on the Floss",
+      "s": "For Luke had been a constant night-watcher by his master’s bed.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0299",
+      "w": "The Mill on the Floss",
+      "s": "Of those two young hearts Tom’s suffered the most unmixed pain, for Maggie, with all her keen susceptibility, yet felt as if the sorrow made larger room for her love to flow in, and gave breathing-space to her passionate nature.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0300",
+      "w": "The Mill on the Floss",
+      "s": "Put that i’ the right words—you know how—and then write, as I don’t forgive Wakem for all that; and for all I’ll serve him honest, I wish evil may befall him.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0301",
+      "w": "The Mill on the Floss",
+      "s": "One day was like another; and Tom’s interest in life, driven back and crushed on every other side, was concentrating itself into the one channel of ambitious resistance to misfortune.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0302",
+      "w": "The Mill on the Floss",
+      "s": "But I’m so used to talking to Mumps, an’ he doesn’t mind a bit o’ cheating, when it’s them skinflint women, as haggle an’ haggle, an’ ’ud like to get their flannel for nothing, an’ ’ud niver ask theirselves how I got my dinner out on’t.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0303",
+      "w": "The Mill on the Floss",
+      "s": "Both above and below, which way soever thou dost turn thee, everywhere thou shalt find the Cross; and everywhere of necessity thou must have patience, if thou wilt have inward peace, and enjoy an everlasting crown....",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0304",
+      "w": "The Mill on the Floss",
+      "s": "Oh dear,” said Maggie, smiling, and flushed with pleasure, “what a queer little girl I was!",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0305",
+      "w": "The Mill on the Floss",
+      "s": "I delight in fine pictures; I long to be able to paint such.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0306",
+      "w": "The Mill on the Floss",
+      "s": "Maggie had an awe of him, against which she struggled as something unfair to her consciousness of wider thoughts and deeper motives; but it was of no use to struggle.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0307",
+      "w": "The Mill on the Floss",
+      "s": "An’ if a bit o’ luck turns up, I’m allays thinkin’ if I can let Mr Tom have a pull at it.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0308",
+      "w": "The Mill on the Floss",
+      "s": "You could do fine things wi’ my money, I don’t doubt.” “Very well,” said Mr Glegg, rather snappishly, “then we’ll do without you.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0309",
+      "w": "The Mill on the Floss",
+      "s": "Bob obeyed with ostentatious reluctance.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0310",
+      "w": "The Mill on the Floss",
+      "s": "I have found great peace in that for the last two or three years, even joy in subduing my own will.” “Yes, Maggie,” said Philip, vehemently; “and you are shutting yourself up in a narrow, self-delusive fanaticism, which is only a way of escaping pain by starving into dulness all the highest powers of your nature.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0311",
+      "w": "The Mill on the Floss",
+      "s": "Maggie felt her heart leap at this subterfuge of Philip’s, and there passed over her face that almost imperceptible shock which accompanies any relief.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0312",
+      "w": "The Mill on the Floss",
+      "s": "I have always been happy when I have been with you.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0313",
+      "w": "The Mill on the Floss",
+      "s": "When I chose my wife, I chose her the right size,—neither too little nor too big.” The poor wife, with her withered beauty, smiled complacently.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0314",
+      "w": "The Mill on the Floss",
+      "s": "Do you call this acting the part of a man and a gentleman, sir?” Tom said, in a voice of harsh scorn, as soon as Philip’s eyes were turned on him again.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0315",
+      "w": "The Mill on the Floss",
+      "s": "You have no pity; you have no sense of your own imperfection and your own sins.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0316",
+      "w": "The Mill on the Floss",
+      "s": "It’s a great thing when a man can be proud as he’s got a good son.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0317",
+      "w": "The Mill on the Floss",
+      "s": "Slowly the lawyer rose, and, as he turned his head, saw that Tulliver’s arms were being held by a girl, rather by the fear of hurting the girl that clung to him with all her young might.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0318",
+      "w": "The Mill on the Floss",
+      "s": "I remember, when I was a little girl and used to go to see my cousins, he often frightened me by talking as if he were angry.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0319",
+      "w": "The Mill on the Floss",
+      "s": "I ought rather to have said, one particular thing.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    },
+    {
+      "id": "eliot.p0320",
+      "w": "The Mill on the Floss",
+      "s": "But I can knit, Lucy,” Maggie went on, “if that will be of any use for your bazaar.” “Oh yes, of infinite use.",
+      "src": {
+        "work": "The Mill on the Floss"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "eliot.f.v0001",
+      "kind": "verbatim",
+      "text": "On leaving Rugby he declined to go to an English university, where I would gladly have placed him, and chose what I must consider the anomalous course of studying at Heidelberg.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "eliot.f.v0002",
+      "kind": "verbatim",
+      "text": "I’ll try and walk round the room.” Fred, in spite of his irritation, had kindness enough in him to be a little sorry for the unloved, unvenerated old man, who with his dropsical legs looked more than usually pitiable in walking.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "eliot.f.v0003",
+      "kind": "verbatim",
+      "text": "Vincy liked well enough the notion of the chaplain’s having a salary, supposing it were given to Farebrother, who was as good a little fellow as ever breathed, and the best preacher anywhere, and companionable too.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "eliot.f.v0004",
+      "kind": "verbatim",
+      "text": "It would have been to contravene these arrangements if Rosamond had consented to go away to Stone Court or elsewhere, as her parents wished her to do, especially since Mr.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "eliot.f.v0005",
+      "kind": "verbatim",
+      "text": "Probabilities are as various as the faces to be seen at will in fretwork or paper-hangings: every form is there, from Jupiter to Judy, if you only look with creative inclination.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "eliot.f.v0006",
+      "kind": "verbatim",
+      "text": "I dare say Dodo likes it: she is fond of melancholy things and ugly people.” “I am fond of knowing something about the people I live among,” said Dorothea, who had been watching everything with the interest of a monk on his holiday tour.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "eliot.f.v0007",
+      "kind": "verbatim",
+      "text": "Lydgate had not entered into such a union; but my relations with him are limited to that use of his gifts for God’s purposes which is taught us by the divine government under each dispensation.” Mrs.",
+      "work": "Middlemarch",
+      "lang": "en",
+      "src": {
+        "work": "Middlemarch"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "eliot.f.v0008",
+      "kind": "verbatim",
+      "text": "He had worked off his anger now, and whenever he wished to be especially kind to his mother, he fell into his strongest native accent and dialect, with which at other times his speech was less deeply tinged.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "eliot.f.v0009",
+      "kind": "verbatim",
+      "text": "See them in the bright sunlight, interrupted every now and then by rolling masses of cloud, ascending the slope from the Broxton side, where the tall gables and elms of the rectory predominate over the tiny whitewashed church.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "eliot.f.v0010",
+      "kind": "verbatim",
+      "text": "Poyser, on her way, peeped into the room where her two boys lay; just to see their ruddy round cheeks on the pillow, and to hear for a moment their light regular breathing.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "eliot.f.v0011",
+      "kind": "verbatim",
+      "text": "Shall I sit down with you while you do up your hair?” “Oh yes,” said Hetty, hastily turning round and reaching the second chair in the room, glad that Dinah looked as if she did not notice her ear-rings.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "eliot.f.v0012",
+      "kind": "verbatim",
+      "text": "My grandfather will never let me have any power while he lives, but there’s nothing I should like better than to undertake the Stonyshire side of the estate—it’s in a dismal condition—and set improvements on foot, and gallop about from one place to another and overlook them.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "eliot.f.v0013",
+      "kind": "verbatim",
+      "text": "He had long made up his mind that it would be wrong as well as foolish for him to marry a blooming young girl, so long as he had no other prospect than that of growing poverty with a growing family.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "eliot.f.v0014",
+      "kind": "verbatim",
+      "text": "She was not indifferent to his presence after all; she had blushed when she saw him, and then there was that touch of sadness about her which must surely mean love, since it was the opposite of her usual manner, which had often impressed him as indifference.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "eliot.f.v0015",
+      "kind": "verbatim",
+      "text": "Bartle kept his eye on the moving figure till it passed into the darkness, while Vixen, in a state of divided affection, had twice run back to the house to bestow a parenthetic lick on her puppies.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "eliot.f.v0016",
+      "kind": "verbatim",
+      "text": "It has long been my wish that he should have the management of the woods on the estate, which happen to be very valuable, not only because I think so highly of his character, but because he has the knowledge and the skill which fit him for the place.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "eliot.f.v0017",
+      "kind": "verbatim",
+      "text": "They were afraid of the noise of the toasts, but it would be a shame for them not to see you at table.” He walked on, speaking to the mothers and patting the children, while Mr.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "eliot.f.v0018",
+      "kind": "verbatim",
+      "text": "I have not seen it for years, and I hear on all hands about your fine cheese and butter,” said the squire, looking politely unconscious that there could be any question on which he and Mrs.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "eliot.f.v0019",
+      "kind": "verbatim",
+      "text": "Now, for the first time, she remembered without indifference the affectionate kindness Dinah had shown her, and those words of Dinah in the bed-chamber—that Hetty must think of her as a friend in trouble.",
+      "work": "Adam Bede",
+      "lang": "en",
+      "src": {
+        "work": "Adam Bede"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "eliot.f.v0020",
+      "kind": "verbatim",
+      "text": "Betty Jay scented the boiling of Squire Cass’s hams, but her longing was arrested by the unctuous liquor in which they were boiled; and when the seasons brought round the great merry-makings, they were regarded on all hands as a fine thing for the poor.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "eliot.f.v0021",
+      "kind": "verbatim",
+      "text": "That was Dunstan’s first thought as he approached it; the second was, that the old fool of a weaver, whose loom he heard rattling already, had a great deal of money hidden somewhere.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "eliot.f.v0022",
+      "kind": "verbatim",
+      "text": "A dull mind, once arriving at an inference that flatters a desire, is rarely able to retain the impression that the notion from which the inference started was purely problematic.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "eliot.f.v0023",
+      "kind": "verbatim",
+      "text": "Drumlow—poor old gentleman, I was fond on him, though he’d got a bit confused in his head, what wi’ age and wi’ taking a drop o’ summat warm when the service come of a cold morning.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "eliot.f.v0024",
+      "kind": "verbatim",
+      "text": "I don’t accuse you—I won’t accuse anybody—only,” he added, lifting up his hands to his head, and turning away with bewildered misery, “I try—I try to think where my guineas can be.” “Aye, aye, they’re gone where it’s hot enough to melt ’em, I doubt,” said Mr.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "eliot.f.v0025",
+      "kind": "verbatim",
+      "text": "Godfrey waited, before he spoke again, until the ale had been brought and the door closed—an interval during which Fleet, the deer-hound, had consumed enough bits of beef to make a poor man’s holiday dinner.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "eliot.f.v0026",
+      "kind": "verbatim",
+      "text": "I can see Nancy’s eyes, just as they will look at me, and feel her hand in mine already.” But Anxiety went on, though in noisy Christmas company; refusing to be utterly quieted even by much drinking.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "eliot.f.v0027",
+      "kind": "verbatim",
+      "text": "Partly, Miss Ladbrook felt that her own skirt must be regarded as unduly lax by the Miss Gunns, and partly, that it was a pity the Miss Gunns did not show that judgment which she herself would show if she were in their place, by stopping a little on this side of the fashion.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "eliot.f.v0028",
+      "kind": "verbatim",
+      "text": "You know one dance with you matters more to me than all the other pleasures in the world.” It was a long, long while since Godfrey had said anything so direct as that, and Nancy was startled.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "eliot.f.v0029",
+      "kind": "verbatim",
+      "text": "She knew this well; and yet, in the moments of wretched unbenumbed consciousness, the sense of her want and degradation transformed itself continually into bitterness towards Godfrey.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "eliot.f.v0030",
+      "kind": "verbatim",
+      "text": "Presently she slipped from his knee and began to toddle about, but with a pretty stagger that made Silas jump up and follow her lest she should fall against anything that would hurt her.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "eliot.f.v0031",
+      "kind": "verbatim",
+      "text": "Mayn’t you just as well stay with us?—such a beautiful evening as it’s likely to be.” The old gentleman had been talking with Godfrey about the increasing poor-rate and the ruinous times, and had not heard the dialogue between his daughters.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "eliot.f.v0032",
+      "kind": "verbatim",
+      "text": "Perhaps it was this very severity towards any indulgence of what she held to be sinful regret in herself, that made her shrink from applying her own standard to her husband.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "eliot.f.v0033",
+      "kind": "verbatim",
+      "text": "I’ll hinder nothing.” Even Nancy, with all the acute sensibility of her own affections, shared her husband’s view, that Marner was not justifiable in his wish to retain Eppie, after her real father had avowed himself.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "eliot.f.v0034",
+      "kind": "verbatim",
+      "text": "When your father opens his home to you, I think it’s right you shouldn’t turn your back on it.” “I can’t feel as I’ve got any father but one,” said Eppie, impetuously, while the tears gathered.",
+      "work": "Silas Marner",
+      "lang": "en",
+      "src": {
+        "work": "Silas Marner"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "eliot.f.v0035",
+      "kind": "verbatim",
+      "text": "Nothing of this sort had ever occurred in my dreaming experience before, for I had often been humiliated because my dreams were only saved from being utterly disjointed and commonplace by the frequent terrors of nightmare.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "eliot.f.v0036",
+      "kind": "verbatim",
+      "text": "No, it was not a dream; was it--the thought was full of tremulous exultation--was it the poet's nature in me, hitherto only a troubled yearning sensibility, now manifesting itself suddenly as spontaneous creation?",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "eliot.f.v0037",
+      "kind": "verbatim",
+      "text": "I concentrated my thoughts on Venice; I stimulated my imagination with poetic memories, and strove to feel myself present in Venice, as I had felt myself present in Prague.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "eliot.f.v0038",
+      "kind": "verbatim",
+      "text": "I sent my thoughts ranging over my world of knowledge, in the hope that they would find some object which would send a reawakening vibration through my slumbering genius.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "eliot.f.v0039",
+      "kind": "verbatim",
+      "text": "I'm tired of waiting, Pierre,\" I said, as distinctly and emphatically as I could, like a man determined to be sober in spite of wine; \"I'm afraid something has happened to my father--he's usually so punctual.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 208
+      }
+    },
+    {
+      "id": "eliot.f.v0040",
+      "kind": "verbatim",
+      "text": "Shortly after this last occurrence--I think the very next day--I began to be aware of a phase in my abnormal sensibility, to which, from the languid and slight nature of my intercourse with others since my illness, I had not been alive before.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "eliot.f.v0041",
+      "kind": "verbatim",
+      "text": "I might have believed this importunate insight to be merely a diseased activity of the imagination, but that my prevision of incalculable words and actions proved it to have a fixed relation to the mental process in other minds.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "eliot.f.v0042",
+      "kind": "verbatim",
+      "text": "As it was, he became in a few weeks an object of intense hatred to me; and when he entered the room, still more when he spoke, it was as if a sensation of grating metal had set my teeth on edge.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "eliot.f.v0043",
+      "kind": "verbatim",
+      "text": "I was completely fooled by this, and for two days shut myself up in my own room whenever Bertha was absent, that I might intoxicate myself afresh with the thought of this scene and all it implied.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "eliot.f.v0044",
+      "kind": "verbatim",
+      "text": "Gradually the hearth, the dim library, the candle-light disappeared--seemed to melt away into a background of light, the green serpent with the diamond eyes remaining a dark image on the retina.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "eliot.f.v0045",
+      "kind": "verbatim",
+      "text": "You have known the powerlessness of ideas before the might of impulse; and my visions, when once they had passed into memory, were mere ideas--pale shadows that beckoned in vain, while my hand was grasped by the living and the loved.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "eliot.f.v0046",
+      "kind": "verbatim",
+      "text": "Those darkened dusty Christian saints, with their loftier arches and their larger candles, needed the consolatory scorn with which they might point to a more shrivelled death-in-life than their own.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "eliot.f.v0047",
+      "kind": "verbatim",
+      "text": "My self-consciousness was heightened to that pitch of intensity in which our own emotions take the form of a drama which urges itself imperatively on our contemplation, and we begin to weep, less under the sense of our suffering than at the thought of it.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "eliot.f.v0048",
+      "kind": "verbatim",
+      "text": "It is to such as you that the good of this world falls: ready dulness, healthy selfishness, good-tempered conceit--these are the keys to happiness.\" The quick thought came, that my selfishness was even stronger than his--it was only a suffering selfishness instead of an enjoying one.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 284
+      }
+    },
+    {
+      "id": "eliot.f.v0049",
+      "kind": "verbatim",
+      "text": "She behaved with a certain new consciousness and distance towards me after my brother's death; and I too was under a double constraint--that of delicacy towards my brother's memory and of anxiety as to the impression my abrupt words had left on her mind.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "eliot.f.v0050",
+      "kind": "verbatim",
+      "text": "I was kind and just to my dependants, but I excited in them a shrinking, half-contemptuous pity; for this class of men and women are but slightly determined in their estimate of others by general considerations, or even experience, of character.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "eliot.f.v0051",
+      "kind": "verbatim",
+      "text": "My insight into the minds of those around me was becoming dimmer and more fitful, and the ideas that crowded my double consciousness became less and less dependent on any personal contact.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "eliot.f.v0052",
+      "kind": "verbatim",
+      "text": "To my surprise she had of late seemed to seek opportunities of remaining in my society, and had cultivated that kind of distant yet familiar talk which is customary between a husband and wife who live in polite and irrevocable alienation.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "eliot.f.v0053",
+      "kind": "verbatim",
+      "text": "I have reserved to this moment the mention of a circumstance which had forced itself on my notice shortly before Meunier's arrival, namely, that there had been some quarrel between Bertha and this maid, apparently during a visit to a distant family, in which she had accompanied her mistress.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 292
+      }
+    },
+    {
+      "id": "eliot.f.v0054",
+      "kind": "verbatim",
+      "text": "A disagreeable foolish version of the thing might get abroad.\" \"Have you spoken to my wife on the subject?\" I said, \"because she appears to be peculiarly sensitive about this woman: she has been a favourite maid.\" \"To tell you the truth,\" said Meunier, \"I don't want her to know about it.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 288
+      }
+    },
+    {
+      "id": "eliot.f.v0055",
+      "kind": "verbatim",
+      "text": "Meunier and I sat up together in the library, he making frequent visits to the sick-room, and returning with the information that the case was taking precisely the course he expected.",
+      "work": "The Lifted Veil",
+      "lang": "en",
+      "src": {
+        "work": "The Lifted Veil"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "eliot.f.v0056",
+      "kind": "verbatim",
+      "text": "In the same moment he looked up and saw his dear brother Jacob close upon him, holding the pitchfork so that the bright smooth prongs were a yard in advance of his own body, and about a foot off David’s.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "eliot.f.v0057",
+      "kind": "verbatim",
+      "text": "It was probable that some Princess Yarico would want him to marry her, and make him presents of very large jewels beforehand; after which, he needn’t marry her unless he liked.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "eliot.f.v0058",
+      "kind": "verbatim",
+      "text": "His brothers, of course, were early risers, but he should anticipate them by at least an hour and a half, and the little room which he had to himself as only an occasional visitor, had its window over the horse-block, so that he could slip out through the window without the least difficulty.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 292
+      }
+    },
+    {
+      "id": "eliot.f.v0059",
+      "kind": "verbatim",
+      "text": "His expectation was partly fulfilled: Jacob did go to sleep in the cart, but it was in a peculiar attitude—it was with his arms tightly fastened round his dear brother’s body; and if ever David attempted to move, the grasp tightened with the force of an affectionate boa-constrictor.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 283
+      }
+    },
+    {
+      "id": "eliot.f.v0060",
+      "kind": "verbatim",
+      "text": "Mole, who had already guessed it, and who subsequently encouraged herself in buying a mould of jelly, instead of exerting her own skill, by the reflection that “other people” did the same sort of thing.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "eliot.f.v0061",
+      "kind": "verbatim",
+      "text": "I have known young ladies, much better educated, and with an outward world diversified by instructive lectures, to say nothing of literature and highly-developed fancy-work, who have spun a cocoon of visionary joys and sorrows for themselves, just as Penny did.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "eliot.f.v0062",
+      "kind": "verbatim",
+      "text": "It was nothing very surprising for one of the Freely family to have an estate left him, considering the lands that family had possessed in time gone by—nay, still possessed in the Northumberland branch.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "eliot.f.v0063",
+      "kind": "verbatim",
+      "text": "It is possible to pass a great many bad half pennies and bad half-crowns, but I believe there has no instance been known of passing a halfpenny or a half-crown as a sovereign.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "eliot.f.v0064",
+      "kind": "verbatim",
+      "text": "Fate was too strong for him; he had thought to master her inclination and had fled over the seas to that end; but she caught him, tied an apron round him, and snatching him from all other devices, made him devise cakes and patties in a kitchen at Kingstown.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "eliot.f.v0065",
+      "kind": "verbatim",
+      "text": "Palfrey should overcome her reluctance to move from home, and that she and her husband should bring their two daughters to inspect little Penny’s future abode and decide on the new arrangements to be made for the reception of the bride.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "eliot.f.v0066",
+      "kind": "verbatim",
+      "text": "The handsome Letitia looked rather proud and contemptuous, thought her future brother-in-law an odious person, and was vexed with her father and mother for letting Penny marry him.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "eliot.f.v0067",
+      "kind": "verbatim",
+      "text": "It would, perhaps, have been a longer-headed device, if he had never told any of those clever fibs about his uncles, grand and otherwise; for the Palfreys were simple people, and shared the popular prejudice against lying.",
+      "work": "Brother Jacob",
+      "lang": "en",
+      "src": {
+        "work": "Brother Jacob"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "eliot.f.v0068",
+      "kind": "verbatim",
+      "text": "Funerals were always conducted with peculiar propriety in the Dodson family: the hat-bands were never of a blue shade, the gloves never split at the thumb, everybody was a mourner who ought to be, and there were always scarfs for the bearers.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "eliot.f.v0069",
+      "kind": "verbatim",
+      "text": "Mr Deane, he considered, was the “knowingest” man of his acquaintance, and he had besides a ready causticity of tongue that made an agreeable supplement to Mr Tulliver’s own tendency that way, which had remained in rather an inarticulate condition.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "eliot.f.v0070",
+      "kind": "verbatim",
+      "text": "She would willingly have given it to him, for she was not at all attached to her thimble; but the idea that she was among thieves prevented her from feeling any comfort in the revival of deference and attention toward her; all thieves, except Robin Hood, were wicked people.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "eliot.f.v0071",
+      "kind": "verbatim",
+      "text": "Mrs Stelling had given a general invitation for the little girl to come and stay with her brother; so when Mr Tulliver drove over to King’s Lorton late in October, Maggie came too, with the sense that she was taking a great journey, and beginning to see the world.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "eliot.f.v0072",
+      "kind": "verbatim",
+      "text": "He was a boy who adhered tenaciously to impressions once received; as with all minds in which mere perception predominates over thought and emotion, the external remained to him rigidly what it was in the first instance.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "eliot.f.v0073",
+      "kind": "verbatim",
+      "text": "He had rather a shrunken appearance, and was tremulous in the mornings, not from age, but from the extreme perversity of the King’s Lorton boys, which nothing but gin could enable him to sustain with any firmness.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "eliot.f.v0074",
+      "kind": "verbatim",
+      "text": "It was the letter with that news in it that made father ill, they think.” “I believe that scoundrel’s been planning all along to ruin my father,” said Tom, leaping from the vaguest impressions to a definite conclusion.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "eliot.f.v0075",
+      "kind": "verbatim",
+      "text": "There was a heightened colour in his face, and he was very far from looking humbled, but he was preparing to say, in a respectful tone, something he had previously meditated, when the door opened and his mother re-entered.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "eliot.f.v0076",
+      "kind": "verbatim",
+      "text": "Imagine a truly respectable and amiable hen, by some portentous anomaly, taking to reflection and inventing combinations by which she might prevail on Hodge not to wring her neck, or send her and her chicks to market; the result could hardly be other than much cackling and fluttering.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "eliot.f.v0077",
+      "kind": "verbatim",
+      "text": "Of those two young hearts Tom’s suffered the most unmixed pain, for Maggie, with all her keen susceptibility, yet felt as if the sorrow made larger room for her love to flow in, and gave breathing-space to her passionate nature.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "eliot.f.v0078",
+      "kind": "verbatim",
+      "text": "One day was like another; and Tom’s interest in life, driven back and crushed on every other side, was concentrating itself into the one channel of ambitious resistance to misfortune.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "eliot.f.v0079",
+      "kind": "verbatim",
+      "text": "Both above and below, which way soever thou dost turn thee, everywhere thou shalt find the Cross; and everywhere of necessity thou must have patience, if thou wilt have inward peace, and enjoy an everlasting crown....",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "eliot.f.v0080",
+      "kind": "verbatim",
+      "text": "Slowly the lawyer rose, and, as he turned his head, saw that Tulliver’s arms were being held by a girl, rather by the fear of hurting the girl that clung to him with all her young might.",
+      "work": "The Mill on the Floss",
+      "lang": "en",
+      "src": {
+        "work": "The Mill on the Floss"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "eliot.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 4,
+      "worksSpan": 3,
+      "examples": [
+        "If the outline had been less finely cut, his face might have been called jolly; but that was not the right word for its mixture of bonhomie and distinction.",
+        "If anything ever goes wrong, it must be the husband’s fault there: he can make her what he likes—that is plain."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 320,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:67384d603ce83c215be4532e246d1fa6941ce32b3fca5f1cfdc7f06ef494821f"
+}

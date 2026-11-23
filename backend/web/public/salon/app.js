@@ -12,6 +12,7 @@
     : 'https://api.kayroslab.com';
 
   const $ = (id) => document.getElementById(id);
+  const PREFERS_STILL = Boolean(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const ui = {
     seated: $('seated'),
     seatCount: $('seatCount'),
@@ -37,6 +38,7 @@
   const state = {
     catalog: null,
     manifest: null,
+    avatars: null,
     packs: new Map(),
     seated: [],
     question: '',
@@ -99,6 +101,24 @@
   }
 
   function picto(author, size = 'md') {
+    const avatar = state.avatars && state.avatars.authors && state.avatars.authors[author.id];
+    if (!author._noPortrait && avatar && avatar.file) {
+      const img = document.createElement('img');
+      img.className = `picto ${size} portrait`;
+      img.src = new URL(avatar.file, BASE).toString();
+      img.alt = '';
+      // Pas de lazy : dans un conteneur à hauteur contrainte, le portrait ne
+      // se chargeait jamais et la table restait en monogrammes.
+      img.decoding = 'async';
+      img.title = avatar.credit ? `${author.name} — ${avatar.credit}` : author.name;
+      img.setAttribute('aria-hidden', 'true');
+      // Un portrait cassé ne doit pas laisser un trou : on retombe sur le monogramme.
+      img.addEventListener('error', () => {
+        const fallback = picto({ ...author, _noPortrait: true }, size);
+        img.replaceWith(fallback);
+      }, { once: true });
+      return img;
+    }
     const node = el('span', `picto ${size}`, (author.monogram || initials(author.name)).slice(0, 3));
     node.style.setProperty('--hue', String(hash(author.id) % 360));
     node.title = author.name;
@@ -379,8 +399,52 @@
     return index === 0 ? 'ouverture' : 'réponse à l’hôte';
   }
 
-  function renderThread(scroll = false) {
-    clear(ui.thread);
+  /** Carte « X écrit… » : rend visible l'attente du modèle. */
+  let writingCard = null;
+
+  function showWriting(author) {
+    hideWriting();
+    const empty = ui.thread.querySelector('.empty');
+    if (empty) empty.remove();
+    const card = el('article', 'turn pending');
+    card.style.setProperty('--hue', String(hash(author.id) % 360));
+    const head = el('header', 'turn-head');
+    head.append(picto(author, 'sm'));
+    const who = el('div', 'who');
+    who.append(el('h3', null, author.name), el('p', 'sub', 'écrit…'));
+    head.append(who);
+    card.append(head);
+    const dots = el('div', 'writing');
+    dots.append(el('span'), el('span'), el('span'));
+    card.append(dots);
+    ui.thread.append(card);
+    ui.thread.scrollTop = ui.thread.scrollHeight;
+    writingCard = card;
+  }
+
+  function hideWriting() {
+    if (writingCard) { writingCard.remove(); writingCard = null; }
+  }
+
+  /** Écrit le texte mot à mot (durée bornée : ~1,4 s quel que soit le volume). */
+  function revealText(node, text, done) {
+    const parts = String(text || '').split(/(\s+)/);
+    const step = Math.max(6, Math.min(36, 1400 / Math.max(1, parts.length)));
+    let i = 0;
+    node.classList.add('streaming');
+    const timer = setInterval(() => {
+      node.textContent = parts.slice(0, i).join('');
+      i += 2;
+      if (i >= parts.length) {
+        clearInterval(timer);
+        node.textContent = text;
+        node.classList.remove('streaming');
+        if (typeof done === 'function') done();
+      }
+    }, step);
+  }
+
+  function renderThread(scroll = false) {    clear(ui.thread);
     if (!state.turns.length) {
       ui.thread.append(el('p', 'empty', state.question
         ? 'La table est prête. Lancez le premier tour.'
@@ -398,7 +462,16 @@
       head.append(who);
       card.append(head);
       if (turn.prise) card.append(el('p', 'prise', `Prise — ${turn.prise}`));
-      card.append(el('p', 'said', turn.text));
+      const said = el('p', 'said');
+      card.append(said);
+      if (turn.fresh && !PREFERS_STILL) {
+        // Révélation mot à mot : la réplique arrive déjà écrite, mais l'œil
+        // voit la pensée se former au lieu d'un bloc qui surgit.
+        revealText(said, turn.text, () => { delete turn.fresh; });
+      } else {
+        said.textContent = turn.text;
+        delete turn.fresh;
+      }
       if (turn.citations && turn.citations.length) {
         const details = el('details', 'cites');
         details.append(el('summary', null, `Citations vérifiées (${turn.citations.length})`));
@@ -406,11 +479,13 @@
         for (const c of turn.citations) {
           const li = el('li');
           li.append(el('em', null, c.work ? `« ${c.work} »` : 'Œuvre'));
-          li.append(document.createTextNode(c.text ? ` — « ${c.text} »` : ''));
-          if (c.translated) {
-            li.append(el('span', 'translated', `traduction de « ${c.original || ''} »`));
-          } else if (c.translation) {
-            li.append(el('span', 'translated', `traduction : « ${c.translation} »`));
+          // La citation s'affiche dans la langue du salon ; l'original reste
+          // visible en dessous comme preuve vérifiée.
+          const shown = c.translation || c.text || '';
+          const original = c.translated ? (c.original || '') : (c.translation ? (c.text || '') : '');
+          li.append(document.createTextNode(shown ? ` — « ${shown} »` : ''));
+          if (original && original !== shown) {
+            li.append(el('span', 'translated', `original : « ${original} »`));
           }
           list.append(li);
         }
@@ -489,7 +564,12 @@
           authorId: t.author.id,
           text: t.text,
           prise: t.prise,
-          citations: (t.citations || []).slice(0, 4).map((c) => ({ work: c.work, text: c.text })),
+          citations: (t.citations || []).slice(0, 4).map((c) => ({
+            work: c.work,
+            text: c.text,
+            ...(c.translation ? { translation: c.translation, translationLang: c.translationLang } : {}),
+            ...(c.translated ? { translated: true, original: c.original } : {}),
+          })),
           origin: 'agent',
           grounded: true,
           act: t.act,
@@ -604,7 +684,7 @@
   }
 
   function addTurn(turn) {
-    state.turns.push(turn);
+    state.turns.push({ ...turn, fresh: true });
     renderThread(true);
     renderEvolution();
     updateControls();
@@ -635,12 +715,16 @@
 
   async function speakOne({ author, act, toward, toName }) {
     setStatus(`${author.name} parle…`);
+    // Carte d'attente immédiate : sans elle, la table semble figée pendant
+    // les quelques secondes de génération.
+    showWriting(author, act, toward, toName);
     let data = null;
     try {
       data = await callAPI(author, act, toward, toName);
     } catch {
       data = null;
     }
+    hideWriting();
     if (data) {
       addTurn({
         author,
@@ -701,6 +785,8 @@
       const [catalog, manifest] = await Promise.all([loadJSON('catalog.json'), loadJSON('kb-manifest.json')]);
       state.catalog = catalog;
       state.manifest = manifest;
+      // Les portraits sont optionnels : leur absence ne doit pas empêcher la table.
+      state.avatars = await loadJSON('avatars.json').catch(() => null);
       const published = new Set(Object.keys((manifest && manifest.authors) || {}));
       const byId = new Map((catalog.authors || []).filter((a) => published.has(a.id)).map((a) => [a.id, a]));
 
