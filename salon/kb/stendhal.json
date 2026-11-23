@@ -1,0 +1,3239 @@
+{
+  "authorId": "stendhal",
+  "kbVersion": "stendhal@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:49.969Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Le rouge et le noir: chronique du XIXe siècle",
+      "sentences": 37
+    },
+    {
+      "title": "La Chartreuse De Parme",
+      "sentences": 57
+    },
+    {
+      "title": "De l'Amour",
+      "sentences": 54
+    },
+    {
+      "title": "Rome, Naples et Florence, en 1817",
+      "sentences": 58
+    },
+    {
+      "title": "L'Abbesse De Castro",
+      "sentences": 59
+    }
+  ],
+  "passages": [
+    {
+      "id": "stendhal.p0001",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Il ne faut pas trop mal augurer de Julien; il inventait correctement les paroles d'une hypocrisie cauteleuse et prudente.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0002",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Ce sont sans doute de tels moments d'humiliation qui ont fait les Robespierre.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0003",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Son absence avait fait oublier ses gaucheries.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0004",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Dans la surprise que lui causa une marque d'amour si extraordinaire il la regarda avec passion.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0005",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Songe que je ne pourrai plus revenir si tu parles.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0006",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Elle lui prenait la main, qu'elle couvrait de baisers.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0007",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Quel bonheur pour moi de la perdre, de l'offrir en sacrifice, et de ne plus craindre pour mes enfants!",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0008",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Il est bon avocat, qui est-ce qui parle jamais de son talent pour la parole?",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0009",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Le lendemain matin, au jour, il verrait l'impression des pas.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0010",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Les larmes aux yeux, elle regardait vers les grands bois de la montagne.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0011",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Que peut-il y avoir de commun entre cette maison et un nouvel amant?",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0012",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "A la moindre indisposition de vos enfants, vous ne les verrez plus dans la tombe.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0013",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Qu'importe, il ne sera pas dit que je manque un insolent.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0014",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Julien n'avait perdu que l'usage des yeux et la force de se mouvoir; il entendit des pas qui s'approchaient.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0015",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Je garde pour moi l'aile du midi et la grand'nef.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0016",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Je ne vous dissimulerai point que je vous envoie au milieu des loups.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0017",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Julien y vit l'indignation la plus vraie.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0018",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "S'il entend le moindre bruit je suis perdue, il me chassera comme une malheureuse que je suis.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0019",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "La paix des champs est pour moi un enfer.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0020",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Le descendant de l'ami de Henri III lui parut d'abord avoir une tournure assez mesquine.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0021",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Vingt fois Norbert vit Julien sur le point de tomber; mais enfin la promenade finit sans accident.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0022",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Prenant sans cesse conseil de tout le monde, il n'avait le courage de suivre aucun avis jusqu'au bout.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0023",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "L'homme s'en alla, non sans se retourner de temps en temps pour le menacer du poing et lui adresser des injures.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0024",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Julien se sentait une vive inclination pour eux.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0025",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Quoi de plus plat, se dit-elle que tout ce groupe!",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0026",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Il ne daignait pas lever l'oeil sur Mathilde.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0027",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Il lui sembla qu'elle prenait en guignon le marquis de Croisenois.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0028",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Pendant deux ou trois ans, reprit-il en riant, et se moquant de soi.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0029",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Les derniers jours, elle semblait contempler Julien avec une sorte de joie maligne.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0030",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Julien ne vit plus, c'est son cadavre qui s'agite encore.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0031",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Ceci est singulier, pensa Julien, on n'annonce point dans ce salon.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0032",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Il se souvint alors seulement qu'il n'avait point entendu le marquis dire au laquais le nom de la rue, et le marquis avait fait prendre un fiacre, ce qui ne lui arrivait jamais.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0033",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Cela suffira-t-il pour amener une heureuse occupation, comme celle que M.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0034",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Julien le suivit, rempli d'une admiration stupide.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0035",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "CHAPITRE XXVI L'AMOUR MORAL There also was of course in Adeline That calm patrician polish in the address, Which ne'er can pass the equinoctial line Of any thing which Nature would express: Just as a Mandarin finds nothing fine, At least his manner suffers not to guess That any thing he views can greatly please.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0036",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "C'est la table d'un mauvais livre, pensait Julien.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0037",
+      "w": "Le rouge et le noir: chronique du XIXe siècle",
+      "s": "Elle voulut jouir du son de sa voix en ce moment.",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      }
+    },
+    {
+      "id": "stendhal.p0038",
+      "w": "La Chartreuse De Parme",
+      "s": "Fabrice, distrait par sa joie, songeait plus au maréchal Ney et à la gloire qu’à son cheval, lequel étant fort animé, sauta dans le canal; ce qui fit rejaillir l’eau à une hauteur considérable.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0039",
+      "w": "La Chartreuse De Parme",
+      "s": "La fumée empêchait de rien distinguer du côté vers lequel on s’avançait; l’on voyait quelquefois des hommes au galop se détacher sur cette fumée blanche.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0040",
+      "w": "La Chartreuse De Parme",
+      "s": "Ce général n’était autre que le comte d’A..., le lieutenant Robert du 15 mai 1796.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0041",
+      "w": "La Chartreuse De Parme",
+      "s": "Savez-vous que je suis le général comte B***, commandant votre division, etc.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0042",
+      "w": "La Chartreuse De Parme",
+      "s": "Ils le trouvaient fort différent d’eux-mêmes, ce qui les choquait; Fabrice au contraire commençait à se sentir beaucoup d’amitié pour eux.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0043",
+      "w": "La Chartreuse De Parme",
+      "s": "Couds tes napoléons dans ton pantalon; et surtout quand tu as à payer quelque chose, ne montre tout juste que l’argent qu’il faut pour payer.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0044",
+      "w": "La Chartreuse De Parme",
+      "s": "Furieux, le hussard se retourne et lance un coup de toutes ses forces, qui coupe la manche de Fabrice et entre profondément dans son bras: notre héros tombe.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0045",
+      "w": "La Chartreuse De Parme",
+      "s": "Vous m’avez déjà sauvé la vie une fois en me recevant au moment où j’allais tomber mourant dans la rue; sauvez-la-moi encore en me donnant les moyens de rejoindre ma mère.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0046",
+      "w": "La Chartreuse De Parme",
+      "s": "Deux fois, en traversant la France, il fut arrêté; mais il sut se dégager; il dut ces désagréments à son passeport italien et à cette étrange qualité de marchand de baromètres, qui n’était guère d’accord avec sa figure jeune et son bras en écharpe.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0047",
+      "w": "La Chartreuse De Parme",
+      "s": "Bien plus, le baron détaille complaisamment les deux contraventions dont Fabrice est accusé d’après la dénonciation de son indigne frère; il explique que ces deux contraventions emportent la prison; n’est-ce pas nous dire que si nous aimons mieux l’exil, c’est à nous de choisir?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0048",
+      "w": "La Chartreuse De Parme",
+      "s": "Puis aller habiter le château de Grianta avec un abominable secatore, ce marquis del Dongo!...",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0049",
+      "w": "La Chartreuse De Parme",
+      "s": "Cet homme qui l’amusait, le comte Mosca della Rovere Sorezana, était alors ministre de la guerre, de la police et des finances de ce fameux prince de Parme, Ernest IV, si célèbre par ses sévérités que les libéraux de Milan appelaient des cruautés.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0050",
+      "w": "La Chartreuse De Parme",
+      "s": "Elle ne pouvait du moins refuser au comte d’être fort amoureux; un mois ne s’était pas écoulé, qu’elle songeait à lui avec une amitié tendre.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0051",
+      "w": "La Chartreuse De Parme",
+      "s": "De là un million de désagréments de détail.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0052",
+      "w": "La Chartreuse De Parme",
+      "s": "Elle trouva que l’imitation était frappante; évidemment il cherchait le regard et la parole noble de Louis XIV, et il s’appuyait sur la table descagliola, de façon à se donner la tournure de Joseph II.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0053",
+      "w": "La Chartreuse De Parme",
+      "s": "La duchesse était toujours un peu choquée de cette dernière nécessité.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0054",
+      "w": "La Chartreuse De Parme",
+      "s": "La duchesse, toujours passionnée pour quelque chose, toujours agissante, jamais oisive, avait plus d’esprit que toute la cour de Parme; mais elle manquait de patience et d’impassibilité pour réussir dans les intrigues.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0055",
+      "w": "La Chartreuse De Parme",
+      "s": "Cette petite surprise chassa l’ennui: «Voilà un gaillard, se dit-il, pour lequel on va me demander Dieu sait quelles faveurs, toutes celles dont je puis disposer.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0056",
+      "w": "La Chartreuse De Parme",
+      "s": "Fabrice se plaisait fort dans la société du comte: c’était le premier homme supérieur qui eût daigné lui parler sans comédie; d’ailleurs ils avaient un goût commun, celui des antiquités et des fouilles.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0057",
+      "w": "La Chartreuse De Parme",
+      "s": "Comment rapporter tous les raisonnements, toutes les façons de voir ce qui lui arrivait, qui, durant trois mortelles heures, mirent à la torture cet homme passionné?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0058",
+      "w": "La Chartreuse De Parme",
+      "s": "Il protestait partout qu’il tuerait le monsignore, car il avait suivi Fabrice et était parvenu à découvrir son nom.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0059",
+      "w": "La Chartreuse De Parme",
+      "s": "A un quart de lieue de Côme, où la marquise et sa fille devaient s’arrêter pour passer la nuit, il prit un sentier à gauche, qui, contournant le bourg de Vico, se réunit ensuite à un petit chemin récemment établi sur l’extrême bord du lac.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0060",
+      "w": "La Chartreuse De Parme",
+      "s": "Le noble langage de l’architecture le trouva insensible; le souvenir de son frère et de son père fermait son âme à toute sensation de beauté, il n’était attentif qu’à se tenir sur ses gardes en présence d’ennemis hypocrites et dangereux.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0061",
+      "w": "La Chartreuse De Parme",
+      "s": "Ecouter ce langage dans la position où se trouvait Fabrice, en butte aux attentions de MM.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0062",
+      "w": "La Chartreuse De Parme",
+      "s": "Quel chagrin mortel pour elle et pour moi si dans cette espèce de course au clocher que vous venez de faire avec ce cheval maigre, il eût fait un faux pas.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0063",
+      "w": "La Chartreuse De Parme",
+      "s": "Au même instant, Fabrice vit tomber de la portière une sorte de grand couteau de chasse; il se baissa pour le ramasser, mais, au même instant il fut touché à l’épaule par un coup d’épée que lui lançait Giletti.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0064",
+      "w": "La Chartreuse De Parme",
+      "s": "La police est vigilante en diable en pays autrichien: elle saura bientôt qu’il y a eu un homme de tué: vous voyagez avec un passeport qui n’est pas le vôtre, il n’en faut pas tant pour passer deux ans en prison.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0065",
+      "w": "La Chartreuse De Parme",
+      "s": "Fabrice était très gai en ce moment, et au lieu de former des projets sinistres, il répondit en riant: --Et d’où diable connais-tu mon Excellence?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0066",
+      "w": "La Chartreuse De Parme",
+      "s": "Pour savoir de quoi l’on est coupable, il faut interroger son curé, ou lire la liste des péchés, telle qu’elle se trouve imprimée dans les livres intitulés: Préparation au sacrement de la Pénitence.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0067",
+      "w": "La Chartreuse De Parme",
+      "s": "Fabrice ne se doutait en aucune façon de ce qui se passait à Parme.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0068",
+      "w": "La Chartreuse De Parme",
+      "s": "Souvent il fut obligé de relever la tête pour que ses larmes ne tombassent pas sur son papier.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0069",
+      "w": "La Chartreuse De Parme",
+      "s": "Il établit son quartier général non à Parme, c’eût été trop imprudent, mais dans un village des environs, au milieu des bois, sur la route de Sacca où était le château de sa tante.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0070",
+      "w": "La Chartreuse De Parme",
+      "s": "Evidemment, c’est le jeune prince, se dit M***, autrement pourquoi se déguiser?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0071",
+      "w": "La Chartreuse De Parme",
+      "s": "Ludovic et les bravi de Fabrice furent assaillis mais purent se sauver; ils tirèrent quelques coups de pistolet.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0072",
+      "w": "La Chartreuse De Parme",
+      "s": "Le plaisant de la chose c’est que le prince ne songea point à se demander s’il ferait grâce à Fabrice et quelle serait cette grâce.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0073",
+      "w": "La Chartreuse De Parme",
+      "s": "Et, se tournant vers la duchesse, il ajouta, avec le regard le plus galant et en même temps de l’air que l’on prend pour citer le mot d’une comédie: --Que faut-il faire pour plaire à ces beaux yeux?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0074",
+      "w": "La Chartreuse De Parme",
+      "s": "La duchesse écrivait à monseigneur Landriani avec une familiarité qui devait charmer ce bon bourgeois; la signature seule avait trois lignes; la lettre, fort amicale, était suivie de ces mots: Angelina-Cornelia-Isola Valserra del Dongo, duchesse Sanseverina.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0075",
+      "w": "La Chartreuse De Parme",
+      "s": "Il s’était arrêté entre la fenêtre du bureau et la voiture du général pour regarder Fabrice, et ses jurements redoublaient.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0076",
+      "w": "La Chartreuse De Parme",
+      "s": "Ce prétendant est-il éconduit, son caractère devient moins sombre, et je la vois presque gaie, jusqu’à ce qu’un autre épouseur se mette sur les rangs.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0077",
+      "w": "La Chartreuse De Parme",
+      "s": "D’un autre côté le prince s’occupe sans cesse de ce qui se passe à la forteresse, et il n’entend pas raillerie sur ce sujet; la peur rend cruel...",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0078",
+      "w": "La Chartreuse De Parme",
+      "s": "Nous y vivrions d’abord avec les douze cents francs que l’homme d’affaires de son père me fait passer avec une exactitude si plaisante.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0079",
+      "w": "La Chartreuse De Parme",
+      "s": "Dans cette soirée décisive, je n’avais pas besoin de son esprit; il fallait seulement qu’il écrivît sous ma dictée, il n’avait qu’à écrire ce mot, que j’avais obtenu par mon caractère: ses habitudes de bas courtisan l’ont emporté.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0080",
+      "w": "La Chartreuse De Parme",
+      "s": "Le comte, au désespoir lui-même, chercha à la consoler.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0081",
+      "w": "La Chartreuse De Parme",
+      "s": "Il trouva une sorte de joie mélancolique à faire de ces pièces deux belles copies qu’il adressa à la duchesse.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0082",
+      "w": "La Chartreuse De Parme",
+      "s": "Aujourd’hui, je veux la vérité: Qu’est-ce que ces bruits ridicules qui font condamner à mort ce jeune homme comme assassin du comédien Giletti!",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0083",
+      "w": "La Chartreuse De Parme",
+      "s": "Cette tour Farnèse placée en si belle vue se compose d’un rez-de-chaussée long de quarante pas au moins, large à proportion et tout rempli de colonnes fort trapues, car cette pièce si démesurément vaste n’a pas plus de quinze pieds d’élévation.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0084",
+      "w": "La Chartreuse De Parme",
+      "s": "Allez, il faut que vous soyez joliment coupable, toute la citadelle est sens dessus dessous à cause de vous; les belles menées de Madame la duchesse ont déjà fait renvoyer trois d’entre nous.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0085",
+      "w": "La Chartreuse De Parme",
+      "s": "C’était le temps où, deux fois la semaine, le général Fabio Conti disait au prince: --Je puis donner ma parole d’honneur à Votre Altesse que le prisonnier del Dongo ne parle à âme qui vive, et passe sa vie dans l’accablement du plus profond désespoir, ou à dormir.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0086",
+      "w": "La Chartreuse De Parme",
+      "s": "L’homme est un plaisant animal, s’écria-t-il, il faut en convenir!",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0087",
+      "w": "La Chartreuse De Parme",
+      "s": "Le mépris public attaché à son nom qui servait de proverbe à la canaille, le rendait malade depuis qu’il avait l’espoir fondé de pouvoir y échapper.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0088",
+      "w": "La Chartreuse De Parme",
+      "s": "Le lendemain il reçut d’elle une fort longue lettre.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0089",
+      "w": "La Chartreuse De Parme",
+      "s": "Du reste dans son mépris pour des magistrats sans probité, il ne leur dit exactement que ces paroles: --Je suis malade, messieurs, je me meurs de langueur, et vous m’excuserez si je ne puis me lever.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0090",
+      "w": "La Chartreuse De Parme",
+      "s": "De plus, je soupçonne la duchesse d’avoir découvert trois des paysans qui travaillaient à la fouille de Sanguigna et qui se trouvaient hors du fossé au moment où ce brigand de Giletti attaqua del Dongo.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0091",
+      "w": "La Chartreuse De Parme",
+      "s": "La place de tribun rend-elle des services valant réellement cent francs par mois?",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0092",
+      "w": "La Chartreuse De Parme",
+      "s": "Voilà le seul homme qui m’ait comprise, se dit-elle, c’est ainsi qu’en eût agi Fabrice, s’il eût pu m’entendre.» Il y avait deux choses dans le caractère de la duchesse, elle voulait toujours ce qu’elle avait voulu une fois; elle ne remettait jamais en délibération ce qui avait été une fois décidé.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0093",
+      "w": "La Chartreuse De Parme",
+      "s": "Elle ne l’y trouva plus: il avait réussi à s’échapper.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0094",
+      "w": "La Chartreuse De Parme",
+      "s": "Alors, inutile de s’occuper davantage de lui, avait-on dit; s’il ne convenait pas au pouvoir de le faire mourir en place publique, il mourrait bientôt de maladie.",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      }
+    },
+    {
+      "id": "stendhal.p0095",
+      "w": "De l'Amour",
+      "s": "Il y avait encore sous la Restauration une ligne de démarcation dans le grand monde; n'allait pas dans le faubourg Saint-Germain qui voulait; ceux que leur naissance n'y installait point tout d'abord n'y étaient pas introduits, comme depuis, sur la seule étiquette de leur esprit.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0096",
+      "w": "De l'Amour",
+      "s": "Tous deux ne différaient pas moins par la manière dont ils concevaient la forme et le style, ou la façon de s'exprimer.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0097",
+      "w": "De l'Amour",
+      "s": "Le plaisir physique, étant dans la nature, est connu de tout le monde, mais n'a qu'un rang subordonné aux yeux des âmes tendres et passionnées.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0098",
+      "w": "De l'Amour",
+      "s": "Un clin d'oeil entre le nº 3 et le nº 4.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0099",
+      "w": "De l'Amour",
+      "s": "Dans les choses de détail, elles se piquent d'être plus sévères et plus exactes que les hommes.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0100",
+      "w": "De l'Amour",
+      "s": "Cependant elle n'avait nul dessein de se jamais donner à lui, et ces malheurs secrets ne nuisent en rien à son esprit et à son amabilité.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0101",
+      "w": "De l'Amour",
+      "s": "Les femmes de la société avouent l'effet tout en niant ou ne voyant pas la cause.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0102",
+      "w": "De l'Amour",
+      "s": "Si cet examen a lieu, on a affaire à l'amour-goût et non plus à l'amour-passion.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0103",
+      "w": "De l'Amour",
+      "s": "Cette prostitution légale va jusqu'à choquer la pudeur.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0104",
+      "w": "De l'Amour",
+      "s": "Dans ces moments décisifs, l'une gagne autant que l'autre perd; l'âme prosaïque reçoit justement le degré de chaleur qui lui manque habituellement, tandis que la pauvre âme tendre devient folle par excès de sentiment, et, qui plus est, a la prétention de cacher sa folie.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0105",
+      "w": "De l'Amour",
+      "s": "Comme j'achevais, on annonce cet homme charmant.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0106",
+      "w": "De l'Amour",
+      "s": "C'est peut-être à cause d'une attention si délicate que les Anglais, gens d'esprit, laissent voir tant d'ennui de leur bonheur domestique.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0107",
+      "w": "De l'Amour",
+      "s": "75] La monarchie sans charte et sans chambres.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0108",
+      "w": "De l'Amour",
+      "s": "77] Je rentre toujours de chez miss Cornel plein d'admiration et de vues profondes sur les passions observées à nu.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0109",
+      "w": "De l'Amour",
+      "s": "Au bout de deux heures, il m'a tout dit: c'est une belle âme; mais que les pages que l'on vient de lire sont froides auprès de ce qu'il me disait!",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0110",
+      "w": "De l'Amour",
+      "s": "Je crois qu'il y avait bien des jours où il aurait voulu pouvoir suivre les avis de notre sage colonel; il luttait un peu, il croyait réussir; mais ce parti était absolument au-dessus de ses forces; et cependant quelle force n'avait pas cette âme!",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0111",
+      "w": "De l'Amour",
+      "s": "93] C'est ce genre de timidité qui est décisif, et qui prouve un amour-passion dans un homme d'esprit.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0112",
+      "w": "De l'Amour",
+      "s": "Les seules qui soient bien reçues entre femmes sont celles qu'accompagne la franchise de ce raisonnement: Ma chère amie, dans la guerre aussi absurde qu'implacable que nous font les préjugés mis en vogue par nos tyrans, servez-moi aujourd'hui, demain ce sera mon tour[98].",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0113",
+      "w": "De l'Amour",
+      "s": "Souvent la simple galanterie ou l'amour de vanité répond à l'amour-passion, et c'est plutôt la femme qui aime avec transport.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0114",
+      "w": "De l'Amour",
+      "s": "Les provinciaux, en France, se font un modèle ridicule de ce que doit être dans le monde la considération d'un galant homme, et puis ils se mettent à l'affût, et sont là toute leur vie à observer si personne ne saute le fossé.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0115",
+      "w": "De l'Amour",
+      "s": "C'est l'expérience par laquelle on différencie le mieux l'amour-goût de l'amour-passion.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0116",
+      "w": "De l'Amour",
+      "s": "Je ne blâme point les hommes d'en agir ainsi dans leur monde.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0117",
+      "w": "De l'Amour",
+      "s": "Quand on n'a que des désirs physiques, on trouve les filles, et c'est pourquoi les filles de France sont charmantes, et celles de l'Espagne fort mal.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0118",
+      "w": "De l'Amour",
+      "s": "L'on m'assure que plusieurs sont fort chastes; c'est que leur métier est trop fatigant.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0119",
+      "w": "De l'Amour",
+      "s": "Un parallèle approfondi de ces deux îles, en un volume de 500 pages, fâcherait bien des gens et ferait tomber dans le ridicule bien des théories respectées.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0120",
+      "w": "De l'Amour",
+      "s": "Il ignore une foule de petites vérités (vanité puérile de ses voisins); mais il sait profondément les grandes, et a assez de caractère et d'esprit pour suivre leurs conséquences jusque dans leurs effets les plus éloignés.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0121",
+      "w": "De l'Amour",
+      "s": "J'ai vu ce monstre hébéter les gens les plus spirituels.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0122",
+      "w": "De l'Amour",
+      "s": "On dirait que la source de la sensibilité se tarit chez ces gens-là.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0123",
+      "w": "De l'Amour",
+      "s": "Un amant qui, après dix ans d'intimité, abandonnait sa pauvre maîtresse, parce qu'il s'apercevait qu'elle avait trente-deux ans, était perdu d'honneur dans l'aimable Provence; il n'avait d'autre ressource que de s'enterrer dans la solitude d'un cloître.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0124",
+      "w": "De l'Amour",
+      "s": "C'est sous la tente noirâtre de l'Arabe-Bédouin qu'il faut chercher le modèle de la patrie du véritable amour.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0125",
+      "w": "De l'Amour",
+      "s": "Aussi leur manière d'aimer a-t-elle passé en proverbe, et Dieu n'a point fait de créatures aussi tendres qu'eux en amour.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0126",
+      "w": "De l'Amour",
+      "s": "Sans doute, et Napoléon aussi avait raison de ne pas donner des armes à la garde nationale, et les ultra aussi ont raison de proscrire l'enseignement mutuel; armez un homme, et puis continuez à l'opprimer, et vous verrez qu'il sera assez pervers pour tourner, s'il le peut, ses armes contre vous.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0127",
+      "w": "De l'Amour",
+      "s": "Elles dépensent toujours de la même manière, en discutant un compte avec leur cuisinière, les trois louis que leur mari leur donne tous les lundis.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0128",
+      "w": "De l'Amour",
+      "s": "Quel est l'homme, dans l'amour ou dans le mariage, qui a le bonheur de pouvoir communiquer ses pensées, telles qu'elles se présentent à lui, à la femme avec laquelle il passe sa vie?",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0129",
+      "w": "De l'Amour",
+      "s": "Ce sera quelque pauvre jeune femme vertueuse et éperdument amoureuse qui demandera le divorce et qui se fera honnir par des femmes qui ont eu cinquante hommes.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0130",
+      "w": "De l'Amour",
+      "s": "Le gouvernement compléterait à l'administration de l'élysée deux mille francs par femme réfugiée.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0131",
+      "w": "De l'Amour",
+      "s": "Pourquoi Henri IV règne-t-il vingt et un ans, et Louis XV cinquante-neuf?",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0132",
+      "w": "De l'Amour",
+      "s": "A cent lieues d'elle et sous le poids de sa colère, il se surprend à se faire cette réflexion: «Léonore était fort gaie ce soir.» Il se réveille: «Mais, mon Dieu!",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0133",
+      "w": "De l'Amour",
+      "s": "Rappelez-vous que dans ces climats heureux, beaucoup de femmes sont très bien jusqu'à quarante-cinq ans, et la plupart sont mariées à dix-huit.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0134",
+      "w": "De l'Amour",
+      "s": "L'homme à l'humeur gaie et douce, et au bonheur facile, ne peut aimer avec la passion qu'il faut à votre coeur.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0135",
+      "w": "De l'Amour",
+      "s": "Elles ne peuvent être aidées tout au plus que par un petit nombre de maximes fort justes qu'elles ont apprises en écoutant aux portes.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0136",
+      "w": "De l'Amour",
+      "s": "XCII Avoir de la fermeté dans le caractère, c'est avoir éprouvé l'effet des autres sur soi-même; donc il faut les autres.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0137",
+      "w": "De l'Amour",
+      "s": "Il remercie Apollon et les muses; il est ivre de son bonheur.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0138",
+      "w": "De l'Amour",
+      "s": "Ne pourrait-on pas dire que, la vie elle-même n'étant faite que de sensations, le goût universel de tous les êtres qui ont vie est d'être avertis qu'ils vivent par les sensations les plus fortes possibles?",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0139",
+      "w": "De l'Amour",
+      "s": "Voilà bien des pleurs et bien des cris pour peu de chose!",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0140",
+      "w": "De l'Amour",
+      "s": "Lorsque je n'ai pas lu de l'anglais depuis un an, le premier roman qui me tombe sous la main me semble délicieux.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0141",
+      "w": "De l'Amour",
+      "s": "Elle était environnée, en chantant, de trois rangs de jeunes femmes tellement belles, d'une beauté tellement pure et céleste, que je me suis senti baisser les yeux par respect, au lieu de les lever pour admirer et jouir.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0142",
+      "w": "De l'Amour",
+      "s": "Si amor minuatur, cito deficit et raro convalescit.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0143",
+      "w": "De l'Amour",
+      "s": "Le quatrième dans l'octroi de toute la personne.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0144",
+      "w": "De l'Amour",
+      "s": "Vous comparez les illusions favorables que produit ce commencement d'intérêt à ces jolis diamants qui cachent la branche de charmille effeuillée par l'hiver, et qui ne sont aperçus, remarquez-le bien, que par l'oeil de ce jeune homme qui commence à aimer.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0145",
+      "w": "De l'Amour",
+      "s": "Elle regarde en passant, et d'un oeil morne où les larmes sont à peine retenues, la petite cachette à trois pieds au-dessus du sol, bien sûre de n'y rien trouver; elle a trop bien vu jeter le bouquet dans le lac.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0146",
+      "w": "De l'Amour",
+      "s": "Mais, à l'époque dont nous nous entretenons, Ernestine, malgré son esprit, s'embrouilla tout à fait dans ses raisonnements.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0147",
+      "w": "De l'Amour",
+      "s": "Il revint tous les jours dans le petit bois, où il avait éprouvé des sensations si vives.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0148",
+      "w": "De l'Amour",
+      "s": "Ernestine, plus heureuse, était aimée, elle aimait.",
+      "src": {
+        "work": "De l'Amour"
+      }
+    },
+    {
+      "id": "stendhal.p0149",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Tout est décadence ici, tout est souvenir, tout est mort.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0150",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Des gens parfaitement heureux, ou des gens parfaitement insensibles, ne pourraient souffrir la musique.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0151",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Cet homme rare est abhorré par ses trente-trois collègues.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0152",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Je lui dis qu’à mes yeux Rossini est l’espoir de l’école d’Italie; c’est le seul homme qui soit né avec du génie, et il fonde ses succès, non sur la richesse des accompagnemens, mais sur la beauté des chants.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0153",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "L’opéra finit à minuit; je repars à une heure.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0154",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Musique lamentable, toujours de la même couleur, d’un homme froid qui vise au sentiment.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0155",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Au cintre, entre les colonnes de l’avant-scène, bas-relief d’argent de grandeur colossale.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0156",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "L’imagination s’attache à ces jambes que l’on voit remuer, et veut deviner à qui elles appartiennent.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0157",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Enfin, l’aînée tombe à ses pieds, fondant en larmes, et là lui dévoile toute la dénonciation du prince Norvi, et leur résolution d’aller au couvent.--Position de cette mère qui adore son amant et qui a de l’honneur.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0158",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Il eut son développement à Milan, dans les temps brillans du royaume d’Italie.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0159",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "L’imagination, qui n’est pas assez émue pour être à la hauteur de ce degré de terreur, s’amuse de la laideur des diables et de leurs griffes vertes.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0160",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Bianchi va construire à Naples l’église de Saint-François-de-Paule, vis-à-vis le palais.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0161",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "En arrivant à Naples, j’ai appris qu’un duc était directeur du spectacle: je me suis tout de suite attendu à quelque chose d’illibéral et de petitement vexatoire.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0162",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Vous voulez aller au foyer, un escalier roide et incommode vous y fait arriver essoufflé.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0163",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Décidément, les Anglaises l’emportent par la beauté.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0164",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Ils ressuscitent tout simplement les grands effets de la tragédie grecque.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0165",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Applaudir à la danse française, c’est dire qu’on a fait le voyage de Paris.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0166",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Il n’y a point de clair-obscur, peu de coloris, assez de dessin, et beaucoup de facilité.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0167",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "On m’accorde à Paris, sur mon budget, deux cent mille francs pour les artistes romains.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0168",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Si la forme continue à choquer le fond, la source tarira, et, se faisant jour par des conduits secrets, ira former les superstitions les plus extravagantes.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0169",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Penser est une peine: il faut que la société récompense par des louanges.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0170",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Le vulgaire en France ne donne le titre de beau qu’à ce qui est féminin.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0171",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Cette cérémonie déplaisait beaucoup à une certaine nation; il y a eu abonnement.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0172",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "C’est en même temps le peuple le moins civilisé.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0173",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Au quatorzième siècle, plusieurs pays d’Italie, Venise, Florence, Rome, Naples, Milan, le Piémont, parlaient des langues différentes.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0174",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Je crains que ce ridicule ne soit trop fort pour le dix-neuvième siècle.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0175",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "La seule nécessité de l’entendre fait cesser les applaudissemens; et comme cependant il a quelques jaloux, chaque soirée a pour lui l’intérêt piquant d’un drame.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0176",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Paccini, qui fait l’amoureux de la cantatrice, imite jusqu’aux moindres gestes du héros.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0177",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "E s’udia l’Apennin per ogni lato Sonar d’applausi, e di festosi gridi: Italia, Italia, il tuo soccorso è nato[37]!",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0178",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Raphaël eut l’expression, le dessin, l’imitation de l’antique.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0179",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "39] Cela n’est pas exact: ce sont les housards de la liberté; ils sont tous les jours au feu, il faut bien qu’ils reculent quelquefois.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0180",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Je lui ai dit qu’il n’y avait rien eu de si simple, et que ce n’était qu’à Paris que j’avais commencé à me figurer que je venais d’échapper à un grand péril.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0181",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "En affaiblissant une tragédie d’Alfieri, il reste encore une tragédie française de la première force.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0182",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "J’avais presque oublié le tombeau de l’Arioste: j’y vais en sédiole.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0183",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Toute la nature est ici plus touchante pour moi; elle me semble neuve: je ne vois plus rien de plat et d’insipide.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0184",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Pour moi, je suis venu sept fois en France, avant la révolution, et pour la première de toutes, en 1775, à 20 ans.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0185",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "C’est ainsi que votre conversation prit une couleur à la fois moins frivole et moins uniforme que la nôtre.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0186",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Vos ministres n’étaient-ils pas des gens prédestinés que ces deux occupations n’en fissent qu’une seule?",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0187",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "A l’exception de quelques petits accès de galanterie, on ne voyait guère de sympathie pour les malheurs des amis les plus intimes.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0188",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "La Liparini est une belle blonde aux traits délicats; il faut qu’elle soit laide ou froide d’ici à trois ans.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0189",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Le fils du doge est aussi gai que le gondolier; ses intrigues sont aussi publiques.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0190",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Moins ils ont à dire, plus ils étalent leur grand magasin de principes logiques et métaphysiques.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0191",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Les Pisani se trouvèrent devoir une somme énorme, et on leur prit leur beau palais de Strà.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0192",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Il me dit, en d’autres termes, le fameux sonnet de Lope-de-Vega, relatif aux six clefs sous lesquelles il enfermait Térence.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0193",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Les yeux ont leurs habitudes, qu’ils prennent de la nature des objets qu’ils voient le plus souvent.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0194",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "60] Il est ignoble de prendre cet argent: on en fait un hôpital qui, par son nom, perpétue la vengeance.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0195",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "L’accompagnement de violoncelle et de cor ébranle l’âme, une décoration magnifique et sombre achève de donner la couleur au sujet.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0196",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Ce matin, 17 juillet 1817, l’on fabriquait des pièces de cinq et de quarante francs.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0197",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "61] Par les profusions de Pitt qui, en 1794, sauvèrent l’aristocratie, tout Anglais qui n’a pas cent louis de rente est condamné, par sa naissance, au plus inévitable malheur.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0198",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Les routes étaient et sont vingt fois plus belles qu’en France.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0199",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "66] On sent que, dans cette supposition, il ne pouvait être question, pour l’usurpateur, du grand principe qui assure maintenant le bonheur des peuples: la légitimité.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0200",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Dans les arts de la pensée il faut étudier l’art, et sur-le-champ abandonner le maître et être soi-même.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0201",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Tout cela vient de nous arriver depuis deux heures; maintenant, nous distinguons les fenêtres d’une maison à huit lieues d’ici.--Politesse noble du propriétaire, ancien écuyer du roi d’Italie.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0202",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Ce soir, Berinetti nous a dit qu’un des frères du couvent touche de l’orgue.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0203",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Les femmes y sont belles; mais cette incroyable pruderie, dont personne, je crois, n’a parlé, se retrouve jusque dans l’air des visages: cela donne aux figures un fond de froideur et de désintérêt qui repousse la sympathie.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0204",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Il faudrait y passer trois mois pour arriver jusqu’au vrai mérite, s’il y en a.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0205",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Le chef pourrait facilement porter sa troupe à mille hommes; mais il dit que son talent pour commander ne s’élève pas à plus de trente personnes.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0206",
+      "w": "Rome, Naples et Florence, en 1817",
+      "s": "Non seulement les ministres sous les ordres desquels je suis paraissent irrités, mais le ministre qui m’aime paraît dégoûté de me protéger.",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      }
+    },
+    {
+      "id": "stendhal.p0207",
+      "w": "L'Abbesse De Castro",
+      "s": "Tel était l'amour que sut inspirer à Hélène, à peine âgée de dix-sept ans, Jules Branciforte.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0208",
+      "w": "L'Abbesse De Castro",
+      "s": "Pour descendre de ce lieu élevé à la ville moderne, Jules était obligé de passer devant le palais Campireali; Hélène remarqua bientôt l'absence de ce jeune homme singulier, qui, au dire de ses amies, avait abandonné toute autre relation pour se consacrer en entier au bonheur qu'il semblait trouver à la regarder.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0209",
+      "w": "L'Abbesse De Castro",
+      "s": "Comme son père et son frère Fabio étaient dans la maison, sa première pensée fut que le moindre bruit serait suivi d'un coup d'arquebuse dirigé sur Jules; elle eut pitié du danger que courait ce pauvre jeune homme.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0210",
+      "w": "L'Abbesse De Castro",
+      "s": "Ensuite, elle fit signe qu'on s'éloignât; elle entendit Jules lui obéir; car, en s'en allant, il ne cherchait plus à dérober le bruit de ses pas.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0211",
+      "w": "L'Abbesse De Castro",
+      "s": "Toute la journée elle fut d'une gaieté folle, elle parcourait sans cesse la maison du haut en bas; à chaque instant, elle s'approchait des fenêtres, bien résolue de faire à Jules un signe négatif, si elle avait le bonheur de l'apercevoir.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0212",
+      "w": "L'Abbesse De Castro",
+      "s": "Un quart de minute ne s'était pas écoulé lorsque le bouquet, attaché comme de coutume à la longue canne, vint frapper sur son bras.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0213",
+      "w": "L'Abbesse De Castro",
+      "s": "Le lendemain, qui était un dimanche, Hélène s'achemina vers la paroisse avec sa mère; par bonheur, son père ne les suivit pas.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0214",
+      "w": "L'Abbesse De Castro",
+      "s": "Mais, après tout, puis-je croire qu'il ne m'aime plus?» se disait Hélène pendant les trois longues journées que dura l'absence de Branciforte.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0215",
+      "w": "L'Abbesse De Castro",
+      "s": "Le capitaine Branciforte se moquait fort de l'avenir de son fils.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0216",
+      "w": "L'Abbesse De Castro",
+      "s": "Apparemment que, moi aussi, j'ai une épée!",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0217",
+      "w": "L'Abbesse De Castro",
+      "s": "Tout autre homme de son âge et de son temps n'eût songé qu'à jouir de son amour et à enlever Hélène, sans penser en aucune façon à ce qu'elle deviendrait six mois après, pas plus qu'à l'opinion qu'elle pourrait garder de lui.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0218",
+      "w": "L'Abbesse De Castro",
+      "s": "Un de ces jours, à la tombée de la nuit, je vous verrai dans le jardin situé derrière le palais.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0219",
+      "w": "L'Abbesse De Castro",
+      "s": "Le péril ôtait les remords à la jeune fille.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0220",
+      "w": "L'Abbesse De Castro",
+      "s": "Jamais Hélène n'avait avoué son amour à sa mère: la fille et la mère s'aimaient tendrement, elles passaient leur vie ensemble, et pourtant jamais un seul mot sur ce sujet, qui les intéressait presque également toutes les deux, n'avait été prononcé.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0221",
+      "w": "L'Abbesse De Castro",
+      "s": "Je ne sais ce qui me tient de lever leurs capuchons; nous verrions leurs mines.» «A ces mots, Jules saisit sa dague sous sa robe de moine, et se plaça entre Fabio et Hélène.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0222",
+      "w": "L'Abbesse De Castro",
+      "s": "Le prince lui-même avait son capuchon sur la poitrine, de façon à pouvoir le passer dès qu'on apercevrait l'ennemi.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0223",
+      "w": "L'Abbesse De Castro",
+      "s": "Lorsque Fabrice Colonna vit ses soldats et ses partisans bien placés chacun derrière son arbre et pleins de résolution, il partit au galop avec tous ceux des siens qui étaient montés, et parmi lesquels on remarquait Jules Branciforte.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0224",
+      "w": "L'Abbesse De Castro",
+      "s": "Jules éloigna son cheval pour avoir le temps de respirer et de s'essuyer le visage.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0225",
+      "w": "L'Abbesse De Castro",
+      "s": "Prends le commandement de ce qui reste de la compagnie de Ranuce, et conduis son cadavre à notre église de la Petrella; songe que tu seras peut-être attaqué sur la route.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0226",
+      "w": "L'Abbesse De Castro",
+      "s": "Ce long récit terminé: --Je vois bien à vos larmes, dit le vieillard, que rien n'a été prémédité dans votre conduite; mais la mort de Fabio n'en est pas moins un événement bien cruel pour vous.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0227",
+      "w": "L'Abbesse De Castro",
+      "s": "Je n'ai pas besoin de vous avertir qu'il ne serait point prudent de vous montrer à Rome.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0228",
+      "w": "L'Abbesse De Castro",
+      "s": "Il ne l'avait pas vue même en la ramenant au couvent.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0229",
+      "w": "L'Abbesse De Castro",
+      "s": "Voici le mot d'ordre de ma compagnie: Ne dire jamais la vérité sur rien de ce qui a rapport à moi ou à mes soldats.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0230",
+      "w": "L'Abbesse De Castro",
+      "s": "Le surlendemain, un peu avant le point du jour, il entrait dans les murs de la petite ville de Castro, cinq soldats le suivaient, déguisés ainsi que lui: deux firent bande à part, et semblaient ne connaître ni lui ni les trois autres.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0231",
+      "w": "L'Abbesse De Castro",
+      "s": "Jules se hâta de répondre; après quelques invectives contre la destinée, genre d'esprit imité de Platon et alors à la mode: «Tu veux donc, continuait-il, mettre en oubli la parole de Dieu à nous transmise dans les saintes Écritures?",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0232",
+      "w": "L'Abbesse De Castro",
+      "s": "Le son lointain de cet Ave Maria me toucha, je l'avoue; je t'accordai ta demande.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0233",
+      "w": "L'Abbesse De Castro",
+      "s": "Aussitôt, la grande affaire de Jules fut de cacher les larmes dont les tournures polies qu'Hélène prenait pour lui adresser la parole inondaient son visage.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0234",
+      "w": "L'Abbesse De Castro",
+      "s": "Pour achever de chasser la tentation Jules se mit à réciter dévotement des Ave Maria.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0235",
+      "w": "L'Abbesse De Castro",
+      "s": "Rendu à l'espérance par sa dévotion à la Madone, Jules poussa son cheval, et en quelques heures arriva au cantonnement de sa compagnie.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0236",
+      "w": "L'Abbesse De Castro",
+      "s": "Le soir de cette journée, comme l'on quittait la grande route pour rentrer dans la forêt, Jules s'approcha du prince, et lui demanda s'il pouvait rester encore quelques jours où il savait.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0237",
+      "w": "L'Abbesse De Castro",
+      "s": "Une fois ma femme, je n'aurai plus de crainte, et, si votre mère l'exige comme une expiation de l'affreux malheur que nous déplorons tous également, je consentirai à tout, fût-ce même à passer plusieurs mois sans vous voir.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0238",
+      "w": "L'Abbesse De Castro",
+      "s": "De ce moment, Hélène attendit la nuit suivante dans les alternatives de l'anxiété la plus déchirante.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0239",
+      "w": "L'Abbesse De Castro",
+      "s": "Qui pourrait se figurer son ravissement lorsqu'elle apprit que sa fille n'avait jamais manqué à ses devoirs?",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0240",
+      "w": "L'Abbesse De Castro",
+      "s": "Je crains même que le dortoir des pensionnaires ne soit fermé à clef, ainsi que les deux portes de l'escalier tournant, chose que l'on ne fait jamais.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0241",
+      "w": "L'Abbesse De Castro",
+      "s": "Après toutes ces épreuves peut-être elle aurait le courage de le voir.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0242",
+      "w": "L'Abbesse De Castro",
+      "s": "Quand Jules, suivi de ses huit hommes, se trouva à trois lieues de Castro, il s'arrêta dans une auberge écartée pour laisser passer les heures de la grande chaleur.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0243",
+      "w": "L'Abbesse De Castro",
+      "s": "Si l'ennemi nous oblige à détruire le mur qui soutient les gonds de la seconde porte, il faut songer que les bravi de la caserne ne resteront pas oisifs durant cette longue opération; ils vous tueront sept à huit hommes à coups d'arquebuse, et alors on peut nous enlever la femme au retour.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0244",
+      "w": "L'Abbesse De Castro",
+      "s": "A minuit et demi, Jules, qui avait pris pour lui le rôle de courrier, arriva au galop à la porte du couvent, faisant grand bruit et criant qu'on ouvrît sans délai à un courrier envoyé par le cardinal.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0245",
+      "w": "L'Abbesse De Castro",
+      "s": "Jules, en causant et jouant avec elle, passa les mains à travers les gros barreaux de fer de la porte, et, tout en riant, il essaya de l'ouvrir.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0246",
+      "w": "L'Abbesse De Castro",
+      "s": "Il fut blessé douloureusement au genou; il s'élança sur un des hommes qui s'était trop fendu pour lui porter ce coup d'épée, il le tua d'un coup de dague dans la figure, et eut le bonheur de s'emparer de son épée.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0247",
+      "w": "L'Abbesse De Castro",
+      "s": "Il y eut un moment de silence complet, pendant qu'il essayait d'ouvrir un cadenas avec l'une des petites clefs; il s'était trompé de clef, il prit l'autre; enfin, il ouvrit le cadenas; mais, au moment où il soulevait le bras de fer, il reçut presque à bout portant un coup de pistolet dans le bras droit.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0248",
+      "w": "L'Abbesse De Castro",
+      "s": "Après les efforts inutiles contre la porte, Jules s'évanouit tout à fait; Ugone dit aux soldats d'emporter le capitaine au plus vite.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0249",
+      "w": "L'Abbesse De Castro",
+      "s": "Hélène détestait sa lâcheté et sa pusillanimité: --J'ai eu la faiblesse de dire un mot à ma mère, et le sang de Jules a coulé; il pouvait perdre la vie dans cet assaut sublime où son courage a tout fait.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0250",
+      "w": "L'Abbesse De Castro",
+      "s": "A peine arrivée, elle écrivit à Branciforte, et la nourrice trouva, non sans de grandes peines, un homme qui voulut bien se hasarder à s'enfoncer dans la forêt de la Faggiola, sans avoir le mot d'ordre des soldats de Colonna.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0251",
+      "w": "L'Abbesse De Castro",
+      "s": "Mais la pauvre Hélène avait du malheur; le prince était absent de la Petrella, et quand, trois jours après, à son retour, il lui accorda enfin une audience, il se montra très dur.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0252",
+      "w": "L'Abbesse De Castro",
+      "s": "Nous verrons que c'est Victoire Carafa, la mère d'Hélène, qui, par une suite de moyens adroits et fort savamment combinés, amena la mort cruelle de sa fille si chérie, après avoir fait son malheur pendant douze ans, triste résultat de la manie de régner.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0253",
+      "w": "L'Abbesse De Castro",
+      "s": "J'engage votre révérence à lire cette lettre du vice-roi, un peu mon parent, qui daigne m'annoncer cette nouvelle.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0254",
+      "w": "L'Abbesse De Castro",
+      "s": "Enfin, l'amant désespéré s'embarqua pour Barcelone.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0255",
+      "w": "L'Abbesse De Castro",
+      "s": "Parmi eux se trouvait Ugone, maintenant vieux et criblé de blessures.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0256",
+      "w": "L'Abbesse De Castro",
+      "s": "Réveillée par ces paroles, Hélène leva les yeux et rencontra trois regards méchants.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0257",
+      "w": "L'Abbesse De Castro",
+      "s": "Une jeune fille qui n'était pas même religieuse, et qui d'ailleurs n'était connue que par la folle passion d'un brigand, que peut-être elle avait partagée, être mise à la tête d'un couvent où tous les princes romains comptaient quelques parentes!",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0258",
+      "w": "L'Abbesse De Castro",
+      "s": "Tous les jours, nous voyons celui-ci subir des traitements qui nous font rougir pour sa haute dignité.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0259",
+      "w": "L'Abbesse De Castro",
+      "s": "Au milieu de toutes les folies du public, l'évêque vint à passer dans son carrosse; l'abbesse lui fit un signe, et, la nuit suivante, à une heure, il ne manqua pas de se trouver à la porte de l'église.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0260",
+      "w": "L'Abbesse De Castro",
+      "s": "Les deux époux en vinrent à délibérer sur l'emploi d'une telle somme.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0261",
+      "w": "L'Abbesse De Castro",
+      "s": "Le seul César del Bene resta fidèle à son maître, et lui jura qu'il mourrait dans les tourments plutôt que de rien avouer qui pût lui nuire.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0262",
+      "w": "L'Abbesse De Castro",
+      "s": "Elle ajoute: «Quand on se parle sur ce ton, c'est qu'il y a bien longtemps que l'on fait l'amour ensemble.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0263",
+      "w": "L'Abbesse De Castro",
+      "s": "On était étonné de cette quantité de terre qui tombait, pour ainsi dire, du ciel.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0264",
+      "w": "L'Abbesse De Castro",
+      "s": "Avant l'arrivée de Jules, le prince avait ordonné, comme il savait ordonner, que personne dans la Petrella ne s'avisât de parler de Castro et du procès de l'abbesse; la peine de mort, sans aucune rémission était placée en perspective du moindre bavardage.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    },
+    {
+      "id": "stendhal.p0265",
+      "w": "L'Abbesse De Castro",
+      "s": "L'agonie de Grégoire XIII avait duré plus d'une semaine; la signora de Campireali attendait impatiemment les journées de trouble qui allaient suivre sa mort pour faire attaquer les derniers cinquante pas de son souterrain.",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "stendhal.f.v0001",
+      "kind": "verbatim",
+      "text": "Il se souvint alors seulement qu'il n'avait point entendu le marquis dire au laquais le nom de la rue, et le marquis avait fait prendre un fiacre, ce qui ne lui arrivait jamais.",
+      "work": "Le rouge et le noir: chronique du XIXe siècle",
+      "lang": "fr",
+      "src": {
+        "work": "Le rouge et le noir: chronique du XIXe siècle"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "stendhal.f.v0002",
+      "kind": "verbatim",
+      "text": "Fabrice, distrait par sa joie, songeait plus au maréchal Ney et à la gloire qu’à son cheval, lequel étant fort animé, sauta dans le canal; ce qui fit rejaillir l’eau à une hauteur considérable.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "stendhal.f.v0003",
+      "kind": "verbatim",
+      "text": "La fumée empêchait de rien distinguer du côté vers lequel on s’avançait; l’on voyait quelquefois des hommes au galop se détacher sur cette fumée blanche.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "stendhal.f.v0004",
+      "kind": "verbatim",
+      "text": "Furieux, le hussard se retourne et lance un coup de toutes ses forces, qui coupe la manche de Fabrice et entre profondément dans son bras: notre héros tombe.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "stendhal.f.v0005",
+      "kind": "verbatim",
+      "text": "Vous m’avez déjà sauvé la vie une fois en me recevant au moment où j’allais tomber mourant dans la rue; sauvez-la-moi encore en me donnant les moyens de rejoindre ma mère.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "stendhal.f.v0006",
+      "kind": "verbatim",
+      "text": "Deux fois, en traversant la France, il fut arrêté; mais il sut se dégager; il dut ces désagréments à son passeport italien et à cette étrange qualité de marchand de baromètres, qui n’était guère d’accord avec sa figure jeune et son bras en écharpe.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "stendhal.f.v0007",
+      "kind": "verbatim",
+      "text": "Bien plus, le baron détaille complaisamment les deux contraventions dont Fabrice est accusé d’après la dénonciation de son indigne frère; il explique que ces deux contraventions emportent la prison; n’est-ce pas nous dire que si nous aimons mieux l’exil, c’est à nous de choisir?",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "stendhal.f.v0008",
+      "kind": "verbatim",
+      "text": "Cet homme qui l’amusait, le comte Mosca della Rovere Sorezana, était alors ministre de la guerre, de la police et des finances de ce fameux prince de Parme, Ernest IV, si célèbre par ses sévérités que les libéraux de Milan appelaient des cruautés.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "stendhal.f.v0009",
+      "kind": "verbatim",
+      "text": "Elle trouva que l’imitation était frappante; évidemment il cherchait le regard et la parole noble de Louis XIV, et il s’appuyait sur la table descagliola, de façon à se donner la tournure de Joseph II.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "stendhal.f.v0010",
+      "kind": "verbatim",
+      "text": "La duchesse, toujours passionnée pour quelque chose, toujours agissante, jamais oisive, avait plus d’esprit que toute la cour de Parme; mais elle manquait de patience et d’impassibilité pour réussir dans les intrigues.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "stendhal.f.v0011",
+      "kind": "verbatim",
+      "text": "Cette petite surprise chassa l’ennui: «Voilà un gaillard, se dit-il, pour lequel on va me demander Dieu sait quelles faveurs, toutes celles dont je puis disposer.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "stendhal.f.v0012",
+      "kind": "verbatim",
+      "text": "Fabrice se plaisait fort dans la société du comte: c’était le premier homme supérieur qui eût daigné lui parler sans comédie; d’ailleurs ils avaient un goût commun, celui des antiquités et des fouilles.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "stendhal.f.v0013",
+      "kind": "verbatim",
+      "text": "Comment rapporter tous les raisonnements, toutes les façons de voir ce qui lui arrivait, qui, durant trois mortelles heures, mirent à la torture cet homme passionné?",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "stendhal.f.v0014",
+      "kind": "verbatim",
+      "text": "A un quart de lieue de Côme, où la marquise et sa fille devaient s’arrêter pour passer la nuit, il prit un sentier à gauche, qui, contournant le bourg de Vico, se réunit ensuite à un petit chemin récemment établi sur l’extrême bord du lac.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "stendhal.f.v0015",
+      "kind": "verbatim",
+      "text": "Le noble langage de l’architecture le trouva insensible; le souvenir de son frère et de son père fermait son âme à toute sensation de beauté, il n’était attentif qu’à se tenir sur ses gardes en présence d’ennemis hypocrites et dangereux.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "stendhal.f.v0016",
+      "kind": "verbatim",
+      "text": "Quel chagrin mortel pour elle et pour moi si dans cette espèce de course au clocher que vous venez de faire avec ce cheval maigre, il eût fait un faux pas.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "stendhal.f.v0017",
+      "kind": "verbatim",
+      "text": "Au même instant, Fabrice vit tomber de la portière une sorte de grand couteau de chasse; il se baissa pour le ramasser, mais, au même instant il fut touché à l’épaule par un coup d’épée que lui lançait Giletti.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "stendhal.f.v0018",
+      "kind": "verbatim",
+      "text": "La police est vigilante en diable en pays autrichien: elle saura bientôt qu’il y a eu un homme de tué: vous voyagez avec un passeport qui n’est pas le vôtre, il n’en faut pas tant pour passer deux ans en prison.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "stendhal.f.v0019",
+      "kind": "verbatim",
+      "text": "Pour savoir de quoi l’on est coupable, il faut interroger son curé, ou lire la liste des péchés, telle qu’elle se trouve imprimée dans les livres intitulés: Préparation au sacrement de la Pénitence.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "stendhal.f.v0020",
+      "kind": "verbatim",
+      "text": "Il établit son quartier général non à Parme, c’eût été trop imprudent, mais dans un village des environs, au milieu des bois, sur la route de Sacca où était le château de sa tante.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "stendhal.f.v0021",
+      "kind": "verbatim",
+      "text": "La duchesse écrivait à monseigneur Landriani avec une familiarité qui devait charmer ce bon bourgeois; la signature seule avait trois lignes; la lettre, fort amicale, était suivie de ces mots: Angelina-Cornelia-Isola Valserra del Dongo, duchesse Sanseverina.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "stendhal.f.v0022",
+      "kind": "verbatim",
+      "text": "Ce prétendant est-il éconduit, son caractère devient moins sombre, et je la vois presque gaie, jusqu’à ce qu’un autre épouseur se mette sur les rangs.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "stendhal.f.v0023",
+      "kind": "verbatim",
+      "text": "Dans cette soirée décisive, je n’avais pas besoin de son esprit; il fallait seulement qu’il écrivît sous ma dictée, il n’avait qu’à écrire ce mot, que j’avais obtenu par mon caractère: ses habitudes de bas courtisan l’ont emporté.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "stendhal.f.v0024",
+      "kind": "verbatim",
+      "text": "Cette tour Farnèse placée en si belle vue se compose d’un rez-de-chaussée long de quarante pas au moins, large à proportion et tout rempli de colonnes fort trapues, car cette pièce si démesurément vaste n’a pas plus de quinze pieds d’élévation.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "stendhal.f.v0025",
+      "kind": "verbatim",
+      "text": "Allez, il faut que vous soyez joliment coupable, toute la citadelle est sens dessus dessous à cause de vous; les belles menées de Madame la duchesse ont déjà fait renvoyer trois d’entre nous.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "stendhal.f.v0026",
+      "kind": "verbatim",
+      "text": "C’était le temps où, deux fois la semaine, le général Fabio Conti disait au prince: --Je puis donner ma parole d’honneur à Votre Altesse que le prisonnier del Dongo ne parle à âme qui vive, et passe sa vie dans l’accablement du plus profond désespoir, ou à dormir.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "stendhal.f.v0027",
+      "kind": "verbatim",
+      "text": "Le mépris public attaché à son nom qui servait de proverbe à la canaille, le rendait malade depuis qu’il avait l’espoir fondé de pouvoir y échapper.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "stendhal.f.v0028",
+      "kind": "verbatim",
+      "text": "Du reste dans son mépris pour des magistrats sans probité, il ne leur dit exactement que ces paroles: --Je suis malade, messieurs, je me meurs de langueur, et vous m’excuserez si je ne puis me lever.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "stendhal.f.v0029",
+      "kind": "verbatim",
+      "text": "De plus, je soupçonne la duchesse d’avoir découvert trois des paysans qui travaillaient à la fouille de Sanguigna et qui se trouvaient hors du fossé au moment où ce brigand de Giletti attaqua del Dongo.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "stendhal.f.v0030",
+      "kind": "verbatim",
+      "text": "Voilà le seul homme qui m’ait comprise, se dit-elle, c’est ainsi qu’en eût agi Fabrice, s’il eût pu m’entendre.» Il y avait deux choses dans le caractère de la duchesse, elle voulait toujours ce qu’elle avait voulu une fois; elle ne remettait jamais en délibération ce qui avait été une fois décidé.",
+      "work": "La Chartreuse De Parme",
+      "lang": "fr",
+      "src": {
+        "work": "La Chartreuse De Parme"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "stendhal.f.v0031",
+      "kind": "verbatim",
+      "text": "Il y avait encore sous la Restauration une ligne de démarcation dans le grand monde; n'allait pas dans le faubourg Saint-Germain qui voulait; ceux que leur naissance n'y installait point tout d'abord n'y étaient pas introduits, comme depuis, sur la seule étiquette de leur esprit.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 280
+      }
+    },
+    {
+      "id": "stendhal.f.v0032",
+      "kind": "verbatim",
+      "text": "Dans ces moments décisifs, l'une gagne autant que l'autre perd; l'âme prosaïque reçoit justement le degré de chaleur qui lui manque habituellement, tandis que la pauvre âme tendre devient folle par excès de sentiment, et, qui plus est, a la prétention de cacher sa folie.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "stendhal.f.v0033",
+      "kind": "verbatim",
+      "text": "Je crois qu'il y avait bien des jours où il aurait voulu pouvoir suivre les avis de notre sage colonel; il luttait un peu, il croyait réussir; mais ce parti était absolument au-dessus de ses forces; et cependant quelle force n'avait pas cette âme!",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "stendhal.f.v0034",
+      "kind": "verbatim",
+      "text": "Les seules qui soient bien reçues entre femmes sont celles qu'accompagne la franchise de ce raisonnement: Ma chère amie, dans la guerre aussi absurde qu'implacable que nous font les préjugés mis en vogue par nos tyrans, servez-moi aujourd'hui, demain ce sera mon tour[98].",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "stendhal.f.v0035",
+      "kind": "verbatim",
+      "text": "Les provinciaux, en France, se font un modèle ridicule de ce que doit être dans le monde la considération d'un galant homme, et puis ils se mettent à l'affût, et sont là toute leur vie à observer si personne ne saute le fossé.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "stendhal.f.v0036",
+      "kind": "verbatim",
+      "text": "Quand on n'a que des désirs physiques, on trouve les filles, et c'est pourquoi les filles de France sont charmantes, et celles de l'Espagne fort mal.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "stendhal.f.v0037",
+      "kind": "verbatim",
+      "text": "Il ignore une foule de petites vérités (vanité puérile de ses voisins); mais il sait profondément les grandes, et a assez de caractère et d'esprit pour suivre leurs conséquences jusque dans leurs effets les plus éloignés.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "stendhal.f.v0038",
+      "kind": "verbatim",
+      "text": "Un amant qui, après dix ans d'intimité, abandonnait sa pauvre maîtresse, parce qu'il s'apercevait qu'elle avait trente-deux ans, était perdu d'honneur dans l'aimable Provence; il n'avait d'autre ressource que de s'enterrer dans la solitude d'un cloître.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "stendhal.f.v0039",
+      "kind": "verbatim",
+      "text": "Sans doute, et Napoléon aussi avait raison de ne pas donner des armes à la garde nationale, et les ultra aussi ont raison de proscrire l'enseignement mutuel; armez un homme, et puis continuez à l'opprimer, et vous verrez qu'il sera assez pervers pour tourner, s'il le peut, ses armes contre vous.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "stendhal.f.v0040",
+      "kind": "verbatim",
+      "text": "Quel est l'homme, dans l'amour ou dans le mariage, qui a le bonheur de pouvoir communiquer ses pensées, telles qu'elles se présentent à lui, à la femme avec laquelle il passe sa vie?",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "stendhal.f.v0041",
+      "kind": "verbatim",
+      "text": "Ce sera quelque pauvre jeune femme vertueuse et éperdument amoureuse qui demandera le divorce et qui se fera honnir par des femmes qui ont eu cinquante hommes.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "stendhal.f.v0042",
+      "kind": "verbatim",
+      "text": "A cent lieues d'elle et sous le poids de sa colère, il se surprend à se faire cette réflexion: «Léonore était fort gaie ce soir.» Il se réveille: «Mais, mon Dieu!",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "stendhal.f.v0043",
+      "kind": "verbatim",
+      "text": "Ne pourrait-on pas dire que, la vie elle-même n'étant faite que de sensations, le goût universel de tous les êtres qui ont vie est d'être avertis qu'ils vivent par les sensations les plus fortes possibles?",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "stendhal.f.v0044",
+      "kind": "verbatim",
+      "text": "Elle était environnée, en chantant, de trois rangs de jeunes femmes tellement belles, d'une beauté tellement pure et céleste, que je me suis senti baisser les yeux par respect, au lieu de les lever pour admirer et jouir.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "stendhal.f.v0045",
+      "kind": "verbatim",
+      "text": "Vous comparez les illusions favorables que produit ce commencement d'intérêt à ces jolis diamants qui cachent la branche de charmille effeuillée par l'hiver, et qui ne sont aperçus, remarquez-le bien, que par l'oeil de ce jeune homme qui commence à aimer.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "stendhal.f.v0046",
+      "kind": "verbatim",
+      "text": "Elle regarde en passant, et d'un oeil morne où les larmes sont à peine retenues, la petite cachette à trois pieds au-dessus du sol, bien sûre de n'y rien trouver; elle a trop bien vu jeter le bouquet dans le lac.",
+      "work": "De l'Amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'Amour"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "stendhal.f.v0047",
+      "kind": "verbatim",
+      "text": "Je lui dis qu’à mes yeux Rossini est l’espoir de l’école d’Italie; c’est le seul homme qui soit né avec du génie, et il fonde ses succès, non sur la richesse des accompagnemens, mais sur la beauté des chants.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 208
+      }
+    },
+    {
+      "id": "stendhal.f.v0048",
+      "kind": "verbatim",
+      "text": "Enfin, l’aînée tombe à ses pieds, fondant en larmes, et là lui dévoile toute la dénonciation du prince Norvi, et leur résolution d’aller au couvent.--Position de cette mère qui adore son amant et qui a de l’honneur.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "stendhal.f.v0049",
+      "kind": "verbatim",
+      "text": "En arrivant à Naples, j’ai appris qu’un duc était directeur du spectacle: je me suis tout de suite attendu à quelque chose d’illibéral et de petitement vexatoire.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "stendhal.f.v0050",
+      "kind": "verbatim",
+      "text": "Si la forme continue à choquer le fond, la source tarira, et, se faisant jour par des conduits secrets, ira former les superstitions les plus extravagantes.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "stendhal.f.v0051",
+      "kind": "verbatim",
+      "text": "La seule nécessité de l’entendre fait cesser les applaudissemens; et comme cependant il a quelques jaloux, chaque soirée a pour lui l’intérêt piquant d’un drame.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "stendhal.f.v0052",
+      "kind": "verbatim",
+      "text": "Je lui ai dit qu’il n’y avait rien eu de si simple, et que ce n’était qu’à Paris que j’avais commencé à me figurer que je venais d’échapper à un grand péril.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "stendhal.f.v0053",
+      "kind": "verbatim",
+      "text": "66] On sent que, dans cette supposition, il ne pouvait être question, pour l’usurpateur, du grand principe qui assure maintenant le bonheur des peuples: la légitimité.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "stendhal.f.v0054",
+      "kind": "verbatim",
+      "text": "Tout cela vient de nous arriver depuis deux heures; maintenant, nous distinguons les fenêtres d’une maison à huit lieues d’ici.--Politesse noble du propriétaire, ancien écuyer du roi d’Italie.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "stendhal.f.v0055",
+      "kind": "verbatim",
+      "text": "Les femmes y sont belles; mais cette incroyable pruderie, dont personne, je crois, n’a parlé, se retrouve jusque dans l’air des visages: cela donne aux figures un fond de froideur et de désintérêt qui repousse la sympathie.",
+      "work": "Rome, Naples et Florence, en 1817",
+      "lang": "fr",
+      "src": {
+        "work": "Rome, Naples et Florence, en 1817"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "stendhal.f.v0056",
+      "kind": "verbatim",
+      "text": "Comme son père et son frère Fabio étaient dans la maison, sa première pensée fut que le moindre bruit serait suivi d'un coup d'arquebuse dirigé sur Jules; elle eut pitié du danger que courait ce pauvre jeune homme.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "stendhal.f.v0057",
+      "kind": "verbatim",
+      "text": "Toute la journée elle fut d'une gaieté folle, elle parcourait sans cesse la maison du haut en bas; à chaque instant, elle s'approchait des fenêtres, bien résolue de faire à Jules un signe négatif, si elle avait le bonheur de l'apercevoir.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "stendhal.f.v0058",
+      "kind": "verbatim",
+      "text": "Tout autre homme de son âge et de son temps n'eût songé qu'à jouir de son amour et à enlever Hélène, sans penser en aucune façon à ce qu'elle deviendrait six mois après, pas plus qu'à l'opinion qu'elle pourrait garder de lui.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "stendhal.f.v0059",
+      "kind": "verbatim",
+      "text": "Jamais Hélène n'avait avoué son amour à sa mère: la fille et la mère s'aimaient tendrement, elles passaient leur vie ensemble, et pourtant jamais un seul mot sur ce sujet, qui les intéressait presque également toutes les deux, n'avait été prononcé.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "stendhal.f.v0060",
+      "kind": "verbatim",
+      "text": "Je ne sais ce qui me tient de lever leurs capuchons; nous verrions leurs mines.» «A ces mots, Jules saisit sa dague sous sa robe de moine, et se plaça entre Fabio et Hélène.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "stendhal.f.v0061",
+      "kind": "verbatim",
+      "text": "Lorsque Fabrice Colonna vit ses soldats et ses partisans bien placés chacun derrière son arbre et pleins de résolution, il partit au galop avec tous ceux des siens qui étaient montés, et parmi lesquels on remarquait Jules Branciforte.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "stendhal.f.v0062",
+      "kind": "verbatim",
+      "text": "Prends le commandement de ce qui reste de la compagnie de Ranuce, et conduis son cadavre à notre église de la Petrella; songe que tu seras peut-être attaqué sur la route.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "stendhal.f.v0063",
+      "kind": "verbatim",
+      "text": "Ce long récit terminé: --Je vois bien à vos larmes, dit le vieillard, que rien n'a été prémédité dans votre conduite; mais la mort de Fabio n'en est pas moins un événement bien cruel pour vous.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "stendhal.f.v0064",
+      "kind": "verbatim",
+      "text": "Le surlendemain, un peu avant le point du jour, il entrait dans les murs de la petite ville de Castro, cinq soldats le suivaient, déguisés ainsi que lui: deux firent bande à part, et semblaient ne connaître ni lui ni les trois autres.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "stendhal.f.v0065",
+      "kind": "verbatim",
+      "text": "Jules se hâta de répondre; après quelques invectives contre la destinée, genre d'esprit imité de Platon et alors à la mode: «Tu veux donc, continuait-il, mettre en oubli la parole de Dieu à nous transmise dans les saintes Écritures?",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "stendhal.f.v0066",
+      "kind": "verbatim",
+      "text": "Aussitôt, la grande affaire de Jules fut de cacher les larmes dont les tournures polies qu'Hélène prenait pour lui adresser la parole inondaient son visage.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "stendhal.f.v0067",
+      "kind": "verbatim",
+      "text": "Le soir de cette journée, comme l'on quittait la grande route pour rentrer dans la forêt, Jules s'approcha du prince, et lui demanda s'il pouvait rester encore quelques jours où il savait.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "stendhal.f.v0068",
+      "kind": "verbatim",
+      "text": "Une fois ma femme, je n'aurai plus de crainte, et, si votre mère l'exige comme une expiation de l'affreux malheur que nous déplorons tous également, je consentirai à tout, fût-ce même à passer plusieurs mois sans vous voir.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "stendhal.f.v0069",
+      "kind": "verbatim",
+      "text": "Je crains même que le dortoir des pensionnaires ne soit fermé à clef, ainsi que les deux portes de l'escalier tournant, chose que l'on ne fait jamais.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "stendhal.f.v0070",
+      "kind": "verbatim",
+      "text": "Quand Jules, suivi de ses huit hommes, se trouva à trois lieues de Castro, il s'arrêta dans une auberge écartée pour laisser passer les heures de la grande chaleur.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "stendhal.f.v0071",
+      "kind": "verbatim",
+      "text": "Si l'ennemi nous oblige à détruire le mur qui soutient les gonds de la seconde porte, il faut songer que les bravi de la caserne ne resteront pas oisifs durant cette longue opération; ils vous tueront sept à huit hommes à coups d'arquebuse, et alors on peut nous enlever la femme au retour.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "stendhal.f.v0072",
+      "kind": "verbatim",
+      "text": "A minuit et demi, Jules, qui avait pris pour lui le rôle de courrier, arriva au galop à la porte du couvent, faisant grand bruit et criant qu'on ouvrît sans délai à un courrier envoyé par le cardinal.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "stendhal.f.v0073",
+      "kind": "verbatim",
+      "text": "Il fut blessé douloureusement au genou; il s'élança sur un des hommes qui s'était trop fendu pour lui porter ce coup d'épée, il le tua d'un coup de dague dans la figure, et eut le bonheur de s'emparer de son épée.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "stendhal.f.v0074",
+      "kind": "verbatim",
+      "text": "Hélène détestait sa lâcheté et sa pusillanimité: --J'ai eu la faiblesse de dire un mot à ma mère, et le sang de Jules a coulé; il pouvait perdre la vie dans cet assaut sublime où son courage a tout fait.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "stendhal.f.v0075",
+      "kind": "verbatim",
+      "text": "A peine arrivée, elle écrivit à Branciforte, et la nourrice trouva, non sans de grandes peines, un homme qui voulut bien se hasarder à s'enfoncer dans la forêt de la Faggiola, sans avoir le mot d'ordre des soldats de Colonna.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 225
+      }
+    },
+    {
+      "id": "stendhal.f.v0076",
+      "kind": "verbatim",
+      "text": "Nous verrons que c'est Victoire Carafa, la mère d'Hélène, qui, par une suite de moyens adroits et fort savamment combinés, amena la mort cruelle de sa fille si chérie, après avoir fait son malheur pendant douze ans, triste résultat de la manie de régner.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "stendhal.f.v0077",
+      "kind": "verbatim",
+      "text": "Une jeune fille qui n'était pas même religieuse, et qui d'ailleurs n'était connue que par la folle passion d'un brigand, que peut-être elle avait partagée, être mise à la tête d'un couvent où tous les princes romains comptaient quelques parentes!",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "stendhal.f.v0078",
+      "kind": "verbatim",
+      "text": "Au milieu de toutes les folies du public, l'évêque vint à passer dans son carrosse; l'abbesse lui fit un signe, et, la nuit suivante, à une heure, il ne manqua pas de se trouver à la porte de l'église.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "stendhal.f.v0079",
+      "kind": "verbatim",
+      "text": "Avant l'arrivée de Jules, le prince avait ordonné, comme il savait ordonner, que personne dans la Petrella ne s'avisât de parler de Castro et du procès de l'abbesse; la peine de mort, sans aucune rémission était placée en perspective du moindre bavardage.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "stendhal.f.v0080",
+      "kind": "verbatim",
+      "text": "L'agonie de Grégoire XIII avait duré plus d'une semaine; la signora de Campireali attendait impatiemment les journées de trouble qui allaient suivre sa mort pour faire attaquer les derniers cinquante pas de son souterrain.",
+      "work": "L'Abbesse De Castro",
+      "lang": "fr",
+      "src": {
+        "work": "L'Abbesse De Castro"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "stendhal.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 4,
+      "worksSpan": 3,
+      "examples": [
+        "Si cet examen a lieu, on a affaire à l'amour-goût et non plus à l'amour-passion.",
+        "Si amor minuatur, cito deficit et raro convalescit."
+      ]
+    },
+    {
+      "id": "stendhal.f.p02",
+      "kind": "pattern",
+      "label": "maxime",
+      "shape": "(Il faut|Il ne faut|Il est |C'est |One must|We must|Never |No one |Nothing )",
+      "attested": 6,
+      "worksSpan": 2,
+      "examples": [
+        "Il ne faut pas trop mal augurer de Julien; il inventait correctement les paroles d'une hypocrisie cauteleuse et prudente.",
+        "Il est bon avocat, qui est-ce qui parle jamais de son talent pour la parole?"
+      ]
+    },
+    {
+      "id": "stendhal.f.p03",
+      "kind": "pattern",
+      "label": "restriction",
+      "shape": "\\bne\\b[^.]{0,80}\\b(que|point|jamais|rien)\\b",
+      "attested": 17,
+      "worksSpan": 5,
+      "examples": [
+        "Qu'importe, il ne sera pas dit que je manque un insolent.",
+        "Je ne vous dissimulerai point que je vous envoie au milieu des loups."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 265,
+    "formulas": 83,
+    "verbatim": 80,
+    "patterns": 3
+  },
+  "checksum": "sha256:94192bbba100b4dfe82ffc64d9b2c19ae41245d4a402a782abb81e66edc6fa2e"
+}

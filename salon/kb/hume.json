@@ -1,0 +1,3383 @@
+{
+  "authorId": "hume",
+  "kbVersion": "hume@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:50.311Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "An Enquiry Concerning Human Understanding",
+      "sentences": 57
+    },
+    {
+      "title": "A Treatise of Human Nature",
+      "sentences": 56
+    },
+    {
+      "title": "An Enquiry Concerning the Principles of Morals",
+      "sentences": 57
+    },
+    {
+      "title": "Dialogues Concerning Natural Religion",
+      "sentences": 58
+    },
+    {
+      "title": "Essays",
+      "sentences": 58
+    }
+  ],
+  "passages": [
+    {
+      "id": "hume.p0001",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "A like ambiguity and circumlocution seem to run through that philosopher's reasonings on this as well as most other subjects.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0002",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Propositions of this kind are discoverable by the mere operation of thought, without dependence on what is anywhere existent in the universe.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0003",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "And here it is constantly supposed that there is a connexion between the present fact and that which is inferred from it.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0004",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "And even after it is suggested, the conjunction of it with the cause must appear equally arbitrary; since there are always many other effects, which, to reason, must seem fully as consistent and natural.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0005",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The best expedient to prevent this confusion, is to be modest in our pretensions; and even to discover the difficulty ourselves before it is objected to us.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0006",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "I shall allow, if you please, that the one proposition may justly be inferred from the other: I know, in fact, that it always is inferred.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0007",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Where is the medium, the interposing ideas, which join propositions so very wide of each other?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0008",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Let the course of things be allowed hitherto ever so regular; that alone, without some new argument or inference, proves not that, for the future, it will continue so.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0009",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But with regard to the present subject, there are some considerations which seem to remove all this accusation of arrogance or suspicion of mistake.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0010",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But still he finds himself determined to draw it: And though he should be convinced that his understanding has no part in the operation, he would nevertheless continue in the same course of thinking.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0011",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We learn the events of former ages from history; but then we must peruse the volumes in which this instruction is contained, and thence carry up our inferences from one testimony to another, till we arrive at the eyewitnesses and spectators of these distant events.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0012",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Provided we agree about the thing, it is needless to dispute about the terms.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0013",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "This seems to be the case with that belief which arises from the relation of cause and effect.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0014",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "8] 'Naturane nobis, inquit, datum dicam, an errore quodam, ut, cum ea loca videamus, in quibus memoria dignos viros acceperimus multum esse versatos, magis moveamur, quam siquando eorum ipsorum aut facta audiamus aut scriptum aliquod legamus?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0015",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "This process of the thought or reasoning may seem trivial and obvious; but to those who consider it more narrowly, it may, perhaps, afford matter for curious speculation.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0016",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "It is more probable, in almost every country of Europe, that there will be frost sometime in January, than that the weather will continue open throughout that whole month; though this probability varies according to the different climates, and approaches to a certainty in the more northern kingdoms.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0017",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The chief obstacle, therefore, to our improvement in the moral or metaphysical sciences is the obscurity of the ideas, and ambiguity of the terms.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0018",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "It may be said, that we are every moment conscious of internal power; while we feel, that, by the simple command of our will, we can move the organs of our body, or direct the faculties of our mind.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0019",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We should then perceive, independent of experience, why the authority of will over the organs of the body is circumscribed within such particular limits.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0020",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We must, therefore, know both the cause and effect, and the relation between them.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0021",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "They consider not that, by this theory, they diminish, instead of magnifying, the grandeur of those attributes, which they affect so much to celebrate.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0022",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Is it more difficult to conceive that motion may arise from impulse than that it may arise from volition?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0023",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "All events seem entirely loose and separate.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0024",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The dispute whether the force of a body in motion be as its velocity, or the square of its velocity; this dispute, I say, need not be decided by comparing its effects in equal or unequal times; but by a direct mensuration and comparison.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0025",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But if we consider the matter more narrowly, we shall be apt to draw a quite opposite conclusion.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0026",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The same motives always produce the same actions.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0027",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But if we would willingly know what judgement should be formed of such irregular and extraordinary actions, we may consider the sentiments commonly entertained with regard to those irregular events which appear in the course of nature, and the operations of external objects.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0028",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But in order to throw the argument into a greater variety of lights we shall also insist, though briefly, on this latter topic.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0029",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We may change the name of things; but their nature and their operation on the understanding never change.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0030",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Here then is the advantage of definitions.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0031",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We change no circumstance in the received orthodox system with regard to the will, but only in that with regard to material objects and causes.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0032",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "While we act, we are, at the same time, acted upon.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0033",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "We shall make trial of this, with regard to the hypothesis, by which we have, in the foregoing discourse, endeavoured to account for all experimental reasonings; and it is hoped, that this new point of view will serve to confirm all our former observations.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0034",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "19] Since all reasonings concerning facts or causes is derived merely from custom, it may be asked how it happens, that men so much surpass animals in reasoning, and one man so much surpasses another?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0035",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "After we have acquired a confidence in human testimony, books and conversation enlarge much more the sphere of one man's experience and thought than those of another.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0036",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Suppose, for instance, that the fact, which the testimony endeavours to establish, partakes of the extraordinary and the marvellous; in that case, the evidence, resulting from the testimony, admits of a diminution, greater or less, in proportion as the fact is more or less unusual.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0037",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But it is a miracle, that a dead man should come to life; because that has never been observed in any age or country.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0038",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "His auditors may not have, and commonly have not, sufficient judgement to canvass his evidence: what judgement they have, they renounce by principle, in these sublime and mysterious subjects: or if they were ever so willing to employ it, passion and a heated imagination disturb the regularity of its operations.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0039",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Where shall we find such a number of circumstances, agreeing to the corroboration of one fact?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0040",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "All who have been in France about that time have heard of the reputation of Mons.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0041",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The contrariety is equally strong between the miracles related by Herodotus or Plutarch, and those delivered by Mariana, Bede, or any monkish historian.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0042",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "And when afterwards they would willingly detect the cheat, in order to undeceive the deluded multitude, the season is now past, and the records and witnesses, which might clear up the matter, have perished beyond recovery.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0043",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Lord Bacon seems to have embraced the same principles of reasoning.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0044",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "If you cannot make out this point, you allow, that your conclusion fails; and you pretend not to establish the conclusion in a greater latitude than the phenomena of nature will justify.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0045",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The supposition of farther attributes is mere hypothesis; much more the supposition, that, in distant regions of space or periods of time, there has been, or will be, a more magnificent display of these attributes, and a scheme of administration more suitable to such imaginary virtues.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0046",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "These attributes then, are, it seems, beforehand, taken for granted, in their greatest latitude.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0047",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Nothing else ought ever to be heard of in the school, or in the closet.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0048",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But what is the foundation of this method of reasoning?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0049",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "There are other more profound arguments against the senses, which admit not of so easy a solution.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0050",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "But here experience is, and must be entirely silent.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0051",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "The idea of extension is entirely acquired from the senses of sight and feeling; and if all the qualities, perceived by the senses, be in the mind, not in the object, the same conclusion must reach the idea of extension, which is wholly dependent on the sensible ideas or the ideas of secondary qualities.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0052",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "And what he proposes by all these curious researches?_ He is immediately at a loss, and knows not what to answer.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0053",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "While we cannot give a satisfactory reason, why we believe, after a thousand experiments, that a stone will fall, or fire burn; can we ever satisfy ourselves concerning any determination, which we may form, with regard to the origin of worlds, and the situation of nature, from, and to eternity?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0054",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Every proposition, which is not true, is there confused and unintelligible.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0055",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Is the idea of power derived from an internal impression and is it an idea of reflection?",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0056",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Epicurean philosophy, defence of, 102-15; denial of providence and future state is harmless, 104 (v.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0057",
+      "w": "An Enquiry Concerning Human Understanding",
+      "s": "Perceptions divided into impressions and ideas, 11-12; the mind can only compound the materials derived from outward or inward sentiment, 13 (cf.",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "hume.p0058",
+      "w": "A Treatise of Human Nature",
+      "s": "Every thing, that is different is distinguishable: and everything, that is distinguishable, may be separated, according to the maxims above-explained.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0059",
+      "w": "A Treatise of Human Nature",
+      "s": "This would be perfectly decisive, were there no medium betwixt the infinite divisibility of matter, and the non-entity of mathematical points.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0060",
+      "w": "A Treatise of Human Nature",
+      "s": "This gives rise to three objections, which I shall examine together, because the answer I shall give to one is a consequence of that which I shall make use of for the others.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0061",
+      "w": "A Treatise of Human Nature",
+      "s": "First, We may observe, that two visible objects appearing in the midst of utter darkness, affect the senses in the same manner, and form the same angle by the rays, which flow from them, and meet in the eye, as if the distance betwixt them were find with visible objects, that give us a true idea of extension.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0062",
+      "w": "A Treatise of Human Nature",
+      "s": "This invisible and intangible distance is also found by experience to contain a capacity of receiving body, or of becoming visible and tangible.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0063",
+      "w": "A Treatise of Human Nature",
+      "s": "For from thence we may immediately conclude, that since all impressions are clear and precise, the ideas, which are copyed from them, must be of the same nature, and can never, but from our fault, contain any thing so dark and intricate.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0064",
+      "w": "A Treatise of Human Nature",
+      "s": "Can he give any definition of it, that will not be the same with that of causation?",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0065",
+      "w": "A Treatise of Human Nature",
+      "s": "But it is the very point in question, whether every thing must have a cause or not; and therefore, according to all just reasoning, it ought never to be taken for granted.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0066",
+      "w": "A Treatise of Human Nature",
+      "s": "Our ideas are copyed from our impressions, and represent them in all their parts.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0067",
+      "w": "A Treatise of Human Nature",
+      "s": "I would willingly establish it as a general maxim in the science of human nature, that when any impression becomes present to us, it not only transports the mind to such ideas as are related to it, but likewise communicates to them a share of its force and vivacity.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0068",
+      "w": "A Treatise of Human Nature",
+      "s": "I form an idea of ROME, which I neither see nor remember; but which is connected with such impressions as I remember to have received from the conversation and books of travellers and historians.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0069",
+      "w": "A Treatise of Human Nature",
+      "s": "As belief is an act of the mind arising from custom, it is not strange the want of resemblance should overthrow what custom has established, and diminish the force of the idea, as much as that latter principle encreases it.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0070",
+      "w": "A Treatise of Human Nature",
+      "s": "The effect, then, of belief is to raise up a simple idea to an equality with our impressions, and bestow on it a like influence on the passions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0071",
+      "w": "A Treatise of Human Nature",
+      "s": "Thirdly, A certain figure inscribed on each side.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0072",
+      "w": "A Treatise of Human Nature",
+      "s": "But this method of proceeding we have but few instances of in our probable reasonings; and even fewer than in those, which are derived from the uninterrupted conjunction of objects.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0073",
+      "w": "A Treatise of Human Nature",
+      "s": "All our reasonings concerning the probability of causes are founded on the transferring of past to future.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0074",
+      "w": "A Treatise of Human Nature",
+      "s": "It may, therefore, be concluded, that our judgment and imagination can never be contrary, and that custom cannot operate on the latter faculty after such a manner, as to render it opposite to the former.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0075",
+      "w": "A Treatise of Human Nature",
+      "s": "Thus it appears upon the whole, that every kind of opinion or judgment, which amounts not to knowledge, is derived entirely from the force and vivacity of the perception, and that these qualities constitute in the mind, what we call the BELIEF Of the existence of any object.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0076",
+      "w": "A Treatise of Human Nature",
+      "s": "By the refusal of this, we acknowledge, that the idea is impossible and imaginary, since the principle of innate ideas, which alone can save us from this dilemma, has been already refuted, and is now almost universally rejected in the learned world.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0077",
+      "w": "A Treatise of Human Nature",
+      "s": "As objects must either be conjoined or not, and as the mind must either be determined or not to pass from one object to another, it is impossible to admit of any medium betwixt chance and an absolute necessity.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0078",
+      "w": "A Treatise of Human Nature",
+      "s": "When therefore we see other creatures, in millions of instances, perform like actions, and direct them to the ends, all our principles of reason and probability carry us with an invincible force to believe the existence of a like cause.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0079",
+      "w": "A Treatise of Human Nature",
+      "s": "For if the objects of our senses continue to exist, even when they are not perceived, their existence is of course independent of and distinct from the perception: and vice versa, if their existence be independent of the perception and distinct from it, they must continue to exist, even though they be not perceived.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0080",
+      "w": "A Treatise of Human Nature",
+      "s": "Both philosophers and the vulgar suppose the first of these to have a distinct continued existence.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0081",
+      "w": "A Treatise of Human Nature",
+      "s": "These observations are contrary, unless I suppose that the door still remains, and that it was opened without my perceiving it: And this supposition, which was at first entirely arbitrary and hypothetical, acquires a force and evidence by its being the only one, upon which I can reconcile these contradictions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0082",
+      "w": "A Treatise of Human Nature",
+      "s": "The same reasoning affords us an answer to the second question.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0083",
+      "w": "A Treatise of Human Nature",
+      "s": "It is no less certain, that this philosophical system has no primary recommendation to the imagination, and that that faculty would never, of itself, and by its original tendency, have fallen upon such a principle.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0084",
+      "w": "A Treatise of Human Nature",
+      "s": "The constancy of our perceptions has the most considerable effect, and yet is attended with the greatest difficulties.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0085",
+      "w": "A Treatise of Human Nature",
+      "s": "For upon the removal of sounds, colours, beat, cold, and other sensible qualities, from the rank of continued independent existences, we are reduced merely to what are called primary qualities, as the only real ones, of which we have any adequate notion.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0086",
+      "w": "A Treatise of Human Nature",
+      "s": "Thought, therefore, and extension are qualities wholly incompatible, and never can incorporate together into one subject.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0087",
+      "w": "A Treatise of Human Nature",
+      "s": "We have no idea of any quality in an object, which does not agree to, and may not represent a quality in an impression; and that because all our ideas are derived from our impressions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0088",
+      "w": "A Treatise of Human Nature",
+      "s": "But, secondly, supposing, that the deity were the great and efficacious principle, which supplies the deficiency of all causes, this leads us into the grossest impieties and absurdities.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0089",
+      "w": "A Treatise of Human Nature",
+      "s": "The first is our present subject; and to explain it perfectly we must take the matter pretty deep, and account for that identity, which we attribute to plants and animals; there being a great analogy betwixt it, and the identity of a self or person.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0090",
+      "w": "A Treatise of Human Nature",
+      "s": "Methinks I am like a man, who having struck on many shoals, and having narrowly escaped shipwreck in passing a small frith, has yet the temerity to put out to sea in the same leaky weather-beaten vessel, and even carries his ambition so far as to think of compassing the globe under these disadvantageous circumstances.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0091",
+      "w": "A Treatise of Human Nature",
+      "s": "We save ourselves from this total scepticism only by means of that singular and seemingly trivial property of the fancy, by which we enter with difficulty into remote views of things, and are not able to accompany them with so sensible an impression, as we do those, which are more easy and natural.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0092",
+      "w": "A Treatise of Human Nature",
+      "s": "And indeed, of such as these I pretend not to make philosophers, nor do I expect them either to be associates in these researches or auditors of these discoveries.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0093",
+      "w": "A Treatise of Human Nature",
+      "s": "The first of these is the association of ideas, which I have so often observed and explained.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0094",
+      "w": "A Treatise of Human Nature",
+      "s": "For it is observable, that in this particular her conduct is different in the different passions and sensations.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0095",
+      "w": "A Treatise of Human Nature",
+      "s": "This circumstance, like the two foregoing, has an effect upon joy, as well as pride.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0096",
+      "w": "A Treatise of Human Nature",
+      "s": "Hence the origin of vulgar lying; where men without any interest, and merely out of vanity, heap up a number of extraordinary events, which are either the fictions of their brain, or if true, have at least no connexion with themselves.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0097",
+      "w": "A Treatise of Human Nature",
+      "s": "Thus one part of the preceding system, concerning the relations of ideas is a sufficient proof of the other, concerning that of impressions; and is itself so evidently founded on experience, that it would be lost time to endeavour farther to prove it.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0098",
+      "w": "A Treatise of Human Nature",
+      "s": "If the property of any thing, that gives pleasure either by its utility, beauty or novelty, produces also pride by a double relation of impressions and ideas; we need not be surprized, that the power of acquiring this property, should have the same effect.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0099",
+      "w": "A Treatise of Human Nature",
+      "s": "It is certain, then, that if a person considered himself in the same light, in which he appears to his admirer, he would first receive a separate pleasure, and afterwards a pride or self-satisfaction, according to the hypothesis above explained.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0100",
+      "w": "A Treatise of Human Nature",
+      "s": "Such simple and natural principles, founded on such solid proofs, cannot fail to be received by philosophers, unless opposed by some objections, that have escaped me.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0101",
+      "w": "A Treatise of Human Nature",
+      "s": "Twould be tedious to trace the passions of love and hatred, through all the observations which we have formed concerning pride and humility, and which are equally applicable to both sets of passions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0102",
+      "w": "A Treatise of Human Nature",
+      "s": "But every thing, that strikes upon us with vivacity, and appears in a full and strong light, forces itself, in a manner, into our consideration, and becomes present to the mind on the smallest hint and most trivial relation.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0103",
+      "w": "A Treatise of Human Nature",
+      "s": "These two phaenomena appear contradictory, and require some attention to be reconciled.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0104",
+      "w": "A Treatise of Human Nature",
+      "s": "He is a sorcerer: He has a communication with daemons; as is reported of OLIVER CROMWELL, and the DUKE OF LUXEMBOURG: He is bloody-minded, and takes a pleasure in death and destruction.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0105",
+      "w": "A Treatise of Human Nature",
+      "s": "The fancy is by its very nature wavering and inconstant; and considers always two objects as more strongly related together, where it finds the passage equally easy both in going and returning, than where the transition is easy only in one of these motions.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0106",
+      "w": "A Treatise of Human Nature",
+      "s": "Without that circumstance it is difficult to conceive on what we can found our hope of advantage from the riches of others, though there is nothing more certain, than that we naturally esteem and respect the rich, even before we discover in them any such favourable disposition towards us.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0107",
+      "w": "A Treatise of Human Nature",
+      "s": "Add to this, that the principal part of personal beauty is an air of health and vigour, and such a construction of members as promises strength and activity.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0108",
+      "w": "A Treatise of Human Nature",
+      "s": "The second principle I shall take notice of is that of our adherence to general rules; which has such a mighty influence on the actions and understanding, and is able to impose on the very senses.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0109",
+      "w": "A Treatise of Human Nature",
+      "s": "It is worthy of observation concerning that envy, which arises from a superiority in others, that it is not the great disproportion betwixt ourself and another, which produces it; but on the contrary, our proximity.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0110",
+      "w": "A Treatise of Human Nature",
+      "s": "Pity, then, is related to benevolence; and malice to anger: And as benevolence has been already found to be connected with love, by a natural and original quality, and anger with hatred; it is by this chain the passions of pity and malice are connected with love and hatred.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0111",
+      "w": "A Treatise of Human Nature",
+      "s": "The difficulty then is, why any objects ever cause pure love or hatred, and produce not always the mixt passions of respect and contempt.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0112",
+      "w": "A Treatise of Human Nature",
+      "s": "But the most common species of love is that which first arises from beauty, and afterwards diffuses itself into kindness and into the bodily appetite.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0113",
+      "w": "A Treatise of Human Nature",
+      "s": "I OF LIBERTY AND NECESSITY We come now to explain the direct passions, or the impressions, which arise immediately from good or evil, from pain or pleasure.",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      }
+    },
+    {
+      "id": "hume.p0114",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Why should I bind another, by a deed or promise, to do me any good office, when I know that he is already prompted, by the strongest inclination, to seek my happiness, and would, of himself, perform the desired service; except the hurt, he thereby receives, be greater than the benefit accruing to me?",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0115",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The laws of war, which then succeed to those of equity and justice, are rules calculated for the ADVANTAGE and UTILITY of that particular state, in which men are now placed.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0116",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "On the first origin of mankind, we are told, their ignorance and savage nature were so prevalent, that they could give no mutual trust, but must each depend upon himself and his own force or cunning for protection and security.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0117",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Suppose that several families unite together into one society, which is totally disjoined from all others, the rules, which preserve peace and order, enlarge themselves to the utmost extent of that society; but becoming then entirely useless, lose their force when carried one step farther.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0118",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The most rigorous inquisition too is requisite to watch every inequality on its first appearance; and the most severe jurisdiction, to punish and redress it.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0119",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Sometimes the interests of society may require a rule of justice in a particular case; but may not determine any particular rule, among several, which are all equally beneficial.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0120",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Where this enters not into consideration, nothing can appear more whimsical, unnatural, and even superstitious, than all or most of the laws of justice and of property.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0121",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "All these contradictions are easily accounted for, if justice arise entirely from its usefulness to society; but will never be explained on any other hypothesis.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0122",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Or is this a subject in which new discoveries can be made?",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0123",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The necessity of justice to the support of society is the sole foundation of that virtue; and since no moral excellence is more highly esteemed, we may conclude that this circumstance of usefulness has, in general, the strongest energy, and most entire command over our sentiments.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0124",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Human nature cannot by any means subsist, without the association of individuals; and that association never could have place, were no regard paid to the laws of equity and justice.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0125",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "And indeed to what other purpose do all the ideas of chastity and modesty serve?",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0126",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Constancy in friendships, attachments, and familiarities, is commendable, and is requisite to support trust and good correspondence in society.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0127",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Waggoners, coachmen, and postilions have principles, by which they give the way; and these are chiefly founded on mutual ease and convenience.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0128",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Footnote: We ought not to imagine, because an inanimate object may be useful as well as a man, that therefore it ought also, according to this system, to merit he appellation of VIRTUOUS.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0129",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "It is not conceivable, how a REAL sentiment or passion can ever arise from a known IMAGINARY interest; especially when our REAL interest is still kept in view, and is often acknowledged to be entirely distinct from the imaginary, and even sometimes opposite to it.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0130",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Sannazarius, who transferred the scene to the sea-shore, though he presented the most magnificent object in nature, is confessed to have erred in his choice.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0131",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The indifferent, uninteresting style of Suetonius, equally with the masterly pencil of Tacitus, may convince us of the cruel depravity of Nero or Tiberius: But what a difference of sentiment!",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0132",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Pulcher aspectu sit athleta, cujus lacertos execitatio expressit; idem certamini paratior nunquam enim SPECIES ab UTILITATE dividitur.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0133",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Separating the character from the furtone, by an easy and necessary effort of thought, we pronounce these persons alike, and give them the appearance: But is not able entirely to prevail our sentiment.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0134",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Again; reverse these views and reasonings: Consider the matter a posteriori; and weighing the consequences, enquire if the merit of social virtue be not, in a great measure, derived from the feelings of humanity, with which it affects the spectators.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0135",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "A proper celerity, for instance, and dispatch in business, is commendable.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0136",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The best character, indeed, were it not rather too perfect for human nature, is that which is not swayed by temper of any kind; but alternately employs enterprise and caution, as each is useful to the particular purpose intended.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0137",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "PRODIGALITY, the other extreme, is commonly more hurtful to a man himself; and each of these extremes is blamed above the other, according to the temper of the person who censures, and according to his greater or less sensibility to pleasure, either social or sensual.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0138",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Self-satisfaction, at least in some degree, is an advantage, which equally attends the fool and the wise man: But it is the only one; nor is there any other circumstance in the conduct of life, where they are upon an equal footing.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0139",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "It seems, indeed, certain, that first appearances are here, as usual, extremely deceitful, and that it is more difficult, in a speculative way, to resolve into self-love the merit which we ascribe to the selfish virtues above mentioned, than that even of the social virtues, justice and beneficence.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0140",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "In other illustrious men, say he, you will observe, that each possessed some one shining quality, which was the foundation of his fame: In Epaminondas all the VIRTUES are found united; force of body.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0141",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Self-love, for instance, which some affect so much to consider as the source of every sentiment, is plainly insufficient for this purpose.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0142",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Each practice has its advantages and disadvantages.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0143",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Hence the affection and probation which attend the former: the aversion and disgust with which we regard the latter.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0144",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The author entering upon the narration, says, LANIATA VESTE, FOEDUM SPECACULUM DUCEBATUR, MULTIS INCREPANTIBUS, NULLO INLACRIMANTE: deformatitas exitus misericordiam abstulerat.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0145",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Among the ancients, the heroes in philosophy, as well as those in war and patriotism, have a grandeur and force of sentiment, which astonishes our narrow souls, and is rashly rejected as extravagant and supernatural.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0146",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Lysias, Thucydides, Plato, and Isocrates discover, all of them, the same partiality; which, though condemned by calm reason and reflection, appears so natural in the mind of man.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0147",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "A Spaniard goes out of his own house before his guest, to signify that he leaves him master of all.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0148",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Nobody finds fault with Maurice, Prince of Orange, for his reply to one who asked him, whom he esteemed the first general of the age, THE MARQUIS OF SPINOLA, said he, IS THE SECOND.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0149",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "It is besides a sure symptom of the want of true dignity and elevation of mind, which is so great an ornament in any character.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0150",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "We approve of another, because of his wit, politeness, modesty, decency, or any agreeable quality which he possesses; although he be not of our acquaintance, nor has ever given us any entertainment, by means of these accomplishments.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0151",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "And though this affection of humanity may not generally be esteemed so strong as vanity or ambition, yet, being common to all men, it can alone be the foundation of morals, or of any-general system of blame or praise.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0152",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Virtue and Vice become then known; morals are recognized; certain general ideas are framed of human conduct and behaviour; such measures are expected from men in such situations.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0153",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "If this can be clearly ascertained from the foregoing theory, we shall have the satisfaction to reflect, that we have advanced principles, which not only, it is hoped, will stand the test of reasoning and inquiry, but may contribute to the amendment of men's lives, and their improvement in morality and social virtue.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0154",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "The peculiar advantage of the foregoing system seems to be, that it furnishes proper mediums for that purpose.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0155",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "If so, we are but ill-instructed in the nature of the human passions, and are more influenced by verbal distinctions than by real differences.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0156",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "And a very accurate REASON or JUDGEMENT is often requisite, to give the true determination, amidst such intricate doubts arising from obscure or opposite utilities.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0157",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Reason judges either of MATTER OF FACT or of RELATIONS.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0158",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "But suppose a person bore me ill-will or did me ill-offices; and I, in return, were indifferent towards him, or did him good offices.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0159",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "No new fact to be ascertained; no new relation to be discovered.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0160",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Before we can pretend to form any decision of this kind, everything must be known and ascertained on the side of the object or action.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0161",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Till such a spectator appear, there is nothing but a figure of such particular dimensions and proportions: from his sentiments alone arise its elegance and beauty.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0162",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "In vain would you suggest that these characters, though seemingly opposite, are at bottom the same, and that a very inconsiderable turn of thought forms the whole difference between them.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0163",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "I shall not here enter into any detail on the present subject.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0164",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Shall we account for all THEIR sentiments, too, from refined deductions of self-interest?",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0165",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "On the contrary, were the generous friend or disinterested patriot to stand alone in the practice of beneficence, this would rather enhance his value in our eyes, and join the praise of rarity and novelty to his other more exalted merits.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0166",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Public utility requires that property should be regulated by general inflexible rules; and though such rules are adopted as best serve the same end of public utility, it is impossible for them to prevent all particular hardships, or make beneficial consequences result from every individual case.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0167",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "In so sagacious an animal, what necessarily arises from the exertion of his intellectual faculties may justly be esteemed natural.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0168",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "Yet even these rivers are considered as the property of that nation, through whose dominions they run; the idea of a nation being of a suitable bulk to correspond with them, and bear them such a relation in the fancy.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0169",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "First, I do not find that in the English, or any other modern tongue, the boundaries are exactly fixed between virtues and talents, vices and defects, or that a precise definition can be given of the one as contradistinguished from the other.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0170",
+      "w": "An Enquiry Concerning the Principles of Morals",
+      "s": "It is hard to tell, whether you hurt a man's character most by calling him a knave or a coward, and whether a beastly glutton or drunkard be not as odious and contemptible, as a selfish, ungenerous miser.",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      }
+    },
+    {
+      "id": "hume.p0171",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "I shall never assent to so harsh an opinion as that of a celebrated writer [L'Arte de penser], who says, that the Sceptics are not a sect of philosophers: They are only a sect of liars.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0172",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "All the topics of the ancient academics were adopted by the fathers; and thence propagated for several ages in every school and pulpit throughout Christendom.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0173",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "It appears to me, that there are strong symptoms of priestcraft in the whole progress of this affair.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0174",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "The former truth, as you well observe, is unquestionable and self-evident.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0175",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "And it is a pleasure to me (and I hope to you too) that just reasoning and sound piety here concur in the same conclusion, and both of them establish the adorably mysterious and incomprehensible nature of the Supreme Being.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0176",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "What I chiefly scruple in this subject, said PHILO, is not so much that all religious arguments are by CLEANTHES reduced to experience, as that they appear not to be even the most certain and irrefragable of that inferior kind.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0177",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "He might set his fancy a rambling; and she might bring him in an infinite variety of reports and representations.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0178",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "The causes, therefore, must be resembling.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0179",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But can a conclusion, with any propriety, be transferred from parts to the whole?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0180",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But how this argument can have place, where the objects, as in the present case, are single, individual, without parallel, or specific resemblance, may be difficult to explain.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0181",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "All the planets, are they not earths, which revolve about the sun?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0182",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "PART 3 How the most absurd argument, replied CLEANTHES, in the hands of a man of ingenuity and invention, may acquire an air of probability!",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0183",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Some beauties in writing we may meet with, which seem contrary to rules, and which gain the affections, and animate the imagination, in opposition to all the precepts of criticism, and to the authority of the established masters of art.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0184",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But so near an approach we never surely can make to the Deity.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0185",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Who could imagine, replied DEMEA, that CLEANTHES, the calm philosophical CLEANTHES, would attempt to refute his antagonists by affixing a nickname to them; and, like the common bigots and inquisitors of the age, have recourse to invective and declamation, instead of reasoning?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0186",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "In an abstract view, they are entirely alike; and no difficulty attends the one supposition, which is not common to both of them.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0187",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Let us remember the story of the Indian philosopher and his elephant.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0188",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Why, then, should we think, that order is more essential to one than the other?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0189",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "An ideal system, arranged of itself, without a precedent design, is not a whit more explicable than a material one, which attains its order in a like manner; nor is there any more difficulty in the latter supposition than in the former.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0190",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "The further we push our researches of this kind, we are still led to infer the universal cause of all to be vastly different from mankind, or from any object of human experience and observation.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0191",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Secondly, You have no reason, on your theory, for ascribing perfection to the Deity, even in his finite capacity, or for supposing him free from every error, mistake, or incoherence, in his undertakings.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0192",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "And why not become a perfect Anthropomorphite?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0193",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "While we are uncertain whether there is one deity or many; whether the deity or deities, to whom we owe our existence, be perfect or imperfect, subordinate or supreme, dead or alive, what trust or confidence can we repose in them?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0194",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "The world, therefore, I infer, is an animal; and the Deity is the SOUL of the world, actuating it, and actuated by it.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0195",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "It is not two thousand years since vines were transplanted into FRANCE, though there is no climate in the world more favourable to them.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0196",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "How could things have been as they are, were there not an original inherent principle of order somewhere, in thought or in matter?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0197",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Pray open up this argument a little further, said DEMEA, for I do not rightly apprehend it in that concise manner in which you have expressed it.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0198",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But what is this vegetation and generation of which you talk?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0199",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "You need only look around you, replied PHILO, to satisfy yourself with regard to this question.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0200",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "The world, say I, resembles an animal; therefore it is an animal, therefore it arose from generation.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0201",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "This world, therefore, with all its events, even the most minute, has before been produced and destroyed, and will again be produced and destroyed, without any bounds and limitations.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0202",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Is there a system, an order, an economy of things, by which matter can preserve that perpetual agitation which seems essential to it, and yet maintain a constancy in the forms which it produces?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0203",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "If a glimpse or dawn of order appears for a moment, it is instantly hurried away, and confounded, by that never-ceasing force which actuates every part of matter.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0204",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Your theory itself cannot surely pretend to any such advantage, even though you have run into Anthropomorphism, the better to preserve a conformity to common experience.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0205",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "By this argument, too, we may prove the infinity of the Divine attributes, which, I am afraid, can never be ascertained with certainty from any other topic.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0206",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "As they are altogether unknown and inconceivable, they can never be proved incompatible with it.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0207",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "To a superficial observer, so wonderful a regularity may be admired as the effect either of chance or design: but a skilful algebraist immediately concludes it to be the work of necessity, and demonstrates, that it must for ever result from the nature of these numbers.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0208",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "It is only necessary to make us feel it, if possible, more intimately and sensibly.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0209",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "These insects have others still less than themselves, which torment them.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0210",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Hear the pathetic enumeration of the great poet.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0211",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "There is no evading such striking instances, said PHILO, but by apologies, which still further aggravate the charge.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0212",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "His wisdom is infinite: He is never mistaken in choosing the means to any end: But the course of Nature tends not to human or animal felicity: therefore it is not established for that purpose.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0213",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "At least, the few phenomena of this nature are overbalanced by opposite phenomena of still greater importance.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0214",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Have not all pious divines and preachers, who have indulged their rhetoric on so fertile a subject; have they not easily, I say, given a solution of any difficulties which may attend it?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0215",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But I will be contented to retire still from this entrenchment, for I deny that you can ever force me in it.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0216",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Thus, in the present subject, if we abandon all human analogy, as seems your intention, DEMEA, I am afraid we abandon all religion, and retain no conception of the great object of our adoration.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0217",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But still you would assert in general, that, if the architect had had skill and good intentions, he might have formed such a plan of the whole, and might have adjusted the parts in such a manner, as would have remedied all or most of these inconveniences.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0218",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Besides, we must consider, that, according to the present economy of the world, the course of nature, though supposed exactly regular, yet to us appears not so, and many events are uncertain, and many disappoint our expectations.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0219",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Wherever one power is increased, there is a proportional abatement in the others.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0220",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "I am contented to take an increase in one single power or faculty of his soul.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0221",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Let us allow, that, if the goodness of the Deity (I mean a goodness like the human) could be established on any tolerable reasons a priori, these phenomena, however untoward, would not be sufficient to subvert that principle; but might easily, in some unknown manner, be reconcilable to it.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0222",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "But if we consider, on the other hand, the perfect uniformity and agreement of the parts of the universe, we shall not discover in it any marks of the combat of a malevolent with a benevolent being.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0223",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Are you secretly, then, a more dangerous enemy than CLEANTHES himself?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0224",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "What a prodigious display of artifice, even in these simple and homogeneous parts!",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0225",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "That the works of Nature bear a great analogy to the productions of art, is evident; and according to all the rules of good reasoning, we ought to infer, if we argue at all concerning them, that their causes have a proportional analogy.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0226",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Will you quarrel, Gentlemen, about the degrees, and enter into a controversy, which admits not of any precise meaning, nor consequently of any determination?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0227",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "And so will all religion, said PHILO, except the philosophical and rational kind.",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0228",
+      "w": "Dialogues Concerning Natural Religion",
+      "s": "Is there any maxim in politics more certain and infallible, than that both the number and authority of priests should be confined within very narrow limits; and that the civil magistrate ought, for ever, to keep his fasces and axes from such dangerous hands?",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      }
+    },
+    {
+      "id": "hume.p0229",
+      "w": "Essays",
+      "s": "Thus it seems evident, that the two extremes of absolute monarchy and of a republic, approach near to each other in some material circumstances.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0230",
+      "w": "Essays",
+      "s": "But I would fain go a step further, and assert, that such a liberty is attended with so few inconveniences, that it may be claimed as the common right of mankind, and ought to be indulged them almost in every government except the ecclesiastical, to which, indeed, it would be fatal.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0231",
+      "w": "Essays",
+      "s": "A whisper may fly as quick, and be as pernicious as a pamphlet.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0232",
+      "w": "Essays",
+      "s": "So great is the force of laws, and of particular forms of government, and so little dependence have they on the humours and tempers of men, that consequences almost as general and certain may sometimes be deduced from them, as any which the mathematical sciences afford us.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0233",
+      "w": "Essays",
+      "s": "In the Polish government every nobleman, by means of his fiefs, has a distinct hereditary authority over his vassals, and the whole body has no authority but what it receives from the concurrence of its parts.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0234",
+      "w": "Essays",
+      "s": "The filling of the throne, in such a government, is a point of too great and too general interest, not to divide the whole people into factions, whence a civil war, the greatest of ills, may be apprehended, almost with certainty, upon every vacancy.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0235",
+      "w": "Essays",
+      "s": "If we pass from ancient to modern times, we shall still find the observation to hold.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0236",
+      "w": "Essays",
+      "s": "Legislators, therefore, ought not to trust the future government of a state entirely to chance, but ought to provide a system of laws to regulate the administration of public affairs to the latest posterity.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0237",
+      "w": "Essays",
+      "s": "For while the state was always full of sedition, and tumult, and disorder, the bank of St.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0238",
+      "w": "Essays",
+      "s": "To aggravate the charge, his pernicious conduct, it is said, will extend its baneful influence even to posterity, by undermining the best constitution in the world, and disordering that wise system of laws, institutions, and customs, by which our ancestors, during so many centuries, have been so happily governed.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0239",
+      "w": "Essays",
+      "s": "I would employ the same topics to moderate the zeal of those who defend the minister.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0240",
+      "w": "Essays",
+      "s": "3] I have taken it for granted, according to the supposition of Machiavel, that the ancient Persians had no nobility; though there is reason to suspect, that the Florentine secretary, who seems to have been better acquainted with the Roman than the Greek authors, was mistaken in this particular.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0241",
+      "w": "Essays",
+      "s": "And when Alexander married in one day 80 of his captains to Persian women, his intention plainly was to ally the Macedonians with the most eminent Persian families.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0242",
+      "w": "Essays",
+      "s": "His vices, in other instances, are not compensated by those virtues which are nearly allied to them: his want of enterprise is not attended with frugality.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0243",
+      "w": "Essays",
+      "s": "When this opinion prevails among the generality of a state, or among those who have the force in their hands, it gives great security to any government.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0244",
+      "w": "Essays",
+      "s": "But where the original constitution allows any share of power, though small, to an order of men who possess a large share of property, it is easy for them gradually to stretch their authority, and bring the balance of power to coincide with that of property.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0245",
+      "w": "Essays",
+      "s": "The country party do not pretend that a member is absolutely bound to follow instructions as an ambassador or general is confined by his orders, and that his vote is not to be received in the House, but so far as it is conformable to them.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0246",
+      "w": "Essays",
+      "s": "We are, therefore, to look upon all the vast apparatus of our government, as having ultimately no other object or purpose but the distribution of justice, or, in other words, the support of the twelve judges.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0247",
+      "w": "Essays",
+      "s": "Order in society, we find, is much better maintained by means of government; and our duty to the magistrate is more strictly guarded by the principles of human nature, than our duty to our fellow-citizens.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0248",
+      "w": "Essays",
+      "s": "It is probable, that the first ascendent of one man over multitudes began during a state of war; where the superiority of courage and of genius discovers itself most visibly, where unanimity and concert are most requisite, and where the pernicious effects of disorder are most sensibly felt.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0249",
+      "w": "Essays",
+      "s": "In this sense, it must be owned, that liberty is the perfection of civil society; but still authority must be acknowledged essential to its very existence: and in those contests which so often take place between the one and the other, the latter may, on that account, challenge the preference.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0250",
+      "w": "Essays",
+      "s": "The principal weight of the crown lies in the executive; power.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0251",
+      "w": "Essays",
+      "s": "I answer, that the interest of the body is here restrained by that of the individuals, and that the House of Commons stretches not its power, because such an usurpation would be contrary to the interest of the majority of its members.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0252",
+      "w": "Essays",
+      "s": "But a limited monarchy admits not of any such stability; nor is it possible to assign to the crown such a determinate degree of power, as will, in every hand, form a proper counterbalance to the other parts of the constitution.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0253",
+      "w": "Essays",
+      "s": "The following reasoning will, I hope, serve to justify me in this opinion.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0254",
+      "w": "Essays",
+      "s": "And such an irregular authority, not avowed by the laws, is always more dangerous than a much greater authority derived from them.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0255",
+      "w": "Essays",
+      "s": "There is no doubt but a popular government may be imagined more perfect than an absolute monarchy, or even than our present constitution.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0256",
+      "w": "Essays",
+      "s": "Thus, if we have reason to be more jealous of monarchy, because the danger is more imminent from that quarter; we have also reason to be more jealous of popular government, because that danger is more terrible.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0257",
+      "w": "Essays",
+      "s": "Factions subvert government, render laws impotent, and beget the fiercest animosities among men of the same nation, who ought to give mutual assistance and protection to each other.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0258",
+      "w": "Essays",
+      "s": "If mankind had not a strong propensity to such divisions, the indifference of the rest of the community must have suppressed this foolish animosity, that had not any aliment of new benefits and injuries, of general sympathy and antipathy, which never fail to take place, when the whole state is rent into equal factions.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0259",
+      "w": "Essays",
+      "s": "Where two orders of men, such as the nobles and people, have a distinct authority in a government, not very accurately balanced and modelled, they naturally follow a distinct interest; nor can we reasonably expect a different conduct, considering that degree of selfishness implanted in human nature.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0260",
+      "w": "Essays",
+      "s": "But such is the nature of the human mind, that it always lays hold on every mind that approaches it; and as it is wonderfully fortified by an unanimity of sentiments, so it is shocked and disturbed by any contrariety.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0261",
+      "w": "Essays",
+      "s": "The splendour of majesty and power bestows an importance on the fortunes even of a single person.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0262",
+      "w": "Essays",
+      "s": "Pliny ascribes the abolition of the Druidical superstitions to Tiberius, probably because that emperor had taken some steps towards restraining them (lib.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0263",
+      "w": "Essays",
+      "s": "The crown will naturally bestow all trust and power upon those whose principles, real or pretended, are most favourable to monarchical government; and this temptation will naturally engage them to go greater lengths than their principles would otherwise carry them.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0264",
+      "w": "Essays",
+      "s": "In this respect, they may be considered as court and country party, inflamed into a civil war, by an unhappy concurrence of circumstances, and by the turbulent spirit of the age.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0265",
+      "w": "Essays",
+      "s": "But, as the most rational principles are often but a weak counterpoise to passion, it is no wonder that these absurd principles were found too weak for that effect.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0266",
+      "w": "Essays",
+      "s": "The Tories have been so long obliged to talk in the republican style, that they seem to have made converts of themselves by their hypocrisy, and to have embraced the sentiments, as well as language of their adversaries.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0267",
+      "w": "Essays",
+      "s": "The different conduct of the two parties, with regard to foreign politics, is also a proof to the same purpose.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0268",
+      "w": "Essays",
+      "s": "I shall conclude this subject with observing, that we never had any Tories in Scotland, according to the proper signification of the word, and that the division of parties in this country was really into Whigs and Jacobites.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0269",
+      "w": "Essays",
+      "s": "These two species of false religion, though both pernicious, are yet of a very different, and even of a contrary nature.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0270",
+      "w": "Essays",
+      "s": "It is thus enthusiasm produces the most cruel disorders in human society; but its fury is like that of thunder and tempest, which exhaust themselves in a little time, and leave the air more calm and serene than before.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0271",
+      "w": "Essays",
+      "s": "Others insist upon the blind sides of human nature, and can discover nothing, except vanity, in which man surpasses the other animals, whom he affects so much to despise.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0272",
+      "w": "Essays",
+      "s": "A dog and a horse may be of the very same size, while the one is admired for the greatness of its bulk, and the other for the smallness.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0273",
+      "w": "Essays",
+      "s": "When a man denies the sincerity of all public spirit or affection to a country and community, I am at a loss what to think of him.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0274",
+      "w": "Essays",
+      "s": "I am willing, reply I, to receive your interpretation of human actions, provided you admit the facts.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0275",
+      "w": "Essays",
+      "s": "I feel a pleasure in doing good to my friend, because I love him; but do not love him for the sake of that pleasure.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0276",
+      "w": "Essays",
+      "s": "It is not fully known what degree of refinement, either in virtue or vice, human nature is susceptible of, nor what may be expected of mankind from any great revolution in their education, customs, or principles.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0277",
+      "w": "Essays",
+      "s": "Such mighty revolutions have happened in human affairs, and so many events have arisen contrary to the expectation of the ancients, that they are sufficient to beget the suspicion of still further changes.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0278",
+      "w": "Essays",
+      "s": "And though the Lombard school was famous as well as the Roman, yet the Venetians have had the smallest share in its honours, and seem rather inferior to the other Italians in their genius for the arts and sciences.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0279",
+      "w": "Essays",
+      "s": "A subordination of rank is absolutely necessary to the support of monarchy.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0280",
+      "w": "Essays",
+      "s": "Property is there secure, industry encouraged, the arts flourish, and the prince lives secure among his subjects, like a father among his children.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0281",
+      "w": "Essays",
+      "s": "The source of degeneracy which may be remarked in free governments, consists in the practice of contracting debt, and mortgaging the public revenues, by which taxes may, in time, become altogether intolerable, and all the property of the state be brought into the hands of the public The practice is of modern date.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0282",
+      "w": "Essays",
+      "s": "We are told, that, when Demosthenes was to plead, all ingenious men flocked to Athens from the most remote parts of Greece, as to the most celebrated spectacle of the world.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0283",
+      "w": "Essays",
+      "s": "One is somewhat at a loss to what cause we may ascribe so sensible a decline of eloquence in latter ages.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0284",
+      "w": "Essays",
+      "s": "They hurried away with such a torrent of sublime and pathetic, that they left their hearers no leisure to perceive the artifice by which they were deceived.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0285",
+      "w": "Essays",
+      "s": "Yet is his manner more chaste and austere than that of the other.",
+      "src": {
+        "work": "Essays"
+      }
+    },
+    {
+      "id": "hume.p0286",
+      "w": "Essays",
+      "s": "There is certainly something accidental in the first rise and progress of the arts in any nation.",
+      "src": {
+        "work": "Essays"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "hume.f.v0001",
+      "kind": "verbatim",
+      "text": "We learn the events of former ages from history; but then we must peruse the volumes in which this instruction is contained, and thence carry up our inferences from one testimony to another, till we arrive at the eyewitnesses and spectators of these distant events.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 265
+      }
+    },
+    {
+      "id": "hume.f.v0002",
+      "kind": "verbatim",
+      "text": "8] 'Naturane nobis, inquit, datum dicam, an errore quodam, ut, cum ea loca videamus, in quibus memoria dignos viros acceperimus multum esse versatos, magis moveamur, quam siquando eorum ipsorum aut facta audiamus aut scriptum aliquod legamus?",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "hume.f.v0003",
+      "kind": "verbatim",
+      "text": "It is more probable, in almost every country of Europe, that there will be frost sometime in January, than that the weather will continue open throughout that whole month; though this probability varies according to the different climates, and approaches to a certainty in the more northern kingdoms.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 300
+      }
+    },
+    {
+      "id": "hume.f.v0004",
+      "kind": "verbatim",
+      "text": "It may be said, that we are every moment conscious of internal power; while we feel, that, by the simple command of our will, we can move the organs of our body, or direct the faculties of our mind.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "hume.f.v0005",
+      "kind": "verbatim",
+      "text": "The dispute whether the force of a body in motion be as its velocity, or the square of its velocity; this dispute, I say, need not be decided by comparing its effects in equal or unequal times; but by a direct mensuration and comparison.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "hume.f.v0006",
+      "kind": "verbatim",
+      "text": "We shall make trial of this, with regard to the hypothesis, by which we have, in the foregoing discourse, endeavoured to account for all experimental reasonings; and it is hoped, that this new point of view will serve to confirm all our former observations.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "hume.f.v0007",
+      "kind": "verbatim",
+      "text": "19] Since all reasonings concerning facts or causes is derived merely from custom, it may be asked how it happens, that men so much surpass animals in reasoning, and one man so much surpasses another?",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "hume.f.v0008",
+      "kind": "verbatim",
+      "text": "Suppose, for instance, that the fact, which the testimony endeavours to establish, partakes of the extraordinary and the marvellous; in that case, the evidence, resulting from the testimony, admits of a diminution, greater or less, in proportion as the fact is more or less unusual.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "hume.f.v0009",
+      "kind": "verbatim",
+      "text": "If you cannot make out this point, you allow, that your conclusion fails; and you pretend not to establish the conclusion in a greater latitude than the phenomena of nature will justify.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "hume.f.v0010",
+      "kind": "verbatim",
+      "text": "The supposition of farther attributes is mere hypothesis; much more the supposition, that, in distant regions of space or periods of time, there has been, or will be, a more magnificent display of these attributes, and a scheme of administration more suitable to such imaginary virtues.",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 286
+      }
+    },
+    {
+      "id": "hume.f.v0011",
+      "kind": "verbatim",
+      "text": "While we cannot give a satisfactory reason, why we believe, after a thousand experiments, that a stone will fall, or fire burn; can we ever satisfy ourselves concerning any determination, which we may form, with regard to the origin of worlds, and the situation of nature, from, and to eternity?",
+      "work": "An Enquiry Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "hume.f.v0012",
+      "kind": "verbatim",
+      "text": "I would willingly establish it as a general maxim in the science of human nature, that when any impression becomes present to us, it not only transports the mind to such ideas as are related to it, but likewise communicates to them a share of its force and vivacity.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "hume.f.v0013",
+      "kind": "verbatim",
+      "text": "I form an idea of ROME, which I neither see nor remember; but which is connected with such impressions as I remember to have received from the conversation and books of travellers and historians.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "hume.f.v0014",
+      "kind": "verbatim",
+      "text": "As belief is an act of the mind arising from custom, it is not strange the want of resemblance should overthrow what custom has established, and diminish the force of the idea, as much as that latter principle encreases it.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "hume.f.v0015",
+      "kind": "verbatim",
+      "text": "By the refusal of this, we acknowledge, that the idea is impossible and imaginary, since the principle of innate ideas, which alone can save us from this dilemma, has been already refuted, and is now almost universally rejected in the learned world.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "hume.f.v0016",
+      "kind": "verbatim",
+      "text": "As objects must either be conjoined or not, and as the mind must either be determined or not to pass from one object to another, it is impossible to admit of any medium betwixt chance and an absolute necessity.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "hume.f.v0017",
+      "kind": "verbatim",
+      "text": "When therefore we see other creatures, in millions of instances, perform like actions, and direct them to the ends, all our principles of reason and probability carry us with an invincible force to believe the existence of a like cause.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hume.f.v0018",
+      "kind": "verbatim",
+      "text": "It is no less certain, that this philosophical system has no primary recommendation to the imagination, and that that faculty would never, of itself, and by its original tendency, have fallen upon such a principle.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "hume.f.v0019",
+      "kind": "verbatim",
+      "text": "We have no idea of any quality in an object, which does not agree to, and may not represent a quality in an impression; and that because all our ideas are derived from our impressions.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "hume.f.v0020",
+      "kind": "verbatim",
+      "text": "The first is our present subject; and to explain it perfectly we must take the matter pretty deep, and account for that identity, which we attribute to plants and animals; there being a great analogy betwixt it, and the identity of a self or person.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "hume.f.v0021",
+      "kind": "verbatim",
+      "text": "We save ourselves from this total scepticism only by means of that singular and seemingly trivial property of the fancy, by which we enter with difficulty into remote views of things, and are not able to accompany them with so sensible an impression, as we do those, which are more easy and natural.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "hume.f.v0022",
+      "kind": "verbatim",
+      "text": "Hence the origin of vulgar lying; where men without any interest, and merely out of vanity, heap up a number of extraordinary events, which are either the fictions of their brain, or if true, have at least no connexion with themselves.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 235
+      }
+    },
+    {
+      "id": "hume.f.v0023",
+      "kind": "verbatim",
+      "text": "If the property of any thing, that gives pleasure either by its utility, beauty or novelty, produces also pride by a double relation of impressions and ideas; we need not be surprized, that the power of acquiring this property, should have the same effect.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "hume.f.v0024",
+      "kind": "verbatim",
+      "text": "It is certain, then, that if a person considered himself in the same light, in which he appears to his admirer, he would first receive a separate pleasure, and afterwards a pride or self-satisfaction, according to the hypothesis above explained.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "hume.f.v0025",
+      "kind": "verbatim",
+      "text": "Twould be tedious to trace the passions of love and hatred, through all the observations which we have formed concerning pride and humility, and which are equally applicable to both sets of passions.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "hume.f.v0026",
+      "kind": "verbatim",
+      "text": "He is a sorcerer: He has a communication with daemons; as is reported of OLIVER CROMWELL, and the DUKE OF LUXEMBOURG: He is bloody-minded, and takes a pleasure in death and destruction.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hume.f.v0027",
+      "kind": "verbatim",
+      "text": "The fancy is by its very nature wavering and inconstant; and considers always two objects as more strongly related together, where it finds the passage equally easy both in going and returning, than where the transition is easy only in one of these motions.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "hume.f.v0028",
+      "kind": "verbatim",
+      "text": "Without that circumstance it is difficult to conceive on what we can found our hope of advantage from the riches of others, though there is nothing more certain, than that we naturally esteem and respect the rich, even before we discover in them any such favourable disposition towards us.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "hume.f.v0029",
+      "kind": "verbatim",
+      "text": "The second principle I shall take notice of is that of our adherence to general rules; which has such a mighty influence on the actions and understanding, and is able to impose on the very senses.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "hume.f.v0030",
+      "kind": "verbatim",
+      "text": "It is worthy of observation concerning that envy, which arises from a superiority in others, that it is not the great disproportion betwixt ourself and another, which produces it; but on the contrary, our proximity.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "hume.f.v0031",
+      "kind": "verbatim",
+      "text": "Pity, then, is related to benevolence; and malice to anger: And as benevolence has been already found to be connected with love, by a natural and original quality, and anger with hatred; it is by this chain the passions of pity and malice are connected with love and hatred.",
+      "work": "A Treatise of Human Nature",
+      "lang": "en",
+      "src": {
+        "work": "A Treatise of Human Nature"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "hume.f.v0032",
+      "kind": "verbatim",
+      "text": "On the first origin of mankind, we are told, their ignorance and savage nature were so prevalent, that they could give no mutual trust, but must each depend upon himself and his own force or cunning for protection and security.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "hume.f.v0033",
+      "kind": "verbatim",
+      "text": "Suppose that several families unite together into one society, which is totally disjoined from all others, the rules, which preserve peace and order, enlarge themselves to the utmost extent of that society; but becoming then entirely useless, lose their force when carried one step farther.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "hume.f.v0034",
+      "kind": "verbatim",
+      "text": "Sometimes the interests of society may require a rule of justice in a particular case; but may not determine any particular rule, among several, which are all equally beneficial.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "hume.f.v0035",
+      "kind": "verbatim",
+      "text": "The necessity of justice to the support of society is the sole foundation of that virtue; and since no moral excellence is more highly esteemed, we may conclude that this circumstance of usefulness has, in general, the strongest energy, and most entire command over our sentiments.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 281
+      }
+    },
+    {
+      "id": "hume.f.v0036",
+      "kind": "verbatim",
+      "text": "Human nature cannot by any means subsist, without the association of individuals; and that association never could have place, were no regard paid to the laws of equity and justice.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "hume.f.v0037",
+      "kind": "verbatim",
+      "text": "Footnote: We ought not to imagine, because an inanimate object may be useful as well as a man, that therefore it ought also, according to this system, to merit he appellation of VIRTUOUS.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "hume.f.v0038",
+      "kind": "verbatim",
+      "text": "It is not conceivable, how a REAL sentiment or passion can ever arise from a known IMAGINARY interest; especially when our REAL interest is still kept in view, and is often acknowledged to be entirely distinct from the imaginary, and even sometimes opposite to it.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "hume.f.v0039",
+      "kind": "verbatim",
+      "text": "The indifferent, uninteresting style of Suetonius, equally with the masterly pencil of Tacitus, may convince us of the cruel depravity of Nero or Tiberius: But what a difference of sentiment!",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "hume.f.v0040",
+      "kind": "verbatim",
+      "text": "Again; reverse these views and reasonings: Consider the matter a posteriori; and weighing the consequences, enquire if the merit of social virtue be not, in a great measure, derived from the feelings of humanity, with which it affects the spectators.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "hume.f.v0041",
+      "kind": "verbatim",
+      "text": "The best character, indeed, were it not rather too perfect for human nature, is that which is not swayed by temper of any kind; but alternately employs enterprise and caution, as each is useful to the particular purpose intended.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "hume.f.v0042",
+      "kind": "verbatim",
+      "text": "PRODIGALITY, the other extreme, is commonly more hurtful to a man himself; and each of these extremes is blamed above the other, according to the temper of the person who censures, and according to his greater or less sensibility to pleasure, either social or sensual.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "hume.f.v0043",
+      "kind": "verbatim",
+      "text": "Self-satisfaction, at least in some degree, is an advantage, which equally attends the fool and the wise man: But it is the only one; nor is there any other circumstance in the conduct of life, where they are upon an equal footing.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "hume.f.v0044",
+      "kind": "verbatim",
+      "text": "It seems, indeed, certain, that first appearances are here, as usual, extremely deceitful, and that it is more difficult, in a speculative way, to resolve into self-love the merit which we ascribe to the selfish virtues above mentioned, than that even of the social virtues, justice and beneficence.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "hume.f.v0045",
+      "kind": "verbatim",
+      "text": "In other illustrious men, say he, you will observe, that each possessed some one shining quality, which was the foundation of his fame: In Epaminondas all the VIRTUES are found united; force of body.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "hume.f.v0046",
+      "kind": "verbatim",
+      "text": "Among the ancients, the heroes in philosophy, as well as those in war and patriotism, have a grandeur and force of sentiment, which astonishes our narrow souls, and is rashly rejected as extravagant and supernatural.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "hume.f.v0047",
+      "kind": "verbatim",
+      "text": "Nobody finds fault with Maurice, Prince of Orange, for his reply to one who asked him, whom he esteemed the first general of the age, THE MARQUIS OF SPINOLA, said he, IS THE SECOND.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "hume.f.v0048",
+      "kind": "verbatim",
+      "text": "We approve of another, because of his wit, politeness, modesty, decency, or any agreeable quality which he possesses; although he be not of our acquaintance, nor has ever given us any entertainment, by means of these accomplishments.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "hume.f.v0049",
+      "kind": "verbatim",
+      "text": "In vain would you suggest that these characters, though seemingly opposite, are at bottom the same, and that a very inconsiderable turn of thought forms the whole difference between them.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "hume.f.v0050",
+      "kind": "verbatim",
+      "text": "On the contrary, were the generous friend or disinterested patriot to stand alone in the practice of beneficence, this would rather enhance his value in our eyes, and join the praise of rarity and novelty to his other more exalted merits.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "hume.f.v0051",
+      "kind": "verbatim",
+      "text": "Public utility requires that property should be regulated by general inflexible rules; and though such rules are adopted as best serve the same end of public utility, it is impossible for them to prevent all particular hardships, or make beneficial consequences result from every individual case.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "hume.f.v0052",
+      "kind": "verbatim",
+      "text": "First, I do not find that in the English, or any other modern tongue, the boundaries are exactly fixed between virtues and talents, vices and defects, or that a precise definition can be given of the one as contradistinguished from the other.",
+      "work": "An Enquiry Concerning the Principles of Morals",
+      "lang": "en",
+      "src": {
+        "work": "An Enquiry Concerning the Principles of Morals"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "hume.f.v0053",
+      "kind": "verbatim",
+      "text": "I shall never assent to so harsh an opinion as that of a celebrated writer [L'Arte de penser], who says, that the Sceptics are not a sect of philosophers: They are only a sect of liars.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hume.f.v0054",
+      "kind": "verbatim",
+      "text": "What I chiefly scruple in this subject, said PHILO, is not so much that all religious arguments are by CLEANTHES reduced to experience, as that they appear not to be even the most certain and irrefragable of that inferior kind.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "hume.f.v0055",
+      "kind": "verbatim",
+      "text": "Some beauties in writing we may meet with, which seem contrary to rules, and which gain the affections, and animate the imagination, in opposition to all the precepts of criticism, and to the authority of the established masters of art.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hume.f.v0056",
+      "kind": "verbatim",
+      "text": "Who could imagine, replied DEMEA, that CLEANTHES, the calm philosophical CLEANTHES, would attempt to refute his antagonists by affixing a nickname to them; and, like the common bigots and inquisitors of the age, have recourse to invective and declamation, instead of reasoning?",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "hume.f.v0057",
+      "kind": "verbatim",
+      "text": "An ideal system, arranged of itself, without a precedent design, is not a whit more explicable than a material one, which attains its order in a like manner; nor is there any more difficulty in the latter supposition than in the former.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hume.f.v0058",
+      "kind": "verbatim",
+      "text": "The further we push our researches of this kind, we are still led to infer the universal cause of all to be vastly different from mankind, or from any object of human experience and observation.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "hume.f.v0059",
+      "kind": "verbatim",
+      "text": "While we are uncertain whether there is one deity or many; whether the deity or deities, to whom we owe our existence, be perfect or imperfect, subordinate or supreme, dead or alive, what trust or confidence can we repose in them?",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "hume.f.v0060",
+      "kind": "verbatim",
+      "text": "This world, therefore, with all its events, even the most minute, has before been produced and destroyed, and will again be produced and destroyed, without any bounds and limitations.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "hume.f.v0061",
+      "kind": "verbatim",
+      "text": "Is there a system, an order, an economy of things, by which matter can preserve that perpetual agitation which seems essential to it, and yet maintain a constancy in the forms which it produces?",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "hume.f.v0062",
+      "kind": "verbatim",
+      "text": "To a superficial observer, so wonderful a regularity may be admired as the effect either of chance or design: but a skilful algebraist immediately concludes it to be the work of necessity, and demonstrates, that it must for ever result from the nature of these numbers.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "hume.f.v0063",
+      "kind": "verbatim",
+      "text": "His wisdom is infinite: He is never mistaken in choosing the means to any end: But the course of Nature tends not to human or animal felicity: therefore it is not established for that purpose.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "hume.f.v0064",
+      "kind": "verbatim",
+      "text": "Have not all pious divines and preachers, who have indulged their rhetoric on so fertile a subject; have they not easily, I say, given a solution of any difficulties which may attend it?",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "hume.f.v0065",
+      "kind": "verbatim",
+      "text": "Let us allow, that, if the goodness of the Deity (I mean a goodness like the human) could be established on any tolerable reasons a priori, these phenomena, however untoward, would not be sufficient to subvert that principle; but might easily, in some unknown manner, be reconcilable to it.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "hume.f.v0066",
+      "kind": "verbatim",
+      "text": "That the works of Nature bear a great analogy to the productions of art, is evident; and according to all the rules of good reasoning, we ought to infer, if we argue at all concerning them, that their causes have a proportional analogy.",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "hume.f.v0067",
+      "kind": "verbatim",
+      "text": "Is there any maxim in politics more certain and infallible, than that both the number and authority of priests should be confined within very narrow limits; and that the civil magistrate ought, for ever, to keep his fasces and axes from such dangerous hands?",
+      "work": "Dialogues Concerning Natural Religion",
+      "lang": "en",
+      "src": {
+        "work": "Dialogues Concerning Natural Religion"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "hume.f.v0068",
+      "kind": "verbatim",
+      "text": "The filling of the throne, in such a government, is a point of too great and too general interest, not to divide the whole people into factions, whence a civil war, the greatest of ills, may be apprehended, almost with certainty, upon every vacancy.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "hume.f.v0069",
+      "kind": "verbatim",
+      "text": "3] I have taken it for granted, according to the supposition of Machiavel, that the ancient Persians had no nobility; though there is reason to suspect, that the Florentine secretary, who seems to have been better acquainted with the Roman than the Greek authors, was mistaken in this particular.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "hume.f.v0070",
+      "kind": "verbatim",
+      "text": "The country party do not pretend that a member is absolutely bound to follow instructions as an ambassador or general is confined by his orders, and that his vote is not to be received in the House, but so far as it is conformable to them.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "hume.f.v0071",
+      "kind": "verbatim",
+      "text": "It is probable, that the first ascendent of one man over multitudes began during a state of war; where the superiority of courage and of genius discovers itself most visibly, where unanimity and concert are most requisite, and where the pernicious effects of disorder are most sensibly felt.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 291
+      }
+    },
+    {
+      "id": "hume.f.v0072",
+      "kind": "verbatim",
+      "text": "In this sense, it must be owned, that liberty is the perfection of civil society; but still authority must be acknowledged essential to its very existence: and in those contests which so often take place between the one and the other, the latter may, on that account, challenge the preference.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "hume.f.v0073",
+      "kind": "verbatim",
+      "text": "I answer, that the interest of the body is here restrained by that of the individuals, and that the House of Commons stretches not its power, because such an usurpation would be contrary to the interest of the majority of its members.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "hume.f.v0074",
+      "kind": "verbatim",
+      "text": "Factions subvert government, render laws impotent, and beget the fiercest animosities among men of the same nation, who ought to give mutual assistance and protection to each other.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "hume.f.v0075",
+      "kind": "verbatim",
+      "text": "Where two orders of men, such as the nobles and people, have a distinct authority in a government, not very accurately balanced and modelled, they naturally follow a distinct interest; nor can we reasonably expect a different conduct, considering that degree of selfishness implanted in human nature.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 300
+      }
+    },
+    {
+      "id": "hume.f.v0076",
+      "kind": "verbatim",
+      "text": "The crown will naturally bestow all trust and power upon those whose principles, real or pretended, are most favourable to monarchical government; and this temptation will naturally engage them to go greater lengths than their principles would otherwise carry them.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 265
+      }
+    },
+    {
+      "id": "hume.f.v0077",
+      "kind": "verbatim",
+      "text": "The Tories have been so long obliged to talk in the republican style, that they seem to have made converts of themselves by their hypocrisy, and to have embraced the sentiments, as well as language of their adversaries.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "hume.f.v0078",
+      "kind": "verbatim",
+      "text": "I shall conclude this subject with observing, that we never had any Tories in Scotland, according to the proper signification of the word, and that the division of parties in this country was really into Whigs and Jacobites.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "hume.f.v0079",
+      "kind": "verbatim",
+      "text": "It is thus enthusiasm produces the most cruel disorders in human society; but its fury is like that of thunder and tempest, which exhaust themselves in a little time, and leave the air more calm and serene than before.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 218
+      }
+    },
+    {
+      "id": "hume.f.v0080",
+      "kind": "verbatim",
+      "text": "It is not fully known what degree of refinement, either in virtue or vice, human nature is susceptible of, nor what may be expected of mankind from any great revolution in their education, customs, or principles.",
+      "work": "Essays",
+      "lang": "en",
+      "src": {
+        "work": "Essays"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "hume.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 7,
+      "worksSpan": 5,
+      "examples": [
+        "If you cannot make out this point, you allow, that your conclusion fails; and you pretend not to establish the conclusion in a greater latitude than the phenomena of nature will justify.",
+        "If the property of any thing, that gives pleasure either by its utility, beauty or novelty, produces also pride by a double relation of impressions and ideas; we need not be surprized, that the power of acquiring this property, should have the same effect."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 286,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:d2943e22f62014de96f452efd1bc710623aa218fb0130661c3557cdded224675"
+}

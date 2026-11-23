@@ -1,0 +1,3207 @@
+{
+  "authorId": "hardy",
+  "kbVersion": "hardy@bootstrap-2026-11-22",
+  "builtAt": "2026-11-23T09:52:51.002Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Far from the Madding Crowd",
+      "sentences": 51
+    },
+    {
+      "title": "Tess of the d'Urbervilles: A Pure Woman",
+      "sentences": 54
+    },
+    {
+      "title": "The Return of the Native",
+      "sentences": 51
+    },
+    {
+      "title": "The Mayor of Casterbridge",
+      "sentences": 53
+    },
+    {
+      "title": "Jude the Obscure",
+      "sentences": 55
+    }
+  ],
+  "passages": [
+    {
+      "id": "hardy.p0001",
+      "w": "Far from the Madding Crowd",
+      "s": "How long would it take you to make a shepherd’s crook?” “Twenty minutes.” “How much?” “Two shillings.” He sat on a bench and the crook was made, a stem being given him into the bargain.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0002",
+      "w": "Far from the Madding Crowd",
+      "s": "There was room for a little pity, also for a very little exultation: the former at his position, the latter at her own.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0003",
+      "w": "Far from the Madding Crowd",
+      "s": "The question of which was right being tacitly waived by the company, Jan went on meditatively:— “And he’s the fearfullest man, bain’t ye, Joseph?",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0004",
+      "w": "Far from the Madding Crowd",
+      "s": "Shepherd would like to hear the pedigree of yer life, father—wouldn’t ye, shepherd?” “Ay that I should,” said Gabriel, with the heartiness of a man who had longed to hear it for several months.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0005",
+      "w": "Far from the Madding Crowd",
+      "s": "There, as the others’ footsteps died away, he sat down again, and continued gazing as usual into the furnace with his red, bleared eyes.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0006",
+      "w": "Far from the Madding Crowd",
+      "s": "This lady called herself five-and-twenty, looked thirty, passed as thirty-five, and was forty.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0007",
+      "w": "Far from the Madding Crowd",
+      "s": "We turn our attention to the left-hand characteristics.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0008",
+      "w": "Far from the Madding Crowd",
+      "s": "Your coming like this is so sudden and unexpected.” “Yes—yes—it is.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0009",
+      "w": "Far from the Madding Crowd",
+      "s": "Here’s one with a motto—I remember it is some funny one, but I can’t read it.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0010",
+      "w": "Far from the Madding Crowd",
+      "s": "We hear that ye be a extraordinary good and clever man, shepherd,” said Joseph Poorgrass with considerable anxiety from behind the maltster’s bedstead whither he had retired for safety.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0011",
+      "w": "Far from the Madding Crowd",
+      "s": "When Bathsheba’s figure shone upon the farmer’s eyes, it lighted him up as the moon lights up a great tower.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0012",
+      "w": "Far from the Madding Crowd",
+      "s": "In my not marrying you, perhaps!” “Not by any means,” said Gabriel quietly.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0013",
+      "w": "Far from the Madding Crowd",
+      "s": "Isn’t it, Joseph?” “Ay—a holler pipe,” echoed Joseph.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0014",
+      "w": "Far from the Madding Crowd",
+      "s": "It was a small tube or trochar, with a lance passing down the inside; and Gabriel began to use it with a dexterity that would have graced a hospital-surgeon.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0015",
+      "w": "Far from the Madding Crowd",
+      "s": "Far from coquetting with Boldwood, she had trifled with himself in thus feigning that she had trifled with another.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0016",
+      "w": "Far from the Madding Crowd",
+      "s": "Bathsheba then wished them good-night, withdrew from the window, and retired to the back part of the room, Boldwood thereupon closing the sash and the shutters, and shutting himself inside with her.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0017",
+      "w": "Far from the Madding Crowd",
+      "s": "She withdrew her own hand, but, whether by accident or design, he touched it.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0018",
+      "w": "Far from the Madding Crowd",
+      "s": "But surely you must have been told by everybody of what everybody notices?",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0019",
+      "w": "Far from the Madding Crowd",
+      "s": "Bathsheba was brimming with agitated bewilderment, and she said, in half-suspicious accents of feeling, “Can it be!",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0020",
+      "w": "Far from the Madding Crowd",
+      "s": "The wheat was now tall, and the path was narrow; thus the way was quite a sunken groove between the embrowing thicket on either side.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0021",
+      "w": "Far from the Madding Crowd",
+      "s": "I hate taking my own measures so plainly, but upon my life, your provoking ways make a man say what he wouldn’t dream of at other times!",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0022",
+      "w": "Far from the Madding Crowd",
+      "s": "Solemnly swear to me that he’s not a bad man; that it is all lies they say about him!” “But, miss, how can I say he is not if——” “You graceless girl.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0023",
+      "w": "Far from the Madding Crowd",
+      "s": "You are not the cold woman you would have me believe.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0024",
+      "w": "Far from the Madding Crowd",
+      "s": "With almost a morbid dread of being thought a gushing girl, this guileless woman too well concealed from the world under a manner of carelessness the warm depths of her strong emotions.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0025",
+      "w": "Far from the Madding Crowd",
+      "s": "The footprints forming this recent impression were full of information as to pace; they were in equidistant pairs, three or four feet apart, the right and left foot of each pair being exactly opposite one another.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0026",
+      "w": "Far from the Madding Crowd",
+      "s": "Bump his back, shepherd.” “’Tis my nater.” mourned Cain.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0027",
+      "w": "Far from the Madding Crowd",
+      "s": "It was Miss Everdene’s gig, and Liddy and her mistress were the only occupants of the seat.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0028",
+      "w": "Far from the Madding Crowd",
+      "s": "So all I ask is, don’t molest her any more.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0029",
+      "w": "Far from the Madding Crowd",
+      "s": "Gabriel had previously beheld the sight, and he now stood with his back turned, making no reply.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0030",
+      "w": "Far from the Madding Crowd",
+      "s": "As Oak approached the building the sound of violins and a tambourine, and the regular jigging of many feet, grew more distinct.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0031",
+      "w": "Far from the Madding Crowd",
+      "s": "The wheat when threshed would average about thirty quarters to each stack; the barley, at least forty.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0032",
+      "w": "Far from the Madding Crowd",
+      "s": "But oh, if your life should be lost!” “You are not useless; but I would rather not tire you longer.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0033",
+      "w": "Far from the Madding Crowd",
+      "s": "One Saturday evening in the month of October Bathsheba’s vehicle was duly creeping up this incline.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0034",
+      "w": "Far from the Madding Crowd",
+      "s": "It was getting on towards six o’clock, and sounds of movement were to be heard inside the building which was the haven of rest to this wearied soul.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0035",
+      "w": "Far from the Madding Crowd",
+      "s": "Ashamed as she was to show emotion, at last she burst out:— “This is all I get for loving you so well!",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0036",
+      "w": "Far from the Madding Crowd",
+      "s": "It was the first arrival of the autumn fogs, and the first fog of the series.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0037",
+      "w": "Far from the Madding Crowd",
+      "s": "Parson Thirdly will be waiting at the church gates, and there’s the woman a-biding outside in the waggon.” “Joseph Poorgrass, don’t be so miserable!",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0038",
+      "w": "Far from the Madding Crowd",
+      "s": "Suddenly, as in a last attempt to save Bathsheba from, at any rate, immediate anguish, he looked again, as he had looked before, at the chalk writing upon the coffin-lid.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0039",
+      "w": "Far from the Madding Crowd",
+      "s": "When the momentary surprise had passed, his expression changed to a silencing imperious gaze.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0040",
+      "w": "Far from the Madding Crowd",
+      "s": "Bathsheba’s heart bounded with gratitude in the thought that she was not altogether deserted, and she jumped up.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0041",
+      "w": "Far from the Madding Crowd",
+      "s": "This done he ascended the stairs, and throwing himself down upon the bed dressed as he was, he waited miserably for the morning.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0042",
+      "w": "Far from the Madding Crowd",
+      "s": "He now recollected the place and its sinister character.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0043",
+      "w": "Far from the Madding Crowd",
+      "s": "In this he stated that he was passing over the cliff on the remoter side of the cove just as the sun was setting.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0044",
+      "w": "Far from the Madding Crowd",
+      "s": "Troy’s appearance in this position may be briefly accounted for.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0045",
+      "w": "Far from the Madding Crowd",
+      "s": "Troy reached the tent door, and standing among the groups there gathered, looked anxiously for Pennyways, evidently not wishing to make himself prominent by inquiring for him.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0046",
+      "w": "Far from the Madding Crowd",
+      "s": "I can’t explain any more—there’s no more to be explained.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0047",
+      "w": "Far from the Madding Crowd",
+      "s": "This is the first time she has ever gone there, they say.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0048",
+      "w": "Far from the Madding Crowd",
+      "s": "You see all these things will come to light if you go back, and they won’t sound well at all.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0049",
+      "w": "Far from the Madding Crowd",
+      "s": "However, it had not much effect now, for she said, in a passionless murmur which was in itself a proof of her words: “I have no feeling in the matter at all.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0050",
+      "w": "Far from the Madding Crowd",
+      "s": "Come home with me: come!” Bathsheba moved her feet a little, but did not rise.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0051",
+      "w": "Far from the Madding Crowd",
+      "s": "Granthead, the surgeon; and more than three hours passed between the time at which the shot was fired and that of his entering the house.",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      }
+    },
+    {
+      "id": "hardy.p0052",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Yes,” said Tess, “when they come.” “They are already here.” D’Urberville began gathering specimens of the fruit for her, handing them back to her as he stooped; and, presently, selecting a specially fine product of the “British Queen” variety, he stood up and held it by the stem to her mouth.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0053",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "He had wished to know, finally, in the name of his mother, if Tess could really come to manage the old lady’s fowl-farm or not; the lad who had hitherto superintended the birds having proved untrustworthy.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0054",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "It prompted the matron to say that she would walk a little way—as far as to the point where the acclivity from the valley began its first steep ascent to the outer world.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0055",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Her resolve, however, had been taken, and it seemed vacillating even to childishness to abandon it now, unless for graver reasons.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0056",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "He encouraged her with “Try again!” Tess was quite serious, painfully serious by this time; and she tried—ultimately and unexpectedly emitting a real round sound.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0057",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Changing partners simply meant that a satisfactory choice had not as yet been arrived at by one or other of the pair, and by this time every couple had been suitably matched.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0058",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "In the meantime Alec d’Urberville had pushed on up the slope to clear his genuine doubt as to the quarter of The Chase they were in.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0059",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "I have said I will not take anything more from you, and I will not—I cannot!",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0060",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "A plume of smoke soared up suddenly from her father’s chimney, the sight of which made her heart ache.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0061",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "As soon as her lunch was spread she called up the big girl, her sister, and took the baby of her, who, glad to be relieved of the burden, went away to the next shock and joined the other children playing there.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0062",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Tess then stood erect with the infant on her arm beside the basin; the next sister held the Prayer-Book open before her, as the clerk at church held it before the parson; and thus the girl set about baptizing her child.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0063",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "To persons of limited spheres, miles are as geographical degrees, parishes as counties, counties as provinces and kingdoms.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0064",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "So he broke into the ’Tivity Hymm, just as at Christmas carol-singing; when, lo and behold, down went the bull on his bended knees, in his ignorance, just as if ’twere the true ’Tivity night and hour.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0065",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "No, father; I cannot underwrite Article Four (leave alone the rest), taking it ‘in the literal and grammatical sense’ as required by the Declaration; and, therefore, I can’t be a parson in the present state of affairs,” said Angel.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0066",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "But she soon found a curious correspondence between the ostensibly chance position of the cows and her wishes in this matter, till she felt that their order could not be the result of accident.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0067",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Squish, squash echoed the milk in the great cylinder, but never arose the sound they waited for.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0068",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "I have watched him every day, and have found it out.” There was a reflective silence.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0069",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "All the preceding afternoon and night heavy thunderstorms had hissed down upon the meads, and washed some of the hay into the river; but this morning the sun shone out all the more brilliantly for the deluge, and the air was balmy and clear.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0070",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "This was Tess Durbeyfield’s habit, her temple pressing the milcher’s flank, her eyes fixed on the far end of the meadow with the quiet of one lost in meditation.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0071",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Living in such close relations, to meet meant to fall into endearment; flesh and blood could not resist it; and, having arrived at no conclusion as to the issue of such a tendency, he decided to hold aloof for the present from occupations in which they would be mutually engaged.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0072",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "When Correggio’s Holy Families were admired, they admired Correggio’s Holy Families; when he was decried in favour of Velasquez, they sedulously followed suit without any personal objection.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0073",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Every time she held the skimmer under the pump to cool it for the work her hand trembled, the ardour of his affection being so palpable that she seemed to flinch under it like a plant in too burning a sun.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0074",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "O, believe me, it is only for your sake!",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0075",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Tess was so receptive that the few minutes of contact with the whirl of material progress lingered in her thought.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0076",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Dear Tess, J write these few lines Hoping they will find you well, as they leave me at Present, thank God for it.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0077",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "How often had that string of excellences made her young heart ache in church of late years, and how strange that he should have cited them now.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0078",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "But do not let us spoil the day with them; they will be excellent matter for a dull time.” “Then you don’t wish me to, dearest?” “I do not, Tessy, really.” The hurry of dressing and starting left no time for more than this.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0079",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "It was less than a foot long, sewed up in canvas, sealed in red wax with his father’s seal, and directed in his father’s hand to “Mrs Angel Clare.” “It is a little wedding-present for you, Tess,” said he, handing it to her.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0080",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "While they who have cause to be, hide it, and pretend they are not.” This incident had turned the scale for her.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0081",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Tess!” “Yes, dearest.” “Am I to believe this?",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0082",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "His air remained calm and cold, his small compressed mouth indexing his powers of self-control; his face wearing still that terrible sterile expression which had spread thereon since her disclosure.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0083",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "You will promise me as your husband to attempt that no more.” “I am ready to promise.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0084",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "More than once she thought of going away from him during his absence at the mill; but she feared that this, instead of benefiting him, might be the means of hampering and humiliating him yet more if it should become known.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0085",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Before this time he had known it but speculatively; now he thought he knew it as a practical man; though perhaps he did not, even yet.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0086",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Hearing a footstep below, he rose and went to the top of the stairs.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0087",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "I send this message to them as a dying man to the dying; for I shall never see them again.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0088",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "The lane was long and unvaried, and, owing to the rapid shortening of the days, dusk came upon her before she was aware.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0089",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "So these two upper and nether visages confronted each other all day long, the white face looking down on the brown face, and the brown face looking up at the white face, without anything standing between them but the two girls crawling over the surface of the former like flies.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0090",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "I can’t think why maister should have set ’ee at it.” They reached the wheat-barn and entered it.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0091",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "It had no sprightliness, no purpose; only a tendency.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0092",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "She slackened speed without looking round.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0093",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "But before we part come here.” He stepped up to the pillar.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0094",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "He is so unpleasant to me.” That very night she began an appealing letter to Clare, concealing from him her hardships, and assuring him of her undying affection.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0095",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "I was firm as a man could be till I saw those eyes and that mouth again—surely there never was such a maddening mouth since Eve’s!” His voice sank, and a hot archness shot from his own black eyes.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0096",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "The other workfolk were by this time all gathered under the rick, where the loose straw formed a comfortable retreat.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0097",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "If you want to help them—God knows they need it—do it without telling me.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0098",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "At first they had supposed it must be something of the nature of a serious aversion.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0099",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Sighs were expended on the wish that she had taken more notice of the tunes he played on his harp, that she had inquired more curiously of him which were his favourite ballads among those the country-girls sang.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0100",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "When Tess’s mother was a child the majority of the field-folk about Marlott had remained all their lives on one farm, which had been the home also of their fathers and grandfathers; but latterly the desire for yearly removal had risen to a high pitch.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0101",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Now mind, I shall expect you.” Tess again shook her head, her throat swelling with complicated emotion.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0102",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "The four breakfasted by the thin light, and the “house-ridding” was taken in hand.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0103",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "J should say that me and my Family have left Marlott for some Time.— Yours, J.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0104",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "For myself, I was never there.” It was apparent that Joan spoke the truth in this, and he pressed her no further.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0105",
+      "w": "Tess of the d'Urbervilles: A Pure Woman",
+      "s": "Yet how do you come here if you do not know?” “I inquired here and there, and I found the way.” “I waited and waited for you,” she went on, her tones suddenly resuming their old fluty pathos.",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      }
+    },
+    {
+      "id": "hardy.p0106",
+      "w": "The Return of the Native",
+      "s": "But the thick obscurity permitted only skylines to be visible of any scene at present.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0107",
+      "w": "The Return of the Native",
+      "s": "Stop!” he said imperiously, putting his hand upon Mrs.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0108",
+      "w": "The Return of the Native",
+      "s": "Wildeve attended them to the door, beyond which the deep-dyed upward stretch of heath stood awaiting them, an amplitude of darkness reigning from their feet almost to the zenith, where a definite form first became visible in the lowering forehead of Rainbarrow.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0109",
+      "w": "The Return of the Native",
+      "s": "And Eustacia again strolled away from the fire, but this time not towards Rainbarrow.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0110",
+      "w": "The Return of the Native",
+      "s": "I determined you should come; and you have come!",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0111",
+      "w": "The Return of the Native",
+      "s": "Perhaps that was because she frequented a vaster mansion than any of them, the open hills.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0112",
+      "w": "The Return of the Native",
+      "s": "Softer expressions followed this, and then again recurred the tender sadness which had sat upon him during his drive along the highway that afternoon.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0113",
+      "w": "The Return of the Native",
+      "s": "Damon, you have not acted well; you have sunk in my opinion.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0114",
+      "w": "The Return of the Native",
+      "s": "Yeobright slowly walking towards the Quiet Woman.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0115",
+      "w": "The Return of the Native",
+      "s": "She was immediately angry at having betrayed even to herself the possible evanescence of her passion for him.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0116",
+      "w": "The Return of the Native",
+      "s": "He will never forgive you for your secrecy.” “Yes, he will, when he knows it was because I wished to spare him, and that I did not expect him home so soon.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0117",
+      "w": "The Return of the Native",
+      "s": "At that moment there was a cracking noise, and his figure fell into fragments like a pack of cards.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0118",
+      "w": "The Return of the Native",
+      "s": "There was, it is true, a limit to this tendency to uniformity.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0119",
+      "w": "The Return of the Native",
+      "s": "The bottom of the vale was green to a width of ten yards or thereabouts, and the shining facets of frost upon the blades of grass seemed to move on with the shadows of those they surrounded.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0120",
+      "w": "The Return of the Native",
+      "s": "The smoke went up from an Etna of peat in front of him, played round the notches of the chimney-crook, struck against the salt-box, and got lost among the flitches.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0121",
+      "w": "The Return of the Native",
+      "s": "Don’t let your mind so mislead your ears, Christian; and be a man,” said Timothy reproachfully.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0122",
+      "w": "The Return of the Native",
+      "s": "Yeobright as one ready and anxious to take his place as Thomasin’s betrothed.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0123",
+      "w": "The Return of the Native",
+      "s": "There must be some mistake.” “It will be cleared from your mind when you have read the letter.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0124",
+      "w": "The Return of the Native",
+      "s": "Yeobright directed a searching look upon her niece.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0125",
+      "w": "The Return of the Native",
+      "s": "I find there isn’t time for me to get there,” said Clym.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0126",
+      "w": "The Return of the Native",
+      "s": "Something being expected of him, he had not been at home many days before a great curiosity as to why he stayed on so long began to arise in the heath.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0127",
+      "w": "The Return of the Native",
+      "s": "Take all the varying hates felt by Eustacia Vye towards the heath, and translate them into loves, and you have the heart of Clym.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0128",
+      "w": "The Return of the Native",
+      "s": "Three or four hands were stretched out, then jerk went the rope, whizz went the wheel, the two foremost haulers fell backward, the beating of a falling body was heard, receding down the sides of the well, and a thunderous uproar arose at the bottom.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0129",
+      "w": "The Return of the Native",
+      "s": "And now I shall not go again for ever so long—perhaps never.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0130",
+      "w": "The Return of the Native",
+      "s": "As her once elastic walk had become deadened by time, so had her natural pride of life been hindered in its blooming by her necessities.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0131",
+      "w": "The Return of the Native",
+      "s": "How I should chime in with their manners over there!",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0132",
+      "w": "The Return of the Native",
+      "s": "No lady would rove about the heath at all hours of the day and night as she does.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0133",
+      "w": "The Return of the Native",
+      "s": "Let us walk on.” Clym took the hand which was already bared for him—it was a favourite way with them to walk bare hand in bare hand—and led her through the ferns.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0134",
+      "w": "The Return of the Native",
+      "s": "She can have it whenever she chooses to come.” “That won’t be yet.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0135",
+      "w": "The Return of the Native",
+      "s": "What curious creatures these dice be—powerful rulers of us all, and yet at my command!",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0136",
+      "w": "The Return of the Native",
+      "s": "The game fluctuated, now in favour of one, now in favour of the other, without any great advantage on the side of either.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0137",
+      "w": "The Return of the Native",
+      "s": "Wildeve had now ten guineas left; and each laid five.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0138",
+      "w": "The Return of the Native",
+      "s": "Does not that content you?” “Not unless you are my wife without regret.” “I cannot answer you.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0139",
+      "w": "The Return of the Native",
+      "s": "A green cattletrack skirted the spot, without, however, emerging from the screen of fern, and this path Eustacia followed, in order to reconnoitre the group before joining it.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0140",
+      "w": "The Return of the Native",
+      "s": "Yet it was scarcely credible that things had come to such a head as to indicate that Eustacia systematically encouraged him.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0141",
+      "w": "The Return of the Native",
+      "s": "Yeobright, with whom he had been on friendly terms since she had learnt what a providential countermove he had made towards the restitution of the family guineas.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0142",
+      "w": "The Return of the Native",
+      "s": "Not even if they send for me!” “You must be a very curious woman to talk like that.” “O no, not at all,” she said, returning to the boy’s prattle.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0143",
+      "w": "The Return of the Native",
+      "s": "No, not tonight, Eustacia.” “Let it be as you say, then,” she replied in the quiet way of one who, though willing to ward off evil consequences by a mild effort, would let events fall out as they might sooner than wrestle hard to direct them.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0144",
+      "w": "The Return of the Native",
+      "s": "I was always first in the most galliantest scrapes in my younger days!” “I suppose that was because they always used to put the biggest fool afore,” said Fairway from the fire, beside which he knelt, blowing it with his breath.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0145",
+      "w": "The Return of the Native",
+      "s": "If you could remove that impression from your mind—” “Yes, yes,” he said impatiently.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0146",
+      "w": "The Return of the Native",
+      "s": "But I zeed her the morning of the same day she died.” Clym’s look lighted up.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0147",
+      "w": "The Return of the Native",
+      "s": "And while she looked the carmine flush with which warmth and sound sleep had suffused her cheeks and neck dissolved from view, and the deathlike pallor in his face flew across into hers.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0148",
+      "w": "The Return of the Native",
+      "s": "Most women, even when but slightly annoyed, show a flicker of evil in some curl of the mouth or some corner of the cheek; but as for her, never in her angriest moments was there anything malicious in her look.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0149",
+      "w": "The Return of the Native",
+      "s": "He had been so shut off from her by the dignity of her look and the pride of her speech, except at that one blissful interval when he was allowed to hold her hand, that he had hardly deemed her a woman, wingless and earthly, subject to household conditions and domestic jars.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0150",
+      "w": "The Return of the Native",
+      "s": "I wish you had not seen quite all that; it reveals too much by half.” “You might have wished it, because it makes me as sad as you,” he said with emotion and deference.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0151",
+      "w": "The Return of the Native",
+      "s": "But now what is to be done?” “Make it up again—if a quarrel so deadly can ever be made up.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0152",
+      "w": "The Return of the Native",
+      "s": "They say—they say you used to go to Alderworth in the evenings, and it puts into my mind what I have heard about—” Wildeve turned angrily and stood up in front of her.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0153",
+      "w": "The Return of the Native",
+      "s": "It was one of those nights when cracks in the walls of old churches widen, when ancient stains on the ceilings of decayed manor houses are renewed and enlarged from the size of a man’s hand to an area of many feet.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0154",
+      "w": "The Return of the Native",
+      "s": "But the least part of Thomasin was in the house, for her heart being at ease about the little girl upstairs she was mentally following Clym on his journey.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0155",
+      "w": "The Return of the Native",
+      "s": "Thomasin followed him as he wound right and left to avoid the larger bushes, stopping occasionally and covering the lantern, while he looked over his shoulder to gain some idea of the position of Rainbarrow above them, which it was necessary to keep directly behind their backs to preserve a proper course.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0156",
+      "w": "The Return of the Native",
+      "s": "She took from a cupboard some pieces of twine, which she strained across the fireplace, tying the end of each piece to the firedog, previously pulled forward for the purpose, and, unrolling the wet papers, she began pinning them one by one to the strings in a manner of clothes on a line.",
+      "src": {
+        "work": "The Return of the Native"
+      }
+    },
+    {
+      "id": "hardy.p0157",
+      "w": "The Mayor of Casterbridge",
+      "s": "He scorns all tempting liquors; never touches nothing.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0158",
+      "w": "The Mayor of Casterbridge",
+      "s": "The nettled, clouded aspect which had held possession of his face since the subject of his corn-dealings had been broached, changed itself into one of arrested attention.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0159",
+      "w": "The Mayor of Casterbridge",
+      "s": "While she was doing this the wood partition in the centre of the house thrilled to its centre with the tugging of a bell-pull upstairs.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0160",
+      "w": "The Mayor of Casterbridge",
+      "s": "Casterbridge is a old, hoary place o’ wickedness, by all account.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0161",
+      "w": "The Mayor of Casterbridge",
+      "s": "I’d have given him a third share in the business to have stayed!” IX.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0162",
+      "w": "The Mayor of Casterbridge",
+      "s": "And even at the dinner-parties of the professional families the subjects of discussion were corn, cattle-disease, sowing and reaping, fencing and planting; while politics were viewed by them less from their own standpoint of burgesses with rights and privileges than from the standpoint of their country neighbours.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0163",
+      "w": "The Mayor of Casterbridge",
+      "s": "We must have a long talk together—but not just now.” He took her hand at parting, and held it so warmly that she, who had known so little friendship, was much affected, and tears rose to her aerial-grey eyes.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0164",
+      "w": "The Mayor of Casterbridge",
+      "s": "Neither spoke just at first—there was no necessity for speech—and the poor woman leant against Henchard, who supported her in his arms.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0165",
+      "w": "The Mayor of Casterbridge",
+      "s": "The corn-factor’s mien was half admiring, and yet it was not without a dash of pity for the tastes of any one who could care to give his mind to such finnikin details.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0166",
+      "w": "The Mayor of Casterbridge",
+      "s": "She were rewarded by the Agricultural Society for having begot the greatest number of healthy children without parish assistance, and other virtuous marvels.” “’Twas that that kept us so low upon ground—that great hungry family.” “Ay.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0167",
+      "w": "The Mayor of Casterbridge",
+      "s": "Lots o’ people do it already in carelessness—it is her legal name—so it may as well be made her usual name—I don’t like t’other name at all for my own flesh and blood.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0168",
+      "w": "The Mayor of Casterbridge",
+      "s": "Farfrae advanced, imagining himself in solitude, and a few drops of rain beginning to fall he moved and stood under the shelter where she had just been standing.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0169",
+      "w": "The Mayor of Casterbridge",
+      "s": "Don’t sit here in solitary confinement!” But in the daily routine of their business there was little change.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0170",
+      "w": "The Mayor of Casterbridge",
+      "s": "Among the rest of the onlookers were Elizabeth and her mother—the former thoughtful yet much interested, her eyes beaming with a longing lingering light, as if Nature had been advised by Correggio in their creation.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0171",
+      "w": "The Mayor of Casterbridge",
+      "s": "I am now on my way to Bristol, to see my only relative.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0172",
+      "w": "The Mayor of Casterbridge",
+      "s": "Elizabeth, do you think much of old times?” said Henchard.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0173",
+      "w": "The Mayor of Casterbridge",
+      "s": "It was like a pedestal lacking its statue.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0174",
+      "w": "The Mayor of Casterbridge",
+      "s": "Nance accepted this offering thankfully at first; afterwards as a matter of course.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0175",
+      "w": "The Mayor of Casterbridge",
+      "s": "Stannidge seemed to attach no great importance to the incident—the cheerful souls at the Three Mariners having exhausted its aspects long ago—such was Henchard’s haughty spirit that the simple thrifty deed was regarded as little less than a social catastrophe by him.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0176",
+      "w": "The Mayor of Casterbridge",
+      "s": "He showed no further tendency to be angry; he showed something worse.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0177",
+      "w": "The Mayor of Casterbridge",
+      "s": "Now Henchard had not the slightest suspicion that Elizabeth-Jane’s movement was to be so prompt.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0178",
+      "w": "The Mayor of Casterbridge",
+      "s": "Though he was not a fortune-hunter, the possibility that Lucetta had been sublimed into a lady of means by some munificent testament on the part of this relative lent a charm to her image which it might not otherwise have acquired.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0179",
+      "w": "The Mayor of Casterbridge",
+      "s": "He won’t come.” “Why?” “He has taken against me,” she said in a husky voice.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0180",
+      "w": "The Mayor of Casterbridge",
+      "s": "He had planted the stem of his crook in the gutter and was resting upon the bow, which was polished to silver brightness by the long friction of his hands.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0181",
+      "w": "The Mayor of Casterbridge",
+      "s": "She hardly knew that she had done this till Lucetta, animated by the conjunction of her new attire with the sight of Farfrae, spoke out: “Let us go and look at the instrument, whatever it is.” Elizabeth-Jane’s bonnet and shawl were pitchforked on in a moment, and they went out.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0182",
+      "w": "The Mayor of Casterbridge",
+      "s": "For one thing Henchard had never returned to her the cloud of letters she had written and sent him in her first excitement.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0183",
+      "w": "The Mayor of Casterbridge",
+      "s": "She said something very polite about his being good enough to call.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0184",
+      "w": "The Mayor of Casterbridge",
+      "s": "The thus vitalized antagonism took the form of action by Henchard sending for Jopp, the manager originally displaced by Farfrae’s arrival.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0185",
+      "w": "The Mayor of Casterbridge",
+      "s": "And the sooner you help somebody else in that way the better!” Henchard continued his address to Jopp in similar terms till it ended in Jopp’s dismissal there and then, Henchard turning upon his heel and leaving him.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0186",
+      "w": "The Mayor of Casterbridge",
+      "s": "In passing he looked up at her windows, but nothing of her was to be seen.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0187",
+      "w": "The Mayor of Casterbridge",
+      "s": "Elizabeth, seeing that she looked wan and disturbed, encouraged her in the idea, thinking a change would afford her relief.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0188",
+      "w": "The Mayor of Casterbridge",
+      "s": "But not exactly of that kind.” “Then of what kind is it?” she asked with renewed misgiving.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0189",
+      "w": "The Mayor of Casterbridge",
+      "s": "Moreover, there was a convenience in Lucetta arriving first at her house.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0190",
+      "w": "The Mayor of Casterbridge",
+      "s": "Why did you not tell me, instead of teasing me like this?",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0191",
+      "w": "The Mayor of Casterbridge",
+      "s": "While the gusts were bringing the notes to his ears across the damp intervening flat a man passed behind him and greeted Henchard by name.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0192",
+      "w": "The Mayor of Casterbridge",
+      "s": "He was seated on a small table, drawn up to the side of the massive oak board reserved for the churchmen, a few of whom nodded to him as they took their places and said, “How be ye, Mr.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0193",
+      "w": "The Mayor of Casterbridge",
+      "s": "But she somehow began, and introduced Henchard’s name.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0194",
+      "w": "The Mayor of Casterbridge",
+      "s": "I wish you would do what we have talked of,” mournfully remarked Lucetta.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0195",
+      "w": "The Mayor of Casterbridge",
+      "s": "I quite acquit you of any intention to wrong me, yet you are the door through which wrong has come to me.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0196",
+      "w": "The Mayor of Casterbridge",
+      "s": "She steadily refused to have anything to do with the affair, and cutting him short, because of her anxiety to get indoors before her husband should miss her, left him on the pavement.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0197",
+      "w": "The Mayor of Casterbridge",
+      "s": "The inn called Peter’s Finger was the church of Mixen Lane.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0198",
+      "w": "The Mayor of Casterbridge",
+      "s": "I’ve had travelling enough for to-day.” “Stop a minute, then,” said Charl, finding that the man was no enemy.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0199",
+      "w": "The Mayor of Casterbridge",
+      "s": "Donald’s genius would have enabled him to get a footing anywhere, without anybody’s help!",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0200",
+      "w": "The Mayor of Casterbridge",
+      "s": "He fixed the door open and looked over the sill.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0201",
+      "w": "The Mayor of Casterbridge",
+      "s": "O Farfrae!—that’s not true!” he said bitterly.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0202",
+      "w": "The Mayor of Casterbridge",
+      "s": "Grower advanced into Corn Street, whence the sounds had proceeded, they were surprised that no procession could be seen.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0203",
+      "w": "The Mayor of Casterbridge",
+      "s": "Henchard thereupon retraced his steps along Yalbury Plain, the gig coming up with him as its driver slackened speed between two plantations.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0204",
+      "w": "The Mayor of Casterbridge",
+      "s": "Among the other urgent reasons for his presence had been the need of his authority to send to Budmouth for a second physician; and when at length Farfrae did come back he was in a state bordering on distraction at his misconception of Henchard’s motives.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0205",
+      "w": "The Mayor of Casterbridge",
+      "s": "The young sailor who had taken Susan Henchard on the spur of the moment and on the faith of a glance at her face, more than twenty years before, was still living and acting under the form of the grizzled traveller who had taken Henchard’s words on trust so absolute as to shame him as he stood.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0206",
+      "w": "The Mayor of Casterbridge",
+      "s": "While his eyes were bent on the water beneath there slowly became visible a something floating in the circular pool formed by the wash of centuries; the pool he was intending to make his death-bed.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0207",
+      "w": "The Mayor of Casterbridge",
+      "s": "But Elizabeth remained undisturbed in the belief of her relationship to Henchard, and now shared his home.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0208",
+      "w": "The Mayor of Casterbridge",
+      "s": "The Three Mariners having been, years before, the house in which they had witnessed the young man and woman’s first and humble appearance on the Casterbridge stage, they took a kindly interest in their career, not unconnected, perhaps, with visions of festive treatment at their hands hereafter.",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0209",
+      "w": "The Mayor of Casterbridge",
+      "s": "If I did not approve it would be no matter!",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      }
+    },
+    {
+      "id": "hardy.p0210",
+      "w": "Jude the Obscure",
+      "s": "It is not far!” The tenderness which had grown up in Jude’s bosom left him no will to thwart her inclination now—which pleased him in affording him excuse for a longer time with her.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0211",
+      "w": "Jude the Obscure",
+      "s": "She was not there now, and “the embroidery of imagination upon the stuff of nature” so depicted her past presence that a void was in his heart which nothing could fill.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0212",
+      "w": "Jude the Obscure",
+      "s": "It was all up hill.” They were in absolute solitude—the most apparent of all solitudes, that of empty surrounding space.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0213",
+      "w": "Jude the Obscure",
+      "s": "I never thought beyond bringing about the real thing—not that one could sham it!” “Don’t you be too quick to cry sham!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0214",
+      "w": "Jude the Obscure",
+      "s": "A creature I have fed with my own hands.” “Don’t be such a tender-hearted fool!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0215",
+      "w": "Jude the Obscure",
+      "s": "It is mean of ’ee not to!” “Very well.” And he hinted gently what had been revealed to him.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0216",
+      "w": "Jude the Obscure",
+      "s": "Grey-stoned and dun-roofed, it stood within hail of the Wessex border, and almost with the tip of one small toe within it, at the northernmost point of the crinkled line along which the leisurely Thames strokes the fields of that ancient kingdom.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0217",
+      "w": "Jude the Obscure",
+      "s": "How easy to the smallest building; how impossible to most men.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0218",
+      "w": "Jude the Obscure",
+      "s": "Before her lay a piece of zinc, cut to the shape of a scroll three or four feet long, and coated with a dead-surface paint on one side.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0219",
+      "w": "Jude the Obscure",
+      "s": "I don’t know what he’s doing now—not much I fancy—as she’s come back here.” Meanwhile the young woman had knocked at the office door and asked if Mr.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0220",
+      "w": "Jude the Obscure",
+      "s": "An exciting thought would make her walk ahead so fast that he could hardly keep up with her; and her sensitiveness on some points was such that it might have been misread as vanity.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0221",
+      "w": "Jude the Obscure",
+      "s": "She had not the least conception how the hearts of the twain went out to her at this momentary revelation of feeling, and what a complication she was building up thereby in the futures of both.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0222",
+      "w": "Jude the Obscure",
+      "s": "He stood at a bar and tossed off two or three glasses, then unconsciously sauntered along till he came to a spot called The Fourways in the middle of the city, gazing abstractedly at the groups of people like one in a trance, till, coming to himself, he began talking to the policeman fixed there.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0223",
+      "w": "Jude the Obscure",
+      "s": "He hastened down the lane and round into the straight broad street, which he followed till it merged in the highway, and all sound of his late companions had been left behind.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0224",
+      "w": "Jude the Obscure",
+      "s": "But that much he conceded to human frailty, and hoped to learn to love her only as a friend and kinswoman.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0225",
+      "w": "Jude the Obscure",
+      "s": "Shut the window.” Jude waited, knowing that she could enter easily enough, the front door being opened merely by a knob which anybody could turn, as in most old country towns.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0226",
+      "w": "Jude the Obscure",
+      "s": "Only you don’t talk quite like a girl—well, a girl who has had no advantages.” “I have had advantages.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0227",
+      "w": "Jude the Obscure",
+      "s": "It would be superfluous to say what his answer was; and how he thought what he would have done had he been free, which should have rendered a long residence with a female friend quite unnecessary for Sue.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0228",
+      "w": "Jude the Obscure",
+      "s": "Jude forgave her straightway, and asked her to call for him at the cathedral works when she came.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0229",
+      "w": "Jude the Obscure",
+      "s": "Well, that’s strange; but I feel just the same about you, Jude.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0230",
+      "w": "Jude the Obscure",
+      "s": "Jude soon joined them at his rooms, and shortly after they prepared for the ceremony.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0231",
+      "w": "Jude the Obscure",
+      "s": "Jude went on to the stone-yard where he had worked.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0232",
+      "w": "Jude the Obscure",
+      "s": "My aunt is on her deathbed, I fear.” “I’ll go over with you to-morrow morning.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0233",
+      "w": "Jude the Obscure",
+      "s": "The sight of it revived a stronger feeling of self-condemnation for his brief return to her society than for his attachment to Sue.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0234",
+      "w": "Jude the Obscure",
+      "s": "I Shaston, the ancient British Palladour, From whose foundation first such strange reports arise, (as Drayton sang it), was, and is, in itself the city of a dream.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0235",
+      "w": "Jude the Obscure",
+      "s": "Yes—you must go away, for you mistake me!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0236",
+      "w": "Jude the Obscure",
+      "s": "I don’t wish to know.” “If I were unhappy it would be my fault, my wickedness; not that I should have a right to dislike him!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0237",
+      "w": "Jude the Obscure",
+      "s": "Yet with a wife living away from him with another husband, and himself in love erratically, the loved one’s revolt against her state being possibly on his account, he had sunk to be barely respectable according to regulation views.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0238",
+      "w": "Jude the Obscure",
+      "s": "There was a little nest where she had lain, and spiders’ webs hung overhead.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0239",
+      "w": "Jude the Obscure",
+      "s": "He is her cousin, which perhaps accounts for some of it.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0240",
+      "w": "Jude the Obscure",
+      "s": "Besides that I have only a small parcel that will go into Jude’s portmanteau.” “Of course I shall do no such thing as examine your luggage!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0241",
+      "w": "Jude the Obscure",
+      "s": "Ruining your prospects of the Church; ruining your progress in your trade; everything!” “The Church is no more to me.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0242",
+      "w": "Jude the Obscure",
+      "s": "When, however, a month had passed, and Phillotson casually admitted to an acquaintance that he did not know where his wife was staying, curiosity began to be aroused; till, jumping to conclusions, people ventured to affirm that Sue had played him false and run away from him.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0243",
+      "w": "Jude the Obscure",
+      "s": "The pair, however, were so absorbed in their own situation that their surroundings were little in their consciousness.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0244",
+      "w": "Jude the Obscure",
+      "s": "I must go out and speak to her, Sue, at least!” “I can’t say any more!—Oh, if you must, you must!” she said, bursting out into sobs that seemed to tear her heart.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0245",
+      "w": "Jude the Obscure",
+      "s": "In my telegram last night which this is an answer to, I told him I had almost made it up with Jude; and that frightened him, I expect!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0246",
+      "w": "Jude the Obscure",
+      "s": "But Lord, ’twas in my grandfather’s time; and it medn’ have been one of your folk at all.” “I know where the gibbet is said to have stood, very well,” murmured Jude.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0247",
+      "w": "Jude the Obscure",
+      "s": "His betrothed shuddered; and asked him earnestly if he indeed felt that they ought not to go in cold blood and sign that life-undertaking again?",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0248",
+      "w": "Jude the Obscure",
+      "s": "Sue, in her new summer clothes, flexible and light as a bird, her little thumb stuck up by the stem of her white cotton sunshade, went along as if she hardly touched ground, and as if a moderately strong puff of wind would float her over the hedge into the next field.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0249",
+      "w": "Jude the Obscure",
+      "s": "The silence and emptiness of the building gave her confidence, and, standing on a safe low platform erected by Jude, which she was nevertheless timid at mounting, she began painting in the letters of the first Table while he set about mending a portion of the second.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0250",
+      "w": "Jude the Obscure",
+      "s": "Footsteps began stamping up and down the bare stairs, the comers inspecting the goods, some of which were of so quaint and ancient a make as to acquire an adventitious value as art.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0251",
+      "w": "Jude the Obscure",
+      "s": "Very well: we’ll meet in half an hour, unless you come with me to find out where the site of the new chapel is?” “I don’t care to.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0252",
+      "w": "Jude the Obscure",
+      "s": "I should have kept her chained on—her spirit for kicking would have been broke soon enough!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0253",
+      "w": "Jude the Obscure",
+      "s": "Two or three of the houses had notices of rooms to let, and the newcomers knocked at the door of one, which a woman opened.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0254",
+      "w": "Jude the Obscure",
+      "s": "At a very late hour the intelligence was brought to him that a child had been prematurely born, and that it, like the others, was a corpse.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0255",
+      "w": "Jude the Obscure",
+      "s": "Several minutes elapsed, and he thought she had fallen asleep; but he spoke softly, and found that she was wide awake all the time.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0256",
+      "w": "Jude the Obscure",
+      "s": "I had thought I ought in charity to let you approach me—that it was damnably selfish to torture you as I did my other friend.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0257",
+      "w": "Jude the Obscure",
+      "s": "And perhaps she feels, over and above other things, that I ought to have been in her place.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0258",
+      "w": "Jude the Obscure",
+      "s": "The blow of her bereavement seemed to have destroyed her reasoning faculty.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0259",
+      "w": "Jude the Obscure",
+      "s": "Of course everybody will say it was very good and forgiving of ’ee to take her to ’ee again.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0260",
+      "w": "Jude the Obscure",
+      "s": "Then you turn me away?” “I’ll give you enough to get food and lodging for a few days.” “Oh, but can’t you have the kindness to take me in?",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0261",
+      "w": "Jude the Obscure",
+      "s": "That’s all I say.” She then sallied out again, and first hastening back to Jude’s to make sure that he had not returned, began her search for him.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0262",
+      "w": "Jude the Obscure",
+      "s": "If I am bound in honour to marry her—as I suppose I am—though how I came to be here with her I know no more than a dead man—marry her I will, so help me God!",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0263",
+      "w": "Jude the Obscure",
+      "s": "Promise never to speak of her.” “Very well.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    },
+    {
+      "id": "hardy.p0264",
+      "w": "Jude the Obscure",
+      "s": "I can’t endure you to say that!” she burst out, and her eye resting on him a moment, she turned back impulsively.",
+      "src": {
+        "work": "Jude the Obscure"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "hardy.f.v0001",
+      "kind": "verbatim",
+      "text": "Shepherd would like to hear the pedigree of yer life, father—wouldn’t ye, shepherd?” “Ay that I should,” said Gabriel, with the heartiness of a man who had longed to hear it for several months.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "hardy.f.v0002",
+      "kind": "verbatim",
+      "text": "We hear that ye be a extraordinary good and clever man, shepherd,” said Joseph Poorgrass with considerable anxiety from behind the maltster’s bedstead whither he had retired for safety.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hardy.f.v0003",
+      "kind": "verbatim",
+      "text": "It was a small tube or trochar, with a lance passing down the inside; and Gabriel began to use it with a dexterity that would have graced a hospital-surgeon.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "hardy.f.v0004",
+      "kind": "verbatim",
+      "text": "Bathsheba then wished them good-night, withdrew from the window, and retired to the back part of the room, Boldwood thereupon closing the sash and the shutters, and shutting himself inside with her.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "hardy.f.v0005",
+      "kind": "verbatim",
+      "text": "Solemnly swear to me that he’s not a bad man; that it is all lies they say about him!” “But, miss, how can I say he is not if——” “You graceless girl.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "hardy.f.v0006",
+      "kind": "verbatim",
+      "text": "With almost a morbid dread of being thought a gushing girl, this guileless woman too well concealed from the world under a manner of carelessness the warm depths of her strong emotions.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hardy.f.v0007",
+      "kind": "verbatim",
+      "text": "The footprints forming this recent impression were full of information as to pace; they were in equidistant pairs, three or four feet apart, the right and left foot of each pair being exactly opposite one another.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 213
+      }
+    },
+    {
+      "id": "hardy.f.v0008",
+      "kind": "verbatim",
+      "text": "Suddenly, as in a last attempt to save Bathsheba from, at any rate, immediate anguish, he looked again, as he had looked before, at the chalk writing upon the coffin-lid.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "hardy.f.v0009",
+      "kind": "verbatim",
+      "text": "Troy reached the tent door, and standing among the groups there gathered, looked anxiously for Pennyways, evidently not wishing to make himself prominent by inquiring for him.",
+      "work": "Far from the Madding Crowd",
+      "lang": "en",
+      "src": {
+        "work": "Far from the Madding Crowd"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hardy.f.v0010",
+      "kind": "verbatim",
+      "text": "Yes,” said Tess, “when they come.” “They are already here.” D’Urberville began gathering specimens of the fruit for her, handing them back to her as he stooped; and, presently, selecting a specially fine product of the “British Queen” variety, he stood up and held it by the stem to her mouth.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "hardy.f.v0011",
+      "kind": "verbatim",
+      "text": "He had wished to know, finally, in the name of his mother, if Tess could really come to manage the old lady’s fowl-farm or not; the lad who had hitherto superintended the birds having proved untrustworthy.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "hardy.f.v0012",
+      "kind": "verbatim",
+      "text": "It prompted the matron to say that she would walk a little way—as far as to the point where the acclivity from the valley began its first steep ascent to the outer world.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "hardy.f.v0013",
+      "kind": "verbatim",
+      "text": "He encouraged her with “Try again!” Tess was quite serious, painfully serious by this time; and she tried—ultimately and unexpectedly emitting a real round sound.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "hardy.f.v0014",
+      "kind": "verbatim",
+      "text": "Changing partners simply meant that a satisfactory choice had not as yet been arrived at by one or other of the pair, and by this time every couple had been suitably matched.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "hardy.f.v0015",
+      "kind": "verbatim",
+      "text": "As soon as her lunch was spread she called up the big girl, her sister, and took the baby of her, who, glad to be relieved of the burden, went away to the next shock and joined the other children playing there.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "hardy.f.v0016",
+      "kind": "verbatim",
+      "text": "Tess then stood erect with the infant on her arm beside the basin; the next sister held the Prayer-Book open before her, as the clerk at church held it before the parson; and thus the girl set about baptizing her child.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "hardy.f.v0017",
+      "kind": "verbatim",
+      "text": "No, father; I cannot underwrite Article Four (leave alone the rest), taking it ‘in the literal and grammatical sense’ as required by the Declaration; and, therefore, I can’t be a parson in the present state of affairs,” said Angel.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "hardy.f.v0018",
+      "kind": "verbatim",
+      "text": "All the preceding afternoon and night heavy thunderstorms had hissed down upon the meads, and washed some of the hay into the river; but this morning the sun shone out all the more brilliantly for the deluge, and the air was balmy and clear.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "hardy.f.v0019",
+      "kind": "verbatim",
+      "text": "This was Tess Durbeyfield’s habit, her temple pressing the milcher’s flank, her eyes fixed on the far end of the meadow with the quiet of one lost in meditation.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "hardy.f.v0020",
+      "kind": "verbatim",
+      "text": "Living in such close relations, to meet meant to fall into endearment; flesh and blood could not resist it; and, having arrived at no conclusion as to the issue of such a tendency, he decided to hold aloof for the present from occupations in which they would be mutually engaged.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 279
+      }
+    },
+    {
+      "id": "hardy.f.v0021",
+      "kind": "verbatim",
+      "text": "When Correggio’s Holy Families were admired, they admired Correggio’s Holy Families; when he was decried in favour of Velasquez, they sedulously followed suit without any personal objection.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "hardy.f.v0022",
+      "kind": "verbatim",
+      "text": "Every time she held the skimmer under the pump to cool it for the work her hand trembled, the ardour of his affection being so palpable that she seemed to flinch under it like a plant in too burning a sun.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "hardy.f.v0023",
+      "kind": "verbatim",
+      "text": "It was less than a foot long, sewed up in canvas, sealed in red wax with his father’s seal, and directed in his father’s hand to “Mrs Angel Clare.” “It is a little wedding-present for you, Tess,” said he, handing it to her.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "hardy.f.v0024",
+      "kind": "verbatim",
+      "text": "His air remained calm and cold, his small compressed mouth indexing his powers of self-control; his face wearing still that terrible sterile expression which had spread thereon since her disclosure.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "hardy.f.v0025",
+      "kind": "verbatim",
+      "text": "More than once she thought of going away from him during his absence at the mill; but she feared that this, instead of benefiting him, might be the means of hampering and humiliating him yet more if it should become known.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "hardy.f.v0026",
+      "kind": "verbatim",
+      "text": "He is so unpleasant to me.” That very night she began an appealing letter to Clare, concealing from him her hardships, and assuring him of her undying affection.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "hardy.f.v0027",
+      "kind": "verbatim",
+      "text": "I was firm as a man could be till I saw those eyes and that mouth again—surely there never was such a maddening mouth since Eve’s!” His voice sank, and a hot archness shot from his own black eyes.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "hardy.f.v0028",
+      "kind": "verbatim",
+      "text": "Sighs were expended on the wish that she had taken more notice of the tunes he played on his harp, that she had inquired more curiously of him which were his favourite ballads among those the country-girls sang.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "hardy.f.v0029",
+      "kind": "verbatim",
+      "text": "When Tess’s mother was a child the majority of the field-folk about Marlott had remained all their lives on one farm, which had been the home also of their fathers and grandfathers; but latterly the desire for yearly removal had risen to a high pitch.",
+      "work": "Tess of the d'Urbervilles: A Pure Woman",
+      "lang": "en",
+      "src": {
+        "work": "Tess of the d'Urbervilles: A Pure Woman"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "hardy.f.v0030",
+      "kind": "verbatim",
+      "text": "Wildeve attended them to the door, beyond which the deep-dyed upward stretch of heath stood awaiting them, an amplitude of darkness reigning from their feet almost to the zenith, where a definite form first became visible in the lowering forehead of Rainbarrow.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 261
+      }
+    },
+    {
+      "id": "hardy.f.v0031",
+      "kind": "verbatim",
+      "text": "Softer expressions followed this, and then again recurred the tender sadness which had sat upon him during his drive along the highway that afternoon.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "hardy.f.v0032",
+      "kind": "verbatim",
+      "text": "He will never forgive you for your secrecy.” “Yes, he will, when he knows it was because I wished to spare him, and that I did not expect him home so soon.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "hardy.f.v0033",
+      "kind": "verbatim",
+      "text": "The bottom of the vale was green to a width of ten yards or thereabouts, and the shining facets of frost upon the blades of grass seemed to move on with the shadows of those they surrounded.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "hardy.f.v0034",
+      "kind": "verbatim",
+      "text": "The smoke went up from an Etna of peat in front of him, played round the notches of the chimney-crook, struck against the salt-box, and got lost among the flitches.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "hardy.f.v0035",
+      "kind": "verbatim",
+      "text": "Something being expected of him, he had not been at home many days before a great curiosity as to why he stayed on so long began to arise in the heath.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "hardy.f.v0036",
+      "kind": "verbatim",
+      "text": "Three or four hands were stretched out, then jerk went the rope, whizz went the wheel, the two foremost haulers fell backward, the beating of a falling body was heard, receding down the sides of the well, and a thunderous uproar arose at the bottom.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 249
+      }
+    },
+    {
+      "id": "hardy.f.v0037",
+      "kind": "verbatim",
+      "text": "Let us walk on.” Clym took the hand which was already bared for him—it was a favourite way with them to walk bare hand in bare hand—and led her through the ferns.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "hardy.f.v0038",
+      "kind": "verbatim",
+      "text": "A green cattletrack skirted the spot, without, however, emerging from the screen of fern, and this path Eustacia followed, in order to reconnoitre the group before joining it.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hardy.f.v0039",
+      "kind": "verbatim",
+      "text": "Yeobright, with whom he had been on friendly terms since she had learnt what a providential countermove he had made towards the restitution of the family guineas.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "hardy.f.v0040",
+      "kind": "verbatim",
+      "text": "No, not tonight, Eustacia.” “Let it be as you say, then,” she replied in the quiet way of one who, though willing to ward off evil consequences by a mild effort, would let events fall out as they might sooner than wrestle hard to direct them.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "hardy.f.v0041",
+      "kind": "verbatim",
+      "text": "I was always first in the most galliantest scrapes in my younger days!” “I suppose that was because they always used to put the biggest fool afore,” said Fairway from the fire, beside which he knelt, blowing it with his breath.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "hardy.f.v0042",
+      "kind": "verbatim",
+      "text": "Most women, even when but slightly annoyed, show a flicker of evil in some curl of the mouth or some corner of the cheek; but as for her, never in her angriest moments was there anything malicious in her look.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "hardy.f.v0043",
+      "kind": "verbatim",
+      "text": "He had been so shut off from her by the dignity of her look and the pride of her speech, except at that one blissful interval when he was allowed to hold her hand, that he had hardly deemed her a woman, wingless and earthly, subject to household conditions and domestic jars.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "hardy.f.v0044",
+      "kind": "verbatim",
+      "text": "I wish you had not seen quite all that; it reveals too much by half.” “You might have wished it, because it makes me as sad as you,” he said with emotion and deference.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "hardy.f.v0045",
+      "kind": "verbatim",
+      "text": "They say—they say you used to go to Alderworth in the evenings, and it puts into my mind what I have heard about—” Wildeve turned angrily and stood up in front of her.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "hardy.f.v0046",
+      "kind": "verbatim",
+      "text": "It was one of those nights when cracks in the walls of old churches widen, when ancient stains on the ceilings of decayed manor houses are renewed and enlarged from the size of a man’s hand to an area of many feet.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "hardy.f.v0047",
+      "kind": "verbatim",
+      "text": "She took from a cupboard some pieces of twine, which she strained across the fireplace, tying the end of each piece to the firedog, previously pulled forward for the purpose, and, unrolling the wet papers, she began pinning them one by one to the strings in a manner of clothes on a line.",
+      "work": "The Return of the Native",
+      "lang": "en",
+      "src": {
+        "work": "The Return of the Native"
+      },
+      "quality": {
+        "chars": 288
+      }
+    },
+    {
+      "id": "hardy.f.v0048",
+      "kind": "verbatim",
+      "text": "The nettled, clouded aspect which had held possession of his face since the subject of his corn-dealings had been broached, changed itself into one of arrested attention.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "hardy.f.v0049",
+      "kind": "verbatim",
+      "text": "We must have a long talk together—but not just now.” He took her hand at parting, and held it so warmly that she, who had known so little friendship, was much affected, and tears rose to her aerial-grey eyes.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 208
+      }
+    },
+    {
+      "id": "hardy.f.v0050",
+      "kind": "verbatim",
+      "text": "The corn-factor’s mien was half admiring, and yet it was not without a dash of pity for the tastes of any one who could care to give his mind to such finnikin details.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "hardy.f.v0051",
+      "kind": "verbatim",
+      "text": "She were rewarded by the Agricultural Society for having begot the greatest number of healthy children without parish assistance, and other virtuous marvels.” “’Twas that that kept us so low upon ground—that great hungry family.” “Ay.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "hardy.f.v0052",
+      "kind": "verbatim",
+      "text": "Lots o’ people do it already in carelessness—it is her legal name—so it may as well be made her usual name—I don’t like t’other name at all for my own flesh and blood.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "hardy.f.v0053",
+      "kind": "verbatim",
+      "text": "Farfrae advanced, imagining himself in solitude, and a few drops of rain beginning to fall he moved and stood under the shelter where she had just been standing.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "hardy.f.v0054",
+      "kind": "verbatim",
+      "text": "Among the rest of the onlookers were Elizabeth and her mother—the former thoughtful yet much interested, her eyes beaming with a longing lingering light, as if Nature had been advised by Correggio in their creation.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 215
+      }
+    },
+    {
+      "id": "hardy.f.v0055",
+      "kind": "verbatim",
+      "text": "Stannidge seemed to attach no great importance to the incident—the cheerful souls at the Three Mariners having exhausted its aspects long ago—such was Henchard’s haughty spirit that the simple thrifty deed was regarded as little less than a social catastrophe by him.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "hardy.f.v0056",
+      "kind": "verbatim",
+      "text": "Though he was not a fortune-hunter, the possibility that Lucetta had been sublimed into a lady of means by some munificent testament on the part of this relative lent a charm to her image which it might not otherwise have acquired.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "hardy.f.v0057",
+      "kind": "verbatim",
+      "text": "He had planted the stem of his crook in the gutter and was resting upon the bow, which was polished to silver brightness by the long friction of his hands.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "hardy.f.v0058",
+      "kind": "verbatim",
+      "text": "She hardly knew that she had done this till Lucetta, animated by the conjunction of her new attire with the sight of Farfrae, spoke out: “Let us go and look at the instrument, whatever it is.” Elizabeth-Jane’s bonnet and shawl were pitchforked on in a moment, and they went out.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "hardy.f.v0059",
+      "kind": "verbatim",
+      "text": "He was seated on a small table, drawn up to the side of the massive oak board reserved for the churchmen, a few of whom nodded to him as they took their places and said, “How be ye, Mr.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "hardy.f.v0060",
+      "kind": "verbatim",
+      "text": "She steadily refused to have anything to do with the affair, and cutting him short, because of her anxiety to get indoors before her husband should miss her, left him on the pavement.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "hardy.f.v0061",
+      "kind": "verbatim",
+      "text": "Among the other urgent reasons for his presence had been the need of his authority to send to Budmouth for a second physician; and when at length Farfrae did come back he was in a state bordering on distraction at his misconception of Henchard’s motives.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "hardy.f.v0062",
+      "kind": "verbatim",
+      "text": "The young sailor who had taken Susan Henchard on the spur of the moment and on the faith of a glance at her face, more than twenty years before, was still living and acting under the form of the grizzled traveller who had taken Henchard’s words on trust so absolute as to shame him as he stood.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "hardy.f.v0063",
+      "kind": "verbatim",
+      "text": "While his eyes were bent on the water beneath there slowly became visible a something floating in the circular pool formed by the wash of centuries; the pool he was intending to make his death-bed.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "hardy.f.v0064",
+      "kind": "verbatim",
+      "text": "The Three Mariners having been, years before, the house in which they had witnessed the young man and woman’s first and humble appearance on the Casterbridge stage, they took a kindly interest in their career, not unconnected, perhaps, with visions of festive treatment at their hands hereafter.",
+      "work": "The Mayor of Casterbridge",
+      "lang": "en",
+      "src": {
+        "work": "The Mayor of Casterbridge"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "hardy.f.v0065",
+      "kind": "verbatim",
+      "text": "It is not far!” The tenderness which had grown up in Jude’s bosom left him no will to thwart her inclination now—which pleased him in affording him excuse for a longer time with her.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "hardy.f.v0066",
+      "kind": "verbatim",
+      "text": "She was not there now, and “the embroidery of imagination upon the stuff of nature” so depicted her past presence that a void was in his heart which nothing could fill.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "hardy.f.v0067",
+      "kind": "verbatim",
+      "text": "Grey-stoned and dun-roofed, it stood within hail of the Wessex border, and almost with the tip of one small toe within it, at the northernmost point of the crinkled line along which the leisurely Thames strokes the fields of that ancient kingdom.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "hardy.f.v0068",
+      "kind": "verbatim",
+      "text": "An exciting thought would make her walk ahead so fast that he could hardly keep up with her; and her sensitiveness on some points was such that it might have been misread as vanity.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "hardy.f.v0069",
+      "kind": "verbatim",
+      "text": "She had not the least conception how the hearts of the twain went out to her at this momentary revelation of feeling, and what a complication she was building up thereby in the futures of both.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "hardy.f.v0070",
+      "kind": "verbatim",
+      "text": "He stood at a bar and tossed off two or three glasses, then unconsciously sauntered along till he came to a spot called The Fourways in the middle of the city, gazing abstractedly at the groups of people like one in a trance, till, coming to himself, he began talking to the policeman fixed there.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "hardy.f.v0071",
+      "kind": "verbatim",
+      "text": "He hastened down the lane and round into the straight broad street, which he followed till it merged in the highway, and all sound of his late companions had been left behind.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hardy.f.v0072",
+      "kind": "verbatim",
+      "text": "Shut the window.” Jude waited, knowing that she could enter easily enough, the front door being opened merely by a knob which anybody could turn, as in most old country towns.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "hardy.f.v0073",
+      "kind": "verbatim",
+      "text": "It would be superfluous to say what his answer was; and how he thought what he would have done had he been free, which should have rendered a long residence with a female friend quite unnecessary for Sue.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "hardy.f.v0074",
+      "kind": "verbatim",
+      "text": "I Shaston, the ancient British Palladour, From whose foundation first such strange reports arise, (as Drayton sang it), was, and is, in itself the city of a dream.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "hardy.f.v0075",
+      "kind": "verbatim",
+      "text": "When, however, a month had passed, and Phillotson casually admitted to an acquaintance that he did not know where his wife was staying, curiosity began to be aroused; till, jumping to conclusions, people ventured to affirm that Sue had played him false and run away from him.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "hardy.f.v0076",
+      "kind": "verbatim",
+      "text": "I must go out and speak to her, Sue, at least!” “I can’t say any more!—Oh, if you must, you must!” she said, bursting out into sobs that seemed to tear her heart.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "hardy.f.v0077",
+      "kind": "verbatim",
+      "text": "Sue, in her new summer clothes, flexible and light as a bird, her little thumb stuck up by the stem of her white cotton sunshade, went along as if she hardly touched ground, and as if a moderately strong puff of wind would float her over the hedge into the next field.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "hardy.f.v0078",
+      "kind": "verbatim",
+      "text": "The silence and emptiness of the building gave her confidence, and, standing on a safe low platform erected by Jude, which she was nevertheless timid at mounting, she began painting in the letters of the first Table while he set about mending a portion of the second.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "hardy.f.v0079",
+      "kind": "verbatim",
+      "text": "Footsteps began stamping up and down the bare stairs, the comers inspecting the goods, some of which were of so quaint and ancient a make as to acquire an adventitious value as art.",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "hardy.f.v0080",
+      "kind": "verbatim",
+      "text": "If I am bound in honour to marry her—as I suppose I am—though how I came to be here with her I know no more than a dead man—marry her I will, so help me God!",
+      "work": "Jude the Obscure",
+      "lang": "en",
+      "src": {
+        "work": "Jude the Obscure"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "hardy.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 4,
+      "worksSpan": 4,
+      "examples": [
+        "If you want to help them—God knows they need it—do it without telling me.",
+        "If you could remove that impression from your mind—” “Yes, yes,” he said impatiently."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 264,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:19784663c4a5eddb25715d4e058432db93a86fe08b6ffad7689dda50502de5ce"
+}

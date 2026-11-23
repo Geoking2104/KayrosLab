@@ -1,0 +1,2287 @@
+{
+  "authorId": "aquinas",
+  "kbVersion": "aquinas@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:50.233Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Summa Theologica",
+      "sentences": 75
+    },
+    {
+      "title": "On prayer and the contemplative life",
+      "sentences": 77
+    }
+  ],
+  "passages": [
+    {
+      "id": "aquinas.p0001",
+      "w": "Summa Theologica",
+      "s": "Thus in every composite there is something which is not it itself.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0002",
+      "w": "Summa Theologica",
+      "s": "For since matter as such is merely potential, the first material principle must be simply potential, and thus most imperfect.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0003",
+      "w": "Summa Theologica",
+      "s": "Now being implies the habitude of a formal cause only, either inherent or exemplar; and its causality does not extend save to those things which are actual.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0004",
+      "w": "Summa Theologica",
+      "s": "And to these three can be reduced species, mode and order, as Augustine says (Gen.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0005",
+      "w": "Summa Theologica",
+      "s": "Now everything seeks after its own perfection; and the perfection and form of an effect consist in a certain likeness to the agent, since every agent makes its like; and hence the agent itself is desirable and has the nature of good.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0006",
+      "w": "Summa Theologica",
+      "s": "And because good is convertible with being, as one is also; he called God the absolute good, from whom all things are called good by way of participation.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0007",
+      "w": "Summa Theologica",
+      "s": "Nevertheless, primary matter even as a potentiality is not absolutely infinite, but relatively, because its potentiality extends only to natural forms.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0008",
+      "w": "Summa Theologica",
+      "s": "Therefore it is impossible for an actually infinite multitude to exist, even accidentally.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0009",
+      "w": "Summa Theologica",
+      "s": "Such a kind of indivisible does not belong to the continuous, as a part of it, but as touching it by its power; hence, according as its power can extend itself to one or to many, to a small thing, or to a great one, in this way it is in one or in many places, and in a small or large place.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0010",
+      "w": "Summa Theologica",
+      "s": "On the other hand incorporeal substances, being subsistent forms which, although with respect to their own existence are as potentiality to act, are not consistent with the privation of this act; forasmuch as existence is consequent upon form, and nothing corrupts except it lose its form.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0011",
+      "w": "Summa Theologica",
+      "s": "2: From this appears the answer to the Second Objection.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0012",
+      "w": "Summa Theologica",
+      "s": "Now aeviternity is not eternity; for it is written (Ecclus.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0013",
+      "w": "Summa Theologica",
+      "s": "4: For things to be measured by one, it is not necessary that the one should be the cause of all, but that it be more simple than the rest.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0014",
+      "w": "Summa Theologica",
+      "s": "And if this were a privation, one of them would not be absolutely perfect; but if a perfection, one of them would be without it.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0015",
+      "w": "Summa Theologica",
+      "s": "2: The infinity of matter not made perfect by form, is unknown in itself, because all knowledge comes by the form; whereas the infinity of the form not limited by matter, is in itself supremely known.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0016",
+      "w": "Summa Theologica",
+      "s": "2: Further, what is supremely visible, is made less visible to us by reason of our defective corporeal or intellectual sight.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0017",
+      "w": "Summa Theologica",
+      "s": "6] Whether of Those Who See the Essence of God, One Sees More Perfectly Than Another?",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0018",
+      "w": "Summa Theologica",
+      "s": "Therefore whosoever sees the essence of God, does not know all things.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0019",
+      "w": "Summa Theologica",
+      "s": "4: Further, according to Augustine (Gen.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0020",
+      "w": "Summa Theologica",
+      "s": "(2) Whether any names applied to God are predicated of Him substantially?",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0021",
+      "w": "Summa Theologica",
+      "s": "So when we say, \"God is good,\" the meaning is not, \"God is the cause of goodness,\" or \"God is not evil\"; but the meaning is, \"Whatever good we attribute to creatures, pre-exists in God,\" and in a more excellent and higher way.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0022",
+      "w": "Summa Theologica",
+      "s": "In the same way, as said in the preceding article, all perfections existing in creatures divided and multiplied, pre-exist in God unitedly.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0023",
+      "w": "Summa Theologica",
+      "s": "But nothing temporal can be in God, for He is above time.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0024",
+      "w": "Summa Theologica",
+      "s": "It is properly communicable in the sense that its whole signification can be given to many; by similitude it is communicable according to some part of the signification of the name.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0025",
+      "w": "Summa Theologica",
+      "s": "For it does not signify form, but simply existence itself.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0026",
+      "w": "Summa Theologica",
+      "s": "Objection 1: It seems that in God there is not knowledge.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0027",
+      "w": "Summa Theologica",
+      "s": "But God is not to be called finite to Himself in this sense, as if He understood Himself to be something finite.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0028",
+      "w": "Summa Theologica",
+      "s": "2: Further, the created essence is as distant from the divine essence, as the divine essence is distant from the created essence.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0029",
+      "w": "Summa Theologica",
+      "s": "8] Whether the Knowledge of God Is the Cause of Things?",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0030",
+      "w": "Summa Theologica",
+      "s": "Hence God would not know good things perfectly, unless He also knew evil things.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0031",
+      "w": "Summa Theologica",
+      "s": "But God does not know the infinite or infinite things, as if He enumerated part after part; since He knows all things simultaneously, and not successively, as said above (A.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0032",
+      "w": "Summa Theologica",
+      "s": "But enunciable things are contained in the thoughts of men.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0033",
+      "w": "Summa Theologica",
+      "s": "And, as regards evil things, although they are not operable by Him, yet they fall under His practical knowledge, like good things, inasmuch as He permits, or impedes, or directs them; as also sicknesses fall under the practical knowledge of the physician, inasmuch as he cures them by his art.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0034",
+      "w": "Summa Theologica",
+      "s": "Hence ideas are said to be many, inasmuch as many types are understood through the self-same essence.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0035",
+      "w": "Summa Theologica",
+      "s": "Now we do not judge of a thing by what is in it accidentally, but by what is in it essentially.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0036",
+      "w": "Summa Theologica",
+      "s": "Therefore the good is prior to the true.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0037",
+      "w": "Summa Theologica",
+      "s": "Objection 1: It seems that created truth is eternal.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0038",
+      "w": "Summa Theologica",
+      "s": "So therefore this proposition, \"Socrates sits,\" is true, as long as he is sitting, both with the truth of the thing, in so far as the expression is significative, and with the truth of signification, in so far as it signifies a true opinion.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0039",
+      "w": "Summa Theologica",
+      "s": "Hence in another translation it is said more plainly, \"Sense, about its proper object, is never false.\" Falsity is attributed to the imagination, as it represents the likeness of something even in its absence.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0040",
+      "w": "Summa Theologica",
+      "s": "2: Further, plants are said to live, inasmuch as they have in themselves a principle of movement of growth and decay.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0041",
+      "w": "Summa Theologica",
+      "s": "3: If form only, and not matter, belonged to natural things, then in all respects natural things would exist more truly in the divine mind, by the ideas of them, than in themselves.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0042",
+      "w": "Summa Theologica",
+      "s": "Thus, then, He wills both Himself to be, and other things to be; but Himself as the end, and other things as ordained to that end; inasmuch as it befits the divine goodness that other things should be partakers therein.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0043",
+      "w": "Summa Theologica",
+      "s": "He acts then by nature, and not by will.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0044",
+      "w": "Summa Theologica",
+      "s": "Therefore the will of God is not always fulfilled.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0045",
+      "w": "Summa Theologica",
+      "s": "For when we repent, we destroy what we have made; although we may even do so without change of will; as, when a man wills to make a thing, at the same time intending to destroy it later.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0046",
+      "w": "Summa Theologica",
+      "s": "Now the evil that accompanies one good, is the privation of another good.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0047",
+      "w": "Summa Theologica",
+      "s": "But precept, counsel, and prohibition belong to rational creatures only.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0048",
+      "w": "Summa Theologica",
+      "s": "3: An act of love always tends towards two things; to the good that one wills, and to the person for whom one wills it: since to love a person is to wish that person good.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0049",
+      "w": "Summa Theologica",
+      "s": "Therefore there is no reason why it may not vary in degree.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0050",
+      "w": "Summa Theologica",
+      "s": "For Boethius says (De Hebdom.): \"Good regards the essence; justice the act.\" Therefore justice does not belong to God.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0051",
+      "w": "Summa Theologica",
+      "s": "Hence it follows that he endeavors to dispel the misery of this other, as if it were his; and this is the effect of mercy.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0052",
+      "w": "Summa Theologica",
+      "s": "But providence seems to be something composite, because it includes both the intellect and the will.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0053",
+      "w": "Summa Theologica",
+      "s": "Since God, then, provides universally for all being, it belongs to His providence to permit certain defects in particular effects, that the perfect good of the universe may not be hindered, for if all evil were prevented, much good would be absent from the universe.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0054",
+      "w": "Summa Theologica",
+      "s": "(2) What is predestination, and whether it places anything in the predestined?",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0055",
+      "w": "Summa Theologica",
+      "s": "1: Actions passing out to external matter imply of themselves passion--for example, the actions of warming and cutting; but not so actions remaining in the agent, as understanding and willing, as said above (Q.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0056",
+      "w": "Summa Theologica",
+      "s": "2 ,3):--election, inasmuch as He wills this good to some in preference to others; since He reprobates some, as stated above (A.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0057",
+      "w": "Summa Theologica",
+      "s": "Individuals, however, which undergo corruption, are not ordained as it were chiefly for the good of the universe, but in a secondary way, inasmuch as the good of the species is preserved through them.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0058",
+      "w": "Summa Theologica",
+      "s": "4) that all the predestined are chosen by God to possess eternal life.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0059",
+      "w": "Summa Theologica",
+      "s": "For form is better than matter; and action than active power, since it is its end.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0060",
+      "w": "Summa Theologica",
+      "s": "The reason of this is that one body moving another is a univocal agent; wherefore it follows that the whole power of the agent is made known in its motion.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0061",
+      "w": "Summa Theologica",
+      "s": "Therefore, and much more can He do what is only impossible accidentally.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0062",
+      "w": "Summa Theologica",
+      "s": "The sentence would then be true in this sense: \"God cannot do anything except that which, if He did it, would be suitable and just.\" Reply Obj.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0063",
+      "w": "Summa Theologica",
+      "s": "Therefore, since we enjoy God in respect to our intellect, because \"vision is the whole of the reward,\" as Augustine says (De Civ.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0064",
+      "w": "Summa Theologica",
+      "s": "Such an action in an intellectual nature is that of the intellect, and of the will.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0065",
+      "w": "Summa Theologica",
+      "s": "Therefore the divine relations are not real relations, but are formed only by the mind.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0066",
+      "w": "Summa Theologica",
+      "s": "So when \"man\" is attributed to anyone, a rational nature is likewise attributed to him.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0067",
+      "w": "Summa Theologica",
+      "s": "3: Further, an intentional term must not be included in the definition of a thing.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0068",
+      "w": "Summa Theologica",
+      "s": "Nat.): \"The word person seems to be taken from those persons who represented men in comedies and tragedies.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0069",
+      "w": "Summa Theologica",
+      "s": "Though neither is it applied univocally, since nothing can be said univocally of God and creatures (Q.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0070",
+      "w": "Summa Theologica",
+      "s": "But the Father and the Holy Ghost have one and the same goodness.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0071",
+      "w": "Summa Theologica",
+      "s": "The vague individual thing, as \"some man,\" signifies the common nature with the determinate mode of existence of singular things--that is, something self-subsisting, as distinct from others.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0072",
+      "w": "Summa Theologica",
+      "s": "So, because in God distinction is by the persons, and not by the essence, we say that the Father is other than the Son, but not something else; while conversely we say that they are one thing, but not one person.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0073",
+      "w": "Summa Theologica",
+      "s": "Now, the creative power of God is common to the whole Trinity; and hence it belongs to the unity of the essence, and not to the distinction of the persons.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0074",
+      "w": "Summa Theologica",
+      "s": "1, 3); while there is no reason against our admitting in God, many logical relations.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0075",
+      "w": "Summa Theologica",
+      "s": "Therefore we must not say that He is the principle of the Son.",
+      "src": {
+        "work": "Summa Theologica"
+      }
+    },
+    {
+      "id": "aquinas.p0076",
+      "w": "On prayer and the contemplative life",
+      "s": "De quo futurum erat, ut, dum sic anxius maturius Deum prae aliis quaereret, clarius prae ceteris, quae scire futurus erat, scriberet, quae de Deo, ipso donante, studiosius et citius inveniret\" (William of Tocco, _Vita B.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0077",
+      "w": "On prayer and the contemplative life",
+      "s": "But since a slave implies a master, it follows that where there exists a peculiar and special title of dominion there also will be found a peculiar and special ratio of servitude.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0078",
+      "w": "On prayer and the contemplative life",
+      "s": "And similarly the payment of due service to God can be an act of virtue according as a man does it voluntarily.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0079",
+      "w": "On prayer and the contemplative life",
+      "s": "Consequently religion is not one virtue.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0080",
+      "w": "On prayer and the contemplative life",
+      "s": "Every work of virtue therefore comes under religion.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0081",
+      "w": "On prayer and the contemplative life",
+      "s": "From all which it is evident that God does not stand to the virtue of religion as its object or as the material with which it is concerned, but as its goal.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0082",
+      "w": "On prayer and the contemplative life",
+      "s": "VI Is Religion to be preferred to the Other Moral Virtues?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0083",
+      "w": "On prayer and the contemplative life",
+      "s": "It appears, then, that God is to be worshipped by exterior as well as by interior acts.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0084",
+      "w": "On prayer and the contemplative life",
+      "s": "Yet all the while their invisible will and their heart's intention are known to God.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0085",
+      "w": "On prayer and the contemplative life",
+      "s": "Temperance indeed worketh cleanness, but this has not the ratio of sanctity except it be referred to God.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0086",
+      "w": "On prayer and the contemplative life",
+      "s": "Devotion is so termed from \"devoting\" oneself.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0087",
+      "w": "On prayer and the contemplative life",
+      "s": "This only do I know: that it fares ill with me when away from Thee; and this not merely externally, but within me; for all abundance which is not my God is but penury for me!",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0088",
+      "w": "On prayer and the contemplative life",
+      "s": "Lastly, by the virtue of religion a man turns to God alone.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0089",
+      "w": "On prayer and the contemplative life",
+      "s": "Lastly, if contemplation were the real cause of devotion, it ought to follow that those who are the more fitted for contemplation are also the more fitted for devotion; whereas the contrary is the case, for greater devotion is often found among simple folk and in the female sex, where contemplation is wanting.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0090",
+      "w": "On prayer and the contemplative life",
+      "s": "And it is in this sense that tears spring from devotion.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0091",
+      "w": "On prayer and the contemplative life",
+      "s": "On the Seven Petitions of the Lord's Prayer Cardinal Cajetan, On the Grouping of these Petitions S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0092",
+      "w": "On prayer and the contemplative life",
+      "s": "And in this respect both of these acts come under the reason whose office it is to arrange.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0093",
+      "w": "On prayer and the contemplative life",
+      "s": "Hence men must do certain things, not so that their acts may change the Divine arrangement, but that by their acts they may bring about certain effects according to the order arranged by God; and it is the same with natural causes.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0094",
+      "w": "On prayer and the contemplative life",
+      "s": "Assuredly in this matter the Church does not demand laborious disputations; but note Her daily prayers: She prays that unbelievers may believe: God then brings them to the Faith.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0095",
+      "w": "On prayer and the contemplative life",
+      "s": "As far, then, as the thing petitioned for is concerned, we give nothing to God when we pray; rather we ask Him to give us something.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0096",
+      "w": "On prayer and the contemplative life",
+      "s": "I will sing to the Lord as long as I live; I will sing praise to my God while I have my being.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0097",
+      "w": "On prayer and the contemplative life",
+      "s": "There seems, then, to be no reason why we should address prayers to the Saints in Paradise.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0098",
+      "w": "On prayer and the contemplative life",
+      "s": "But we ought not to direct our prayers towards making God will what we will, but rather we should will what He wills--as the Gloss says on the words of Ps.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0099",
+      "w": "On prayer and the contemplative life",
+      "s": "And Thou seest in my heart that it is so; for I would offer to Thee in sacrifice the service of my thoughts and of my tongue.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0100",
+      "w": "On prayer and the contemplative life",
+      "s": "But temporal possessions are at times hurtful, and this not merely spiritually but even temporally; hence a man ought not to ask them of God.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0101",
+      "w": "On prayer and the contemplative life",
+      "s": "And I wrote my request on a wax tablet and I gave it them to read.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0102",
+      "w": "On prayer and the contemplative life",
+      "s": "When, then, you ask of Him things which He praises, which He commands, things which He has promised us in the next world, then ask in confidence and be instant in prayer as far as in you lies, that so you may receive what you ask.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0103",
+      "w": "On prayer and the contemplative life",
+      "s": "But absolutely to love our individual enemies, and to assist them, belongs to perfection.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0104",
+      "w": "On prayer and the contemplative life",
+      "s": "For it is clear that we desire first the end and then the means to the attainment of that end.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0105",
+      "w": "On prayer and the contemplative life",
+      "s": "Luke,[184] there are only five petitions in the Lord's Prayer.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0106",
+      "w": "On prayer and the contemplative life",
+      "s": "For these things we need for our pilgrimage.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0107",
+      "w": "On prayer and the contemplative life",
+      "s": "But if someone holds your hands your ears remain open, and you cannot then shut out cursing words, impure words, flattering and deceitful words.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0108",
+      "w": "On prayer and the contemplative life",
+      "s": "(An Indulgence of 100 days for the recitation of this rhythm.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0109",
+      "w": "On prayer and the contemplative life",
+      "s": "Consequently if the souls of the Saints could pray for us, we ought--as long as their souls are separated from their bodies--to appeal, not to Peter to help us, but to Peter's soul; whereas the Church does the contrary.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0110",
+      "w": "On prayer and the contemplative life",
+      "s": "Chrysostom says[205]: \"The Lord forbade us to pray in public with a view to being seen by the public.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0111",
+      "w": "On prayer and the contemplative life",
+      "s": "Augustine:_ Sometimes, indeed, through immoderate fear of this mistake I err by excessive severity; nay, sometimes, though it is but rarely, I could almost wish to shut out from my ears and even from the Church itself all those sweet-sounding melodies used in the accompaniment of David's Psalms.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0112",
+      "w": "On prayer and the contemplative life",
+      "s": "Lastly, prayer must needs be without sin.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0113",
+      "w": "On prayer and the contemplative life",
+      "s": "When you read, God speaks to you; when you pray, you speak to God....",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0114",
+      "w": "On prayer and the contemplative life",
+      "s": "My spirit is in anguish within me; my heart within me is troubled.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0115",
+      "w": "On prayer and the contemplative life",
+      "s": "But to prolong our prayer does not mean that we ask for many things, but that our hearts are continuously set upon one object for which we yearn.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0116",
+      "w": "On prayer and the contemplative life",
+      "s": "Yet this is not always the case, for even the prayers of the Saints are often not heard; S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0117",
+      "w": "On prayer and the contemplative life",
+      "s": "This is That One Thing Which ought to be loved: that we may dwell in the House of the Lord all the days of our life!",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0118",
+      "w": "On prayer and the contemplative life",
+      "s": "When he shall fall, he shall not be bruised, for the Lord putteth His hand under him.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0119",
+      "w": "On prayer and the contemplative life",
+      "s": "My heart is troubled within me, and the fear of death is fallen upon me.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0120",
+      "w": "On prayer and the contemplative life",
+      "s": "Hence, since no rectitude is lacking to the Saints, they wish to know those things which concern themselves, and consequently they must know them in the Word.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0121",
+      "w": "On prayer and the contemplative life",
+      "s": "But the souls of the Saints have their will perfectly conformed to the Will of God, even in what they would will.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0122",
+      "w": "On prayer and the contemplative life",
+      "s": "Consequently we ought always to make the greater Saints our intercessors with God, and never the lesser ones.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0123",
+      "w": "On prayer and the contemplative life",
+      "s": "But a man becomes deserving that some Saint should pray for him from the very fact that with pure-hearted devotion he has recourse to him in his needs.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0124",
+      "w": "On prayer and the contemplative life",
+      "s": "But this contest of the good Angels is not to be understood in the sense that they put forth contrary prayers before God, but that they set before the Divine scrutiny conflicting merits on either hand, and awaited the Divine decision.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0125",
+      "w": "On prayer and the contemplative life",
+      "s": "But, as is evident from the passage of S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0126",
+      "w": "On prayer and the contemplative life",
+      "s": "Again, when one thing precedes another it is unfitting to divide the former by differences which find place in the latter.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0127",
+      "w": "On prayer and the contemplative life",
+      "s": "But things which hold a middle course are compounded of the extremes, and hence are virtually contained in them, as the tepid in the hot and the cold, the pallid in the white and the black.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0128",
+      "w": "On prayer and the contemplative life",
+      "s": "Is the Contemplative Life wholly confined to the Intellect, or does the Will enter into it?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0129",
+      "w": "On prayer and the contemplative life",
+      "s": "But the appetitive powers not only move the bodily members to the performance of external acts, but the intellect, too, is moved by them to the exercise of contemplation.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0130",
+      "w": "On prayer and the contemplative life",
+      "s": "Essentially, then, the moral virtues do not pertain to the contemplative life; for the goal of the contemplative life is the consideration of truth.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0131",
+      "w": "On prayer and the contemplative life",
+      "s": "O expectation of Israel, the Saviour thereof in time of trouble: why wilt Thou be as a stranger in the land, and as a wayfaring man turning in to lodge?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0132",
+      "w": "On prayer and the contemplative life",
+      "s": "Consequently it seems that many acts belong to contemplation.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0133",
+      "w": "On prayer and the contemplative life",
+      "s": "Gregory says[355]: \"In contemplation it is the Principle--namely, God--which is sought.\" A thing may come under the contemplative life in two ways: either primarily, or secondarily--that is, dispositively.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0134",
+      "w": "On prayer and the contemplative life",
+      "s": "Augustine:_ Martha, Martha, thou hast chosen a good part, but Mary hath chosen the better.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0135",
+      "w": "On prayer and the contemplative life",
+      "s": "Consequently the highest degree of contemplation which is compatible with the present life is that which S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0136",
+      "w": "On prayer and the contemplative life",
+      "s": "The old error is passed away; Thou wilt keep peace: peace, because we have hoped in Thee.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0137",
+      "w": "On prayer and the contemplative life",
+      "s": "Denis expresses first of all in his definition of the circular motion of the soul when he speaks of \"the return of the soul upon itself as opposed to external things.\" And there must be removed in the second place that second lack of uniformity which arises from the discursive action of the reason.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0138",
+      "w": "On prayer and the contemplative life",
+      "s": "Gregory says[384]: \"The contemplative life means a truly lovable sweetness.\" There are two sources of pleasure in contemplation; for, firstly, there is the very act of contemplating, and everyone finds a certain pleasure in the performance of acts which are appropriate to his nature or to his habits.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0139",
+      "w": "On prayer and the contemplative life",
+      "s": "Lastly, bodily injuries are a hindrance to delight.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0140",
+      "w": "On prayer and the contemplative life",
+      "s": "It is true indeed that no action can remain long at the pitch of its intensity.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0141",
+      "w": "On prayer and the contemplative life",
+      "s": "Some, however, maintain that all the acts of the moral virtues do not belong to the active life, thus: 1.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0142",
+      "w": "On prayer and the contemplative life",
+      "s": "Just as the contemplative life pertains to the cognoscitive powers, so does the active life pertain to the appetitive powers.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0143",
+      "w": "On prayer and the contemplative life",
+      "s": "Some, however, regard teaching as rather belonging to the contemplative than to the active life, thus: 1.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0144",
+      "w": "On prayer and the contemplative life",
+      "s": "But the moral virtues remain after death, as S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0145",
+      "w": "On prayer and the contemplative life",
+      "s": "Cardinal Cajetan, On Preparation for the Contemplative Life S.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0146",
+      "w": "On prayer and the contemplative life",
+      "s": "Gregory expresses when he says: \"The active life is termed a service, the contemplative life freedom.\"[453] 3.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0147",
+      "w": "On prayer and the contemplative life",
+      "s": "For will He Who gave such a pledge to the pilgrim desert him when he comes to Him?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0148",
+      "w": "On prayer and the contemplative life",
+      "s": "Gregory says[469]: \"No sacrifice is more acceptable to God than zeal for souls.\" But zeal for souls means that a man gives himself up to the works of the active life.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0149",
+      "w": "On prayer and the contemplative life",
+      "s": "Augustine:_ See the life that Mary chose!",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0150",
+      "w": "On prayer and the contemplative life",
+      "s": "He remembereth that we are dust: man's days are as grass, as the flower of the field so shall he flourish.\"[481] IV Does the Active Life precede the Contemplative?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0151",
+      "w": "On prayer and the contemplative life",
+      "s": "Are Contemplative Orders superior to Active Orders?",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    },
+    {
+      "id": "aquinas.p0152",
+      "w": "On prayer and the contemplative life",
+      "s": "Hence it seems that Orders which are devoted to an active life are superior to those which aim solely at contemplation.",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "aquinas.f.v0001",
+      "kind": "verbatim",
+      "text": "Now being implies the habitude of a formal cause only, either inherent or exemplar; and its causality does not extend save to those things which are actual.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "aquinas.f.v0002",
+      "kind": "verbatim",
+      "text": "Now everything seeks after its own perfection; and the perfection and form of an effect consist in a certain likeness to the agent, since every agent makes its like; and hence the agent itself is desirable and has the nature of good.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "aquinas.f.v0003",
+      "kind": "verbatim",
+      "text": "Such a kind of indivisible does not belong to the continuous, as a part of it, but as touching it by its power; hence, according as its power can extend itself to one or to many, to a small thing, or to a great one, in this way it is in one or in many places, and in a small or large place.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "aquinas.f.v0004",
+      "kind": "verbatim",
+      "text": "On the other hand incorporeal substances, being subsistent forms which, although with respect to their own existence are as potentiality to act, are not consistent with the privation of this act; forasmuch as existence is consequent upon form, and nothing corrupts except it lose its form.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "aquinas.f.v0005",
+      "kind": "verbatim",
+      "text": "4: For things to be measured by one, it is not necessary that the one should be the cause of all, but that it be more simple than the rest.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "aquinas.f.v0006",
+      "kind": "verbatim",
+      "text": "2: The infinity of matter not made perfect by form, is unknown in itself, because all knowledge comes by the form; whereas the infinity of the form not limited by matter, is in itself supremely known.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "aquinas.f.v0007",
+      "kind": "verbatim",
+      "text": "2: Further, what is supremely visible, is made less visible to us by reason of our defective corporeal or intellectual sight.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "aquinas.f.v0008",
+      "kind": "verbatim",
+      "text": "6] Whether of Those Who See the Essence of God, One Sees More Perfectly Than Another?",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "aquinas.f.v0009",
+      "kind": "verbatim",
+      "text": "(2) Whether any names applied to God are predicated of Him substantially?",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 73
+      }
+    },
+    {
+      "id": "aquinas.f.v0010",
+      "kind": "verbatim",
+      "text": "So when we say, \"God is good,\" the meaning is not, \"God is the cause of goodness,\" or \"God is not evil\"; but the meaning is, \"Whatever good we attribute to creatures, pre-exists in God,\" and in a more excellent and higher way.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "aquinas.f.v0011",
+      "kind": "verbatim",
+      "text": "In the same way, as said in the preceding article, all perfections existing in creatures divided and multiplied, pre-exist in God unitedly.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "aquinas.f.v0012",
+      "kind": "verbatim",
+      "text": "It is properly communicable in the sense that its whole signification can be given to many; by similitude it is communicable according to some part of the signification of the name.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "aquinas.f.v0013",
+      "kind": "verbatim",
+      "text": "2: Further, the created essence is as distant from the divine essence, as the divine essence is distant from the created essence.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 129
+      }
+    },
+    {
+      "id": "aquinas.f.v0014",
+      "kind": "verbatim",
+      "text": "Hence God would not know good things perfectly, unless He also knew evil things.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "aquinas.f.v0015",
+      "kind": "verbatim",
+      "text": "And, as regards evil things, although they are not operable by Him, yet they fall under His practical knowledge, like good things, inasmuch as He permits, or impedes, or directs them; as also sicknesses fall under the practical knowledge of the physician, inasmuch as he cures them by his art.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "aquinas.f.v0016",
+      "kind": "verbatim",
+      "text": "Hence ideas are said to be many, inasmuch as many types are understood through the self-same essence.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "aquinas.f.v0017",
+      "kind": "verbatim",
+      "text": "Now we do not judge of a thing by what is in it accidentally, but by what is in it essentially.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "aquinas.f.v0018",
+      "kind": "verbatim",
+      "text": "So therefore this proposition, \"Socrates sits,\" is true, as long as he is sitting, both with the truth of the thing, in so far as the expression is significative, and with the truth of signification, in so far as it signifies a true opinion.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "aquinas.f.v0019",
+      "kind": "verbatim",
+      "text": "Hence in another translation it is said more plainly, \"Sense, about its proper object, is never false.\" Falsity is attributed to the imagination, as it represents the likeness of something even in its absence.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "aquinas.f.v0020",
+      "kind": "verbatim",
+      "text": "2: Further, plants are said to live, inasmuch as they have in themselves a principle of movement of growth and decay.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "aquinas.f.v0021",
+      "kind": "verbatim",
+      "text": "3: If form only, and not matter, belonged to natural things, then in all respects natural things would exist more truly in the divine mind, by the ideas of them, than in themselves.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "aquinas.f.v0022",
+      "kind": "verbatim",
+      "text": "Thus, then, He wills both Himself to be, and other things to be; but Himself as the end, and other things as ordained to that end; inasmuch as it befits the divine goodness that other things should be partakers therein.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "aquinas.f.v0023",
+      "kind": "verbatim",
+      "text": "For when we repent, we destroy what we have made; although we may even do so without change of will; as, when a man wills to make a thing, at the same time intending to destroy it later.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "aquinas.f.v0024",
+      "kind": "verbatim",
+      "text": "3: An act of love always tends towards two things; to the good that one wills, and to the person for whom one wills it: since to love a person is to wish that person good.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "aquinas.f.v0025",
+      "kind": "verbatim",
+      "text": "Hence it follows that he endeavors to dispel the misery of this other, as if it were his; and this is the effect of mercy.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 122
+      }
+    },
+    {
+      "id": "aquinas.f.v0026",
+      "kind": "verbatim",
+      "text": "Since God, then, provides universally for all being, it belongs to His providence to permit certain defects in particular effects, that the perfect good of the universe may not be hindered, for if all evil were prevented, much good would be absent from the universe.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "aquinas.f.v0027",
+      "kind": "verbatim",
+      "text": "(2) What is predestination, and whether it places anything in the predestined?",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 78
+      }
+    },
+    {
+      "id": "aquinas.f.v0028",
+      "kind": "verbatim",
+      "text": "1: Actions passing out to external matter imply of themselves passion--for example, the actions of warming and cutting; but not so actions remaining in the agent, as understanding and willing, as said above (Q.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "aquinas.f.v0029",
+      "kind": "verbatim",
+      "text": "2 ,3):--election, inasmuch as He wills this good to some in preference to others; since He reprobates some, as stated above (A.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "aquinas.f.v0030",
+      "kind": "verbatim",
+      "text": "Individuals, however, which undergo corruption, are not ordained as it were chiefly for the good of the universe, but in a secondary way, inasmuch as the good of the species is preserved through them.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "aquinas.f.v0031",
+      "kind": "verbatim",
+      "text": "The reason of this is that one body moving another is a univocal agent; wherefore it follows that the whole power of the agent is made known in its motion.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "aquinas.f.v0032",
+      "kind": "verbatim",
+      "text": "The sentence would then be true in this sense: \"God cannot do anything except that which, if He did it, would be suitable and just.\" Reply Obj.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 143
+      }
+    },
+    {
+      "id": "aquinas.f.v0033",
+      "kind": "verbatim",
+      "text": "Such an action in an intellectual nature is that of the intellect, and of the will.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 83
+      }
+    },
+    {
+      "id": "aquinas.f.v0034",
+      "kind": "verbatim",
+      "text": "3: Further, an intentional term must not be included in the definition of a thing.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 82
+      }
+    },
+    {
+      "id": "aquinas.f.v0035",
+      "kind": "verbatim",
+      "text": "Nat.): \"The word person seems to be taken from those persons who represented men in comedies and tragedies.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 107
+      }
+    },
+    {
+      "id": "aquinas.f.v0036",
+      "kind": "verbatim",
+      "text": "Though neither is it applied univocally, since nothing can be said univocally of God and creatures (Q.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
+      "id": "aquinas.f.v0037",
+      "kind": "verbatim",
+      "text": "The vague individual thing, as \"some man,\" signifies the common nature with the determinate mode of existence of singular things--that is, something self-subsisting, as distinct from others.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "aquinas.f.v0038",
+      "kind": "verbatim",
+      "text": "So, because in God distinction is by the persons, and not by the essence, we say that the Father is other than the Son, but not something else; while conversely we say that they are one thing, but not one person.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "aquinas.f.v0039",
+      "kind": "verbatim",
+      "text": "Now, the creative power of God is common to the whole Trinity; and hence it belongs to the unity of the essence, and not to the distinction of the persons.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "aquinas.f.v0040",
+      "kind": "verbatim",
+      "text": "1, 3); while there is no reason against our admitting in God, many logical relations.",
+      "work": "Summa Theologica",
+      "lang": "en",
+      "src": {
+        "work": "Summa Theologica"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "aquinas.f.v0041",
+      "kind": "verbatim",
+      "text": "De quo futurum erat, ut, dum sic anxius maturius Deum prae aliis quaereret, clarius prae ceteris, quae scire futurus erat, scriberet, quae de Deo, ipso donante, studiosius et citius inveniret\" (William of Tocco, _Vita B.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "aquinas.f.v0042",
+      "kind": "verbatim",
+      "text": "But since a slave implies a master, it follows that where there exists a peculiar and special title of dominion there also will be found a peculiar and special ratio of servitude.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "aquinas.f.v0043",
+      "kind": "verbatim",
+      "text": "From all which it is evident that God does not stand to the virtue of religion as its object or as the material with which it is concerned, but as its goal.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "aquinas.f.v0044",
+      "kind": "verbatim",
+      "text": "It appears, then, that God is to be worshipped by exterior as well as by interior acts.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 87
+      }
+    },
+    {
+      "id": "aquinas.f.v0045",
+      "kind": "verbatim",
+      "text": "Temperance indeed worketh cleanness, but this has not the ratio of sanctity except it be referred to God.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "aquinas.f.v0046",
+      "kind": "verbatim",
+      "text": "This only do I know: that it fares ill with me when away from Thee; and this not merely externally, but within me; for all abundance which is not my God is but penury for me!",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "aquinas.f.v0047",
+      "kind": "verbatim",
+      "text": "Lastly, if contemplation were the real cause of devotion, it ought to follow that those who are the more fitted for contemplation are also the more fitted for devotion; whereas the contrary is the case, for greater devotion is often found among simple folk and in the female sex, where contemplation is wanting.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 311
+      }
+    },
+    {
+      "id": "aquinas.f.v0048",
+      "kind": "verbatim",
+      "text": "On the Seven Petitions of the Lord's Prayer Cardinal Cajetan, On the Grouping of these Petitions S.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "aquinas.f.v0049",
+      "kind": "verbatim",
+      "text": "Hence men must do certain things, not so that their acts may change the Divine arrangement, but that by their acts they may bring about certain effects according to the order arranged by God; and it is the same with natural causes.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "aquinas.f.v0050",
+      "kind": "verbatim",
+      "text": "Assuredly in this matter the Church does not demand laborious disputations; but note Her daily prayers: She prays that unbelievers may believe: God then brings them to the Faith.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "aquinas.f.v0051",
+      "kind": "verbatim",
+      "text": "As far, then, as the thing petitioned for is concerned, we give nothing to God when we pray; rather we ask Him to give us something.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "aquinas.f.v0052",
+      "kind": "verbatim",
+      "text": "I will sing to the Lord as long as I live; I will sing praise to my God while I have my being.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "aquinas.f.v0053",
+      "kind": "verbatim",
+      "text": "There seems, then, to be no reason why we should address prayers to the Saints in Paradise.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "aquinas.f.v0054",
+      "kind": "verbatim",
+      "text": "When, then, you ask of Him things which He praises, which He commands, things which He has promised us in the next world, then ask in confidence and be instant in prayer as far as in you lies, that so you may receive what you ask.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "aquinas.f.v0055",
+      "kind": "verbatim",
+      "text": "Consequently if the souls of the Saints could pray for us, we ought--as long as their souls are separated from their bodies--to appeal, not to Peter to help us, but to Peter's soul; whereas the Church does the contrary.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "aquinas.f.v0056",
+      "kind": "verbatim",
+      "text": "Augustine:_ Sometimes, indeed, through immoderate fear of this mistake I err by excessive severity; nay, sometimes, though it is but rarely, I could almost wish to shut out from my ears and even from the Church itself all those sweet-sounding melodies used in the accompaniment of David's Psalms.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "aquinas.f.v0057",
+      "kind": "verbatim",
+      "text": "This is That One Thing Which ought to be loved: that we may dwell in the House of the Lord all the days of our life!",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 116
+      }
+    },
+    {
+      "id": "aquinas.f.v0058",
+      "kind": "verbatim",
+      "text": "When he shall fall, he shall not be bruised, for the Lord putteth His hand under him.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "aquinas.f.v0059",
+      "kind": "verbatim",
+      "text": "Hence, since no rectitude is lacking to the Saints, they wish to know those things which concern themselves, and consequently they must know them in the Word.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "aquinas.f.v0060",
+      "kind": "verbatim",
+      "text": "Consequently we ought always to make the greater Saints our intercessors with God, and never the lesser ones.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "aquinas.f.v0061",
+      "kind": "verbatim",
+      "text": "But this contest of the good Angels is not to be understood in the sense that they put forth contrary prayers before God, but that they set before the Divine scrutiny conflicting merits on either hand, and awaited the Divine decision.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "aquinas.f.v0062",
+      "kind": "verbatim",
+      "text": "Again, when one thing precedes another it is unfitting to divide the former by differences which find place in the latter.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 122
+      }
+    },
+    {
+      "id": "aquinas.f.v0063",
+      "kind": "verbatim",
+      "text": "But things which hold a middle course are compounded of the extremes, and hence are virtually contained in them, as the tepid in the hot and the cold, the pallid in the white and the black.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "aquinas.f.v0064",
+      "kind": "verbatim",
+      "text": "Is the Contemplative Life wholly confined to the Intellect, or does the Will enter into it?",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "aquinas.f.v0065",
+      "kind": "verbatim",
+      "text": "Essentially, then, the moral virtues do not pertain to the contemplative life; for the goal of the contemplative life is the consideration of truth.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "aquinas.f.v0066",
+      "kind": "verbatim",
+      "text": "O expectation of Israel, the Saviour thereof in time of trouble: why wilt Thou be as a stranger in the land, and as a wayfaring man turning in to lodge?",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "aquinas.f.v0067",
+      "kind": "verbatim",
+      "text": "Gregory says[355]: \"In contemplation it is the Principle--namely, God--which is sought.\" A thing may come under the contemplative life in two ways: either primarily, or secondarily--that is, dispositively.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "aquinas.f.v0068",
+      "kind": "verbatim",
+      "text": "Augustine:_ Martha, Martha, thou hast chosen a good part, but Mary hath chosen the better.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 90
+      }
+    },
+    {
+      "id": "aquinas.f.v0069",
+      "kind": "verbatim",
+      "text": "Consequently the highest degree of contemplation which is compatible with the present life is that which S.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 107
+      }
+    },
+    {
+      "id": "aquinas.f.v0070",
+      "kind": "verbatim",
+      "text": "The old error is passed away; Thou wilt keep peace: peace, because we have hoped in Thee.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 89
+      }
+    },
+    {
+      "id": "aquinas.f.v0071",
+      "kind": "verbatim",
+      "text": "Denis expresses first of all in his definition of the circular motion of the soul when he speaks of \"the return of the soul upon itself as opposed to external things.\" And there must be removed in the second place that second lack of uniformity which arises from the discursive action of the reason.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "aquinas.f.v0072",
+      "kind": "verbatim",
+      "text": "Gregory says[384]: \"The contemplative life means a truly lovable sweetness.\" There are two sources of pleasure in contemplation; for, firstly, there is the very act of contemplating, and everyone finds a certain pleasure in the performance of acts which are appropriate to his nature or to his habits.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 301
+      }
+    },
+    {
+      "id": "aquinas.f.v0073",
+      "kind": "verbatim",
+      "text": "It is true indeed that no action can remain long at the pitch of its intensity.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "aquinas.f.v0074",
+      "kind": "verbatim",
+      "text": "Some, however, maintain that all the acts of the moral virtues do not belong to the active life, thus: 1.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "aquinas.f.v0075",
+      "kind": "verbatim",
+      "text": "Just as the contemplative life pertains to the cognoscitive powers, so does the active life pertain to the appetitive powers.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "aquinas.f.v0076",
+      "kind": "verbatim",
+      "text": "Some, however, regard teaching as rather belonging to the contemplative than to the active life, thus: 1.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "aquinas.f.v0077",
+      "kind": "verbatim",
+      "text": "Gregory expresses when he says: \"The active life is termed a service, the contemplative life freedom.\"[453] 3.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 110
+      }
+    },
+    {
+      "id": "aquinas.f.v0078",
+      "kind": "verbatim",
+      "text": "Gregory says[469]: \"No sacrifice is more acceptable to God than zeal for souls.\" But zeal for souls means that a man gives himself up to the works of the active life.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "aquinas.f.v0079",
+      "kind": "verbatim",
+      "text": "He remembereth that we are dust: man's days are as grass, as the flower of the field so shall he flourish.\"[481] IV Does the Active Life precede the Contemplative?",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "aquinas.f.v0080",
+      "kind": "verbatim",
+      "text": "Hence it seems that Orders which are devoted to an active life are superior to those which aim solely at contemplation.",
+      "work": "On prayer and the contemplative life",
+      "lang": "en",
+      "src": {
+        "work": "On prayer and the contemplative life"
+      },
+      "quality": {
+        "chars": 119
+      }
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 152,
+    "formulas": 80,
+    "verbatim": 80,
+    "patterns": 0
+  },
+  "checksum": "sha256:afcc8760f608b6c6526a58e2387e88070a77bcaae2a167eb4e86841861dc22b5"
+}

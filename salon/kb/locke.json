@@ -1,0 +1,2871 @@
+{
+  "authorId": "locke",
+  "kbVersion": "locke@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:50.283Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Second Treatise of Government",
+      "sentences": 77
+    },
+    {
+      "title": "An Essay Concerning Human Understanding",
+      "sentences": 71
+    },
+    {
+      "title": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "sentences": 75
+    }
+  ],
+  "passages": [
+    {
+      "id": "locke.p0001",
+      "w": "Second Treatise of Government",
+      "s": "It cannot be meant, who shall decide the controversy; every one knows what Jephtha here tells us, that the Lord the Judge shall judge.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0002",
+      "w": "Second Treatise of Government",
+      "s": "No body can give more power than he has himself; and he that cannot take away his own life, cannot give another power over it.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0003",
+      "w": "Second Treatise of Government",
+      "s": "Whatsoever then he removes out of the state that nature hath provided, and left it in, he hath mixed his labour with, and joined to it something that is his own, and thereby makes it his property.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0004",
+      "w": "Second Treatise of Government",
+      "s": "Was it a robbery thus to assume to himself what belonged to all in common?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0005",
+      "w": "Second Treatise of Government",
+      "s": "Though the water running in the fountain be every one’s, yet who can doubt, but that in the pitcher is his only who drew it out?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0006",
+      "w": "Second Treatise of Government",
+      "s": "God has given us all things richly, 1 Tim.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0007",
+      "w": "Second Treatise of Government",
+      "s": "Nor will it invalidate his right, to say every body else has an equal title to it; and therefore he cannot appropriate, he cannot inclose, without the consent of all his fellow-commoners, all mankind.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0008",
+      "w": "Second Treatise of Government",
+      "s": "No body could think himself injured by the drinking of another man, though he took a good draught, who had a whole river of the same water left him to quench his thirst: and the case of land and water, where there is enough of both, is perfectly the same.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0009",
+      "w": "Second Treatise of Government",
+      "s": "God commanded, and his wants forced him to labour.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0010",
+      "w": "Second Treatise of Government",
+      "s": "But, on the contrary, the inhabitants think themselves beholden to him, who, by his industry on neglected, and consequently waste land, has increased the stock of corn, which they wanted.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0011",
+      "w": "Second Treatise of Government",
+      "s": "And for the same reason Esau went from his father, and his brother, and planted in mount Seir, Gen.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0012",
+      "w": "Second Treatise of Government",
+      "s": "He that gathered a hundred bushels of acorns or apples, had thereby a property in them, they were his goods as soon as gathered.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0013",
+      "w": "Second Treatise of Government",
+      "s": "It would not be worth the enclosing, and we should see him give up again to the wild common of nature, whatever was more than would supply the conveniencies of life to be had there for him and his family.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0014",
+      "w": "Second Treatise of Government",
+      "s": "This may give one reason to ask, whether this might not be more properly called parental power?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0015",
+      "w": "Second Treatise of Government",
+      "s": "This holds in all the laws a man is under, whether natural or civil.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0016",
+      "w": "Second Treatise of Government",
+      "s": "A child is free by his father’s title, by his father’s understanding, which is to govern him till he hath it of his own.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0017",
+      "w": "Second Treatise of Government",
+      "s": "The freedom then of man, and liberty of acting according to his own will, is grounded on his having reason, which is able to instruct him in that law he is to govern himself by, and make him know how far he is left to the freedom of his own will.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0018",
+      "w": "Second Treatise of Government",
+      "s": "If the father die whilst the children are young, do they not naturally every where owe the same obedience to their mother, during their minority, as to their father were he alive?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0019",
+      "w": "Second Treatise of Government",
+      "s": "The want of distinguishing these two powers, viz.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0020",
+      "w": "Second Treatise of Government",
+      "s": "But both these are very far from a power to make laws, and enforcing them with penalties, that may reach estate, liberty, limbs and life.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0021",
+      "w": "Second Treatise of Government",
+      "s": "Thus it was easy, and almost natural for children, by a tacit, and scarce avoidable consent, to make way for the father’s authority and government.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0022",
+      "w": "Second Treatise of Government",
+      "s": "And herein I think lies the chief, if not the only reason, why the male and female in mankind are tied to a longer conjunction than other creatures, viz.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0023",
+      "w": "Second Treatise of Government",
+      "s": "But there is another sort of servants, which by a peculiar name we call slaves, who being captives taken in a just war, are by the right of nature subjected to the absolute dominion and arbitrary power of their masters.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0024",
+      "w": "Second Treatise of Government",
+      "s": "And where-ever there are any number of men, however associated, that have no such decisive power to appeal to, there they are still in the state of nature.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0025",
+      "w": "Second Treatise of Government",
+      "s": "They are ready to tell you, that it deserves death only to ask after safety.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0026",
+      "w": "Second Treatise of Government",
+      "s": "MEN being, as has been said, by nature, all free, equal, and independent, no one can be put out of this estate, and subjected to the political power of another, without his own consent.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0027",
+      "w": "Second Treatise of Government",
+      "s": "Whosoever therefore out of a state of nature unite into a community, must be understood to give up all the power, necessary to the ends for which they unite into society, to the majority of the community, unless they expresly agreed in any number greater than the majority.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0028",
+      "w": "Second Treatise of Government",
+      "s": "Secondly, It is impossible of right, that men should do so, because all men being born under government, they are to submit to that, and are not at liberty to begin a new one.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0029",
+      "w": "Second Treatise of Government",
+      "s": "But be that as it will, these men, it is evident, were actually free; and whatever superiority some politicians now would place in any of them, they themselves claimed it not, but by consent were all equal, till by the same consent they set rulers over themselves.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0030",
+      "w": "Second Treatise of Government",
+      "s": "If therefore they must have one to rule them, as government is hardly to be avoided amongst men that live together; who so likely to be the man as he that was their common father; unless negligence, cruelty, or any other defect of mind or body made him unfit for it?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0031",
+      "w": "Second Treatise of Government",
+      "s": "The Ammonites making war upon Israel, the Gileadites in fear send to Jephtha, a bastard of their family whom they had cast off, and article with him, if he will assist them against the Ammonites, to make him their ruler; which they do in these words, And the people made him head and captain over them, Judg.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0032",
+      "w": "Second Treatise of Government",
+      "s": "And therefore those, who after Saul’s being solemnly chosen and saluted king by the tribes at Mispah, were unwilling to have him their king, made no other objection but this, How shall this man save us?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0033",
+      "w": "Second Treatise of Government",
+      "s": "I say peaceful, because I shall have occasion in another place to speak of conquest, which some esteem a way of beginning of governments.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0034",
+      "w": "Second Treatise of Government",
+      "s": "All men, say they, are born under government, and therefore they cannot be at liberty to begin a new one.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0035",
+      "w": "Second Treatise of Government",
+      "s": "Not the king of England’s; for he must have leave to be admitted to the privileges of it: nor the king of France’s; for how then has his father a liberty to bring him away, and breed him as he pleases?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0036",
+      "w": "Second Treatise of Government",
+      "s": "The difficulty is, what ought to be looked upon as a tacit consent, and how far it binds, i.e.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0037",
+      "w": "Second Treatise of Government",
+      "s": "IF man in the state of nature be so free, as has been said; if he be absolute lord of his own person and possessions, equal to the greatest, and subject to no body, why will he part with his freedom?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0038",
+      "w": "Second Treatise of Government",
+      "s": "And in this we have the original right and rise of both the legislative and executive power, as well as of the governments and societies themselves.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0039",
+      "w": "Second Treatise of Government",
+      "s": "And so accordingly of these the community may make compounded and mixed forms of government, as they think good.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0040",
+      "w": "Second Treatise of Government",
+      "s": "Thus the law of nature stands as an eternal rule to all men, legislators as well as others.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0041",
+      "w": "Second Treatise of Government",
+      "s": "Hence it is a mistake to think, that the supreme or legislative power of any commonwealth, can do what it will, and dispose of the estates of the subject arbitrarily, or take any part of them at pleasure.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0042",
+      "w": "Second Treatise of Government",
+      "s": "And when the people have said, We will submit to rules, and be governed by laws made by such men, and in such forms, no body else can say other men shall make laws for them; nor can the people be bound by any laws, but such as are enacted by those whom they have chosen, and authorized to make laws for them.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0043",
+      "w": "Second Treatise of Government",
+      "s": "Fourthly, The legislative neither must nor can transfer the power of making laws to any body else, or place it any where, but where the people have.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0044",
+      "w": "Second Treatise of Government",
+      "s": "So that under this consideration, the whole community is one body in the state of nature, in respect of all other states or persons out of its community.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0045",
+      "w": "Second Treatise of Government",
+      "s": "Only thus much, which is necessary to our present purpose, we may take notice of concerning them, that they have no manner of authority, any of them, beyond what is by positive grant and commission delegated to them, and are all of them accountable to some other power in the commonwealth.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0046",
+      "w": "Second Treatise of Government",
+      "s": "The use of force without authority, always puts him that uses it into a state of war, as the aggressor, and renders him liable to be treated accordingly.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0047",
+      "w": "Second Treatise of Government",
+      "s": "A few established laws served the turn, and the discretion and care of the ruler supplied the rest.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0048",
+      "w": "Second Treatise of Government",
+      "s": "Nor let any one think, this lays a perpetual foundation for disorder; for this operates not, till the inconveniency is so great, that the majority feel it, and are weary of it, and find a necessity to have it amended.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0049",
+      "w": "Second Treatise of Government",
+      "s": "And thus captives, taken in a just and lawful war, and such only, are subject to a despotical power, which, as it arises not from compact, so neither is it capable of any, but is the state of war continued: for what compact can be made with a man that is not master of his own life?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0050",
+      "w": "Second Treatise of Government",
+      "s": "But conquest is as far from setting up any government, as demolishing an house is from building a new one in the place.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0051",
+      "w": "Second Treatise of Government",
+      "s": "The only difference is, great robbers punish little ones, to keep them in their obedience; but the great ones are rewarded with laurels and triumphs, because they are too big for the weak hands of justice in this world, and have the power in their own possession, which should punish offenders.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0052",
+      "w": "Second Treatise of Government",
+      "s": "Then they may appeal, as Jephtha did, to heaven, and repeat their appeal till they have recovered the native right of their ancestors, which was, to have such a legislative over them, as the majority should approve, and freely acquiesce in.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0053",
+      "w": "Second Treatise of Government",
+      "s": "And the conquering people are not, I hope, to be slaves by conquest, and wear their laurels only to shew they are sacrifices to their leaders triumph.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0054",
+      "w": "Second Treatise of Government",
+      "s": "This I doubt not, but at first sight will seem a strange doctrine, it being so quite contrary to the practice of the world; there being nothing more familiar in speaking of the dominion of countries, than to say such an one conquered it; as if conquest, without any more ado, conveyed a right of possession.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0055",
+      "w": "Second Treatise of Government",
+      "s": "I could not forfeit their lives; they were not mine to forfeit.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0056",
+      "w": "Second Treatise of Government",
+      "s": "But if that be all, it gives no other title than what bare force gives to the stronger over the weaker: and, by this reason, he that is strongest will have a right to whatever he pleases to seize on.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0057",
+      "w": "Second Treatise of Government",
+      "s": "By the same reason, he that forced a promise from me, ought presently to restore it, i.e.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0058",
+      "w": "Second Treatise of Government",
+      "s": "Secondly, a right, before any other man, to inherit with his brethren his father’s goods.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0059",
+      "w": "Second Treatise of Government",
+      "s": "Grants, promises, and oaths, are bonds that hold the Almighty: whatever some flatterers say to princes of the world, who all together, with all their people joined to them, are, in comparison of the great God, but as a drop of the bucket, or a dust on the balance, inconsiderable, nothing!",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0060",
+      "w": "Second Treatise of Government",
+      "s": "And therefore a king governing in a settled kingdom, leaves to be a king, and degenerates into a tyrant, as soon as he leaves off to rule according to his laws.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0061",
+      "w": "Second Treatise of Government",
+      "s": "May the commands then of a prince be opposed?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0062",
+      "w": "Second Treatise of Government",
+      "s": "The mischief this man does me is a hundred, or possibly a thousand times more than the other perhaps intended me (whom I killed before he really did me any); and yet I might lawfully kill the one, and cannot so much as hurt the other lawfully.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0063",
+      "w": "Second Treatise of Government",
+      "s": "Whenever the society is dissolved, it is certain the government of that society cannot remain.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0064",
+      "w": "Second Treatise of Government",
+      "s": "A single hereditary person, having the constant, supreme, executive power, and with it the power of convoking and dissolving the other two within certain periods of time.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0065",
+      "w": "Second Treatise of Government",
+      "s": "But yet, so far as the other parts of the legislative any way contribute to any attempt upon the government, and do either promote, or not, what lies in them, hinder such designs, they are guilty, and partake in this, which is certainly the greatest crime which men can partake of one towards another.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0066",
+      "w": "Second Treatise of Government",
+      "s": "This, if barely so, is rather mockery than relief; and men can never be secure from tyranny, if there be no means to escape it till they are perfectly under it: and therefore it is, that they have not only a right to get out of it, but to prevent it.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0067",
+      "w": "Second Treatise of Government",
+      "s": "To prepare such an assembly as this, and endeavour to set up the declared abettors of his own will, for the true representatives of the people, and the law-makers of the society, is certainly as great a breach of trust, and as perfect a declaration of a design to subvert the government, as is possible to be met with.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0068",
+      "w": "Second Treatise of Government",
+      "s": "But it will be said, this hypothesis lays a ferment for frequent rebellion.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0069",
+      "w": "Second Treatise of Government",
+      "s": "If the innocent honest man must quietly quit all he has, for peace sake, to him who will lay violent hands upon it, I desire it may be considered, what a kind of peace there will be in the world, which consists only in violence and rapine; and which is to be maintained only for the benefit of robbers and oppressors.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0070",
+      "w": "Second Treatise of Government",
+      "s": "But if they universally have a persuation, grounded upon manifest evidence, that designs are carrying on against their liberties, and the general course and tendency of things cannot but give them strong suspicions of the evil intention of their governors, who is to be blamed for it?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0071",
+      "w": "Second Treatise of Government",
+      "s": "Whosoever uses force without right, as every one does in society, who does it without law, puts himself into a state of war with those against whom he so uses it; and in that state all former ties are cancelled, all other rights cease, and every one has a right to defend himself, and to resist the aggressor.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0072",
+      "w": "Second Treatise of Government",
+      "s": "Huic breviter responsum sit, Populo universo negari defensionem, quae juris naturalis est, neque ultionem quae praeter naturam est adversus regem concedi debere.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0073",
+      "w": "Second Treatise of Government",
+      "s": "But if any one should ask, Must the people then always lay themselves open to the cruelty and rage of tyranny?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0074",
+      "w": "Second Treatise of Government",
+      "s": "Thus far that great advocate of monarchical power allows of resistance.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0075",
+      "w": "Second Treatise of Government",
+      "s": "He therefore who may resist, must be allowed to strike.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0076",
+      "w": "Second Treatise of Government",
+      "s": "His words are, Quid ergo, nulline casus incidere possunt quibus populo sese erigere atque in regem impotentius dominantem arma capere & invadere jure suo suaque authoritate liceat?",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0077",
+      "w": "Second Treatise of Government",
+      "s": "Et de Caligula, quod palam denunciarit se neque civem neque principem senatui amplius fore, inque animo habuerit interempto utriusque ordinis electissimo quoque Alexandriam commigrare, ac ut populum uno ictu interimeret, unam ei cervicem optavit.",
+      "src": {
+        "work": "Second Treatise of Government"
+      }
+    },
+    {
+      "id": "locke.p0078",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Or that the child has any notion or apprehension of that proposition at an age, wherein yet, it is plain, it knows a great many other truths?",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0079",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "JUSTICE, and keeping of contracts, is that which most men seem to agree in.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0080",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "View but an army at the sacking of a town, and see what observation or sense of moral principles, or what touch of conscience for all the outrages they do.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0081",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "It is therefore little less than a contradiction to suppose, that whole nations of men should, both in their professions and practice, unanimously and universally give the lie to what, by the most invincible evidence, every one of them knew to be true, right, and good.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0082",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Yet, after all, universal consent (were there any in moral principles) to truths, the knowledge whereof may be attained otherwise, would scarce prove them to be innate; which is all I contend for.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0083",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But can any one think, or will any one say, that “impossibility” and “identity” are two innate IDEAS?",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0084",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "That the idea the term worship stands for is not in the understanding of children, and a character stamped on the mind in its first original, I think will be easily granted, by any one that considers how few there be amongst grown men who have a clear and distinct notion of it.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0085",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "How, by these means, they come to frame in their minds an idea men have of a Deity, I shall hereafter show.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0086",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The general reception and assent that is given doth not at all prove, that the ideas expressed in them are innate; for in many cases, however the ideas came there, the assent to words expressing the agreement or disagreement of such ideas, will necessarily follow.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0087",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The same may happen concerning the notions we have of the being of a Deity.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0088",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "These two are the fountains of knowledge, from whence all the ideas we have, or can naturally have, do spring.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0089",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, by this account, soul and its ideas, as body and its extension, will begin to exist both at the same time.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0090",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, if Castor’s soul can think, whilst Castor is asleep, what Castor is never conscious of, it is no matter what PLACE it chooses to think in.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0091",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "I would be glad also to learn from these men who so confidently pronounce that the human soul, or, which is all one, that a man always thinks, how they come to know it; nay, how they come to know that they themselves think, when they themselves do not perceive it.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0092",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And yet it is hard to imagine that the rational soul should think so much, and not reason at all.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0093",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "I have here followed the common opinion of man’s having but five senses; though, perhaps, there may be justly counted more;—but either supposition serves equally to my present purpose.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0094",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For (not to go so far as annihilation of any particular body) I ask, whether a man cannot have the idea of the motion of one single body alone, without any other succeeding immediately into its place?",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0095",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The Idea of Perception, and Idea of Willing, we have from Reflection.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0096",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Thus the ideas of heat and cold, light and darkness, white and black, motion and rest, are equally clear and positive ideas in the mind; though, perhaps, some of the causes which produce them are barely privations, in those subjects from whence our senses derive those ideas.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0097",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "They are, in the bodies we denominate from them, only a power to produce those sensations in us: and what is sweet, blue, or warm in idea, is but the certain bulk, figure, and motion of the insensible parts, in the bodies themselves, which we call so.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0098",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The other two are only powers to act differently upon other things: which powers result from the different modifications of those primary qualities.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0099",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Which Ideas appear first is not evident, nor important.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0100",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The pictures drawn in our minds are laid in fading colours; and if not sometimes refreshed, vanish and disappear.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0101",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "It is not enough to have a confused perception of something in general.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0102",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "This is called ABSTRACTION, whereby ideas taken from particular beings become general representatives of all of the same kind; and their names general names, applicable to whatever exists conformable to such abstract ideas.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0103",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "These alone, as far as I can discover, are the windows by which light is let into this DARK ROOM.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0104",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "At least I think it most intelligible, and the best way to avoid confusion, if we use the word extension for an affection of matter or the distance of the extremities of particular solid bodies; and space in the more general signification, for distance, with or without solid matter possessing it.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0105",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Thirdly, The parts of pure space are immovable, which follows from their inseparability; motion being nothing but change of distance between any two things; but this cannot be between parts that are inseparable, which, therefore, must needs be at perpetual rest one amongst another.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0106",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "If body be not supposed infinite, (which I think no one will affirm,) I would ask, whether, if God placed a man at the extremity of corporeal beings, he could not stretch his hand beyond his body?",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0107",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But whether any one will take space to be only a RELATION resulting from the existence of other beings at a distance; or whether they will think the words of the most knowing King Solomon, ‘The heaven, and the heaven of heavens, cannot contain thee;’ or those more emphatical ones of the inspired philosopher St.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0108",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For a man looking upon a body really moving, perceives yet no motion at all unless that motion produces a constant train of successive ideas: v.g.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0109",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The diurnal and annual revolutions of the sun, as having been, from the beginning of nature, constant, regular, and universally observable by all mankind, and supposed equal to one another, have been with reason made use of for the measure of duration.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0110",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, First, by observing what passes in our minds, how our ideas there in train constantly some vanish and others begin to appear, we come by the idea of SUCCESSION.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0111",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Time and Place are taken for so much of either as are set out by the Existence and Motion of Bodies.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0112",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But, how clear soever this idea of the infinity of number be, there is nothing yet more evident than the absurdity of the actual idea of an infinite number.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0113",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Then the idea of SO MUCH is positive and clear.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0114",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Though I suppose nobody thinks it conceivable that anything does or has existed in that future duration.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0115",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "In it the mind observes a great variety of modifications, and from thence receives distinct ideas.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0116",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But it suffices to note, that our ideas of love and hatred are but the dispositions of the mind, in respect of pleasure and pain in general, however caused in us.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0117",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The actual exercise of that power, by directing any particular action, or its forbearance, is that which we call VOLITION or WILLING.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0118",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "This way of talking causes confusion of thought.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0119",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And to this I answer,—The motive for continuing in the same state or action, is only the present satisfaction in it; the motive to change is always some uneasiness: nothing setting us upon the change of state, or upon any new action, but some uneasiness.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0120",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "A little burning felt pushes us more powerfully than greater pleasure in prospect draw or allure.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0121",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But, these set apart the most important and urgent uneasiness we at that time feel, is that which ordinarily determines the will, successively, in that train of voluntary actions which makes up our lives.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0122",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "The Power to suspend the Prosecution of any Desire makes way for consideration.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0123",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Nor let any one say, he cannot govern his passions, nor hinder them from breaking out, and carrying him into action; for what he can do before a prince or a great man, he can do alone, or in the presence of God, if he will.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0124",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Because the indolency and enjoyment we have, sufficing for our present happiness, we desire not to venture the change; since we judge that we are happy already, being content, and that is enough.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0125",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For that being intended for a state of happiness, it must certainly be agreeable to every one’s wish and desire: could we suppose their relishes as different there as they are here, yet the manna in heaven will suit every one’s palate.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0126",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Actions are pleasing or displeasing, either in themselves, or considered as a means to a greater and more desirable end.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0127",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "It is not impossible but that some may think my former notions right; and some (as I have already found) these latter; and some neither.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0128",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "There are therefore three ways whereby we get these complex ideas of mixed modes:—(1) By experience and OBSERVATION of things themselves: thus, by seeing two men mixed wrestle or fence, we get the idea of wrestling or fencing.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0129",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "So that if any one will examine himself concerning his notion of pure substance in general, he will find he has no other idea of it at all, but only a supposition of he knows not what SUPPORT of such qualities which are capable of producing simple ideas in us; which qualities are commonly called accidents.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0130",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "We are able, by our senses, to know and distinguish things: and to examine them so far as to apply them to our uses, and several ways to accommodate the exigences of this life.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0131",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Cohesion of solid parts and Impulse, the primary ideas peculiar to Body.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0132",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "We have likewise the ideas of the several modes of thinking viz.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0133",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "So likewise, when I say Caius is a white man, I have nothing but the bare consideration of a man who hath that white colour.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0134",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Relations all terminate in simple Ideas.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0135",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Thus, when we say a weak man, we mean one that has not so much strength or power to move as usually men have, or usually those of his size have; which is a comparing his strength to the idea we have of the usual strength of men, or men of such a size.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0136",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "It is plain it is nothing but a fit organization or construction of parts to a certain end, which, when a sufficient force is added to it, it is capable to attain.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0137",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "How far this may be an argument against those who would place thinking in a system of fleeting animal spirits, I leave to be considered.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0138",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And the same man being presumed to be the same person, I is easily here supposed to stand also for the same person.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0139",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Now, though these are all reciprocal, as well as the rest, and contain in them a reference of two things one to the other; yet, because one of the two things often wants a relative name, importing that reference, men usually take no notice of it, and the relation is commonly overlooked: v.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0140",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Sunt sua praemia laudi, says Virgil; and so Cicero, Nihil habet natura praestantius, quam honestatem, quam laudem, quam dignitatem, quam decus, which he tells you are all names for the same thing.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0141",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "It would make a volume to go over all sorts of RELATIONS: it is not, therefore, to be expected that I should here mention them all.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0142",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "This, I suppose, needs no application to make it plainer.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0143",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, the more it has of these, the more it has still of the perceivable differences, whereby it is kept separate and distinct from all ideas belonging to other names, even those that approach nearest to it, and thereby all confusion with them is avoided.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0144",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For nothing finite bears any proportion to infinite; and therefore our ideas, which are all finite, cannot bear any.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0145",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "Because, being nothing but the effects of certain powers in things, fitted and ordained by God to produce such sensations in us, they cannot but be correspondent and adequate to those powers: and we are sure they agree to the reality of things.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0146",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "But yet this property has no necessary connexion with that complex idea, or any part of it: and there is no more reason to think that malleableness depends on that colour, weight, and hardness, than that colour or that weight depends on its malleableness.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0147",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "For, since the powers or qualities that are observable by us are not the real essence of that substance, but depend on it, and flow from it, any collection whatsoever of these qualities cannot be the real essence of that thing.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0148",
+      "w": "An Essay Concerning Human Understanding",
+      "s": "And hence it is that men are so forward to suppose, that the abstract ideas they have in their minds are such as agree to the things existing without them, to which they are referred; and are the same also to which the names they give them do by the use and propriety of that language belong.",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      }
+    },
+    {
+      "id": "locke.p0149",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But still subservient to the End of Language, and not made at random.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0150",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But in mixed modes, at least the most considerable parts of them, which are moral beings, we consider the original patterns as being in the mind, and to those we refer for the distinguishing of particular beings under names.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0151",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "That which is essential belongs to it as a condition whereby it is of this or that sort: but take away the consideration of its being ranked under the name of some abstract idea, and then there is nothing necessary to it, nothing inseparable from it.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0152",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "That our ranking and distinguishing natural substances into species consists in the nominal essences the mind makes, and not in the real essences to be found in the things themselves, is further evident from our ideas of spirits.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0153",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Fifthly, The only imaginable help in this case would be, that, having framed perfect complex ideas of the properties of things flowing from their different real essences, we should thereby distinguish them into species.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0154",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Or must the bishop have been consulted, whether it were man enough to be admitted to the font or no?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0155",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "It is true that many particular substances are so made by Nature, that they have agreement and likeness one with another, and so afford a foundation of being ranked into sorts.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0156",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "From what has been said, it is evident that MEN make sorts of things.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0157",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For to them all those other names would be but synonymous terms for the same idea, and signify no more, nor no other thing but a watch.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0158",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Instances of a species of Substance named ZAHAB.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0159",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For let it be ever so true, that all gold, i.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0160",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Fifthly, 'All animals have sense, but a dog is an animal:' here it signifies little more but that the latter proposition is joined to the former, as the minor of a syllogism.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0161",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Communication by Words either for civil or philosophical purposes.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0162",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "They are assemblages of ideas put together at the pleasure of the mind, pursuing its own ends of discourse, and suited to its own notions; whereby it designs not to copy anything really existing, but to denominate and rank things as they come to agree with those archetypes or forms it has made.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0163",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Let us only here consider a little more exactly the fore-mentioned instance of the word GOLD, and we shall see how hard it is precisely to determine its signification.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0164",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "At least they interpose themselves so much between our understandings, and the truth which it would contemplate and apprehend, that, like the medium through which visible objects pass, the obscurity and disorder do not seldom cast a mist before our eyes, and impose upon our understandings.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0165",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "If men should do so in their reckonings, I wonder who would have to do with them?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0166",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "How else comes it to pass that princes, speaking or writing to their servants, in their ordinary commands are easily understood; speaking to their people, in their laws, are not so?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0167",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For, when a man says gold is malleable, he means and would insinuate something more than this, That what I call gold is malleable, (though truly it amounts to no more,) but would have this understood, viz.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0168",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And therefore such application of names as would make them stand for ideas which we have not, must needs cause great disorder in discourses and reasonings about them, and be a great inconvenience in our communication by words.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0169",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Thirdly, Therewith to convey the Knowledge of Things.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0170",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "In Modes and Relations generally, we are liable only to the four first of these inconveniences; viz.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0171",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Let us look into the books of controversy of any kind, there we shall see that the effect of obscure, unsteady, or equivocal terms is nothing but noise and wrangling about sounds, without convincing or bettering a man's understanding.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0172",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Merchants and lovers, cooks and tailors, have words wherewithal to dispatch their ordinary affairs: and so, I think, might philosophers and disputants too, if they had a mind to understand, and to clearly understood.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0173",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And it must be great want of ingenuousness (to say no worse of it) to refuse to do it: since a definition is the only way whereby the precise meaning of moral words can be known; and yet a way whereby their meaning may be known certainly, and without leaving any room for any contest about it.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0174",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Ideas of Substances must also be conformable to Things.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0175",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Our Knowledge conversant about our Ideas only.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0176",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Such kinds of truths the mind perceives at the first sight of the ideas together, by bare intuition; without the intervention of any other idea: and this kind of knowledge is the clearest and most certain that human frailty is capable of.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0177",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But in other simple ideas, whose modes and differences are made and counted by degrees, and not quantity, we have not so nice and accurate a distinction of their differences as to perceive, or find ways to measure, their just equality, or the least differences.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0178",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "The affirmations or negations we make concerning the ideas we have, may, as I have before intimated in general, be reduced to these four sorts, viz.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0179",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Our Knowledge of the Co-existence of Power in Bodies extends but a very little Way.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0180",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "One part of these disadvantages in moral ideas which has made them be thought not capable of demonstration, may in a good measure be remedied by definitions, setting down that collection of simple ideas, which every term shall stand for; and then using the terms steadily and constantly for that precise collection.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0181",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "He that will consider the infinite power, wisdom, and goodness of the Creator of all things will find reason to think it was not all laid out upon so inconsiderable, mean, and impotent a creature as he will find man to be; who in all probability is one of the lowest of all intellectual beings.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0182",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "CERTAINTY and DEMONSTRATION are things we must not, in these matters, pretend to.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0183",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And thus many are ignorant of mathematical truths, not out of any imperfection of their faculties, or uncertainty in the things themselves, but for want of application in acquiring, examining, and by due ways comparing those ideas.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0184",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But I hope, before I have done, to make it evident, that this way of certainty, by the knowledge of our own ideas, goes a little further than bare imagination: and I believe it will appear that all the certainty of general truths a man has lies in nothing else.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0185",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And hence it follows that moral knowledge is as capable of real certainty as mathematics.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0186",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And our ideas being thus true, though not perhaps very exact copies, are yet the subjects of real (as far as we have any) knowledge of them.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0187",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For this or that outward mark of our bodies no more carries with it the hope of an eternal duration, than the fashion of a man's suit gives him reasonable grounds to imagine it will never wear out, or that it will make him immortal.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0188",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "A right joining or separating of signs, i.e.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0189",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Who knows not what odd notions many men's heads are filled with, and what strange ideas all men's brains are capable of?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0190",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "General Truths hardly to be understood, but in verbal Propositions.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0191",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For if, according to the useless imagination of the Schools, any one supposes the term gold to stand for a species of things set out by nature, by a real essence belonging to it, it is evident he knows not what particular substances are of that species; and so cannot with certainty affirm anything universally of gold.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0192",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But how many other extrinsical and possibly very remote bodies do the springs of these admirable machines depend on, which are not vulgarly observed, or so much as thought on; and how many are there which the severest inquiry can never discover?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0193",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Whilst our idea the word MAN stands for is only an imperfect collection of some sensible qualities and powers in him, there is no discernible connexion or repugnance between our specific idea, and the operation of either the parts of hemlock or stones upon his constitution.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0194",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "In Co-existance we have few self-evident Propositions.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0195",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Nor after the knowledge, that the whole is equal to all its parts, does he know that one and two are equal to three, better or more certainly than he did before.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0196",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "They are not of use to help men forward in the advancement of sciences, or new discoveries of yet unknown truths.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0197",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Our intellectual progress is from particulars and involuntary recipiency, through reactive doubt and criticism, into what is at last reasoned faith.].",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0198",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For instance: let MAN be that concerning which you would by these first principles demonstrate anything, and we shall see, that so far as demonstration is by these principles, it is only verbal, and gives us no certain, universal, true proposition, or knowledge, of any being existing without us.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0199",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "What instruction can it carry with it, to tell one that which he hath been told already, or he is supposed to know before?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0200",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For since no abstract idea can be the same with any other but itself, when its abstract name is affirmed of any other term, it can signify no more but this, that it may, or ought to be called by that name; or that these two names signify the same idea.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0201",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "This, then, I think I may take for a truth, which every one's certain knowledge assures him of, beyond the liberty of doubting, viz.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0202",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Two Sorts of Beings, cogitative and incogitative.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0203",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Not material: First, because each Particle of Matter is not cogitative.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0204",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But if I ask you, what that YOU is, which began then to be, you can scarce tell me.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0205",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "This is certain: the confidence that our faculties do not herein deceive us, is the greatest assurance we are capable of concerning the existence of material beings.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0206",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And if our dreamer pleases to try whether the glowing heat of a glass furnace be barely a wandering imagination in a drowsy man's fancy, by putting his hand into it, he may perhaps be wakened into a certainty greater than he could wish, that it is something more than bare imagination.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0207",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "So, having the idea of God and myself, of fear and obedience, I cannot but be sure that God is to be feared and obeyed by me: and this proposition will be certain, concerning man in general, if I have made an abstract idea of such a species, whereof I am one particular.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0208",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "And he who, with Plato, shall place beatitude in the knowledge of God, will have his thoughts raised to other contemplations than those who look not beyond this spot of earth, and those perishing things which are to be had in it.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0209",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "We are able, I imagine, to reach very little general knowledge concerning the species of bodies, and their several properties.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0210",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Our knowledge, as in other things, so in this, has so great a conformity with our sight, that it is neither wholly necessary, nor wholly voluntary.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0211",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Being that which makes us presume Things to be true, before we know them to be so.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0212",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Without this, the greatest part of men must be either very sceptics; or change every moment, and yield themselves up to whoever, having lately studied the question, offers them arguments, which, for want of memory, they are not able presently to answer.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0213",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Unquestionable Testimony, and our own Experience that a thing is for the most part so, produce Confidence.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0214",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But the further still it is from the original, the less valid it is, and has always less force in the mouth or writing of him that last made use of it than in his from whom he received it.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0215",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "ONLY WE MUST BE SURE THAT IT BE A DIVINE REVELATION, AND THAT WE UNDERSTAND IT RIGHT: else we shall expose ourselves to all the extravagancy of enthusiasm, and all the error of wrong principles, if we have faith and assurance in what is not DIVINE revelation.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0216",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Tell a country gentlewoman that the wind is south-west, and the weather lowering, and like to rain, and she will easily understand it is not safe for her to go abroad thin clad in such a day, after a fever: she clearly sees the probable connexion of all these, viz.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0217",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "REASON, though it penetrates into the depths of the sea and earth, elevates our thoughts as high as the stars, and leads us through the vast spaces and large rooms of this mighty fabric, yet it comes far short of the real extent of even corporeal being.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0218",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "But though we have, here and there, a little of this clear light, some sparks of bright knowledge, yet the greatest part of our ideas are such, that we cannot discern their agreement or disagreement by an immediate comparing them.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0219",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Whoever backs his tenets with such authorities, thinks he ought thereby to carry the cause, and is ready to style it impudence in any one who shall stand out against them.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0220",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "For he governs his assent right, and places it as he should, who, in any case or matter whatsoever, believes or disbelieves according as reason directs him.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0221",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "So God might, by revelation, discover the truth of any proposition in Euclid; as well as men, by the natural use of their faculties, come to make the discovery themselves.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0222",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "Revelation in Matters where Reason cannot judge, or but probably, ought to be hearkened to.",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    },
+    {
+      "id": "locke.p0223",
+      "w": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "s": "(for of those it is obvious to inquire.) Have the bulk of mankind no other guide but accident and blind chance to conduct them to their happiness or misery?",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "locke.f.v0001",
+      "kind": "verbatim",
+      "text": "It cannot be meant, who shall decide the controversy; every one knows what Jephtha here tells us, that the Lord the Judge shall judge.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "locke.f.v0002",
+      "kind": "verbatim",
+      "text": "Whatsoever then he removes out of the state that nature hath provided, and left it in, he hath mixed his labour with, and joined to it something that is his own, and thereby makes it his property.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "locke.f.v0003",
+      "kind": "verbatim",
+      "text": "Nor will it invalidate his right, to say every body else has an equal title to it; and therefore he cannot appropriate, he cannot inclose, without the consent of all his fellow-commoners, all mankind.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "locke.f.v0004",
+      "kind": "verbatim",
+      "text": "No body could think himself injured by the drinking of another man, though he took a good draught, who had a whole river of the same water left him to quench his thirst: and the case of land and water, where there is enough of both, is perfectly the same.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "locke.f.v0005",
+      "kind": "verbatim",
+      "text": "It would not be worth the enclosing, and we should see him give up again to the wild common of nature, whatever was more than would supply the conveniencies of life to be had there for him and his family.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "locke.f.v0006",
+      "kind": "verbatim",
+      "text": "The freedom then of man, and liberty of acting according to his own will, is grounded on his having reason, which is able to instruct him in that law he is to govern himself by, and make him know how far he is left to the freedom of his own will.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "locke.f.v0007",
+      "kind": "verbatim",
+      "text": "If the father die whilst the children are young, do they not naturally every where owe the same obedience to their mother, during their minority, as to their father were he alive?",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "locke.f.v0008",
+      "kind": "verbatim",
+      "text": "MEN being, as has been said, by nature, all free, equal, and independent, no one can be put out of this estate, and subjected to the political power of another, without his own consent.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "locke.f.v0009",
+      "kind": "verbatim",
+      "text": "Whosoever therefore out of a state of nature unite into a community, must be understood to give up all the power, necessary to the ends for which they unite into society, to the majority of the community, unless they expresly agreed in any number greater than the majority.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 273
+      }
+    },
+    {
+      "id": "locke.f.v0010",
+      "kind": "verbatim",
+      "text": "Secondly, It is impossible of right, that men should do so, because all men being born under government, they are to submit to that, and are not at liberty to begin a new one.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "locke.f.v0011",
+      "kind": "verbatim",
+      "text": "If therefore they must have one to rule them, as government is hardly to be avoided amongst men that live together; who so likely to be the man as he that was their common father; unless negligence, cruelty, or any other defect of mind or body made him unfit for it?",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "locke.f.v0012",
+      "kind": "verbatim",
+      "text": "The Ammonites making war upon Israel, the Gileadites in fear send to Jephtha, a bastard of their family whom they had cast off, and article with him, if he will assist them against the Ammonites, to make him their ruler; which they do in these words, And the people made him head and captain over them, Judg.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 308
+      }
+    },
+    {
+      "id": "locke.f.v0013",
+      "kind": "verbatim",
+      "text": "I say peaceful, because I shall have occasion in another place to speak of conquest, which some esteem a way of beginning of governments.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "locke.f.v0014",
+      "kind": "verbatim",
+      "text": "Not the king of England’s; for he must have leave to be admitted to the privileges of it: nor the king of France’s; for how then has his father a liberty to bring him away, and breed him as he pleases?",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "locke.f.v0015",
+      "kind": "verbatim",
+      "text": "IF man in the state of nature be so free, as has been said; if he be absolute lord of his own person and possessions, equal to the greatest, and subject to no body, why will he part with his freedom?",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "locke.f.v0016",
+      "kind": "verbatim",
+      "text": "Hence it is a mistake to think, that the supreme or legislative power of any commonwealth, can do what it will, and dispose of the estates of the subject arbitrarily, or take any part of them at pleasure.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 204
+      }
+    },
+    {
+      "id": "locke.f.v0017",
+      "kind": "verbatim",
+      "text": "Fourthly, The legislative neither must nor can transfer the power of making laws to any body else, or place it any where, but where the people have.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "locke.f.v0018",
+      "kind": "verbatim",
+      "text": "Only thus much, which is necessary to our present purpose, we may take notice of concerning them, that they have no manner of authority, any of them, beyond what is by positive grant and commission delegated to them, and are all of them accountable to some other power in the commonwealth.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "locke.f.v0019",
+      "kind": "verbatim",
+      "text": "The use of force without authority, always puts him that uses it into a state of war, as the aggressor, and renders him liable to be treated accordingly.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 153
+      }
+    },
+    {
+      "id": "locke.f.v0020",
+      "kind": "verbatim",
+      "text": "Nor let any one think, this lays a perpetual foundation for disorder; for this operates not, till the inconveniency is so great, that the majority feel it, and are weary of it, and find a necessity to have it amended.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "locke.f.v0021",
+      "kind": "verbatim",
+      "text": "The only difference is, great robbers punish little ones, to keep them in their obedience; but the great ones are rewarded with laurels and triumphs, because they are too big for the weak hands of justice in this world, and have the power in their own possession, which should punish offenders.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "locke.f.v0022",
+      "kind": "verbatim",
+      "text": "This I doubt not, but at first sight will seem a strange doctrine, it being so quite contrary to the practice of the world; there being nothing more familiar in speaking of the dominion of countries, than to say such an one conquered it; as if conquest, without any more ado, conveyed a right of possession.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 307
+      }
+    },
+    {
+      "id": "locke.f.v0023",
+      "kind": "verbatim",
+      "text": "Grants, promises, and oaths, are bonds that hold the Almighty: whatever some flatterers say to princes of the world, who all together, with all their people joined to them, are, in comparison of the great God, but as a drop of the bucket, or a dust on the balance, inconsiderable, nothing!",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "locke.f.v0024",
+      "kind": "verbatim",
+      "text": "The mischief this man does me is a hundred, or possibly a thousand times more than the other perhaps intended me (whom I killed before he really did me any); and yet I might lawfully kill the one, and cannot so much as hurt the other lawfully.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "locke.f.v0025",
+      "kind": "verbatim",
+      "text": "A single hereditary person, having the constant, supreme, executive power, and with it the power of convoking and dissolving the other two within certain periods of time.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "locke.f.v0026",
+      "kind": "verbatim",
+      "text": "This, if barely so, is rather mockery than relief; and men can never be secure from tyranny, if there be no means to escape it till they are perfectly under it: and therefore it is, that they have not only a right to get out of it, but to prevent it.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "locke.f.v0027",
+      "kind": "verbatim",
+      "text": "To prepare such an assembly as this, and endeavour to set up the declared abettors of his own will, for the true representatives of the people, and the law-makers of the society, is certainly as great a breach of trust, and as perfect a declaration of a design to subvert the government, as is possible to be met with.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 318
+      }
+    },
+    {
+      "id": "locke.f.v0028",
+      "kind": "verbatim",
+      "text": "If the innocent honest man must quietly quit all he has, for peace sake, to him who will lay violent hands upon it, I desire it may be considered, what a kind of peace there will be in the world, which consists only in violence and rapine; and which is to be maintained only for the benefit of robbers and oppressors.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 317
+      }
+    },
+    {
+      "id": "locke.f.v0029",
+      "kind": "verbatim",
+      "text": "Whosoever uses force without right, as every one does in society, who does it without law, puts himself into a state of war with those against whom he so uses it; and in that state all former ties are cancelled, all other rights cease, and every one has a right to defend himself, and to resist the aggressor.",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 309
+      }
+    },
+    {
+      "id": "locke.f.v0030",
+      "kind": "verbatim",
+      "text": "Huic breviter responsum sit, Populo universo negari defensionem, quae juris naturalis est, neque ultionem quae praeter naturam est adversus regem concedi debere.",
+      "work": "Second Treatise of Government",
+      "lang": "fr",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "locke.f.v0031",
+      "kind": "verbatim",
+      "text": "His words are, Quid ergo, nulline casus incidere possunt quibus populo sese erigere atque in regem impotentius dominantem arma capere & invadere jure suo suaque authoritate liceat?",
+      "work": "Second Treatise of Government",
+      "lang": "en",
+      "src": {
+        "work": "Second Treatise of Government"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "locke.f.v0032",
+      "kind": "verbatim",
+      "text": "View but an army at the sacking of a town, and see what observation or sense of moral principles, or what touch of conscience for all the outrages they do.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "locke.f.v0033",
+      "kind": "verbatim",
+      "text": "It is therefore little less than a contradiction to suppose, that whole nations of men should, both in their professions and practice, unanimously and universally give the lie to what, by the most invincible evidence, every one of them knew to be true, right, and good.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "locke.f.v0034",
+      "kind": "verbatim",
+      "text": "That the idea the term worship stands for is not in the understanding of children, and a character stamped on the mind in its first original, I think will be easily granted, by any one that considers how few there be amongst grown men who have a clear and distinct notion of it.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "locke.f.v0035",
+      "kind": "verbatim",
+      "text": "The general reception and assent that is given doth not at all prove, that the ideas expressed in them are innate; for in many cases, however the ideas came there, the assent to words expressing the agreement or disagreement of such ideas, will necessarily follow.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "locke.f.v0036",
+      "kind": "verbatim",
+      "text": "I would be glad also to learn from these men who so confidently pronounce that the human soul, or, which is all one, that a man always thinks, how they come to know it; nay, how they come to know that they themselves think, when they themselves do not perceive it.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 264
+      }
+    },
+    {
+      "id": "locke.f.v0037",
+      "kind": "verbatim",
+      "text": "I have here followed the common opinion of man’s having but five senses; though, perhaps, there may be justly counted more;—but either supposition serves equally to my present purpose.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "locke.f.v0038",
+      "kind": "verbatim",
+      "text": "They are, in the bodies we denominate from them, only a power to produce those sensations in us: and what is sweet, blue, or warm in idea, is but the certain bulk, figure, and motion of the insensible parts, in the bodies themselves, which we call so.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "locke.f.v0039",
+      "kind": "verbatim",
+      "text": "The other two are only powers to act differently upon other things: which powers result from the different modifications of those primary qualities.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "locke.f.v0040",
+      "kind": "verbatim",
+      "text": "This is called ABSTRACTION, whereby ideas taken from particular beings become general representatives of all of the same kind; and their names general names, applicable to whatever exists conformable to such abstract ideas.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "locke.f.v0041",
+      "kind": "verbatim",
+      "text": "At least I think it most intelligible, and the best way to avoid confusion, if we use the word extension for an affection of matter or the distance of the extremities of particular solid bodies; and space in the more general signification, for distance, with or without solid matter possessing it.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "locke.f.v0042",
+      "kind": "verbatim",
+      "text": "Thirdly, The parts of pure space are immovable, which follows from their inseparability; motion being nothing but change of distance between any two things; but this cannot be between parts that are inseparable, which, therefore, must needs be at perpetual rest one amongst another.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "locke.f.v0043",
+      "kind": "verbatim",
+      "text": "If body be not supposed infinite, (which I think no one will affirm,) I would ask, whether, if God placed a man at the extremity of corporeal beings, he could not stretch his hand beyond his body?",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "locke.f.v0044",
+      "kind": "verbatim",
+      "text": "The diurnal and annual revolutions of the sun, as having been, from the beginning of nature, constant, regular, and universally observable by all mankind, and supposed equal to one another, have been with reason made use of for the measure of duration.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "locke.f.v0045",
+      "kind": "verbatim",
+      "text": "Nor let any one say, he cannot govern his passions, nor hinder them from breaking out, and carrying him into action; for what he can do before a prince or a great man, he can do alone, or in the presence of God, if he will.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "locke.f.v0046",
+      "kind": "verbatim",
+      "text": "Because the indolency and enjoyment we have, sufficing for our present happiness, we desire not to venture the change; since we judge that we are happy already, being content, and that is enough.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "locke.f.v0047",
+      "kind": "verbatim",
+      "text": "It is not impossible but that some may think my former notions right; and some (as I have already found) these latter; and some neither.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "locke.f.v0048",
+      "kind": "verbatim",
+      "text": "There are therefore three ways whereby we get these complex ideas of mixed modes:—(1) By experience and OBSERVATION of things themselves: thus, by seeing two men mixed wrestle or fence, we get the idea of wrestling or fencing.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "locke.f.v0049",
+      "kind": "verbatim",
+      "text": "We are able, by our senses, to know and distinguish things: and to examine them so far as to apply them to our uses, and several ways to accommodate the exigences of this life.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "locke.f.v0050",
+      "kind": "verbatim",
+      "text": "It is plain it is nothing but a fit organization or construction of parts to a certain end, which, when a sufficient force is added to it, it is capable to attain.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "locke.f.v0051",
+      "kind": "verbatim",
+      "text": "How far this may be an argument against those who would place thinking in a system of fleeting animal spirits, I leave to be considered.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "locke.f.v0052",
+      "kind": "verbatim",
+      "text": "Now, though these are all reciprocal, as well as the rest, and contain in them a reference of two things one to the other; yet, because one of the two things often wants a relative name, importing that reference, men usually take no notice of it, and the relation is commonly overlooked: v.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "locke.f.v0053",
+      "kind": "verbatim",
+      "text": "Sunt sua praemia laudi, says Virgil; and so Cicero, Nihil habet natura praestantius, quam honestatem, quam laudem, quam dignitatem, quam decus, which he tells you are all names for the same thing.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "locke.f.v0054",
+      "kind": "verbatim",
+      "text": "Because, being nothing but the effects of certain powers in things, fitted and ordained by God to produce such sensations in us, they cannot but be correspondent and adequate to those powers: and we are sure they agree to the reality of things.",
+      "work": "An Essay Concerning Human Understanding",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Human Understanding"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "locke.f.v0055",
+      "kind": "verbatim",
+      "text": "That which is essential belongs to it as a condition whereby it is of this or that sort: but take away the consideration of its being ranked under the name of some abstract idea, and then there is nothing necessary to it, nothing inseparable from it.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "locke.f.v0056",
+      "kind": "verbatim",
+      "text": "That our ranking and distinguishing natural substances into species consists in the nominal essences the mind makes, and not in the real essences to be found in the things themselves, is further evident from our ideas of spirits.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "locke.f.v0057",
+      "kind": "verbatim",
+      "text": "Fifthly, The only imaginable help in this case would be, that, having framed perfect complex ideas of the properties of things flowing from their different real essences, we should thereby distinguish them into species.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "locke.f.v0058",
+      "kind": "verbatim",
+      "text": "It is true that many particular substances are so made by Nature, that they have agreement and likeness one with another, and so afford a foundation of being ranked into sorts.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "locke.f.v0059",
+      "kind": "verbatim",
+      "text": "Fifthly, 'All animals have sense, but a dog is an animal:' here it signifies little more but that the latter proposition is joined to the former, as the minor of a syllogism.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "locke.f.v0060",
+      "kind": "verbatim",
+      "text": "They are assemblages of ideas put together at the pleasure of the mind, pursuing its own ends of discourse, and suited to its own notions; whereby it designs not to copy anything really existing, but to denominate and rank things as they come to agree with those archetypes or forms it has made.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 295
+      }
+    },
+    {
+      "id": "locke.f.v0061",
+      "kind": "verbatim",
+      "text": "Let us only here consider a little more exactly the fore-mentioned instance of the word GOLD, and we shall see how hard it is precisely to determine its signification.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "locke.f.v0062",
+      "kind": "verbatim",
+      "text": "At least they interpose themselves so much between our understandings, and the truth which it would contemplate and apprehend, that, like the medium through which visible objects pass, the obscurity and disorder do not seldom cast a mist before our eyes, and impose upon our understandings.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "locke.f.v0063",
+      "kind": "verbatim",
+      "text": "How else comes it to pass that princes, speaking or writing to their servants, in their ordinary commands are easily understood; speaking to their people, in their laws, are not so?",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "locke.f.v0064",
+      "kind": "verbatim",
+      "text": "Let us look into the books of controversy of any kind, there we shall see that the effect of obscure, unsteady, or equivocal terms is nothing but noise and wrangling about sounds, without convincing or bettering a man's understanding.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 234
+      }
+    },
+    {
+      "id": "locke.f.v0065",
+      "kind": "verbatim",
+      "text": "Merchants and lovers, cooks and tailors, have words wherewithal to dispatch their ordinary affairs: and so, I think, might philosophers and disputants too, if they had a mind to understand, and to clearly understood.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "locke.f.v0066",
+      "kind": "verbatim",
+      "text": "Such kinds of truths the mind perceives at the first sight of the ideas together, by bare intuition; without the intervention of any other idea: and this kind of knowledge is the clearest and most certain that human frailty is capable of.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "locke.f.v0067",
+      "kind": "verbatim",
+      "text": "The affirmations or negations we make concerning the ideas we have, may, as I have before intimated in general, be reduced to these four sorts, viz.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "locke.f.v0068",
+      "kind": "verbatim",
+      "text": "One part of these disadvantages in moral ideas which has made them be thought not capable of demonstration, may in a good measure be remedied by definitions, setting down that collection of simple ideas, which every term shall stand for; and then using the terms steadily and constantly for that precise collection.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 315
+      }
+    },
+    {
+      "id": "locke.f.v0069",
+      "kind": "verbatim",
+      "text": "He that will consider the infinite power, wisdom, and goodness of the Creator of all things will find reason to think it was not all laid out upon so inconsiderable, mean, and impotent a creature as he will find man to be; who in all probability is one of the lowest of all intellectual beings.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "locke.f.v0070",
+      "kind": "verbatim",
+      "text": "Whilst our idea the word MAN stands for is only an imperfect collection of some sensible qualities and powers in him, there is no discernible connexion or repugnance between our specific idea, and the operation of either the parts of hemlock or stones upon his constitution.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "locke.f.v0071",
+      "kind": "verbatim",
+      "text": "Nor after the knowledge, that the whole is equal to all its parts, does he know that one and two are equal to three, better or more certainly than he did before.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "locke.f.v0072",
+      "kind": "verbatim",
+      "text": "Our intellectual progress is from particulars and involuntary recipiency, through reactive doubt and criticism, into what is at last reasoned faith.].",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 150
+      }
+    },
+    {
+      "id": "locke.f.v0073",
+      "kind": "verbatim",
+      "text": "This is certain: the confidence that our faculties do not herein deceive us, is the greatest assurance we are capable of concerning the existence of material beings.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "locke.f.v0074",
+      "kind": "verbatim",
+      "text": "Our knowledge, as in other things, so in this, has so great a conformity with our sight, that it is neither wholly necessary, nor wholly voluntary.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "locke.f.v0075",
+      "kind": "verbatim",
+      "text": "Without this, the greatest part of men must be either very sceptics; or change every moment, and yield themselves up to whoever, having lately studied the question, offers them arguments, which, for want of memory, they are not able presently to answer.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "locke.f.v0076",
+      "kind": "verbatim",
+      "text": "ONLY WE MUST BE SURE THAT IT BE A DIVINE REVELATION, AND THAT WE UNDERSTAND IT RIGHT: else we shall expose ourselves to all the extravagancy of enthusiasm, and all the error of wrong principles, if we have faith and assurance in what is not DIVINE revelation.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "locke.f.v0077",
+      "kind": "verbatim",
+      "text": "Tell a country gentlewoman that the wind is south-west, and the weather lowering, and like to rain, and she will easily understand it is not safe for her to go abroad thin clad in such a day, after a fever: she clearly sees the probable connexion of all these, viz.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 265
+      }
+    },
+    {
+      "id": "locke.f.v0078",
+      "kind": "verbatim",
+      "text": "REASON, though it penetrates into the depths of the sea and earth, elevates our thoughts as high as the stars, and leads us through the vast spaces and large rooms of this mighty fabric, yet it comes far short of the real extent of even corporeal being.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 253
+      }
+    },
+    {
+      "id": "locke.f.v0079",
+      "kind": "verbatim",
+      "text": "Whoever backs his tenets with such authorities, thinks he ought thereby to carry the cause, and is ready to style it impudence in any one who shall stand out against them.",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "locke.f.v0080",
+      "kind": "verbatim",
+      "text": "(for of those it is obvious to inquire.) Have the bulk of mankind no other guide but accident and blind chance to conduct them to their happiness or misery?",
+      "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4",
+      "lang": "en",
+      "src": {
+        "work": "An Essay Concerning Humane Understanding, Volume 2&#13; MDCXC, Based on the 2nd Edition, Books 3 and 4"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "locke.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 5,
+      "worksSpan": 3,
+      "examples": [
+        "If the father die whilst the children are young, do they not naturally every where owe the same obedience to their mother, during their minority, as to their father were he alive?",
+        "If therefore they must have one to rule them, as government is hardly to be avoided amongst men that live together; who so likely to be the man as he that was their common father; unless negligence, cruelty, or any other defect of mind or body made him unfit for it?"
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 223,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:7c85740a59e96f4dda32ed1797d775b838eaae47dfc717afee3dbddebd6665bd"
+}

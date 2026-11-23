@@ -1,0 +1,3303 @@
+{
+  "authorId": "ciceron",
+  "kbVersion": "ciceron@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:50.130Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "De Officiis",
+      "sentences": 56
+    },
+    {
+      "title": "Treatises on Friendship and Old Age",
+      "sentences": 56
+    },
+    {
+      "title": "Cicero's Tusculan Disputations",
+      "sentences": 53
+    },
+    {
+      "title": "The republic of Cicero",
+      "sentences": 54
+    },
+    {
+      "title": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "sentences": 57
+    }
+  ],
+  "passages": [
+    {
+      "id": "ciceron.p0001",
+      "w": "De Officiis",
+      "s": "Again, there are certain duties that we owe even to those who have wronged us.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0002",
+      "w": "De Officiis",
+      "s": "But those wars which have glory for their end must be carried on with less bitterness.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0003",
+      "w": "De Officiis",
+      "s": "Id autem tantum abest ab[37] officio, ut nihil magis officio possit esse contrarium.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0004",
+      "w": "De Officiis",
+      "s": "Hence there is an open field for orators on the subjects of Marathon, Salamis, Plataea, Thermopylae, and Leuctra, and hence our own Cocles, the Decii, Gnaeus and Publius Scipio, Marcus Marcellus, and countless others, and, above all, the Roman People as a nation are celebrated for greatness of spirit.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0005",
+      "w": "De Officiis",
+      "s": "For we must agree that it takes a brave and heroic soul to hold as slight what most people think grand and glorious, and to disregard it from fixed and settled principles.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0006",
+      "w": "De Officiis",
+      "s": "Fortis vero animi et constantis est non perturbari in rebus asperis nec tumultuantem de gradu deici, ut dicitur, sed praesenti animo uti et consilio nec a ratione discedere.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0007",
+      "w": "De Officiis",
+      "s": "In carrying out such enterprises, some run the risk of losing their lives, others their reputation and the good-will of their fellow-citizens.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0008",
+      "w": "De Officiis",
+      "s": "For if anyone proceeds in a passion to inflict punishment, he will never observe that happy mean which lies between excess and defect.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0009",
+      "w": "De Officiis",
+      "s": "But it will rest with the poets to decide, according to the individual characters, what is proper for each; but to us Nature herself has assigned a character of surpassing excellence, far superior to that of all other living creatures, and in accordance with that we shall have to decide what propriety requires.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0010",
+      "w": "De Officiis",
+      "s": "They are lovers of truth, haters of fraud.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0011",
+      "w": "De Officiis",
+      "s": "If not, it must be made gradually, step by step, just as, when friendships become no longer pleasing or desirable, it is more proper (so wise men think) to undo the bond little by little than to sever it at a stroke.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0012",
+      "w": "De Officiis",
+      "s": "But the propriety to which I refer shows itself also in every deed, in every word, even in every movement and attitude of the body.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0013",
+      "w": "De Officiis",
+      "s": "We must follow the same principle in regard to dress.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0014",
+      "w": "De Officiis",
+      "s": "Horum tamen trium praestantissimum est appetitum optemperare rationi.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0015",
+      "w": "De Officiis",
+      "s": "Ut, si qui, cum causam sit acturus, in itinere aut in ambulatione secum ipse meditetur, aut si quid aliud attentius cogitet, non reprehendatur, at hoc idem si in convivio faciat, inhumanus videatur inscitia temporis.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0016",
+      "w": "De Officiis",
+      "s": "And this is the natural sequence; for discreet action will presuppose learning and practical wisdom; it follows, therefore, that discreet action is of more value than wise (but inactive) speculation.] So much must suffice for this topic.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0017",
+      "w": "De Officiis",
+      "s": "For what, in the name of heaven, is more to be desired than wisdom?",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0018",
+      "w": "De Officiis",
+      "s": "The usage of this word has been corrupted and perverted and has gradually come to the point where, separating moral rectitude from expediency, it is accepted that a thing may be morally right without being expedient, and expedient without being morally right.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0019",
+      "w": "De Officiis",
+      "s": "Omnium autem rerum nec aptius est quicquam ad opes tuendas ac tenendas quam diligi nec alienius quam timeri.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0020",
+      "w": "De Officiis",
+      "s": "And indeed no power is strong enough to be lasting, if it labours under the weight of fear.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0021",
+      "w": "De Officiis",
+      "s": "For in just this one point there is but little difference between the greatest and the ordinary man; and friendship is to be cultivated almost equally by both.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0022",
+      "w": "De Officiis",
+      "s": "But Gaius Laelius--the one surnamed \"the Wise\"--in his praetorship crushed his power, reduced him to terms, and so checked his intrepid daring, that he left to his successors an easy conquest.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0023",
+      "w": "De Officiis",
+      "s": "Atque ea quidem tua laus pariter cum re publica cecidit.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0024",
+      "w": "De Officiis",
+      "s": "Mihi autem ille fructus liberalitatis, cuius pauca exempla posui, multo et maior videtur et certior.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0025",
+      "w": "De Officiis",
+      "s": "But in so doing they should keep within their means, as I myself did.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0026",
+      "w": "De Officiis",
+      "s": "But in selecting worthy cases, we ought to use judgment and discretion.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0027",
+      "w": "De Officiis",
+      "s": "Of what concern to any one of us is the size of another man's fortune?",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0028",
+      "w": "De Officiis",
+      "s": "For the chief purpose in the establishment of constitutional state and municipal governments was that individual property rights might be secured.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0029",
+      "w": "De Officiis",
+      "s": "He preferred to adorn Italy rather than his own house.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0030",
+      "w": "De Officiis",
+      "s": "These principles Xenophon, a pupil of Socrates, has set forth most happily in his book entitled \"Oeconomicus.\" When I was about your present age, I translated it from the Greek into Latin.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0031",
+      "w": "De Officiis",
+      "s": "I wish I could say the same of myself and say it truly.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0032",
+      "w": "De Officiis",
+      "s": "Besides, he promises at the close of the third book that he will discuss this division also in its proper turn.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0033",
+      "w": "De Officiis",
+      "s": "If anyone will hearken to that voice (and all will hearken to it who wish to live in accord with nature's laws), he will never be guilty of coveting anything that is his neighbour's or of appropriating to himself what he has taken from his neighbour.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0034",
+      "w": "De Officiis",
+      "s": "But if such is not the case, each one must bear his own burden of distress rather than rob a neighbour of his rights.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0035",
+      "w": "De Officiis",
+      "s": "But if upon closer inspection one sees that there is some immorality connected with what presents the appearance of expediency, then one is not necessarily to sacrifice expediency but to recognize that there can be no expediency where there is immorality.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0036",
+      "w": "De Officiis",
+      "s": "Illa praeclara, in quibus publicae utilitatis species prae honestate contemnitur.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0037",
+      "w": "De Officiis",
+      "s": "Cui fit iniuria?\" *52* Exoritur Antipatri ratio ex altera parte: \"Quid ais?",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0038",
+      "w": "De Officiis",
+      "s": "At all events he would be no candid or sincere or straightforward or upright or honest man, but rather one who is shifty, sly, artful, shrewd, underhand, cunning, one grown old in fraud and subtlety.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0039",
+      "w": "De Officiis",
+      "s": "Sed huius modi reticentiae iure civili comprehendi[327] non possunt; quae autem possunt, diligenter tenentur.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0040",
+      "w": "De Officiis",
+      "s": "Prudentia est enim locata in dilectu bonorum et malorum, malitia, si omnia, quae turpia sunt, mala sunt, mala bonis ponit ante.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0041",
+      "w": "De Officiis",
+      "s": "Quod quo facilius optinerent, scripserunt heredes secum M.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0042",
+      "w": "De Officiis",
+      "s": "In joint session they drafted an ordinance, defining the penalty and the methods of procedure in cases of violation of the ordinance, and agreed that they should all appear together upon the rostra in the afternoon to publish it.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0043",
+      "w": "De Officiis",
+      "s": "Again, when people disregard everything that is morally right and true, if only they may secure power thereby, #(3) Pompey,# are they not pursuing the same course as he[BR] who wished to have as a father-in-law the man by whose effrontery he might gain power for himself?",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0044",
+      "w": "De Officiis",
+      "s": "If supremacy is to be sought for the sake of glory, crime should be excluded, for there can be no glory in crime; but if it is power for its own sake that is sought, whatever the price, it cannot be expedient if it is linked with shame.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0045",
+      "w": "De Officiis",
+      "s": "When Neptune offered him three wishes, he wished for the death of his son Hippolytus, because the father was suspicious of the son's relations with his step-mother.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0046",
+      "w": "De Officiis",
+      "s": "The trick was not morally right, but, some one may perhaps say, \"It was expedient for him to keep his throne and live at ease in Ithaca with parents, wife, and son.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0047",
+      "w": "De Officiis",
+      "s": "Néque dedi neque do ínfideli cuíquam quamquam ab impio rege dicitur, luculente tamen dicitur.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0048",
+      "w": "De Officiis",
+      "s": "Quare ex multis mirabilibus exemplis haud facile quis dixerit hoc exemplo aut laudabilius aut praestantius.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0049",
+      "w": "De Officiis",
+      "s": "When the son, who was then a young man, heard that his father was in trouble on his account, he hastened to Rome--so the story goes--and at daybreak presented himself at the house of Pomponius.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0050",
+      "w": "De Officiis",
+      "s": "Restat quarta pars, quae decore, moderatione, modestia, continentia, temperantia continetur.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0051",
+      "w": "De Officiis",
+      "s": "Aequians, a warlike mountain tribe on the upper Anio, warring against Rome (till 304), I, 35.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0052",
+      "w": "De Officiis",
+      "s": "Aratus, of Sicyon, soldier and statesman (271-213), removed the tyrant Nicocles (251) and averted financial ruin, II, 81, 82; leader of the Achaean League; poisoned by order of Philip of Macedon.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0053",
+      "w": "De Officiis",
+      "s": "Capitolium, the Capitoline Hill, between the forum and the Tiber, the citadel of Rome, with the temple of Jupiter and Good Faith, III, 104; place of augury, III, 66.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0054",
+      "w": "De Officiis",
+      "s": "Evil, the supreme, I, 5; III, 119; not pain, I, 5; III, 105, 117; but moral wrong, III, 105, 106; the only, III, 106.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0055",
+      "w": "De Officiis",
+      "s": "Honesty, the bond of human society, III, 21 fg.; the corner-stone of government, II, 78 fg.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0056",
+      "w": "De Officiis",
+      "s": "Macedonia, until the time of Philip a small country north of Thessaly, I, 37.",
+      "src": {
+        "work": "De Officiis"
+      }
+    },
+    {
+      "id": "ciceron.p0057",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "He never was a candidate for the consulship, yet was elected consul twice: the first time before the legal age; the second at a time which, as far as he was concerned, was soon enough, but was near being too late for the interests of the State.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0058",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Only a few days before his death--as though he had a presentiment of what was coming--he discoursed for three days on the state of the republic.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0059",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "What makes me care the more about this is the fact that in all history there are scarcely three or four pairs of friends on record; and it is classed with them that I cherish a hope of the friendship of Scipio and Laelius being known to posterity.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0060",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Such men as these being generally accounted \"good,\" let us agree to call them so, on the ground that to the best of human ability they follow nature as the most perfect guide to a good life.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0061",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Turn which way you please, you will find it at hand.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0062",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Or is it not rather true that, although this is an advantage naturally belonging to friendship, yet its original cause is quite other, prior in time, more noble in character, and springing more directly from our nature itself?",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0063",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For the former, owing to his probity, we entertain no great feelings of enmity: the latter, owing to his cruelty, our country has detested and always will detest.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0064",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Again, wide breaches and, for the most part, justifiable ones were caused by an immoral request being made of friends, to pander to a man's unholy desires or to assist him in inflicting a wrong.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0065",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "That is a thing,\" he replied, \"that he never would have wished.\" \"Ah, but if he had wished it?\" said I.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0066",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "What the friends and connexions that followed him, even after his death, have succeeded in doing in the case of Publius Scipio I cannot describe without tears.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0067",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "At the head of the army in the Persian war he had freed Greece; he owed his exile to personal envy: but he did not submit to the wrong done him by his ungrateful country as he ought to have done.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0068",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "There is nothing in the world, by the way, beyond the reach of their sophistry.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0069",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "And if we add, as we may fairly do, that nothing so powerfully attracts and draws one thing to itself as likeness does to friendship, it will at once be admitted to be true that the good love the good and attach them to themselves as though they were united by blood and nature.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0070",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "It is not friendship, then, that follows material advantage, but material advantage friendship.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0071",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "And as it was his character that prevented his having genuine friends, so it often happens in the case of men of unusually great means--their very wealth forbids faithful friendships.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0072",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "But I must first mention the sentiment which used to call forth Scipio's severest criticism.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0073",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "But to return again to Scipio, the sole author of the discourse on friendship.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0074",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "And to say nothing of that, think how grievous and almost intolerable it is to most men to share political disaster.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0075",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "And the proverb is a true one, \"You must eat many a peck of salt with a man to be thorough friends with him.\" Novelty, indeed, has its advantage, which we must not despise.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0076",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For instance, if their parents are in humble circumstances, if their relations are powerful neither in intellect nor means, we should supply their deficiencies and promote their rank and dignity.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0077",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For there are people who make their friendship disagreeable by imagining themselves undervalued.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0078",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "It will happen at times that an outbreak of vicious conduct affects either a man's friends themselves or strangers, yet the discredit falls on the friends.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0079",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "This sort of man is rare; and indeed all excellent things are rare; and nothing in the world is so hard to find as a thing entirely and completely perfect of its kind.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0080",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Those who enjoy in the present, or have enjoyed in the past, or are destined to enjoy in the future such a partnership as this, must be considered to have secured the most excellent and auspicious combination for reaching nature's highest good.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0081",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "The one possible cause of offence that must be faced is when the interests of your friend and your own sincerity are at stake.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0082",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "On the contrary, they ought to be grieved at the crime and glad of the correction.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0083",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "But if we only take reasonable care, it is as easy to separate and distinguish a genuine from a specious friend as anything else that is coloured and artificial from what is sincere and genuine.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0084",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Nor would the servility of parasites in comedy have seemed humorous to us had there been no such things as braggart captains.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0085",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "On it depends harmony of interest, permanence, fidelity.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0086",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "In it I found sympathy in public, counsel in private business; in it too a means of spending my leisure with unalloyed delight.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0087",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "I represent Laelius and Scipio at his house expressing surprise at his carrying his years so lightly, and Cato answering them.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0088",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "In the next place, in what way would old age have been less disagreeable to them if they were in their eight-hundredth year than in their eightieth?",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0089",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Albinus, who were of consular rank and about my time, used to give vent.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0090",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "In his second consulship, though his colleague would not move in the matter, he resisted as long as he could the proposal of the tribune C.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0091",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "And I used at that time to enjoy his conversation with a passionate eagerness, as though I already divined, what actually turned out to be the case, that when he died there would be no one to teach me anything.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0092",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "At Sparta, indeed, those who hold the highest magistracies are in accordance with the fact actually called \"elders.\" But if you will take the trouble to read or listen to foreign history, you will find that the mightiest States have been brought into peril by young men, have been supported and restored by old.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0093",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "What about lawyers, pontiffs, augurs, philosophers, when old?",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0094",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "That remark about the old man is better than the following: If age brought nothing worse than this, It were enough to mar our bliss, That he who bides for many years Sees much to shun and much for tears.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0095",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For my part, I used to think Publius and Gnaeus Scipio and your two grandfathers, L.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0096",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For I have never given in to that ancient and much-praised proverb: Old when young Is old for long.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0097",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "By no rain or cold can he be induced to cover his head.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0098",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Appius governed four sturdy sons, five daughters, that great establishment, and all those clients, though he was both old and blind.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0099",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "I appear in court for my friends; I frequently attend the Senate and bring motions before it on my own responsibility, prepared after deep and long reflection.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0100",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "It is a fruitful source of treasons, revolutions, secret communications with the enemy.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0101",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Why, because, far from being a charge against old age, that it does not much feel the want of any pleasures, it is its highest praise.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0102",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For myself, owing to the pleasure I take in conversation, I enjoy even banquets that begin early in the afternoon, and not only in company with my contemporaries--of whom very few survive--but also with men of your age and with yourselves.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0103",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Why, what blessings are these--that the soul, having served its time, so to speak, in the campaigns of desire and ambition, rivalry and hatred, and all the passions, should live in its own thoughts, and, as the expression goes, should dwell apart!",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0104",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "The vine by nature is apt to fall, and unless supported drops down to the earth; yet in order to keep itself upright it embraces whatever it reaches with its tendrils as though they were hands.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0105",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "However, you must pardon me; for farming is a very favourite hobby of mine, and old age is naturally rather garrulous--for I would not be thought to acquit it of all faults.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0106",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "For the good and hard-working farmer's wine-cellar and oil-store, as well as his larder, are always well filled, and his whole farm-house is richly furnished.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0107",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "In fact, old age, especially when it has enjoyed honours, has an influence worth all the pleasures of youth put together.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0108",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Yet all these faults are softened both by good character and good education.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0109",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Accordingly, only a few arrive at old age.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0110",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "Accordingly, the death of young men seems to me like putting out a great fire with a deluge of water; but old men die like a fire going out because it has burnt down of its own nature without artificial means.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0111",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "He wants, I suppose, to be beloved by them.",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0112",
+      "w": "Treatises on Friendship and Old Age",
+      "s": "There are others suited to early manhood: does that settled time of life called \"middle age\" ask for them?",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      }
+    },
+    {
+      "id": "ciceron.p0113",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "It might be so if being without sensation were the same thing as wanting it; but as it is evident there can be nothing of any kind in that which has no existence, what can there be afflicting to that which can neither feel want nor be sensible of anything?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0114",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "This celebrated man was pleasant to the last, even when he had received the poison into his bowels, and truly foretold the death of that man whom he named when he drank the poison, and that death soon followed.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0115",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "You see under what mistaken notions all this is said.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0116",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "And who is there whom pain may not befall?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0117",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "He will answer that a trifling degree of pain is a greater evil than the greatest infamy; for that there is no evil in infamy itself, unless attended with pain.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0118",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Why is it that there is this sensible difference between a raw recruit and a veteran soldier?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0119",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Calanus the Indian will occur to him, an ignorant man and a barbarian, born at the foot of Mount Caucasus, who committed himself to the flames by his own free, voluntary act.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0120",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Do we not observe that where those exercises called gymnastic are in esteem, those who enter the lists never concern themselves about dangers?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0121",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "They who are differently affected we must necessarily call \"unsound.\" So that nothing is better than what is usual in Latin, to say that they who are run away with by their lust or anger have quitted the command over themselves; though anger includes lust, for anger is defined to be the lust of revenge.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0122",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Should Pythagoras, Socrates, or Plato say to me, Why are you dejected or sad?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0123",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Though he should hold those pleasures in contempt which he just now commended, yet I must remember wherein he places the chief good.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0124",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Therefore those unlooked-for things have not so much force as to give rise to all our grief; the blow perhaps may fall the heavier, but whatever happens does not appear the greater on that account.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0125",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Was there no evil in what afflicted Alcibiades thus?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0126",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "But of other studies I shall speak elsewhere if there is occasion, as I have already often done.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0127",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "But let us suppose that while he was bearing this with moderation, the death of his children had intervened; here would have started a fresh grief, which, admitting it to be moderate in itself, yet still must have been a great addition to the other.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0128",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Or was Theseus in a passion when he seized on the horns of the Marathonian bull?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0129",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "We may even allow a centurion or standard-bearer to be angry, or any others, whom, not to explain too far the mysteries of the rhetoricians, I shall not mention here; for to touch the passions, where reason cannot be come at, may have its use; but my inquiry, as I often repeat, is about a wise man.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0130",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "We are to demonstrate, as was said of every perturbation, that there are no such feelings which do not consist entirely of opinion and judgment, and are not owing to ourselves.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0131",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Can any person speak ill of the parent of life, and dare to pollute himself thus with parricide, and be so impiously ungrateful as to accuse her whom he ought to reverence, even were he less able to appreciate the advantages which he might derive from her?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0132",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "For in that book he is supposed to say that a man who is placed on the wheel (that is a kind of torture in use among the Greeks) cannot attain to a completely happy life.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0133",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "But there is a kind of life that admits of being spoken of, and gloried in, and boasted of, as Epaminondas saith, The wings of Sparta's pride my counsels clipp'd.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0134",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "There were ointments and garlands; perfumes were burned; tables provided with the most exquisite meats.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0135",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Why, then, may I not call him happy, nay, the happiest of men, who has attained them?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0136",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Our friend Demosthenes was certainly very weak in declaring himself pleased with the whisper of a woman who was carrying water, as is the custom in Greece, and who whispered to another, \"That is he--that is Demosthenes.\" What could be weaker than this?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0137",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Diodorus the Stoic was blind, and lived many years at my house.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0138",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "I do not even know, if we cast off piety towards the Gods, but that faith, and all the associations of human life, and that most excellent of all virtues, justice, may perish with it.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0139",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Besides, is not everything that had a beginning subject to mortality?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0140",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "He deprives the Deity of sense, and makes his form mutable; and, in the same book again, he makes earth and heaven Deities.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0141",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "This is called by Epicurus [Greek: isonomia]; that is to say, an equal distribution or even disposition of things.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0142",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "If he never heard a lecture on these Democritean principles, what lectures did he ever hear?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0143",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Because neither use nor ornament requires more than five; but your Deity has not only a finger more than he wants, but a head, a neck, shoulders, sides, a paunch, back, hams, hands, feet, thighs, and legs.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0144",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "But what are those images you talk of, or whence do they proceed?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0145",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "He likewise used to quote many, which were more gross, from Metrodorus, the sage colleague of Epicurus, who blamed his brother Timocrates because he would not allow that everything which had any reference to a happy life was to be measured by the belly; nor has he said this once only, but often.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0146",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "From whence they are called omens, signs, portents, prodigies.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0147",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "But it is a foolish piece of vanity in man to think there is nothing preferable to him.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0148",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Therefore, since all motion arises from the heat of the world, and that heat is not moved by the effect of any external impulse, but of its own accord, it must necessarily be a mind; from whence it follows that the world is animated.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0149",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Everything, then, from which any great utility proceeded was deified; and, indeed, the names I have just now mentioned are declaratory of the particular virtue of each Deity.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0150",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Shall we not then allow the Gods to have these perfections, since we worship the sacred and august images of them?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0151",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Is it possible for any man to behold these things, and yet imagine that certain solid and individual bodies move by their natural force and gravitation, and that a world so beautifully adorned was made by their fortuitous concourse?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0152",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "They are clothed with a rind or bark, to secure them more thoroughly from heat and cold.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0153",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Human art and industry are indeed necessary towards the preservation and improvement of certain animals and vegetables; for there are several of both kinds which would perish without that assistance.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0154",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "And as in building the architect averts from the eyes and nose of the master those things which must necessarily be offensive, so has nature removed far from our senses what is of the same kind in the human body.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0155",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "You have proposed, says Cotta, four articles.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0156",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "If you assure me that you have, I shall believe you, though I really know not what a Faun is.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0157",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "If you did not deify one as well as the other, what will become of Ino?",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0158",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "The third, the daughter of Jupiter and Diana, was married to Vulcan, but is said to have had Anteros by Mars.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0159",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Aristo of Chios used often to say that the philosophers do hurt to such of their disciples as take their good doctrine in a wrong sense; thus the lectures of Aristippus might produce debauchees, and those of Zeno pedants.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0160",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "There is nothing, replied Cotta, which I desire more than to be confuted.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0161",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "Scipio was asking me, replied Philus, what I thought of the parhelion, or mock sun, whose recent apparition was so strongly attested.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0162",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "In order, therefore, that we may consecrate these holidays as much as possible to conversations which may be profitable to the Commonwealth, let us beg Scipio to explain to us what in his estimation appears to be the best form of government.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0163",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "For they are not themselves admitted to the government, to the exercise of public authority, or to offices of select judges, which are permitted to those only of ancient families and large fortunes.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0164",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "When, therefore, he observed all his friends kindled with the de]sire of hearing him, Scipio thus opened the discussion.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0165",
+      "w": "Cicero's Tusculan Disputations",
+      "s": "You will become still more convinced of this fact, said Africanus, when tracing the progress of our Commonwealth as it became gradually developed to its best and maturest condition.",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      }
+    },
+    {
+      "id": "ciceron.p0166",
+      "w": "The republic of Cicero",
+      "s": "He testified that Clodius had been with him in his house in Rome on the very day of the pollution.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0167",
+      "w": "The republic of Cicero",
+      "s": "This humiliating event took place in his forty-ninth year.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0168",
+      "w": "The republic of Cicero",
+      "s": "Public virtue appeared to him to have no longer any value in the eyes of the Romans.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0169",
+      "w": "The republic of Cicero",
+      "s": "In his latter days, he showed an invincible spirit, defying the profligate Anthony in the plenitude of his power.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0170",
+      "w": "The republic of Cicero",
+      "s": "They will be applicable to all times as long as civil government exists among men.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0171",
+      "w": "The republic of Cicero",
+      "s": "These opinions also flattered the Romans, for in fact it was substantially their own form of government, which consisted of consuls, patricians, and the people and their tribunes.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0172",
+      "w": "The republic of Cicero",
+      "s": "Scarce any part of his discourse is preserved.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0173",
+      "w": "The republic of Cicero",
+      "s": "God, the sole Ruler, and universal Lord, has framed and proclaimed this law.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0174",
+      "w": "The republic of Cicero",
+      "s": "For nothing is propounded by philosophers, concerning what is esteemed to be just and proper, that is not confirmed and assured by those who have legislated for states.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0175",
+      "w": "The republic of Cicero",
+      "s": "It is here however they deem themselves most successful and eloquent, when they bring forward the calamities of eminent men, and the injuries heaped upon them by their ungrateful countrymen.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0176",
+      "w": "The republic of Cicero",
+      "s": "But had it happened otherwise, as I said, what complaint could I make?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0177",
+      "w": "The republic of Cicero",
+      "s": "Pleased with his visit, and kindly addressing him “What!",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0178",
+      "w": "The republic of Cicero",
+      "s": "What are you engaged in,” said Furius; “hath our arrival broken in upon your conversation?” “Not in the least,” replied Africanus, “for it is precisely about matters, such as Tubero has just been introducing, that thou art wont diligently to inquire into, and to investigate.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0179",
+      "w": "The republic of Cicero",
+      "s": "Sulpicius Gallus, a very learned man as you know; when this same phenomenon was stated to have been seen, being by chance in the house of M.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0180",
+      "w": "The republic of Cicero",
+      "s": "What are temporal things in the eyes of those conversant with eternal ones?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0181",
+      "w": "The republic of Cicero",
+      "s": "Not that he judged so from the cultivation of the fields which he beheld, but from these indications of science.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0182",
+      "w": "The republic of Cicero",
+      "s": "Paulus by the mother’s side, born of such a noble and illustrious family in this republic, should seek for reasons why two suns have been seen, when he does not inquire the cause why two senates, and almost two people exist in one republic?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0183",
+      "w": "The republic of Cicero",
+      "s": "That the name of the subject in discussion being agreed upon, the meaning of the name shall be defined.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0184",
+      "w": "The republic of Cicero",
+      "s": "Which after being fortified by their labours and by its position, and fitted with temples and public squares, the re-union of dwellings constructed after this manner, they called a town or city.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0185",
+      "w": "The republic of Cicero",
+      "s": "But if the people are able to preserve their rights, they think no condition of things could be more excellent, more free, or more happy.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0186",
+      "w": "The republic of Cicero",
+      "s": "For what is a state but a community of rights?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0187",
+      "w": "The republic of Cicero",
+      "s": "Nor can the condition of any city be more deplorable, than where the richest men pass for the best.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0188",
+      "w": "The republic of Cicero",
+      "s": "This opinion has been established for the conduct of life, by those who have had the direction of public affairs; that the belief might prevail, that one king ruled in heaven, who with his nod, as Homer says, could tumble down Olympus; and that he should be considered as the King and Father of all.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0189",
+      "w": "The republic of Cicero",
+      "s": "A most just one; and from that period up to Romulus, who reigned six hundred years from the present time.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0190",
+      "w": "The republic of Cicero",
+      "s": "Tarquin being driven out, the people exulted with a marvellous sort of insolence of freedom.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0191",
+      "w": "The republic of Cicero",
+      "s": "And the same inclinations would have remained with their posterity, if the character of their kings had not changed.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0192",
+      "w": "The republic of Cicero",
+      "s": "It is then,” he says, “when the insatiable throats of the people, parched with the thirst of liberty, and led on by rash demagogues, have greedily drank, not temperate but too unalloyed draughts of freedom.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0193",
+      "w": "The republic of Cicero",
+      "s": "Out of such licentious freedom a tyrant arises, and the most unjust and severe bondage.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0194",
+      "w": "The republic of Cicero",
+      "s": "This cannot well happen in such a combined and moderately balanced government, unless by the great vices of the chief persons.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0195",
+      "w": "The republic of Cicero",
+      "s": "The which if we now possess it, would hardly be so, if any one stood in a more conspicuous situation than yourself.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0196",
+      "w": "The republic of Cicero",
+      "s": "In regard to the situation of the city, a circumstance which is most carefully to be considered by him, who endeavours to establish a permanent government; he chose it with incredible skill.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0197",
+      "w": "The republic of Cicero",
+      "s": "New languages and new customs are mingled together, and not only productions but manners are imported from abroad; so that nothing remains entire of the pristine institutions.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0198",
+      "w": "The republic of Cicero",
+      "s": "A most obvious cause of the evils and revolutions of Greece, arising from the vices of these maritime cities, which awhile ago I slightly touched upon.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0199",
+      "w": "The republic of Cicero",
+      "s": "He also had the common people assigned as clients to the principal men, the utility of which measure I will afterwards consider.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0200",
+      "w": "The republic of Cicero",
+      "s": "So that there was scarce room in so intelligent an age, and amid so many learned men, for any one to establish fictions.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0201",
+      "w": "The republic of Cicero",
+      "s": "Even in these times, this new people perceived what had escaped the Lacedemonian Lycurgus; who esteemed it best not to choose a king, if this were indeed in the power of Lycurgus to do, but rather to be governed by any one whatever descended from the race of Hercules.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0202",
+      "w": "The republic of Cicero",
+      "s": "You will distinguish that more clearly,” said Africanus, “when you perceive how the commonwealth advances and comes to the greatest perfection by a straight forward and natural course.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0203",
+      "w": "The republic of Cicero",
+      "s": "For in order that it might be lawful for him to be preceded by twelve lictors with their fasces * * [Two pages wanting.] XVIII.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0204",
+      "w": "The republic of Cicero",
+      "s": "It is stated that one Demaratus, a Corinthian, a principal man, and of much honour and authority in his own city, and of an easy fortune, not being able to endure Cypselus, the tyrant of the Corinthians, fled with a great deal of money, and betook himself to a flourishing city of Etruria, among the Tarquinians.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0205",
+      "w": "The republic of Cicero",
+      "s": "But when Tarquin had perished by the plots of the sons of Ancus, Servius, as I before said, began to reign, not by the command, but by the assent and sufferance of the people.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0206",
+      "w": "The republic of Cicero",
+      "s": "But of those ninety six centuries, more were enumerated in one century, than almost in the whole first class.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0207",
+      "w": "The republic of Cicero",
+      "s": "Many things however are altogether wanting to a people subject to a king.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0208",
+      "w": "The republic of Cicero",
+      "s": "Manilius, and Spurius Mælius, are said to have wished to establish a kingdom, and even * * * * * * [Two pages wanting.] XXVIII.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0209",
+      "w": "The republic of Cicero",
+      "s": "He did not constitute things as they might exist, but in such a manner as the nature of civil affairs might be considered.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0210",
+      "w": "The republic of Cicero",
+      "s": "Nor did the Portian laws, which are three as you know of the three Portii, contain any thing new except the confirmation of it.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0211",
+      "w": "The republic of Cicero",
+      "s": "Their high worth also was the more esteemed in the state, because in private life they diligently assisted individuals by their advice, and by substantial services.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0212",
+      "w": "The republic of Cicero",
+      "s": "From which college, however, comes that praiseworthy act of C.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0213",
+      "w": "The republic of Cicero",
+      "s": "Nor have I learnt from your discourse, by what discipline, or by what customs or laws, a republic like the one you praise, can be constituted or preserved.” XXXIX.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0214",
+      "w": "The republic of Cicero",
+      "s": "This transaction having roused the people, the senate was obliged to consent to the liberation of all persons who had become “nexi” by their voluntary act, and to order the practice to be discontinued in future.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0215",
+      "w": "The republic of Cicero",
+      "s": "Then in Greece, where as with us, magnificent temples are consecrated containing human images, which the Persians considered impious.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0216",
+      "w": "The republic of Cicero",
+      "s": "But it is said, although there are various laws, still good men, by natural inclination, pursue what is just in itself, and not what is assumed to be so; because it is the part of a good and just man, to render that justice to every one which he is deserving of.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0217",
+      "w": "The republic of Cicero",
+      "s": "And through this general delusion of the citizens, the good man is harassed, arrested, bound, his eyes put out, condemned, thrown in chains, tortured in the fire, banished.",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0218",
+      "w": "The republic of Cicero",
+      "s": "Who is ignorant that Pompey made that treaty, and that Mancinus was concerned in the same affair?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0219",
+      "w": "The republic of Cicero",
+      "s": "How was it at Rome, when the Decemvirs existed without appeal, in that third year, when liberty itself had parted with its privileges?",
+      "src": {
+        "work": "The republic of Cicero"
+      }
+    },
+    {
+      "id": "ciceron.p0220",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Those of Calamis, though evidently harsh, are somewhat softer.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0221",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "He adds that he exhibited his first dramatic piece about eleven years after, in the Consulship of C.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0222",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "They, accordingly, by the advice of Laelius, requested Galba to undertake it.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0223",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Mummius, both whose Orations are still in being:--the style of Lucius is plain and antiquated; but that of Spurius, though equally unembellished, is more close, and compact; for he was well versed in the doctrine of the Stoics.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0224",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Lepidus one of the Consuls: and it was afterwards objected to Africanus, that Briso dropped the opposition by his advice.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0225",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "He was, therefore, esteemed the best pleader of his time; for no sooner had he began to distinguish himself in the Forum, but the depravity of the age gave birth to a number of law-suits; and it was first found necessary, in the time of his youth, to settle the form of public trials, which had never been done before.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0226",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Furius Philus was thought to speak our language as elegantly, and more correctly than any other man; P.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0227",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "For it is of little consequence to discover what is proper to be said, unless you are able to express it in a free and agreeable manner: and even that will be insufficient, if not recommended by the voice, the look, and the gesture.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0228",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Who also was more nervous than Aristotle?",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0229",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Galba, the son of the eloquent Servius, and the son-in-law of P.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0230",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "When we were boys, we used to think his Orations worth reading; though they are now scarcely to be met with.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0231",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "All his speeches were, in appearance, the unpremeditated effusions of an honest heart; and yet, in reality, they were preconcerted with so much skill, that the judges were, sometimes, not so well prepared, as they should have been, to withstand the force of them.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0232",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Curius, which was tried before the Centum Viri.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0233",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "He was expected with impatience, and heard with pleasure.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0234",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "His Orations have so many delicate turns, such a number of well-chosen examples, and such an agreeable vein of politeness, that they almost seem to have been composed in the true Attic style.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0235",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "I do not mean, however, though nobody appeared in the interim who could dispute the prize with him, that he was entitled to the second, or even the third post of honour.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0236",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Sextius of bribery, when he was praetor elect, was a prompt and an easy speaker: he lived in great splendor, and had a very promising genius; and, if he had not been of a weak, and indeed a sickly constitution, he would have advanced much farther than he did in the road to preferment.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0237",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "For it is the invariable, property of an accomplished Orator, to be reckoned such in the opinion of the people.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0238",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "There is, however, the exception to be made; the people sometimes give their approbation to an orator who does not deserve it.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0239",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Those who had not interest enough to engage either of these, commonly applied to Philip, or Caesar; but when Cotta and Sulpicius were at liberty, they generally had the preference: so that all the causes in which any honour was to be acquired, were pleaded by these six Orators.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0240",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Scaevola, the augur, who was the ablest and most affable Civilian of his time.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0241",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Sicinius, a very vulgar sort of man, but exceedingly humourous, which was the only qualification he had to recommend him as an Orator.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0242",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "In the same class, (if I may be allowed to interrupt the series of my narrative) L.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0243",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "In short, his style was easy, and flowing, and his appearance rather genteel than otherwise: but his action was a little defective, partly through the disagreeable tone of his voice, and partly by a few ridiculous gestures, of which he could not entirely break himself.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0244",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But to preserve the order of my narrative, I shall first introduce such other Speakers as I think ought to be previously noticed: and I shall begin with M.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0245",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But I wish it to be noticed, that after recounting all who ever ventured to speak in public, we find but few, (very few indeed!) whose names are worth recording; and not many who had even the repute of being Orators.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0246",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Nobody denies it: and yet (for I am not afraid of provoking your censure, in a conversation which leaves each of us at liberty to say what he thinks) I had rather be the author of the single Oration of Crassus, in defence of Curius, than be honoured with two Ligurian triumphs.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0247",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Rufius.\"--\"What do you refer to?\" said Brutus; \"and who was the Caius Rufius you are speaking of?\"--\"He was a noted prosecutor,\" replied he, \"some years ago.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0248",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Domitius, he was totally unacquainted with any rules of art; but he spoke his native language with purity, and had a great freedom of address.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0249",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "After he had been advanced to the Aedileship, by the hearty approbation of all the better sort of citizens, as he had lost my company (for I was then abroad in Cilicia) he likewise lost himself; and entirely sunk his credit, by imitating the conduct of those very men, whom he had before so successfully opposed.--But M.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0250",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "You was, therefore, so far from interesting our passions in your favour, that we could scarcely keep our eyes open, while you was relating the dangers you had so narrowly escaped.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0251",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "In the same manner, I would recommend neither a raw, unmellowed style, which, (if I may so express myself) has been newly drawn off from the vat; nor the rough, and antiquated language of the grave and manly Thucydides.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0252",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Lepidus too was the author of several Speeches, which have received your approbation; in which I can partly join with you, if you consider them only as specimens of our ancient Eloquence.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0253",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "He had likewise an elegant choice of words, an agreeable flow in his periods, and a copious Elocution, which he was partly indebted for to a fine natural capacity, and partly acquired by the most laborious rhetorical exercises.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0254",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "And it gave the greater alarm to those who had a regard for me, that I used to speak without any remission or variation, with the utmost stretch of my voice, and a total agitation of my body.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0255",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "As Hortensius, therefore, was nearer to me in age, and his manner more agreeable to the natural ardour of my temper, I considered him as the proper object of my competition.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0256",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Not to mention several other advantages I derived from it, I shall only observe, that about this time, and but a very few years after my Aedileship, I was declared the first Praetor, by the unanimous suffrages of my fellow- citizens.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0257",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "You desire to know, then, (and you have often repeated your request) what kind of Eloquence I most approve, and can look upon to be so highly finished, as to require no farther improvement.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0258",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But as to Natural Philosophy (the knowledge of which will supply us with the richest treasures of Elocution;)--and as to life, and it's various duties, and the great principles of morality,--what is it possible either to express or understand aright, without a large acquaintance with these?",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0259",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "He carried his animosity so far as to commence a litigious suit against him, at a time when the reputation of the latter was at the lowest ebb.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0260",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "It is equally amazing, though you are always engaged in the most important offices of Government, that your studies are never intermitted; and that you are constantly either composing something of your own, or finding employment for me!",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0261",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But these things are only for shew and amusement: whereas it is our business to take the field in earnest, and prepare for action.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0262",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Thus, then, we have given a cursory view of what he ought to be, in the two first departments of Oratory.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0263",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Metre, however, is far from being the principal merit of the Poets; though it is certainly no small recommendation, that, while they pursue all the beauties of Eloquence, the harmony of their numbers is far more regular and exact.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0264",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "This, my Brutus, as your long acquaintance with it must necessarily inform you, is a copious subject, and would require an extensive volume to discuss.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0265",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "For, if I may so express myself, though his veins are not over-stocked with blood, his juices must be found and good; and though he is not possessed of any extraordinary strength, he must have a healthy constitution.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0266",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Under these restrictions our artless Orator will play off his wit and humour, as I have never seen it done by any of the modern pretenders to Atticism, though they cannot deny that this is entirely in the Attic taste.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0267",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But the Orator, whom we regard as the prince of his profession,--the nervous,--the fierce,--the flaming Orator, if he is born for this alone, and only practices and applies himself to this, without tempering his copiousness with the two inferior characters of Eloquence, is of all others the most contemptible.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0268",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "From the same capacity came those riper expressions,--\"She was the spouse of her son-in-law, the step-mother of her own offspring?",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0269",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "A skilful management of the former contributes most to, give weight to a discourse, and strike the attention of the hearer: because they are easy, and familiar to the understanding.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0270",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But as they furnish some very instructive hints, the Reader will peruse them with more pleasure than pain] myself have possessed a tolerable share of this, or, it may be, a trifling one:--but as I always spoke with uncommon warmth and impetuosity, I have frequently forced my antagonist to relinquish the field.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0271",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "The most lively and interesting sentiments, if they are harshly expressed, will offend the ear, that delicate and fastidious judge of rhetorical harmony.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0272",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "I have frequently seen a whole assembly burst into raptures of applause at a happy period: for the ear naturally expects that our sentences should be properly tuned and measured.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0273",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "If this is the case with them (and I cannot think otherwise) will they reject the evidence of their own sensations?",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0274",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "But both parties seem to be equally mistaken: for those who exclude the paeon, are not aware that they reject the sweetest and fullest number we have.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0275",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "Another question which occurs before us, is--whether an attention to our numbers should be extended to every part of a sentence, or only to the beginning and the end.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    },
+    {
+      "id": "ciceron.p0276",
+      "w": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "s": "For if we pursue it too closely, it will create a satiety, and our attention to it will be discovered by the most illiterate observer.",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "ciceron.f.v0001",
+      "kind": "verbatim",
+      "text": "Fortis vero animi et constantis est non perturbari in rebus asperis nec tumultuantem de gradu deici, ut dicitur, sed praesenti animo uti et consilio nec a ratione discedere.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "ciceron.f.v0002",
+      "kind": "verbatim",
+      "text": "If not, it must be made gradually, step by step, just as, when friendships become no longer pleasing or desirable, it is more proper (so wise men think) to undo the bond little by little than to sever it at a stroke.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "ciceron.f.v0003",
+      "kind": "verbatim",
+      "text": "Ut, si qui, cum causam sit acturus, in itinere aut in ambulatione secum ipse meditetur, aut si quid aliud attentius cogitet, non reprehendatur, at hoc idem si in convivio faciat, inhumanus videatur inscitia temporis.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "ciceron.f.v0004",
+      "kind": "verbatim",
+      "text": "The usage of this word has been corrupted and perverted and has gradually come to the point where, separating moral rectitude from expediency, it is accepted that a thing may be morally right without being expedient, and expedient without being morally right.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "ciceron.f.v0005",
+      "kind": "verbatim",
+      "text": "These principles Xenophon, a pupil of Socrates, has set forth most happily in his book entitled \"Oeconomicus.\" When I was about your present age, I translated it from the Greek into Latin.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "ciceron.f.v0006",
+      "kind": "verbatim",
+      "text": "If anyone will hearken to that voice (and all will hearken to it who wish to live in accord with nature's laws), he will never be guilty of coveting anything that is his neighbour's or of appropriating to himself what he has taken from his neighbour.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 250
+      }
+    },
+    {
+      "id": "ciceron.f.v0007",
+      "kind": "verbatim",
+      "text": "At all events he would be no candid or sincere or straightforward or upright or honest man, but rather one who is shifty, sly, artful, shrewd, underhand, cunning, one grown old in fraud and subtlety.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "ciceron.f.v0008",
+      "kind": "verbatim",
+      "text": "In joint session they drafted an ordinance, defining the penalty and the methods of procedure in cases of violation of the ordinance, and agreed that they should all appear together upon the rostra in the afternoon to publish it.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "ciceron.f.v0009",
+      "kind": "verbatim",
+      "text": "Again, when people disregard everything that is morally right and true, if only they may secure power thereby, #(3) Pompey,# are they not pursuing the same course as he[BR] who wished to have as a father-in-law the man by whose effrontery he might gain power for himself?",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 271
+      }
+    },
+    {
+      "id": "ciceron.f.v0010",
+      "kind": "verbatim",
+      "text": "If supremacy is to be sought for the sake of glory, crime should be excluded, for there can be no glory in crime; but if it is power for its own sake that is sought, whatever the price, it cannot be expedient if it is linked with shame.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "ciceron.f.v0011",
+      "kind": "verbatim",
+      "text": "When Neptune offered him three wishes, he wished for the death of his son Hippolytus, because the father was suspicious of the son's relations with his step-mother.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "ciceron.f.v0012",
+      "kind": "verbatim",
+      "text": "The trick was not morally right, but, some one may perhaps say, \"It was expedient for him to keep his throne and live at ease in Ithaca with parents, wife, and son.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "ciceron.f.v0013",
+      "kind": "verbatim",
+      "text": "When the son, who was then a young man, heard that his father was in trouble on his account, he hastened to Rome--so the story goes--and at daybreak presented himself at the house of Pomponius.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "ciceron.f.v0014",
+      "kind": "verbatim",
+      "text": "Aratus, of Sicyon, soldier and statesman (271-213), removed the tyrant Nicocles (251) and averted financial ruin, II, 81, 82; leader of the Achaean League; poisoned by order of Philip of Macedon.",
+      "work": "De Officiis",
+      "lang": "en",
+      "src": {
+        "work": "De Officiis"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "ciceron.f.v0015",
+      "kind": "verbatim",
+      "text": "He never was a candidate for the consulship, yet was elected consul twice: the first time before the legal age; the second at a time which, as far as he was concerned, was soon enough, but was near being too late for the interests of the State.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "ciceron.f.v0016",
+      "kind": "verbatim",
+      "text": "What makes me care the more about this is the fact that in all history there are scarcely three or four pairs of friends on record; and it is classed with them that I cherish a hope of the friendship of Scipio and Laelius being known to posterity.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "ciceron.f.v0017",
+      "kind": "verbatim",
+      "text": "Such men as these being generally accounted \"good,\" let us agree to call them so, on the ground that to the best of human ability they follow nature as the most perfect guide to a good life.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "ciceron.f.v0018",
+      "kind": "verbatim",
+      "text": "Again, wide breaches and, for the most part, justifiable ones were caused by an immoral request being made of friends, to pander to a man's unholy desires or to assist him in inflicting a wrong.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "ciceron.f.v0019",
+      "kind": "verbatim",
+      "text": "What the friends and connexions that followed him, even after his death, have succeeded in doing in the case of Publius Scipio I cannot describe without tears.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "ciceron.f.v0020",
+      "kind": "verbatim",
+      "text": "At the head of the army in the Persian war he had freed Greece; he owed his exile to personal envy: but he did not submit to the wrong done him by his ungrateful country as he ought to have done.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 195
+      }
+    },
+    {
+      "id": "ciceron.f.v0021",
+      "kind": "verbatim",
+      "text": "It will happen at times that an outbreak of vicious conduct affects either a man's friends themselves or strangers, yet the discredit falls on the friends.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "ciceron.f.v0022",
+      "kind": "verbatim",
+      "text": "This sort of man is rare; and indeed all excellent things are rare; and nothing in the world is so hard to find as a thing entirely and completely perfect of its kind.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "ciceron.f.v0023",
+      "kind": "verbatim",
+      "text": "Those who enjoy in the present, or have enjoyed in the past, or are destined to enjoy in the future such a partnership as this, must be considered to have secured the most excellent and auspicious combination for reaching nature's highest good.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "ciceron.f.v0024",
+      "kind": "verbatim",
+      "text": "That remark about the old man is better than the following: If age brought nothing worse than this, It were enough to mar our bliss, That he who bides for many years Sees much to shun and much for tears.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "ciceron.f.v0025",
+      "kind": "verbatim",
+      "text": "I appear in court for my friends; I frequently attend the Senate and bring motions before it on my own responsibility, prepared after deep and long reflection.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "ciceron.f.v0026",
+      "kind": "verbatim",
+      "text": "Why, what blessings are these--that the soul, having served its time, so to speak, in the campaigns of desire and ambition, rivalry and hatred, and all the passions, should live in its own thoughts, and, as the expression goes, should dwell apart!",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 247
+      }
+    },
+    {
+      "id": "ciceron.f.v0027",
+      "kind": "verbatim",
+      "text": "The vine by nature is apt to fall, and unless supported drops down to the earth; yet in order to keep itself upright it embraces whatever it reaches with its tendrils as though they were hands.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "ciceron.f.v0028",
+      "kind": "verbatim",
+      "text": "Accordingly, the death of young men seems to me like putting out a great fire with a deluge of water; but old men die like a fire going out because it has burnt down of its own nature without artificial means.",
+      "work": "Treatises on Friendship and Old Age",
+      "lang": "en",
+      "src": {
+        "work": "Treatises on Friendship and Old Age"
+      },
+      "quality": {
+        "chars": 209
+      }
+    },
+    {
+      "id": "ciceron.f.v0029",
+      "kind": "verbatim",
+      "text": "It might be so if being without sensation were the same thing as wanting it; but as it is evident there can be nothing of any kind in that which has no existence, what can there be afflicting to that which can neither feel want nor be sensible of anything?",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "ciceron.f.v0030",
+      "kind": "verbatim",
+      "text": "This celebrated man was pleasant to the last, even when he had received the poison into his bowels, and truly foretold the death of that man whom he named when he drank the poison, and that death soon followed.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "ciceron.f.v0031",
+      "kind": "verbatim",
+      "text": "He will answer that a trifling degree of pain is a greater evil than the greatest infamy; for that there is no evil in infamy itself, unless attended with pain.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "ciceron.f.v0032",
+      "kind": "verbatim",
+      "text": "Calanus the Indian will occur to him, an ignorant man and a barbarian, born at the foot of Mount Caucasus, who committed himself to the flames by his own free, voluntary act.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "ciceron.f.v0033",
+      "kind": "verbatim",
+      "text": "We may even allow a centurion or standard-bearer to be angry, or any others, whom, not to explain too far the mysteries of the rhetoricians, I shall not mention here; for to touch the passions, where reason cannot be come at, may have its use; but my inquiry, as I often repeat, is about a wise man.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "ciceron.f.v0034",
+      "kind": "verbatim",
+      "text": "We are to demonstrate, as was said of every perturbation, that there are no such feelings which do not consist entirely of opinion and judgment, and are not owing to ourselves.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "ciceron.f.v0035",
+      "kind": "verbatim",
+      "text": "Can any person speak ill of the parent of life, and dare to pollute himself thus with parricide, and be so impiously ungrateful as to accuse her whom he ought to reverence, even were he less able to appreciate the advantages which he might derive from her?",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "ciceron.f.v0036",
+      "kind": "verbatim",
+      "text": "Our friend Demosthenes was certainly very weak in declaring himself pleased with the whisper of a woman who was carrying water, as is the custom in Greece, and who whispered to another, \"That is he--that is Demosthenes.\" What could be weaker than this?",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "ciceron.f.v0037",
+      "kind": "verbatim",
+      "text": "I do not even know, if we cast off piety towards the Gods, but that faith, and all the associations of human life, and that most excellent of all virtues, justice, may perish with it.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "ciceron.f.v0038",
+      "kind": "verbatim",
+      "text": "Because neither use nor ornament requires more than five; but your Deity has not only a finger more than he wants, but a head, a neck, shoulders, sides, a paunch, back, hams, hands, feet, thighs, and legs.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 205
+      }
+    },
+    {
+      "id": "ciceron.f.v0039",
+      "kind": "verbatim",
+      "text": "He likewise used to quote many, which were more gross, from Metrodorus, the sage colleague of Epicurus, who blamed his brother Timocrates because he would not allow that everything which had any reference to a happy life was to be measured by the belly; nor has he said this once only, but often.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 296
+      }
+    },
+    {
+      "id": "ciceron.f.v0040",
+      "kind": "verbatim",
+      "text": "Everything, then, from which any great utility proceeded was deified; and, indeed, the names I have just now mentioned are declaratory of the particular virtue of each Deity.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "ciceron.f.v0041",
+      "kind": "verbatim",
+      "text": "Is it possible for any man to behold these things, and yet imagine that certain solid and individual bodies move by their natural force and gravitation, and that a world so beautifully adorned was made by their fortuitous concourse?",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 232
+      }
+    },
+    {
+      "id": "ciceron.f.v0042",
+      "kind": "verbatim",
+      "text": "Human art and industry are indeed necessary towards the preservation and improvement of certain animals and vegetables; for there are several of both kinds which would perish without that assistance.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "ciceron.f.v0043",
+      "kind": "verbatim",
+      "text": "Aristo of Chios used often to say that the philosophers do hurt to such of their disciples as take their good doctrine in a wrong sense; thus the lectures of Aristippus might produce debauchees, and those of Zeno pedants.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 221
+      }
+    },
+    {
+      "id": "ciceron.f.v0044",
+      "kind": "verbatim",
+      "text": "In order, therefore, that we may consecrate these holidays as much as possible to conversations which may be profitable to the Commonwealth, let us beg Scipio to explain to us what in his estimation appears to be the best form of government.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "ciceron.f.v0045",
+      "kind": "verbatim",
+      "text": "You will become still more convinced of this fact, said Africanus, when tracing the progress of our Commonwealth as it became gradually developed to its best and maturest condition.",
+      "work": "Cicero's Tusculan Disputations",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Tusculan Disputations"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "ciceron.f.v0046",
+      "kind": "verbatim",
+      "text": "These opinions also flattered the Romans, for in fact it was substantially their own form of government, which consisted of consuls, patricians, and the people and their tribunes.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "ciceron.f.v0047",
+      "kind": "verbatim",
+      "text": "It is here however they deem themselves most successful and eloquent, when they bring forward the calamities of eminent men, and the injuries heaped upon them by their ungrateful countrymen.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "ciceron.f.v0048",
+      "kind": "verbatim",
+      "text": "What are you engaged in,” said Furius; “hath our arrival broken in upon your conversation?” “Not in the least,” replied Africanus, “for it is precisely about matters, such as Tubero has just been introducing, that thou art wont diligently to inquire into, and to investigate.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 275
+      }
+    },
+    {
+      "id": "ciceron.f.v0049",
+      "kind": "verbatim",
+      "text": "Paulus by the mother’s side, born of such a noble and illustrious family in this republic, should seek for reasons why two suns have been seen, when he does not inquire the cause why two senates, and almost two people exist in one republic?",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 240
+      }
+    },
+    {
+      "id": "ciceron.f.v0050",
+      "kind": "verbatim",
+      "text": "Which after being fortified by their labours and by its position, and fitted with temples and public squares, the re-union of dwellings constructed after this manner, they called a town or city.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "ciceron.f.v0051",
+      "kind": "verbatim",
+      "text": "This opinion has been established for the conduct of life, by those who have had the direction of public affairs; that the belief might prevail, that one king ruled in heaven, who with his nod, as Homer says, could tumble down Olympus; and that he should be considered as the King and Father of all.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 299
+      }
+    },
+    {
+      "id": "ciceron.f.v0052",
+      "kind": "verbatim",
+      "text": "It is then,” he says, “when the insatiable throats of the people, parched with the thirst of liberty, and led on by rash demagogues, have greedily drank, not temperate but too unalloyed draughts of freedom.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 206
+      }
+    },
+    {
+      "id": "ciceron.f.v0053",
+      "kind": "verbatim",
+      "text": "In regard to the situation of the city, a circumstance which is most carefully to be considered by him, who endeavours to establish a permanent government; he chose it with incredible skill.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "ciceron.f.v0054",
+      "kind": "verbatim",
+      "text": "New languages and new customs are mingled together, and not only productions but manners are imported from abroad; so that nothing remains entire of the pristine institutions.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "ciceron.f.v0055",
+      "kind": "verbatim",
+      "text": "Even in these times, this new people perceived what had escaped the Lacedemonian Lycurgus; who esteemed it best not to choose a king, if this were indeed in the power of Lycurgus to do, but rather to be governed by any one whatever descended from the race of Hercules.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "ciceron.f.v0056",
+      "kind": "verbatim",
+      "text": "You will distinguish that more clearly,” said Africanus, “when you perceive how the commonwealth advances and comes to the greatest perfection by a straight forward and natural course.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "ciceron.f.v0057",
+      "kind": "verbatim",
+      "text": "Their high worth also was the more esteemed in the state, because in private life they diligently assisted individuals by their advice, and by substantial services.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "ciceron.f.v0058",
+      "kind": "verbatim",
+      "text": "Nor have I learnt from your discourse, by what discipline, or by what customs or laws, a republic like the one you praise, can be constituted or preserved.” XXXIX.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "ciceron.f.v0059",
+      "kind": "verbatim",
+      "text": "This transaction having roused the people, the senate was obliged to consent to the liberation of all persons who had become “nexi” by their voluntary act, and to order the practice to be discontinued in future.",
+      "work": "The republic of Cicero",
+      "lang": "en",
+      "src": {
+        "work": "The republic of Cicero"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "ciceron.f.v0060",
+      "kind": "verbatim",
+      "text": "Mummius, both whose Orations are still in being:--the style of Lucius is plain and antiquated; but that of Spurius, though equally unembellished, is more close, and compact; for he was well versed in the doctrine of the Stoics.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "ciceron.f.v0061",
+      "kind": "verbatim",
+      "text": "All his speeches were, in appearance, the unpremeditated effusions of an honest heart; and yet, in reality, they were preconcerted with so much skill, that the judges were, sometimes, not so well prepared, as they should have been, to withstand the force of them.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "ciceron.f.v0062",
+      "kind": "verbatim",
+      "text": "His Orations have so many delicate turns, such a number of well-chosen examples, and such an agreeable vein of politeness, that they almost seem to have been composed in the true Attic style.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "ciceron.f.v0063",
+      "kind": "verbatim",
+      "text": "I do not mean, however, though nobody appeared in the interim who could dispute the prize with him, that he was entitled to the second, or even the third post of honour.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "ciceron.f.v0064",
+      "kind": "verbatim",
+      "text": "Sextius of bribery, when he was praetor elect, was a prompt and an easy speaker: he lived in great splendor, and had a very promising genius; and, if he had not been of a weak, and indeed a sickly constitution, he would have advanced much farther than he did in the road to preferment.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "ciceron.f.v0065",
+      "kind": "verbatim",
+      "text": "Those who had not interest enough to engage either of these, commonly applied to Philip, or Caesar; but when Cotta and Sulpicius were at liberty, they generally had the preference: so that all the causes in which any honour was to be acquired, were pleaded by these six Orators.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 278
+      }
+    },
+    {
+      "id": "ciceron.f.v0066",
+      "kind": "verbatim",
+      "text": "In short, his style was easy, and flowing, and his appearance rather genteel than otherwise: but his action was a little defective, partly through the disagreeable tone of his voice, and partly by a few ridiculous gestures, of which he could not entirely break himself.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 269
+      }
+    },
+    {
+      "id": "ciceron.f.v0067",
+      "kind": "verbatim",
+      "text": "Nobody denies it: and yet (for I am not afraid of provoking your censure, in a conversation which leaves each of us at liberty to say what he thinks) I had rather be the author of the single Oration of Crassus, in defence of Curius, than be honoured with two Ligurian triumphs.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "ciceron.f.v0068",
+      "kind": "verbatim",
+      "text": "You was, therefore, so far from interesting our passions in your favour, that we could scarcely keep our eyes open, while you was relating the dangers you had so narrowly escaped.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "ciceron.f.v0069",
+      "kind": "verbatim",
+      "text": "In the same manner, I would recommend neither a raw, unmellowed style, which, (if I may so express myself) has been newly drawn off from the vat; nor the rough, and antiquated language of the grave and manly Thucydides.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 219
+      }
+    },
+    {
+      "id": "ciceron.f.v0070",
+      "kind": "verbatim",
+      "text": "Lepidus too was the author of several Speeches, which have received your approbation; in which I can partly join with you, if you consider them only as specimens of our ancient Eloquence.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "ciceron.f.v0071",
+      "kind": "verbatim",
+      "text": "He had likewise an elegant choice of words, an agreeable flow in his periods, and a copious Elocution, which he was partly indebted for to a fine natural capacity, and partly acquired by the most laborious rhetorical exercises.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 227
+      }
+    },
+    {
+      "id": "ciceron.f.v0072",
+      "kind": "verbatim",
+      "text": "As Hortensius, therefore, was nearer to me in age, and his manner more agreeable to the natural ardour of my temper, I considered him as the proper object of my competition.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "ciceron.f.v0073",
+      "kind": "verbatim",
+      "text": "Not to mention several other advantages I derived from it, I shall only observe, that about this time, and but a very few years after my Aedileship, I was declared the first Praetor, by the unanimous suffrages of my fellow- citizens.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "ciceron.f.v0074",
+      "kind": "verbatim",
+      "text": "You desire to know, then, (and you have often repeated your request) what kind of Eloquence I most approve, and can look upon to be so highly finished, as to require no farther improvement.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "ciceron.f.v0075",
+      "kind": "verbatim",
+      "text": "It is equally amazing, though you are always engaged in the most important offices of Government, that your studies are never intermitted; and that you are constantly either composing something of your own, or finding employment for me!",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "ciceron.f.v0076",
+      "kind": "verbatim",
+      "text": "Metre, however, is far from being the principal merit of the Poets; though it is certainly no small recommendation, that, while they pursue all the beauties of Eloquence, the harmony of their numbers is far more regular and exact.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 230
+      }
+    },
+    {
+      "id": "ciceron.f.v0077",
+      "kind": "verbatim",
+      "text": "Under these restrictions our artless Orator will play off his wit and humour, as I have never seen it done by any of the modern pretenders to Atticism, though they cannot deny that this is entirely in the Attic taste.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "ciceron.f.v0078",
+      "kind": "verbatim",
+      "text": "A skilful management of the former contributes most to, give weight to a discourse, and strike the attention of the hearer: because they are easy, and familiar to the understanding.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "ciceron.f.v0079",
+      "kind": "verbatim",
+      "text": "I have frequently seen a whole assembly burst into raptures of applause at a happy period: for the ear naturally expects that our sentences should be properly tuned and measured.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "ciceron.f.v0080",
+      "kind": "verbatim",
+      "text": "Another question which occurs before us, is--whether an attention to our numbers should be extended to every part of a sentence, or only to the beginning and the end.",
+      "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker.",
+      "lang": "en",
+      "src": {
+        "work": "Cicero's Brutus or History of Famous Orators; also His Orator, or Accomplished Speaker."
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "ciceron.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 7,
+      "worksSpan": 3,
+      "examples": [
+        "If not, it must be made gradually, step by step, just as, when friendships become no longer pleasing or desirable, it is more proper (so wise men think) to undo the bond little by little than to sever it at a stroke.",
+        "If anyone will hearken to that voice (and all will hearken to it who wish to live in accord with nature's laws), he will never be guilty of coveting anything that is his neighbour's or of appropriating to himself what he has taken from his neighbour."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 276,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:6513989ae683cdcff7abda211717c50dc7fb1206ef736bb9c67f097a56d67712"
+}

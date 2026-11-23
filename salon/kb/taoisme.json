@@ -1,0 +1,2243 @@
+{
+  "authorId": "taoisme",
+  "kbVersion": "taoisme@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:50.697Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Tao Te Ching",
+      "sentences": 74
+    },
+    {
+      "title": "Zhuangzi",
+      "sentences": 71
+    }
+  ],
+  "passages": [
+    {
+      "id": "taoisme.p0001",
+      "w": "Tao Te Ching",
+      "s": "When he has cleansed away the most mysterious sights (of his imagination), he can become without a flaw.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0002",
+      "w": "Tao Te Ching",
+      "s": "This is what is called 'The mysterious Quality' (of the Tao).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0003",
+      "w": "Tao Te Ching",
+      "s": "Colour's five hues from th' eyes their sight will take; Music's five notes the ears as deaf can make; The flavours five deprive the mouth of taste; The chariot course, and the wild hunting waste Make mad the mind; and objects rare and strange, Sought for, men's conduct will to evil change.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0004",
+      "w": "Tao Te Ching",
+      "s": "The getting that (favour) leads to the apprehension (of losing it), and the losing it leads to the fear of (still greater calamity):--this is what is meant by saying that favour and disgrace would seem equally to be feared.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0005",
+      "w": "Tao Te Ching",
+      "s": "Ceaseless in its action, it yet cannot be named, and then it again returns and becomes nothing.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0006",
+      "w": "Tao Te Ching",
+      "s": "As they were thus beyond men's knowledge, I will make an effort to describe of what sort they appeared to be.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0007",
+      "w": "Tao Te Ching",
+      "s": "They who preserve this method of the Tao do not wish to be full (of themselves).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0008",
+      "w": "Tao Te Ching",
+      "s": "This returning to their root is what we call the state of stillness; and that stillness may be called a reporting that they have fulfilled their appointed end.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0009",
+      "w": "Tao Te Ching",
+      "s": "Possessed of the Tao, he endures long; and to the end of his bodily life, is exempt from all danger of decay.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0010",
+      "w": "Tao Te Ching",
+      "s": "How irresolute did those (earliest rulers) appear, showing (by their reticence) the importance which they set upon their words!",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0011",
+      "w": "Tao Te Ching",
+      "s": "If we could renounce our sageness and discard our wisdom, it would be better for the people a hundredfold.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0012",
+      "w": "Tao Te Ching",
+      "s": "But mark their issues, good and ill;-- What space the gulf between shall fill?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0013",
+      "w": "Tao Te Ching",
+      "s": "I look dejected and forlorn, as if I had no home to go to.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0014",
+      "w": "Tao Te Ching",
+      "s": "They look full of discrimination, while I alone am dull and confused.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0015",
+      "w": "Tao Te Ching",
+      "s": "Its name--what passes not away; So, in their beautiful array, Things form and never know decay.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0016",
+      "w": "Tao Te Ching",
+      "s": "He is free from self-display, and therefore he shines; from self-assertion, and therefore he is distinguished; from self-boasting, and therefore his merit is acknowledged; from self-complacency, and therefore he acquires superiority.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0017",
+      "w": "Tao Te Ching",
+      "s": "To whom is it that these (two) things are owing?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0018",
+      "w": "Tao Te Ching",
+      "s": "He who stands on his tiptoes does not stand firm; he who stretches his legs does not walk (easily).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0019",
+      "w": "Tao Te Ching",
+      "s": "It may be regarded as the Mother of all things.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0020",
+      "w": "Tao Te Ching",
+      "s": "Gravity is the root of lightness; stillness, the ruler of movement.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0021",
+      "w": "Tao Te Ching",
+      "s": "This is called 'Hiding the light of his procedure.' 2.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0022",
+      "w": "Tao Te Ching",
+      "s": "Thus he the constant excellence retains; The simple child again, free from all stains.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0023",
+      "w": "Tao Te Ching",
+      "s": "If any one should wish to get the kingdom for himself, and to effect this by what he does, I see that he will not succeed.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0024",
+      "w": "Tao Te Ching",
+      "s": "Hence the sage puts away excessive effort, extravagance, and easy indulgence.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0025",
+      "w": "Tao Te Ching",
+      "s": "A skilful (commander) strikes a decisive blow, and stops.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0026",
+      "w": "Tao Te Ching",
+      "s": "Now arms, however beautiful, are instruments of evil omen, hateful, it may be said, to all creatures.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0027",
+      "w": "Tao Te Ching",
+      "s": "To consider this desirable would be to delight in the slaughter of men; and he who delights in the slaughter of men cannot get his will in the kingdom.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0028",
+      "w": "Tao Te Ching",
+      "s": "Though in its primordial simplicity it may be small, the whole world dares not deal with (one embodying) it as a minister.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0029",
+      "w": "Tao Te Ching",
+      "s": "The relation of the Tao to all the world is like that of the great rivers and seas to the streams from the valleys.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0030",
+      "w": "Tao Te Ching",
+      "s": "Hence the sage is able (in the same way) to accomplish his great achievements.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0031",
+      "w": "Tao Te Ching",
+      "s": "But though the Tao as it comes from the mouth, seems insipid and has no flavour, though it seems not worth being looked at or listened to, the use of it is inexhaustible.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0032",
+      "w": "Tao Te Ching",
+      "s": "If this transformation became to me an object of desire, I would express the desire by the nameless simplicity.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0033",
+      "w": "Tao Te Ching",
+      "s": "(Those who) possessed them in a lower degree were (always) doing, and had need to be so doing.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0034",
+      "w": "Tao Te Ching",
+      "s": "Now propriety is the attenuated form of leal-heartedness and good faith, and is also the commencement of disorder; swift apprehension is (only) a flower of the Tao, and is the beginning of stupidity.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0035",
+      "w": "Tao Te Ching",
+      "s": "All things under heaven sprang from It as existing (and named); that existence sprang from It as non-existent (and not named).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0036",
+      "w": "Tao Te Ching",
+      "s": "Therefore the sentence-makers have thus expressed themselves:-- 'The Tao, when brightest seen, seems light to lack; Who progress in it makes, seems drawing back; Its even way is like a rugged track.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0037",
+      "w": "Tao Te Ching",
+      "s": "What men dislike is to be orphans, to have little virtue, to be as carriages without naves; and yet these are the designations which kings and princes use for themselves.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0038",
+      "w": "Tao Te Ching",
+      "s": "The softest thing in the world dashes against and overcomes the hardest; that which has no (substantial) existence enters where there is no crevice.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0039",
+      "w": "Tao Te Ching",
+      "s": "Keep life and lose those other things; Keep them and lose your life:--which brings Sorrow and pain more near?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0040",
+      "w": "Tao Te Ching",
+      "s": "Of greatest fulness, deemed a void, Exhaustion ne'er shall stem the tide.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0041",
+      "w": "Tao Te Ching",
+      "s": "When the Tao is disregarded in the world, the war-horses breed in the border lands.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0042",
+      "w": "Tao Te Ching",
+      "s": "Therefore the sages got their knowledge without travelling; gave their (right) names to things without seeing them; and accomplished their ends without any purpose of doing so.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0043",
+      "w": "Tao Te Ching",
+      "s": "The sage has no invariable mind of his own; he makes the mind of the people his mind.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0044",
+      "w": "Tao Te Ching",
+      "s": "Men come forth and live; they enter (again) and die.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0045",
+      "w": "Tao Te Ching",
+      "s": "Because there is in him no place of death.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0046",
+      "w": "Tao Te Ching",
+      "s": "It produces them and makes no claim to the possession of them; it carries them through their processes and does not vaunt its ability in doing so; it brings them to maturity and exercises no control over them;--this is called its mysterious operation.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0047",
+      "w": "Tao Te Ching",
+      "s": "If I were suddenly to become known, and (put into a position to) conduct (a government) according to the Great Tao, what I should be most afraid of would be a boastful display.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0048",
+      "w": "Tao Te Ching",
+      "s": "Sons shall bring in lengthening line, Sacrifices to his shrine.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0049",
+      "w": "Tao Te Ching",
+      "s": "How do I know that this effect is sure to hold thus all under the sky?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0050",
+      "w": "Tao Te Ching",
+      "s": "It knows not yet the union of male and female, and yet its virile member may be excited;--showing the perfection of its physical essence.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0051",
+      "w": "Tao Te Ching",
+      "s": "He who knows (the Tao) does not (care to) speak (about it); he who is (ever ready to) speak about it does not know it.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0052",
+      "w": "Tao Te Ching",
+      "s": "A state may be ruled by (measures of) correction; weapons of war may be used with crafty dexterity; (but) the kingdom is made one's own (only) by freedom from action and purpose.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0053",
+      "w": "Tao Te Ching",
+      "s": "Therefore the sage is (like) a square which cuts no one (with its angles); (like) a corner which injures no one (with its sharpness).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0054",
+      "w": "Tao Te Ching",
+      "s": "With that repeated accumulation of those attributes, there comes the subjugation (of every obstacle to such return).",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0055",
+      "w": "Tao Te Ching",
+      "s": "It is not that those manes have not that spiritual energy, but it will not be employed to hurt men.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0056",
+      "w": "Tao Te Ching",
+      "s": "Stillness may be considered (a sort of) abasement.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0057",
+      "w": "Tao Te Ching",
+      "s": "Tao has of all things the most honoured place.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0058",
+      "w": "Tao Te Ching",
+      "s": "This is the reason why all under heaven consider it the most valuable thing.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0059",
+      "w": "Tao Te Ching",
+      "s": "He who lightly promises is sure to keep but little faith; he who is continually thinking things easy is sure to find them difficult.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0060",
+      "w": "Tao Te Ching",
+      "s": "The sage does not act (so), and therefore does no harm; he does not lay hold (so), and therefore does not lose his hold.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0061",
+      "w": "Tao Te Ching",
+      "s": "The ancients who showed their skill in practising the Tao did so, not to enlighten the people, but rather to make them simple and ignorant.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0062",
+      "w": "Tao Te Ching",
+      "s": "Deep and far-reaching is such mysterious excellence, showing indeed its possessor as opposite to others, but leading them to a great conformity to him.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0063",
+      "w": "Tao Te Ching",
+      "s": "Now it is just its greatness that makes it seem to be inferior.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0064",
+      "w": "Tao Te Ching",
+      "s": "Now-a-days they give up gentleness and are all for being bold; economy, and are all for being liberal; the hindmost place, and seek only to be foremost;--(of all which the end is) death.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0065",
+      "w": "Tao Te Ching",
+      "s": "Thus we say, 'He ne'er contends, And therein is his might.' Thus we say, 'Men's wills he bends, That they with him unite.' Thus we say, 'Like Heaven's his ends, No sage of old more bright.' 69.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0066",
+      "w": "Tao Te Ching",
+      "s": "My words are very easy to know, and very easy to practise; but there is no one in the world who is able to know and able to practise them.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0067",
+      "w": "Tao Te Ching",
+      "s": "To know and yet (think) we do not know is the highest (attainment); not to know (and yet think) we do know is a disease.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0068",
+      "w": "Tao Te Ching",
+      "s": "It is by avoiding such indulgence that such weariness does not arise.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0069",
+      "w": "Tao Te Ching",
+      "s": "But When Heaven's anger smites a man, Who the cause shall truly scan?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0070",
+      "w": "Tao Te Ching",
+      "s": "The people do not fear death; to what purpose is it to (try to) frighten them with death?",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0071",
+      "w": "Tao Te Ching",
+      "s": "It is through this that they suffer famine.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0072",
+      "w": "Tao Te Ching",
+      "s": "Thus it is that to leave the subject of living altogether out of view is better than to set a high value on it.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0073",
+      "w": "Tao Te Ching",
+      "s": "Hence he who (relies on) the strength of his forces does not conquer; and a tree which is strong will fill the out-stretched arms, (and thereby invites the feller.) 4.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0074",
+      "w": "Tao Te Ching",
+      "s": "There is nothing in the world more soft and weak than water, and yet for attacking things that are firm and strong there is nothing that can take precedence of it;--for there is nothing (so effectual) for which it can be changed.",
+      "src": {
+        "work": "Tao Te Ching"
+      }
+    },
+    {
+      "id": "taoisme.p0075",
+      "w": "Zhuangzi",
+      "s": "But what is it that gives to each the individuality, to all the potentiality, of sound?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0076",
+      "w": "Zhuangzi",
+      "s": "And when that axis passes through the centre at which all Infinities converge, positive and negative alike blend into an infinite ONE.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0077",
+      "w": "Zhuangzi",
+      "s": "If then all things are ONE, what room is there for Speech?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0078",
+      "w": "Zhuangzi",
+      "s": "Confucius is here evidently dealing with the actual doctrines of Lao Tzŭ.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0079",
+      "w": "Zhuangzi",
+      "s": "Yours is skill indeed.\" \"Sire,\" replied the cook; \"I have always devoted myself to TAO.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0080",
+      "w": "Zhuangzi",
+      "s": "It will be as though you took fire to quell fire, water to quell water, which is popularly known as 'pouring oil on the flames.' And if you begin with concessions, there will be no end to them.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0081",
+      "w": "Zhuangzi",
+      "s": "Shall it not then be adopted by mankind in general?\" Who stand much more in need of regeneration than such worthies as were these ancient Emperors.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0082",
+      "w": "Zhuangzi",
+      "s": "Do you not know that those who keep tigers do not venture to give them live animals as food, for fear of exciting their fury when killing the prey?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0083",
+      "w": "Zhuangzi",
+      "s": "The misfortunes of this life are weighty as the earth itself, yet none can keep out of their reach.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0084",
+      "w": "Zhuangzi",
+      "s": "What is the use of coming to me now?\" \"In my ignorance,\" replied No-toes, \"I made free with my body and lost my toes.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0085",
+      "w": "Zhuangzi",
+      "s": "They do not separate, and therefore require no glue.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0086",
+      "w": "Zhuangzi",
+      "s": "He who is not absolutely oblivious of his own existence can never be a ruler of men.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0087",
+      "w": "Zhuangzi",
+      "s": "Nature is no other than a man's parents.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0088",
+      "w": "Zhuangzi",
+      "s": "It is based upon the baseless, and travels through the realms of Nowhere.\" The operation of true government is invisible to the eye of man.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0089",
+      "w": "Zhuangzi",
+      "s": "If I want it curved, I use an arc; if straight, a line.\" But on what grounds can we think that the natures of clay and wood desire this application of compasses and square, of arc and line?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0090",
+      "w": "Zhuangzi",
+      "s": "The prince of Ch'u held an assembly, to which the princes of Lu and Chao brought presents of wine.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0091",
+      "w": "Zhuangzi",
+      "s": "But if their natural dispositions be not perverted nor their virtue laid aside, what room is there left for government?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0092",
+      "w": "Zhuangzi",
+      "s": "These Powers are the controllers of heaven and earth, and each contains the other.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0093",
+      "w": "Zhuangzi",
+      "s": "Therefore the true Sage looks up to God, but does not offer to aid.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0094",
+      "w": "Zhuangzi",
+      "s": "If metal and stone were without TAO, they would not be capable of emitting sound.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0095",
+      "w": "Zhuangzi",
+      "s": "The praise and the blame of the world neither advantage him nor otherwise.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0096",
+      "w": "Zhuangzi",
+      "s": "If I know that I cannot succeed and yet try to force success, this would be but another source of error.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0097",
+      "w": "Zhuangzi",
+      "s": "Heaven has no parturitions, yet all things are evolved.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0098",
+      "w": "Zhuangzi",
+      "s": "Does not universal love contradict itself?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0099",
+      "w": "Zhuangzi",
+      "s": "It blows now east, now west; and now it whirls aloft.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0100",
+      "w": "Zhuangzi",
+      "s": "He closed a pure and gentle life at the early age of 32, to the inexpressible grief of the Sage.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0101",
+      "w": "Zhuangzi",
+      "s": "When the pond dries up and the fishes are left upon dry ground, to moisten them with the breath or to damp them with a little spittle is not to be compared with leaving them in the first instance in their native rivers and lakes.\" Repeated from ch.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0102",
+      "w": "Zhuangzi",
+      "s": "Wherefore it has been said, \"The Sage is a negative quantity, and is consequently in a state of passivity.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0103",
+      "w": "Zhuangzi",
+      "s": "He investigates fulness and decay, and does not rejoice if he succeeds, nor lament if he fails; for he knows that conditions are not invariable.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0104",
+      "w": "Zhuangzi",
+      "s": "The intention of the giver must also be taken into the calculation.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0105",
+      "w": "Zhuangzi",
+      "s": "I exhausted all the arguments that were brought against me.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0106",
+      "w": "Zhuangzi",
+      "s": "Is there then, after all, such a thing as happiness?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0107",
+      "w": "Zhuangzi",
+      "s": "He lived on the mountains and drank water.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0108",
+      "w": "Zhuangzi",
+      "s": "It contains the form required, which is afterwards elaborated.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0109",
+      "w": "Zhuangzi",
+      "s": "A handsome fox or a striped leopard will live in a mountain forest, hiding beneath some precipitous cliff.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0110",
+      "w": "Zhuangzi",
+      "s": "When Chuang Tzŭ was wandering in the park at Tiao-ling, he saw a strange bird which came from the south.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0111",
+      "w": "Zhuangzi",
+      "s": "I cannot understand how this is so.\" \"What is there to prevent you from finding out?\" replied Confucius.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0112",
+      "w": "Zhuangzi",
+      "s": "He took off his clothes and squatted down bare-backed.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0113",
+      "w": "Zhuangzi",
+      "s": "If charity perishes, then duty to one's neighbour will perish.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0114",
+      "w": "Zhuangzi",
+      "s": "No entrance gate, no dwelling house, they pass this way and that, as though at the meeting of cross-roads.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0115",
+      "w": "Zhuangzi",
+      "s": "To the eye it is formless, and to the ear it is noiseless.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0116",
+      "w": "Zhuangzi",
+      "s": "The best language is that which is not spoken, the best form of action is that which is without deeds.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0117",
+      "w": "Zhuangzi",
+      "s": "If I do not do my duty to my neighbour, I injure others.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0118",
+      "w": "Zhuangzi",
+      "s": "What is feared in subdivision is separation.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0119",
+      "w": "Zhuangzi",
+      "s": "Hate, ambition, joy, anger, sorrow, pleasure,--these six are entanglements to virtue.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0120",
+      "w": "Zhuangzi",
+      "s": "They are not equal to the horses of the Empire.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0121",
+      "w": "Zhuangzi",
+      "s": "If dialecticians have not their premisses and conclusion, they are not happy.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0122",
+      "w": "Zhuangzi",
+      "s": "There are things in the State he does not hear; there are things in the family he does not see.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0123",
+      "w": "Zhuangzi",
+      "s": "Supposing that to me, not being a shepherd, a lamb were born in the south-west corner of my hall; or that to me, not being a sportsman, quails were hatched in the north-east corner.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0124",
+      "w": "Zhuangzi",
+      "s": "Yet he could not foresee the evil that was to come upon himself.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0125",
+      "w": "Zhuangzi",
+      "s": "From his very return to passivity comes this active influence for good.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0126",
+      "w": "Zhuangzi",
+      "s": "He is a Sage,\" replied Confucius, \"under the garb of a menial.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0127",
+      "w": "Zhuangzi",
+      "s": "And upon digging a grave there, several fathoms deep, a stone coffin was found, which, being cleaned, yielded the following inscription:--_Posterity cannot be trusted.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0128",
+      "w": "Zhuangzi",
+      "s": "If it were existent, it could not be non-existent.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0129",
+      "w": "Zhuangzi",
+      "s": "Its wisdom can yield seventy-two faultless omens, yet it cannot escape the misery of being cut to pieces.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0130",
+      "w": "Zhuangzi",
+      "s": "When the idea is expressed, the language may be ignored.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0131",
+      "w": "Zhuangzi",
+      "s": "Not knowing what preceded birth, how can we assert the operation of Destiny?",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0132",
+      "w": "Zhuangzi",
+      "s": "Shou was at first nowhere to be found, but at length he was traced to Tan Hsüeh.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0133",
+      "w": "Zhuangzi",
+      "s": "If he drew up his sleeve his elbow would poke through.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0134",
+      "w": "Zhuangzi",
+      "s": "But Pien Sui declined, saying, \"When your Majesty consulted with me about attacking Chieh, you evidently looked on me as a robber.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0135",
+      "w": "Zhuangzi",
+      "s": "That he talks nonsense about Wên Wang and Wu Wang.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0136",
+      "w": "Zhuangzi",
+      "s": "I hurried away to smooth the tiger's head and comb out his beard.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0137",
+      "w": "Zhuangzi",
+      "s": "By whom he had been turned out of doors.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0138",
+      "w": "Zhuangzi",
+      "s": "Day and night they had bouts before the prince.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0139",
+      "w": "Zhuangzi",
+      "s": "I am truly ashamed of it.\" Thereupon the prince drew Chuang Tzŭ up on to the dais, and the attendants served food, the king three times assisting with his own hand.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0140",
+      "w": "Zhuangzi",
+      "s": "I know not what my fault is that I should have suffered these four persecutions.\" \"Dear me!\" said the old man in a vexed tone, \"How slow of perception you are.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0141",
+      "w": "Zhuangzi",
+      "s": "The truth within not being duly assimilated,\" replied Lieh Tzŭ, \"a certain brightness is visible externally.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0142",
+      "w": "Zhuangzi",
+      "s": "To him who can penetrate the mystery of life, all things are revealed.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0143",
+      "w": "Zhuangzi",
+      "s": "Thus, the body of the Son of Heaven was enclosed in a seven-fold coffin.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0144",
+      "w": "Zhuangzi",
+      "s": "He studied under P'êng Mêng; with the result that he learnt nothing.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    },
+    {
+      "id": "taoisme.p0145",
+      "w": "Zhuangzi",
+      "s": "That the middle of the world is north of Yen and south of Yüeh.",
+      "src": {
+        "work": "Zhuangzi"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "taoisme.f.v0001",
+      "kind": "verbatim",
+      "text": "When he has cleansed away the most mysterious sights (of his imagination), he can become without a flaw.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "taoisme.f.v0002",
+      "kind": "verbatim",
+      "text": "Colour's five hues from th' eyes their sight will take; Music's five notes the ears as deaf can make; The flavours five deprive the mouth of taste; The chariot course, and the wild hunting waste Make mad the mind; and objects rare and strange, Sought for, men's conduct will to evil change.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 290
+      }
+    },
+    {
+      "id": "taoisme.f.v0003",
+      "kind": "verbatim",
+      "text": "The getting that (favour) leads to the apprehension (of losing it), and the losing it leads to the fear of (still greater calamity):--this is what is meant by saying that favour and disgrace would seem equally to be feared.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "taoisme.f.v0004",
+      "kind": "verbatim",
+      "text": "Ceaseless in its action, it yet cannot be named, and then it again returns and becomes nothing.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "taoisme.f.v0005",
+      "kind": "verbatim",
+      "text": "As they were thus beyond men's knowledge, I will make an effort to describe of what sort they appeared to be.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "taoisme.f.v0006",
+      "kind": "verbatim",
+      "text": "They who preserve this method of the Tao do not wish to be full (of themselves).",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "taoisme.f.v0007",
+      "kind": "verbatim",
+      "text": "This returning to their root is what we call the state of stillness; and that stillness may be called a reporting that they have fulfilled their appointed end.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "taoisme.f.v0008",
+      "kind": "verbatim",
+      "text": "Possessed of the Tao, he endures long; and to the end of his bodily life, is exempt from all danger of decay.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "taoisme.f.v0009",
+      "kind": "verbatim",
+      "text": "How irresolute did those (earliest rulers) appear, showing (by their reticence) the importance which they set upon their words!",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "taoisme.f.v0010",
+      "kind": "verbatim",
+      "text": "If we could renounce our sageness and discard our wisdom, it would be better for the people a hundredfold.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0011",
+      "kind": "verbatim",
+      "text": "Its name--what passes not away; So, in their beautiful array, Things form and never know decay.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "taoisme.f.v0012",
+      "kind": "verbatim",
+      "text": "He is free from self-display, and therefore he shines; from self-assertion, and therefore he is distinguished; from self-boasting, and therefore his merit is acknowledged; from self-complacency, and therefore he acquires superiority.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "taoisme.f.v0013",
+      "kind": "verbatim",
+      "text": "He who stands on his tiptoes does not stand firm; he who stretches his legs does not walk (easily).",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "taoisme.f.v0014",
+      "kind": "verbatim",
+      "text": "If any one should wish to get the kingdom for himself, and to effect this by what he does, I see that he will not succeed.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 122
+      }
+    },
+    {
+      "id": "taoisme.f.v0015",
+      "kind": "verbatim",
+      "text": "Hence the sage puts away excessive effort, extravagance, and easy indulgence.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "taoisme.f.v0016",
+      "kind": "verbatim",
+      "text": "Now arms, however beautiful, are instruments of evil omen, hateful, it may be said, to all creatures.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 101
+      }
+    },
+    {
+      "id": "taoisme.f.v0017",
+      "kind": "verbatim",
+      "text": "To consider this desirable would be to delight in the slaughter of men; and he who delights in the slaughter of men cannot get his will in the kingdom.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "taoisme.f.v0018",
+      "kind": "verbatim",
+      "text": "Though in its primordial simplicity it may be small, the whole world dares not deal with (one embodying) it as a minister.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 122
+      }
+    },
+    {
+      "id": "taoisme.f.v0019",
+      "kind": "verbatim",
+      "text": "The relation of the Tao to all the world is like that of the great rivers and seas to the streams from the valleys.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 115
+      }
+    },
+    {
+      "id": "taoisme.f.v0020",
+      "kind": "verbatim",
+      "text": "Hence the sage is able (in the same way) to accomplish his great achievements.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 78
+      }
+    },
+    {
+      "id": "taoisme.f.v0021",
+      "kind": "verbatim",
+      "text": "If this transformation became to me an object of desire, I would express the desire by the nameless simplicity.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 111
+      }
+    },
+    {
+      "id": "taoisme.f.v0022",
+      "kind": "verbatim",
+      "text": "(Those who) possessed them in a lower degree were (always) doing, and had need to be so doing.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "taoisme.f.v0023",
+      "kind": "verbatim",
+      "text": "Now propriety is the attenuated form of leal-heartedness and good faith, and is also the commencement of disorder; swift apprehension is (only) a flower of the Tao, and is the beginning of stupidity.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "taoisme.f.v0024",
+      "kind": "verbatim",
+      "text": "All things under heaven sprang from It as existing (and named); that existence sprang from It as non-existent (and not named).",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "taoisme.f.v0025",
+      "kind": "verbatim",
+      "text": "Therefore the sentence-makers have thus expressed themselves:-- 'The Tao, when brightest seen, seems light to lack; Who progress in it makes, seems drawing back; Its even way is like a rugged track.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "taoisme.f.v0026",
+      "kind": "verbatim",
+      "text": "What men dislike is to be orphans, to have little virtue, to be as carriages without naves; and yet these are the designations which kings and princes use for themselves.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "taoisme.f.v0027",
+      "kind": "verbatim",
+      "text": "The softest thing in the world dashes against and overcomes the hardest; that which has no (substantial) existence enters where there is no crevice.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 148
+      }
+    },
+    {
+      "id": "taoisme.f.v0028",
+      "kind": "verbatim",
+      "text": "Keep life and lose those other things; Keep them and lose your life:--which brings Sorrow and pain more near?",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 109
+      }
+    },
+    {
+      "id": "taoisme.f.v0029",
+      "kind": "verbatim",
+      "text": "When the Tao is disregarded in the world, the war-horses breed in the border lands.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 83
+      }
+    },
+    {
+      "id": "taoisme.f.v0030",
+      "kind": "verbatim",
+      "text": "Therefore the sages got their knowledge without travelling; gave their (right) names to things without seeing them; and accomplished their ends without any purpose of doing so.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "taoisme.f.v0031",
+      "kind": "verbatim",
+      "text": "The sage has no invariable mind of his own; he makes the mind of the people his mind.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "taoisme.f.v0032",
+      "kind": "verbatim",
+      "text": "It produces them and makes no claim to the possession of them; it carries them through their processes and does not vaunt its ability in doing so; it brings them to maturity and exercises no control over them;--this is called its mysterious operation.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 251
+      }
+    },
+    {
+      "id": "taoisme.f.v0033",
+      "kind": "verbatim",
+      "text": "If I were suddenly to become known, and (put into a position to) conduct (a government) according to the Great Tao, what I should be most afraid of would be a boastful display.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "taoisme.f.v0034",
+      "kind": "verbatim",
+      "text": "It knows not yet the union of male and female, and yet its virile member may be excited;--showing the perfection of its physical essence.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "taoisme.f.v0035",
+      "kind": "verbatim",
+      "text": "He who knows (the Tao) does not (care to) speak (about it); he who is (ever ready to) speak about it does not know it.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "taoisme.f.v0036",
+      "kind": "verbatim",
+      "text": "A state may be ruled by (measures of) correction; weapons of war may be used with crafty dexterity; (but) the kingdom is made one's own (only) by freedom from action and purpose.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "taoisme.f.v0037",
+      "kind": "verbatim",
+      "text": "With that repeated accumulation of those attributes, there comes the subjugation (of every obstacle to such return).",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 116
+      }
+    },
+    {
+      "id": "taoisme.f.v0038",
+      "kind": "verbatim",
+      "text": "It is not that those manes have not that spiritual energy, but it will not be employed to hurt men.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "taoisme.f.v0039",
+      "kind": "verbatim",
+      "text": "He who lightly promises is sure to keep but little faith; he who is continually thinking things easy is sure to find them difficult.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "taoisme.f.v0040",
+      "kind": "verbatim",
+      "text": "The sage does not act (so), and therefore does no harm; he does not lay hold (so), and therefore does not lose his hold.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "taoisme.f.v0041",
+      "kind": "verbatim",
+      "text": "The ancients who showed their skill in practising the Tao did so, not to enlighten the people, but rather to make them simple and ignorant.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "taoisme.f.v0042",
+      "kind": "verbatim",
+      "text": "Deep and far-reaching is such mysterious excellence, showing indeed its possessor as opposite to others, but leading them to a great conformity to him.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 151
+      }
+    },
+    {
+      "id": "taoisme.f.v0043",
+      "kind": "verbatim",
+      "text": "Now-a-days they give up gentleness and are all for being bold; economy, and are all for being liberal; the hindmost place, and seek only to be foremost;--(of all which the end is) death.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "taoisme.f.v0044",
+      "kind": "verbatim",
+      "text": "Thus we say, 'He ne'er contends, And therein is his might.' Thus we say, 'Men's wills he bends, That they with him unite.' Thus we say, 'Like Heaven's his ends, No sage of old more bright.' 69.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "taoisme.f.v0045",
+      "kind": "verbatim",
+      "text": "My words are very easy to know, and very easy to practise; but there is no one in the world who is able to know and able to practise them.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "taoisme.f.v0046",
+      "kind": "verbatim",
+      "text": "To know and yet (think) we do not know is the highest (attainment); not to know (and yet think) we do know is a disease.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "taoisme.f.v0047",
+      "kind": "verbatim",
+      "text": "The people do not fear death; to what purpose is it to (try to) frighten them with death?",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 89
+      }
+    },
+    {
+      "id": "taoisme.f.v0048",
+      "kind": "verbatim",
+      "text": "Hence he who (relies on) the strength of his forces does not conquer; and a tree which is strong will fill the out-stretched arms, (and thereby invites the feller.) 4.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "taoisme.f.v0049",
+      "kind": "verbatim",
+      "text": "There is nothing in the world more soft and weak than water, and yet for attacking things that are firm and strong there is nothing that can take precedence of it;--for there is nothing (so effectual) for which it can be changed.",
+      "work": "Tao Te Ching",
+      "lang": "en",
+      "src": {
+        "work": "Tao Te Ching"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "taoisme.f.v0050",
+      "kind": "verbatim",
+      "text": "Yours is skill indeed.\" \"Sire,\" replied the cook; \"I have always devoted myself to TAO.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 87
+      }
+    },
+    {
+      "id": "taoisme.f.v0051",
+      "kind": "verbatim",
+      "text": "It will be as though you took fire to quell fire, water to quell water, which is popularly known as 'pouring oil on the flames.' And if you begin with concessions, there will be no end to them.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "taoisme.f.v0052",
+      "kind": "verbatim",
+      "text": "Shall it not then be adopted by mankind in general?\" Who stand much more in need of regeneration than such worthies as were these ancient Emperors.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "taoisme.f.v0053",
+      "kind": "verbatim",
+      "text": "Do you not know that those who keep tigers do not venture to give them live animals as food, for fear of exciting their fury when killing the prey?",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 147
+      }
+    },
+    {
+      "id": "taoisme.f.v0054",
+      "kind": "verbatim",
+      "text": "The misfortunes of this life are weighty as the earth itself, yet none can keep out of their reach.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "taoisme.f.v0055",
+      "kind": "verbatim",
+      "text": "What is the use of coming to me now?\" \"In my ignorance,\" replied No-toes, \"I made free with my body and lost my toes.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "taoisme.f.v0056",
+      "kind": "verbatim",
+      "text": "He who is not absolutely oblivious of his own existence can never be a ruler of men.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 84
+      }
+    },
+    {
+      "id": "taoisme.f.v0057",
+      "kind": "verbatim",
+      "text": "It is based upon the baseless, and travels through the realms of Nowhere.\" The operation of true government is invisible to the eye of man.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 139
+      }
+    },
+    {
+      "id": "taoisme.f.v0058",
+      "kind": "verbatim",
+      "text": "If I want it curved, I use an arc; if straight, a line.\" But on what grounds can we think that the natures of clay and wood desire this application of compasses and square, of arc and line?",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "taoisme.f.v0059",
+      "kind": "verbatim",
+      "text": "The prince of Ch'u held an assembly, to which the princes of Lu and Chao brought presents of wine.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "taoisme.f.v0060",
+      "kind": "verbatim",
+      "text": "These Powers are the controllers of heaven and earth, and each contains the other.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 82
+      }
+    },
+    {
+      "id": "taoisme.f.v0061",
+      "kind": "verbatim",
+      "text": "If metal and stone were without TAO, they would not be capable of emitting sound.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 81
+      }
+    },
+    {
+      "id": "taoisme.f.v0062",
+      "kind": "verbatim",
+      "text": "If I know that I cannot succeed and yet try to force success, this would be but another source of error.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "taoisme.f.v0063",
+      "kind": "verbatim",
+      "text": "He closed a pure and gentle life at the early age of 32, to the inexpressible grief of the Sage.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "taoisme.f.v0064",
+      "kind": "verbatim",
+      "text": "When the pond dries up and the fishes are left upon dry ground, to moisten them with the breath or to damp them with a little spittle is not to be compared with leaving them in the first instance in their native rivers and lakes.\" Repeated from ch.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 248
+      }
+    },
+    {
+      "id": "taoisme.f.v0065",
+      "kind": "verbatim",
+      "text": "Wherefore it has been said, \"The Sage is a negative quantity, and is consequently in a state of passivity.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0066",
+      "kind": "verbatim",
+      "text": "He investigates fulness and decay, and does not rejoice if he succeeds, nor lament if he fails; for he knows that conditions are not invariable.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "taoisme.f.v0067",
+      "kind": "verbatim",
+      "text": "A handsome fox or a striped leopard will live in a mountain forest, hiding beneath some precipitous cliff.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0068",
+      "kind": "verbatim",
+      "text": "When Chuang Tzŭ was wandering in the park at Tiao-ling, he saw a strange bird which came from the south.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "taoisme.f.v0069",
+      "kind": "verbatim",
+      "text": "I cannot understand how this is so.\" \"What is there to prevent you from finding out?\" replied Confucius.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "taoisme.f.v0070",
+      "kind": "verbatim",
+      "text": "No entrance gate, no dwelling house, they pass this way and that, as though at the meeting of cross-roads.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 106
+      }
+    },
+    {
+      "id": "taoisme.f.v0071",
+      "kind": "verbatim",
+      "text": "The best language is that which is not spoken, the best form of action is that which is without deeds.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
+      "id": "taoisme.f.v0072",
+      "kind": "verbatim",
+      "text": "Hate, ambition, joy, anger, sorrow, pleasure,--these six are entanglements to virtue.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "taoisme.f.v0073",
+      "kind": "verbatim",
+      "text": "If dialecticians have not their premisses and conclusion, they are not happy.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "taoisme.f.v0074",
+      "kind": "verbatim",
+      "text": "There are things in the State he does not hear; there are things in the family he does not see.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 95
+      }
+    },
+    {
+      "id": "taoisme.f.v0075",
+      "kind": "verbatim",
+      "text": "Supposing that to me, not being a shepherd, a lamb were born in the south-west corner of my hall; or that to me, not being a sportsman, quails were hatched in the north-east corner.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "taoisme.f.v0076",
+      "kind": "verbatim",
+      "text": "Its wisdom can yield seventy-two faultless omens, yet it cannot escape the misery of being cut to pieces.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "taoisme.f.v0077",
+      "kind": "verbatim",
+      "text": "Shou was at first nowhere to be found, but at length he was traced to Tan Hsüeh.",
+      "work": "Zhuangzi",
+      "lang": "fr",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "taoisme.f.v0078",
+      "kind": "verbatim",
+      "text": "I am truly ashamed of it.\" Thereupon the prince drew Chuang Tzŭ up on to the dais, and the attendants served food, the king three times assisting with his own hand.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "taoisme.f.v0079",
+      "kind": "verbatim",
+      "text": "I know not what my fault is that I should have suffered these four persecutions.\" \"Dear me!\" said the old man in a vexed tone, \"How slow of perception you are.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 159
+      }
+    },
+    {
+      "id": "taoisme.f.v0080",
+      "kind": "verbatim",
+      "text": "The truth within not being duly assimilated,\" replied Lieh Tzŭ, \"a certain brightness is visible externally.",
+      "work": "Zhuangzi",
+      "lang": "en",
+      "src": {
+        "work": "Zhuangzi"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "taoisme.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 13,
+      "worksSpan": 2,
+      "examples": [
+        "If we could renounce our sageness and discard our wisdom, it would be better for the people a hundredfold.",
+        "If any one should wish to get the kingdom for himself, and to effect this by what he does, I see that he will not succeed."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 145,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:06ca82dd8c6b7dee6604b6b99a80fdaadfe2473fe637b33160de2f641025ec40"
+}

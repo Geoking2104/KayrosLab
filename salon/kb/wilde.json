@@ -1,0 +1,2759 @@
+{
+  "authorId": "wilde",
+  "kbVersion": "wilde@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:49.825Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "The Picture of Dorian Gray",
+      "sentences": 44
+    },
+    {
+      "title": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "sentences": 41
+    },
+    {
+      "title": "An ideal husband",
+      "sentences": 33
+    },
+    {
+      "title": "De Profundis",
+      "sentences": 54
+    },
+    {
+      "title": "Lady Windermere's Fan",
+      "sentences": 36
+    }
+  ],
+  "passages": [
+    {
+      "id": "wilde.p0001",
+      "w": "The Picture of Dorian Gray",
+      "s": "It is of the great facts of the world, like sunlight, or spring-time, or the reflection in dark waters of that silver shell we call the moon.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0002",
+      "w": "The Picture of Dorian Gray",
+      "s": "It will never be older than this particular day of June....",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0003",
+      "w": "The Picture of Dorian Gray",
+      "s": "He was a hero to his valet, who bullied him, and a terror to most of his relations, whom he bullied in turn.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0004",
+      "w": "The Picture of Dorian Gray",
+      "s": "She could have married anybody she chose.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0005",
+      "w": "The Picture of Dorian Gray",
+      "s": "Was it not Buonarotti who had carved it in the coloured marbles of a sonnet-sequence?",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0006",
+      "w": "The Picture of Dorian Gray",
+      "s": "He was brilliant, fantastic, irresponsible.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0007",
+      "w": "The Picture of Dorian Gray",
+      "s": "Men marry because they are tired; women, because they are curious: both are disappointed.” “I don’t think I am likely to marry, Harry.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0008",
+      "w": "The Picture of Dorian Gray",
+      "s": "They ride in the park in the morning and chatter at tea-parties in the afternoon.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0009",
+      "w": "The Picture of Dorian Gray",
+      "s": "It depresses me,” murmured Lord Henry, examining his rings.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0010",
+      "w": "The Picture of Dorian Gray",
+      "s": "It is what I call the depth of generosity.” “Oh, Basil is the best of fellows, but he seems to me to be just a bit of a Philistine.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0011",
+      "w": "The Picture of Dorian Gray",
+      "s": "She had sent her soul to search for him, and it had brought him back.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0012",
+      "w": "The Picture of Dorian Gray",
+      "s": "Let us go to the park.” “I am too shabby,” he answered, frowning.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0013",
+      "w": "The Picture of Dorian Gray",
+      "s": "The vulgar directness of the question called for a direct answer.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0014",
+      "w": "The Picture of Dorian Gray",
+      "s": "We are to see her to-night, if that boy doesn’t forget his appointment.” “Are you serious?” “Quite serious, Basil.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0015",
+      "w": "The Picture of Dorian Gray",
+      "s": "But I am afraid I cannot claim my theory as my own.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0016",
+      "w": "The Picture of Dorian Gray",
+      "s": "He drove off by himself, as had been arranged, and watched the flashing lights of the little brougham in front of him.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0017",
+      "w": "The Picture of Dorian Gray",
+      "s": "Her body swayed, while she danced, as a plant sways in the water.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0018",
+      "w": "The Picture of Dorian Gray",
+      "s": "Suddenly it dawned on my soul what it all meant.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0019",
+      "w": "The Picture of Dorian Gray",
+      "s": "After all, it is only once that I have not pleased you.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0020",
+      "w": "The Picture of Dorian Gray",
+      "s": "But the strange expression that he had noticed in the face of the portrait seemed to linger there, to be more intensified even.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0021",
+      "w": "The Picture of Dorian Gray",
+      "s": "Yes, of course,” answered Lord Henry, sinking into a chair and slowly pulling off his yellow gloves.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0022",
+      "w": "The Picture of Dorian Gray",
+      "s": "I should have thought she was almost younger than that.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0023",
+      "w": "The Picture of Dorian Gray",
+      "s": "Taking some one else’s admirer when one loses one’s own.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0024",
+      "w": "The Picture of Dorian Gray",
+      "s": "No; there was no further change in the picture.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0025",
+      "w": "The Picture of Dorian Gray",
+      "s": "As he was sitting at breakfast next morning, Basil Hallward was shown into the room.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0026",
+      "w": "The Picture of Dorian Gray",
+      "s": "Well, Dorian,” he said at length, with a sad smile, “I won’t speak to you again about this horrible thing, after to-day.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0027",
+      "w": "The Picture of Dorian Gray",
+      "s": "It was a large, well-proportioned room, which had been specially built by the last Lord Kelso for the use of the little grandson whom, for his strange likeness to his mother, and also for other reasons, he had always hated and desired to keep at a distance.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0028",
+      "w": "The Picture of Dorian Gray",
+      "s": "Perhaps some night he might find him creeping upstairs and trying to force the door of the room.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0029",
+      "w": "The Picture of Dorian Gray",
+      "s": "Yet, after some time, he wearied of them, and would sit in his box at the opera, either alone or with Lord Henry, listening in rapt pleasure to “Tannhauser” and seeing in the prelude to that great work of art a presentation of the tragedy of his own soul.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0030",
+      "w": "The Picture of Dorian Gray",
+      "s": "It was true that the portrait still preserved, under all the foulness and ugliness of the face, its marked likeness to himself; but what could they learn from that?",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0031",
+      "w": "The Picture of Dorian Gray",
+      "s": "I want you to lead such a life as will make the world respect you.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0032",
+      "w": "The Picture of Dorian Gray",
+      "s": "I am sorry to have had to wake you up, Francis,” he said, stepping in; “but I had forgotten my latch-key.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0033",
+      "w": "The Picture of Dorian Gray",
+      "s": "Don’t come to me.” “Alan, it was murder.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0034",
+      "w": "The Picture of Dorian Gray",
+      "s": "You will do me the justice to admit that.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0035",
+      "w": "The Picture of Dorian Gray",
+      "s": "Then he stopped, and a troubled look came into his eyes.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0036",
+      "w": "The Picture of Dorian Gray",
+      "s": "You are not yourself to-night.” “Don’t mind me, Harry.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0037",
+      "w": "The Picture of Dorian Gray",
+      "s": "Perhaps.” “Good night, then.” “Good night,” answered the young man, passing up the steps and wiping his parched mouth with a handkerchief.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0038",
+      "w": "The Picture of Dorian Gray",
+      "s": "Dim and wavering as was the wind-blown light, yet it served to show him the hideous error, as it seemed, into which he had fallen, for the face of the man he had sought to kill had all the bloom of boyhood, all the unstained purity of youth.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0039",
+      "w": "The Picture of Dorian Gray",
+      "s": "The man who could call a spade a spade should be compelled to use one.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0040",
+      "w": "The Picture of Dorian Gray",
+      "s": "Why, the man did not know who he was, could not know who he was.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0041",
+      "w": "The Picture of Dorian Gray",
+      "s": "After a few moments—that were to him, in his perturbed state, like endless hours of pain—he felt a hand laid on his shoulder.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0042",
+      "w": "The Picture of Dorian Gray",
+      "s": "I wish I could love,” cried Dorian Gray with a deep note of pathos in his voice.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0043",
+      "w": "The Picture of Dorian Gray",
+      "s": "He stood there for some minutes looking at the dead body.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0044",
+      "w": "The Picture of Dorian Gray",
+      "s": "That is one of the most important secrets of life.",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      }
+    },
+    {
+      "id": "wilde.p0045",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Why are you Ernest in town and Jack in the country?",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0046",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "You have invented a very useful younger brother called Ernest, in order that you may be able to come up to town as often as you like.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0047",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Besides, now that I know you to be a confirmed Bunburyist I naturally want to talk to you about Bunburying.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0048",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Gwendolen and Jack sit down together in the corner.] LADY BRACKNELL.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0049",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I hear her hair has turned quite gold from grief.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0050",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Well, I must say, Algernon, that I think it is high time that Mr.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0051",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Besides, Jack is a notorious domesticity for John!",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0052",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "A man should always have an occupation of some kind.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0053",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I have a country house with some land, of course, attached to it, about fifteen hundred acres, I believe; but I don’t depend on that for my real income.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0054",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "You can hardly imagine that I and Lord Bracknell would dream of allowing our only daughter—a girl brought up with the utmost care—to marry into a cloak-room, and form an alliance with a parcel?",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0055",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "It is the only thing that makes me put up with them at all.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0056",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "In a very patronising manner.] My dear fellow, the truth isn’t quite the sort of thing one tells to a nice, sweet, refined girl.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0057",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "The Manor House, Woolton, Hertfordshire.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0058",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "You can put up my dress clothes, my smoking jacket, and all the Bunbury suits .",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0059",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I suppose that is why he often looks a little bored when we three are together.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0060",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I believe that Memory is responsible for nearly all the three-volume novels that Mudie sends us.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0061",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "A misanthrope I can understand—a womanthrope, never!",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0062",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Raising his hand.] Charity, dear Miss Prism, charity!",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0063",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "And you will shake hands with him, won’t you, Uncle Jack?",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0064",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Ernest has just been telling me about his poor invalid friend Mr.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0065",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Your vanity is ridiculous, your conduct an outrage, and your presence in my garden utterly absurd.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0066",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "He kisses her, she puts her fingers through his hair.] I hope your hair curls naturally, does it?",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0067",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I don’t quite like women who are interested in philanthropic work.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0068",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Well, to speak with perfect candour, Cecily, I wish that you were fully forty-two, and more than usually plain for your age.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0069",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Thoughtfully and sadly.] Whatever unfortunate entanglement my dear boy may have got into, I will never reproach him with it after we are married.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0070",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "From the top of one of the hills quite close one can see five counties.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0071",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Cecily looks angrily at her, takes up the tongs and puts four lumps of sugar into the cup.] CECILY.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0072",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "We are both engaged to be married to your brother Ernest, so it is a matter of some importance to us to know where your brother Ernest is at present.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0073",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Well, you’ve no right whatsoever to Bunbury here.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0074",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Besides, I am particularly fond of muffins.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0075",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "I made arrangements this morning with Dr.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0076",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Science is always making wonderful improvements in things.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0077",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Was it in order that you might have an opportunity of coming up to town to see me as often as possible?",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0078",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "But we are going to be christened this afternoon.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0079",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "But of course, you will clearly understand that all communication between yourself and my daughter must cease immediately from this moment.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0080",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Cecily presents her profile.] Yes, quite as I expected.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0081",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Under an assumed name he drank, I’ve just been informed by my butler, an entire pint bottle of my Perrier-Jouet, Brut, ’89; wine I was specially reserving for myself.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0082",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "So I don’t think your guardian’s consent is, after all, a matter of any importance.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0083",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "The moment you consent to my marriage with Gwendolen, I will most gladly allow your nephew to form an alliance with my ward.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0084",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Catches sight of Lady Bracknell, who has fixed her with a stony glare.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0085",
+      "w": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "s": "Miss Prism, this is a matter of no small importance to me.",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      }
+    },
+    {
+      "id": "wilde.p0086",
+      "w": "An ideal husband",
+      "s": "The men are all dowdies and the women are all dandies, aren’t they?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0087",
+      "w": "An ideal husband",
+      "s": "Olivia, I have a curious feeling of absolute faintness.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0088",
+      "w": "An ideal husband",
+      "s": "My stay in England really depends on you, Sir Robert.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0089",
+      "w": "An ideal husband",
+      "s": "It is infamous, what you propose—infamous!",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0090",
+      "w": "An ideal husband",
+      "s": "I have enjoyed my talk with him immensely.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0091",
+      "w": "An ideal husband",
+      "s": "Why did you wish to meet my husband, Mrs.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0092",
+      "w": "An ideal husband",
+      "s": "You are not going to lend your support to this Argentine speculation?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0093",
+      "w": "An ideal husband",
+      "s": "But you told me yesterday that you had received the report from the Commission, and that it entirely condemned the whole thing.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0094",
+      "w": "An ideal husband",
+      "s": "It is power to do good that is fine—that, and that only.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0095",
+      "w": "An ideal husband",
+      "s": "Put out the lights, Mason, put out the lights!",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0096",
+      "w": "An ideal husband",
+      "s": "Well, at the worst it would simply be a psychological experiment.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0097",
+      "w": "An ideal husband",
+      "s": "Not remorse in the ordinary, rather silly sense of the word.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0098",
+      "w": "An ideal husband",
+      "s": "Arthur, the only thing for me to do now is to fight the thing out.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0099",
+      "w": "An ideal husband",
+      "s": "Besides, my dear Robert, I should not build too high hopes on frightening Mrs.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0100",
+      "w": "An ideal husband",
+      "s": "Fortunately I don’t know what bimetallism means.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0101",
+      "w": "An ideal husband",
+      "s": "I have got to stand on my head in some tableaux.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0102",
+      "w": "An ideal husband",
+      "s": "Ah yes, I suppose it must have been at the Opera.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0103",
+      "w": "An ideal husband",
+      "s": "I remember once at Bath, years ago, losing in the Pump Room an exceedingly handsome cameo bracelet that Sir John had given me.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0104",
+      "w": "An ideal husband",
+      "s": "I know she had lost all sense of pleasure in life.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0105",
+      "w": "An ideal husband",
+      "s": "Wonderful woman, Lady Markby, isn’t she?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0106",
+      "w": "An ideal husband",
+      "s": "And now what is there before me but public disgrace, ruin, terrible shame, the mockery of the world, a lonely dishonoured life, a lonely dishonoured death, it may be, some day?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0107",
+      "w": "An ideal husband",
+      "s": "Let me help you on with your cloak, father.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0108",
+      "w": "An ideal husband",
+      "s": "Common sense is the privilege of our sex.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0109",
+      "w": "An ideal husband",
+      "s": "I said to her things that were hideously true, on my side, from my stand-point, from the standpoint of men.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0110",
+      "w": "An ideal husband",
+      "s": "Do you give me your word that there is no one there?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0111",
+      "w": "An ideal husband",
+      "s": "I never could quite make out which of the two he was talking about.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0112",
+      "w": "An ideal husband",
+      "s": "You mean that you amused yourself immensely, don’t you?",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0113",
+      "w": "An ideal husband",
+      "s": "I have found the thief now, and I have heard her own confession.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0114",
+      "w": "An ideal husband",
+      "s": "I don’t know how the betting stands to-day.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0115",
+      "w": "An ideal husband",
+      "s": "I am afraid that he has one of those terribly weak natures that are not susceptible to influence.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0116",
+      "w": "An ideal husband",
+      "s": "It is one of Tommy’s days for proposing.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0117",
+      "w": "An ideal husband",
+      "s": "If so, it was for me to come to you, not for you to write of coming to me.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0118",
+      "w": "An ideal husband",
+      "s": "I cannot accept this offer, Lord Caversham.",
+      "src": {
+        "work": "An ideal husband"
+      }
+    },
+    {
+      "id": "wilde.p0119",
+      "w": "De Profundis",
+      "s": "It is the last thing left in me, and the best: the ultimate discovery at which I have arrived, the starting-point for a fresh development.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0120",
+      "w": "De Profundis",
+      "s": "My nature is seeking a fresh mode of self-realisation.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0121",
+      "w": "De Profundis",
+      "s": "After that, I hope to be able to recreate my creative faculty.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0122",
+      "w": "De Profundis",
+      "s": "I have hills far steeper to climb, valleys much darker to pass through.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0123",
+      "w": "De Profundis",
+      "s": "And exactly as in Art one is only concerned with what a particular thing is at a particular moment to oneself, so it is also in the ethical evolution of one's character.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0124",
+      "w": "De Profundis",
+      "s": "What is said, however, by myself or by others, matters little.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0125",
+      "w": "De Profundis",
+      "s": "Society takes upon itself the right to inflict appalling punishment on the individual, but it also has the supreme vice of shallowness, and fails to realise what it has done.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0126",
+      "w": "De Profundis",
+      "s": "For I have come, not from obscurity into the momentary notoriety of crime, but from a sort of eternity of fame to a sort of eternity of infamy, and sometimes seem to myself to have shown, if indeed it required showing, that between the famous and the infamous there is but one step, if as much as one.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0127",
+      "w": "De Profundis",
+      "s": "The only people I would care to be with now are artists and people who have suffered: those who know what beauty is, and those who know what sorrow is: nobody else interests me.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0128",
+      "w": "De Profundis",
+      "s": "And that, in the views and ideas I am here shaping for myself, I am quite right is shown to me by the fact that now for the first time since my imprisonment I have a real desire for life.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0129",
+      "w": "De Profundis",
+      "s": "Sorrow, then, and all that it teaches one, is my new world.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0130",
+      "w": "De Profundis",
+      "s": "One discerns things one never discerned before.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0131",
+      "w": "De Profundis",
+      "s": "Behind joy and laughter there may be a temperament, coarse, hard and callous.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0132",
+      "w": "De Profundis",
+      "s": "More than this, there is about sorrow an intense, an extraordinary reality.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0133",
+      "w": "De Profundis",
+      "s": "Far off, like a perfect pearl, one can see the city of God.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0134",
+      "w": "De Profundis",
+      "s": "The most terrible thing about it is not that it breaks one's heart--hearts are made to be broken--but that it turns one's heart to stone.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0135",
+      "w": "De Profundis",
+      "s": "My only mistake was that I confined myself so exclusively to the trees of what seemed to me the sun-lit side of the garden, and shunned the other side for its shadow and its gloom.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0136",
+      "w": "De Profundis",
+      "s": "It is, if I can fully attain to it, the ultimate realisation of the artistic life.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0137",
+      "w": "De Profundis",
+      "s": "His whole conception of Humanity sprang right out of the imagination and can only be realised by it.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0138",
+      "w": "De Profundis",
+      "s": "But his entire life also is the most wonderful of poems.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0139",
+      "w": "De Profundis",
+      "s": "That is because one realises one's soul only by getting rid of all alien passions, all acquired culture, and all external possessions, be they good or evil.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0140",
+      "w": "De Profundis",
+      "s": "It was a blow so appalling that I did not know what to do, so I flung myself on my knees, and bowed my head, and wept, and said, 'The body of a child is as the body of the Lord: I am not worthy of either.' That moment seemed to save me.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0141",
+      "w": "De Profundis",
+      "s": "By this means he gave to man an extended, a Titan personality.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0142",
+      "w": "De Profundis",
+      "s": "To the artist, expression is the only mode under which he can conceive life at all.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0143",
+      "w": "De Profundis",
+      "s": "For the Greek gods, in spite of the white and red of their fair fleet limbs, were not really what they appeared to be.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0144",
+      "w": "De Profundis",
+      "s": "We owe to him the most diverse things and people.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0145",
+      "w": "De Profundis",
+      "s": "He appeals to the temper of wonder, and creates that mood in which alone he can be understood.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0146",
+      "w": "De Profundis",
+      "s": "At Christmas I managed to get hold of a Greek Testament, and every morning, after I had cleaned my cell and polished my tins, I read a little of the Gospels, a dozen verses taken by chance anywhere.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0147",
+      "w": "De Profundis",
+      "s": "It will sound strange that dry bread could possibly be a delicacy to any one.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0148",
+      "w": "De Profundis",
+      "s": "If any love is shown us we should recognise that we are quite unworthy of it.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0149",
+      "w": "De Profundis",
+      "s": "He held them up as examples to their elders, which I myself have always thought the chief use of children, if what is perfect should have a use.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0150",
+      "w": "De Profundis",
+      "s": "That is the war every child of light has to wage.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0151",
+      "w": "De Profundis",
+      "s": "He would not hear of life being sacrificed to any system of thought or morals.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0152",
+      "w": "De Profundis",
+      "s": "But it is when he deals with a sinner that Christ is most romantic, in the sense of most real.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0153",
+      "w": "De Profundis",
+      "s": "But in a manner not yet understood of the world he regarded sin and suffering as being in themselves beautiful holy things and modes of perfection.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0154",
+      "w": "De Profundis",
+      "s": "Simply because otherwise he would be unable to realise what he had done.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0155",
+      "w": "De Profundis",
+      "s": "But then God had given him at his birth the soul of a poet, as he himself when quite young had in mystical marriage taken poverty as his bride: and with the soul of a poet and the body of a beggar he found the way to perfection not difficult.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0156",
+      "w": "De Profundis",
+      "s": "The more mechanical people to whom life is a shrewd speculation depending on a careful calculation of ways and means, always know where they are going, and go there.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0157",
+      "w": "De Profundis",
+      "s": "In one sense of the word it is of course necessary, as the Greek oracle said, to know oneself: that is the first achievement of knowledge.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0158",
+      "w": "De Profundis",
+      "s": "I know also that much is waiting for me outside that is very delightful, from what St.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0159",
+      "w": "De Profundis",
+      "s": "If after I am free a friend of mine gave a feast, and did not invite me to it, I should not mind a bit.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0160",
+      "w": "De Profundis",
+      "s": "But if after I am free a friend of mine had a sorrow and refused to allow me to share it, I should feel it most bitterly.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0161",
+      "w": "De Profundis",
+      "s": "It is bitter in Baudelaire, sweet and plaintive in Lamartine, mystic in Verlaine.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0162",
+      "w": "De Profundis",
+      "s": "To each of us different fates are meted out.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0163",
+      "w": "De Profundis",
+      "s": "The nineteenth century is no exception to the rule.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0164",
+      "w": "De Profundis",
+      "s": "As soon as they had been informed they laughed still more.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0165",
+      "w": "De Profundis",
+      "s": "Of course when they saw me I was not on my pedestal, I was in the pillory.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0166",
+      "w": "De Profundis",
+      "s": "It were wiser still to say that behind sorrow there is always a soul.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0167",
+      "w": "De Profundis",
+      "s": "To have made such an appeal would have been from the individualist point of view bad enough, but what excuse can there ever be put forward for having made it?",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0168",
+      "w": "De Profundis",
+      "s": "He is the Philistine who upholds and aids the heavy, cumbrous, blind, mechanical forces of society, and who does not recognise dynamic force when he meets it either in a man or a movement.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0169",
+      "w": "De Profundis",
+      "s": "A great friend of mine--a friend of ten years' standing--came to see me some time ago, and told me that he did not believe a single word of what was said against me, and wished me to know that he considered me quite innocent, and the victim of a hideous plot.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0170",
+      "w": "De Profundis",
+      "s": "Brutus used madness as a cloak to conceal the sword of his purpose, the dagger of his will, but the Hamlet madness is a mere mask for the hiding of weakness.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0171",
+      "w": "De Profundis",
+      "s": "When, at last, by means of the play within the play, and the puppets in their dalliance, Hamlet 'catches the conscience' of the King, and drives the wretched man in terror from his throne, Guildenstern and Rosencrantz see no more in his conduct than a rather painful breach of Court etiquette.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0172",
+      "w": "De Profundis",
+      "s": "Horatio, who in order to 'report Hamlet and his cause aright to the unsatisfied,' 'Absents him from felicity a while, And in this harsh world draws his breath in pain,' dies, but Guildenstern and Rosencrantz are as immortal as Angelo and Tartuffe, and should rank with them.",
+      "src": {
+        "work": "De Profundis"
+      }
+    },
+    {
+      "id": "wilde.p0173",
+      "w": "Lady Windermere's Fan",
+      "s": "Do you think that there should be the same laws for men as there are for women?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0174",
+      "w": "Lady Windermere's Fan",
+      "s": "As a wicked man I am a complete failure.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0175",
+      "w": "Lady Windermere's Fan",
+      "s": "They certainly come to my parties—the men get quite furious if one doesn’t ask them.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0176",
+      "w": "Lady Windermere's Fan",
+      "s": "Why do you talk to me about this person?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0177",
+      "w": "Lady Windermere's Fan",
+      "s": "Though I am bound to say he never gave away any large sums of money to anybody.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0178",
+      "w": "Lady Windermere's Fan",
+      "s": "You needn’t be afraid, Duchess, I never cry.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0179",
+      "w": "Lady Windermere's Fan",
+      "s": "I know where Arthur keeps his bank book—in one of the drawers of that desk.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0180",
+      "w": "Lady Windermere's Fan",
+      "s": "I think that you spend your money strangely.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0181",
+      "w": "Lady Windermere's Fan",
+      "s": "Won’t you help a woman who is trying to get back?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0182",
+      "w": "Lady Windermere's Fan",
+      "s": "It shows a wide-spread interest in my health.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0183",
+      "w": "Lady Windermere's Fan",
+      "s": "I am so much interested in his political career.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0184",
+      "w": "Lady Windermere's Fan",
+      "s": "So that is poor Dumby with Lady Plymdale?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0185",
+      "w": "Lady Windermere's Fan",
+      "s": "They say she is ruining poor Windermere.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0186",
+      "w": "Lady Windermere's Fan",
+      "s": "You would feel that the look in his eyes was false, his voice false, his touch false, his passion false.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0187",
+      "w": "Lady Windermere's Fan",
+      "s": "It’s wrong for a man to abandon his wife for a shameless woman.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0188",
+      "w": "Lady Windermere's Fan",
+      "s": "Can’t imagine why people speak against her.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0189",
+      "w": "Lady Windermere's Fan",
+      "s": "I think you’ll find he will have a great deal to say to you to-morrow.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0190",
+      "w": "Lady Windermere's Fan",
+      "s": "Yes; dear Windermere is becoming almost modern.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0191",
+      "w": "Lady Windermere's Fan",
+      "s": "Well, really, Windermere, if I am to be the Duchess’s sister-in-law— LORD WINDERMERE.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0192",
+      "w": "Lady Windermere's Fan",
+      "s": "But seriously, what do you say to £2000?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0193",
+      "w": "Lady Windermere's Fan",
+      "s": "Why is he not here, to wake by passionate words some fire within me?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0194",
+      "w": "Lady Windermere's Fan",
+      "s": "I must go back—no; I can’t go back, my letter has put me in their power—Arthur would not take me back!",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0195",
+      "w": "Lady Windermere's Fan",
+      "s": "You must come with me and drive straight home.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0196",
+      "w": "Lady Windermere's Fan",
+      "s": "My husband told you, and sent you to decoy me back.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0197",
+      "w": "Lady Windermere's Fan",
+      "s": "The hold I have over him— LADY WINDERMERE.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0198",
+      "w": "Lady Windermere's Fan",
+      "s": "Erlynne looked very handsome to-night, didn’t she?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0199",
+      "w": "Lady Windermere's Fan",
+      "s": "There is nothing in the whole world so unbecoming to a woman as a Nonconformist conscience.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0200",
+      "w": "Lady Windermere's Fan",
+      "s": "The only good woman you have ever met in your life?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0201",
+      "w": "Lady Windermere's Fan",
+      "s": "That is much more important, dear Tuppy.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0202",
+      "w": "Lady Windermere's Fan",
+      "s": "What is my wife’s fan doing here in your rooms?",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0203",
+      "w": "Lady Windermere's Fan",
+      "s": "It was very good of you to receive her last night—but you are never to see her again.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0204",
+      "w": "Lady Windermere's Fan",
+      "s": "My child, you may be on the brink of a great sorrow.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0205",
+      "w": "Lady Windermere's Fan",
+      "s": "But I wanted so much to come and see you.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0206",
+      "w": "Lady Windermere's Fan",
+      "s": "Twenty-nine when there are pink shades, thirty when there are not.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0207",
+      "w": "Lady Windermere's Fan",
+      "s": "And besides, if a woman really repents, she has to go to a bad dressmaker, otherwise no one believes in her.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    },
+    {
+      "id": "wilde.p0208",
+      "w": "Lady Windermere's Fan",
+      "s": "If it had been a girl, I would have called it after my mother.",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "wilde.f.v0001",
+      "kind": "verbatim",
+      "text": "It is of the great facts of the world, like sunlight, or spring-time, or the reflection in dark waters of that silver shell we call the moon.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 141
+      }
+    },
+    {
+      "id": "wilde.f.v0002",
+      "kind": "verbatim",
+      "text": "He was a hero to his valet, who bullied him, and a terror to most of his relations, whom he bullied in turn.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 108
+      }
+    },
+    {
+      "id": "wilde.f.v0003",
+      "kind": "verbatim",
+      "text": "Was it not Buonarotti who had carved it in the coloured marbles of a sonnet-sequence?",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "wilde.f.v0004",
+      "kind": "verbatim",
+      "text": "Men marry because they are tired; women, because they are curious: both are disappointed.” “I don’t think I am likely to marry, Harry.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "wilde.f.v0005",
+      "kind": "verbatim",
+      "text": "They ride in the park in the morning and chatter at tea-parties in the afternoon.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 81
+      }
+    },
+    {
+      "id": "wilde.f.v0006",
+      "kind": "verbatim",
+      "text": "It is what I call the depth of generosity.” “Oh, Basil is the best of fellows, but he seems to me to be just a bit of a Philistine.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 131
+      }
+    },
+    {
+      "id": "wilde.f.v0007",
+      "kind": "verbatim",
+      "text": "We are to see her to-night, if that boy doesn’t forget his appointment.” “Are you serious?” “Quite serious, Basil.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 114
+      }
+    },
+    {
+      "id": "wilde.f.v0008",
+      "kind": "verbatim",
+      "text": "He drove off by himself, as had been arranged, and watched the flashing lights of the little brougham in front of him.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "wilde.f.v0009",
+      "kind": "verbatim",
+      "text": "Yes, of course,” answered Lord Henry, sinking into a chair and slowly pulling off his yellow gloves.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "wilde.f.v0010",
+      "kind": "verbatim",
+      "text": "As he was sitting at breakfast next morning, Basil Hallward was shown into the room.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 84
+      }
+    },
+    {
+      "id": "wilde.f.v0011",
+      "kind": "verbatim",
+      "text": "Well, Dorian,” he said at length, with a sad smile, “I won’t speak to you again about this horrible thing, after to-day.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "wilde.f.v0012",
+      "kind": "verbatim",
+      "text": "It was a large, well-proportioned room, which had been specially built by the last Lord Kelso for the use of the little grandson whom, for his strange likeness to his mother, and also for other reasons, he had always hated and desired to keep at a distance.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "wilde.f.v0013",
+      "kind": "verbatim",
+      "text": "Perhaps some night he might find him creeping upstairs and trying to force the door of the room.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "wilde.f.v0014",
+      "kind": "verbatim",
+      "text": "Yet, after some time, he wearied of them, and would sit in his box at the opera, either alone or with Lord Henry, listening in rapt pleasure to “Tannhauser” and seeing in the prelude to that great work of art a presentation of the tragedy of his own soul.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "wilde.f.v0015",
+      "kind": "verbatim",
+      "text": "It was true that the portrait still preserved, under all the foulness and ugliness of the face, its marked likeness to himself; but what could they learn from that?",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "wilde.f.v0016",
+      "kind": "verbatim",
+      "text": "I am sorry to have had to wake you up, Francis,” he said, stepping in; “but I had forgotten my latch-key.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 105
+      }
+    },
+    {
+      "id": "wilde.f.v0017",
+      "kind": "verbatim",
+      "text": "Perhaps.” “Good night, then.” “Good night,” answered the young man, passing up the steps and wiping his parched mouth with a handkerchief.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "wilde.f.v0018",
+      "kind": "verbatim",
+      "text": "Dim and wavering as was the wind-blown light, yet it served to show him the hideous error, as it seemed, into which he had fallen, for the face of the man he had sought to kill had all the bloom of boyhood, all the unstained purity of youth.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "wilde.f.v0019",
+      "kind": "verbatim",
+      "text": "After a few moments—that were to him, in his perturbed state, like endless hours of pain—he felt a hand laid on his shoulder.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "wilde.f.v0020",
+      "kind": "verbatim",
+      "text": "I wish I could love,” cried Dorian Gray with a deep note of pathos in his voice.",
+      "work": "The Picture of Dorian Gray",
+      "lang": "en",
+      "src": {
+        "work": "The Picture of Dorian Gray"
+      },
+      "quality": {
+        "chars": 80
+      }
+    },
+    {
+      "id": "wilde.f.v0021",
+      "kind": "verbatim",
+      "text": "You have invented a very useful younger brother called Ernest, in order that you may be able to come up to town as often as you like.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 133
+      }
+    },
+    {
+      "id": "wilde.f.v0022",
+      "kind": "verbatim",
+      "text": "I have a country house with some land, of course, attached to it, about fifteen hundred acres, I believe; but I don’t depend on that for my real income.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "wilde.f.v0023",
+      "kind": "verbatim",
+      "text": "You can hardly imagine that I and Lord Bracknell would dream of allowing our only daughter—a girl brought up with the utmost care—to marry into a cloak-room, and form an alliance with a parcel?",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "wilde.f.v0024",
+      "kind": "verbatim",
+      "text": "In a very patronising manner.] My dear fellow, the truth isn’t quite the sort of thing one tells to a nice, sweet, refined girl.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "wilde.f.v0025",
+      "kind": "verbatim",
+      "text": "You can put up my dress clothes, my smoking jacket, and all the Bunbury suits .",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "wilde.f.v0026",
+      "kind": "verbatim",
+      "text": "I suppose that is why he often looks a little bored when we three are together.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "wilde.f.v0027",
+      "kind": "verbatim",
+      "text": "I believe that Memory is responsible for nearly all the three-volume novels that Mudie sends us.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 96
+      }
+    },
+    {
+      "id": "wilde.f.v0028",
+      "kind": "verbatim",
+      "text": "Your vanity is ridiculous, your conduct an outrage, and your presence in my garden utterly absurd.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 98
+      }
+    },
+    {
+      "id": "wilde.f.v0029",
+      "kind": "verbatim",
+      "text": "He kisses her, she puts her fingers through his hair.] I hope your hair curls naturally, does it?",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "wilde.f.v0030",
+      "kind": "verbatim",
+      "text": "Well, to speak with perfect candour, Cecily, I wish that you were fully forty-two, and more than usually plain for your age.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "wilde.f.v0031",
+      "kind": "verbatim",
+      "text": "Thoughtfully and sadly.] Whatever unfortunate entanglement my dear boy may have got into, I will never reproach him with it after we are married.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 145
+      }
+    },
+    {
+      "id": "wilde.f.v0032",
+      "kind": "verbatim",
+      "text": "Cecily looks angrily at her, takes up the tongs and puts four lumps of sugar into the cup.] CECILY.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 99
+      }
+    },
+    {
+      "id": "wilde.f.v0033",
+      "kind": "verbatim",
+      "text": "We are both engaged to be married to your brother Ernest, so it is a matter of some importance to us to know where your brother Ernest is at present.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "wilde.f.v0034",
+      "kind": "verbatim",
+      "text": "Was it in order that you might have an opportunity of coming up to town to see me as often as possible?",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "wilde.f.v0035",
+      "kind": "verbatim",
+      "text": "Under an assumed name he drank, I’ve just been informed by my butler, an entire pint bottle of my Perrier-Jouet, Brut, ’89; wine I was specially reserving for myself.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "wilde.f.v0036",
+      "kind": "verbatim",
+      "text": "The moment you consent to my marriage with Gwendolen, I will most gladly allow your nephew to form an alliance with my ward.",
+      "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People",
+      "lang": "en",
+      "src": {
+        "work": "The Importance of Being Earnest: A Trivial Comedy for Serious People"
+      },
+      "quality": {
+        "chars": 124
+      }
+    },
+    {
+      "id": "wilde.f.v0037",
+      "kind": "verbatim",
+      "text": "I remember once at Bath, years ago, losing in the Pump Room an exceedingly handsome cameo bracelet that Sir John had given me.",
+      "work": "An ideal husband",
+      "lang": "en",
+      "src": {
+        "work": "An ideal husband"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "wilde.f.v0038",
+      "kind": "verbatim",
+      "text": "And now what is there before me but public disgrace, ruin, terrible shame, the mockery of the world, a lonely dishonoured life, a lonely dishonoured death, it may be, some day?",
+      "work": "An ideal husband",
+      "lang": "en",
+      "src": {
+        "work": "An ideal husband"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "wilde.f.v0039",
+      "kind": "verbatim",
+      "text": "I said to her things that were hideously true, on my side, from my stand-point, from the standpoint of men.",
+      "work": "An ideal husband",
+      "lang": "en",
+      "src": {
+        "work": "An ideal husband"
+      },
+      "quality": {
+        "chars": 107
+      }
+    },
+    {
+      "id": "wilde.f.v0040",
+      "kind": "verbatim",
+      "text": "I am afraid that he has one of those terribly weak natures that are not susceptible to influence.",
+      "work": "An ideal husband",
+      "lang": "en",
+      "src": {
+        "work": "An ideal husband"
+      },
+      "quality": {
+        "chars": 97
+      }
+    },
+    {
+      "id": "wilde.f.v0041",
+      "kind": "verbatim",
+      "text": "It is the last thing left in me, and the best: the ultimate discovery at which I have arrived, the starting-point for a fresh development.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "wilde.f.v0042",
+      "kind": "verbatim",
+      "text": "Society takes upon itself the right to inflict appalling punishment on the individual, but it also has the supreme vice of shallowness, and fails to realise what it has done.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "wilde.f.v0043",
+      "kind": "verbatim",
+      "text": "The only people I would care to be with now are artists and people who have suffered: those who know what beauty is, and those who know what sorrow is: nobody else interests me.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 177
+      }
+    },
+    {
+      "id": "wilde.f.v0044",
+      "kind": "verbatim",
+      "text": "And that, in the views and ideas I am here shaping for myself, I am quite right is shown to me by the fact that now for the first time since my imprisonment I have a real desire for life.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "wilde.f.v0045",
+      "kind": "verbatim",
+      "text": "Behind joy and laughter there may be a temperament, coarse, hard and callous.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "wilde.f.v0046",
+      "kind": "verbatim",
+      "text": "More than this, there is about sorrow an intense, an extraordinary reality.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 75
+      }
+    },
+    {
+      "id": "wilde.f.v0047",
+      "kind": "verbatim",
+      "text": "The most terrible thing about it is not that it breaks one's heart--hearts are made to be broken--but that it turns one's heart to stone.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 137
+      }
+    },
+    {
+      "id": "wilde.f.v0048",
+      "kind": "verbatim",
+      "text": "My only mistake was that I confined myself so exclusively to the trees of what seemed to me the sun-lit side of the garden, and shunned the other side for its shadow and its gloom.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "wilde.f.v0049",
+      "kind": "verbatim",
+      "text": "It is, if I can fully attain to it, the ultimate realisation of the artistic life.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 82
+      }
+    },
+    {
+      "id": "wilde.f.v0050",
+      "kind": "verbatim",
+      "text": "His whole conception of Humanity sprang right out of the imagination and can only be realised by it.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 100
+      }
+    },
+    {
+      "id": "wilde.f.v0051",
+      "kind": "verbatim",
+      "text": "That is because one realises one's soul only by getting rid of all alien passions, all acquired culture, and all external possessions, be they good or evil.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "wilde.f.v0052",
+      "kind": "verbatim",
+      "text": "It was a blow so appalling that I did not know what to do, so I flung myself on my knees, and bowed my head, and wept, and said, 'The body of a child is as the body of the Lord: I am not worthy of either.' That moment seemed to save me.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "wilde.f.v0053",
+      "kind": "verbatim",
+      "text": "To the artist, expression is the only mode under which he can conceive life at all.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 83
+      }
+    },
+    {
+      "id": "wilde.f.v0054",
+      "kind": "verbatim",
+      "text": "He appeals to the temper of wonder, and creates that mood in which alone he can be understood.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 94
+      }
+    },
+    {
+      "id": "wilde.f.v0055",
+      "kind": "verbatim",
+      "text": "At Christmas I managed to get hold of a Greek Testament, and every morning, after I had cleaned my cell and polished my tins, I read a little of the Gospels, a dozen verses taken by chance anywhere.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "wilde.f.v0056",
+      "kind": "verbatim",
+      "text": "It will sound strange that dry bread could possibly be a delicacy to any one.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "wilde.f.v0057",
+      "kind": "verbatim",
+      "text": "If any love is shown us we should recognise that we are quite unworthy of it.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 77
+      }
+    },
+    {
+      "id": "wilde.f.v0058",
+      "kind": "verbatim",
+      "text": "He held them up as examples to their elders, which I myself have always thought the chief use of children, if what is perfect should have a use.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "wilde.f.v0059",
+      "kind": "verbatim",
+      "text": "He would not hear of life being sacrificed to any system of thought or morals.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 78
+      }
+    },
+    {
+      "id": "wilde.f.v0060",
+      "kind": "verbatim",
+      "text": "But then God had given him at his birth the soul of a poet, as he himself when quite young had in mystical marriage taken poverty as his bride: and with the soul of a poet and the body of a beggar he found the way to perfection not difficult.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "wilde.f.v0061",
+      "kind": "verbatim",
+      "text": "The more mechanical people to whom life is a shrewd speculation depending on a careful calculation of ways and means, always know where they are going, and go there.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "wilde.f.v0062",
+      "kind": "verbatim",
+      "text": "In one sense of the word it is of course necessary, as the Greek oracle said, to know oneself: that is the first achievement of knowledge.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "wilde.f.v0063",
+      "kind": "verbatim",
+      "text": "I know also that much is waiting for me outside that is very delightful, from what St.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 86
+      }
+    },
+    {
+      "id": "wilde.f.v0064",
+      "kind": "verbatim",
+      "text": "If after I am free a friend of mine gave a feast, and did not invite me to it, I should not mind a bit.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 103
+      }
+    },
+    {
+      "id": "wilde.f.v0065",
+      "kind": "verbatim",
+      "text": "It is bitter in Baudelaire, sweet and plaintive in Lamartine, mystic in Verlaine.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 81
+      }
+    },
+    {
+      "id": "wilde.f.v0066",
+      "kind": "verbatim",
+      "text": "To have made such an appeal would have been from the individualist point of view bad enough, but what excuse can there ever be put forward for having made it?",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "wilde.f.v0067",
+      "kind": "verbatim",
+      "text": "He is the Philistine who upholds and aids the heavy, cumbrous, blind, mechanical forces of society, and who does not recognise dynamic force when he meets it either in a man or a movement.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "wilde.f.v0068",
+      "kind": "verbatim",
+      "text": "A great friend of mine--a friend of ten years' standing--came to see me some time ago, and told me that he did not believe a single word of what was said against me, and wished me to know that he considered me quite innocent, and the victim of a hideous plot.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 259
+      }
+    },
+    {
+      "id": "wilde.f.v0069",
+      "kind": "verbatim",
+      "text": "Brutus used madness as a cloak to conceal the sword of his purpose, the dagger of his will, but the Hamlet madness is a mere mask for the hiding of weakness.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "wilde.f.v0070",
+      "kind": "verbatim",
+      "text": "When, at last, by means of the play within the play, and the puppets in their dalliance, Hamlet 'catches the conscience' of the King, and drives the wretched man in terror from his throne, Guildenstern and Rosencrantz see no more in his conduct than a rather painful breach of Court etiquette.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "wilde.f.v0071",
+      "kind": "verbatim",
+      "text": "Horatio, who in order to 'report Hamlet and his cause aright to the unsatisfied,' 'Absents him from felicity a while, And in this harsh world draws his breath in pain,' dies, but Guildenstern and Rosencrantz are as immortal as Angelo and Tartuffe, and should rank with them.",
+      "work": "De Profundis",
+      "lang": "en",
+      "src": {
+        "work": "De Profundis"
+      },
+      "quality": {
+        "chars": 274
+      }
+    },
+    {
+      "id": "wilde.f.v0072",
+      "kind": "verbatim",
+      "text": "Do you think that there should be the same laws for men as there are for women?",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "wilde.f.v0073",
+      "kind": "verbatim",
+      "text": "They certainly come to my parties—the men get quite furious if one doesn’t ask them.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 84
+      }
+    },
+    {
+      "id": "wilde.f.v0074",
+      "kind": "verbatim",
+      "text": "Though I am bound to say he never gave away any large sums of money to anybody.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 79
+      }
+    },
+    {
+      "id": "wilde.f.v0075",
+      "kind": "verbatim",
+      "text": "I know where Arthur keeps his bank book—in one of the drawers of that desk.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 75
+      }
+    },
+    {
+      "id": "wilde.f.v0076",
+      "kind": "verbatim",
+      "text": "You would feel that the look in his eyes was false, his voice false, his touch false, his passion false.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 104
+      }
+    },
+    {
+      "id": "wilde.f.v0077",
+      "kind": "verbatim",
+      "text": "Well, really, Windermere, if I am to be the Duchess’s sister-in-law— LORD WINDERMERE.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "wilde.f.v0078",
+      "kind": "verbatim",
+      "text": "I must go back—no; I can’t go back, my letter has put me in their power—Arthur would not take me back!",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 102
+      }
+    },
+    {
+      "id": "wilde.f.v0079",
+      "kind": "verbatim",
+      "text": "There is nothing in the whole world so unbecoming to a woman as a Nonconformist conscience.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 91
+      }
+    },
+    {
+      "id": "wilde.f.v0080",
+      "kind": "verbatim",
+      "text": "It was very good of you to receive her last night—but you are never to see her again.",
+      "work": "Lady Windermere's Fan",
+      "lang": "en",
+      "src": {
+        "work": "Lady Windermere's Fan"
+      },
+      "quality": {
+        "chars": 85
+      }
+    },
+    {
+      "id": "wilde.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 4,
+      "worksSpan": 3,
+      "examples": [
+        "If so, it was for me to come to you, not for you to write of coming to me.",
+        "If any love is shown us we should recognise that we are quite unworthy of it."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 208,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:39a2e74f4246365636ddd999e84769730035989e522cbe23908ab4f71df6ce52"
+}

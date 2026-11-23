@@ -1,0 +1,3303 @@
+{
+  "authorId": "spinoza",
+  "kbVersion": "spinoza@bootstrap-2026-10-03",
+  "builtAt": "2026-11-23T09:52:49.107Z",
+  "source": "bootstrap-corpus",
+  "lang": "en",
+  "works": [
+    {
+      "title": "Ethics",
+      "sentences": 56
+    },
+    {
+      "title": "On the Improvement of the Understanding",
+      "sentences": 58
+    },
+    {
+      "title": "Theologico-Political Treatise",
+      "sentences": 52
+    },
+    {
+      "title": "The Philosophy of Spinoza",
+      "sentences": 55
+    },
+    {
+      "title": "Ethics — Part 1",
+      "sentences": 55
+    }
+  ],
+  "passages": [
+    {
+      "id": "spinoza.p0001",
+      "w": "Ethics",
+      "s": "I say absolutely, not after his kind, as is usually stated.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0002",
+      "w": "Ethics",
+      "s": "Proof.--Will is only a particular mode of thinking, like intellect; therefore (by Prop.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0003",
+      "w": "Ethics",
+      "s": "If it were otherwise, God would not be the cause of all things.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0004",
+      "w": "Ethics",
+      "s": "Whatsoever we conceive to be in the power of God, necessarily exists.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0005",
+      "w": "Ethics",
+      "s": "If all things follow from a necessity of the absolutely perfect nature of God, why are there so many imperfections in nature?",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0006",
+      "w": "Ethics",
+      "s": "Note.--This proposition is also evident from the fact, that we are able to conceive an infinite thinking being.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0007",
+      "w": "Ethics",
+      "s": "Wherefore the actual being of ideas owns for cause God, in so far as he is a thinking thing.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0008",
+      "w": "Ethics",
+      "s": "The first element, which constitutes the actual being of the human mind, is the idea of some particular thing actually existing.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0009",
+      "w": "Ethics",
+      "s": "However, no one will be able to grasp this adequately or distinctly, unless he first has adequate knowledge of the nature of our body.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0010",
+      "w": "Ethics",
+      "s": "If, on the other hand, A be given in motion, we shall, so long as we only consider A, be unable to affirm anything concerning it, except that it is in motion.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0011",
+      "w": "Ethics",
+      "s": "If the mind, while imagining non--existent things as present to it, is at the same time conscious that they do not really exist, this power of imagination must be set down to the efficacy of its nature, and not to a fault, especially if this faculty of imagination depend solely on its own nature--that is (I.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0012",
+      "w": "Ethics",
+      "s": "The idea of the idea of each modification of the human body does not involve an adequate knowledge of the human mind.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0013",
+      "w": "Ethics",
+      "s": "Coroll.), both in so far as he has the idea of the human body, and in so far as he has the ideas of the given external bodies.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0014",
+      "w": "Ethics",
+      "s": "We must, however, bear in mind, that these general notions are not formed by all men in the same way, but vary in each individual according as the point varies, whereby the body has been most often affected and which the mind most easily imagines or remembers.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0015",
+      "w": "Ethics",
+      "s": "Very many controversies have arisen from the fact, that men do not rightly explain their meaning, or do not rightly interpret the meaning of others.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0016",
+      "w": "Ethics",
+      "s": "Proof.--Will and understanding are nothing beyond the individual volitions and ideas (II.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0017",
+      "w": "Ethics",
+      "s": "We have, however, seen that one idea has more reality or perfection than another, for as objects are some more excellent than others, so also are the ideas of them some more excellent than others; this also seems to point to a difference between the understanding and the will.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0018",
+      "w": "Ethics",
+      "s": "I say that we act when anything takes place, either within us or externally to us, whereof we are the adequate cause; that is (by the foregoing definition) when through our nature something takes place within us or externally to us, which can through our nature alone be clearly and distinctly understood.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0019",
+      "w": "Ethics",
+      "s": "Lastly, we dream that from the free decision of our mind we do something, which we should not dare to do when awake.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0020",
+      "w": "Ethics",
+      "s": "Note.--From what has been said we may clearly understand the nature of Love and Hate.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0021",
+      "w": "Ethics",
+      "s": "Note.--This disposition of the mind, which arises from two contrary emotions, is called vacillation; it stands to the emotions in the same relation as doubt does to the imagination (II.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0022",
+      "w": "Ethics",
+      "s": "He, therefore, who conceives that the object of his love is destroyed will feel pain, &c.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0023",
+      "w": "Ethics",
+      "s": "Corollary III.--We seek to free from misery, as far as we can, a thing which we pity.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0024",
+      "w": "Ethics",
+      "s": "The Dutch version and Camerer read, \"an internal cause.\" \"Honor\" = Gloria.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0025",
+      "w": "Ethics",
+      "s": "If anyone conceives, that an object of his love joins itself to another with closer bonds of friendship than he himself has attained to, he will be affected with hatred towards the loved object and with envy towards his rival.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0026",
+      "w": "Ethics",
+      "s": "If anyone conceives that he is loved by another, and believes that he has given no cause for such love, he will love that other in return.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0027",
+      "w": "Ethics",
+      "s": "Proof.--The beloved object feels reciprocal hatred towards him who hates it (III.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0028",
+      "w": "Ethics",
+      "s": "Further, in so far as we hope for or fear anything, we regard it with love or hatred; thus everyone can apply by himself to hope and fear what we have said concerning love and hatred.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0029",
+      "w": "Ethics",
+      "s": "But he can envy his equal, who is assumed to have the same nature as himself.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0030",
+      "w": "Ethics",
+      "s": "Again, pleasure and pain are passive states or passions, whereby every man's power or endeavour to persist in his being is increased or diminished, helped or hindered (III.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0031",
+      "w": "Ethics",
+      "s": "For, by proceeding in the same way as above, we can easily show that love is united to repentance, scorn, shame, &c.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0032",
+      "w": "Ethics",
+      "s": "Explanation--From these definitions it follows, that there is no hope unmingled with fear, and no fear unmingled with hope.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0033",
+      "w": "Ethics",
+      "s": "Envy is hatred, in so far as it induces a man to be pained by another's good fortune, and to rejoice in another's evil fortune.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0034",
+      "w": "Ethics",
+      "s": "For, so long as a man is bound by any desire, he is at the same time necessarily bound by this.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0035",
+      "w": "Ethics",
+      "s": "For all the ideas of bodies, which we possess, denote rather the actual disposition of our own body (II.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0036",
+      "w": "Ethics",
+      "s": "For we are wont to refer all the individual things in nature to one genus, which is called the highest genus, namely, to the category of Being, whereto absolutely all individuals in nature belong.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0037",
+      "w": "Ethics",
+      "s": "Proof.--The force and increase of any passion and its persistence in existing are defined by the power of an external cause compared with our own (by the foregoing Prop.); therefore (IV.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0038",
+      "w": "Ethics",
+      "s": "Proof.--Emotion towards a thing, which we conceive to exist, is more intense than it would be, if we conceived the thing as future (IV.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0039",
+      "w": "Ethics",
+      "s": "But, before I begin to prove my Propositions in detailed geometrical fashion, it is advisable to sketch them briefly in advance, so that everyone may more readily grasp my meaning.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0040",
+      "w": "Ethics",
+      "s": "Proof.--The mind is not capable of understanding anything higher than God, that is (I.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0041",
+      "w": "Ethics",
+      "s": "Proof.--A man, for instance Peter, can be the cause of Paul's feeling pain, because he (Peter) possesses something similar to that which Paul hates (III.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0042",
+      "w": "Ethics",
+      "s": "Note.--What we have just shown is attested by experience so conspicuously, that it is in the mouth of nearly everyone: \"Man is to man a God.\" Yet it rarely happens that men live in obedience to reason, for things are so ordered among them, that they are generally envious and troublesome one to another.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0043",
+      "w": "Ethics",
+      "s": "It sometimes happens, that a man undergoes such changes, that I should hardly call him the same.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0044",
+      "w": "Ethics",
+      "s": "Here, and in what follows, I mean by hatred only hatred towards men.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0045",
+      "w": "Ethics",
+      "s": "Note.--It would be too long a task to enumerate here all the evil results of pride, inasmuch as the proud are a prey to all the emotions, though to none of them less than to love and pity.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0046",
+      "w": "Ethics",
+      "s": "But pain is bad, in so far as it diminishes or checks the power of action (IV.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0047",
+      "w": "Ethics",
+      "s": "In so far as the mind conceives a thing under the dictates of reason, it is affected equally, whether the idea be of a thing future, past, or present.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0048",
+      "w": "Ethics",
+      "s": "Moreover, ingratitude is not an emotion.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0049",
+      "w": "Ethics",
+      "s": "Therefore, without intelligence there is not rational life: and things are only good, in so far as they aid man in his enjoyment of the intellectual life, which is defined by intelligence.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0050",
+      "w": "Ethics",
+      "s": "Hence providing for the poor is a duty, which falls on the State as a whole, and has regard only to the general advantage.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0051",
+      "w": "Ethics",
+      "s": "In truth, as there is no common standard of volition and motion, so is there no comparison possible between the powers of the mind and the power or strength of the body; consequently the strength of one cannot in any wise be determined by the strength of the other.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0052",
+      "w": "Ethics",
+      "s": "Than this remedy for the emotions (to return to the point from which I started), which consists in a true knowledge thereof, nothing more excellent, being within our power, can be devised.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0053",
+      "w": "Ethics",
+      "s": "Proof.--The emotions, which are contrary to our nature, that is (IV.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0054",
+      "w": "Ethics",
+      "s": "In the fact that it separates the emotions from the thought of an external cause, which we conceive confusedly (V.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0055",
+      "w": "Ethics",
+      "s": "Yet, as there is something, notwithstanding, which is conceived by a certain eternal necessity through the very essence of God (last Prop.); this something, which appertains to the essence of the mind, will necessarily be eternal.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0056",
+      "w": "Ethics",
+      "s": "Note.--Things are conceived by us as actual in two ways; either as existing in relation to a given time and place, or as contained in God and following from the necessity of the divine nature.",
+      "src": {
+        "work": "Ethics"
+      }
+    },
+    {
+      "id": "spinoza.p0057",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) In order to bring this about, it is necessary to understand as much of nature as will enable us to attain to the aforesaid character, and also to form a social order such as is most conducive to the attainment of this character by the greatest number with the least difficulty and danger.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0058",
+      "w": "On the Improvement of the Understanding",
+      "s": "17] (1) Yet, as it is necessary that while we are endeavoring to attain our purpose, and bring the understanding into the right path we should carry on our life, we are compelled first of all to lay down certain rules of life as provisionally good, to wit the following:-- I.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0059",
+      "w": "On the Improvement of the Understanding",
+      "s": "(5) Lastly, to endeavor to obtain only sufficient money or other commodities to enable us to preserve our life and health, and to follow such general customs as are consistent with our purpose.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0060",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) By hearsay I know the day of my birth, my parentage, and other matters about which I have never felt any doubt.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0061",
+      "w": "On the Improvement of the Understanding",
+      "s": "23] (1) In order that the whole matter may be put in a clearer light, I will make use of a single illustration as follows.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0062",
+      "w": "On the Improvement of the Understanding",
+      "s": "26] (1) We shall then be in a position to see which mode of perception we ought to choose.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0063",
+      "w": "On the Improvement of the Understanding",
+      "s": "27] (1) The second mode of perception [i] cannot be said to give us the idea of the proportion of which we are in search.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0064",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) This mode, therefore, must be the one which we chiefly employ.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0065",
+      "w": "On the Improvement of the Understanding",
+      "s": "(6) We might thus vainly endeavor to prove that men have no power of working iron.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0066",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) Now, as it is something different from its correlate, it is capable of being understood through itself; in other words, the idea, in so far as its actual essence (essentia formalis) is concerned, may be the subject of another subjective essence (essentia objectiva).",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0067",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) And, again, this idea of the idea of Peter has its own individuality, which may become the subject of yet another idea; and so on, indefinitely.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0068",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) Hence, again, it is clear that no one can know the nature of the highest certainty, unless he possesses an adequate idea, or the subjective essence of a thing: certainty is identical with such subjective essence.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0069",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) In this, one part of the method consists.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0070",
+      "w": "On the Improvement of the Understanding",
+      "s": "(4) This is what we were endeavoring to prove.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0071",
+      "w": "On the Improvement of the Understanding",
+      "s": "(4) Lastly, it is hindered by the conditions of human life, which are, as we have already pointed out, extremely changeable.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0072",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) Such persons are not conscious of themselves.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0073",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) If they deny, grant, or gainsay, they know not that they deny, grant, or gainsay, so that they ought to be regarded as automata, utterly devoid of intelligence.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0074",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) Such work lies in the province of philosophy.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0075",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) Now \"fiction\" is chiefly occupied with things considered as existing.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0076",
+      "w": "On the Improvement of the Understanding",
+      "s": "(6) It is concerned with things possible, and not with things necessary or impossible.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0077",
+      "w": "On the Improvement of the Understanding",
+      "s": "57] (1) It remains for us to consider hypotheses made in problems, which sometimes involve impossibilities.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0078",
+      "w": "On the Improvement of the Understanding",
+      "s": "(57:5) For, in the first case, I have merely recalled to memory, [x] another candle not burning, or conceived the candle before me as without a flame, and then I understand as applying to the latter, leaving its flame out of the question, all that I think of the former.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0079",
+      "w": "On the Improvement of the Understanding",
+      "s": "If they grant it, then necessarily the same must be said of understanding, as is said of fiction.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0080",
+      "w": "On the Improvement of the Understanding",
+      "s": "(60:6) Further, they assert that we or our soul have such freedom that we can constrain ourselves, or our soul, or even our soul's freedom.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0081",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) If there were such a conception we should at the same time be aware of the means and the causes whereby the event took place.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0082",
+      "w": "On the Improvement of the Understanding",
+      "s": "65] (1) Let us shortly come to our conclusion, and again repeat that we need have no fear of confusing with true ideas that which is only a fiction.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0083",
+      "w": "On the Improvement of the Understanding",
+      "s": "67] (1) If attributable to the existence of the thing, it is corrected in the same way as a fictitious idea under similar circumstances.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0084",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) If an architect conceives a building properly constructed, though such a building may never have existed, and amy never exist, nevertheless the idea is true; and the idea remains the same, whether it be put into execution or not.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0085",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) With an idea of this kind before us, we shall, as appears from what has just been said, be more easily able to carry on the research we have in view.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0086",
+      "w": "On the Improvement of the Understanding",
+      "s": "(72:7) Thus falsity consists only in this, that something is affirmed of a thing, which is not contained in the conception we have formed of that thing, as motion or rest of a semicircle.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0087",
+      "w": "On the Improvement of the Understanding",
+      "s": "73] (1) It only remains for us to inquire by what power our mind can form true ideas, and how far such power extends.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0088",
+      "w": "On the Improvement of the Understanding",
+      "s": "(74:4) By combining these ideas, and being at the same time certain of the truth of the axiom, they forthwith became convinced that the mind consists of very subtle bodies; that these very subtle bodies cannot be divided &c.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0089",
+      "w": "On the Improvement of the Understanding",
+      "s": "(5) However, if we proceed with as little abstraction as possible, and begin from primary elements--that is, from the source and origin of nature, as far back as we can reach,--we need not fear any deceptions of this kind.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0090",
+      "w": "On the Improvement of the Understanding",
+      "s": "(5) This is, in fact, a being single and infinite [76z]; in other words, it is the sum total of being, beyond which there is no being found.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0091",
+      "w": "On the Improvement of the Understanding",
+      "s": "(7) Thus rustics are generally astonished when they hear that the sun is much larger than the earth.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0092",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) We may, therefore, conclude that doubt always proceeds from want of due order in investigation.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0093",
+      "w": "On the Improvement of the Understanding",
+      "s": "(4) For the more intelligible a thing is, the more easily is it remembered, and the less intelligible it is, the more easily do we forget it.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0094",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) It is nothing else than the actual sensation of impressions on the brain, accompanied with the thought of a definite duration, [83d] of the sensation.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0095",
+      "w": "On the Improvement of the Understanding",
+      "s": "(6) If this seems too absurd to anyone, it will be sufficient for our purpose, if he reflect on the fact that a thing is more easily remembered in proportion to its singularity, as appears from the example of the comedy just cited.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0096",
+      "w": "On the Improvement of the Understanding",
+      "s": "(4) Let no one then be astonished that before proving the existence of body, and other necessary things, I speak of imagination of body, and of its composition.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0097",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) Neither shall we wonder why we understand some things which in nowise fall within the scope of the imagination, while other things are in the imagination but wholly opposed to the understanding, or others, again, which agree therewith.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0098",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) Sometimes, while making no distinction between the imagination and the intellect, we think that what we more readily imagine is clearer to us; and also we think that what we imagine we understand.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0099",
+      "w": "On the Improvement of the Understanding",
+      "s": "92] (1) As for the first point, it is necessary (as we have said) for our purpose that everything should be conceived, either solely through its essence, or through its proximate cause.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0100",
+      "w": "On the Improvement of the Understanding",
+      "s": "(93:3) For the understanding cannot descend from universal axioms by themselves to particular things, since axioms are of infinite extent, and do not determine the understanding to contemplate one particular thing more than another.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0101",
+      "w": "On the Improvement of the Understanding",
+      "s": "(5) Though, as I have said, this is of no importance in the case of figures and other abstractions, it is of great importance in the case of physical beings and realities: for the properties of things are not understood so long as their essences are unknown.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0102",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) This definition clearly comprehends the proximate cause.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0103",
+      "w": "On the Improvement of the Understanding",
+      "s": "The exclusion of all idea of cause--that is, the thing must not need explanation by Anything outside itself.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0104",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) For it will possess, subjectively, nature's essence, order, and union.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0105",
+      "w": "On the Improvement of the Understanding",
+      "s": "102] (1) But, though this be so, there seems to be no small difficulty in arriving at the knowledge of these particular things, for to conceive them all at once would far surpass the powers of the human understanding.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0106",
+      "w": "On the Improvement of the Understanding",
+      "s": "(5) However, this is not the place to recount such aids, nor is there any need to do so, until we have acquired a sufficient knowledge of eternal things and their infallible laws, and until the nature of our senses has become plain to us.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0107",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) Let us, then, enumerate here the properties of the understanding, let us examine them, and begin by discussing the instruments for research which we find innate in us.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0108",
+      "w": "On the Improvement of the Understanding",
+      "s": "(4) Thus it forms the idea of quantity absolutely, without reference to any other thoughts; but ideas of motion it only forms after taking into consideration the idea of quantity.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0109",
+      "w": "On the Improvement of the Understanding",
+      "s": "(108:8) This is proved by the fact that we conceive them as formed as it were by motion, yet this motion is not perceived unless the quantity be perceived also; we can even prolong the motion to form an infinite line, which we certainly could not do unless we had an idea of infinite quantity.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0110",
+      "w": "On the Improvement of the Understanding",
+      "s": "110] (1) False and fictitious ideas have nothing positive about them (as we have abundantly shown), which causes them to be called false or fictitious; they are only considered as such through the defectiveness of knowledge.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0111",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) This is sufficiently evident from the fact that the cause is only spoken of in very general terms, such as--there exists then something; there exists then some power, &c.; or from the that we only express it in a negative manner--it is not or that, &c.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0112",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) For that which is in itself one, men imagine to be multiplex.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0113",
+      "w": "On the Improvement of the Understanding",
+      "s": "(3) The same may be said of existence, especially when it is conceived quite generally as an entity; it is then readily applied to all things together in the memory.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0114",
+      "w": "On the Improvement of the Understanding",
+      "s": "(2) I therefore append the following for those who may desire it.",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      }
+    },
+    {
+      "id": "spinoza.p0115",
+      "w": "Theologico-Political Treatise",
+      "s": "(45) Having thus laid bare the bases of belief, I draw the conclusion that Revelation has obedience for its sole object, therefore, in purpose no less than in foundation and method, stands entirely aloof from ordinary knowledge; each has its separate province, neither can be called the handmaid of the other.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0116",
+      "w": "Theologico-Political Treatise",
+      "s": "(7) In respect to the certainty it involves, and the source from which it is derived, i.e.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0117",
+      "w": "Theologico-Political Treatise",
+      "s": "(13) Our conclusions on the subject must be drawn solely from Scripture; for what can we affirm about matters transcending our knowledge except what is told us by the words or writings of prophets?",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0118",
+      "w": "Theologico-Political Treatise",
+      "s": "(18) A perusal of the sacred books will show us that all God's revelations to the prophets were made through words or appearances, or a combination of the two.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0119",
+      "w": "Theologico-Political Treatise",
+      "s": "(38) Maimonides and others do indeed maintain that these and every other instance of angelic apparitions (e.g.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0120",
+      "w": "Theologico-Political Treatise",
+      "s": "I could cite from Holy Writ many similar examples, but I think they are sufficiently well known already.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0121",
+      "w": "Theologico-Political Treatise",
+      "s": "(48) To Him the ordinances of God leading men to salvation were revealed directly without words or visions, so that God manifested Himself to the Apostles through the mind of Christ as He formerly did to Moses through the supernatural voice.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0122",
+      "w": "Theologico-Political Treatise",
+      "s": "Behold I will pour out My Spirit unto you,\" Prov.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0123",
+      "w": "Theologico-Political Treatise",
+      "s": "So, too, the expressions spirits of jealousy, fornication, wisdom, counsel, bravery, stand for a jealous, lascivious, wise, prudent, or brave mind (for we Hebrews use substantives in preference to adjectives), or these various qualities.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0124",
+      "w": "Theologico-Political Treatise",
+      "s": "(74) The Psalmist calls the miracles in Egypt the works of God, because the Hebrews found in them a way of safety which they had not looked for, and therefore especially marvelled at.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0125",
+      "w": "Theologico-Political Treatise",
+      "s": "(81) In some places the expression merely means a very strong, dry, and deadly wind, as in Isaiah xl:7, \"The grass withereth, the flower fadeth, because the Spirit of the Lord bloweth upon it.\" (82) Similarly in Gen.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0126",
+      "w": "Theologico-Political Treatise",
+      "s": "(89) In Job xxxiv:14, we read: \"If He gather unto Himself His Spirit and breath;\" in Gen.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0127",
+      "w": "Theologico-Political Treatise",
+      "s": "(110) On our minds also the mind of God and His eternal thoughts are impressed; but this being the same for all men is less taken into account, especially by the Hebrews, who claimed a pre-eminence, and despised other men and other men's knowledge.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0128",
+      "w": "Theologico-Political Treatise",
+      "s": "(115) I might, indeed, say as others do, that they took place by the power of God; but this would be mere trifling, and no better than explaining some unique specimen by a transcendental term.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0129",
+      "w": "Theologico-Political Treatise",
+      "s": "(120) We are only attempting, as I have said, to examine the Scriptural documents, and to draw our conclusions from them as from ultimate natural facts; the causes of the documents do not concern us.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0130",
+      "w": "Theologico-Political Treatise",
+      "s": "(3) Heman, Calcol, and Dara, though men of great talent, were not prophets, whereas uneducated countrymen, nay, even women, such as Hagar, Abraham's handmaid, were thus gifted.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0131",
+      "w": "Theologico-Political Treatise",
+      "s": "(17) Moreover, Scripture warrants the statement that the certitude of the prophets was not mathematical, but moral.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0132",
+      "w": "Theologico-Political Treatise",
+      "s": "(26) Although Scripture does not always make mention of a sign, we must nevertheless suppose that a sign was always vouchsafed; for Scripture does not always relate every condition and circumstance (as many have remarked), but rather takes them for granted.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0133",
+      "w": "Theologico-Political Treatise",
+      "s": "(34) If, on the contrary, he was melancholy, wars, massacres, and calamities were revealed; and so, according as a prophet was merciful, gentle, quick to anger, or severe, he was more fitted for one kind of revelation than another.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0134",
+      "w": "Theologico-Political Treatise",
+      "s": "(39) To the augurs of Nebuchadnezzar the destruction of Jerusalem was revealed through entrails, whereas the king himself inferred it from oracles and the direction of arrows which he shot into the air.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0135",
+      "w": "Theologico-Political Treatise",
+      "s": "(61) Lastly, the prophets, to whom it was revealed that God would take away Elijah, wished to persuade Elisha that he had been taken somewhere where they would find him; showing sufficiently clearly that they had not understood God's revelation aright.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0136",
+      "w": "Theologico-Political Treatise",
+      "s": "(78) Our conclusion is in no wise impious, for though Solomon, Isaiah, Joshua, &c.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0137",
+      "w": "Theologico-Political Treatise",
+      "s": "(84) Abraham also knew not that God is omnipresent, and has foreknowledge of all things; for when he heard the sentence against the inhabitants of Sodom, he prayed that the Lord should not execute it till He had ascertained whether they all merited such punishment; for he said (see Gen.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0138",
+      "w": "Theologico-Political Treatise",
+      "s": "(115) How he did so does not sufficiently appear, whether it was by writing a commentary which has now perished, or by altering Ezekiel's words and audaciously striking out phrases according to his fancy.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0139",
+      "w": "Theologico-Political Treatise",
+      "s": "(122) And this agrees with the chapter of Jeremiah just cited, for it is there said that the Lord repents of the good or the evil pronounced, if the men in question change their ways and manner of life.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0140",
+      "w": "Theologico-Political Treatise",
+      "s": "(128) For instance, the revelation to Cain only teaches us that God admonished him to lead the true life, for such alone is the object and substance of the revelation, not doctrines concerning free will and philosophy.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0141",
+      "w": "Theologico-Political Treatise",
+      "s": "(140) Let it suffice, then, to have indicated a few instances of general application, and let the curious reader consider others by himself.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0142",
+      "w": "Theologico-Political Treatise",
+      "s": "(4) Whoever, therefore, rejoices for such reasons, rejoices in another's misfortune, and is, so far, malicious and bad, knowing neither true happiness nor the peace of the true life.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0143",
+      "w": "Theologico-Political Treatise",
+      "s": "(14) So that to say that everything happens according to natural laws, and to say that everything is ordained by the decree and ordinance of God, is the same thing.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0144",
+      "w": "Theologico-Political Treatise",
+      "s": "(23) It may be concluded that these gifts are not peculiar to any nation, but have always been shared by the whole human race, unless, indeed, we would indulge the dream that nature formerly created men of different kinds.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0145",
+      "w": "Theologico-Political Treatise",
+      "s": "(41) This sufficiently shows that before He founded the Israelitish nation God constituted kings and priests in Jerusalem, and ordained for them rites and laws.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0146",
+      "w": "Theologico-Political Treatise",
+      "s": "31) of the Moabites, \"Therefore will I howl for Moab, and I will cry out for all Moab\" (verse 36), \"and therefore mine heart shall sound for Moab like pipes;\" in the end he prophesies their restoration, as also the restoration of the Egyptians, Ammonites, and Elamites.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0147",
+      "w": "Theologico-Political Treatise",
+      "s": "(71) Wherefore he was without doubt most acceptable to God, for the speeches and cursings of the wicked move God not at all.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0148",
+      "w": "Theologico-Political Treatise",
+      "s": "(96) Wherefore this eternal covenant of the knowledge of God and love is universal, as is clear, moreover, from Zeph.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0149",
+      "w": "Theologico-Political Treatise",
+      "s": "(103) But exactly the opposite happened to those whom the king of Portugal compelled to become Christians, for they always, though converted, lived apart, inasmuch as they were considered unworthy of any civic honours.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0150",
+      "w": "Theologico-Political Treatise",
+      "s": "(108) They have not always retained empire, but they have recovered it when lost, and doubtless will do so again after the spirit of the Tartars becomes relaxed through the luxury of riches and pride.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0151",
+      "w": "Theologico-Political Treatise",
+      "s": "(12) Let us add that as to the actual coordination and concatenation of things, that is how things are ordained and linked together, we are obviously ignorant; therefore, it is more profitable for right living, nay, it is necessary for us to consider things as contingent.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0152",
+      "w": "Theologico-Political Treatise",
+      "s": "(18) But a man who does the same from a knowledge of the true reason for laws and their necessity, acts from a firm purpose and of his own accord, and is therefore properly called just.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0153",
+      "w": "Theologico-Political Treatise",
+      "s": "(24) I call this law Divine because of the nature of the highest good, which I will here shortly explain as clearly as I can.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0154",
+      "w": "Theologico-Political Treatise",
+      "s": "Whether by the natural light of reason we can conceive of God as a law-giver or potentate ordaining laws for men?",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0155",
+      "w": "Theologico-Political Treatise",
+      "s": "(57) Wherefore we make one and the same affirmation concerning God when we say that He has from eternity decreed that three angles of a triangle are equal to two right angles, as when we say that He has understood it.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0156",
+      "w": "Theologico-Political Treatise",
+      "s": "(77) So much for the first point which I wished to explain and demonstrate.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0157",
+      "w": "Theologico-Political Treatise",
+      "s": "(83) It will be better, therefore, to adduce other passages of Scripture, especially such as were written by him, who speaks with all the strength of his natural understanding, in which he surpassed all his contemporaries, and whose sayings are accepted by the people as of equal weight with those of the prophets.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0158",
+      "w": "Theologico-Political Treatise",
+      "s": "Happy is the man that findeth wisdom, and the man that getteth understanding,\" for \"Wisdom gives length of days, and riches and honour; her ways are ways of pleasantness, and all her paths peace\" (xiiii:6, 17).",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0159",
+      "w": "Theologico-Political Treatise",
+      "s": "(5) Isaiah teaches most plainly that the Divine law in its strict sense signifies that universal law which consists in a true manner of life, and does not signify ceremonial observances.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0160",
+      "w": "Theologico-Political Treatise",
+      "s": "(13) For instance, Moses does not teach the Jews as a prophet not to kill or to steal, but gives these commandments solely as a lawgiver and judge; he does not reason out the doctrine, but affixes for its non-observance a penalty which may and very properly does vary in different nations.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0161",
+      "w": "Theologico-Political Treatise",
+      "s": "(24) For when the prophet saw and foretold that the desolation of the city was at hand, he said that God only delights in those who know and understand that He exercises loving-kindness, judgment, and righteousness in the earth, and that such persons only are worthy of praise.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0162",
+      "w": "Theologico-Political Treatise",
+      "s": "(38) Therefore, no society can exist without government, and force, and laws to restrain and repress men's desires and immoderate impulses.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0163",
+      "w": "Theologico-Political Treatise",
+      "s": "(44) Lastly, it is exceedingly difficult to revoke liberties once granted.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0164",
+      "w": "Theologico-Political Treatise",
+      "s": "(50) From these universal considerations, let us pass on to the kingdom of the Jews.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0165",
+      "w": "Theologico-Political Treatise",
+      "s": "(66) If anyone wishes to persuade his fellows for or against anything which is not self-evident, he must deduce his contention from their admissions, and convince them either by experience or by ratiocination; either by appealing to facts of natural experience, or to self-evident intellectual axioms.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0166",
+      "w": "Theologico-Political Treatise",
+      "s": "(75) No definitions of doctrine are given, but all the sayings and reasonings are adapted to the understanding of the masses.",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      }
+    },
+    {
+      "id": "spinoza.p0167",
+      "w": "The Philosophy of Spinoza",
+      "s": "His psychology one might almost say is a moral psychology.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0168",
+      "w": "The Philosophy of Spinoza",
+      "s": "Matter is, in its nature, no more hostile to spirit than body is alien to mind.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0169",
+      "w": "The Philosophy of Spinoza",
+      "s": "Ethical tolerance is different from ethical sentimentality.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0170",
+      "w": "The Philosophy of Spinoza",
+      "s": "Man's real moral problem is to secure a permanent good instead of a transitory good; a more inclusive good instead of a more restricted good; a higher good instead of a lower good.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0171",
+      "w": "The Philosophy of Spinoza",
+      "s": "He knew, as Plato did, that the day of ultimate, universal happiness will dawn rather when all other people become like philosophers.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0172",
+      "w": "The Philosophy of Spinoza",
+      "s": "But even if we are born under an unlucky star, and are misfortunate and unhappy lovers of the ideal, we still have the ideal to which we can hold fast and save ourselves from being shattered in our despairs, from dying in spirit, which is far more terrible than any death in the body could possibly be.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0173",
+      "w": "The Philosophy of Spinoza",
+      "s": "If any one desire an example, let him take Alexander, who only began superstitiously to seek guidance from seers, when he first learned to fear fortune in the passes of Sysis (Curtius v.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0174",
+      "w": "The Philosophy of Spinoza",
+      "s": "These and similar doctrines, I repeat, Scripture everywhere so clearly and expressly teaches, that no one was ever in doubt of its meaning concerning them.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0175",
+      "w": "The Philosophy of Spinoza",
+      "s": "If we read a book which contains incredible or impossible narratives, or is written in a very obscure style, and if we know nothing of its author, nor of the time or occasion of its being written, we shall vainly endeavor to gain any certain knowledge of its true meaning.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0176",
+      "w": "The Philosophy of Spinoza",
+      "s": "He asserted that each passage in Scripture admits of various, nay, contrary meanings; but that we could never be certain of any particular one till we knew that the passage, as we interpreted it, contained nothing contrary or repugnant to reason.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0177",
+      "w": "The Philosophy of Spinoza",
+      "s": "The sole object of such commentators seemed to be to extort from Scripture confirmations of Aristotelian quibbles and their own inventions, a proceeding which I regard as the acme of absurdity.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0178",
+      "w": "The Philosophy of Spinoza",
+      "s": "As the prophets perceived the revelations of God by the aid of imagination, they could indisputably perceive much that is beyond the boundary of the intellect, for many more ideas can be constructed from words and figures than from the principles and notions on which the whole fabric of reasoned knowledge is reared.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0179",
+      "w": "The Philosophy of Spinoza",
+      "s": "Scripture itself teaches and shows that God led away David to number the people, though it bears ample witness to David's piety.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0180",
+      "w": "The Philosophy of Spinoza",
+      "s": "We have determined, then, that we are only bound to believe in the prophetic writings, the object and substance of the revelation; with regard to the details, every one may believe or not, as he likes.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0181",
+      "w": "The Philosophy of Spinoza",
+      "s": "For instance, a man's true happiness consists only in wisdom, and the knowledge of the truth, not at all in the fact that he is wiser than others, or that others lack such knowledge: such considerations do not increase his wisdom or true happiness.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0182",
+      "w": "The Philosophy of Spinoza",
+      "s": "Nevertheless, human management and watchfulness can greatly assist towards living in security and warding off the injuries of our fellow men, and even of beasts.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0183",
+      "w": "The Philosophy of Spinoza",
+      "s": "Lastly, what is the good gained by knowing the sacred histories and believing them?",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0184",
+      "w": "The Philosophy of Spinoza",
+      "s": "Understanding is a well-spring of life to him that hath it; but the instruction of fools is folly\" (Prov.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0185",
+      "w": "The Philosophy of Spinoza",
+      "s": "The formation of society serves not only for defensive purposes, but is also very useful, and, indeed, absolutely necessary, as rendering possible the division of labor.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0186",
+      "w": "The Philosophy of Spinoza",
+      "s": "They have no single sound idea concerning either God or Nature, they confound God's decrees with human decrees, they conceive Nature as so limited that they believe man to be its chief part!",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0187",
+      "w": "The Philosophy of Spinoza",
+      "s": "The prophets frequently used to predict victories and defeats of the nations in similar phrases.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0188",
+      "w": "The Philosophy of Spinoza",
+      "s": "Everything which is, is either in itself or in another.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0189",
+      "w": "The Philosophy of Spinoza",
+      "s": "All things, I say, are in God, and everything which takes place by the laws alone of the infinite nature of God, and follows (as I shall presently show) from the necessity of His essence.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0190",
+      "w": "The Philosophy of Spinoza",
+      "s": "III All things which are, are in God and must be conceived through Him and therefore He is the cause of the things which are in Himself.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0191",
+      "w": "The Philosophy of Spinoza",
+      "s": "I can therefore turn the argument on my opponents in this way.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0192",
+      "w": "The Philosophy of Spinoza",
+      "s": "If our sight were longer or shorter, or, if our constitution were different, what now appears beautiful to us would seem misshapen and what we now think misshapen we should regard as beautiful.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0193",
+      "w": "The Philosophy of Spinoza",
+      "s": "Therefore the idea of God, from which infinite numbers of things follow in infinite ways, can be one only.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0194",
+      "w": "The Philosophy of Spinoza",
+      "s": "As the nature of the universe is not limited, like the nature of blood, but is absolutely infinite, its parts are by this nature of infinite power infinitely modified, and compelled to undergo infinite variations....",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0195",
+      "w": "The Philosophy of Spinoza",
+      "s": "Hence, it is plain that, in order to understand the actual Peter, it is not necessary first to understand the idea of Peter, and still less the idea of the idea of Peter.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0196",
+      "w": "The Philosophy of Spinoza",
+      "s": "Hence it follows that some ideas or notions exist which are common to all men, for all bodies agree in some things, which must be adequately, that is to say, clearly and distinctly, perceived by all.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0197",
+      "w": "The Philosophy of Spinoza",
+      "s": "Moreover, to knowledge of the second and third kind we have said that those ideas belong which are adequate, and therefore this knowledge is necessarily true.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0198",
+      "w": "The Philosophy of Spinoza",
+      "s": "The intellect and will, therefore, are related to this or that idea or volition as rockiness is related to this or that rock, or as man is related to Peter or Paul.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0199",
+      "w": "The Philosophy of Spinoza",
+      "s": "Since this imagination involves the existence of the horse, and the boy does not perceive anything which negates its existence, he will necessarily contemplate it as present, nor will he be able to doubt its existence although he may not be certain of it.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0200",
+      "w": "The Philosophy of Spinoza",
+      "s": "This latter consequence all admit to follow necessarily from the divine nature, yet no one conceives that God is under the compulsion of any fate, but that He understands Himself quite freely, though necessarily.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0201",
+      "w": "The Philosophy of Spinoza",
+      "s": "They seem indeed to consider man in Nature as a kingdom within a kingdom.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0202",
+      "w": "The Philosophy of Spinoza",
+      "s": "It is, however, to be observed that pleasurable excitement and pain are related to a man when one of his parts is affected more than the others; cheerfulness and melancholy, on the other hand, when all parts are equally affected.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0203",
+      "w": "The Philosophy of Spinoza",
+      "s": "Absolutely, therefore, these emotions have reference not so much to the acts themselves of eating and drinking as to the appetite and love itself.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0204",
+      "w": "The Philosophy of Spinoza",
+      "s": "Anything may be accidentally the cause either of hope or fear.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0205",
+      "w": "The Philosophy of Spinoza",
+      "s": "But (by hypothesis) we love him notwithstanding, and therefore we shall be agitated both by love and hatred.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0206",
+      "w": "The Philosophy of Spinoza",
+      "s": "Since, therefore, He exists for no end, He acts for no end; and since He has no principle or end of existence, He has no principle or end of action.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0207",
+      "w": "The Philosophy of Spinoza",
+      "s": "It is impossible, therefore, that a man can suffer no changes but those of which he is the adequate cause.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0208",
+      "w": "The Philosophy of Spinoza",
+      "s": "It may cling obstinately to the body; it may impede the body in such a manner as to render it less capable of being affected in many ways, and therefore may be evil.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0209",
+      "w": "The Philosophy of Spinoza",
+      "s": "Those whom he conquers yield gladly, not from defect of strength, but from an increase of it.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0210",
+      "w": "The Philosophy of Spinoza",
+      "s": "He, therefore, who is ignorant of himself, and consequently (as we have just shown) altogether ignorant of all the virtues, cannot in any way act in conformity with virtue, that is to say, is altogether impotent in mind.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0211",
+      "w": "The Philosophy of Spinoza",
+      "s": "It is to be observed, too, that fear arises from impotence of mind, and therefore is of no service to reason; nor is pity, although it seems to present an appearance of piety.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0212",
+      "w": "The Philosophy of Spinoza",
+      "s": "Therefore in so far as we understand these things properly will the efforts of the better part of us agree with the order of the whole of Nature.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0213",
+      "w": "The Philosophy of Spinoza",
+      "s": "How such a compact as this should be entered into, how ratified and established, we will now inquire.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0214",
+      "w": "The Philosophy of Spinoza",
+      "s": "It has the right to force him, as best it can, either to submit, or to contract an alliance.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0215",
+      "w": "The Philosophy of Spinoza",
+      "s": "34] Whatever be the social state a man finds himself in, he may be free.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0216",
+      "w": "The Philosophy of Spinoza",
+      "s": "Whence it would follow that the civil state is irrational, and could only be created by men destitute of reason, not at all by such as are led by it.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0217",
+      "w": "The Philosophy of Spinoza",
+      "s": "But it is so much the more bound to observe the conditions of peace; that is, the less independent, and the more bound to accommodate itself to the general will of the contracting parties.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0218",
+      "w": "The Philosophy of Spinoza",
+      "s": "And, accordingly, it has not merely the right to avenge itself, or to lay down and interpret laws, but also to abolish the same, and to pardon any guilty person out of the fullness of its power.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0219",
+      "w": "The Philosophy of Spinoza",
+      "s": "37] Literally, \"oil and trouble\"--a common proverbial expression in Latin.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0220",
+      "w": "The Philosophy of Spinoza",
+      "s": "We cannot doubt that such is the best system of government and open to the fewest objections, since it is the one most in harmony with human nature.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0221",
+      "w": "The Philosophy of Spinoza",
+      "s": "We do not contemplate an object as absent by reason of the emotion by which we imagine it, but by reason of the fact that the body is affected with another modification, which excludes the existence of that object.",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      }
+    },
+    {
+      "id": "spinoza.p0222",
+      "w": "Ethics — Part 1",
+      "s": "Therefore, we may have true ideas of non-existent modifications; for, although they may have no actual existence apart from the conceiving intellect, yet their essence is so involved in something external to themselves that they may through it be conceived.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0223",
+      "w": "Ethics — Part 1",
+      "s": "And we can hence conclude by another process of reasoning--that there is but one such substance.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0224",
+      "w": "Ethics — Part 1",
+      "s": "This cause of existence must either be contained in the nature and definition of the thing defined, or must be postulated apart from such definition.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0225",
+      "w": "Ethics — Part 1",
+      "s": "Consequently, the cause for the existence of these twenty men, and, consequently, of each of them, must necessarily be sought externally to each individual.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0226",
+      "w": "Ethics — Part 1",
+      "s": "The more reality or being a thing has, the greater the number of its attributes (Def.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0227",
+      "w": "Ethics — Part 1",
+      "s": "This reason or cause must either be contained in the nature of the thing in question, or be external to it.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0228",
+      "w": "Ethics — Part 1",
+      "s": "From the latter it must follow, either that a triangle necessarily exists, or that it is impossible that it should exist.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0229",
+      "w": "Ethics — Part 1",
+      "s": "If such a reason or cause should be given, it must either be drawn from the very nature of God, or be external to him--that is, drawn from another substance of another nature.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0230",
+      "w": "Ethics — Part 1",
+      "s": "Now we exist either in ourselves, or in something else which necessarily exists (see Ax.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0231",
+      "w": "Ethics — Part 1",
+      "s": "Perhaps there will be many who will be unable to see the force of this proof, inasmuch as they are accustomed only to consider those things which flow from external causes.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0232",
+      "w": "Ethics — Part 1",
+      "s": "For inasmuch as his essence excludes all imperfection, and involves absolute perfection, all cause for doubt concerning his existence is done away, and the utmost certainty on the question is given.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0233",
+      "w": "Ethics — Part 1",
+      "s": "Substance absolutely infinite is indivisible.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0234",
+      "w": "Ethics — Part 1",
+      "s": "The nature of substance can only be conceived as infinite, and by a part of substance, nothing else can be understood than finite substance, which (by Prop.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0235",
+      "w": "Ethics — Part 1",
+      "s": "But meanwhile by other reasons with which they try to prove their point, they show that they think corporeal or extended substance wholly apart from the divine nature, and say it was created by God.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0236",
+      "w": "Ethics — Part 1",
+      "s": "If extended substance, they say, is infinite, let it be conceived to be divided into two parts; each part will then be either finite or infinite.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0237",
+      "w": "Ethics — Part 1",
+      "s": "God, it is said, inasmuch as he is a supremely perfect being, cannot be passive; but extended substance, insofar as it is divisible, is passive.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0238",
+      "w": "Ethics — Part 1",
+      "s": "However, I think an attentive reader will see that I have already answered their propositions; for all their arguments are founded on the hypothesis that extended substance is composed of parts, and such a hypothesis I have shown (Prop.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0239",
+      "w": "Ethics — Part 1",
+      "s": "So, also, others, after asserting that a line is composed of points, can produce many arguments to prove that a line cannot be infinitely divided.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0240",
+      "w": "Ethics — Part 1",
+      "s": "If anyone asks me the further question, Why are we naturally so prone to divide quantity?",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0241",
+      "w": "Ethics — Part 1",
+      "s": "For instance, water, in so far as it is water, we conceive to be divided, and its parts to be separated one from the other; but not in so far as it is extended substance; from this point of view it is neither separated nor divisible.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0242",
+      "w": "Ethics — Part 1",
+      "s": "All things, I repeat, are in God, and all things which come to pass, come to pass solely through the laws of the infinite nature of God, and follow (as I will shortly show) from the necessity of his essence.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0243",
+      "w": "Ethics — Part 1",
+      "s": "Wherefore God acts solely by the laws of his own nature, and is not constrained by anyone.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0244",
+      "w": "Ethics — Part 1",
+      "s": "For God alone exists by the sole necessity of his nature (by Prop.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0245",
+      "w": "Ethics — Part 1",
+      "s": "Further, although they conceive God as actually supremely intelligent, they yet do not believe that he can bring into existence everything which he actually understands, for they think that they would thus destroy God's power.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0246",
+      "w": "Ethics — Part 1",
+      "s": "Wherefore the intellect of God, in so far as it is conceived to constitute God's essence, is, in reality, the cause of things, both of their essence and of their existence.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0247",
+      "w": "Ethics — Part 1",
+      "s": "Wherefore, a thing which is the cause both of the essence and of the existence of a given effect, must differ from such effect both in respect to its essence, and also in respect to its existence.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0248",
+      "w": "Ethics — Part 1",
+      "s": "God, and all the attributes of God, are eternal.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0249",
+      "w": "Ethics — Part 1",
+      "s": "The existence of God and his essence are one and the same.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0250",
+      "w": "Ethics — Part 1",
+      "s": "For if they could be changed in respect to existence, they must also be able to be changed in respect to essence--that is, obviously, be changed from true to false, which is absurd.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0251",
+      "w": "Ethics — Part 1",
+      "s": "Furthermore, a thing which thus follows from the necessity of the nature of any attribute cannot have a limited duration.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0252",
+      "w": "Ethics — Part 1",
+      "s": "Bear in mind that the same proposition may be affirmed of anything, which in any attribute necessarily follows from God's absolute nature.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0253",
+      "w": "Ethics — Part 1",
+      "s": "If therefore a mode is conceived as necessarily existing and infinite, it must necessarily be inferred or perceived through some attribute of God, in so far as such attribute is conceived as expressing the infinity and necessity of existence, in other words (Def.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0254",
+      "w": "Ethics — Part 1",
+      "s": "For it is evident thereby that, given the divine nature, the essence of things must be inferred from it, no less than their existence--in a word, God must be called the cause of all things, in the same sense as he is called the cause of himself.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0255",
+      "w": "Ethics — Part 1",
+      "s": "Our second point is plainly to be inferred therefrom.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0256",
+      "w": "Ethics — Part 1",
+      "s": "It must, therefore, follow from some attribute of God, in so far as the said attribute is considered as in some way modified; for substance and modes make up the sum total of existence (by Ax.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0257",
+      "w": "Ethics — Part 1",
+      "s": "Further, the modes of the divine nature follow therefrom necessarily, and not contingently (Prop.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0258",
+      "w": "Ethics — Part 1",
+      "s": "Wherefore all things are conditioned by the necessity of the divine nature, not only to exist, but also to exist and operate in a particular manner, and there is nothing that is contingent.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0259",
+      "w": "Ethics — Part 1",
+      "s": "Therefore the intellect, in function finite, or in function infinite, must comprehend the attributes of God and the modifications of God, and nothing else.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0260",
+      "w": "Ethics — Part 1",
+      "s": "For will, like the rest, stands in need of a cause, by which it is conditioned to exist and act in a particular manner.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0261",
+      "w": "Ethics — Part 1",
+      "s": "Things could not have been brought into being by God in any manner or in any order different from that which has in fact obtained.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0262",
+      "w": "Ethics — Part 1",
+      "s": "However, I am also convinced that if such persons reflect on the matter, and duly weigh in their minds our series of propositions, they will reject such freedom as they now attribute to God, not only as nugatory, but also as a great impediment to organized knowledge.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0263",
+      "w": "Ethics — Part 1",
+      "s": "Further, that all the decrees of God have been ratified from all eternity by God himself.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0264",
+      "w": "Ethics — Part 1",
+      "s": "But persons who say this must admit that God can change his decrees.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0265",
+      "w": "Ethics — Part 1",
+      "s": "This (as we have just shown) is the height of absurdity.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0266",
+      "w": "Ethics — Part 1",
+      "s": "But God's will cannot be different (as we have just most clearly demonstrated) from God's perfection.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0267",
+      "w": "Ethics — Part 1",
+      "s": "This is only another name for subjecting God to the dominion of destiny, an utter absurdity in respect to God, whom we have shown to be the first and only free cause of the essence of all things and also of their existence.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0268",
+      "w": "Ethics — Part 1",
+      "s": "Yet there still remain misconceptions not a few, which might and may prove very grave hindrances to the understanding of the concatenation of things, as I have explained it above.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0269",
+      "w": "Ethics — Part 1",
+      "s": "It is accepted as certain, that God himself directs all things to a definite goal (for it is said that God made all things for man, and man that he might worship him).",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0270",
+      "w": "Ethics — Part 1",
+      "s": "If they cannot learn such causes from external sources, they are compelled to turn to considering themselves, and reflecting what end would have induced them personally to bring about the given event, and thus they necessarily judge other natures by their own.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0271",
+      "w": "Ethics — Part 1",
+      "s": "They therefore laid down as an axiom, that God's judgments far transcend human understanding.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0272",
+      "w": "Ethics — Part 1",
+      "s": "I have now sufficiently explained my first point.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0273",
+      "w": "Ethics — Part 1",
+      "s": "That which is really a cause it considers as an effect, and vice versa: it makes that which is by nature first to be last, and that which is highest and most perfect to be most imperfect.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0274",
+      "w": "Ethics — Part 1",
+      "s": "Perhaps you will answer that the event is due to the facts that the wind was blowing, and the man was walking that way.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0275",
+      "w": "Ethics — Part 1",
+      "s": "Such persons know that, with the removal of ignorance, the wonder which forms their only available means for proving and preserving their authority would vanish also.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    },
+    {
+      "id": "spinoza.p0276",
+      "w": "Ethics — Part 1",
+      "s": "I will speak of these latter hereafter, when I treat of human nature; the former I will briefly explain here.",
+      "src": {
+        "work": "Ethics — Part 1"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "spinoza.f.v0001",
+      "kind": "verbatim",
+      "text": "We must, however, bear in mind, that these general notions are not formed by all men in the same way, but vary in each individual according as the point varies, whereby the body has been most often affected and which the mind most easily imagines or remembers.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "spinoza.f.v0002",
+      "kind": "verbatim",
+      "text": "We have, however, seen that one idea has more reality or perfection than another, for as objects are some more excellent than others, so also are the ideas of them some more excellent than others; this also seems to point to a difference between the understanding and the will.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "spinoza.f.v0003",
+      "kind": "verbatim",
+      "text": "Note.--This disposition of the mind, which arises from two contrary emotions, is called vacillation; it stands to the emotions in the same relation as doubt does to the imagination (II.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "spinoza.f.v0004",
+      "kind": "verbatim",
+      "text": "If anyone conceives, that an object of his love joins itself to another with closer bonds of friendship than he himself has attained to, he will be affected with hatred towards the loved object and with envy towards his rival.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "spinoza.f.v0005",
+      "kind": "verbatim",
+      "text": "Further, in so far as we hope for or fear anything, we regard it with love or hatred; thus everyone can apply by himself to hope and fear what we have said concerning love and hatred.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "spinoza.f.v0006",
+      "kind": "verbatim",
+      "text": "Again, pleasure and pain are passive states or passions, whereby every man's power or endeavour to persist in his being is increased or diminished, helped or hindered (III.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "spinoza.f.v0007",
+      "kind": "verbatim",
+      "text": "Proof.--The force and increase of any passion and its persistence in existing are defined by the power of an external cause compared with our own (by the foregoing Prop.); therefore (IV.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "spinoza.f.v0008",
+      "kind": "verbatim",
+      "text": "Note.--It would be too long a task to enumerate here all the evil results of pride, inasmuch as the proud are a prey to all the emotions, though to none of them less than to love and pity.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "spinoza.f.v0009",
+      "kind": "verbatim",
+      "text": "In truth, as there is no common standard of volition and motion, so is there no comparison possible between the powers of the mind and the power or strength of the body; consequently the strength of one cannot in any wise be determined by the strength of the other.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 265
+      }
+    },
+    {
+      "id": "spinoza.f.v0010",
+      "kind": "verbatim",
+      "text": "Than this remedy for the emotions (to return to the point from which I started), which consists in a true knowledge thereof, nothing more excellent, being within our power, can be devised.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "spinoza.f.v0011",
+      "kind": "verbatim",
+      "text": "Note.--Things are conceived by us as actual in two ways; either as existing in relation to a given time and place, or as contained in God and following from the necessity of the divine nature.",
+      "work": "Ethics",
+      "lang": "en",
+      "src": {
+        "work": "Ethics"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "spinoza.f.v0012",
+      "kind": "verbatim",
+      "text": "(3) In order to bring this about, it is necessary to understand as much of nature as will enable us to attain to the aforesaid character, and also to form a social order such as is most conducive to the attainment of this character by the greatest number with the least difficulty and danger.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 292
+      }
+    },
+    {
+      "id": "spinoza.f.v0013",
+      "kind": "verbatim",
+      "text": "(5) Lastly, to endeavor to obtain only sufficient money or other commodities to enable us to preserve our life and health, and to follow such general customs as are consistent with our purpose.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "spinoza.f.v0014",
+      "kind": "verbatim",
+      "text": "(3) Now, as it is something different from its correlate, it is capable of being understood through itself; in other words, the idea, in so far as its actual essence (essentia formalis) is concerned, may be the subject of another subjective essence (essentia objectiva).",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 270
+      }
+    },
+    {
+      "id": "spinoza.f.v0015",
+      "kind": "verbatim",
+      "text": "(3) Hence, again, it is clear that no one can know the nature of the highest certainty, unless he possesses an adequate idea, or the subjective essence of a thing: certainty is identical with such subjective essence.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "spinoza.f.v0016",
+      "kind": "verbatim",
+      "text": "(2) If they deny, grant, or gainsay, they know not that they deny, grant, or gainsay, so that they ought to be regarded as automata, utterly devoid of intelligence.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 164
+      }
+    },
+    {
+      "id": "spinoza.f.v0017",
+      "kind": "verbatim",
+      "text": "(2) If an architect conceives a building properly constructed, though such a building may never have existed, and amy never exist, nevertheless the idea is true; and the idea remains the same, whether it be put into execution or not.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 233
+      }
+    },
+    {
+      "id": "spinoza.f.v0018",
+      "kind": "verbatim",
+      "text": "(5) However, if we proceed with as little abstraction as possible, and begin from primary elements--that is, from the source and origin of nature, as far back as we can reach,--we need not fear any deceptions of this kind.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "spinoza.f.v0019",
+      "kind": "verbatim",
+      "text": "(6) If this seems too absurd to anyone, it will be sufficient for our purpose, if he reflect on the fact that a thing is more easily remembered in proportion to its singularity, as appears from the example of the comedy just cited.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "spinoza.f.v0020",
+      "kind": "verbatim",
+      "text": "(2) Neither shall we wonder why we understand some things which in nowise fall within the scope of the imagination, while other things are in the imagination but wholly opposed to the understanding, or others, again, which agree therewith.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 239
+      }
+    },
+    {
+      "id": "spinoza.f.v0021",
+      "kind": "verbatim",
+      "text": "(2) Sometimes, while making no distinction between the imagination and the intellect, we think that what we more readily imagine is clearer to us; and also we think that what we imagine we understand.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "spinoza.f.v0022",
+      "kind": "verbatim",
+      "text": "(5) Though, as I have said, this is of no importance in the case of figures and other abstractions, it is of great importance in the case of physical beings and realities: for the properties of things are not understood so long as their essences are unknown.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "spinoza.f.v0023",
+      "kind": "verbatim",
+      "text": "(5) However, this is not the place to recount such aids, nor is there any need to do so, until we have acquired a sufficient knowledge of eternal things and their infallible laws, and until the nature of our senses has become plain to us.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "spinoza.f.v0024",
+      "kind": "verbatim",
+      "text": "(3) Let us, then, enumerate here the properties of the understanding, let us examine them, and begin by discussing the instruments for research which we find innate in us.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "spinoza.f.v0025",
+      "kind": "verbatim",
+      "text": "(4) Thus it forms the idea of quantity absolutely, without reference to any other thoughts; but ideas of motion it only forms after taking into consideration the idea of quantity.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "spinoza.f.v0026",
+      "kind": "verbatim",
+      "text": "(2) This is sufficiently evident from the fact that the cause is only spoken of in very general terms, such as--there exists then something; there exists then some power, &c.; or from the that we only express it in a negative manner--it is not or that, &c.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 256
+      }
+    },
+    {
+      "id": "spinoza.f.v0027",
+      "kind": "verbatim",
+      "text": "(3) The same may be said of existence, especially when it is conceived quite generally as an entity; it is then readily applied to all things together in the memory.",
+      "work": "On the Improvement of the Understanding",
+      "lang": "en",
+      "src": {
+        "work": "On the Improvement of the Understanding"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "spinoza.f.v0028",
+      "kind": "verbatim",
+      "text": "(13) Our conclusions on the subject must be drawn solely from Scripture; for what can we affirm about matters transcending our knowledge except what is told us by the words or writings of prophets?",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 197
+      }
+    },
+    {
+      "id": "spinoza.f.v0029",
+      "kind": "verbatim",
+      "text": "(48) To Him the ordinances of God leading men to salvation were revealed directly without words or visions, so that God manifested Himself to the Apostles through the mind of Christ as He formerly did to Moses through the supernatural voice.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 241
+      }
+    },
+    {
+      "id": "spinoza.f.v0030",
+      "kind": "verbatim",
+      "text": "(74) The Psalmist calls the miracles in Egypt the works of God, because the Hebrews found in them a way of safety which they had not looked for, and therefore especially marvelled at.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "spinoza.f.v0031",
+      "kind": "verbatim",
+      "text": "(120) We are only attempting, as I have said, to examine the Scriptural documents, and to draw our conclusions from them as from ultimate natural facts; the causes of the documents do not concern us.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "spinoza.f.v0032",
+      "kind": "verbatim",
+      "text": "(3) Heman, Calcol, and Dara, though men of great talent, were not prophets, whereas uneducated countrymen, nay, even women, such as Hagar, Abraham's handmaid, were thus gifted.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "spinoza.f.v0033",
+      "kind": "verbatim",
+      "text": "(26) Although Scripture does not always make mention of a sign, we must nevertheless suppose that a sign was always vouchsafed; for Scripture does not always relate every condition and circumstance (as many have remarked), but rather takes them for granted.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 257
+      }
+    },
+    {
+      "id": "spinoza.f.v0034",
+      "kind": "verbatim",
+      "text": "(34) If, on the contrary, he was melancholy, wars, massacres, and calamities were revealed; and so, according as a prophet was merciful, gentle, quick to anger, or severe, he was more fitted for one kind of revelation than another.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 231
+      }
+    },
+    {
+      "id": "spinoza.f.v0035",
+      "kind": "verbatim",
+      "text": "(39) To the augurs of Nebuchadnezzar the destruction of Jerusalem was revealed through entrails, whereas the king himself inferred it from oracles and the direction of arrows which he shot into the air.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 202
+      }
+    },
+    {
+      "id": "spinoza.f.v0036",
+      "kind": "verbatim",
+      "text": "(61) Lastly, the prophets, to whom it was revealed that God would take away Elijah, wished to persuade Elisha that he had been taken somewhere where they would find him; showing sufficiently clearly that they had not understood God's revelation aright.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "spinoza.f.v0037",
+      "kind": "verbatim",
+      "text": "(84) Abraham also knew not that God is omnipresent, and has foreknowledge of all things; for when he heard the sentence against the inhabitants of Sodom, he prayed that the Lord should not execute it till He had ascertained whether they all merited such punishment; for he said (see Gen.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 287
+      }
+    },
+    {
+      "id": "spinoza.f.v0038",
+      "kind": "verbatim",
+      "text": "(4) Whoever, therefore, rejoices for such reasons, rejoices in another's misfortune, and is, so far, malicious and bad, knowing neither true happiness nor the peace of the true life.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "spinoza.f.v0039",
+      "kind": "verbatim",
+      "text": "(23) It may be concluded that these gifts are not peculiar to any nation, but have always been shared by the whole human race, unless, indeed, we would indulge the dream that nature formerly created men of different kinds.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "spinoza.f.v0040",
+      "kind": "verbatim",
+      "text": "(108) They have not always retained empire, but they have recovered it when lost, and doubtless will do so again after the spirit of the Tartars becomes relaxed through the luxury of riches and pride.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "spinoza.f.v0041",
+      "kind": "verbatim",
+      "text": "(12) Let us add that as to the actual coordination and concatenation of things, that is how things are ordained and linked together, we are obviously ignorant; therefore, it is more profitable for right living, nay, it is necessary for us to consider things as contingent.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "spinoza.f.v0042",
+      "kind": "verbatim",
+      "text": "(18) But a man who does the same from a knowledge of the true reason for laws and their necessity, acts from a firm purpose and of his own accord, and is therefore properly called just.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "spinoza.f.v0043",
+      "kind": "verbatim",
+      "text": "(57) Wherefore we make one and the same affirmation concerning God when we say that He has from eternity decreed that three angles of a triangle are equal to two right angles, as when we say that He has understood it.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 217
+      }
+    },
+    {
+      "id": "spinoza.f.v0044",
+      "kind": "verbatim",
+      "text": "(5) Isaiah teaches most plainly that the Divine law in its strict sense signifies that universal law which consists in a true manner of life, and does not signify ceremonial observances.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "spinoza.f.v0045",
+      "kind": "verbatim",
+      "text": "(13) For instance, Moses does not teach the Jews as a prophet not to kill or to steal, but gives these commandments solely as a lawgiver and judge; he does not reason out the doctrine, but affixes for its non-observance a penalty which may and very properly does vary in different nations.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 289
+      }
+    },
+    {
+      "id": "spinoza.f.v0046",
+      "kind": "verbatim",
+      "text": "(24) For when the prophet saw and foretold that the desolation of the city was at hand, he said that God only delights in those who know and understand that He exercises loving-kindness, judgment, and righteousness in the earth, and that such persons only are worthy of praise.",
+      "work": "Theologico-Political Treatise",
+      "lang": "en",
+      "src": {
+        "work": "Theologico-Political Treatise"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "spinoza.f.v0047",
+      "kind": "verbatim",
+      "text": "Man's real moral problem is to secure a permanent good instead of a transitory good; a more inclusive good instead of a more restricted good; a higher good instead of a lower good.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "spinoza.f.v0048",
+      "kind": "verbatim",
+      "text": "If any one desire an example, let him take Alexander, who only began superstitiously to seek guidance from seers, when he first learned to fear fortune in the passes of Sysis (Curtius v.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 186
+      }
+    },
+    {
+      "id": "spinoza.f.v0049",
+      "kind": "verbatim",
+      "text": "If we read a book which contains incredible or impossible narratives, or is written in a very obscure style, and if we know nothing of its author, nor of the time or occasion of its being written, we shall vainly endeavor to gain any certain knowledge of its true meaning.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 272
+      }
+    },
+    {
+      "id": "spinoza.f.v0050",
+      "kind": "verbatim",
+      "text": "He asserted that each passage in Scripture admits of various, nay, contrary meanings; but that we could never be certain of any particular one till we knew that the passage, as we interpreted it, contained nothing contrary or repugnant to reason.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 246
+      }
+    },
+    {
+      "id": "spinoza.f.v0051",
+      "kind": "verbatim",
+      "text": "The sole object of such commentators seemed to be to extort from Scripture confirmations of Aristotelian quibbles and their own inventions, a proceeding which I regard as the acme of absurdity.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "spinoza.f.v0052",
+      "kind": "verbatim",
+      "text": "We have determined, then, that we are only bound to believe in the prophetic writings, the object and substance of the revelation; with regard to the details, every one may believe or not, as he likes.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "spinoza.f.v0053",
+      "kind": "verbatim",
+      "text": "The formation of society serves not only for defensive purposes, but is also very useful, and, indeed, absolutely necessary, as rendering possible the division of labor.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "spinoza.f.v0054",
+      "kind": "verbatim",
+      "text": "They have no single sound idea concerning either God or Nature, they confound God's decrees with human decrees, they conceive Nature as so limited that they believe man to be its chief part!",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 190
+      }
+    },
+    {
+      "id": "spinoza.f.v0055",
+      "kind": "verbatim",
+      "text": "All things, I say, are in God, and everything which takes place by the laws alone of the infinite nature of God, and follows (as I shall presently show) from the necessity of His essence.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "spinoza.f.v0056",
+      "kind": "verbatim",
+      "text": "If our sight were longer or shorter, or, if our constitution were different, what now appears beautiful to us would seem misshapen and what we now think misshapen we should regard as beautiful.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "spinoza.f.v0057",
+      "kind": "verbatim",
+      "text": "As the nature of the universe is not limited, like the nature of blood, but is absolutely infinite, its parts are by this nature of infinite power infinitely modified, and compelled to undergo infinite variations....",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 216
+      }
+    },
+    {
+      "id": "spinoza.f.v0058",
+      "kind": "verbatim",
+      "text": "Hence, it is plain that, in order to understand the actual Peter, it is not necessary first to understand the idea of Peter, and still less the idea of the idea of Peter.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "spinoza.f.v0059",
+      "kind": "verbatim",
+      "text": "Hence it follows that some ideas or notions exist which are common to all men, for all bodies agree in some things, which must be adequately, that is to say, clearly and distinctly, perceived by all.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "spinoza.f.v0060",
+      "kind": "verbatim",
+      "text": "Since this imagination involves the existence of the horse, and the boy does not perceive anything which negates its existence, he will necessarily contemplate it as present, nor will he be able to doubt its existence although he may not be certain of it.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "spinoza.f.v0061",
+      "kind": "verbatim",
+      "text": "This latter consequence all admit to follow necessarily from the divine nature, yet no one conceives that God is under the compulsion of any fate, but that He understands Himself quite freely, though necessarily.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "spinoza.f.v0062",
+      "kind": "verbatim",
+      "text": "It is, however, to be observed that pleasurable excitement and pain are related to a man when one of his parts is affected more than the others; cheerfulness and melancholy, on the other hand, when all parts are equally affected.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 229
+      }
+    },
+    {
+      "id": "spinoza.f.v0063",
+      "kind": "verbatim",
+      "text": "It may cling obstinately to the body; it may impede the body in such a manner as to render it less capable of being affected in many ways, and therefore may be evil.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 165
+      }
+    },
+    {
+      "id": "spinoza.f.v0064",
+      "kind": "verbatim",
+      "text": "He, therefore, who is ignorant of himself, and consequently (as we have just shown) altogether ignorant of all the virtues, cannot in any way act in conformity with virtue, that is to say, is altogether impotent in mind.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 220
+      }
+    },
+    {
+      "id": "spinoza.f.v0065",
+      "kind": "verbatim",
+      "text": "It is to be observed, too, that fear arises from impotence of mind, and therefore is of no service to reason; nor is pity, although it seems to present an appearance of piety.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "spinoza.f.v0066",
+      "kind": "verbatim",
+      "text": "We do not contemplate an object as absent by reason of the emotion by which we imagine it, but by reason of the fact that the body is affected with another modification, which excludes the existence of that object.",
+      "work": "The Philosophy of Spinoza",
+      "lang": "en",
+      "src": {
+        "work": "The Philosophy of Spinoza"
+      },
+      "quality": {
+        "chars": 214
+      }
+    },
+    {
+      "id": "spinoza.f.v0067",
+      "kind": "verbatim",
+      "text": "If such a reason or cause should be given, it must either be drawn from the very nature of God, or be external to him--that is, drawn from another substance of another nature.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "spinoza.f.v0068",
+      "kind": "verbatim",
+      "text": "Perhaps there will be many who will be unable to see the force of this proof, inasmuch as they are accustomed only to consider those things which flow from external causes.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "spinoza.f.v0069",
+      "kind": "verbatim",
+      "text": "All things, I repeat, are in God, and all things which come to pass, come to pass solely through the laws of the infinite nature of God, and follow (as I will shortly show) from the necessity of his essence.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 207
+      }
+    },
+    {
+      "id": "spinoza.f.v0070",
+      "kind": "verbatim",
+      "text": "Further, although they conceive God as actually supremely intelligent, they yet do not believe that he can bring into existence everything which he actually understands, for they think that they would thus destroy God's power.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 226
+      }
+    },
+    {
+      "id": "spinoza.f.v0071",
+      "kind": "verbatim",
+      "text": "Wherefore the intellect of God, in so far as it is conceived to constitute God's essence, is, in reality, the cause of things, both of their essence and of their existence.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "spinoza.f.v0072",
+      "kind": "verbatim",
+      "text": "Wherefore, a thing which is the cause both of the essence and of the existence of a given effect, must differ from such effect both in respect to its essence, and also in respect to its existence.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 196
+      }
+    },
+    {
+      "id": "spinoza.f.v0073",
+      "kind": "verbatim",
+      "text": "If therefore a mode is conceived as necessarily existing and infinite, it must necessarily be inferred or perceived through some attribute of God, in so far as such attribute is conceived as expressing the infinity and necessity of existence, in other words (Def.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 263
+      }
+    },
+    {
+      "id": "spinoza.f.v0074",
+      "kind": "verbatim",
+      "text": "It must, therefore, follow from some attribute of God, in so far as the said attribute is considered as in some way modified; for substance and modes make up the sum total of existence (by Ax.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "spinoza.f.v0075",
+      "kind": "verbatim",
+      "text": "Wherefore all things are conditioned by the necessity of the divine nature, not only to exist, but also to exist and operate in a particular manner, and there is nothing that is contingent.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 189
+      }
+    },
+    {
+      "id": "spinoza.f.v0076",
+      "kind": "verbatim",
+      "text": "This is only another name for subjecting God to the dominion of destiny, an utter absurdity in respect to God, whom we have shown to be the first and only free cause of the essence of all things and also of their existence.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 223
+      }
+    },
+    {
+      "id": "spinoza.f.v0077",
+      "kind": "verbatim",
+      "text": "It is accepted as certain, that God himself directs all things to a definite goal (for it is said that God made all things for man, and man that he might worship him).",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "spinoza.f.v0078",
+      "kind": "verbatim",
+      "text": "If they cannot learn such causes from external sources, they are compelled to turn to considering themselves, and reflecting what end would have induced them personally to bring about the given event, and thus they necessarily judge other natures by their own.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 260
+      }
+    },
+    {
+      "id": "spinoza.f.v0079",
+      "kind": "verbatim",
+      "text": "That which is really a cause it considers as an effect, and vice versa: it makes that which is by nature first to be last, and that which is highest and most perfect to be most imperfect.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "spinoza.f.v0080",
+      "kind": "verbatim",
+      "text": "Such persons know that, with the removal of ignorance, the wonder which forms their only available means for proving and preserving their authority would vanish also.",
+      "work": "Ethics — Part 1",
+      "lang": "en",
+      "src": {
+        "work": "Ethics — Part 1"
+      },
+      "quality": {
+        "chars": 166
+      }
+    },
+    {
+      "id": "spinoza.f.p01",
+      "kind": "pattern",
+      "label": "condition",
+      "shape": "(Si|If)\\b",
+      "attested": 15,
+      "worksSpan": 4,
+      "examples": [
+        "If it were otherwise, God would not be the cause of all things.",
+        "If all things follow from a necessity of the absolutely perfect nature of God, why are there so many imperfections in nature?"
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 276,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:274906f182fe46efa1e5f7818738c3af47b4c356a6793c94ef82c8e8fca37fce"
+}

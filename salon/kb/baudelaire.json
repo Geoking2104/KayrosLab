@@ -1,0 +1,3251 @@
+{
+  "authorId": "baudelaire",
+  "kbVersion": "baudelaire@bootstrap-2026-11-22",
+  "builtAt": "2026-11-23T09:52:50.839Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "Les Fleurs du Mal",
+      "sentences": 56
+    },
+    {
+      "title": "Journaux intimes",
+      "sentences": 50
+    },
+    {
+      "title": "Les épaves de Charles Baudelaire",
+      "sentences": 58
+    },
+    {
+      "title": "De l'amour",
+      "sentences": 56
+    },
+    {
+      "title": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "sentences": 48
+    }
+  ],
+  "passages": [
+    {
+      "id": "baudelaire.p0001",
+      "w": "Les Fleurs du Mal",
+      "s": "A peine les ont-ils déposés sur les planches, Que ces rois de l'azur, maladroits et honteux, Laissent piteusement leurs grandes ailes blanches Comme des avirons traîner à côté d'eux.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0002",
+      "w": "Les Fleurs du Mal",
+      "s": "Celui dont les pensers, comme des alouettes, Vers les cieux le matin prennent un libre essor, --Qui plane sur la vie et comprend sans effort Le langage des fleurs et des choses muettes!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0003",
+      "w": "Les Fleurs du Mal",
+      "s": "Et qui sait si les fleurs nouvelles que je rêve Trouveront dans ce sol lavé comme une grève Le mystique aliment qui ferait leur vigueur?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0004",
+      "w": "Les Fleurs du Mal",
+      "s": "L'HOMME ET LA MER Homme libre, toujours tu chériras la mer!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0005",
+      "w": "Les Fleurs du Mal",
+      "s": "Cette femme, morceau vraiment miraculeux, Divinement robuste, adorablement mince, Est faite pour trôner sur des lits somptueux, Et charmer les loisirs d'un pontife ou d'un prince.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0006",
+      "w": "Les Fleurs du Mal",
+      "s": "Ton regard, infernal et divin, Verse confusément le bienfait et le crime, Et l'on peut pour cela te comparer au vin.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0007",
+      "w": "Les Fleurs du Mal",
+      "s": "La langoureuse Asie et la brûlante Afrique, Tout un monde lointain, absent, presque défunt, Vit dans tes profondeurs, forêt aromatique!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0008",
+      "w": "Les Fleurs du Mal",
+      "s": "Je m'avance à l'attaque, et je grimpe aux assauts, Comme après un cadavre un choeur de vermisseaux, Et je chéris, ô bête implacable et cruelle, Jusqu'à cette froideur par où tu m'es plus belle!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0009",
+      "w": "Les Fleurs du Mal",
+      "s": "Tes yeux, où rien ne se révèle De doux ni d'amer, Sont deux bijoux froids où se mêle L'or avec le fer.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0010",
+      "w": "Les Fleurs du Mal",
+      "s": "LE VAMPIRE Toi qui, comme un coup de couteau.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0011",
+      "w": "Les Fleurs du Mal",
+      "s": "LE BALCON Mère des souvenirs, maîtresse des maîtresses, O toi, tous mes plaisirs, ô toi, tous mes devoirs!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0012",
+      "w": "Les Fleurs du Mal",
+      "s": "Et tes pieds s'endormaient dans mes mains fraternelles, La nuit s'épaississait ainsi qu'une cloison.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0013",
+      "w": "Les Fleurs du Mal",
+      "s": "III LE CADRE Comme un beau cadre ajoute à la peinture, Bien qu'elle soit d'un pinceau très vanté, Je ne sais quoi d'étrange et d'enchanté En l'isolant de l'immense nature.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0014",
+      "w": "Les Fleurs du Mal",
+      "s": "SEMPER EADEM « D'où vous vient, disiez-vous, cette tristesse étrange, Montant comme la mer sur le roc noir et nu?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0015",
+      "w": "Les Fleurs du Mal",
+      "s": "Lorsque tout me ravit, j'ignore Si quelque chose me séduit.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0016",
+      "w": "Les Fleurs du Mal",
+      "s": "Il était tard; ainsi qu'une médaille neuve La pleine lune s'étalait, Et la solennité de la nuit, comme un fleuve, Sur Paris dormant ruisselait.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0017",
+      "w": "Les Fleurs du Mal",
+      "s": "LE CHAT I Dans ma cervelle se promène Ainsi qu'en son appartement, Un beau chat, fort, doux et charmant, Quand il miaule, on l'entend à peine, Tant son timbre est tendre et discret; Mais que sa voix s'apaise ou gronde, Elle est toujours riche et profonde.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0018",
+      "w": "Les Fleurs du Mal",
+      "s": "LE BEAU NAVIRE Je veux te raconter, ô molle enchanteresse, Les diverses beautés qui parent ta jeunesse; Je veux te peindre ta beauté Où l'enfance s'allie à la maturité.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0019",
+      "w": "Les Fleurs du Mal",
+      "s": "L'IRREPARABLE I Pouvons-nous étouffer le vieux, le long Remords, Qui vit, s'agite et se tortille, Et se nourrit de nous comme le ver des morts, Comme du chêne la chenille?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0020",
+      "w": "Les Fleurs du Mal",
+      "s": "L'irréparable ronge avec sa dent maudite!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0021",
+      "w": "Les Fleurs du Mal",
+      "s": "CHANT D'AUTOMNE I Bientôt nous plongerons dans les froides ténèbres; Adieu, vive clarté de nos étés trop courts!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0022",
+      "w": "Les Fleurs du Mal",
+      "s": "Ce bruit mystérieux sonne comme un départ.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0023",
+      "w": "Les Fleurs du Mal",
+      "s": "Tes hanches sont amoureuses De ton dos et de tes seins, Et tu ravis les coussins Par tes poses langoureuses.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0024",
+      "w": "Les Fleurs du Mal",
+      "s": "Je hais la passion et l'esprit me fait mal!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0025",
+      "w": "Les Fleurs du Mal",
+      "s": "LA PIPE Je suis la pipe d'un auteur; On voit, à contempler ma mine D'Abyssienne ou de Cafrine, Que mon maître est un grand fumeur.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0026",
+      "w": "Les Fleurs du Mal",
+      "s": "Moi, mon âme est fêlée, et lorsqu'en ses ennuis Elle veut de ses chants peupler l'air froid des nuits, Il arrive souvent que sa voix affaiblie Semble le râle épais d'un blessé qu'on oublie Au bord d'un lac de sang sous un grand tas de morts, Et qui meurt, sans bouger, dans d'immenses efforts.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0027",
+      "w": "Les Fleurs du Mal",
+      "s": "Résigne-toi, mon coeur; dors ton sommeil de brute.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0028",
+      "w": "Les Fleurs du Mal",
+      "s": "Un gazetier fumeux, qui se croit un flambeau, Dit au pauvre, qu'il a noyé dans les ténèbres: « Où donc l'aperçois-tu, ce créateur du Beau, Ce Redresseur que tu célèbres?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0029",
+      "w": "Les Fleurs du Mal",
+      "s": "LA VOIX Mon berceau s'adossait à la bibliothèque, Babel sombre, où roman, science, fabliau, Tout, la cendre latine et la poussière grecque, Se mêlaient.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0030",
+      "w": "Les Fleurs du Mal",
+      "s": "Sachet toujours frais qui parfume L'atmosphère d'un cher réduit, Encensoir oublié qui fume En secret à travers la nuit, Comment, amour incorruptible, T'exprimer avec vérité?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0031",
+      "w": "Les Fleurs du Mal",
+      "s": "Dans la cour le jet d'eau qui jase Et ne se tait ni nuit ni jour, Entretient doucement l'extase Où ce soir m'a plongé l'amour.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0032",
+      "w": "Les Fleurs du Mal",
+      "s": "En vain j'ai voulu de l'espace, Trouver la fin et le milieu; Sous je ne sais quel oeil de feu Je sens mon aile qui se casse; Et brûlé par l'amour du beau, Je n'aurai pas l'honneur sublime De donner mon nom à l'abîme Qui me servira de tombeau.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0033",
+      "w": "Les Fleurs du Mal",
+      "s": "Le poète buter du front sur son travail?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0034",
+      "w": "Les Fleurs du Mal",
+      "s": "Je pense aux matelots oubliés dans une île, Aux captifs, aux vaincus!...",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0035",
+      "w": "Les Fleurs du Mal",
+      "s": "A quel complot infâme étais-je donc en butte, Ou quel méchant hasard ainsi m'humiliait?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0036",
+      "w": "Les Fleurs du Mal",
+      "s": "Tout cassés Qu'ils sont, ils ont des yeux perçants comme une vrille, Luisants comme ces trous où l'eau dort dans la nuit; Ils ont les yeux divins de la petite fille Qui s'étonne et qui rit à tout ce qui reluit.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0037",
+      "w": "Les Fleurs du Mal",
+      "s": "Longue, mince, en grand deuil, douleur majestueuse, Une femme passa, d'une main fastueuse Soulevant, balançant le feston et l'ourlet; Agile et noble, avec sa jambe de statue.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0038",
+      "w": "Les Fleurs du Mal",
+      "s": "Recueille-toi, mon âme, en ce grave moment, Et ferme ton oreille à ce rugissement.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0039",
+      "w": "Les Fleurs du Mal",
+      "s": "La ruche qui se joue au bord des clavicules, Comme un ruisseau lascif qui se frotte au rocher, Défend pudiquement des lazzi ridicules Les funèbres appas qu'elle tient à cacher.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0040",
+      "w": "Les Fleurs du Mal",
+      "s": "A travers le treillis recourbé de tes côtes Je vois, errant encor, l'insatiable aspic.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0041",
+      "w": "Les Fleurs du Mal",
+      "s": "Mais ne suffit-il pas que tu sois l'apparence, Pour réjouir un coeur qui fuit la vérité?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0042",
+      "w": "Les Fleurs du Mal",
+      "s": "Entends-tu retentir les refrains des dimanches Et l'espoir qui gazouille en mon sein palpitant?",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0043",
+      "w": "Les Fleurs du Mal",
+      "s": "C'est ainsi qu'à travers l'Humanité frivole Le vin roule de l'or, éblouissant Pactole; Par le gosier de l'homme il chante ses exploits Et règne par ses dons ainsi que les vrais rois.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0044",
+      "w": "Les Fleurs du Mal",
+      "s": "Comme deux anges que torture Une implacable calenture, Dans le bleu cristal du matin Suivons le mirage lointain!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0045",
+      "w": "Les Fleurs du Mal",
+      "s": "Elle marche en déesse et repose en sultane; Elle a dans le plaisir la foi mahométane, Et dans ses bras ouverts que remplissent ses seins, Elle appelle des yeux la race des humains.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0046",
+      "w": "Les Fleurs du Mal",
+      "s": "Ridicule pendu, tes douleurs sont les miennes!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0047",
+      "w": "Les Fleurs du Mal",
+      "s": "Toi qui, même aux lépreux, aux parias maudits, Enseignes par l'amour le goût du Paradis, O Satan, prends pitié de ma longue misère!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0048",
+      "w": "Les Fleurs du Mal",
+      "s": "Toi qui, pour consoler l'homme frêle qui souffre, Nous appris à mêler le salpêtre et le soufre.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0049",
+      "w": "Les Fleurs du Mal",
+      "s": "Usant à l'envi leurs chaleurs dernières, Nos deux coeurs seront deux vastes flambeaux, Qui réfléchiront leurs doubles lumières Dans nos deux esprits, ces miroirs jumeaux.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0050",
+      "w": "Les Fleurs du Mal",
+      "s": "Singulière fortune où le but se déplace, Et, n'étant nulle part, peut être n'importe où!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0051",
+      "w": "Les Fleurs du Mal",
+      "s": "Montrez-nous les écrins de vos riches mémoires, Les bijoux merveilleux, faits d'astres et d'éthers.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0052",
+      "w": "Les Fleurs du Mal",
+      "s": "Nous avons salué des idoles à trompe; Des trônes constellés de joyaux lumineux; Des palais ouvragés dont la féerique pompe Serait pour vos banquiers un rêve ruineux; Des costumes qui sont pour les yeux une ivresse; Des femmes dont les dents et les ongles sont teints Et des jongleurs savants que le serpent caresse.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0053",
+      "w": "Les Fleurs du Mal",
+      "s": "Pour rafraîchir ton coeur nage vers ton Electre!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0054",
+      "w": "Les Fleurs du Mal",
+      "s": "Le passant chagrin que tu frôles Est ébloui par la santé Qui jaillit comme une clarté De tes bras et de tes épaules.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0055",
+      "w": "Les Fleurs du Mal",
+      "s": "Tu tires ton pardon de l'éternel martyre Infligé sans relâche aux coeurs ambitieux Qu'attiré loin de nous le radieux sourire Entrevue vaguement au bord des autres cieux; Tu tires ton pardon de l'éternel martyre!",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0056",
+      "w": "Les Fleurs du Mal",
+      "s": "FEMMES DAMNEES A la pâle clarté des lampes languissantes, Sur de profonds coussins tout imprégnés d'odeur, Hippolyte rêvait aux caresses puissantes Qui levaient le rideau de sa jeune candeur.",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0057",
+      "w": "Journaux intimes",
+      "s": "VIII Ces beaux et grands navires, imperceptiblement balancés (dandinés) sur les eaux tranquilles, ces robustes navires, à l’air désoeuvré et nostalgique, ne nous disent-ils pas dans une langue muette: Quand partons-nous pour le bonheur?",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0058",
+      "w": "Journaux intimes",
+      "s": "D’ailleurs on peut affirmer que le plaisir viendrait après, à bien plus juste titre qu’on ne dit: l’amour vient après le mariage.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0059",
+      "w": "Journaux intimes",
+      "s": "IX NOTES Théodore de Banville n’est pas précisément matérialiste; il est lumineux.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0060",
+      "w": "Journaux intimes",
+      "s": "Jouissances spirituelles et physiques causées par l’orage, l’électricité et la foudre, tocsin des souvenirs amoureux, ténébreux, des anciennes années.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0061",
+      "w": "Journaux intimes",
+      "s": "Un culte (magisme, sorcellerie évocatoire).",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0062",
+      "w": "Journaux intimes",
+      "s": "Il y a des moments de l’existence où le temps et l’étendue sont plus profonds, et le sentiment de l’existence immensément augmenté.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0063",
+      "w": "Journaux intimes",
+      "s": "J’eus heureusement le temps de la ramasser; mais cette idée malheureuse se glissa un instant après dans mon esprit, que c’était un mauvais présage; et dès lors l’idée n’a plus voulu me lâcher; elle ne m’a laissé aucun repos de toute la journée.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0064",
+      "w": "Journaux intimes",
+      "s": "Tantôt il lui demandait la permission de lui baiser la jambe, et il profitait de la circonstance pour baiser cette belle jambe dans telle position qu’elle dessinât son contour sur le soleil couchant.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0065",
+      "w": "Journaux intimes",
+      "s": "Quand j’aurai inspiré le dégoût et l’horreur universels, j’aurai conquis la solitude.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0066",
+      "w": "Journaux intimes",
+      "s": "La sensibilité de chacun, c’est son génie.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0067",
+      "w": "Journaux intimes",
+      "s": "Enfin, j’aimais ma mère pour son élégance.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0068",
+      "w": "Journaux intimes",
+      "s": "XIII SUGGESTIONS Pourquoi les démocrates n’aiment pas les chats, il est facile de le deviner.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0069",
+      "w": "Journaux intimes",
+      "s": "A travers la noirceur de la nuit, il avait regardé derrière lui dans les années profondes, puis il s’était jeté dans les bras de sa coupable amie pour y retrouver le pardon qu’il lui accordait.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0070",
+      "w": "Journaux intimes",
+      "s": "La jeunesse elle-même est un sacerdoce, -- à ce que dit la jeunesse.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0071",
+      "w": "Journaux intimes",
+      "s": "Je ne dis pas que le monde sera réduit aux expédients et au désordre, bouffon des républiques du Sud-Amérique, -- que peut-être même nous retournerons à l’état sauvage, et que nous irons, à travers les ruines herbues de notre civilisation, chercher notre pâture, un fusil à la main.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0072",
+      "w": "Journaux intimes",
+      "s": "Ai-je besoin de dire que le peu qui restera de politique se débattra péniblement dans les étreintes de l’animalité générale, et que les gouvernants seront forcés, pour se maintenir et pour créer un fantôme d’ordre, de recourir à des moyens qui feraient frissonner notre humanité actuelle, pourtant si endurcie?",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0073",
+      "w": "Journaux intimes",
+      "s": "Car il y a des choses dans l’homme, qui se fortifient et prospèrent à mesure que d’autres se délicatisent et s’amoindrissent, et, grâce au progrès de ces temps, il ne te restera de tes entrailles que des viscères!",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0074",
+      "w": "Journaux intimes",
+      "s": "MON COEUR MIS À NU (Deuxième partie des journaux intimes) Table des matières Présentation I 1.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0075",
+      "w": "Journaux intimes",
+      "s": "Il y a des gens qui prétendent que rien n’empêche de croire que, le ciel étant immobile, c’est la terre qui tourne autour de son axe.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0076",
+      "w": "Journaux intimes",
+      "s": "Elle est en rut et elle veut être foutue.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0077",
+      "w": "Journaux intimes",
+      "s": "Analyse des contre-religions, exemple: la prostitution sacrée.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0078",
+      "w": "Journaux intimes",
+      "s": "Folie du peuple et folie de la bourgeoisie.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0079",
+      "w": "Journaux intimes",
+      "s": "Trouver l'explication de sa nature, et sa providentialité.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0080",
+      "w": "Journaux intimes",
+      "s": "Il n'y a pas en moi de base pour une conviction.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0081",
+      "w": "Journaux intimes",
+      "s": "Les nations n'ont de grands hommes que malgré elles.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0082",
+      "w": "Journaux intimes",
+      "s": "Mais le monde est fait de gens qui ne peuvent penser qu'en commun, en bandes.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0083",
+      "w": "Journaux intimes",
+      "s": "Seulement, je voudrais que les comédiens fussent montés sur des patins très hauts, portassent des masques plus expressifs que le visage humain, et parlassent à travers des porte-voix; enfin que les rôles de femmes fussent joués par des hommes.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0084",
+      "w": "Journaux intimes",
+      "s": "La question (torture) est, comme art de découvrir la vérité, une niaiserie barbare; c'est l'application d'un moyen matériel à un but spirituel.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0085",
+      "w": "Journaux intimes",
+      "s": "Ce qu'il y a de vil dans une fonction quelconque.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0086",
+      "w": "Journaux intimes",
+      "s": "Madame de Metternich, quoique princesse, a oublié de me répondre à propos de ce que j'ai dit d'elle et de Wagner.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0087",
+      "w": "Journaux intimes",
+      "s": "Seulement elle faisait autrefois de la contre-morale.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0088",
+      "w": "Journaux intimes",
+      "s": "Que quelques hommes aient pu s'amouracher de cette latrine, c'est bien la preuve de l'abaissement des hommes de ce siècle.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0089",
+      "w": "Journaux intimes",
+      "s": "Si je la rencontrais, je ne pourrais m'empêcher de lui jeter un bénitier à la tête.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0090",
+      "w": "Journaux intimes",
+      "s": "Ne pouvant pas supprimer l'amour, l'Église a voulu au moins le désinfecter, et elle a fait le mariage.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0091",
+      "w": "Journaux intimes",
+      "s": "On n'en veut plus parce qu'elles se sont salies à de certains hommes.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0092",
+      "w": "Journaux intimes",
+      "s": "A ajouter aux métaphores militaires: Les poètes de combat.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0093",
+      "w": "Journaux intimes",
+      "s": "Adrien me disait que son frère Félix avait tous les viscères en double.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0094",
+      "w": "Journaux intimes",
+      "s": "Ne pas même aspirer à comprendre la Religion.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0095",
+      "w": "Journaux intimes",
+      "s": "Pourquoi le spectacle de la mer est-il si infiniment et si éternellement agréable?",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0096",
+      "w": "Journaux intimes",
+      "s": "Le mot de Saint-Marc G[irardin] implique une immense haine contre le sublime.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0097",
+      "w": "Journaux intimes",
+      "s": "Il y a dans la jeune fille toute l'abjection du voyou et du collégien.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0098",
+      "w": "Journaux intimes",
+      "s": "Ces mérites et ces vices sont presque toujours, comme la statistique et la logique le pourraient démontrer, attribuables à l'atmosphère du gouvernement précédent.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0099",
+      "w": "Journaux intimes",
+      "s": "C'est toujours le gouvernement précédent qui est responsable des moeurs du suivant, en tant qu'un gouvernement puisse être responsable de quoi que ce soit.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0100",
+      "w": "Journaux intimes",
+      "s": "Je mettrai l'orthographe même sous la main du bourreau.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0101",
+      "w": "Journaux intimes",
+      "s": "Plus l'homme cultive les arts, moins il bande.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0102",
+      "w": "Journaux intimes",
+      "s": "Tout enfant, j'ai senti dans mon coeur deux sentiments contradictoires, l'horreur de la vie et l'extase de la vie.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0103",
+      "w": "Journaux intimes",
+      "s": "Quand Jésus-Christ dit: «Heureux ceux qui sont affamés, car ils seront rassasiés», Jésus-Christ fait un calcul de probabilités.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0104",
+      "w": "Journaux intimes",
+      "s": "On peut ne pas manquer d'esprit et chercher dans Dieu le complice et l'ami qui manquent toujours.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0105",
+      "w": "Journaux intimes",
+      "s": "Je ne comprends pas qu'une main puisse toucher un journal sans une convulsion de dégoût.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0106",
+      "w": "Journaux intimes",
+      "s": "Dès mon enfance, tendance à la mysticité.",
+      "src": {
+        "work": "Journaux intimes"
+      }
+    },
+    {
+      "id": "baudelaire.p0107",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Lesbos, où les Phrynés l'une l'autre s'attirent, Où jamais un soupir ne resta sans écho, A l'égal de Paphos les étoiles t'admirent, Et Vénus à bon droit peut jalouser Sapho!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0108",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Laisse du vieux Platon se froncer l'oeil austère.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0109",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Tu tires ton pardon de l'éternel martyre!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0110",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Qui des Dieux osera, Lesbos, être ton juge?",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0111",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Vierges au coeur sublime, honneur de l'Archipel, Votre religion comme une autre est auguste, Et l'amour se rira de l'Enfer et du Ciel!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0112",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Et c'est depuis ce temps que Lesbos se lamente!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0113",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Elle cherchait, d'un oeil troublé par la tempête, De sa naïveté le ciel déjà lointain, Ainsi qu'un voyageur qui retourne la tête Vers les horizons bleus dépassés le matin.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0114",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Etendue à ses pieds, calme et pleine de joie, Delphine la couvait avec des yeux ardents, Comme un animal fort qui surveille une proie, Après l'avoir d'abord marquée avec les dents.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0115",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Mes baisers sont légers comme ces éphémères Qui caressent le soir les grands lacs transparents, Et ceux de ton amant creuseront leurs ornières Comme des chariots ou des socs déchirants; Ils passeront sur toi comme un lourd attelage De chevaux et de boeufs aux sabots sans pitié...",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0116",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Pour un de ces regards charmants, baume divin, Des plaisirs plus obscurs je lèverai les voiles, Et je t'endormirai dans un rêve sans fin!» Mais Hippolyte alors, levant sa jeune tête: --«Je ne suis point ingrate et ne me repens pas, Ma Delphine, je souffre et je suis inquiète, Comme après un nocturne et terrible repas.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0117",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Avons-nous donc commis une action étrange?",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0118",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Ne me regarde pas ainsi, toi, ma pensée!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0119",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Va, si tu veux, chercher un fiancé stupide; Cours offrir un coeur vierge à ses cruels baisers; Et, pleine de remords et d'horreur, et livide, Tu me rapporteras tes seins stigmatisés...",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0120",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Brûlant comme un volcan, profond comme le vide!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0121",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Que nos rideaux fermés nous séparent du monde, Et que la lassitude amène le repos!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0122",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Jamais un rayon frais n'éclaira vos cavernes; Par les fentes des murs des miasmes fiévreux Filtrent en s'enflammant ainsi que des lanternes Et pénètrent vos corps de leurs parfums affreux.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0123",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Lion des peuples vivants, errantes, condamnées, A travers les déserts courez comme les loups; Faites votre destin, âmes désordonnées, Et fuyez l'infini que vous portez en vous!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0124",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Dans un sommeil aussi doux que la mort, J'étalerai mes baisers sans remord Sur ton beau corps poli comme le cuivre.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0125",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Pour engloutir mes sanglots apaisés Rien ne me vaut l'abîme de ta couche; L'oubli puissant habite sur ta bouche, Et le Léthé coule dans tes baisers.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0126",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Les retentissantes couleurs Dont tu parsèmes tes toilettes Jettent dans l'esprit des poëtes L'image d'un ballet de fleurs.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0127",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Quelquefois dans un beau jardin Où je traînais mon atonie, J'ai senti, comme une ironie Le soleil déchirer mon sein; Et le printemps et la verdure Ont tant humilié mon coeur, Que j'ai puni sur une fleur L'insolence de la Nature.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0128",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "A travers ces lèvres nouvelles, Plus éclatantes et plus belles, T'infuser mon venin, ma soeur![3] [3] Les juges ont cru découvrir un sens à la fois sanguinaire et obscène dans les deux dernières stances.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0129",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Je croyais voir unis par un nouveau dessin Les hanches de l'Antiope au buste d'un imberbe, Tant sa taille faisait ressortir son bassin.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0130",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Je remplace, pour qui me voit nue et sans voiles, La lune, le soleil, le ciel et les étoiles!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0131",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "La gerbe épanouie En mille fleurs, Où Phoebé réjouie Met ses couleurs, Tombe comme une pluie De larges pleurs.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0132",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Puis, elle s'épanche, mourante, En un flot de triste langueur, Qui par une invisible pente Descend jusqu'au fond de mon coeur.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0133",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "O toi, que la nuit rend si belle, Qu'il m'est doux, penché vers tes seins, D'écouter la plainte éternelle Qui sanglote dans les bassins!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0134",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "IX LES YEUX DE BERTHE Vous pouvez mépriser les yeux les plus célèbres, Beaux yeux de mon enfant, par où filtre et s'enfuit Je ne sais quoi de bon, de doux comme la Nuit!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0135",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Leurs feux sont ces pensers d'Amour, mêlés de Foi, Qui pétillent au fond, voluptueux ou chastes.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0136",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Elle se répand dans ma vie Comme un air imprégné de sel, Et dans mon âme inassouvie Verse le goût de l'éternel.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0137",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Grain de musc qui gis, invisible, Au fond de mon éternité!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0138",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Tu n'es plus fraîche, ma très-chère, Ma vieille infante!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0139",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Je ne trouve pas monotone La verdeur de tes quarante ans; Je préfère tes fruits, Automne, Aux fleurs banales du Printemps!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0140",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Ta carcasse a des agréments Et des grâces particulières; Je trouve d'étranges piments Dans le creux de tes deux salières Ta carcasse a des agréments!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0141",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Je préfère tes clavicules A celles du roi Salomon[4], Et je plains ces gens ridicules!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0142",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Par sa luxure et son dédain Ta lèvre amère nous provoque; Cette lèvre, c'est un Eden Qui nous attire et qui nous choque.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0143",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Prévost-Paradol l'eût avertie qu'elle dansait le cancan sur un volcan.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0144",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "En effet, Voulant du Mal chercher la crème Et n'aimer qu'un monstre parfait, Vraiment oui!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0145",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Dans cette merveilleuse langue, le solécisme et le barbarisme me paraissent rendre les négligences forcées d'une passion qui s'oublie et se moque des règles.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0146",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Le calembour lui-même, quand il traverse ces pédantesques bégaiements, ne joue-t-il pas la grâce sauvage et baroque de l'enfance?»--C.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0147",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Esto sertis implicata, O femina delicata, Per quam solvuntur peccata!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0148",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Quod erat spurcum, cremasti; Quod rudius, exæquasti; Quod debile, confirmasti!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0149",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Adde nunc vires viribus, Dulce balneum suavibus Unguentatum odoribus!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0150",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Meos circa lumbos mica, O castitatis lorica, Aqua tincta seraphica; Patera gemmis corusca, Panis salsus, mollis esca, Divinum vinum, Francisca!",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0151",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "C'est un satirique, un moqueur; Mais l'énergie avec laquelle Il peint le Mal et sa séquelle, Prouve la beauté de son coeur.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0152",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "XV LOLA DE VALENCE[9] [9] Ces vers ont été composés pour servir d'inscription à un merveilleux portrait de mademoiselle Lola, ballerine espagnole, par M.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0153",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Les rires enivrants dont s'emplit la prison Vers l'étrange et l'absurde invitent sa raison; Le Doute l'environne, et la Peur ridicule, Hideuse et multiforme, autour de lui circule.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0154",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "PIECES DIVERSES XVII LA VOIX Mon berceau s'adossait à la bibliothèque, Babel sombre, où roman, science, fabliau, Tout, la cendre latine et la poussière grecque, Se mêlaient.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0155",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Et c'est depuis ce temps que, pareil aux prophètes, J'aime si tendrement le désert et la mer; Que je ris dans les deuils et pleure dans les fêtes, Et trouve un goût suave au vin le plus amer; Que je prends très-souvent les faits pour des mensonges, Et que, les yeux au ciel, je tombe dans des trous.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0156",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Observons que, comme tous les nouveaux convertis, il se montre très-rigoureux et très-fanatique.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0157",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "L'homme est aveugle, sourd, fragile comme un mur Qu'habite et que ronge un insecte!» Et puis, Quelqu'un paraît, que tous avaient nié, Et qui leur dit, railleur et fier: «Dans mon ciboire, Vous avez, que je crois, assez communié, A la joyeuse Messe noire?",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0158",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Mon âme dans tes mains n'est pas un vain jouet, Et ta prudence est infinie.» Le son de la trompette est si délicieux, Dans ces soirs solennels de célestes vendanges, Qu'il s'infiltre comme une extase dans tous ceux Dont elle chante les louanges.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0159",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Aux pays chauds et bleus où ton Dieu t'a fait naître, Ta tâche est d'allumer la pipe de ton maître, De pourvoir les flacons d'eaux fraîches et d'odeurs, De chasser loin du lit les moustiques rôdeurs, Et, dès que le matin fait chanter les platanes, D'acheter au bazar ananas et bananes.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0160",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Pourquoi, l'heureuse enfant, veux-tu voir notre France, Ce pays trop peuplé que fauche la souffrance, Et, confiant ta vie aux bras forts des marins, Faire de grands adieux à tes chers tamarins?",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0161",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "S'il fallait décrire ma peine, Ce serait à n'en plus finir; Je me disais, domptant ma haine: «Au moins, si je pouvais dormir!» Comme un qui n'est pas à son aise, Et qui n'ose pas s'en aller, Je frottais de mon cul ma chaise, Rêvant de le faire empaler.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0162",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Moi, je fuirai jusqu'en Gascogne, Ou j'irai me jeter à l'eau, Si dans ce Paris, qu'il redoute, Quand chacun sera retourné, Je trouve encore sur ma route Ce fléau, natif de Tournai.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0163",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Nous avons vu récemment une petite composition de lui, où, se reprochant d'avoir rebuté une pauvresse, le poëte se met à sa recherche, et ne se couche que tout triste de ne l'avoir pu retrouver.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0164",
+      "w": "Les épaves de Charles Baudelaire",
+      "s": "Monselet ne cède pas plus souvent à son tempérament lyrique, qu'une gaîté, tant soit peu artificielle, a trop souvent contrarié.",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      }
+    },
+    {
+      "id": "baudelaire.p0165",
+      "w": "De l'amour",
+      "s": "Et il veut cette douceur, il veut cette vie; de toutes ses forces il s'accroche à ces mensonges_: Qu'importe la réalité placée hors de moi, si elle m'a aidé à vivre, à sentit que je suis...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0166",
+      "w": "De l'amour",
+      "s": "Et la dame de l'hôtel commence d'être pressante.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0167",
+      "w": "De l'amour",
+      "s": "Il entrevoit cette vie quotidiennement crapuleuse, demain, après-demain, et toujours...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0168",
+      "w": "De l'amour",
+      "s": "Elle est si belle, sa gorge triomphante qui s'avance et qui pouse la moire; et il en ouvre les panneaux bombés et clairs, comme d'une armoire, armoire à doux secrets, pleine de bonne choses, de vins, de parfums, de liqueurs, qui font délirer les cerveaux et les cœurs.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0169",
+      "w": "De l'amour",
+      "s": "Tout d'elle lui est un plaisir, la mollesse de son balancement, la cadence de son abandon, la souplesse de son corps qui frissonne sus les caresses du linge; jusqu'aux lenteurs et aux brusqueries de ses mouvements, son allure orientale et sa grâce enfantine de singe.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0170",
+      "w": "De l'amour",
+      "s": "L'Amour est assis sur le crâne de l'humanité et de sa bouche cruelle il éparpille en l'air sa cervelle, son sang et sa chair.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0171",
+      "w": "De l'amour",
+      "s": "Le salut, c'est l'argent, la gloire, la sécurité, la levée du C.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0172",
+      "w": "De l'amour",
+      "s": "Enfin, voici une femme qu'il veut aimer avec toute l'humilité des dévotions, une femme que son amour va auréoler d'un pureté infinie, dont les rayons l'illumineront de clarté et de joie, une femme dans les yeux de laquelle il va réfléchir la meilleure partie de lui-même, la portion divine et immortelle de son âme.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0173",
+      "w": "De l'amour",
+      "s": "L'absence de signature n'est-elle pas un symptôme de cette invincible pudeur?...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0174",
+      "w": "De l'amour",
+      "s": "Toute son âme, il la transfuse par inspiration dans ces sonnets qui restent les plus beaux de son œuvre, et nous donnent surtout l'intimité de cette nature sensible, de toutes les sensibilités les plus diverses.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0175",
+      "w": "De l'amour",
+      "s": "Il eût dû, le pauvre malade, ainsi que le Hollandais volant, s'engloutir alors dans le Léthé avec sa douce amie; et les premières caresses auraient dû être dernières...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0176",
+      "w": "De l'amour",
+      "s": "Ce sont les indemnités à la porte d'un théâtre où quelque féerie, quelque ballet aérien, les musiques, les lumières, donnent aux exilés l'illusion édénique des paradis perdus._ BAUDELAIRE, UN AMOREUX, UN PASSIONNÉ, MÊME L'AMOUREUX, LE PASSIONNÉ, J'IRAI JUSQU'AU DÉTRAQUÉ, À L'INVERTI SENTIMENTAL: CERTAINEMENT.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0177",
+      "w": "De l'amour",
+      "s": "Homme du Midi, à qui la nature claire ne peut pas donner le goût des secrets et des mystères,--homme frivole,--de Bordeaux, de Marseille ou d'Italie,--que les femmes ardentes vous suffisent; ce mouvement et cette animation sont votre empire naturel;--empire amusant.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0178",
+      "w": "De l'amour",
+      "s": "Le charmant Alcibiade bégayait si bien, et l'enfance a de si divins baragouinages!",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0179",
+      "w": "De l'amour",
+      "s": "Le beau fruit défendu qu'une large impiété,--dans une tumultueuse nuit d'hiver, au coin du feu, du vin et des truffes, cantique muet du bonheur domestique, victoire remportée sur la nature rigoureuse, qui semble elle-même blasphémer les dieux!",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0180",
+      "w": "De l'amour",
+      "s": "C'est la naïveté qui sauve, c'est la naïveté qui rend heureux, votre maîtresse fut-elle laide comme la vieille Mab, la reine des épouvantements!",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0181",
+      "w": "De l'amour",
+      "s": "Comme je ne dormais pas, je me suis amusé, pendant qu'elle dormait, à passer ma main sur ses bras, sur son cou et sur ses épaules.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0182",
+      "w": "De l'amour",
+      "s": "Pour moi, Messieurs, je me fais gloire d'être arrivé, depuis longtemps, à l'époque climatérique du troisième degré où la beauté elle-même ne suffit plus, si elle n'est assaisonnée par le parfum, la parure, etc...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0183",
+      "w": "De l'amour",
+      "s": "Pour répondre à un sous-entendu déshonnête, à cette partie de la question qui n'ose pas se produire, je renverrai le lecteur à Pline, qui a parlé quelque part des propriétés du chanvre de façon à dissiper sur ce sujet bien des illusions.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0184",
+      "w": "De l'amour",
+      "s": "Longue, fine, forte, grasse et nerveuse à la fois, elle avait toute la correction du beau et tout l'attrait libertin du joli.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0185",
+      "w": "De l'amour",
+      "s": "Les femmes sentimentales et précieuses seront peut-être choquées d'apprendre que, semblable à Michel-Ange (rappelez-vous la fin d'un de ses sonnets: «Sculpture!",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0186",
+      "w": "De l'amour",
+      "s": "Il est malheureusement bien vrai que, sans le loisir et l'argent, l'amour ne peut être qu'une orgie de roturier ou l'accomplissement d'un devoir conjugal.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0187",
+      "w": "De l'amour",
+      "s": "À la porte d'un café, s'appuyant aux vitres illuminées par devant et par derrière, s'étale un de ces imbéciles, dont l'élégance est faite par son tailleur et la tête par son coiffeur.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0188",
+      "w": "De l'amour",
+      "s": "Elle représente bien la sauvagerie dans la civilisation.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0189",
+      "w": "De l'amour",
+      "s": "Ce qui les rend précieuses et les consacre, c'est les innombrables pensées qu'elles font naître, généralement sévères et noires.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0190",
+      "w": "De l'amour",
+      "s": "Vous figurez-vous celui-ci obligé d'écrire un rôle pour sa femme qui n'a pas de talent?",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0191",
+      "w": "De l'amour",
+      "s": "Voudrait-il par hasard les induire à prendre des leçons des Chinois économes et de M.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0192",
+      "w": "De l'amour",
+      "s": "Tout poète lyrique, en vertu de sa nature, opère fatalement un retour vers l'Eden perdu.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0193",
+      "w": "De l'amour",
+      "s": "Vous êtes-vous demandé la raison du charme qu'on trouve parfois à fouiller ces annales de la luxure, enfouies dans les bibliothèques ou perdues dans les cartons des marchands, et parfois aussi de la mauvaise humeur qu'elles vous donnent?",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0194",
+      "w": "De l'amour",
+      "s": "Victor Hugo est un grand poète sculptural qui a l'œil fermé à la spiritualité.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0195",
+      "w": "De l'amour",
+      "s": "Il est le président de cette république galante et minaudière.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0196",
+      "w": "De l'amour",
+      "s": "Je crois à sa confiance; car il a l'air sédentaire et peu propre à la marche.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0197",
+      "w": "De l'amour",
+      "s": "Anecdote du chasseur, relative à la liaison intime de la férocité et de l'amour.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0198",
+      "w": "De l'amour",
+      "s": "Car, certes, je croirais faire un sacrilège en appliquant le mot: extase à cette sorte de décomposition.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0199",
+      "w": "De l'amour",
+      "s": "Une belle tête d'homme n'a pas besoin de comporter, excepté peut-être aux yeux d'une femme, cette idée de volupté, qui, dans un visage de femme, est une provocation d'autant plus attirante que le visage est généralement plus mélancolique.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0200",
+      "w": "De l'amour",
+      "s": "Il ajuste une poupée, et dit à sa femme: Je me figure que c'est toi.--Il ferme les yeux et abat la poupée.--Puis il dit, en baisant les mains de sa compagne: Cher ange, que je te remercie de mon adresse.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0201",
+      "w": "De l'amour",
+      "s": "J'ai toujours été étonné qu'on laissât les femmes entrer dans les églises.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0202",
+      "w": "De l'amour",
+      "s": "Il paraît que le curé a pris depuis lors ses précautions contre le sacrilège.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0203",
+      "w": "De l'amour",
+      "s": "J'oserai la ravir au Dieu même qu'elle adore (Valmont Satan, rival de Dieu).",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0204",
+      "w": "De l'amour",
+      "s": "Je la montrerai, dis-je, oubliant ses devoirs...",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0205",
+      "w": "De l'amour",
+      "s": "Il a fallu que, dans Racine, Mithridate, Alexandre, Porus, aient été galants.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0206",
+      "w": "De l'amour",
+      "s": "Ce peuple n'a pas changé, et les peintres flamands sont encore vrais.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0207",
+      "w": "De l'amour",
+      "s": "LETTRES DE BAUDELAIRE I À MADAME MARIE Madame, Est-il bien possible que je ne dois plus vous revoir?",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0208",
+      "w": "De l'amour",
+      "s": "Mais vous, Madame, vous y avez beaucoup gagné: vous m'avez inspiré du respect et une estime profonde.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0209",
+      "w": "De l'amour",
+      "s": "Il vous a plu de me mettre à la porte, il me plaît de vous adorer.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0210",
+      "w": "De l'amour",
+      "s": "Quelque absurde que tout cela vous paraisse, figurez-vous qu'il y a un cœur dont vous ne pourriez vous moquer sans cruauté, et où votre image vit toujours.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0211",
+      "w": "De l'amour",
+      "s": "Je vous ai, dès la publication, réservé un exemplaire de choix, et, s'il est revêtu d'un habit si indigne de vous, ce n'est pas ma faute, celle de mon relieur, à qui j'avais commandé quelque chose de beaucoup plus spirituel.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0212",
+      "w": "De l'amour",
+      "s": "C'est cette intimité, où je me donne la réplique depuis si longtemps, qui m'a donné l'audace de ce ton si familier.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0213",
+      "w": "De l'amour",
+      "s": "Voyez comme en peu de jours notre situation a été bouleversée.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0214",
+      "w": "De l'amour",
+      "s": "Je n'ose pas trop relire cette lettre; je serais peut-être obligé de la modifier, car je crains bien de vous affliger; il me semble que j'ai dû laisser percer quelque chose de la vilaine partie de mon caractère.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0215",
+      "w": "De l'amour",
+      "s": "Je vous raconterai plus tard ce que tout cela veut dire.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0216",
+      "w": "De l'amour",
+      "s": "Il se trouve, chère Madame, que cette représentation est avancée d'un jour.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0217",
+      "w": "De l'amour",
+      "s": "Sachant que vous aimiez les vieilleries et les bibelots, j'avais avisé depuis longtemps un encrier qui pouvait vous plaire.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0218",
+      "w": "De l'amour",
+      "s": "J'ignore absolument quand je pourrai jouir de votre dimanche, car j'ai commencé ce tour de force dont je ne suis capable que si rarement.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0219",
+      "w": "De l'amour",
+      "s": "Voilà, ma chère amie, le petit livre dont je vous avais parlé et qui vous amusera, j'en suis sûr.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0220",
+      "w": "De l'amour",
+      "s": "Désormais, je ne veux plus faire à Paris de ces énormes séjours qui me coûtent tant d'argent.",
+      "src": {
+        "work": "De l'amour"
+      }
+    },
+    {
+      "id": "baudelaire.p0221",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Bien loin des pioches et des sondes; Mainte fleur épanche à regret Son parfum doux comme un secret Dans les solitudes profondes.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0222",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Je laisse à Gavarni, poète des chloroses, Son troupeau gazouillant de beautés d'hôpital, Car je ne puis trouver parmi ces pâles roses Une fleur qui ressemble à mon rouge idéal.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0223",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Pour exercer tes dents à ce jeu singulier, Il te faut chaque jour un cœur au râtelier.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0224",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Sous le fardeau de ta paresse Ta tête d'enfant Se balance avec la mollesse D'un jeune éléphant, Et ton corps se penche et s'allonge Comme un fin vaisseau Qui roule bord sur bord et plonge Ses vergues dans l'eau.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0225",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "J'ai prié le glaive rapide De conquérir ma liberté, Et j'ai dit au poison perfide De secourir ma lâcheté.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0226",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "RÉVERSIBILITÉ Ange plein de gaîté, connaissez-vous l'angoisse, La honte, les remords, les sanglots, les ennuis Et les vagues terreurs de ces affreuses nuits Qui compriment le cœur comme un papier qu'on froisse?",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0227",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Ainsi, chère Déesse, Être lucide et pur, Sur les débris fumeux des stupides orgies Ton souvenir plus clair, plus rose, plus charmant, A mes yeux agrandis voltige incessamment.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0228",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Quand il miaule, on l'entend à peine, Tant son timbre est tendre et discret: Mais que sa voix s'apaise ou gronde, Elle est toujours riche et profonde.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0229",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Dans quel philtre?--dans quel vin?--dans quelle tisane?",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0230",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Mais la tristesse en moi monte comme la mer, Et laisse, en refluant, sur ma lèvre morose Le souvenir cuisant de son limon amer.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0231",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Je suis les membres et la roue, Et la victime et le bourreau!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0232",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "In fame mea taberna, In nocte mea lucerna, Recte me semper guberna.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0233",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "C'est une pyramide, un immense caveau, Qui contient plus de morts que la fosse commune.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0234",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Contre un gigantesque remous Qui va chantant comme les fous Et pirouettant dans les ténèbres; Un malheureux ensorcelé Dans ses tâtonnements futiles, Pour fuir d'un lieu plein de reptiles, Cherchant la lumière et la clé; Un damné descendant, sans lampe.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0235",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Que nous veulent les lois du juste et de l'injuste?",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0236",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Loin des peuples vivants, errantes, condamnées, A travers les déserts courez comme les loups; Faites votre destin, âmes désordonnées, Et fuyez l'infini que vous portez en vous!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0237",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "ALLÉGORIE C'est une femme belle et de riche encolure, Qui laisse dans son vin traîner sa chevelure.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0238",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Comme un tyran gorgé de viande et de vins, Il s'endort au doux bruit de nos affreux blasphèmes.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0239",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Toi dont l'œil clair connaît les profonds arsenaux Où dort enseveli le peuple des métaux, O Satan, prends pitié de ma longue misère!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0240",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "De l'Enfer où, fécond, tu couves le silence!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0241",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Au nom des serments de tendresse, Dont rien ne peut nous délier, Et pour nous réconcilier Comme au beau temps de notre ivresse, J'implorai d'elle un rendez-vous, Le soir, sur une route obscure.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0242",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Mais il est des carapaces heureuses que le poison lui-même n'entamerait pas.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0243",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Pour insuffler au peuple l'intelligence d'un objet d'art, j'ai une trop grande peur du ridicule, et je craindrais, en cette matière, d'égaler ces utopistes qui veulent, par un décret, rendre tous les Français riches et vertueux d'un seul coup.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0244",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Enfin, par une générosité peu commune, dont MM.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0245",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "La femme au corps divin, promettant le bonheur, Par le haut se termine en monstre bicéphale!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0246",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Crépite, flambe, et dit: «Bénissons ce flambeau!» L'amoureux pantelant incliné sur sa belle A l'air d'un moribond caressant son tombeau.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0247",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Cheveux bleus, pavillon de ténèbres tendues, Vous me rendez l'azur du ciel immense et rond; Sur les bords duvetés de vos mèches tordues Je m'enivre ardemment des senteurs confondues De l'huile de coco, du musc et du goudron.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0248",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "SEMPER EADEM «D'où vous vient, disiez-vous, cette tristesse étrange, Montant comme la mer sur le roc noir et nu?» --Quand notre cœur a fait une fois sa vendange, Vivre est un mal!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0249",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Je connais les engins de son vieil arsenal: Crime, horreur et folie!--O pâle marguerite!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0250",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Résigne-toi, mon cœur; dors ton sommeil de brute!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0251",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Il est doux, à travers les brumes, de voir naître L'étoile dans l'azur, la lampe à la fenêtre, Les fleuves de charbon monter au firmament Et la lune verser son pâle enchantement.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0252",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Que celui-là qui rit de mon inquiétude, Et qui n'est pas saisi d'un frisson fraternel, Songe bien que malgré tant de décrépitude Ces sept monstres hideux avaient l'air éternel!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0253",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Vous qui fûtes la grâce ou qui fûtes la gloire, Nul ne vous reconnaît!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0254",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Viens-tu troubler, avec ta puissante grimace, La fête de la Vie?",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0255",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Des nappes d'eau s'épanchaient, bleues, Entre des quais roses et verts, Pendant des millions de lieues, Vers les confins de l'univers; C'étaient des pierres inouïes Et des flots magiques; c'étaient D'immenses glaces éblouies Par tout ce qu'elles reflétaient!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0256",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "C'était dans mon âme amoureuse, Désir mêlé d'horreur, un mal particulier; Angoisse et vif espoir, sans humeur factieuse.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0257",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "O le pauvre amoureux des pays chimériques!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0258",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Le monde, monotone et petit, aujourd'hui, Hier, demain, toujours, nous fait voir notre image: Une oasis d'horreur dans un désert d'ennui!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0259",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Avec sa main terrible il rompit un morceau Du rocher, dont il fit une pipe superbe, Puis, au bord du ruisseau, dans une énorme gerbe, Pour s'en faire un tuyau, choisit un long roseau.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0260",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "C'est Gitche Manito, le Maître de la Vie, Qui vous parle!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0261",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Sache qu'il faut aimer, sans faire la grimace, Le pauvre, le méchant, le tortu, l'hébété, Pour que tu puisses faire à Jésus, quand il passe, Un tapis triomphal avec ta charité.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0262",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Tu réclamais le Soir; il descend; le voici: Une atmosphère obscure enveloppe la ville, Aux uns portant la paix, aux autres le souci.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0263",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Des encadrements d'Oppenord; --Qu'il donnerait (fût-ce à Luzarches) Dans le bric-à-brac jusqu'au cou, Et qu'au Marché des Patriarches Il avait fait plus d'un bon coup; --Qu'il n'aimait pas beaucoup sa femme, Ni sa mère;--mais qu'il croyait A l'immortalité de l'âme Et qu'il avait lu Niboyet!",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0264",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Cette belle a, parmi les genêts près d'éclore, Respiré les ardeurs de notre tiède aurore.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0265",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "(1848.) ÉPILOGUE[22] Le cœur content, je suis monté sur la montagne D'où l'on peut contempler la ville en son ampleur, Hôpital, lupanars, purgatoire, enfer, bagne, Où toute énormité fleurit comme une fleur.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0266",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Pour avoir des souliers elle a vendu son âme, Mais le bon Dieu rirait si, près de cette infâme, Je tranchais du tartufe et singeais la hauteur, Moi qui vends ma pensée et qui veux être auteur.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0267",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Plus polis et luisants que des anneaux de chaîne, Que, jour à jour, la peau des hommes a fourbis, Nous traînions tristement nos ennuis, accroupis Et voûtés sous le ciel carré des solitudes, Où l'enfant boit, dix ans, l'âpre lait des études.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    },
+    {
+      "id": "baudelaire.p0268",
+      "w": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "s": "Vous aimez le ciel pur et les brises amies; Aussi d'un vol léger, vous vous êtes enfuies Quand est venu le mauvais temps.",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "baudelaire.f.v0001",
+      "kind": "verbatim",
+      "text": "A peine les ont-ils déposés sur les planches, Que ces rois de l'azur, maladroits et honteux, Laissent piteusement leurs grandes ailes blanches Comme des avirons traîner à côté d'eux.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "baudelaire.f.v0002",
+      "kind": "verbatim",
+      "text": "Celui dont les pensers, comme des alouettes, Vers les cieux le matin prennent un libre essor, --Qui plane sur la vie et comprend sans effort Le langage des fleurs et des choses muettes!",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 185
+      }
+    },
+    {
+      "id": "baudelaire.f.v0003",
+      "kind": "verbatim",
+      "text": "Cette femme, morceau vraiment miraculeux, Divinement robuste, adorablement mince, Est faite pour trôner sur des lits somptueux, Et charmer les loisirs d'un pontife ou d'un prince.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "baudelaire.f.v0004",
+      "kind": "verbatim",
+      "text": "Je m'avance à l'attaque, et je grimpe aux assauts, Comme après un cadavre un choeur de vermisseaux, Et je chéris, ô bête implacable et cruelle, Jusqu'à cette froideur par où tu m'es plus belle!",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "baudelaire.f.v0005",
+      "kind": "verbatim",
+      "text": "III LE CADRE Comme un beau cadre ajoute à la peinture, Bien qu'elle soit d'un pinceau très vanté, Je ne sais quoi d'étrange et d'enchanté En l'isolant de l'immense nature.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "baudelaire.f.v0006",
+      "kind": "verbatim",
+      "text": "LE CHAT I Dans ma cervelle se promène Ainsi qu'en son appartement, Un beau chat, fort, doux et charmant, Quand il miaule, on l'entend à peine, Tant son timbre est tendre et discret; Mais que sa voix s'apaise ou gronde, Elle est toujours riche et profonde.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 255
+      }
+    },
+    {
+      "id": "baudelaire.f.v0007",
+      "kind": "verbatim",
+      "text": "LE BEAU NAVIRE Je veux te raconter, ô molle enchanteresse, Les diverses beautés qui parent ta jeunesse; Je veux te peindre ta beauté Où l'enfance s'allie à la maturité.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "baudelaire.f.v0008",
+      "kind": "verbatim",
+      "text": "L'IRREPARABLE I Pouvons-nous étouffer le vieux, le long Remords, Qui vit, s'agite et se tortille, Et se nourrit de nous comme le ver des morts, Comme du chêne la chenille?",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "baudelaire.f.v0009",
+      "kind": "verbatim",
+      "text": "Moi, mon âme est fêlée, et lorsqu'en ses ennuis Elle veut de ses chants peupler l'air froid des nuits, Il arrive souvent que sa voix affaiblie Semble le râle épais d'un blessé qu'on oublie Au bord d'un lac de sang sous un grand tas de morts, Et qui meurt, sans bouger, dans d'immenses efforts.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 293
+      }
+    },
+    {
+      "id": "baudelaire.f.v0010",
+      "kind": "verbatim",
+      "text": "Un gazetier fumeux, qui se croit un flambeau, Dit au pauvre, qu'il a noyé dans les ténèbres: « Où donc l'aperçois-tu, ce créateur du Beau, Ce Redresseur que tu célèbres?",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "baudelaire.f.v0011",
+      "kind": "verbatim",
+      "text": "Sachet toujours frais qui parfume L'atmosphère d'un cher réduit, Encensoir oublié qui fume En secret à travers la nuit, Comment, amour incorruptible, T'exprimer avec vérité?",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "baudelaire.f.v0012",
+      "kind": "verbatim",
+      "text": "En vain j'ai voulu de l'espace, Trouver la fin et le milieu; Sous je ne sais quel oeil de feu Je sens mon aile qui se casse; Et brûlé par l'amour du beau, Je n'aurai pas l'honneur sublime De donner mon nom à l'abîme Qui me servira de tombeau.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 242
+      }
+    },
+    {
+      "id": "baudelaire.f.v0013",
+      "kind": "verbatim",
+      "text": "Tout cassés Qu'ils sont, ils ont des yeux perçants comme une vrille, Luisants comme ces trous où l'eau dort dans la nuit; Ils ont les yeux divins de la petite fille Qui s'étonne et qui rit à tout ce qui reluit.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "baudelaire.f.v0014",
+      "kind": "verbatim",
+      "text": "Longue, mince, en grand deuil, douleur majestueuse, Une femme passa, d'une main fastueuse Soulevant, balançant le feston et l'ourlet; Agile et noble, avec sa jambe de statue.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "baudelaire.f.v0015",
+      "kind": "verbatim",
+      "text": "La ruche qui se joue au bord des clavicules, Comme un ruisseau lascif qui se frotte au rocher, Défend pudiquement des lazzi ridicules Les funèbres appas qu'elle tient à cacher.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0016",
+      "kind": "verbatim",
+      "text": "C'est ainsi qu'à travers l'Humanité frivole Le vin roule de l'or, éblouissant Pactole; Par le gosier de l'homme il chante ses exploits Et règne par ses dons ainsi que les vrais rois.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 182
+      }
+    },
+    {
+      "id": "baudelaire.f.v0017",
+      "kind": "verbatim",
+      "text": "Elle marche en déesse et repose en sultane; Elle a dans le plaisir la foi mahométane, Et dans ses bras ouverts que remplissent ses seins, Elle appelle des yeux la race des humains.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "baudelaire.f.v0018",
+      "kind": "verbatim",
+      "text": "Usant à l'envi leurs chaleurs dernières, Nos deux coeurs seront deux vastes flambeaux, Qui réfléchiront leurs doubles lumières Dans nos deux esprits, ces miroirs jumeaux.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "baudelaire.f.v0019",
+      "kind": "verbatim",
+      "text": "Tu tires ton pardon de l'éternel martyre Infligé sans relâche aux coeurs ambitieux Qu'attiré loin de nous le radieux sourire Entrevue vaguement au bord des autres cieux; Tu tires ton pardon de l'éternel martyre!",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "baudelaire.f.v0020",
+      "kind": "verbatim",
+      "text": "FEMMES DAMNEES A la pâle clarté des lampes languissantes, Sur de profonds coussins tout imprégnés d'odeur, Hippolyte rêvait aux caresses puissantes Qui levaient le rideau de sa jeune candeur.",
+      "work": "Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "baudelaire.f.v0021",
+      "kind": "verbatim",
+      "text": "VIII Ces beaux et grands navires, imperceptiblement balancés (dandinés) sur les eaux tranquilles, ces robustes navires, à l’air désoeuvré et nostalgique, ne nous disent-ils pas dans une langue muette: Quand partons-nous pour le bonheur?",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 236
+      }
+    },
+    {
+      "id": "baudelaire.f.v0022",
+      "kind": "verbatim",
+      "text": "J’eus heureusement le temps de la ramasser; mais cette idée malheureuse se glissa un instant après dans mon esprit, que c’était un mauvais présage; et dès lors l’idée n’a plus voulu me lâcher; elle ne m’a laissé aucun repos de toute la journée.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "baudelaire.f.v0023",
+      "kind": "verbatim",
+      "text": "Tantôt il lui demandait la permission de lui baiser la jambe, et il profitait de la circonstance pour baiser cette belle jambe dans telle position qu’elle dessinât son contour sur le soleil couchant.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 199
+      }
+    },
+    {
+      "id": "baudelaire.f.v0024",
+      "kind": "verbatim",
+      "text": "A travers la noirceur de la nuit, il avait regardé derrière lui dans les années profondes, puis il s’était jeté dans les bras de sa coupable amie pour y retrouver le pardon qu’il lui accordait.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "baudelaire.f.v0025",
+      "kind": "verbatim",
+      "text": "Je ne dis pas que le monde sera réduit aux expédients et au désordre, bouffon des républiques du Sud-Amérique, -- que peut-être même nous retournerons à l’état sauvage, et que nous irons, à travers les ruines herbues de notre civilisation, chercher notre pâture, un fusil à la main.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 282
+      }
+    },
+    {
+      "id": "baudelaire.f.v0026",
+      "kind": "verbatim",
+      "text": "Seulement, je voudrais que les comédiens fussent montés sur des patins très hauts, portassent des masques plus expressifs que le visage humain, et parlassent à travers des porte-voix; enfin que les rôles de femmes fussent joués par des hommes.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "baudelaire.f.v0027",
+      "kind": "verbatim",
+      "text": "Ces mérites et ces vices sont presque toujours, comme la statistique et la logique le pourraient démontrer, attribuables à l'atmosphère du gouvernement précédent.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "baudelaire.f.v0028",
+      "kind": "verbatim",
+      "text": "C'est toujours le gouvernement précédent qui est responsable des moeurs du suivant, en tant qu'un gouvernement puisse être responsable de quoi que ce soit.",
+      "work": "Journaux intimes",
+      "lang": "fr",
+      "src": {
+        "work": "Journaux intimes"
+      },
+      "quality": {
+        "chars": 155
+      }
+    },
+    {
+      "id": "baudelaire.f.v0029",
+      "kind": "verbatim",
+      "text": "Lesbos, où les Phrynés l'une l'autre s'attirent, Où jamais un soupir ne resta sans écho, A l'égal de Paphos les étoiles t'admirent, Et Vénus à bon droit peut jalouser Sapho!",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "baudelaire.f.v0030",
+      "kind": "verbatim",
+      "text": "Elle cherchait, d'un oeil troublé par la tempête, De sa naïveté le ciel déjà lointain, Ainsi qu'un voyageur qui retourne la tête Vers les horizons bleus dépassés le matin.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "baudelaire.f.v0031",
+      "kind": "verbatim",
+      "text": "Etendue à ses pieds, calme et pleine de joie, Delphine la couvait avec des yeux ardents, Comme un animal fort qui surveille une proie, Après l'avoir d'abord marquée avec les dents.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "baudelaire.f.v0032",
+      "kind": "verbatim",
+      "text": "Mes baisers sont légers comme ces éphémères Qui caressent le soir les grands lacs transparents, Et ceux de ton amant creuseront leurs ornières Comme des chariots ou des socs déchirants; Ils passeront sur toi comme un lourd attelage De chevaux et de boeufs aux sabots sans pitié...",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 280
+      }
+    },
+    {
+      "id": "baudelaire.f.v0033",
+      "kind": "verbatim",
+      "text": "Va, si tu veux, chercher un fiancé stupide; Cours offrir un coeur vierge à ses cruels baisers; Et, pleine de remords et d'horreur, et livide, Tu me rapporteras tes seins stigmatisés...",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "baudelaire.f.v0034",
+      "kind": "verbatim",
+      "text": "Jamais un rayon frais n'éclaira vos cavernes; Par les fentes des murs des miasmes fiévreux Filtrent en s'enflammant ainsi que des lanternes Et pénètrent vos corps de leurs parfums affreux.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 188
+      }
+    },
+    {
+      "id": "baudelaire.f.v0035",
+      "kind": "verbatim",
+      "text": "Lion des peuples vivants, errantes, condamnées, A travers les déserts courez comme les loups; Faites votre destin, âmes désordonnées, Et fuyez l'infini que vous portez en vous!",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0036",
+      "kind": "verbatim",
+      "text": "Quelquefois dans un beau jardin Où je traînais mon atonie, J'ai senti, comme une ironie Le soleil déchirer mon sein; Et le printemps et la verdure Ont tant humilié mon coeur, Que j'ai puni sur une fleur L'insolence de la Nature.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "baudelaire.f.v0037",
+      "kind": "verbatim",
+      "text": "A travers ces lèvres nouvelles, Plus éclatantes et plus belles, T'infuser mon venin, ma soeur![3] [3] Les juges ont cru découvrir un sens à la fois sanguinaire et obscène dans les deux dernières stances.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "baudelaire.f.v0038",
+      "kind": "verbatim",
+      "text": "IX LES YEUX DE BERTHE Vous pouvez mépriser les yeux les plus célèbres, Beaux yeux de mon enfant, par où filtre et s'enfuit Je ne sais quoi de bon, de doux comme la Nuit!",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 169
+      }
+    },
+    {
+      "id": "baudelaire.f.v0039",
+      "kind": "verbatim",
+      "text": "Dans cette merveilleuse langue, le solécisme et le barbarisme me paraissent rendre les négligences forcées d'une passion qui s'oublie et se moque des règles.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 157
+      }
+    },
+    {
+      "id": "baudelaire.f.v0040",
+      "kind": "verbatim",
+      "text": "Les rires enivrants dont s'emplit la prison Vers l'étrange et l'absurde invitent sa raison; Le Doute l'environne, et la Peur ridicule, Hideuse et multiforme, autour de lui circule.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "baudelaire.f.v0041",
+      "kind": "verbatim",
+      "text": "PIECES DIVERSES XVII LA VOIX Mon berceau s'adossait à la bibliothèque, Babel sombre, où roman, science, fabliau, Tout, la cendre latine et la poussière grecque, Se mêlaient.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 173
+      }
+    },
+    {
+      "id": "baudelaire.f.v0042",
+      "kind": "verbatim",
+      "text": "L'homme est aveugle, sourd, fragile comme un mur Qu'habite et que ronge un insecte!» Et puis, Quelqu'un paraît, que tous avaient nié, Et qui leur dit, railleur et fier: «Dans mon ciboire, Vous avez, que je crois, assez communié, A la joyeuse Messe noire?",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 254
+      }
+    },
+    {
+      "id": "baudelaire.f.v0043",
+      "kind": "verbatim",
+      "text": "Mon âme dans tes mains n'est pas un vain jouet, Et ta prudence est infinie.» Le son de la trompette est si délicieux, Dans ces soirs solennels de célestes vendanges, Qu'il s'infiltre comme une extase dans tous ceux Dont elle chante les louanges.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 245
+      }
+    },
+    {
+      "id": "baudelaire.f.v0044",
+      "kind": "verbatim",
+      "text": "Aux pays chauds et bleus où ton Dieu t'a fait naître, Ta tâche est d'allumer la pipe de ton maître, De pourvoir les flacons d'eaux fraîches et d'odeurs, De chasser loin du lit les moustiques rôdeurs, Et, dès que le matin fait chanter les platanes, D'acheter au bazar ananas et bananes.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "baudelaire.f.v0045",
+      "kind": "verbatim",
+      "text": "Pourquoi, l'heureuse enfant, veux-tu voir notre France, Ce pays trop peuplé que fauche la souffrance, Et, confiant ta vie aux bras forts des marins, Faire de grands adieux à tes chers tamarins?",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "baudelaire.f.v0046",
+      "kind": "verbatim",
+      "text": "S'il fallait décrire ma peine, Ce serait à n'en plus finir; Je me disais, domptant ma haine: «Au moins, si je pouvais dormir!» Comme un qui n'est pas à son aise, Et qui n'ose pas s'en aller, Je frottais de mon cul ma chaise, Rêvant de le faire empaler.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "baudelaire.f.v0047",
+      "kind": "verbatim",
+      "text": "Moi, je fuirai jusqu'en Gascogne, Ou j'irai me jeter à l'eau, Si dans ce Paris, qu'il redoute, Quand chacun sera retourné, Je trouve encore sur ma route Ce fléau, natif de Tournai.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "baudelaire.f.v0048",
+      "kind": "verbatim",
+      "text": "Nous avons vu récemment une petite composition de lui, où, se reprochant d'avoir rebuté une pauvresse, le poëte se met à sa recherche, et ne se couche que tout triste de ne l'avoir pu retrouver.",
+      "work": "Les épaves de Charles Baudelaire",
+      "lang": "fr",
+      "src": {
+        "work": "Les épaves de Charles Baudelaire"
+      },
+      "quality": {
+        "chars": 194
+      }
+    },
+    {
+      "id": "baudelaire.f.v0049",
+      "kind": "verbatim",
+      "text": "Elle est si belle, sa gorge triomphante qui s'avance et qui pouse la moire; et il en ouvre les panneaux bombés et clairs, comme d'une armoire, armoire à doux secrets, pleine de bonne choses, de vins, de parfums, de liqueurs, qui font délirer les cerveaux et les cœurs.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "baudelaire.f.v0050",
+      "kind": "verbatim",
+      "text": "Tout d'elle lui est un plaisir, la mollesse de son balancement, la cadence de son abandon, la souplesse de son corps qui frissonne sus les caresses du linge; jusqu'aux lenteurs et aux brusqueries de ses mouvements, son allure orientale et sa grâce enfantine de singe.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "baudelaire.f.v0051",
+      "kind": "verbatim",
+      "text": "Toute son âme, il la transfuse par inspiration dans ces sonnets qui restent les plus beaux de son œuvre, et nous donnent surtout l'intimité de cette nature sensible, de toutes les sensibilités les plus diverses.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "baudelaire.f.v0052",
+      "kind": "verbatim",
+      "text": "Il eût dû, le pauvre malade, ainsi que le Hollandais volant, s'engloutir alors dans le Léthé avec sa douce amie; et les premières caresses auraient dû être dernières...",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "baudelaire.f.v0053",
+      "kind": "verbatim",
+      "text": "Homme du Midi, à qui la nature claire ne peut pas donner le goût des secrets et des mystères,--homme frivole,--de Bordeaux, de Marseille ou d'Italie,--que les femmes ardentes vous suffisent; ce mouvement et cette animation sont votre empire naturel;--empire amusant.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 266
+      }
+    },
+    {
+      "id": "baudelaire.f.v0054",
+      "kind": "verbatim",
+      "text": "Le beau fruit défendu qu'une large impiété,--dans une tumultueuse nuit d'hiver, au coin du feu, du vin et des truffes, cantique muet du bonheur domestique, victoire remportée sur la nature rigoureuse, qui semble elle-même blasphémer les dieux!",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "baudelaire.f.v0055",
+      "kind": "verbatim",
+      "text": "Pour moi, Messieurs, je me fais gloire d'être arrivé, depuis longtemps, à l'époque climatérique du troisième degré où la beauté elle-même ne suffit plus, si elle n'est assaisonnée par le parfum, la parure, etc...",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "baudelaire.f.v0056",
+      "kind": "verbatim",
+      "text": "Pour répondre à un sous-entendu déshonnête, à cette partie de la question qui n'ose pas se produire, je renverrai le lecteur à Pline, qui a parlé quelque part des propriétés du chanvre de façon à dissiper sur ce sujet bien des illusions.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "baudelaire.f.v0057",
+      "kind": "verbatim",
+      "text": "Les femmes sentimentales et précieuses seront peut-être choquées d'apprendre que, semblable à Michel-Ange (rappelez-vous la fin d'un de ses sonnets: «Sculpture!",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "baudelaire.f.v0058",
+      "kind": "verbatim",
+      "text": "À la porte d'un café, s'appuyant aux vitres illuminées par devant et par derrière, s'étale un de ces imbéciles, dont l'élégance est faite par son tailleur et la tête par son coiffeur.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "baudelaire.f.v0059",
+      "kind": "verbatim",
+      "text": "Vous êtes-vous demandé la raison du charme qu'on trouve parfois à fouiller ces annales de la luxure, enfouies dans les bibliothèques ou perdues dans les cartons des marchands, et parfois aussi de la mauvaise humeur qu'elles vous donnent?",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "baudelaire.f.v0060",
+      "kind": "verbatim",
+      "text": "Une belle tête d'homme n'a pas besoin de comporter, excepté peut-être aux yeux d'une femme, cette idée de volupté, qui, dans un visage de femme, est une provocation d'autant plus attirante que le visage est généralement plus mélancolique.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 238
+      }
+    },
+    {
+      "id": "baudelaire.f.v0061",
+      "kind": "verbatim",
+      "text": "Il ajuste une poupée, et dit à sa femme: Je me figure que c'est toi.--Il ferme les yeux et abat la poupée.--Puis il dit, en baisant les mains de sa compagne: Cher ange, que je te remercie de mon adresse.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "baudelaire.f.v0062",
+      "kind": "verbatim",
+      "text": "Je vous ai, dès la publication, réservé un exemplaire de choix, et, s'il est revêtu d'un habit si indigne de vous, ce n'est pas ma faute, celle de mon relieur, à qui j'avais commandé quelque chose de beaucoup plus spirituel.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "baudelaire.f.v0063",
+      "kind": "verbatim",
+      "text": "Je n'ose pas trop relire cette lettre; je serais peut-être obligé de la modifier, car je crains bien de vous affliger; il me semble que j'ai dû laisser percer quelque chose de la vilaine partie de mon caractère.",
+      "work": "De l'amour",
+      "lang": "fr",
+      "src": {
+        "work": "De l'amour"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "baudelaire.f.v0064",
+      "kind": "verbatim",
+      "text": "Je laisse à Gavarni, poète des chloroses, Son troupeau gazouillant de beautés d'hôpital, Car je ne puis trouver parmi ces pâles roses Une fleur qui ressemble à mon rouge idéal.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0065",
+      "kind": "verbatim",
+      "text": "Sous le fardeau de ta paresse Ta tête d'enfant Se balance avec la mollesse D'un jeune éléphant, Et ton corps se penche et s'allonge Comme un fin vaisseau Qui roule bord sur bord et plonge Ses vergues dans l'eau.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "baudelaire.f.v0066",
+      "kind": "verbatim",
+      "text": "RÉVERSIBILITÉ Ange plein de gaîté, connaissez-vous l'angoisse, La honte, les remords, les sanglots, les ennuis Et les vagues terreurs de ces affreuses nuits Qui compriment le cœur comme un papier qu'on froisse?",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 210
+      }
+    },
+    {
+      "id": "baudelaire.f.v0067",
+      "kind": "verbatim",
+      "text": "Contre un gigantesque remous Qui va chantant comme les fous Et pirouettant dans les ténèbres; Un malheureux ensorcelé Dans ses tâtonnements futiles, Pour fuir d'un lieu plein de reptiles, Cherchant la lumière et la clé; Un damné descendant, sans lampe.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 252
+      }
+    },
+    {
+      "id": "baudelaire.f.v0068",
+      "kind": "verbatim",
+      "text": "Loin des peuples vivants, errantes, condamnées, A travers les déserts courez comme les loups; Faites votre destin, âmes désordonnées, Et fuyez l'infini que vous portez en vous!",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0069",
+      "kind": "verbatim",
+      "text": "Au nom des serments de tendresse, Dont rien ne peut nous délier, Et pour nous réconcilier Comme au beau temps de notre ivresse, J'implorai d'elle un rendez-vous, Le soir, sur une route obscure.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 193
+      }
+    },
+    {
+      "id": "baudelaire.f.v0070",
+      "kind": "verbatim",
+      "text": "Pour insuffler au peuple l'intelligence d'un objet d'art, j'ai une trop grande peur du ridicule, et je craindrais, en cette matière, d'égaler ces utopistes qui veulent, par un décret, rendre tous les Français riches et vertueux d'un seul coup.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 243
+      }
+    },
+    {
+      "id": "baudelaire.f.v0071",
+      "kind": "verbatim",
+      "text": "Cheveux bleus, pavillon de ténèbres tendues, Vous me rendez l'azur du ciel immense et rond; Sur les bords duvetés de vos mèches tordues Je m'enivre ardemment des senteurs confondues De l'huile de coco, du musc et du goudron.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 224
+      }
+    },
+    {
+      "id": "baudelaire.f.v0072",
+      "kind": "verbatim",
+      "text": "SEMPER EADEM «D'où vous vient, disiez-vous, cette tristesse étrange, Montant comme la mer sur le roc noir et nu?» --Quand notre cœur a fait une fois sa vendange, Vivre est un mal!",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 179
+      }
+    },
+    {
+      "id": "baudelaire.f.v0073",
+      "kind": "verbatim",
+      "text": "Il est doux, à travers les brumes, de voir naître L'étoile dans l'azur, la lampe à la fenêtre, Les fleuves de charbon monter au firmament Et la lune verser son pâle enchantement.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 178
+      }
+    },
+    {
+      "id": "baudelaire.f.v0074",
+      "kind": "verbatim",
+      "text": "Que celui-là qui rit de mon inquiétude, Et qui n'est pas saisi d'un frisson fraternel, Songe bien que malgré tant de décrépitude Ces sept monstres hideux avaient l'air éternel!",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0075",
+      "kind": "verbatim",
+      "text": "Des nappes d'eau s'épanchaient, bleues, Entre des quais roses et verts, Pendant des millions de lieues, Vers les confins de l'univers; C'étaient des pierres inouïes Et des flots magiques; c'étaient D'immenses glaces éblouies Par tout ce qu'elles reflétaient!",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 258
+      }
+    },
+    {
+      "id": "baudelaire.f.v0076",
+      "kind": "verbatim",
+      "text": "Avec sa main terrible il rompit un morceau Du rocher, dont il fit une pipe superbe, Puis, au bord du ruisseau, dans une énorme gerbe, Pour s'en faire un tuyau, choisit un long roseau.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "baudelaire.f.v0077",
+      "kind": "verbatim",
+      "text": "Sache qu'il faut aimer, sans faire la grimace, Le pauvre, le méchant, le tortu, l'hébété, Pour que tu puisses faire à Jésus, quand il passe, Un tapis triomphal avec ta charité.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "baudelaire.f.v0078",
+      "kind": "verbatim",
+      "text": "Des encadrements d'Oppenord; --Qu'il donnerait (fût-ce à Luzarches) Dans le bric-à-brac jusqu'au cou, Et qu'au Marché des Patriarches Il avait fait plus d'un bon coup; --Qu'il n'aimait pas beaucoup sa femme, Ni sa mère;--mais qu'il croyait A l'immortalité de l'âme Et qu'il avait lu Niboyet!",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 291
+      }
+    },
+    {
+      "id": "baudelaire.f.v0079",
+      "kind": "verbatim",
+      "text": "Pour avoir des souliers elle a vendu son âme, Mais le bon Dieu rirait si, près de cette infâme, Je tranchais du tartufe et singeais la hauteur, Moi qui vends ma pensée et qui veux être auteur.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 192
+      }
+    },
+    {
+      "id": "baudelaire.f.v0080",
+      "kind": "verbatim",
+      "text": "Plus polis et luisants que des anneaux de chaîne, Que, jour à jour, la peau des hommes a fourbis, Nous traînions tristement nos ennuis, accroupis Et voûtés sous le ciel carré des solitudes, Où l'enfant boit, dix ans, l'âpre lait des études.",
+      "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal",
+      "lang": "fr",
+      "src": {
+        "work": "L'Oeuvre Poètique de Charles Baudelaire: Les Fleurs du Mal"
+      },
+      "quality": {
+        "chars": 240
+      }
+    },
+    {
+      "id": "baudelaire.f.p01",
+      "kind": "pattern",
+      "label": "maxime",
+      "shape": "(Il faut|Il ne faut|Il est |C'est |One must|We must|Never |No one |Nothing )",
+      "attested": 10,
+      "worksSpan": 5,
+      "examples": [
+        "C'est ainsi qu'à travers l'Humanité frivole Le vin roule de l'or, éblouissant Pactole; Par le gosier de l'homme il chante ses exploits Et règne par ses dons ainsi que les vrais rois.",
+        "C'est toujours le gouvernement précédent qui est responsable des moeurs du suivant, en tant qu'un gouvernement puisse être responsable de quoi que ce soit."
+      ]
+    },
+    {
+      "id": "baudelaire.f.p02",
+      "kind": "pattern",
+      "label": "restriction",
+      "shape": "\\bne\\b[^.]{0,80}\\b(que|point|jamais|rien)\\b",
+      "attested": 7,
+      "worksSpan": 5,
+      "examples": [
+        "Mais ne suffit-il pas que tu sois l'apparence, Pour réjouir un coeur qui fuit la vérité?",
+        "Je ne dis pas que le monde sera réduit aux expédients et au désordre, bouffon des républiques du Sud-Amérique, -- que peut-être même nous retournerons à l’état sauvage, et que nous irons, à travers les ruines herbues de notre civilisation, chercher notre pâture, un fusil à la main."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 268,
+    "formulas": 82,
+    "verbatim": 80,
+    "patterns": 2
+  },
+  "checksum": "sha256:a91372e0a03fbd9874255c4297e809885b2946183dc829dbd3c9fd38819ec724"
+}

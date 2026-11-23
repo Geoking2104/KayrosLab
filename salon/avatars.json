@@ -1,0 +1,640 @@
+{
+ "generatedAt": "2026-11-23T09:59:18.890Z",
+ "source": "Wikipedia",
+ "authors": {
+  "smith": {
+   "file": "avatars/smith.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Adam_Smith",
+   "credit": "Etching created by Cadell and Davies (1811), John Horsburgh (1828) or R.C. Bell (1872).",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:AdamSmith.jpg"
+  },
+  "aristote": {
+   "file": "avatars/aristote.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Aristote",
+   "credit": "Eric Gaba (User:Sting)",
+   "license": "CC BY-SA 2.5",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Aristoteles_Louvre.jpg"
+  },
+  "spinoza": {
+   "file": "avatars/spinoza.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Baruch_Spinoza",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Spinoza.jpg"
+  },
+  "darwin": {
+   "file": "avatars/darwin.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Charles_Darwin",
+   "credit": "Herbert Rose Barraud",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Charles_Darwin_portrait.jpg"
+  },
+  "confucius": {
+   "file": "avatars/confucius.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Confucius",
+   "credit": "Confucius, gouache on paper, c. 1770. Encyclopedia Britannica.",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Konfuzius-1770.jpg"
+  },
+  "poe": {
+   "file": "avatars/poe.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Edgar_Allan_Poe",
+   "credit": "Auteur inconnu; restauré par Yann Forget et Adam Cuerden",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Edgar_Allan_Poe,_circa_1849,_restored,_squared_off.jpg"
+  },
+  "kant": {
+   "file": "avatars/kant.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Emmanuel_Kant",
+   "credit": "Johann Gottlieb Becker (1720-1782)",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Immanuel_Kant_-_Gemaelde_1.jpg"
+  },
+  "dostoevski": {
+   "file": "avatars/dostoevski.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Fiodor_Dosto%C3%AFevski",
+   "credit": "Constantin Shapiro",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Dostoevsky_1879.jpg"
+  },
+  "kafka": {
+   "file": "avatars/kafka.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Franz_Kafka",
+   "credit": "Photographe inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Franz_Kafka,_1923.jpg"
+  },
+  "nietzsche": {
+   "file": "avatars/nietzsche.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Friedrich_Nietzsche",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Portrait_of_Friedrich_Nietzsche.jpg"
+  },
+  "balzac": {
+   "file": "avatars/balzac.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Honor%C3%A9_de_Balzac",
+   "credit": "Louis-Auguste Bisson",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:%E5%A5%A5%C2%B7%E5%B7%B4%E5%B0%94%E6%89%8E%E5%85%8B.png"
+  },
+  "austen": {
+   "file": "avatars/austen.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Jane_Austen",
+   "credit": "From a watercolour by James Andrews of Maidenhead based on an unfinished work by Cassandra Austen. Engraving by William Home Lizars.",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Jane_Austen,_from_A_Memoir_of_Jane_Austen_(1870).jpg"
+  },
+  "rousseau": {
+   "file": "avatars/rousseau.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Jean-Jacques_Rousseau",
+   "credit": "Maurice-Quentin de La Tour",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Jean-Jacques_Rousseau_(painted_portrait).jpg"
+  },
+  "verne": {
+   "file": "avatars/verne.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Jules_Verne",
+   "credit": "Nadar",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:F%C3%A9lix_Nadar_1820-1910_portraits_Jules_Verne.jpg"
+  },
+  "marx": {
+   "file": "avatars/marx.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Karl_Marx",
+   "credit": "John Jabez Edwin Mayall",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png"
+  },
+  "tolstoi": {
+   "file": "avatars/tolstoi.jpg",
+   "page": "https://fr.wikipedia.org/wiki/L%C3%A9on_Tolsto%C3%AF",
+   "credit": "Sergueï Prokoudine-Gorski",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:L.N.Tolstoy_Prokudin-Gorsky.jpg"
+  },
+  "marcaurele": {
+   "file": "avatars/marcaurele.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Marc_Aur%C3%A8le",
+   "credit": "Daniel Martin",
+   "license": "CC BY-SA 4.0",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:MSR-ra-61-b-1-DM_(cropped).jpg"
+  },
+  "montaigne": {
+   "file": "avatars/montaigne.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Michel_de_Montaigne",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Montaigne-Dumonstier.jpg"
+  },
+  "cervantes": {
+   "file": "avatars/cervantes.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Miguel_de_Cervantes",
+   "credit": "Attribué à Juan de Jáuregui",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Cervantes_J%C3%A1uregui.jpg"
+  },
+  "machiavel": {
+   "file": "avatars/machiavel.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Nicolas_Machiavel",
+   "credit": "Santi di Tito",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Portrait_of_Niccol%C3%B2_Machiavelli_by_Santi_di_Tito.jpg"
+  },
+  "wilde": {
+   "file": "avatars/wilde.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Oscar_Wilde",
+   "credit": "Downey, W. & D.",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Oscar_Wilde_(1854-1900)_1889,_May_23._Picture_by_W._and_D._Downey.jpg"
+  },
+  "platon": {
+   "file": "avatars/platon.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Platon",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Plato_Pio-Clemetino_Inv305.jpg"
+  },
+  "descartes": {
+   "file": "avatars/descartes.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Ren%C3%A9_Descartes",
+   "credit": "D’après Frans Hals",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Frans_Hals_-_Portret_van_Ren%C3%A9_Descartes.jpg"
+  },
+  "stendhal": {
+   "file": "avatars/stendhal.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Stendhal",
+   "credit": "Olof Södermark",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Stendhal.jpg"
+  },
+  "suntzu": {
+   "file": "avatars/suntzu.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Sun_Tzu",
+   "credit": "663highland",
+   "license": "CC BY 2.5",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Enchoen27n3200.jpg"
+  },
+  "hugo": {
+   "file": "avatars/hugo.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Victor_Hugo",
+   "credit": "Nadar",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Victor_Hugo_001.jpg"
+  },
+  "voltaire": {
+   "file": "avatars/voltaire.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Voltaire",
+   "credit": "Nicolas de Largillierre",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Atelier_de_Nicolas_de_Largilli%C3%A8re,_portrait_de_Voltaire,_d%C3%A9tail_(mus%C3%A9e_Carnavalet)_-002.jpg"
+  },
+  "shakespeare": {
+   "file": "avatars/shakespeare.jpg",
+   "page": "https://fr.wikipedia.org/wiki/William_Shakespeare",
+   "credit": "Attribué à John Taylor",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Shakespeare.jpg"
+  },
+  "seneca": {
+   "file": "avatars/seneca.jpg",
+   "page": "https://en.wikipedia.org/wiki/Seneca_the_Younger",
+   "credit": "Calidius",
+   "license": "CC BY-SA 3.0",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Duble_herma_of_Socrates_and_Seneca_Antikensammlung_Berlin_07.jpg"
+  },
+  "ciceron": {
+   "file": "avatars/ciceron.jpg",
+   "page": "https://en.wikipedia.org/wiki/Cicero",
+   "credit": "José Luiz",
+   "license": "CC BY-SA 4.0",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Bust_of_Cicero_(1st-cent._BC)_-_Palazzo_Nuovo_-_Musei_Capitolini_-_Rome_2016.jpg"
+  },
+  "epictete": {
+   "file": "avatars/epictete.jpg",
+   "page": "https://fr.wikipedia.org/wiki/%C3%89pict%C3%A8te",
+   "credit": "Claude Reydellet, engraving by S. Beyssent",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Epictetus.png"
+  },
+  "epicure": {
+   "file": "avatars/epicure.jpg",
+   "page": "https://fr.wikipedia.org/wiki/%C3%89picure",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Epikouros_BM_1843.jpg"
+  },
+  "augustin": {
+   "file": "avatars/augustin.jpg",
+   "page": "https://en.wikipedia.org/wiki/Augustine_of_Hippo",
+   "credit": "Philippe de Champaigne",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Saint_Augustine_by_Philippe_de_Champaigne.jpg"
+  },
+  "boece": {
+   "file": "avatars/boece.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Bo%C3%A8ce",
+   "credit": "Boethius",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Bo%C3%A8ce_et_Philosophie.jpg"
+  },
+  "aquinas": {
+   "file": "avatars/aquinas.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Thomas_d%27Aquin",
+   "credit": "Carlo Crivelli",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:St-thomas-aquinasFXD.jpg"
+  },
+  "hobbes": {
+   "file": "avatars/hobbes.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Thomas_Hobbes",
+   "credit": "John Michael Wright",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Thomas_Hobbes_(portrait).jpg"
+  },
+  "locke": {
+   "file": "avatars/locke.jpg",
+   "page": "https://fr.wikipedia.org/wiki/John_Locke",
+   "credit": "Godfrey Kneller",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:JohnLocke.png"
+  },
+  "hume": {
+   "file": "avatars/hume.jpg",
+   "page": "https://fr.wikipedia.org/wiki/David_Hume",
+   "credit": "Allan Ramsay",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Painting_of_David_Hume.jpg"
+  },
+  "leibniz": {
+   "file": "avatars/leibniz.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Gottfried_Wilhelm_Leibniz",
+   "credit": "Christoph Bernhard Francke",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Gottfried_Wilhelm_von_Leibniz.jpg"
+  },
+  "pascal": {
+   "file": "avatars/pascal.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Blaise_Pascal",
+   "credit": "Auteur inconnu; une copie d’une peinture de François II Quesnel; gravée par Gérard Edelinck en 1691.",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Blaise_Pascal_Versailles.JPG"
+  },
+  "berkeley": {
+   "file": "avatars/berkeley.jpg",
+   "page": "https://fr.wikipedia.org/wiki/George_Berkeley",
+   "credit": "John Smybert",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:George_Berkeley_by_Jonh_Smibert.jpg"
+  },
+  "hegel": {
+   "file": "avatars/hegel.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Georg_Wilhelm_Friedrich_Hegel",
+   "credit": "Jakob Schlesinger",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Hegel_by_Schlesinger.jpg"
+  },
+  "schopenhauer": {
+   "file": "avatars/schopenhauer.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Arthur_Schopenhauer",
+   "credit": "Jules Lunteschütz (1822–1893)",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Schopenhauer_by_Jules_Luntesch%C3%BCtz.jpg"
+  },
+  "kierkegaard": {
+   "file": "avatars/kierkegaard.jpg",
+   "page": "https://fr.wikipedia.org/wiki/S%C3%B8ren_Kierkegaard",
+   "credit": "Luplau Janssen",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Kierkegaard_1902_by_Luplau_Janssen.jpg"
+  },
+  "mill": {
+   "file": "avatars/mill.jpg",
+   "page": "https://fr.wikipedia.org/wiki/John_Stuart_Mill",
+   "credit": "John Watkins",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:John_Stuart_Mill_by_John_Watkins,_1865.jpg"
+  },
+  "emerson": {
+   "file": "avatars/emerson.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Ralph_Waldo_Emerson",
+   "credit": "Southworth & Hawes",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Ralph_Waldo_Emerson_ca1857.jpg"
+  },
+  "james": {
+   "file": "avatars/james.jpg",
+   "page": "https://fr.wikipedia.org/wiki/William_James",
+   "credit": "Alice Boughton",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:William_James_by_Alice_M._Boughton,_c._1907,_platinum_print,_from_the_National_Portrait_Gallery_-_NPG-NPG_87_37James-000001_(cropped).jpg"
+  },
+  "diderot": {
+   "file": "avatars/diderot.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Denis_Diderot",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Denis_Diderot_111.PNG"
+  },
+  "christianisme": {
+   "file": "avatars/christianisme.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Bible",
+   "credit": "NYC Wanderer (Kevin Eng)",
+   "license": "CC BY-SA 2.0",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Gutenberg_Bible,_Lenox_Copy,_New_York_Public_Library,_2009._Pic_01.jpg"
+  },
+  "judaisme": {
+   "file": "avatars/judaisme.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Torah",
+   "credit": "HOWI - Horsch, Willy",
+   "license": "CC BY-SA 4.0",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:K%C3%B6ln-Tora-und-Innenansicht-Synagoge-Glockengasse-040.JPG"
+  },
+  "islam": {
+   "file": "avatars/islam.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Coran",
+   "credit": "Mustafa-trit20",
+   "license": "CC BY-SA 4.0",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Mamluk_era_Quran,_circa_1380,_open_to_sura_16.jpg"
+  },
+  "hindouisme": {
+   "file": "avatars/hindouisme.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Bhagavad-G%C4%ABt%C4%81",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Krishna_and_Arjun_on_the_chariot,_Mahabharata,_18th-19th_century,_India.jpg"
+  },
+  "bouddhisme": {
+   "file": "avatars/bouddhisme.jpg",
+   "page": "https://en.wikipedia.org/wiki/Dhammapada",
+   "credit": "Auteur inconnu",
+   "license": "CC0",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Folios_of_the_Bhikkhuni-patimokkha_(BL_IO_Man.Pali_21).jpg"
+  },
+  "taoisme": {
+   "file": "avatars/taoisme.jpg",
+   "page": "https://en.wikipedia.org/wiki/Tao_Te_Ching",
+   "credit": "Auteur inconnu",
+   "license": "Public domain",
+   "type": "oeuvre",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Mawangdui_LaoTsu_Ms2.JPG"
+  },
+  "moliere": {
+   "file": "avatars/moliere.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Moli%C3%A8re",
+   "credit": "Https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/moliere-1622-1673-dans-le-role-de-cesar-de-la-mort-de-pompee",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Moli%C3%A8re_-_Nicolas_Mignard_(1658).jpg"
+  },
+  "racine": {
+   "file": "avatars/racine.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Jean_Racine",
+   "credit": "D’après Jean-Baptiste Santerre",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Portrait_de_Jean_Racine_d%27apr%C3%A8s_Jean-Baptiste_Santerre.jpg"
+  },
+  "montesquieu": {
+   "file": "avatars/montesquieu.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Montesquieu",
+   "credit": "D’après Jacques-Antoine Dassier",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Montesquieu_1.png"
+  },
+  "flaubert": {
+   "file": "avatars/flaubert.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Gustave_Flaubert",
+   "credit": "Nadar",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Gustave_Flaubert.jpg"
+  },
+  "maupassant": {
+   "file": "avatars/maupassant.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Guy_de_Maupassant",
+   "credit": "Nadar",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Maupassant_par_Nadar.jpg"
+  },
+  "baudelaire": {
+   "file": "avatars/baudelaire.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Charles_Baudelaire",
+   "credit": "Étienne Carjat",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:%C3%89tienne_Carjat,_Portrait_of_Charles_Baudelaire,_circa_1862.jpg"
+  },
+  "dickens": {
+   "file": "avatars/dickens.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Charles_Dickens",
+   "credit": "Jeremiah Gurney",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Dickens_Gurney_head.jpg"
+  },
+  "melville": {
+   "file": "avatars/melville.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Herman_Melville",
+   "credit": "Joseph Oriel Eaton",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Herman_Melville_by_Joseph_O_Eaton.jpg"
+  },
+  "twain": {
+   "file": "avatars/twain.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Mark_Twain",
+   "credit": "Napoleon Sarony",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Mark_Twain_Sarony.jpg"
+  },
+  "whitman": {
+   "file": "avatars/whitman.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Walt_Whitman",
+   "credit": "George C. Cox / Adam Cuerden",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Walt_Whitman_-_George_Collins_Cox.jpg"
+  },
+  "bronte": {
+   "file": "avatars/bronte.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Emily_Bront%C3%AB",
+   "credit": "Branwell Brontë",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Emily_Bront%C3%AB_by_Patrick_Branwell_Bront%C3%AB_restored.jpg"
+  },
+  "hardy": {
+   "file": "avatars/hardy.jpg",
+   "page": "https://en.wikipedia.org/wiki/Thomas_Hardy",
+   "credit": "Bain News Service, publisher",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Thomas_Hardy_Restored_Portrait_1910%E2%80%931915_(3x4_cropped).jpg"
+  },
+  "goethe": {
+   "file": "avatars/goethe.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Johann_Wolfgang_von_Goethe",
+   "credit": "Joseph Karl Stieler",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Goethe_(Stieler_1828).jpg"
+  },
+  "dante": {
+   "file": "avatars/dante.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Dante_Alighieri",
+   "credit": "Sandro Botticelli",
+   "license": "Public domain",
+   "type": "portrait",
+   "filePage": "https://commons.wikimedia.org/wiki/File:Portrait_de_Dante.jpg"
+  },
+  "corneille": {
+   "file": "avatars/corneille.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Pierre_Corneille",
+   "credit": "dramaturge et poète français (1606-1684)",
+   "license": "voir la page"
+  },
+  "labruyere": {
+   "file": "avatars/labruyere.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Jean_de_La_Bruy%C3%A8re",
+   "credit": "écrivain et moraliste français du XVIIe siècle (1645-1696)",
+   "license": "voir la page"
+  },
+  "tocqueville": {
+   "file": "avatars/tocqueville.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Alexis_de_Tocqueville",
+   "credit": "philosophe politique, homme politique, historien, précurseur de la sociologie et écrivain français",
+   "license": "voir la page"
+  },
+  "thoreau": {
+   "file": "avatars/thoreau.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Henry_David_Thoreau",
+   "credit": "essayiste, enseignant, philosophe, naturaliste et poète américain",
+   "license": "voir la page"
+  },
+  "burke": {
+   "file": "avatars/burke.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Edmund_Burke",
+   "credit": "homme politique et philosophe irlandais",
+   "license": "voir la page"
+  },
+  "wollstonecraft": {
+   "file": "avatars/wollstonecraft.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Mary_Wollstonecraft",
+   "credit": "enseignante d’école primaire, autrice, philosophe et féministe anglaise",
+   "license": "voir la page"
+  },
+  "paine": {
+   "file": "avatars/paine.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Thomas_Paine",
+   "credit": "intellectuel, pamphlétaire, révolutionnaire britannique, américain puis français",
+   "license": "voir la page"
+  },
+  "eliot": {
+   "file": "avatars/eliot.jpg",
+   "page": "https://fr.wikipedia.org/wiki/George_Eliot",
+   "credit": "romancière, essayiste et poète britannique (1819–1880)",
+   "license": "voir la page"
+  },
+  "thackeray": {
+   "file": "avatars/thackeray.jpg",
+   "page": "https://fr.wikipedia.org/wiki/William_Makepeace_Thackeray",
+   "credit": "romancier britannique (1811-1863)",
+   "license": "voir la page"
+  },
+  "trollope": {
+   "file": "avatars/trollope.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Anthony_Trollope",
+   "credit": "écrivain britannique de l'époque victorienne",
+   "license": "voir la page"
+  },
+  "ruskin": {
+   "file": "avatars/ruskin.jpg",
+   "page": "https://fr.wikipedia.org/wiki/John_Ruskin",
+   "credit": "auteur, poète, artiste et critique d’art britannique (1819–1900)",
+   "license": "voir la page"
+  },
+  "plutarch": {
+   "file": "avatars/plutarch.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Plutarque",
+   "credit": "philosophe, biographe et moraliste grec de la Rome antique",
+   "license": "voir la page"
+  },
+  "lucretius": {
+   "file": "avatars/lucretius.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Lucr%C3%A8ce",
+   "credit": "poète et philosophe latin épicurien",
+   "license": "voir la page"
+  },
+  "erasmus": {
+   "file": "avatars/erasmus.jpg",
+   "page": "https://fr.wikipedia.org/wiki/%C3%89rasme",
+   "credit": "écrivain humaniste et théologien néerlandais",
+   "license": "voir la page"
+  },
+  "more": {
+   "file": "avatars/more.jpg",
+   "page": "https://fr.wikipedia.org/wiki/Thomas_More",
+   "credit": "philosophe, humaniste et théologien anglais",
+   "license": "voir la page"
+  }
+ }
+}

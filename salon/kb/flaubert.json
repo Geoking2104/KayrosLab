@@ -1,0 +1,3079 @@
+{
+  "authorId": "flaubert",
+  "kbVersion": "flaubert@bootstrap-2026-11-22",
+  "builtAt": "2026-11-23T09:52:50.790Z",
+  "source": "bootstrap-corpus",
+  "lang": "fr",
+  "works": [
+    {
+      "title": "La tentation de Saint Antoine",
+      "sentences": 50
+    },
+    {
+      "title": "Trois contes",
+      "sentences": 52
+    },
+    {
+      "title": "Madame Bovary",
+      "sentences": 53
+    },
+    {
+      "title": "Dictionnaire des idées reçues",
+      "sentences": 46
+    },
+    {
+      "title": "Bouvard et Pécuchet",
+      "sentences": 47
+    }
+  ],
+  "passages": [
+    {
+      "id": "flaubert.p0001",
+      "w": "La tentation de Saint Antoine",
+      "s": "Les vins se mettent à couler, les poissons à palpiter, le sang dans les plats bouillonne, la pulpe des fruits s'avance comme des lèvres amoureuses; et la table monte jusqu'à sa poitrine, jusqu'à son menton,--ne portant qu'une seule assiette et qu'un seul pain, qui se trouvent juste en face de lui.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0002",
+      "w": "La tentation de Saint Antoine",
+      "s": "J'aurais beau en jeter à la mer continuellement, il m'en restera.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0003",
+      "w": "La tentation de Saint Antoine",
+      "s": "Le môle, à chaque bout, est terminé par un pont établi sur des colonnes de marbre plantées dans la mer.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0004",
+      "w": "La tentation de Saint Antoine",
+      "s": "De tièdes exhalaisons circulent; il entend, quelquefois, le claquement discret d'une sandale.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0005",
+      "w": "La tentation de Saint Antoine",
+      "s": "Le martyr Paphnuce brosse la crinière d'un cheval, Théophile lave les jambes d'un autre, Jean peint les sabots d'un troisième, Alexandre ramasse du crottin dans une corbeille.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0006",
+      "w": "La tentation de Saint Antoine",
+      "s": "Aussitôt il est repu de débordements et d'exterminations; et l'envie le prend de se rouler dans la bassesse.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0007",
+      "w": "La tentation de Saint Antoine",
+      "s": "Voici du baume de Génézareth, de l'encens du cap Gardefan, du ladanon, du cinnamone, et du silphium, bon à mettre dans les sauces.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0008",
+      "w": "La tentation de Saint Antoine",
+      "s": "J'ai des trésors enfermés dans des galeries où l'on se perd comme dans un bois.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0009",
+      "w": "La tentation de Saint Antoine",
+      "s": "Elle se rapproche; et d'un ton irrité: Comment?",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0010",
+      "w": "La tentation de Saint Antoine",
+      "s": "HILARION Tellement borné du reste, qu'il avoue ne rien comprendre à la nature du Verbe.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0011",
+      "w": "La tentation de Saint Antoine",
+      "s": "HILARION Cela n'est peut-être pas si difficile.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0012",
+      "w": "La tentation de Saint Antoine",
+      "s": "Asseyons-nous là, sur cette grosse pierre,--comme autrefois, quand à la première lueur du jour je te saluais, en t'appelant «claire étoile du matin»; et tu commençais tout de suite mes instructions.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0013",
+      "w": "La tentation de Saint Antoine",
+      "s": "Ils ont l'air de bourreaux ou l'air d'eunuques.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0014",
+      "w": "La tentation de Saint Antoine",
+      "s": "Il s'en échappe plus facilement par les parfums, les épices, l'arôme du vin cuit, les choses légères qui ressemblent à des pensées.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0015",
+      "w": "La tentation de Saint Antoine",
+      "s": "VALENTIN Le plus parfait des êtres, des Éons, l'Abîme, reposait au sein de la Profondeur avec la Pensée.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0016",
+      "w": "La tentation de Saint Antoine",
+      "s": "Puis, ils se trouvent l'un près de l'autre, loin de la foule;--et un silence, un apaisement extraordinaire s'est fait, comme dans les bois, quand le vent s'arrête et que les feuilles tout à coup ne remuent plus.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0017",
+      "w": "La tentation de Saint Antoine",
+      "s": "En nous appelant par nos noms, il nous reprochait la vanité de nos oeuvres, l'infamie de nos corps;--et il levait le poing du côté des dromadaires, à cause des clochettes d'argent qu'ils portent sous la mâchoire.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0018",
+      "w": "La tentation de Saint Antoine",
+      "s": "LES ARCONTIQUES en cilices de crins: Le Sauveur a dit: «Je suis venu pour détruire l'oeuvre de la Femme.» LES TATIANIENS en cilices de joncs: L'arbre du mal c'est elle!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0019",
+      "w": "La tentation de Saint Antoine",
+      "s": "Sur les autres parois de la chambre, des médaillons en fer poli représentent des têtes d'animaux, celle d'un boeuf, d'un lion, d'un aigle, d'un chien, et la tête d'âne--encore!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0020",
+      "w": "La tentation de Saint Antoine",
+      "s": "Les senteurs du port se mêlent dans l'air chaud à la fumée des lampes.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0021",
+      "w": "La tentation de Saint Antoine",
+      "s": "J'ai recueilli ses os qui brillaient comme des lucioles dans les herbes.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0022",
+      "w": "La tentation de Saint Antoine",
+      "s": "Tout en criant, Antoine trépigne sur le feu;--et quand il ne reste plus qu'un amas de cendres: Où est donc Hilarion?",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0023",
+      "w": "La tentation de Saint Antoine",
+      "s": "Elle tourne ses prunelles comme sortant d'un songe, passe lentement ses doigts sur ses deux sourcils, et d'une voix dolente: HÉLÈNE (ENNOIA) J'ai souvenir d'une région lointaine, couleur d'émeraude.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0024",
+      "w": "La tentation de Saint Antoine",
+      "s": "A Tyr, la Syrienne, elle était la maîtresse des voleurs.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0025",
+      "w": "La tentation de Saint Antoine",
+      "s": "Aussi, je restais seul à me promener par les rues.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0026",
+      "w": "La tentation de Saint Antoine",
+      "s": "DAMIS Le Maître lui dit: «O beau jeune homme, tu caresses un serpent; un serpent te caresse!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0027",
+      "w": "La tentation de Saint Antoine",
+      "s": "Il se relève; il essaye de fuir; les portes sont fermées; ah!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0028",
+      "w": "La tentation de Saint Antoine",
+      "s": "Tu humeras l'odeur du myrrhodion qui fait mourir les faibles.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0029",
+      "w": "La tentation de Saint Antoine",
+      "s": "HILARION C'est la dualité primordiale des Brakhmanes,--l'Absolu ne s'exprimant par aucune forme.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0030",
+      "w": "La tentation de Saint Antoine",
+      "s": "Coiffée d'une mitre éblouissante, elle court sur les blés, sur les flots, monte dans l'air, s'étale partout!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0031",
+      "w": "La tentation de Saint Antoine",
+      "s": "Des prêtres en robes de lin passent et reviennent tout autour, de manière à décrire par leurs évolutions un cercle en mouvement; et, la tête levée, ils contemplent les astres.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0032",
+      "w": "La tentation de Saint Antoine",
+      "s": "Et on entend des baisers sous les feuillages,--quelquefois un grand cri aigu.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0033",
+      "w": "La tentation de Saint Antoine",
+      "s": "Il s'appuie du coude contre une des branches de l'arbre, en tenant une flûte à la main, dans une pose langoureuse.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0034",
+      "w": "La tentation de Saint Antoine",
+      "s": "Alors UNE FEMME s'incline sur le cadavre.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0035",
+      "w": "La tentation de Saint Antoine",
+      "s": "HILARION Mais la luxure, dans ses fureurs, a le désintéressement de la pénitence.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0036",
+      "w": "La tentation de Saint Antoine",
+      "s": "Les Heures, de taille égale, se tiennent par la main; et MERCURE est posé obliquement sur un arc-en-ciel, avec son caducée, ses talonnières et son pétase.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0037",
+      "w": "La tentation de Saint Antoine",
+      "s": "DIANE habillée de noir, et au milieu de ses chiens devenus des loups: L'indépendance des grands bois m'a grisée, avec la senteur des fauves et l'exhalaison des marécages.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0038",
+      "w": "La tentation de Saint Antoine",
+      "s": "Le feu qui dévora ma mère coule dans mes veines.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0039",
+      "w": "La tentation de Saint Antoine",
+      "s": "HILARION Ce sont les Dieux de l'Étrurie, les innombrables Aesars.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0040",
+      "w": "La tentation de Saint Antoine",
+      "s": "Et au milieu d'une chambre, sur une estrade, se découvre un lit d'ivoire, environné par des gens qui tiennent des torches de sapin.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0041",
+      "w": "La tentation de Saint Antoine",
+      "s": "Et se dilatant d'aise à cause de moi, le convive exhalait toute sa gaieté par les ouvertures de son corps.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0042",
+      "w": "La tentation de Saint Antoine",
+      "s": "LE DIABLE Jamais le soleil ne se couche!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0043",
+      "w": "La tentation de Saint Antoine",
+      "s": "Il y a des pluies d'étoiles, des traînées de poussière d'or, des vapeurs lumineuses qui flottent et se dissolvent.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0044",
+      "w": "La tentation de Saint Antoine",
+      "s": "LE DIABLE Monte dans le ciel toujours et toujours; jamais tu n'atteindras le sommet!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0045",
+      "w": "La tentation de Saint Antoine",
+      "s": "La nuit fut lente à venir; et des ondes noires se répandaient sur la terre qu'une immense couleur rose occupait encore le ciel.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0046",
+      "w": "La tentation de Saint Antoine",
+      "s": "Dommine d'Alep et ses deux filles, trois autres saintes, se sont tuées;--et rappelle-toi tous les confesseurs qui couraient au-devant des bourreaux, par impatience de la mort.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0047",
+      "w": "La tentation de Saint Antoine",
+      "s": "Rien qu'à les voir de loin, le dégoût vous en prend.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0048",
+      "w": "La tentation de Saint Antoine",
+      "s": "Il allonge ses pattes, secoue les bandelettes de son front, et se couche sur le ventre.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0049",
+      "w": "La tentation de Saint Antoine",
+      "s": "La lassitude les prend; et ils tombent d'eux-mêmes à la renverse.",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0050",
+      "w": "La tentation de Saint Antoine",
+      "s": "Des espèces de traits, et comme une vague figure empreinte sur nos poitrines, voilà tout!",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      }
+    },
+    {
+      "id": "flaubert.p0051",
+      "w": "Trois contes",
+      "s": "La marée basse laissait à découvert des oursins, des godefiches, des méduses; et les enfants couraient, pour saisir des flocons d'écume que le vent emportait.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0052",
+      "w": "Trois contes",
+      "s": "On les rencontrait toujours aux abords de la cuisine, ou dans les promenades que l'on faisait.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0053",
+      "w": "Trois contes",
+      "s": "Pourquoi l'avaient-ils crucifié, lui qui chérissait les enfants, nourrissait les foules, guérissait les aveugles, et avait voulu, par douceur, naître au milieu des pauvres, sur le fumier d'une étable?",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0054",
+      "w": "Trois contes",
+      "s": "Il arrivait le dimanche après la messe, les joues roses, la poitrine nue, et sentant l'odeur de la campagne qu'il avait traversée.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0055",
+      "w": "Trois contes",
+      "s": "Quand elle fut devant le Calvaire, au lieu de prendre à gauche, elle prit à droite, se perdit dans des chantiers, revint sur ses pas; des gens qu'elle accosta l'engagèrent à se hâter.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0056",
+      "w": "Trois contes",
+      "s": "Les jours de soleil, elle se tourmentait de la soif; quand il faisait de l'orage, craignait pour lui la foudre.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0057",
+      "w": "Trois contes",
+      "s": "Alors elle dit: --«Ça ne leur fait rien, à eux!» Sa tête retomba; et machinalement elle soulevait, de temps à autre, les longues aiguilles sur la table à ouvrage.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0058",
+      "w": "Trois contes",
+      "s": "Il y a dans le jardin une terrasse d'où l'on découvre la Seine.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0059",
+      "w": "Trois contes",
+      "s": "Vers le milieu, elle entendit des sons étranges, un glas de mort.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0060",
+      "w": "Trois contes",
+      "s": "Félicité la sermonnait doucement; il fallait se conserver pour son fils, et pour l'autre, en souvenir «d'elle».",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0061",
+      "w": "Trois contes",
+      "s": "Mais une chose était seule capable de l'émouvoir, les lettres de son fils.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0062",
+      "w": "Trois contes",
+      "s": "Quand elle entendait dans la rue les tambours d'un régiment en marche, elle se mettait devant la porte avec une cruche de cidre, et offrait à boire aux soldats.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0063",
+      "w": "Trois contes",
+      "s": "Paul, un jour, eut l'imprudence de lui souffler aux narines la fumée d'un cigare; une autre fois que Mme Lormeau l'agaçait du bout de son ombrelle, il en happa la virole; enfin, il se perdit.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0064",
+      "w": "Trois contes",
+      "s": "Tous les êtres fonctionnaient avec le silence des fantômes.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0065",
+      "w": "Trois contes",
+      "s": "Derrière elle, dans un nuage de poussière et emportée par la descente, une malle-poste au grand galop se précipitait comme une trombe.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0066",
+      "w": "Trois contes",
+      "s": "Dix jours après (le temps d'accourir de Besançon), les héritiers survinrent.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0067",
+      "w": "Trois contes",
+      "s": "Un flot de monde se poussait derrière, entre les nappes blanches couvrant le mur des maisons; et l'on arriva au bas de la côte.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0068",
+      "w": "Trois contes",
+      "s": "Loulou, caché sous des roses, ne laissait voir que son front bleu, pareil à une plaque de lapis.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0069",
+      "w": "Trois contes",
+      "s": "On voyait dans la salle d'armes, entre des étendards et des mufles de bêtes fauves, des armes de tous les temps et de toutes les nations, depuis les frondes des Amalécites et les javelots des Garamantes jusqu'aux braquemarts des Sarrasins et aux cottes de mailles des Normands.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0070",
+      "w": "Trois contes",
+      "s": "Les dents lui poussèrent sans qu'il pleurât une seule fois.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0071",
+      "w": "Trois contes",
+      "s": "Sa place dans la chapelle était aux côtés de ses parents; et, si longs que fussent les offices, il restait à genoux sur son prie-Dieu, la toque par terre et les mains jointes.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0072",
+      "w": "Trois contes",
+      "s": "Le pigeon, les ailes cassées, palpitait, suspendu dans les branches d'un troëne.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0073",
+      "w": "Trois contes",
+      "s": "Des gouttes de verglas se collaient à son manteau, une brise violente soufflait.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0074",
+      "w": "Trois contes",
+      "s": "Malgré la distance, une flèche l'abattit; et il fut chagrin de ne pouvoir emporter la peau.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0075",
+      "w": "Trois contes",
+      "s": "Souvent le heurt d'une pierre fracassa son bouclier.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0076",
+      "w": "Trois contes",
+      "s": "C'est lui, et pas un autre, qui assomma la guivre de Milan et le dragon d'Oberbirbach.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0077",
+      "w": "Trois contes",
+      "s": "Qu'importe, puisque bientôt ils embrasseraient leur fils?",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0078",
+      "w": "Trois contes",
+      "s": "Il enfonçait dans des tas de feuilles mortes, et il s'appuya contre un chêne pour haleter un peu.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0079",
+      "w": "Trois contes",
+      "s": "Le sanglier lui frottait les talons avec ses défenses, le loup l'intérieur des mains avec les poils de son museau.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0080",
+      "w": "Trois contes",
+      "s": "Alors, il sentit contre sa bouche l'impression d'une barbe.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0081",
+      "w": "Trois contes",
+      "s": "Puis il se porta de l'autre côté de la couche, occupé par l'autre corps, dont les cheveux blancs masquaient une partie de la figure.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0082",
+      "w": "Trois contes",
+      "s": "Deux trous dans la muraille servaient de fenêtres.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0083",
+      "w": "Trois contes",
+      "s": "Après une minute d'hésitation, Julien dénoua l'amarre.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0084",
+      "w": "Trois contes",
+      "s": "Le toit s'envola, le firmament se déployait;--et Julien monta vers les espaces bleus, face à face avec Notre-Seigneur Jésus, qui l'emportait dans le ciel.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0085",
+      "w": "Trois contes",
+      "s": "Philippe, son troisième frère, souverain de la Batanée, s'armait clandestinement.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0086",
+      "w": "Trois contes",
+      "s": "Leur temple de Garizim, désigné par Moïse pour être le centre d'Israël, n'existait plus depuis le roi Hyrcan; et celui de Jérusalem les mettait dans la fureur d'un outrage, et d'une injustice permanente.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0087",
+      "w": "Trois contes",
+      "s": "Ses épaules se voûtaient dans une toge sombre, à bordure violette; ses cheveux blancs se mêlaient à sa barbe, et le soleil, qui traversait la voile, baignait de lumière son front chagrin.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0088",
+      "w": "Trois contes",
+      "s": "Quand on l'avait pris et lié avec des cordes, les soldats devaient le poignarder s'il résistait; il s'était montré doux.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0089",
+      "w": "Trois contes",
+      "s": "Il craignait Hérodias, Mannaëi, et l'inconnu.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0090",
+      "w": "Trois contes",
+      "s": "Le Tétrarque était tombé aux genoux du Proconsul, chagrin, disait-il, de n'avoir pas connu plus tôt la faveur de sa présence.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0091",
+      "w": "Trois contes",
+      "s": "C'étaient des Sadducéens et des Pharisiens, que la même ambition poussait à Machaerous, les premiers voulant obtenir la sacrificature, et les autres la conserver.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0092",
+      "w": "Trois contes",
+      "s": "On distinguait dans l'ombre des choses hideuses inventées par les barbares; casse-têtes garnis de clous, javelots empoisonnant les blessures, tenailles qui ressemblaient à des mâchoires de crocodiles; enfin le Tétrarque possédait dans Machaerous des munitions de guerre pour quarante mille hommes.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0093",
+      "w": "Trois contes",
+      "s": "Celui-là flairait partout, avec sa mâchoire de fouine et ses paupières clignotantes.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0094",
+      "w": "Trois contes",
+      "s": "Tes vierges, en avalant leurs pleurs, joueront de la cithare dans les festins de l'étranger, et tes fils les plus braves baisseront leur échine, écorchée par des fardeaux trop lourds!» Le peuple revoyait les jours de son exil, toutes les catastrophes de son histoire.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0095",
+      "w": "Trois contes",
+      "s": "L'homme effroyable se renversa la tête; et, empoignant les barreaux, y colla son visage, qui avait l'air d'une broussaille, où étincelaient deux charbons: --«Ah!",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0096",
+      "w": "Trois contes",
+      "s": "On ne devait point se gêner pour de pareilles sottises; et il riait beaucoup du blâme des prêtres, et de la fureur de Iaokanann.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0097",
+      "w": "Trois contes",
+      "s": "Il parla seulement des Romains; Vitellius ne lui avait rien confié de ses projets militaires.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0098",
+      "w": "Trois contes",
+      "s": "Des tapis de Babylone l'enfermaient dans une espèce de pavillon.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0099",
+      "w": "Trois contes",
+      "s": "Quel infâme bateleur!» Derrière le Tétrarque, un homme se leva, pâle comme la bordure de sa chlamyde.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0100",
+      "w": "Trois contes",
+      "s": "Ammonius, élève de Philon le Platonicien, les jugeait stupides, et le disait à des Grecs qui se moquaient des oracles.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0101",
+      "w": "Trois contes",
+      "s": "C'est mon père qui a édifié votre temple!» Alors les Pharisiens, les fils des proscrits, les partisans des Matathias, accusèrent le Tétrarque des crimes de sa famille.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0102",
+      "w": "Trois contes",
+      "s": "La robe abaissée jusqu'aux hanches, il gisait derrière un monceau de victuailles, trop repu pour en prendre, mais s'obstinant à ne point les quitter.",
+      "src": {
+        "work": "Trois contes"
+      }
+    },
+    {
+      "id": "flaubert.p0103",
+      "w": "Madame Bovary",
+      "s": "Emma, dans sa chambre, était à faire sa toilette; il arrivait à pas muets, il la baisait dans le dos, elle poussait un cri.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0104",
+      "w": "Madame Bovary",
+      "s": "Quand son père la retira de pension, on ne fut point fâché de la voir partir.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0105",
+      "w": "Madame Bovary",
+      "s": "Ses expansions étaient devenues régulières; il l’embrassait à de certaines heures.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0106",
+      "w": "Madame Bovary",
+      "s": "Après le souper, où il y eut beaucoup de vins d’Espagne et de vins du Rhin, des potages à la bisque et au lait d’amandes, des puddings à la Trafalgar et toutes sortes de viandes froides avec des gelées alentour qui tremblaient dans les plats, les voitures, les unes après les autres, commencèrent à s’en aller.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0107",
+      "w": "Madame Bovary",
+      "s": "Venait ensuite la société des duchesses; on y était pâle; on se levait à quatre heures; les femmes, pauvres anges!",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0108",
+      "w": "Madame Bovary",
+      "s": "Elle répétait qu’il fallait économiser, puisqu’ils n’étaient pas riches, ajoutant qu’elle était très contente, très heureuse, que Tostes lui plaisait beaucoup, et autres discours nouveaux qui fermaient la bouche à la belle-mère.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0109",
+      "w": "Madame Bovary",
+      "s": "Le petit cimetière qui l’entoure, clos d’un mur à hauteur d’appui, est si bien rempli de tombeaux, que les vieilles pierres à ras du sol font un dallage continu, où l’herbe a dessiné de soi-même des carrés verts réguliers.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0110",
+      "w": "Madame Bovary",
+      "s": "Pas un poil ne dépassait la ligne de son collier blond, qui, contournant la mâchoire, encadrait comme la bordure d’une plate-bande sa longue figure terne, dont les yeux étaient petits et le nez busqué.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0111",
+      "w": "Madame Bovary",
+      "s": "Léon attendit pendant tout le jour que six heures du soir fussent arrivées; mais, en entrant à l’auberge, il ne trouva personne que M.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0112",
+      "w": "Madame Bovary",
+      "s": "On parcourut le calendrier d’un bout à l’autre, et l’on consulta les étrangers.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0113",
+      "w": "Madame Bovary",
+      "s": "Après avoir subi ses remerciements, madame Bovary s’en alla; et elle était quelque peu avancée dans le sentier, lorsqu’à un bruit de sabots elle tourna la tête: c’était la nourrice!",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0114",
+      "w": "Madame Bovary",
+      "s": "Binet en possédait une pour son usage particulier.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0115",
+      "w": "Madame Bovary",
+      "s": "Elle entendit des pas dans l’escalier: c’était Léon.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0116",
+      "w": "Madame Bovary",
+      "s": "Elle s’irritait d’un plat mal servi ou d’une porte entrebâillée, gémissait du velours qu’elle n’avait pas, du bonheur qui lui manquait, de ses rêves trop hauts, de sa maison trop étroite.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0117",
+      "w": "Madame Bovary",
+      "s": "Madame Homais en savait quelque chose, ayant encore sur la poitrine les marques d’une écuellée de braise qu’une cuisinière, autrefois, avait laissée tomber dans son sarrau.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0118",
+      "w": "Madame Bovary",
+      "s": "Puis il ouvrit la main; leurs yeux se rencontrèrent encore, et il disparut.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0119",
+      "w": "Madame Bovary",
+      "s": "Dès lors, ce souvenir de Léon fut comme le centre de son ennui; il y pétillait plus fort que, dans un steppe de Russie, un feu de voyageurs abandonné sur la neige.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0120",
+      "w": "Madame Bovary",
+      "s": "Et aussitôt il examina la partie politique de l’entreprise.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0121",
+      "w": "Madame Bovary",
+      "s": "Peut-être qu’elle sera bien aise d’avoir une place dans l’enceinte, sous le péristyle.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0122",
+      "w": "Madame Bovary",
+      "s": "Et elle jurait qu’elle ne se moquait pas, quand un coup de canon retentit; aussitôt, on se poussa, pêle-mêle, vers le village.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0123",
+      "w": "Madame Bovary",
+      "s": "Soixante et dix francs!» — Cent fois même j’ai voulu partir, et je vous ai suivie, je suis resté.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0124",
+      "w": "Madame Bovary",
+      "s": "Je voudrais que l’on inscrivît, hebdomadairement, à la porte de la mairie, sur un tableau ad hoc, les noms de tous ceux qui, durant la semaine, se seraient intoxiqués avec des alcools.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0125",
+      "w": "Madame Bovary",
+      "s": "Elle se tourna vers lui avec un sanglot.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0126",
+      "w": "Madame Bovary",
+      "s": "En entrant dans Yonville, elle caracola sur les pavés.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0127",
+      "w": "Madame Bovary",
+      "s": "Ensuite, elle examinait l’appartement, elle ouvrait les tiroirs des meubles, elle se peignait avec son peigne et se regardait dans le miroir à barbe.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0128",
+      "w": "Madame Bovary",
+      "s": "Que serait-ce donc, s’il t’avait fallu servir, aller combattre sous les drapeaux?...",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0129",
+      "w": "Madame Bovary",
+      "s": "Hippolyte déjà s’était plaint d’en souffrir; on n’y avait pris garde; il fallut reconnaître qu’il n’avait pas eu tort complètement; et on le laissa libre quelques heures.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0130",
+      "w": "Madame Bovary",
+      "s": "Canivet, dont les ordonnances quelquefois arrivaient jusqu’à Yonville; aussi ne prit-il pas la défense de Bovary, ne fit-il même aucune observation, et, abandonnant ses principes, il sacrifia sa dignité aux intérêts plus sérieux de sort négoce.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0131",
+      "w": "Madame Bovary",
+      "s": "Derozerays, qui avait coutume, chaque année, de le payer vers la Saint-Pierre.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0132",
+      "w": "Madame Bovary",
+      "s": "C’était lui, sans doute; elle descendit l’escalier, traversa la cour.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0133",
+      "w": "Madame Bovary",
+      "s": "Elle partirait d’Yonville comme pour aller faire des commissions à Rouen.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0134",
+      "w": "Madame Bovary",
+      "s": "Alors elle voulut se calmer; elle se rappela la lettre; il fallait la finir, elle n’osait pas.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0135",
+      "w": "Madame Bovary",
+      "s": "Alors Homais demanda comment cet accident était survenu.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0136",
+      "w": "Madame Bovary",
+      "s": "Toutes ses idées paraissaient se borner au soin d’elle-même.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0137",
+      "w": "Madame Bovary",
+      "s": "Opéra..., etc.» Il faisait beau; on avait chaud; la sueur coulait dans les frisures, tous les mouchoirs tirés épongeaient les fronts rouges; et parfois un vent tiède, qui soufflait de la rivière, agitait mollement la bordure des tentes en coutil suspendues à la porte des estaminets.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0138",
+      "w": "Madame Bovary",
+      "s": "Ashton lui lançait en notes graves des provocations homicides, Lucie poussait sa plainte aiguë, Arthur modulait à l’écart des sons moyens, et la basse-taille du ministre ronflait comme un orgue, tandis que les voix de femmes, répétant ses paroles, reprenaient en chœur, délicieusement.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0139",
+      "w": "Madame Bovary",
+      "s": "Il s’avança vers Léon, et, avec ce sourire de bénignité pateline que prennent les ecclésiastiques lorsqu’ils interrogent les enfants: — Monsieur, sans doute, n’est pas d’ici?",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0140",
+      "w": "Madame Bovary",
+      "s": "Sans répondre, il continuait à marcher d’un pas rapide, et déjà madame Bovary trempait son doigt dans l’eau bénite, quand ils entendirent derrière eux un grand souffle haletant, entrecoupé régulièrement par le rebondissement d’une canne.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0141",
+      "w": "Madame Bovary",
+      "s": "N’as-tu rien vu, dans le coin, à gauche, sur la troisième tablette?",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0142",
+      "w": "Madame Bovary",
+      "s": "Elle demeurait perdue dans toutes sortes d’appréhensions.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0143",
+      "w": "Madame Bovary",
+      "s": "Le batelier l’examina et finit par dire: — Ah!",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0144",
+      "w": "Madame Bovary",
+      "s": "C’est une idée de Rousseau, peut-être un peu neuve encore, mais qui finira par triompher, j’en suis sûr, comme l’allaitement maternel et la vaccination.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0145",
+      "w": "Madame Bovary",
+      "s": "Sa voix, faible d’abord et vagissante, devenait aiguë.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0146",
+      "w": "Madame Bovary",
+      "s": "Et elle jeta dans le feu la procuration.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0147",
+      "w": "Madame Bovary",
+      "s": "Mais le dénigrement de ceux que nous aimons toujours nous en détache quelque peu.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0148",
+      "w": "Madame Bovary",
+      "s": "Ou, d’autres fois, brûlée plus fort par cette flamme intime que l’adultère avivait, haletante, émue, tout en désir, elle ouvrait sa fenêtre, aspirait l’air froid, éparpillait au vent sa chevelure trop lourde, et, regardant les étoiles, souhaitait des amours de prince.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0149",
+      "w": "Madame Bovary",
+      "s": "À deux heures, elle courut chez Léon, frappa contre sa porte.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0150",
+      "w": "Madame Bovary",
+      "s": "Il l’engageait à prendre de bon vin, de bonne bière, de bons rôtis.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0151",
+      "w": "Madame Bovary",
+      "s": "Elle sentait contre sa joue le souffle d’une respiration haletante.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0152",
+      "w": "Madame Bovary",
+      "s": "Comme la cloison était mince, on entendait le cliquetis des fourchettes sur les assiettes dans la salle à manger.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0153",
+      "w": "Madame Bovary",
+      "s": "Il se heurtait aux meubles, s’arrachait les cheveux, et jamais le pharmacien n’avait cru qu’il pût y avoir de si épouvantable spectacle.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0154",
+      "w": "Madame Bovary",
+      "s": "Il avait pris ses mains et il les serrait, tressaillant à chaque battement de son cœur, comme au contrecoup d’une ruine qui tombe.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0155",
+      "w": "Madame Bovary",
+      "s": "Il fut longtemps à se rappeler ainsi toutes les félicités disparues, ses attitudes, ses gestes, le timbre de sa voix.",
+      "src": {
+        "work": "Madame Bovary"
+      }
+    },
+    {
+      "id": "flaubert.p0156",
+      "w": "Dictionnaire des idées reçues",
+      "s": "BOUDIN: Signe de gaieté dans les maisons.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0157",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Dans un grand dîner, doit se prendre debout.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0158",
+      "w": "Dictionnaire des idées reçues",
+      "s": "CATHOLICISME: A eu une influence très favorable sur les arts.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0159",
+      "w": "Dictionnaire des idées reçues",
+      "s": "CHACAL: Singulier de shakos (vieux, mais fait toujours rire).",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0160",
+      "w": "Dictionnaire des idées reçues",
+      "s": "CHÂTEAU FORT: A toujours subi un siège sous Philippe Auguste.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0161",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Les seuls bons viennent par contrebande.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0162",
+      "w": "Dictionnaire des idées reçues",
+      "s": "COQ: Un homme maigre doit toujours dire qu'un bon coq n'est jamais gras.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0163",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Devraient être chassées impitoyablement.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0164",
+      "w": "Dictionnaire des idées reçues",
+      "s": "CROCODILE: Imite le cri des enfants pour attirer l'homme.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0165",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Quand on l'obtient, toujours dire qu'on ne l'a pas demandée.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0166",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Jamais de dessert!» DESSIN (l'art du): Se compose de trois choses: le ligne, le grain, et le grainé fin; de plus, le trait de force.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0167",
+      "w": "Dictionnaire des idées reçues",
+      "s": "DIX (Conseil des): On ne sait pas ce que c'est, mais c'est formidable!",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0168",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Cependant la Justice, la Police, y pénètrent quand elles veulent.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0169",
+      "w": "Dictionnaire des idées reçues",
+      "s": "DRAPEAU national: Sa vue fait battre le coeur.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0170",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ÉCONOMIE POLITIQUE: Science sans entrailles.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0171",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ÉMIGRÉS: Gagnaient leur vie à donner des leçons de guitare et à faire la salade.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0172",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ÉPÉE: On ne connaît que celle de Damoclès.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0173",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ÉTERNUEMENT: Après qu'on a dit: «Dieu vous bénisse» , engager une discussion sur l'origine de cet usage.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0174",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ÉVIDENCE: Vous aveugle, quand elle ne crève pas les yeux.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0175",
+      "w": "Dictionnaire des idées reçues",
+      "s": "FAISCEAUX: A former, est le comble de la difficulté dans la garde nationale.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0176",
+      "w": "Dictionnaire des idées reçues",
+      "s": "FEU (adj.): Feu mon père, et on soulève son chapeau.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0177",
+      "w": "Dictionnaire des idées reçues",
+      "s": "FLAMANT: Oiseau ainsi nommé parce qu'il vient des Flandres.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0178",
+      "w": "Dictionnaire des idées reçues",
+      "s": "FRAUDER: Frauder l'octroi n'est pas tromper, c'est une preuve d'esprit et d'indépendance politique.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0179",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Joie de l'individu à qui on accorde cette faveur.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0180",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Plus adroits que ceux qui se servent de la main droite.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0181",
+      "w": "Dictionnaire des idées reçues",
+      "s": "GOTHIQUE: Style d'architecture portant plus à la religion que les autres.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0182",
+      "w": "Dictionnaire des idées reçues",
+      "s": "HALEINE: L'avoir forte donne l'air distingué.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0183",
+      "w": "Dictionnaire des idées reçues",
+      "s": "HERNIE: Tout le monde en a sans le savoir.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0184",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Comme on ignore d'où elles viennent, dire qu'elles arrivent «des bords lointains» (poétique).",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0185",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Citer les vers: Chez les montagnards écossais, L'hospitalité se donne Mais ne se vend jamais.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0186",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Cela indique qu'on est accablé de correspondance.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0187",
+      "w": "Dictionnaire des idées reçues",
+      "s": "IMPRÉSARIO: Mot d'artiste qui signifie directeur.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0188",
+      "w": "Dictionnaire des idées reçues",
+      "s": "INFÉODÉ: Injure très grave et de grand style à jeter à la tête d'un adversaire politique: «Môssieu!",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0189",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Donne bien des déceptions, n'est pas si belle qu'on dit.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0190",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Une femme ne doit jamais négliger ce détail de toilette, il y a tant d'impertinents en ce monde.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0191",
+      "w": "Dictionnaire des idées reçues",
+      "s": "JOCKEY-CLUB: Ses membres sont tous des jeunes gens farceurs et très riches.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0192",
+      "w": "Dictionnaire des idées reçues",
+      "s": "LACUSTRES (les villes): Nier leur existence, parce qu'on ne peut pas vivre sous l'eau.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0193",
+      "w": "Dictionnaire des idées reçues",
+      "s": "LAVEMENT: Ne se dit qu'en parlant de la cérémonie du lavement des pieds.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0194",
+      "w": "Dictionnaire des idées reçues",
+      "s": "LINGE: On n'en montre jamais trop, jamais assez.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0195",
+      "w": "Dictionnaire des idées reçues",
+      "s": "MALADIE DES NERFS: Toujours des grimaces.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0196",
+      "w": "Dictionnaire des idées reçues",
+      "s": "MÉNAGE: En parler toujours avec respect.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0197",
+      "w": "Dictionnaire des idées reçues",
+      "s": "NAIN: Raconter l'histoire du général Tom Pouce et, si on lui a serré la main, le dire avec orgueil.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0198",
+      "w": "Dictionnaire des idées reçues",
+      "s": "ORCHESTRE: Image de la société: chacun fait sa partie et il y a un chef.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0199",
+      "w": "Dictionnaire des idées reçues",
+      "s": "PAUVRES: S'en occuper tient lieu de toutes les vertus.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0200",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Eteindre les lumières quand on l'allume.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0201",
+      "w": "Dictionnaire des idées reçues",
+      "s": "Sont moins immoraux en feuilletons qu'en volumes.",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      }
+    },
+    {
+      "id": "flaubert.p0202",
+      "w": "Bouvard et Pécuchet",
+      "s": "Les boutures ne reprirent pas; les greffes se décollèrent; la sève des marcottes s'arrêta, les arbres avaient le blanc dans leurs racines; les semis furent une désolation.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0203",
+      "w": "Bouvard et Pécuchet",
+      "s": "Bouvard souriait au milieu de cette infection.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0204",
+      "w": "Bouvard et Pécuchet",
+      "s": "Le Docteur donnait le bras à sa femme qui marchait péniblement en s'abritant sous son ombrelle.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0205",
+      "w": "Bouvard et Pécuchet",
+      "s": "Mme Bordin éclata de rire: Tous firent comme elle.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0206",
+      "w": "Bouvard et Pécuchet",
+      "s": "Cependant, Pécuchet tourmenté par la mésaventure du malaga prit dans l'armoire les boîtes de fer-blanc, fit sauter le couvercle de la première, puis de la seconde, de la troisième.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0207",
+      "w": "Bouvard et Pécuchet",
+      "s": "Il était couleur de brique, sans chevelure, sans peau, avec d'innombrables filets bleus, rouges et blancs le bariolant.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0208",
+      "w": "Bouvard et Pécuchet",
+      "s": "Bouvard eut peine à le croire--puis il rit énormément, mais s'arrêta, en apercevant des larmes dans les yeux de Pécuchet.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0209",
+      "w": "Bouvard et Pécuchet",
+      "s": "Une fièvre typhoïde se répandit aux environs: Bouvard déclara qu'il ne s'en mêlerait pas.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0210",
+      "w": "Bouvard et Pécuchet",
+      "s": "Leur idéal était Cornaro, ce gentilhomme vénitien, qui à force de régime atteignit une extrême vieillesse.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0211",
+      "w": "Bouvard et Pécuchet",
+      "s": "Plusieurs sont intermittentes, d'autres ne reviennent jamais;--et elles changent de position; tout s'agite, tout passe.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0212",
+      "w": "Bouvard et Pécuchet",
+      "s": "C'était un ammonite nodosus, rongé par les bouts mais pesant bien seize livres, et Pécuchet, dans l'enthousiasme, s'écria:--Nous ne pouvons faire moins que de l'offrir à Dumouchel!",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0213",
+      "w": "Bouvard et Pécuchet",
+      "s": "Cuvier jusqu'à présent leur avait apparu dans l'éclat d'une auréole, au sommet d'une science indiscutable.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0214",
+      "w": "Bouvard et Pécuchet",
+      "s": "Un morceau de cotte de mailles ornait la cloison à droite; et en dessous, des pointes maintenaient horizontalement une hallebarde, pièce unique.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0215",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ils en cherchèrent la place inutilement.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0216",
+      "w": "Bouvard et Pécuchet",
+      "s": "Elle ne répondit rien, mais se mit à jouer avec sa longue chaîne de montre.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0217",
+      "w": "Bouvard et Pécuchet",
+      "s": "Le nom latin de Bellocastes qui était celui des gens de Bayeux vient de Beli Casa, demeure, sanctuaire de Bélus.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0218",
+      "w": "Bouvard et Pécuchet",
+      "s": "Rouen, à proprement parler, n'avait pas de marque.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0219",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ainsi Bouvard ne doutait pas que Danton eût accepté cent mille écus pour faire des motions qui perdraient la République;--et selon Pécuchet Vergniaud aurait demandé six mille francs par mois.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0220",
+      "w": "Bouvard et Pécuchet",
+      "s": "À Rambouillet, les gardes du corps font leurs adieux.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0221",
+      "w": "Bouvard et Pécuchet",
+      "s": "Elle déboucla leurs guêtres sans murmurer.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0222",
+      "w": "Bouvard et Pécuchet",
+      "s": "En haine du bric-à-brac, Bouvard prit George Sand.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0223",
+      "w": "Bouvard et Pécuchet",
+      "s": "À partir de ce jour-là, ils déclamèrent souvent devant Mélie et Gorju tout en regrettant de n'avoir pas un théâtre de société.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0224",
+      "w": "Bouvard et Pécuchet",
+      "s": "Elle a pour cause le mépris de la Littérature--ou plutôt du style.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0225",
+      "w": "Bouvard et Pécuchet",
+      "s": "On le définit un discernement spécial, un jugement rapide, l'avantage de distinguer certains rapports.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0226",
+      "w": "Bouvard et Pécuchet",
+      "s": "Et tout le monde l'approuvant, les deux Polonais se turent.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0227",
+      "w": "Bouvard et Pécuchet",
+      "s": "Tous clabauderaient contre lui; le peuple ne voulait pas d'un Monsieur; ses meilleurs malades le quitteraient;--et ayant pesé ces arguments, le médecin regretta sa faiblesse.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0228",
+      "w": "Bouvard et Pécuchet",
+      "s": "La théorie du droit divin a été formulée sous Charles II par l'Anglais Filmer.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0229",
+      "w": "Bouvard et Pécuchet",
+      "s": "Pécuchet immobile, et la terre du fossé à la hauteur de son menton, les regardait, en haletant.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0230",
+      "w": "Bouvard et Pécuchet",
+      "s": "Elle le recevait, un peu sanglée dans sa robe de soie gorge-pigeon qui craquait comme le harnais d'un cheval, tout en maniant par contenance sa longue chaîne d'or.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0231",
+      "w": "Bouvard et Pécuchet",
+      "s": "D'après la gravure du livre, ils garnirent de bâtonnets un câble, et l'attachèrent sous le hangar.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0232",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ces mécaniques se vendaient rue d'Aumale; M.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0233",
+      "w": "Bouvard et Pécuchet",
+      "s": "Le spiritisme pose en dogme l'amélioration fatale de notre espèce.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0234",
+      "w": "Bouvard et Pécuchet",
+      "s": "Plus le défunt nous touche de près, mieux il accourt à notre appel; mais il n'avait aucune relique de sa famille, ni bague ni miniature, pas un cheveu, tandis que Bouvard était dans les conditions à évoquer son père--et comme il témoignait de la répugnance Pécuchet lui demanda:--Que crains-tu?",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0235",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ensuite, ils pensèrent à leur pauvre jardin.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0236",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ils se mirent tous les deux à table, pleins de découragement.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0237",
+      "w": "Bouvard et Pécuchet",
+      "s": "On devient quelque chose de la sève des arbres, de l'éclat des pierres fines, du plumage des oiseaux.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0238",
+      "w": "Bouvard et Pécuchet",
+      "s": "La tiède température, leur procura un singulier bien-être; et leurs pensées, orageuses tout à l'heure, se faisaient douces, comme des vagues qui s'apaisent.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0239",
+      "w": "Bouvard et Pécuchet",
+      "s": "La première fois qu'ils entrèrent dans le salon, elle défendait quelqu'un.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0240",
+      "w": "Bouvard et Pécuchet",
+      "s": "Elle lui avait causé une malveillance antireligieuse;--et une heure après, assis devant un feu de broussailles, il lisait le Curé Meslier.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0241",
+      "w": "Bouvard et Pécuchet",
+      "s": "Bouvard lui fit lire ce passage de Louis Hervieu: Pour connaître l'abîme qui les sépare, opposez leurs axiomes: La Raison vous dit: Le tout enferme la partie; et la Foi vous répond par la substantiation.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0242",
+      "w": "Bouvard et Pécuchet",
+      "s": "Des lapins sortirent de leurs terriers, et broutaient le gazon.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0243",
+      "w": "Bouvard et Pécuchet",
+      "s": "Il assiste peut-être à des choses que tu lui jalouserais si tu pouvais les voir.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0244",
+      "w": "Bouvard et Pécuchet",
+      "s": "Les filles n'ont pas besoin d'être savantes comme les garçons.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0245",
+      "w": "Bouvard et Pécuchet",
+      "s": "Celle de Victorine était généralement unie, marque de pondération--mais son frère avait un crâne déplorable!",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0246",
+      "w": "Bouvard et Pécuchet",
+      "s": "Mais un hasard fit qu'ils virent une shérardie (description de la plante)--et elle avait un calice.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0247",
+      "w": "Bouvard et Pécuchet",
+      "s": "Dans tout cela suivant Bouvard, il n'avait pas défini le Bien.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    },
+    {
+      "id": "flaubert.p0248",
+      "w": "Bouvard et Pécuchet",
+      "s": "Ce n'était pas trop que trois hommes pour le contenir.",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      }
+    }
+  ],
+  "formulas": [
+    {
+      "id": "flaubert.f.v0001",
+      "kind": "verbatim",
+      "text": "Les vins se mettent à couler, les poissons à palpiter, le sang dans les plats bouillonne, la pulpe des fruits s'avance comme des lèvres amoureuses; et la table monte jusqu'à sa poitrine, jusqu'à son menton,--ne portant qu'une seule assiette et qu'un seul pain, qui se trouvent juste en face de lui.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 298
+      }
+    },
+    {
+      "id": "flaubert.f.v0002",
+      "kind": "verbatim",
+      "text": "Le martyr Paphnuce brosse la crinière d'un cheval, Théophile lave les jambes d'un autre, Jean peint les sabots d'un troisième, Alexandre ramasse du crottin dans une corbeille.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "flaubert.f.v0003",
+      "kind": "verbatim",
+      "text": "Voici du baume de Génézareth, de l'encens du cap Gardefan, du ladanon, du cinnamone, et du silphium, bon à mettre dans les sauces.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "flaubert.f.v0004",
+      "kind": "verbatim",
+      "text": "Asseyons-nous là, sur cette grosse pierre,--comme autrefois, quand à la première lueur du jour je te saluais, en t'appelant «claire étoile du matin»; et tu commençais tout de suite mes instructions.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "flaubert.f.v0005",
+      "kind": "verbatim",
+      "text": "Il s'en échappe plus facilement par les parfums, les épices, l'arôme du vin cuit, les choses légères qui ressemblent à des pensées.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 131
+      }
+    },
+    {
+      "id": "flaubert.f.v0006",
+      "kind": "verbatim",
+      "text": "Puis, ils se trouvent l'un près de l'autre, loin de la foule;--et un silence, un apaisement extraordinaire s'est fait, comme dans les bois, quand le vent s'arrête et que les feuilles tout à coup ne remuent plus.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 211
+      }
+    },
+    {
+      "id": "flaubert.f.v0007",
+      "kind": "verbatim",
+      "text": "En nous appelant par nos noms, il nous reprochait la vanité de nos oeuvres, l'infamie de nos corps;--et il levait le poing du côté des dromadaires, à cause des clochettes d'argent qu'ils portent sous la mâchoire.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 212
+      }
+    },
+    {
+      "id": "flaubert.f.v0008",
+      "kind": "verbatim",
+      "text": "LES ARCONTIQUES en cilices de crins: Le Sauveur a dit: «Je suis venu pour détruire l'oeuvre de la Femme.» LES TATIANIENS en cilices de joncs: L'arbre du mal c'est elle!",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 168
+      }
+    },
+    {
+      "id": "flaubert.f.v0009",
+      "kind": "verbatim",
+      "text": "Sur les autres parois de la chambre, des médaillons en fer poli représentent des têtes d'animaux, celle d'un boeuf, d'un lion, d'un aigle, d'un chien, et la tête d'âne--encore!",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 176
+      }
+    },
+    {
+      "id": "flaubert.f.v0010",
+      "kind": "verbatim",
+      "text": "Tout en criant, Antoine trépigne sur le feu;--et quand il ne reste plus qu'un amas de cendres: Où est donc Hilarion?",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 116
+      }
+    },
+    {
+      "id": "flaubert.f.v0011",
+      "kind": "verbatim",
+      "text": "Elle tourne ses prunelles comme sortant d'un songe, passe lentement ses doigts sur ses deux sourcils, et d'une voix dolente: HÉLÈNE (ENNOIA) J'ai souvenir d'une région lointaine, couleur d'émeraude.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 198
+      }
+    },
+    {
+      "id": "flaubert.f.v0012",
+      "kind": "verbatim",
+      "text": "Des prêtres en robes de lin passent et reviennent tout autour, de manière à décrire par leurs évolutions un cercle en mouvement; et, la tête levée, ils contemplent les astres.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "flaubert.f.v0013",
+      "kind": "verbatim",
+      "text": "Il s'appuie du coude contre une des branches de l'arbre, en tenant une flûte à la main, dans une pose langoureuse.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 114
+      }
+    },
+    {
+      "id": "flaubert.f.v0014",
+      "kind": "verbatim",
+      "text": "Les Heures, de taille égale, se tiennent par la main; et MERCURE est posé obliquement sur un arc-en-ciel, avec son caducée, ses talonnières et son pétase.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "flaubert.f.v0015",
+      "kind": "verbatim",
+      "text": "DIANE habillée de noir, et au milieu de ses chiens devenus des loups: L'indépendance des grands bois m'a grisée, avec la senteur des fauves et l'exhalaison des marécages.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "flaubert.f.v0016",
+      "kind": "verbatim",
+      "text": "Il y a des pluies d'étoiles, des traînées de poussière d'or, des vapeurs lumineuses qui flottent et se dissolvent.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 114
+      }
+    },
+    {
+      "id": "flaubert.f.v0017",
+      "kind": "verbatim",
+      "text": "La nuit fut lente à venir; et des ondes noires se répandaient sur la terre qu'une immense couleur rose occupait encore le ciel.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "flaubert.f.v0018",
+      "kind": "verbatim",
+      "text": "Dommine d'Alep et ses deux filles, trois autres saintes, se sont tuées;--et rappelle-toi tous les confesseurs qui couraient au-devant des bourreaux, par impatience de la mort.",
+      "work": "La tentation de Saint Antoine",
+      "lang": "fr",
+      "src": {
+        "work": "La tentation de Saint Antoine"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "flaubert.f.v0019",
+      "kind": "verbatim",
+      "text": "La marée basse laissait à découvert des oursins, des godefiches, des méduses; et les enfants couraient, pour saisir des flocons d'écume que le vent emportait.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 158
+      }
+    },
+    {
+      "id": "flaubert.f.v0020",
+      "kind": "verbatim",
+      "text": "Pourquoi l'avaient-ils crucifié, lui qui chérissait les enfants, nourrissait les foules, guérissait les aveugles, et avait voulu, par douceur, naître au milieu des pauvres, sur le fumier d'une étable?",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 200
+      }
+    },
+    {
+      "id": "flaubert.f.v0021",
+      "kind": "verbatim",
+      "text": "Il arrivait le dimanche après la messe, les joues roses, la poitrine nue, et sentant l'odeur de la campagne qu'il avait traversée.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "flaubert.f.v0022",
+      "kind": "verbatim",
+      "text": "Quand elle fut devant le Calvaire, au lieu de prendre à gauche, elle prit à droite, se perdit dans des chantiers, revint sur ses pas; des gens qu'elle accosta l'engagèrent à se hâter.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 183
+      }
+    },
+    {
+      "id": "flaubert.f.v0023",
+      "kind": "verbatim",
+      "text": "Quand elle entendait dans la rue les tambours d'un régiment en marche, elle se mettait devant la porte avec une cruche de cidre, et offrait à boire aux soldats.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 160
+      }
+    },
+    {
+      "id": "flaubert.f.v0024",
+      "kind": "verbatim",
+      "text": "Paul, un jour, eut l'imprudence de lui souffler aux narines la fumée d'un cigare; une autre fois que Mme Lormeau l'agaçait du bout de son ombrelle, il en happa la virole; enfin, il se perdit.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 191
+      }
+    },
+    {
+      "id": "flaubert.f.v0025",
+      "kind": "verbatim",
+      "text": "Derrière elle, dans un nuage de poussière et emportée par la descente, une malle-poste au grand galop se précipitait comme une trombe.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "flaubert.f.v0026",
+      "kind": "verbatim",
+      "text": "Un flot de monde se poussait derrière, entre les nappes blanches couvrant le mur des maisons; et l'on arriva au bas de la côte.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 127
+      }
+    },
+    {
+      "id": "flaubert.f.v0027",
+      "kind": "verbatim",
+      "text": "On voyait dans la salle d'armes, entre des étendards et des mufles de bêtes fauves, des armes de tous les temps et de toutes les nations, depuis les frondes des Amalécites et les javelots des Garamantes jusqu'aux braquemarts des Sarrasins et aux cottes de mailles des Normands.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 277
+      }
+    },
+    {
+      "id": "flaubert.f.v0028",
+      "kind": "verbatim",
+      "text": "Sa place dans la chapelle était aux côtés de ses parents; et, si longs que fussent les offices, il restait à genoux sur son prie-Dieu, la toque par terre et les mains jointes.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 175
+      }
+    },
+    {
+      "id": "flaubert.f.v0029",
+      "kind": "verbatim",
+      "text": "Le sanglier lui frottait les talons avec ses défenses, le loup l'intérieur des mains avec les poils de son museau.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 114
+      }
+    },
+    {
+      "id": "flaubert.f.v0030",
+      "kind": "verbatim",
+      "text": "Puis il se porta de l'autre côté de la couche, occupé par l'autre corps, dont les cheveux blancs masquaient une partie de la figure.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "flaubert.f.v0031",
+      "kind": "verbatim",
+      "text": "Le toit s'envola, le firmament se déployait;--et Julien monta vers les espaces bleus, face à face avec Notre-Seigneur Jésus, qui l'emportait dans le ciel.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 154
+      }
+    },
+    {
+      "id": "flaubert.f.v0032",
+      "kind": "verbatim",
+      "text": "Leur temple de Garizim, désigné par Moïse pour être le centre d'Israël, n'existait plus depuis le roi Hyrcan; et celui de Jérusalem les mettait dans la fureur d'un outrage, et d'une injustice permanente.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "flaubert.f.v0033",
+      "kind": "verbatim",
+      "text": "Ses épaules se voûtaient dans une toge sombre, à bordure violette; ses cheveux blancs se mêlaient à sa barbe, et le soleil, qui traversait la voile, baignait de lumière son front chagrin.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "flaubert.f.v0034",
+      "kind": "verbatim",
+      "text": "Quand on l'avait pris et lié avec des cordes, les soldats devaient le poignarder s'il résistait; il s'était montré doux.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 120
+      }
+    },
+    {
+      "id": "flaubert.f.v0035",
+      "kind": "verbatim",
+      "text": "Le Tétrarque était tombé aux genoux du Proconsul, chagrin, disait-il, de n'avoir pas connu plus tôt la faveur de sa présence.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 125
+      }
+    },
+    {
+      "id": "flaubert.f.v0036",
+      "kind": "verbatim",
+      "text": "C'étaient des Sadducéens et des Pharisiens, que la même ambition poussait à Machaerous, les premiers voulant obtenir la sacrificature, et les autres la conserver.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 162
+      }
+    },
+    {
+      "id": "flaubert.f.v0037",
+      "kind": "verbatim",
+      "text": "On distinguait dans l'ombre des choses hideuses inventées par les barbares; casse-têtes garnis de clous, javelots empoisonnant les blessures, tenailles qui ressemblaient à des mâchoires de crocodiles; enfin le Tétrarque possédait dans Machaerous des munitions de guerre pour quarante mille hommes.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 297
+      }
+    },
+    {
+      "id": "flaubert.f.v0038",
+      "kind": "verbatim",
+      "text": "Tes vierges, en avalant leurs pleurs, joueront de la cithare dans les festins de l'étranger, et tes fils les plus braves baisseront leur échine, écorchée par des fardeaux trop lourds!» Le peuple revoyait les jours de son exil, toutes les catastrophes de son histoire.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 267
+      }
+    },
+    {
+      "id": "flaubert.f.v0039",
+      "kind": "verbatim",
+      "text": "L'homme effroyable se renversa la tête; et, empoignant les barreaux, y colla son visage, qui avait l'air d'une broussaille, où étincelaient deux charbons: --«Ah!",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 161
+      }
+    },
+    {
+      "id": "flaubert.f.v0040",
+      "kind": "verbatim",
+      "text": "On ne devait point se gêner pour de pareilles sottises; et il riait beaucoup du blâme des prêtres, et de la fureur de Iaokanann.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 128
+      }
+    },
+    {
+      "id": "flaubert.f.v0041",
+      "kind": "verbatim",
+      "text": "Ammonius, élève de Philon le Platonicien, les jugeait stupides, et le disait à des Grecs qui se moquaient des oracles.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 118
+      }
+    },
+    {
+      "id": "flaubert.f.v0042",
+      "kind": "verbatim",
+      "text": "C'est mon père qui a édifié votre temple!» Alors les Pharisiens, les fils des proscrits, les partisans des Matathias, accusèrent le Tétrarque des crimes de sa famille.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 167
+      }
+    },
+    {
+      "id": "flaubert.f.v0043",
+      "kind": "verbatim",
+      "text": "La robe abaissée jusqu'aux hanches, il gisait derrière un monceau de victuailles, trop repu pour en prendre, mais s'obstinant à ne point les quitter.",
+      "work": "Trois contes",
+      "lang": "fr",
+      "src": {
+        "work": "Trois contes"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "flaubert.f.v0044",
+      "kind": "verbatim",
+      "text": "Emma, dans sa chambre, était à faire sa toilette; il arrivait à pas muets, il la baisait dans le dos, elle poussait un cri.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 123
+      }
+    },
+    {
+      "id": "flaubert.f.v0045",
+      "kind": "verbatim",
+      "text": "Après le souper, où il y eut beaucoup de vins d’Espagne et de vins du Rhin, des potages à la bisque et au lait d’amandes, des puddings à la Trafalgar et toutes sortes de viandes froides avec des gelées alentour qui tremblaient dans les plats, les voitures, les unes après les autres, commencèrent à s’en aller.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 310
+      }
+    },
+    {
+      "id": "flaubert.f.v0046",
+      "kind": "verbatim",
+      "text": "Elle répétait qu’il fallait économiser, puisqu’ils n’étaient pas riches, ajoutant qu’elle était très contente, très heureuse, que Tostes lui plaisait beaucoup, et autres discours nouveaux qui fermaient la bouche à la belle-mère.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 228
+      }
+    },
+    {
+      "id": "flaubert.f.v0047",
+      "kind": "verbatim",
+      "text": "Le petit cimetière qui l’entoure, clos d’un mur à hauteur d’appui, est si bien rempli de tombeaux, que les vieilles pierres à ras du sol font un dallage continu, où l’herbe a dessiné de soi-même des carrés verts réguliers.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 222
+      }
+    },
+    {
+      "id": "flaubert.f.v0048",
+      "kind": "verbatim",
+      "text": "Pas un poil ne dépassait la ligne de son collier blond, qui, contournant la mâchoire, encadrait comme la bordure d’une plate-bande sa longue figure terne, dont les yeux étaient petits et le nez busqué.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 201
+      }
+    },
+    {
+      "id": "flaubert.f.v0049",
+      "kind": "verbatim",
+      "text": "Léon attendit pendant tout le jour que six heures du soir fussent arrivées; mais, en entrant à l’auberge, il ne trouva personne que M.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 134
+      }
+    },
+    {
+      "id": "flaubert.f.v0050",
+      "kind": "verbatim",
+      "text": "Après avoir subi ses remerciements, madame Bovary s’en alla; et elle était quelque peu avancée dans le sentier, lorsqu’à un bruit de sabots elle tourna la tête: c’était la nourrice!",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 181
+      }
+    },
+    {
+      "id": "flaubert.f.v0051",
+      "kind": "verbatim",
+      "text": "Elle s’irritait d’un plat mal servi ou d’une porte entrebâillée, gémissait du velours qu’elle n’avait pas, du bonheur qui lui manquait, de ses rêves trop hauts, de sa maison trop étroite.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 187
+      }
+    },
+    {
+      "id": "flaubert.f.v0052",
+      "kind": "verbatim",
+      "text": "Madame Homais en savait quelque chose, ayant encore sur la poitrine les marques d’une écuellée de braise qu’une cuisinière, autrefois, avait laissée tomber dans son sarrau.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 172
+      }
+    },
+    {
+      "id": "flaubert.f.v0053",
+      "kind": "verbatim",
+      "text": "Dès lors, ce souvenir de Léon fut comme le centre de son ennui; il y pétillait plus fort que, dans un steppe de Russie, un feu de voyageurs abandonné sur la neige.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "flaubert.f.v0054",
+      "kind": "verbatim",
+      "text": "Je voudrais que l’on inscrivît, hebdomadairement, à la porte de la mairie, sur un tableau ad hoc, les noms de tous ceux qui, durant la semaine, se seraient intoxiqués avec des alcools.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 184
+      }
+    },
+    {
+      "id": "flaubert.f.v0055",
+      "kind": "verbatim",
+      "text": "Ensuite, elle examinait l’appartement, elle ouvrait les tiroirs des meubles, elle se peignait avec son peigne et se regardait dans le miroir à barbe.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 149
+      }
+    },
+    {
+      "id": "flaubert.f.v0056",
+      "kind": "verbatim",
+      "text": "Hippolyte déjà s’était plaint d’en souffrir; on n’y avait pris garde; il fallut reconnaître qu’il n’avait pas eu tort complètement; et on le laissa libre quelques heures.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 170
+      }
+    },
+    {
+      "id": "flaubert.f.v0057",
+      "kind": "verbatim",
+      "text": "Canivet, dont les ordonnances quelquefois arrivaient jusqu’à Yonville; aussi ne prit-il pas la défense de Bovary, ne fit-il même aucune observation, et, abandonnant ses principes, il sacrifia sa dignité aux intérêts plus sérieux de sort négoce.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 244
+      }
+    },
+    {
+      "id": "flaubert.f.v0058",
+      "kind": "verbatim",
+      "text": "Opéra..., etc.» Il faisait beau; on avait chaud; la sueur coulait dans les frisures, tous les mouchoirs tirés épongeaient les fronts rouges; et parfois un vent tiède, qui soufflait de la rivière, agitait mollement la bordure des tentes en coutil suspendues à la porte des estaminets.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 283
+      }
+    },
+    {
+      "id": "flaubert.f.v0059",
+      "kind": "verbatim",
+      "text": "Ashton lui lançait en notes graves des provocations homicides, Lucie poussait sa plainte aiguë, Arthur modulait à l’écart des sons moyens, et la basse-taille du ministre ronflait comme un orgue, tandis que les voix de femmes, répétant ses paroles, reprenaient en chœur, délicieusement.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 285
+      }
+    },
+    {
+      "id": "flaubert.f.v0060",
+      "kind": "verbatim",
+      "text": "Il s’avança vers Léon, et, avec ce sourire de bénignité pateline que prennent les ecclésiastiques lorsqu’ils interrogent les enfants: — Monsieur, sans doute, n’est pas d’ici?",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "flaubert.f.v0061",
+      "kind": "verbatim",
+      "text": "Sans répondre, il continuait à marcher d’un pas rapide, et déjà madame Bovary trempait son doigt dans l’eau bénite, quand ils entendirent derrière eux un grand souffle haletant, entrecoupé régulièrement par le rebondissement d’une canne.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 237
+      }
+    },
+    {
+      "id": "flaubert.f.v0062",
+      "kind": "verbatim",
+      "text": "C’est une idée de Rousseau, peut-être un peu neuve encore, mais qui finira par triompher, j’en suis sûr, comme l’allaitement maternel et la vaccination.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 152
+      }
+    },
+    {
+      "id": "flaubert.f.v0063",
+      "kind": "verbatim",
+      "text": "Ou, d’autres fois, brûlée plus fort par cette flamme intime que l’adultère avivait, haletante, émue, tout en désir, elle ouvrait sa fenêtre, aspirait l’air froid, éparpillait au vent sa chevelure trop lourde, et, regardant les étoiles, souhaitait des amours de prince.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 268
+      }
+    },
+    {
+      "id": "flaubert.f.v0064",
+      "kind": "verbatim",
+      "text": "Il se heurtait aux meubles, s’arrachait les cheveux, et jamais le pharmacien n’avait cru qu’il pût y avoir de si épouvantable spectacle.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 136
+      }
+    },
+    {
+      "id": "flaubert.f.v0065",
+      "kind": "verbatim",
+      "text": "Il avait pris ses mains et il les serrait, tressaillant à chaque battement de son cœur, comme au contrecoup d’une ruine qui tombe.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 130
+      }
+    },
+    {
+      "id": "flaubert.f.v0066",
+      "kind": "verbatim",
+      "text": "Il fut longtemps à se rappeler ainsi toutes les félicités disparues, ses attitudes, ses gestes, le timbre de sa voix.",
+      "work": "Madame Bovary",
+      "lang": "fr",
+      "src": {
+        "work": "Madame Bovary"
+      },
+      "quality": {
+        "chars": 117
+      }
+    },
+    {
+      "id": "flaubert.f.v0067",
+      "kind": "verbatim",
+      "text": "Jamais de dessert!» DESSIN (l'art du): Se compose de trois choses: le ligne, le grain, et le grainé fin; de plus, le trait de force.",
+      "work": "Dictionnaire des idées reçues",
+      "lang": "fr",
+      "src": {
+        "work": "Dictionnaire des idées reçues"
+      },
+      "quality": {
+        "chars": 132
+      }
+    },
+    {
+      "id": "flaubert.f.v0068",
+      "kind": "verbatim",
+      "text": "Les boutures ne reprirent pas; les greffes se décollèrent; la sève des marcottes s'arrêta, les arbres avaient le blanc dans leurs racines; les semis furent une désolation.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 171
+      }
+    },
+    {
+      "id": "flaubert.f.v0069",
+      "kind": "verbatim",
+      "text": "Il était couleur de brique, sans chevelure, sans peau, avec d'innombrables filets bleus, rouges et blancs le bariolant.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "flaubert.f.v0070",
+      "kind": "verbatim",
+      "text": "Bouvard eut peine à le croire--puis il rit énormément, mais s'arrêta, en apercevant des larmes dans les yeux de Pécuchet.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 121
+      }
+    },
+    {
+      "id": "flaubert.f.v0071",
+      "kind": "verbatim",
+      "text": "Plusieurs sont intermittentes, d'autres ne reviennent jamais;--et elles changent de position; tout s'agite, tout passe.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "en",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 119
+      }
+    },
+    {
+      "id": "flaubert.f.v0072",
+      "kind": "verbatim",
+      "text": "C'était un ammonite nodosus, rongé par les bouts mais pesant bien seize livres, et Pécuchet, dans l'enthousiasme, s'écria:--Nous ne pouvons faire moins que de l'offrir à Dumouchel!",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 180
+      }
+    },
+    {
+      "id": "flaubert.f.v0073",
+      "kind": "verbatim",
+      "text": "Un morceau de cotte de mailles ornait la cloison à droite; et en dessous, des pointes maintenaient horizontalement une hallebarde, pièce unique.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 144
+      }
+    },
+    {
+      "id": "flaubert.f.v0074",
+      "kind": "verbatim",
+      "text": "À partir de ce jour-là, ils déclamèrent souvent devant Mélie et Gorju tout en regrettant de n'avoir pas un théâtre de société.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 126
+      }
+    },
+    {
+      "id": "flaubert.f.v0075",
+      "kind": "verbatim",
+      "text": "Tous clabauderaient contre lui; le peuple ne voulait pas d'un Monsieur; ses meilleurs malades le quitteraient;--et ayant pesé ces arguments, le médecin regretta sa faiblesse.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 174
+      }
+    },
+    {
+      "id": "flaubert.f.v0076",
+      "kind": "verbatim",
+      "text": "Elle le recevait, un peu sanglée dans sa robe de soie gorge-pigeon qui craquait comme le harnais d'un cheval, tout en maniant par contenance sa longue chaîne d'or.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 163
+      }
+    },
+    {
+      "id": "flaubert.f.v0077",
+      "kind": "verbatim",
+      "text": "Plus le défunt nous touche de près, mieux il accourt à notre appel; mais il n'avait aucune relique de sa famille, ni bague ni miniature, pas un cheveu, tandis que Bouvard était dans les conditions à évoquer son père--et comme il témoignait de la répugnance Pécuchet lui demanda:--Que crains-tu?",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 294
+      }
+    },
+    {
+      "id": "flaubert.f.v0078",
+      "kind": "verbatim",
+      "text": "La tiède température, leur procura un singulier bien-être; et leurs pensées, orageuses tout à l'heure, se faisaient douces, comme des vagues qui s'apaisent.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 156
+      }
+    },
+    {
+      "id": "flaubert.f.v0079",
+      "kind": "verbatim",
+      "text": "Elle lui avait causé une malveillance antireligieuse;--et une heure après, assis devant un feu de broussailles, il lisait le Curé Meslier.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 138
+      }
+    },
+    {
+      "id": "flaubert.f.v0080",
+      "kind": "verbatim",
+      "text": "Bouvard lui fit lire ce passage de Louis Hervieu: Pour connaître l'abîme qui les sépare, opposez leurs axiomes: La Raison vous dit: Le tout enferme la partie; et la Foi vous répond par la substantiation.",
+      "work": "Bouvard et Pécuchet",
+      "lang": "fr",
+      "src": {
+        "work": "Bouvard et Pécuchet"
+      },
+      "quality": {
+        "chars": 203
+      }
+    },
+    {
+      "id": "flaubert.f.p01",
+      "kind": "pattern",
+      "label": "restriction",
+      "shape": "\\bne\\b[^.]{0,80}\\b(que|point|jamais|rien)\\b",
+      "attested": 16,
+      "worksSpan": 5,
+      "examples": [
+        "HILARION Tellement borné du reste, qu'il avoue ne rien comprendre à la nature du Verbe.",
+        "Alors elle dit: --«Ça ne leur fait rien, à eux!» Sa tête retomba; et machinalement elle soulevait, de temps à autre, les longues aiguilles sur la table à ouvrage."
+      ]
+    }
+  ],
+  "concepts": [],
+  "entities": [],
+  "doctrine": null,
+  "stats": {
+    "sentences": 248,
+    "formulas": 81,
+    "verbatim": 80,
+    "patterns": 1
+  },
+  "checksum": "sha256:10fe3af89fcdba0cd3662c3c73eddfd5e728d57951e5328739d68bd67906fcaf"
+}

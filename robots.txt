@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /console/
+Disallow: /positionner-app/
+
+Sitemap: https://www.kayroslab.com/sitemap.xml
